@@ -9,6 +9,8 @@
 #include <guanaqo/print.hpp>
 #include <guanaqo/trace.hpp>
 #include <cyqlone-version.h>
+#include <bit>
+#include <cstdlib>
 #if CYQLONE_WITH_MATIO
 #include <cyqlone/matio.hpp>
 #endif
@@ -36,12 +38,25 @@ auto unpacked(const M &m) {
     return res;
 }
 
+// Get the maximum number of processors available, respecting CI limits,
+// and rounding down to the nearest power of two.
+index_t cyq_get_num_proc() {
+    int p = 8;
+#if BATMAT_WITH_OPENMP
+    p = omp_get_num_procs();
+#endif
+    if (const char *env_p = std::getenv("CI_JOB_CPU_LIMIT"))
+        p = std::min(p, std::atoi(env_p));
+    // floor to the nearest power of two
+    return static_cast<index_t>(std::bit_floor(static_cast<unsigned>(std::max(1, p))));
+}
+
 // Tests the factorization, factorization updates, and solution of the Cyqlone linear solver.
 TEST_P(CyqloneFactorTest, factor) {
     using namespace cyqlone;
     using batmat::linalg::simdify;
 
-    const index_t p  = 8;
+    const index_t p  = cyq_get_num_proc();
     using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
     const index_t ny = 50, ny_0 = 25, ny_N = 25, nyM = std::max(ny, ny_0 + ny_N);
     OCPDim dim{.N_horiz = 96, .nx = 7, .nu = 5, .ny = ny, .ny_N = ny_N};

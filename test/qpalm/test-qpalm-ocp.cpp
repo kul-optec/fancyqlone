@@ -43,13 +43,15 @@ static std::filesystem::path save_trace(const char *name) {
 }
 #endif
 
+index_t cyq_get_num_proc();
+
 TEST(QPALM, cyqlone) {
     auto ocp =
         qp::problems::platooning({.N_horiz = 128, .masses{100, 150, 130, 70, 180, 170, 169, 130}});
     auto cocp          = cyqlone::CyqloneStorage<>::build(ocp.ocp);
     const bool verbose = true;
     auto &&backend     = qp::make_cyqpalm_backend<4>(cocp, {},
-                                                     {.processors      = 8,
+                                                     {.processors      = cyq_get_num_proc(),
                                                       .print_residuals = verbose,
                                                       .print_precision = 17,
                                                       .tricyqle_params = {.pcg_print_resid = verbose}});
@@ -106,7 +108,7 @@ TEST(QPALM, cyqloneSpringsMasses) try {
     auto cocp = cyqlone::CyqloneStorage<>::build(ocp);
     const bool verbose = false;
     auto &&backend     = qp::make_cyqpalm_backend<4>(cocp, {},
-                                                     {.processors      = 8,
+                                                     {.processors      = cyq_get_num_proc(),
                                                       .print_residuals = verbose,
                                                       .print_precision = 17,
                                                       .tricyqle_params = {.pcg_print_resid = verbose}});

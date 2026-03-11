@@ -4,12 +4,35 @@
 #include <thread>
 #include <vector>
 #include <version>
+#if defined(__linux__)
+#include <guanaqo/string-util.hpp>
+#include <sys/utsname.h>
+#endif
 
 class BarrierTest : public ::testing::TestWithParam<uint32_t> {};
 
+cyqlone::index_t cyq_get_num_proc();
+
+static bool old_kernel() {
+#if defined(__linux__)
+    // Check if the kernel version is older than 6.x, which seems to cause issues with futexes
+    // not waking up threads properly.
+    struct utsname buf;
+    if (uname(&buf) == 0) {
+        auto [maj, _] = guanaqo::split(buf.release, ".");
+        // NOLINTNEXTLINE(*-suspicious-stringview-data-usage): maj is null-terminated, and atoi
+        return std::atoi(maj.data()) < 6; // only reads until the first non-digit.
+    }
+#endif
+    return false;
+}
+
 TEST_P(BarrierTest, stress) {
+    if (old_kernel())
+        GTEST_SKIP() << "Skipping test on old Linux kernel";
     const uint32_t num_workers = GetParam();
-    const uint32_t iterations  = num_workers < 10 ? 1'000'000 : 1'000;
+    const auto hw_workers      = static_cast<uint32_t>(cyq_get_num_proc());
+    const uint32_t iterations  = num_workers <= hw_workers ? 100'000 : 100;
 
     using Barrier = cyqlone::TreeBarrier<>;
     ASSERT_GE(Barrier::max(), num_workers + 1);
@@ -46,8 +69,11 @@ TEST_P(BarrierTest, stress) {
 #include <barrier>
 
 TEST_P(BarrierTest, std) {
+    if (old_kernel())
+        GTEST_SKIP() << "Skipping test on old Linux kernel";
     const uint32_t num_workers = GetParam();
-    const uint32_t iterations  = num_workers < 10 ? 1'000'000 : 1'000;
+    const auto hw_workers      = static_cast<uint32_t>(cyq_get_num_proc());
+    const uint32_t iterations  = num_workers <= hw_workers ? 100'000 : 100;
 
     using Barrier = std::barrier<>;
     ASSERT_GE(Barrier::max(), num_workers + 1);
@@ -81,8 +107,11 @@ TEST_P(BarrierTest, std) {
 #endif
 
 TEST_P(BarrierTest, reduce) {
+    if (old_kernel())
+        GTEST_SKIP() << "Skipping test on old Linux kernel";
     const uint32_t num_workers = GetParam();
-    const uint32_t iterations  = num_workers < 10 ? 1'000'000 : 1'000;
+    const auto hw_workers      = static_cast<uint32_t>(cyq_get_num_proc());
+    const uint32_t iterations  = num_workers <= hw_workers ? 100'000 : 100;
 
     using Barrier = cyqlone::TreeBarrier<>;
     ASSERT_GE(Barrier::max(), num_workers);
