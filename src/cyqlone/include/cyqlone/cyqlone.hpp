@@ -626,7 +626,7 @@ struct CyqloneSolver {
         const index_t ti = riccati_thread_assignment(ctx);
         for (index_t i = 0; i < n; ++i) {
             const index_t di = ti * n + i;
-            const index_t j  = sub_wrap_ceil_N(ti * n, i);
+            const index_t j  = ti > 0 ? ti * n - (i + 1) : i + 1 < n ? ceil_N() - (i + 1) : 0;
             func(j, di, xs.batch(di)...);
         }
     }
@@ -637,9 +637,9 @@ struct CyqloneSolver {
         BATMAT_ASSERT(((xs.batch_size() == v) && ...));
         BATMAT_ASSERT(((xs.depth() == ceil_N()) && ...));
         const index_t ti = riccati_thread_assignment(ctx);
-        for (index_t i = n; i --> 0;) {
+        for (index_t i = n; i-- > 0;) {
             const index_t di = ti * n + i;
-            const index_t j  = sub_wrap_ceil_N(ti * n, i);
+            const index_t j  = ti > 0 ? ti * n - (i + 1) : i + 1 < n ? ceil_N() - (i + 1) : 0;
             func(j, di, xs.batch(di)...);
         }
     }
