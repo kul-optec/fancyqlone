@@ -62,14 +62,13 @@ auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::build_sparse(const CyqloneStorage<
     // Populate the sparse matrix
     for (index_t l = 0; l < v; ++l) { // vector lane
         for (index_t c = 0; c < p; ++c) {
-            const index_t j0 = c * n + l * p * n;
-            const auto biA   = c + l * p;
-            const auto biI   = sub_wrap_ceil_P(biA, 1);
-            const auto sλA   = sλ + nx * get_linear_batch_offset(biA);
-            const auto sλI   = sλ + nx * get_linear_batch_offset(biI);
+            const auto biA = c + l * p;
+            const auto biI = sub_wrap_ceil_P(biA, 1);
+            const auto sλA = sλ + nx * get_linear_batch_offset(biA);
+            const auto sλI = sλ + nx * get_linear_batch_offset(biI);
             // TODO: handle case if lev > or >= lp()
             for (index_t i = 0; i < n; ++i) {
-                const index_t j = sub_wrap_ceil_N(j0, i);
+                const index_t j = stage_index(c, i, l);
                 // index of current diagonal block
                 index_t s = l * vector_stride + c * interval_stride + stage_stride * i;
                 // Padding
@@ -214,18 +213,16 @@ auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::build_sparse_factor() const -> Spa
     // Populate the sparse matrix
     for (index_t l = 0; l < v; ++l) {
         for (index_t t = 0; t < p; ++t) {
-            const index_t j0 = t * n + l * n * p;
-            const auto biA   = t + l * p;
-            const auto biI   = sub_wrap_ceil_P(biA, 1);
-            const auto sλA   = sλ + nx * get_linear_batch_offset(biA);
-            const auto sλI   = sλ + nx * get_linear_batch_offset(biI);
-            auto B̂t          = riccati_LAB.batch(t).right_cols(n * nu);
-            auto LHt         = riccati_LH.batch(t);
-            auto LBAt        = LBA.batch(t);
-            auto LAt         = LA.batch(t);
-            auto invQᵀt      = invQᵀ.batch(t);
+            const auto biA = t + l * p;
+            const auto biI = sub_wrap_ceil_P(biA, 1);
+            const auto sλA = sλ + nx * get_linear_batch_offset(biA);
+            const auto sλI = sλ + nx * get_linear_batch_offset(biI);
+            auto B̂t        = riccati_LAB.batch(t).right_cols(n * nu);
+            auto LHt       = riccati_LH.batch(t);
+            auto LBAt      = LBA.batch(t);
+            auto LAt       = LA.batch(t);
+            auto invQᵀt    = invQᵀ.batch(t);
             for (index_t i = 0; i < n; ++i) {
-                [[maybe_unused]] const index_t j = sub_wrap_ceil_N(j0, i);
                 index_t s  = l * vector_stride + t * interval_stride + i * stage_stride;
                 auto B̂i    = B̂t.middle_cols(i * nu, nu);
                 auto LHi   = LHt.middle_cols(i * nux, nux);

@@ -626,7 +626,7 @@ struct CyqloneSolver {
         const index_t ti = riccati_thread_assignment(ctx);
         for (index_t i = 0; i < n; ++i) {
             const index_t di = ti * n + i;
-            const index_t j  = ti > 0 ? ti * n - (i + 1) : i + 1 < n ? ceil_N() - (i + 1) : 0;
+            const index_t j  = stage_index(ti, i, 0);
             func(j, di, xs.batch(di)...);
         }
     }
@@ -639,7 +639,7 @@ struct CyqloneSolver {
         const index_t ti = riccati_thread_assignment(ctx);
         for (index_t i = n; i-- > 0;) {
             const index_t di = ti * n + i;
-            const index_t j  = ti > 0 ? ti * n - (i + 1) : i + 1 < n ? ceil_N() - (i + 1) : 0;
+            const index_t j  = stage_index(ti, i, 0);
             func(j, di, xs.batch(di)...);
         }
     }
@@ -667,6 +667,10 @@ struct CyqloneSolver {
     [[nodiscard]] index_t add_wrap_ceil_p(index_t a, index_t b) const;
     /// Subtract @p b from @p a modulo @ref ceil_p().
     [[nodiscard]] index_t sub_wrap_ceil_p(index_t a, index_t b) const;
+    /// Compute the stage index given the block column index @p c, the reverse index within the
+    /// column @p i, and the vector lane index @p l.
+    /// Note that @p i is in factorization order, i.e. later stages first.
+    [[nodiscard]] index_t stage_index(index_t c, index_t i, index_t l) const;
 
     /// @todo refactor sparse.tpp
     [[nodiscard]] index_t sub_wrap_ceil_P(index_t a, index_t b) const;

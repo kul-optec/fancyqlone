@@ -27,7 +27,6 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_riccati_solve(Context &ctx,
     const index_t c = riccati_thread_assignment(ctx);
     //  3|  j₁ = n(c-1)+1, jₙ = nc
     const index_t dn  = c * n;                                    // data batch index
-    const index_t jn  = c * n;                                    // stage index
     const index_t nux = nu + nx, nyM = std::max(ny, ny_0 + ny_N); // max active constraints/stage
     // TODO: special case nyM for c == 0
     auto LHs = riccati_LH.batch(c);
@@ -35,7 +34,7 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_riccati_solve(Context &ctx,
     auto VGᵀ       = riccati_V.batch(c);
     index_t m_syrk = 0; // number of columns of VDCᵀ (depends on active constraints)
     if constexpr (Factor) {
-        GUANAQO_TRACE("Riccati init", jn);
+        GUANAQO_TRACE("Riccati init", stage_index(c, 0, 0));
         //  4|  B̂(jₙ) = B(jₙ)
         // Note that Â(jₙ) is not copied explicitly, as it is not modified in-place
         copy(data_F.batch(dn).left_cols(nu), B̂s.left_cols(nu));
@@ -46,14 +45,13 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_riccati_solve(Context &ctx,
     // Iterate over all stages in the interval (in reverse order)
     for (index_t i = 0; i < n; ++i) {
         //  6|  for j = jₙ downto j₁
-        const index_t j  = sub_wrap_ceil_N(jn, i); // stage index j ≡ jₙ - i mod N
-        const index_t di = dn + i;                 // data batch index
+        const index_t di = dn + i; // data batch index
         auto LH          = LHs.middle_cols(i * nux, nux);
         auto RS          = LH.left_cols(nu);
         auto R = RS.top_rows(nu), S = RS.bottom_rows(nx), Q = LH.bottom_right(nx, nx);
         auto B̂ = B̂s.middle_cols(i * nu, nu), Acl = Âs.middle_cols(i * nx, nx);
         {
-            GUANAQO_TRACE("Riccati QRS", j);
+            GUANAQO_TRACE("Riccati QRS", stage_index(c, i, 0));
             // Compute and factor R̂, update Ŝ, factor Q̂
             //
             // 13|  [ R̂(j)  Ŝ(j) ] = [ R(j)  S(j) ] + [ D(j)ᵀ ] Σ(j) [ D(j)  C(j) ] + V(j) V(j)ᵀ
@@ -91,8 +89,7 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_riccati_solve(Context &ctx,
         }
         // 10|  if j > j₁
         if (i + 1 < n) {
-            [[maybe_unused]] const auto j_next = sub_wrap_ceil_N(j, 1);
-            GUANAQO_TRACE("Riccati update AB", j_next);
+            GUANAQO_TRACE("Riccati update AB", stage_index(c, i + 1, 0));
             const auto di_next = dn + i + 1;
             auto VGᵀnext = VGᵀ.left_cols(nx + nyM), V_next = VGᵀnext.left_cols(nx),
                  Gᵀnext = VGᵀnext.right_cols(nyM);
@@ -125,7 +122,7 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_riccati_solve(Context &ctx,
                     m_syrk += compress_masks_sqrt(data_Gᵀ.batch(di_next), Σ.batch(di_next), Gᵀnext);
             }
         } else {
-            GUANAQO_TRACE("Riccati last", j);
+            GUANAQO_TRACE("Riccati last", stage_index(c, i, 0));
             // 14|  LA(j₁) = Â(j₁) LQ(j₁)⁻ᵀ
             if constexpr (Factor) {
                 trsm(Acl, tril(Q).transposed());
@@ -147,7 +144,6 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse(
     std::optional<mut_view<>> Mᵀλ) const {
     const index_t c       = riccati_thread_assignment(ctx);
     const index_t c_prev  = sub_wrap_p(c, 1);
-    const index_t jn      = c * n;      // stage index
     const index_t dn      = c * n;      // jₙ data batch index
     const index_t dn_prev = c_prev * n; // j₀ data batch index
     const index_t nux     = nu + nx;
@@ -158,7 +154,7 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse(
     const auto w          = work.batch(c);
 
     for (index_t i = n; i-- > 0;) {
-        [[maybe_unused]] index_t j = sub_wrap_ceil_N(jn, i);
+        [[maybe_unused]] index_t j = stage_index(c, i, 0);
         index_t di                 = dn + i;
         const auto LH = LHs.middle_cols(i * nux, nux), LQ = LH.bottom_right(nx, nx),
                    LR = LH.top_left(nu, nu), LS = LH.bottom_left(nx, nu);

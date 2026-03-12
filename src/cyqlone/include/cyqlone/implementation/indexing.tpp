@@ -125,5 +125,10 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 [[nodiscard]] index_t CyqloneSolver<VL, T, DefaultOrder, Ctx>::ν2p(index_t bi) const {
     return tricyqle.ν2p(bi);
 }
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+[[nodiscard]] index_t CyqloneSolver<VL, T, DefaultOrder, Ctx>::stage_index(index_t c, index_t i,
+                                                                           index_t l) const {
+    return sub_wrap_ceil_N(c * n + l * p * n, i);
+}
 
 } // namespace CYQLONE_NS(cyqlone)
