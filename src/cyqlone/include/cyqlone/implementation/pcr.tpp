@@ -114,7 +114,7 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::factor_pcr_level_parallel(Context
     static constexpr auto r = 1 << Level; // 2^l
 
     // Use the same thread assignment as CR
-    BATMAT_ASSUME(ctx.num_thr >= 2);
+    BATMAT_ASSUME(ctx.num_thr() >= 2);
     const bool primary   = ν2p(ctx.index + 1) + 1 == lp(),
                secondary = ν2p(ctx.index + 1 + p / 2) + 1 == lp();
 

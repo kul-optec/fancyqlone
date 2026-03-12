@@ -74,7 +74,9 @@ struct Context {
 #endif
 
     shared_context_type &shared;
-    const index_t index, num_thr = shared.num_thr;
+    const index_t index;
+
+    [[nodiscard]] index_t num_thr() const { return shared.num_thr; }
 
     friend constexpr bool operator==(const Context &a, const Context &b) {
         return &a.shared == &b.shared && a.index == b.index;
