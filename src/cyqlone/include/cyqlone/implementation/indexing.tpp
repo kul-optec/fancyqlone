@@ -128,7 +128,8 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 [[nodiscard]] index_t CyqloneSolver<VL, T, DefaultOrder, Ctx>::stage_index(index_t c, index_t i,
                                                                            index_t l) const {
-    return sub_wrap_ceil_N(c * n + l * p * n, i);
+    return params.eliminate_u0_first ? sub_wrap_ceil_N(c * n + l * p * n, i)
+                                     : sub_wrap_ceil_N(c * n + l * p * n + n - 1, i);
 }
 
 } // namespace CYQLONE_NS(cyqlone)

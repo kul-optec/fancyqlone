@@ -27,11 +27,14 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::residual_dynamics_constr(Context &
         auto j = stage_index(c, i, 0);
         GUANAQO_TRACE("resid_dyn_constr", j);
         index_t di = dn + i;
-        auto BAj   = data_F.batch(di);
-        auto uxj   = x.batch(di);
-        auto bj    = b.batch(di);
-        auto Mxbj  = Mxb.batch(di);
-        gemv_add(BAj, uxj, bj, Mxbj); // A(j) x(j) + B(j) u(j) + b(j)
+        auto BAj = data_F.batch(di), Bj = BAj.left_cols(nu);
+        auto uxj = x.batch(di), uj = uxj.top_rows(nu);
+        auto bj   = b.batch(di);
+        auto Mxbj = Mxb.batch(di);
+        if (v == 1 && j == 0)
+            gemv_add(Bj, uj, bj, Mxbj); // A(j) x(j) + B(j) u(j) + b(j)
+        else
+            gemv_add(BAj, uxj, bj, Mxbj); // A(j) x(j) + B(j) u(j) + b(j)
         if (i > 0) {
             index_t di_next = di - 1; // j + 1
             auto x_next     = x.batch(di_next).bottom_rows(nx);
@@ -65,14 +68,14 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::transposed_dynamics_constr(Context
         auto BAj = data_F.batch(di), Bj = BAj.left_cols(nu);
         auto λj   = λ.batch(di);
         auto Mᵀλj = Mᵀλ.batch(di);
-        if (v > 1 || c > 0 || i > 0) {
-            accum ? gemv_add(BAj.transposed(), λj, Mᵀλj) //
-                  : gemv(BAj.transposed(), λj, Mᵀλj);
-        } else {
+        if (v == 1 && j == 0) {
             accum ? gemv_add(Bj.transposed(), λj, Mᵀλj.top_rows(nu)) //
                   : gemv(Bj.transposed(), λj, Mᵀλj.top_rows(nu));
             if (!accum)
                 Mᵀλj.bottom_rows(nx).set_constant(0);
+        } else {
+            accum ? gemv_add(BAj.transposed(), λj, Mᵀλj) //
+                  : gemv(BAj.transposed(), λj, Mᵀλj);
         }
         if (i + 1 < n) {
             index_t di_prev = di + 1; // j - 1

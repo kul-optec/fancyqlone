@@ -61,7 +61,20 @@ template <class T = real_t>
 struct CyqloneParams {
     using value_type = T;
 
-    // Currently empty, but kept for future Cyqlone-specific parameters
+    /// Whether to eliminate the first control input u(0) in the very first iteration of the
+    /// modified Riccati recursion. When set to true, this matches the derivation in the Cyqlone
+    /// paper @cite pas_cyqlone_2025. When set to false, all stage indices are shifted by n-1, and
+    /// u(0) is elimenated in the last iteration of the modified Riccati recursion instead of the
+    /// first. This means that the remaining Schur complement also corresponds to different
+    /// equations, but this is useful in the case of nonlinear dynamics, where during the
+    /// simulation, it is beneficial to have the u(0) at the beginning of the first window instead
+    /// of at the end. Setting this setting to false leads to more fill-in in the first interval,
+    /// but the structure is otherwise the same. It can be seen as a simple relabeling of all
+    /// variables (shifted by n-1). This additional fill-in in the first interval does not actually
+    /// affect the run time, since it is present in all other intervals anyway.
+    /// @todo Is it necessary to isolate the update of x(N) if eliminate_u0_first=false, similar to
+    //        what we do for u(0) when eliminate_u0_first=true?
+    bool eliminate_u0_first = true;
 };
 
 } // namespace cyqlone

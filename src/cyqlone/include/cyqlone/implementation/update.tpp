@@ -365,7 +365,7 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::update_riccati_solve(Context &ctx,
     // update, but also introduces structural zeros that can be exploited during the CR updates.
     // Its contribution just has to be applied to LB(0) (which is done in this function), and to
     // M(0)/L(0) (which is done in update_L).
-    const bool isolate_u0 = v == 1 && dn == 0;
+    const bool isolate_u0 = v == 1 && dn == 0 && params.eliminate_u0_first;
 
     index_t m    = 0; // Total update rank so far
     index_t mu0  = 0; // Update rank for u(0)
