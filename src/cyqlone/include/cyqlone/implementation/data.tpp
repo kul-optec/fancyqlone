@@ -38,7 +38,8 @@ void scale(T0 scalar, guanaqo::MatrixView<T1, I1, S1, O1> src,
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 CyqloneSolver<VL, T, DefaultOrder, Ctx>
-CyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const CyqloneStorage<value_type> &ocp, index_t p) {
+CyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const CyqloneStorage<value_type> &ocp, index_t p,
+                                               CyqloneParams<value_type> params) {
     BATMAT_ASSERT(p > 0);
     BATMAT_ASSERT(v == 1 || is_pow_2(p));
     CyqloneSolver<VL, T, DefaultOrder, Ctx> res{
@@ -49,6 +50,7 @@ CyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const CyqloneStorage<value_type> 
         .ny_0    = ocp.ny_0,
         .ny_N    = ocp.ny_N,
         .p       = p,
+        .params  = std::move(params),
     };
     res.update_data(ocp);
     return res;

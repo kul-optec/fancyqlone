@@ -849,7 +849,8 @@ struct CyqloneSolver {
     /// should be zero.
     ///
     /// @todo Create documentation page about the different OCP representations and storage formats.
-    static CyqloneSolver build(const CyqloneStorage<value_type> &ocp, index_t p);
+    static CyqloneSolver build(const CyqloneStorage<value_type> &ocp, index_t p,
+                               CyqloneParams<value_type> params = {});
     /// Update the internal data structures to reflect changes in the OCP data (without changing
     /// the problem size).
     void update_data(const CyqloneStorage<value_type> &ocp);
