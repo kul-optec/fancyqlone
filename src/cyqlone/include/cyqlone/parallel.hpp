@@ -181,9 +181,9 @@ struct Context {
     /// before releasing all threads again. Changes by all threads are visible during the call to
     /// @p f and changes made by @p f are visible to all threads after this function returns.
     template <class F>
-    void run_single_sync(F &&f) {
-        shared.barrier.arrive_and_wait_with_completion(static_cast<uint32_t>(index),
-                                                       std::forward<F>(f));
+    auto run_single_sync(F &&f) {
+        return shared.barrier.arrive_and_wait_with_completion(static_cast<uint32_t>(index),
+                                                              std::forward<F>(f));
     }
 };
 
