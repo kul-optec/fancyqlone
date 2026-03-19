@@ -41,7 +41,7 @@ CyqloneSolver<VL, T, DefaultOrder, Ctx>
 CyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const CyqloneStorage<value_type> &ocp, index_t p) {
     BATMAT_ASSERT(p > 0);
     BATMAT_ASSERT(v == 1 || is_pow_2(p));
-    CyqloneSolver<VL, T, DefaultOrder> res{
+    CyqloneSolver<VL, T, DefaultOrder, Ctx> res{
         .N_horiz = ocp.N_horiz,
         .nx      = ocp.nx,
         .nu      = ocp.nu,
