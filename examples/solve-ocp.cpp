@@ -84,9 +84,9 @@ int main(int argc, char *argv[]) try {
     auto pctx = solver.create_parallel_context();
     auto t0   = std::chrono::high_resolution_clock::now();
     pctx->run([&](cyqlone::CyqloneSolver<v, real_t>::Context &ctx) {
-        solver.factor_solve(ctx, γ, {}, ux, λ); // Cholesky factorization and forward substitution
-        solver.solve_reverse(ctx, ux, λ);       // Backward substitution
-    });                                         // blocks until all threads have joined
+        solver.factor_solve(ctx, γ, 0, {}, ux, λ); // Cholesky factorization & forward substitution
+        solver.solve_reverse(ctx, ux, λ);          // Backward substitution
+    });                                            // blocks until all threads have joined
     auto t1 = std::chrono::high_resolution_clock::now();
     std::println("Time: {:.3f} ms", std::chrono::duration<double, std::milli>(t1 - t0).count());
 

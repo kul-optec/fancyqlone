@@ -29,7 +29,7 @@ void CyQPALMBackend<VL, DefaultOrder>::solve(Context &ctx, [[maybe_unused]] cons
         print_solve_rhs_norms(ctx, d, Δλ, grad, Mᵀλ, Aᵀŷ);
     if (reset_factorization) {
         auto t = get_timed(&Timings::factor);
-        ocp.factor_solve(ctx, S, J, d, Δλ); // (d, Δλ) ← L⁻¹ (d, Δλ)
+        ocp.factor_solve(ctx, S, 0, J, d, Δλ); // (d, Δλ) ← L⁻¹ (d, Δλ)
         if (ctx.is_master()) {
             // No synchronization needed here, barriers in factor_solve and solve_reverse
             reset_factorization = false;

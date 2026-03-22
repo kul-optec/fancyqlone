@@ -28,8 +28,8 @@ using namespace batmat::linalg;
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 template <bool Factor, bool Solve>
 // NOLINTNEXTLINE(*-cognitive-complexity) // Needs to match pseudocode structure
-void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, mut_view<> ux,
-                                                            mut_view<> λ) {
+void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, real_t ρ_inv,
+                                                            mut_view<> ux, mut_view<> λ) {
     const index_t c   = riccati_thread_assignment(ctx);
     const auto c_next = add_wrap_p(c, 1);
     //  7|  j₁ = n(c-1)+1,  jₙ = nc
@@ -91,6 +91,8 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, mut_vi
             // 13|  M(c)˃ = WWᵀ
             // 14|  M(c) = M(c)˂ + M(c)˃
             syrk_add(W, M);
+            if (ρ_inv > 0)
+                M.value.add_to_diagonal(ρ_inv);
             // 16|  L(c) = chol(M(c))
             potrf(M, L0); // Final block is stored separately (for PCR/PCG later)
         } else if (ν2p(i_fwd) == 0) {
@@ -100,13 +102,15 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, mut_vi
             // 13|  M(c)˃ = WWᵀ
             // 14|  M(c) = M(c)˂ + M(c)˃
             // 16|  L(c) = chol(M(c))
-            syrk_add_potrf(W, M);
+            syrk_add_potrf(W, M, M, ρ_inv);
         } else {
             GUANAQO_TRACE("Compute WWᵀ", c);
             CYQ_TRACE_WRITE(M, c, 0);
             // 13|  M(c)˃ = WWᵀ
             // 14|  M(c) = M(c)˂ + M(c)˃
             syrk_add(W, M);
+            if (ρ_inv > 0)
+                M.value.add_to_diagonal(ρ_inv);
         }
     }
     if constexpr (Solve) {

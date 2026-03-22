@@ -123,7 +123,7 @@ TEST_P(CyqloneFactorTest, factor) {
         cyqlone::linalg::negate(rq, ux);
         λ = b;
         pctx->run([&](auto &ctx) {
-            solver.factor(ctx, 1e100, Σ);
+            solver.factor(ctx, 1e100, 0, Σ);
 #if WITH_UPDATES
             solver.update(ctx, ΔΣ);
 #endif
@@ -145,7 +145,7 @@ TEST_P(CyqloneFactorTest, factor) {
     guanaqo::get_trace_logger().reset();
 #endif
     pctx->run([&](auto &ctx) {
-        solver.factor(ctx, 1e100, Σ);
+        solver.factor(ctx, 1e100, 0, Σ);
 #if WITH_UPDATES
         solver.update(ctx, ΔΣ);
 #endif
@@ -189,7 +189,7 @@ TEST_P(CyqloneFactorTest, factor) {
     cyqlone::add_to_mat(matfile.get(), "LH", unpacked(solver.riccati_LH));
     cyqlone::add_to_mat(matfile.get(), "LAB", unpacked(solver.riccati_LAB));
     // Execute the factorization with Σ2 directly (instead of factorizing with Σ and updating)
-    pctx->run([&](auto &ctx) { solver.factor(ctx, 1e100, Σ2); });
+    pctx->run([&](auto &ctx) { solver.factor(ctx, 1e100, 0, Σ2); });
     cyqlone::add_to_mat(matfile.get(), "L_refactor", solver.build_sparse_factor());
     std::cout << filename << "\n";
 #endif

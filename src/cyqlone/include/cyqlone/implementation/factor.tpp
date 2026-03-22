@@ -11,12 +11,12 @@ namespace CYQLONE_NS(cyqlone) {
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 template <bool Factor, bool Solve>
 void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx, value_type γ,
-                                                                view<> Σ, mut_view<> ux,
-                                                                mut_view<> λ) {
+                                                                real_t ρ_inv, view<> Σ,
+                                                                mut_view<> ux, mut_view<> λ) {
     //  2|  factor-block-column-riccati(c)    -- steps 1 and 2
     factor_riccati_solve<Factor, Solve>(ctx, γ, Σ, ux, λ);
     //  3|  compute-schur(c)                  -- step 3
-    compute_schur<Factor, Solve>(ctx, ux, λ);
+    compute_schur<Factor, Solve>(ctx, ρ_inv, ux, λ);
     //  4|  factor-schur(c)                   -- step 4
     tricyqle.template factor_solve_skip_first<Factor, Solve>(ctx, λ, n);
 }
@@ -129,18 +129,19 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::solve_forward(Context &ctx, mut_v
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve(Context &ctx, value_type γ, view<> Σ,
-                                                           mut_view<> ux, mut_view<> λ) {
-    factor_solve_impl<true, true>(ctx, γ, Σ, ux, λ);
+void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve(Context &ctx, value_type γ, real_t ρ_inv,
+                                                           view<> Σ, mut_view<> ux, mut_view<> λ) {
+    factor_solve_impl<true, true>(ctx, γ, ρ_inv, Σ, ux, λ);
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor(Context &ctx, value_type γ, view<> Σ) {
-    factor_solve_impl<true, false>(ctx, γ, Σ, {}, {});
+void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor(Context &ctx, value_type γ, real_t ρ_inv,
+                                                     view<> Σ) {
+    factor_solve_impl<true, false>(ctx, γ, ρ_inv, Σ, {}, {});
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_forward(Context &ctx, mut_view<> ux,
                                                             mut_view<> λ) {
-    factor_solve_impl<false, true>(ctx, 0, {}, ux, λ);
+    factor_solve_impl<false, true>(ctx, 0, 0, {}, ux, λ);
 }
 
 // Algorithm 5 “Solution of a symmetric block-tridiagonal system using cyclic reduction (CR)”

@@ -207,7 +207,7 @@ void bm_factor_cyqlone(benchmark::State &state) {
     auto Σ_packed = solver.initialize_general_constraints();
     solver.pack_constraints(as_span(Σ.reshaped()), Σ_packed);
     const auto do_factor = [&] {
-        pctx->run([&](auto &ctx) { solver.factor(ctx, 1e100, Σ_packed); });
+        pctx->run([&](auto &ctx) { solver.factor(ctx, 1e100, 0, Σ_packed); });
     };
     for (auto _ : state)
         do_factor();

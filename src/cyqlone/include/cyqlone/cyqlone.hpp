@@ -936,6 +936,7 @@ struct CyqloneSolver {
     /// (fused for improved locality).
     /// @param ctx Parallel context.
     /// @param γ Reciprocal primal regularization.
+    /// @param ρ_inv Dual regularization.
     /// @param Σ ALM penalty factors.
     /// @param[in,out] ux Negative augmented Lagrangian gradient on entry; solution of forward solve
     ///                   on exit.
@@ -944,10 +945,11 @@ struct CyqloneSolver {
     /// To obtain the solution of the KKT system, a reverse solve with the same factorization must
     /// be performed afterwards.
     /// @see @ref solve_reverse
-    void factor_solve(Context &ctx, value_type γ, view<> Σ, mut_view<> ux, mut_view<> λ);
+    void factor_solve(Context &ctx, value_type γ, real_t ρ_inv, view<> Σ, mut_view<> ux,
+                      mut_view<> λ);
     /// Compute the Cyqlone factorization of the KKT matrix of the OCP.
     /// @see @ref factor_solve
-    void factor(Context &ctx, value_type γ, view<> Σ);
+    void factor(Context &ctx, value_type γ, real_t ρ_inv, view<> Σ);
     /// Perform a forward solve with the Cyqlone factorization.
     /// @see @ref factor_solve
     void solve_forward(Context &ctx, mut_view<> ux, mut_view<> λ);
@@ -978,7 +980,7 @@ struct CyqloneSolver {
     template <bool Factor = true, bool Solve = true>
     void factor_riccati_solve(Context &ctx, value_type γ, view<> Σ, mut_view<> ux, mut_view<> λ);
     template <bool Factor = true, bool Solve = true>
-    void compute_schur(Context &ctx, mut_view<> ux, mut_view<> λ);
+    void compute_schur(Context &ctx, real_t ρ_inv, mut_view<> ux, mut_view<> λ);
 
     /// @}
 
@@ -986,7 +988,8 @@ struct CyqloneSolver {
     /// @{
 
     template <bool Factor = true, bool Solve = true>
-    void factor_solve_impl(Context &ctx, value_type γ, view<> Σ, mut_view<> ux, mut_view<> λ);
+    void factor_solve_impl(Context &ctx, value_type γ, real_t ρ_inv, view<> Σ, mut_view<> ux,
+                           mut_view<> λ);
 
     /// @}
 
