@@ -371,7 +371,7 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::update_riccati_solve(Context &ctx,
     index_t mu0  = 0; // Update rank for u(0)
     auto Υ_first = Υ2.left_cols(nyM), Υu0_first = Υ2.right_cols(ny_0);
     if (!isolate_u0) {
-        GUANAQO_TRACE("Riccati update compress", jn);
+        GUANAQO_TRACE("Riccati update compress", dn);
         //  4|  [ Υu(jₙ) ]   [ D(jₙ)ᵀ ]
         //   |  [ Υx(jₙ) ] = [ C(jₙ)ᵀ ],    𝑆(jₙ) = ΔΣ(jₙ)
         //   |  [ Υλ(jₙ) ]   [   0    ]
