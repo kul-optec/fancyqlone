@@ -22,6 +22,10 @@
 #endif
 #endif
 
+#if CYQLONE_SANITY_CHECKS_BARRIER
+#include <format>
+#endif
+
 namespace cyqlone {
 
 /// No-op completion function for the @ref TreeBarrier.
@@ -257,7 +261,11 @@ class TreeBarrier {
     /// that arrives, before advancing the barrier phase and notifying all waiting threads.
     /// Each thread should use a unique thread ID in [0, expected-1].
     [[nodiscard]] arrival_token arrive(uint32_t thread_id) {
+#if CYQLONE_SANITY_CHECKS_BARRIER
+        return arrive(thread_id, 0xDEADBEEF);
+#else
         return arrive_with_completion(thread_id, completion);
+#endif
     }
 
     /// Arrive at the barrier, recording the given line number for sanity checking to make sure
@@ -270,10 +278,14 @@ class TreeBarrier {
 #if CYQLONE_SANITY_CHECKS_BARRIER
         get_local_line(thread_id).store(static_cast<ticket_value_type>(line),
                                         std::memory_order_relaxed);
-        return arrive_with_completion(thread_id, [&] {
+        return arrive_with_completion(thread_id, [this, line, thread_id] {
             for (uint32_t i = 0; i < expected; ++i)
-                BATMAT_ASSERT(get_local_line(i).load(std::memory_order_relaxed) ==
-                              static_cast<ticket_value_type>(line));
+                if (get_local_line(i).load(std::memory_order_relaxed) !=
+                    static_cast<ticket_value_type>(line))
+                    throw std::logic_error(std::format(
+                        "Barrier sanity check failed: thread {} arrived at line {}, "
+                        "but thread {} arrived at line {}",
+                        i, get_local_line(i).load(std::memory_order_relaxed), thread_id, line));
             completion();
         });
 #else
@@ -346,10 +358,26 @@ class TreeBarrier {
     /// number of threads.
     template <class T, class F>
     [[nodiscard]] arrival_token_typed<T> arrive_reduce(uint32_t thread_id, T x, F reduce) {
+#if CYQLONE_SANITY_CHECKS_BARRIER
+        auto hash = typeid(T).hash_code() ^ typeid(F).hash_code();
+        get_local_line(thread_id).store(static_cast<ticket_value_type>(hash),
+                                        std::memory_order_relaxed);
+        auto completion = [this, hash, thread_id] {
+            for (uint32_t i = 0; i < expected; ++i)
+                if (get_local_line(i).load(std::memory_order_relaxed) !=
+                    static_cast<ticket_value_type>(hash))
+                    throw std::logic_error(std::format(
+                        "Barrier sanity check failed: different types in arrive_reduce: "
+                        "thread {} has hash {}, but thread {} has hash {}",
+                        i, get_local_line(i).load(std::memory_order_relaxed), thread_id, hash));
+        };
+#else
+        auto completion = [] {};
+#endif
         auto arrival = [this, &reduce, &x](BarrierPhase cur_phase, uint32_t thread_id) {
             return arrive_impl(cur_phase, thread_id, std::move(x), std::move(reduce));
         };
-        return arrival_token_typed<T>{arrive_with_completion(thread_id, arrival, [] {})};
+        return arrival_token_typed<T>{arrive_with_completion(thread_id, arrival, completion)};
     }
 
     /// Wait for the result of an @ref arrive_reduce call and obtain the reduced value.
