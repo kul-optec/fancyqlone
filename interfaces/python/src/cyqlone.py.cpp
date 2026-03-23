@@ -238,7 +238,7 @@ void register_cyqlone_solver(nb::module_ &m) {
             "factor",
             [](Solver &self, real_t S, np_batched_view<v, const real_t> Σ) {
                 auto Σ_vw = view_as_batched(Σ);
-                self.run([&](auto &ctx) { self.factor(ctx, S, Σ_vw); });
+                self.run([&](auto &ctx) { self.factor(ctx, S, 0, Σ_vw); });
             },
             "S"_a, "Σ"_a.noconvert())
         .def(
@@ -248,7 +248,7 @@ void register_cyqlone_solver(nb::module_ &m) {
                 auto Σ_vw  = view_as_batched(Σ);
                 auto ux_vw = view_as_batched(ux);
                 auto λ_vw  = view_as_batched(λ);
-                self.run([&](auto &ctx) { self.factor_solve(ctx, S, Σ_vw, ux_vw, λ_vw); });
+                self.run([&](auto &ctx) { self.factor_solve(ctx, S, 0, Σ_vw, ux_vw, λ_vw); });
             },
             "S"_a, "Σ"_a.noconvert(), "ux"_a.noconvert(), "λ"_a.noconvert())
         .def(
@@ -259,7 +259,7 @@ void register_cyqlone_solver(nb::module_ &m) {
                 auto ux   = self.initialize_gradient(ocp);
                 cyqlone::linalg::negate(ux); // right-hand side is the negative gradient
                 auto λ = self.initialize_rhs(ocp);
-                self.run([&](auto &ctx) { self.factor_solve(ctx, S, Σ_vw, ux, λ); });
+                self.run([&](auto &ctx) { self.factor_solve(ctx, S, 0, Σ_vw, ux, λ); });
                 return std::make_tuple(np_copy(std::move(ux)), np_copy(std::move(λ)));
             },
             "S"_a, "Σ"_a.noconvert(), "ocp"_a)
