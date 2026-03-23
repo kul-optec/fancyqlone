@@ -73,8 +73,8 @@ class CyqloneRecipe(ConanFile):
     generators = ("CMakeDeps",)
 
     def requirements(self):
-        self.requires("guanaqo/1.0.0-alpha.26", transitive_headers=True, transitive_libs=True)
-        self.requires("batmat/0.0.18", transitive_headers=True, transitive_libs=True)
+        self.requires("guanaqo/1.0.0-alpha.27", transitive_headers=True, transitive_libs=True)
+        self.requires("batmat/0.0.19", transitive_headers=True, transitive_libs=True)
         if self.options.get_safe("with_zlib"):
             self.requires("zlib/[~1]")
         if self.options.get_safe("with_python"):
