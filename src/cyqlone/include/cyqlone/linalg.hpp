@@ -368,7 +368,7 @@ template <simdifiable Vx, simdifiable Vy, simdifiable Vz,
           std::convertible_to<simdified_value_t<Vx>> Ta>
     requires simdify_compatible<Vx, Vy, Vz>
 void axpy(Ta alpha, Vx &&x, Vy &&y, Vz &&z) {
-    axpby(alpha, x, 1, y, z);
+    axpby(alpha, x, Ta{1}, y, z);
 }
 
 /// Add scaled vector y = αx + βy (where β is a compile-time constant).
