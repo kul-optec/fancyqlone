@@ -1021,6 +1021,7 @@ struct CyqloneSolver {
 
     [[nodiscard]] SparseMatrix build_sparse(const CyqloneStorage<value_type> &ocp,
                                             std::span<const value_type> Σ) const;
+    [[nodiscard]] SparseMatrix build_sparse_no_penalty() const;
     [[nodiscard]] std::vector<value_type> build_rhs(view<> rq, view<> b, value_type scale_rq = -1,
                                                     value_type scale_b = -1) const;
     [[nodiscard]] std::vector<value_type> build_sol(view<> ux, view<> λ) const {
@@ -1028,6 +1029,8 @@ struct CyqloneSolver {
     }
     [[nodiscard]] SparseMatrix build_sparse_factor() const;
     [[nodiscard]] SparseMatrix build_sparse_diag() const;
+    [[nodiscard]] SparseMatrix build_sparse_reg(real_t γ, real_t ρ_inv_internal,
+                                                real_t ρ_inv_windows) const;
 
     /// @}
 };

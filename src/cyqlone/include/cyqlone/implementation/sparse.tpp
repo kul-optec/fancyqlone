@@ -101,6 +101,65 @@ auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::build_sparse(const CyqloneStorage<
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::build_sparse_no_penalty() const -> SparseMatrix {
+    BATMAT_ASSERT(is_pow_2(p));
+    using enum batmat::linalg::MatrixStructure;
+    using std::sqrt;
+    const index_t nux = nu + nx, nuxx = nux + nx;
+    // stride between stages in the same interval
+    const index_t stage_stride = nuxx;
+    // stride between intervals in the thread partitioning
+    const index_t interval_stride = nuxx * n - nx;
+    // stride between vector lanes (largest stride)
+    const index_t vector_stride = p * interval_stride;
+    // total matrix size
+    const index_t nn = ceil_N() * nuxx;
+    // first index of the CR block
+    const index_t sλ = nn - (nx * p * v);
+
+    SparseMatrixBuilder mat{.rows = nn, .cols = nn, .symmetry = Symmetry::Unsymmetric};
+
+    // Populate the sparse matrix
+    for (index_t l = 0; l < v; ++l) { // vector lane
+        for (index_t c = 0; c < p; ++c) {
+            const auto biA = c + l * p;
+            const auto biI = sub_wrap_ceil_P(biA, 1);
+            const auto sλA = sλ + nx * get_linear_batch_offset(biA);
+            const auto sλI = sλ + nx * get_linear_batch_offset(biI);
+            // TODO: handle case if lev > or >= lp()
+            for (index_t i = 0; i < n; ++i) {
+                const auto di   = c * n + i;
+                const index_t j = stage_index(c, i, l);
+                // index of current diagonal block
+                index_t s = l * vector_stride + c * interval_stride + stage_stride * i;
+                // Padding
+                if (j >= N_horiz) {
+                    mat.add_diag(s, s, 1, nux);                         // H = I
+                    i + 1 == n ? mat.add_diag(sλI, s + nu, -1, nx)      // E = -I
+                               : mat.add_diag(s + nux, s + nu, -1, nx); // E = -I
+                    continue;
+                }
+                // H
+                mat.add(s, s, data_H(di), 1, LowerTriangular);
+                // beginning of subinterval: coupling constraints at the bottom (row sλA)
+                if (i == 0) {
+                    mat.add(sλA, s, data_F(di).left_cols(nu));              // B(j)
+                    j > 0 ? mat.add(sλA, s + nu, data_F(di).right_cols(nx)) // A(j)
+                          : void();                                         // A(0) = 0
+                } else {
+                    mat.add(s, s - nx, data_F(di).left_cols(nu).transposed());       // B(j)
+                    mat.add(s + nu, s - nx, data_F(di).right_cols(nx).transposed()); // A(j)
+                }
+                // end of subinterval: coupling constraints at the bottom (row sλI)
+                i + 1 == n ? mat.add_diag(sλI, s + nu, -1, nx)      // E = -I
+                           : mat.add_diag(s + nux, s + nu, -1, nx); // E = -I
+            }
+        }
+    }
+    return std::move(mat).build();
+}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::build_rhs(view<> rq, view<> b, value_type scale_rq,
                                                         value_type scale_b) const
     -> std::vector<T> {
@@ -310,6 +369,45 @@ auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::build_sparse_diag() const -> Spars
     for (index_t i = 0; i < p * v; ++i)
         for (index_t r = 0; r < nx; ++r)
             mat.add(sλ + nx * i + r, sλ + nx * i + r, -1);
+    return std::move(mat).build();
+}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::build_sparse_reg(real_t γ, real_t ρ_inv_internal,
+                                                               real_t ρ_inv_windows) const
+    -> SparseMatrix {
+    BATMAT_ASSERT(is_pow_2(p));
+    const index_t nux = nu + nx, nuxx = nux + nx;
+    // stride between stages in the same interval
+    const index_t stage_stride = nuxx;
+    // stride between intervals in the thread partitioning
+    const index_t interval_stride = nuxx * n - nx;
+    // stride between vector lanes (largest stride)
+    const index_t vector_stride = p * interval_stride;
+    // total matrix size
+    const index_t nn = ceil_N() * nuxx;
+    // first index of the CR block
+    const index_t sλ = nn - (nx * p * v);
+
+    SparseMatrixBuilder mat{.rows = nn, .cols = nn, .symmetry = Symmetry::Lower};
+
+    for (index_t l = 0; l < v; ++l) {
+        for (index_t t = 0; t < p; ++t) {
+            for (index_t i = 0; i < n; ++i) {
+                index_t s = l * vector_stride + t * interval_stride + i * stage_stride;
+                if (i > 0)
+                    for (index_t c = 0; c < nx; ++c)
+                        mat.add(s - nx + c, s - nx + c, -ρ_inv_internal);
+                for (index_t c = 0; c < nu; ++c)
+                    mat.add(s + c, s + c, 1 / γ);
+                for (index_t c = 0; c < nx; ++c)
+                    mat.add(s + c + nu, s + c + nu, 1 / γ);
+            }
+        }
+    }
+    for (index_t i = 0; i < p * v; ++i)
+        for (index_t r = 0; r < nx; ++r)
+            mat.add(sλ + nx * i + r, sλ + nx * i + r, -ρ_inv_windows);
     return std::move(mat).build();
 }
 
