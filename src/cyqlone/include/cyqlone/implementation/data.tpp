@@ -150,12 +150,12 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_rhs(const CyqloneStorag
     BATMAT_ASSERT(rhs.depth() == ceil_N());
     BATMAT_ASSERT(rhs.rows() == nx);
     BATMAT_ASSERT(rhs.cols() == 1);
-    for (index_t ti = 0; ti < p; ++ti) {
-        const index_t di0 = ti * n;
+    for (index_t c = 0; c < p; ++c) {
+        const index_t di0 = c * n;
         for (index_t i = 0; i < n; ++i) {
             index_t di = di0 + i;
             for (index_t vi = 0; vi < v; ++vi) {
-                auto j = stage_index(ti, i, vi);
+                auto j = stage_index(c, i, vi);
                 if (j < N_horiz) {
                     rhs.batch(di)(vi) = ocp.data_c(j);
                 } else {
@@ -173,12 +173,12 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_gradient(
     BATMAT_ASSERT(grad.rows() == nu + nx);
     BATMAT_ASSERT(grad.cols() == 1);
     const auto scale_qN = 1 / static_cast<value_type>(ceil_N() - N_horiz + 1);
-    for (index_t ti = 0; ti < p; ++ti) {
-        const index_t di0 = ti * n;
+    for (index_t c = 0; c < p; ++c) {
+        const index_t di0 = c * n;
         for (index_t i = 0; i < n; ++i) {
             index_t di = di0 + i;
             for (index_t vi = 0; vi < v; ++vi) {
-                auto j = stage_index(ti, i, vi);
+                auto j = stage_index(c, i, vi);
                 if (j == 0) {
                     if (ceil_N() == N_horiz) {
                         grad.batch(di)(vi) = ocp.data_rq(0);
@@ -210,12 +210,12 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_bounds(
     BATMAT_ASSERT(b_max.rows() == nyM);
     BATMAT_ASSERT(b_max.cols() == 1);
     const auto inf = std::numeric_limits<value_type>::infinity();
-    for (index_t ti = 0; ti < p; ++ti) {
-        const index_t di0 = ti * n;
+    for (index_t c = 0; c < p; ++c) {
+        const index_t di0 = c * n;
         for (index_t i = 0; i < n; ++i) {
             index_t di = di0 + i;
             for (index_t vi = 0; vi < v; ++vi) {
-                auto j       = stage_index(ti, i, vi);
+                auto j       = stage_index(c, i, vi);
                 auto b_min_i = b_min.batch(di)(vi), b_max_i = b_max.batch(di)(vi);
                 if (j == 0) {
                     b_min_i.top_rows(ny_0 + ny_N) = ocp.data_lb0N(0);
@@ -244,12 +244,12 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_variables(std::span<const val
     BATMAT_ASSERT(ux.depth() == ceil_N());
     BATMAT_ASSERT(ux.rows() == nux);
     BATMAT_ASSERT(ux.cols() == 1);
-    for (index_t ti = 0; ti < p; ++ti) {
-        const index_t di0 = ti * n;
+    for (index_t c = 0; c < p; ++c) {
+        const index_t di0 = c * n;
         for (index_t i = 0; i < n; ++i) {
             index_t di = di0 + i;
             for (index_t vi = 0; vi < v; ++vi) {
-                auto j       = stage_index(ti, i, vi);
+                auto j       = stage_index(c, i, vi);
                 using crview = guanaqo::MatrixView<const value_type, index_t>;
                 if (j == 0) {
                     ux.batch(di)(vi).top_rows(nu) = crview::as_column(ux_lin.first(nu));
@@ -282,12 +282,12 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_variables(view<> ux,
     BATMAT_ASSERT(ux.depth() == ceil_N());
     BATMAT_ASSERT(ux.rows() == nux);
     BATMAT_ASSERT(ux.cols() == 1);
-    for (index_t ti = 0; ti < p; ++ti) {
-        const index_t di0 = ti * n;
+    for (index_t c = 0; c < p; ++c) {
+        const index_t di0 = c * n;
         for (index_t i = 0; i < n; ++i) {
             index_t di = di0 + i;
             for (index_t vi = 0; vi < v; ++vi) {
-                auto j      = stage_index(ti, i, vi);
+                auto j      = stage_index(c, i, vi);
                 using rview = guanaqo::MatrixView<value_type, index_t>;
                 if (j == 0) {
                     rview::as_column(ux_lin.first(nu)) = ux.batch(di)(vi).top_rows(nu);
@@ -316,12 +316,12 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_dynamics(std::span<const valu
     BATMAT_ASSERT(λ.depth() == ceil_N());
     BATMAT_ASSERT(λ.rows() == nλ);
     BATMAT_ASSERT(λ.cols() == 1);
-    for (index_t ti = 0; ti < p; ++ti) {
-        const index_t di0 = ti * n;
+    for (index_t c = 0; c < p; ++c) {
+        const index_t di0 = c * n;
         for (index_t i = 0; i < n; ++i) {
             index_t di = di0 + i;
             for (index_t vi = 0; vi < v; ++vi) {
-                auto j       = stage_index(ti, i, vi);
+                auto j       = stage_index(c, i, vi);
                 using crview = guanaqo::MatrixView<const value_type, index_t>;
                 if (j < N_horiz) {
                     λ.batch(di)(vi) = crview::as_column(λ_lin.subspan(j * nλ, nλ));
@@ -341,12 +341,12 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_dynamics(view<> λ,
     BATMAT_ASSERT(λ.depth() == ceil_N());
     BATMAT_ASSERT(λ.rows() == nλ);
     BATMAT_ASSERT(λ.cols() == 1);
-    for (index_t ti = 0; ti < p; ++ti) {
-        const index_t di0 = ti * n;
+    for (index_t c = 0; c < p; ++c) {
+        const index_t di0 = c * n;
         for (index_t i = 0; i < n; ++i) {
             index_t di = di0 + i;
             for (index_t vi = 0; vi < v; ++vi) {
-                auto j      = stage_index(ti, i, vi);
+                auto j      = stage_index(c, i, vi);
                 using rview = guanaqo::MatrixView<value_type, index_t>;
                 if (j < N_horiz) {
                     rview::as_column(λ_lin.subspan(j * nλ, nλ)) = λ.batch(di)(vi);
@@ -364,12 +364,12 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_constraints(std::span<const v
     BATMAT_ASSERT(y.depth() == ceil_N());
     BATMAT_ASSERT(y.rows() == std::max(ny, ny_0 + ny_N));
     BATMAT_ASSERT(y.cols() == 1);
-    for (index_t ti = 0; ti < p; ++ti) {
-        const index_t di0 = ti * n;
+    for (index_t c = 0; c < p; ++c) {
+        const index_t di0 = c * n;
         for (index_t i = 0; i < n; ++i) {
             index_t di = di0 + i;
             for (index_t vi = 0; vi < v; ++vi) {
-                auto j       = stage_index(ti, i, vi);
+                auto j       = stage_index(c, i, vi);
                 using crview = guanaqo::MatrixView<const value_type, index_t>;
                 if (j == 0) {
                     index_t ny_pad                 = std::max(ny, ny_0 + ny_N) - (ny_0 + ny_N);
@@ -397,12 +397,12 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_constraints(
     BATMAT_ASSERT(y.depth() == ceil_N());
     BATMAT_ASSERT(y.rows() == std::max(ny, ny_0 + ny_N));
     BATMAT_ASSERT(y.cols() == 1);
-    for (index_t ti = 0; ti < p; ++ti) {
-        const index_t di0 = ti * n;
+    for (index_t c = 0; c < p; ++c) {
+        const index_t di0 = c * n;
         for (index_t i = 0; i < n; ++i) {
             index_t di = di0 + i;
             for (index_t vi = 0; vi < v; ++vi) {
-                auto j      = stage_index(ti, i, vi);
+                auto j      = stage_index(c, i, vi);
                 using rview = guanaqo::MatrixView<value_type, index_t>;
                 if (j == 0) {
                     rview::as_column(y_lin.first(ny_0)) = y.batch(di)(vi).top_rows(ny_0);

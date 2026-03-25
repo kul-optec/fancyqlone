@@ -623,10 +623,10 @@ struct CyqloneSolver {
     void foreach_stage(Context &ctx, auto &&func, auto &&...xs) const {
         BATMAT_ASSERT(((xs.batch_size() == v) && ...));
         BATMAT_ASSERT(((xs.depth() == ceil_N()) && ...));
-        const index_t ti = riccati_thread_assignment(ctx);
+        const index_t c = riccati_thread_assignment(ctx);
         for (index_t i = 0; i < n; ++i) {
-            const index_t di = ti * n + i;
-            const index_t j  = stage_index(ti, i, 0);
+            const index_t di = c * n + i;
+            const index_t j  = stage_index(c, i, 0);
             func(j, di, xs.batch(di)...);
         }
     }
@@ -636,10 +636,10 @@ struct CyqloneSolver {
     void foreach_stage_fwd(Context &ctx, auto &&func, auto &&...xs) const {
         BATMAT_ASSERT(((xs.batch_size() == v) && ...));
         BATMAT_ASSERT(((xs.depth() == ceil_N()) && ...));
-        const index_t ti = riccati_thread_assignment(ctx);
+        const index_t c = riccati_thread_assignment(ctx);
         for (index_t i = n; i-- > 0;) {
-            const index_t di = ti * n + i;
-            const index_t j  = stage_index(ti, i, 0);
+            const index_t di = c * n + i;
+            const index_t j  = stage_index(c, i, 0);
             func(j, di, xs.batch(di)...);
         }
     }
