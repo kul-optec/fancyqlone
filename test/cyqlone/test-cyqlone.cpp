@@ -17,6 +17,7 @@
 
 #if GUANAQO_WITH_TRACING
 #include <filesystem>
+#include <fstream>
 #endif
 #include <iostream>
 #include <limits>
