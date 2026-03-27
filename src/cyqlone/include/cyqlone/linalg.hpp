@@ -8,6 +8,7 @@
 #include <batmat/linalg/simdify.hpp>
 #include <batmat/ops/rotate.hpp>
 #include <batmat/simd.hpp>
+#include <guanaqo/trace.hpp>
 #include <array>
 #include <cmath>
 #include <concepts>
@@ -22,6 +23,8 @@ using namespace batmat::linalg;
 /// @cond DETAIL
 
 namespace detail {
+
+constexpr index_t num_elem(const auto &A) { return A.rows() * A.cols() * A.depth(); }
 
 template <class T, class Abi, StorageOrder O, class F, class X, class... Xs>
 [[gnu::always_inline]] inline void iter_elems(F &&fun, X &&x, Xs &&...xs) {
@@ -252,6 +255,7 @@ template <class T, class Abi, int Rotate, StorageOrder OA, StorageOrder OB, Stor
 /// Compute the norms (max, 1-norm, and 2-norm) of a vector.
 template <simdifiable Vx>
 norms<simdified_value_t<Vx>>::result norms_all(Vx &&x) {
+    GUANAQO_TRACE_LINALG("norms_all", 3 * detail::num_elem(simdify(x))); // fma, add, max
     return detail::norms_all<simdified_value_t<Vx>, simdified_abi_t<Vx>>(simdify(x).as_const());
 }
 
@@ -270,6 +274,7 @@ simdified_value_t<Vx> norm_1(Vx &&x) {
 /// Compute the squared 2-norm of a vector.
 template <simdifiable Vx>
 simdified_value_t<Vx> norm_2_squared(Vx &&x) {
+    GUANAQO_TRACE_LINALG("norm_2_squared", detail::num_elem(simdify(x)));
     return detail::norm_2_sq<simdified_value_t<Vx>, simdified_abi_t<Vx>>(simdify(x).as_const());
 }
 
@@ -284,6 +289,7 @@ simdified_value_t<Vx> norm_2(Vx &&x) {
 template <simdifiable Vx, simdifiable Vy>
     requires simdify_compatible<Vx, Vy>
 simdified_value_t<Vx> dot(Vx &&x, Vy &&y) {
+    GUANAQO_TRACE_LINALG("dot", detail::num_elem(simdify(x)));
     return detail::dot<simdified_value_t<Vx>, simdified_abi_t<Vx>>(simdify(x).as_const(),
                                                                    simdify(y).as_const());
 }
@@ -292,6 +298,7 @@ simdified_value_t<Vx> dot(Vx &&x, Vy &&y) {
 template <simdifiable Vx, simdifiable Vz, std::convertible_to<simdified_value_t<Vx>> T>
     requires simdify_compatible<Vx, Vz>
 void scale(T alpha, Vx &&x, Vz &&z) {
+    GUANAQO_TRACE_LINALG("scale", detail::num_elem(simdify(x)));
     detail::scale<simdified_value_t<Vx>, simdified_abi_t<Vx>>(alpha, simdify(x).as_const(),
                                                               simdify(z));
 }
@@ -299,6 +306,7 @@ void scale(T alpha, Vx &&x, Vz &&z) {
 /// Multiply a vector by a scalar x = αx.
 template <simdifiable Vx, std::convertible_to<simdified_value_t<Vx>> T>
 void scale(T alpha, Vx &&x) {
+    GUANAQO_TRACE_LINALG("scale", detail::num_elem(simdify(x)));
     detail::scale<simdified_value_t<Vx>, simdified_abi_t<Vx>>(alpha, simdify(x).as_const(),
                                                               simdify(x));
 }
@@ -307,6 +315,7 @@ void scale(T alpha, Vx &&x) {
 template <simdifiable Vx, simdifiable Vy, simdifiable Vz>
     requires simdify_compatible<Vx, Vy, Vz>
 void hadamard(Vx &&x, Vy &&y, Vz &&z) {
+    GUANAQO_TRACE_LINALG("hadamard", detail::num_elem(simdify(x)));
     detail::hadamard<simdified_value_t<Vx>, simdified_abi_t<Vx>>(simdify(x).as_const(),
                                                                  simdify(y).as_const(), simdify(z));
 }
@@ -315,6 +324,7 @@ void hadamard(Vx &&x, Vy &&y, Vz &&z) {
 template <simdifiable Vx, simdifiable Vy>
     requires simdify_compatible<Vx, Vy>
 void hadamard(Vx &&x, Vy &&y) {
+    GUANAQO_TRACE_LINALG("hadamard", detail::num_elem(simdify(x)));
     detail::hadamard<simdified_value_t<Vx>, simdified_abi_t<Vx>>(simdify(x).as_const(),
                                                                  simdify(y).as_const(), simdify(x));
 }
@@ -323,6 +333,7 @@ void hadamard(Vx &&x, Vy &&y) {
 template <simdifiable Vx, simdifiable Vlo, simdifiable Vhi, simdifiable Vz>
     requires simdify_compatible<Vx, Vlo, Vhi, Vz>
 void clamp(Vx &&x, Vlo &&lo, Vhi &&hi, Vz &&z) {
+    GUANAQO_TRACE_LINALG("clamp", 2 * detail::num_elem(simdify(x))); // max, min
     detail::clamp<simdified_value_t<Vx>, simdified_abi_t<Vx>>(
         simdify(x).as_const(), simdify(lo).as_const(), simdify(hi).as_const(), simdify(z));
 }
@@ -331,6 +342,7 @@ void clamp(Vx &&x, Vlo &&lo, Vhi &&hi, Vz &&z) {
 template <simdifiable Vx, simdifiable Vlo, simdifiable Vhi, simdifiable Vz>
     requires simdify_compatible<Vx, Vlo, Vhi, Vz>
 void clamp_resid(Vx &&x, Vlo &&lo, Vhi &&hi, Vz &&z) {
+    GUANAQO_TRACE_LINALG("clamp_resid", 3 * detail::num_elem(simdify(x))); // sub, max, min
     detail::clamp_resid<simdified_value_t<Vx>, simdified_abi_t<Vx>>(
         simdify(x).as_const(), simdify(lo).as_const(), simdify(hi).as_const(), simdify(z));
 }
@@ -341,6 +353,7 @@ template <simdifiable Vx, simdifiable Vy, simdifiable Vz, //
           std::convertible_to<simdified_value_t<Vx>> Tb>
     requires simdify_compatible<Vx, Vy, Vz>
 void axpby(Ta alpha, Vx &&x, Tb beta, Vy &&y, Vz &&z) {
+    GUANAQO_TRACE_LINALG("axpby", 2 * detail::num_elem(simdify(x))); // mul, fma
     detail::gaxpby<simdified_value_t<Vx>, simdified_abi_t<Vx>, simdified_value_t<Vx>{0}>(
         simdify(z), {{alpha, beta}}, simdify(x).as_const(), simdify(y).as_const());
 }
@@ -351,6 +364,7 @@ template <simdifiable Vx, simdifiable Vy, //
           std::convertible_to<simdified_value_t<Vx>> Tb>
     requires simdify_compatible<Vx, Vy>
 void axpby(Ta alpha, Vx &&x, Tb beta, Vy &&y) {
+    GUANAQO_TRACE_LINALG("axpby", 2 * detail::num_elem(simdify(x))); // mul, fma
     detail::gaxpby<simdified_value_t<Vx>, simdified_abi_t<Vx>, simdified_value_t<Vx>{0}>(
         simdify(y), {{alpha, beta}}, simdify(x).as_const(), simdify(y).as_const());
 }
@@ -359,6 +373,9 @@ void axpby(Ta alpha, Vx &&x, Tb beta, Vy &&y) {
 template <auto Beta = 1, simdifiable Vy, simdifiable... Vx>
     requires simdify_compatible<Vy, Vx...>
 void axpy(Vy &&y, const std::array<simdified_value_t<Vy>, sizeof...(Vx)> &alphas, Vx &&...x) {
+    [[maybe_unused]] static constexpr index_t num_mul = Beta != 1 && Beta != 0 ? 1 : 0;
+    [[maybe_unused]] static constexpr index_t num_fma = sizeof...(Vx);
+    GUANAQO_TRACE_LINALG("axpy", (num_mul + num_fma) * detail::num_elem(simdify(y))); // mul, fma
     detail::gaxpby<simdified_value_t<Vy>, simdified_abi_t<Vy>, simdified_value_t<Vy>{Beta}>(
         simdify(y), alphas, simdify(x).as_const()...);
 }
@@ -376,6 +393,9 @@ template <auto Beta = 1, simdifiable Vx, simdifiable Vy,
           std::convertible_to<simdified_value_t<Vx>> Ta>
     requires simdify_compatible<Vx, Vy>
 void axpy(Ta alpha, Vx &&x, Vy &&y) {
+    [[maybe_unused]] static constexpr index_t num_mul = Beta != 1 && Beta != 0 ? 1 : 0;
+    [[maybe_unused]] static constexpr index_t num_fma = 1;
+    GUANAQO_TRACE_LINALG("axpy", (num_mul + num_fma) * detail::num_elem(simdify(y))); // mul, fma
     detail::gaxpby<simdified_value_t<Vx>, simdified_abi_t<Vx>, simdified_value_t<Vx>{Beta}>(
         simdify(y), {{alpha}}, simdify(x).as_const());
 }
@@ -384,6 +404,7 @@ void axpy(Ta alpha, Vx &&x, Vy &&y) {
 template <simdifiable VA, simdifiable VB, int Rotate = 0>
     requires simdify_compatible<VA, VB>
 void negate(VA &&A, VB &&B, with_rotate_t<Rotate> = {}) {
+    GUANAQO_TRACE_LINALG("negate", detail::num_elem(simdify(A)));
     detail::negate<simdified_value_t<VA>, simdified_abi_t<VA>, Rotate>(simdify(A).as_const(),
                                                                        simdify(B));
 }
@@ -391,6 +412,7 @@ void negate(VA &&A, VB &&B, with_rotate_t<Rotate> = {}) {
 /// Negate a matrix or vector A = -A.
 template <simdifiable VA, int Rotate = 0>
 void negate(VA &&A, with_rotate_t<Rotate> = {}) {
+    GUANAQO_TRACE_LINALG("negate", detail::num_elem(simdify(A)));
     detail::negate<simdified_value_t<VA>, simdified_abi_t<VA>, Rotate>(simdify(A).as_const(),
                                                                        simdify(A));
 }
@@ -399,6 +421,7 @@ void negate(VA &&A, with_rotate_t<Rotate> = {}) {
 template <simdifiable VA, simdifiable VB, simdifiable VC, int Rotate = 0>
     requires simdify_compatible<VA, VB, VC>
 void sub(VA &&A, VB &&B, VC &&C, with_rotate_t<Rotate> = {}) {
+    GUANAQO_TRACE_LINALG("sub", detail::num_elem(simdify(A)));
     detail::sub<simdified_value_t<VA>, simdified_abi_t<VA>, Rotate>(
         simdify(A).as_const(), simdify(B).as_const(), simdify(C));
 }
@@ -407,6 +430,7 @@ void sub(VA &&A, VB &&B, VC &&C, with_rotate_t<Rotate> = {}) {
 template <simdifiable VA, simdifiable VB, int Rotate = 0>
     requires simdify_compatible<VA, VB>
 void sub(VA &&A, VB &&B, with_rotate_t<Rotate> = {}) {
+    GUANAQO_TRACE_LINALG("sub", detail::num_elem(simdify(A)));
     detail::sub<simdified_value_t<VA>, simdified_abi_t<VA>, Rotate>(
         simdify(A).as_const(), simdify(B).as_const(), simdify(A));
 }
@@ -415,6 +439,7 @@ void sub(VA &&A, VB &&B, with_rotate_t<Rotate> = {}) {
 template <simdifiable VA, simdifiable VB, simdifiable VC, int Rotate = 0>
     requires simdify_compatible<VA, VB, VC>
 void add(VA &&A, VB &&B, VC &&C, with_rotate_t<Rotate> = {}) {
+    GUANAQO_TRACE_LINALG("add", detail::num_elem(simdify(A)));
     detail::add<simdified_value_t<VA>, simdified_abi_t<VA>, Rotate>(
         simdify(A).as_const(), simdify(B).as_const(), simdify(C));
 }
@@ -423,6 +448,7 @@ void add(VA &&A, VB &&B, VC &&C, with_rotate_t<Rotate> = {}) {
 template <simdifiable VA, simdifiable VB, int Rotate = 0>
     requires simdify_compatible<VA, VB>
 void add(VA &&A, VB &&B, with_rotate_t<Rotate> = {}) {
+    GUANAQO_TRACE_LINALG("add", detail::num_elem(simdify(A)));
     detail::add<simdified_value_t<VA>, simdified_abi_t<VA>, Rotate>(
         simdify(A).as_const(), simdify(B).as_const(), simdify(A));
 }
