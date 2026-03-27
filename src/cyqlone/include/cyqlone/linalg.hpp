@@ -763,6 +763,22 @@ void copy(Structured<VA, S> A, Structured<VB, S> B, Opts... opts) {
                              make_structured<S>(B.value.batch(b)), opts...);
 }
 
+using batmat::linalg::fill;
+
+/// Copy a matrix or vector B = A.
+template <simdifiable_multi VB>
+void fill(simdified_value_t<VB> a, VB &&B) {
+    for (index_t b = 0; b < B.num_batches(); ++b)
+        batmat::linalg::fill(a, B.batch(b));
+}
+
+/// Copy a matrix or vector B = A.
+template <MatrixStructure S, simdifiable_multi VB>
+void fill(simdified_value_t<VB> a, Structured<VB, S> B) {
+    for (index_t b = 0; b < B.value.num_batches(); ++b)
+        batmat::linalg::fill(a, make_structured<S>(B.value.batch(b)));
+}
+
 /// @}
 
 /// @}
