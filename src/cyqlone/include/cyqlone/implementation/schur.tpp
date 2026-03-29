@@ -58,12 +58,13 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, real_t
             CYQ_TRACE_WRITE(Kb, i_fwd, 0);
             trmm_neg(Tc, LA1.transposed(), tricyqle.cr_U.batch(i_fwd));
         } else {
-            GUANAQO_TRACE("Compute first Y", i_bwd);
-            CYQ_TRACE_WRITE(Kf, i_bwd, 0);
-            if (i_fwd > 0)
-                trmm_neg(LA1, Tc.transposed(), tricyqle.cr_Y.batch(i_bwd));
+            const index_t i_bwd_wrap = sub_wrap_p(c, 1);
+            GUANAQO_TRACE("Compute first Y", i_bwd_wrap);
+            CYQ_TRACE_WRITE(Kf, i_bwd_wrap, 0);
+            if (i_fwd > 0 || (v == 1 && !params.eliminate_u0_first))
+                trmm_neg(LA1, Tc.transposed(), tricyqle.cr_Y.batch(i_bwd_wrap));
             else if constexpr (v > 1)
-                trmm_neg(LA1, Tc.transposed(), tricyqle.cr_Y.batch(i_bwd), //
+                trmm_neg(LA1, Tc.transposed(), tricyqle.cr_Y.batch(i_bwd_wrap), //
                          with_rotate_C<-1>, with_rotate_D<-1>, with_mask_D<-1>);
         }
         // 11|  -- sync --

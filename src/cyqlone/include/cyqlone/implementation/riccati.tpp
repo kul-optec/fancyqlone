@@ -181,12 +181,13 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse(
             gemv_add(Acl.transposed(), λn, λ_prev);
             sub(λ_prev, w);
             if (Mᵀλ) {
-                const auto Fᵀprev = F_prev.transposed();
+                const auto Fᵀprev = F_prev.transposed(), Bᵀprev = Fᵀprev.top_rows(nu);
                 const auto Mᵀλj = Mᵀλ->batch(di), Mᵀλ_prev = Mᵀλ->batch(di_prev);
-                gemv_add(Fᵀprev, λ_prev, Mᵀλ_prev);   // (Mᵀλ)(j-1) += [ B(j-1)ᵀ ] λ(j-1)
-                                                      //               [ A(j-1)ᵀ ]
-                Mᵀλj.top_rows(nu).set_constant(0);    // (Mᵀλ)(j) = - [ 0 ] λ(j-1)
-                negate(λ_prev, Mᵀλj.bottom_rows(nx)); //              [ I ]
+                v > 0 || j > 0
+                    ? gemv_add(Fᵀprev, λ_prev, Mᵀλ_prev) // (Mᵀλ)(j-1) += [ B(j-1)ᵀ ] λ(j-1)
+                    : gemv_add(Bᵀprev, λ_prev, Mᵀλ_prev.top_rows(nu)); // [ A(j-1)ᵀ ]
+                Mᵀλj.top_rows(nu).set_constant(0);                     // (Mᵀλ)(j) = - [ 0 ] λ(j-1)
+                negate(λ_prev, Mᵀλj.bottom_rows(nx));                  //              [ I ]
             }
         } else {
             GUANAQO_TRACE("Riccati solve rev", j);
@@ -216,10 +217,11 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse(
         }
     }
     if (Mᵀλ) {
+        const index_t j = stage_index(c, 0, 0);
         const auto Fᵀn  = data_F.batch(dn).transposed();
         const auto λn   = λ.batch(dn);
         const auto Mᵀλn = Mᵀλ->batch(dn);
-        v > 1 || c > 0
+        v > 1 || j > 0
             ? gemv_add(Fᵀn, λn, Mᵀλn)                            // (Mᵀλ)(jₙ) += [ B(jₙ)ᵀ ] λ(jₙ)
             : gemv_add(Fᵀn.top_rows(nu), λn, Mᵀλn.top_rows(nu)); //              [ A(jₙ)ᵀ ]
     }
