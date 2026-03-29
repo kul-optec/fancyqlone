@@ -132,8 +132,8 @@ target_sources(cyqlone PUBLIC FILE_SET HEADERS
 )
 
 # Build time
+set(CYQLONE_BUILD_TIME_CPP "${CMAKE_CURRENT_BINARY_DIR}/cyqlone-build-time.cpp")
 if (CYQLONE_WITH_ACCURATE_BUILD_TIME)
-    set(CYQLONE_BUILD_TIME_CPP "${CMAKE_CURRENT_BINARY_DIR}/cyqlone-build-time.cpp")
     add_custom_target(cyqlone-build-time-generate
         BYPRODUCTS ${CYQLONE_BUILD_TIME_CPP}
         COMMAND ${CMAKE_COMMAND}
@@ -142,10 +142,10 @@ if (CYQLONE_WITH_ACCURATE_BUILD_TIME)
     target_sources(cyqlone PRIVATE ${CYQLONE_BUILD_TIME_CPP})
     add_dependencies(cyqlone cyqlone-build-time-generate)
 else()
-    set(CYQLONE_BUILD_TIME_CPP "${CMAKE_CURRENT_BINARY_DIR}/cyqlone-build-time.cpp")
-    if (NOT EXISTS ${CYQLONE_BUILD_TIME_CPP})
-        include(cmake/BuildTime.cmake)
-    endif()
+    include(cmake/BuildTime.cmake)
+    set(CYQLONE_BUILD_TIME "${CYQLONE_BUILD_TIME}" CACHE STRING
+        "Build time to embed in the library. Consider using SOURCE_DATE_EPOCH instead of setting this directly.")
+    unset(CYQLONE_BUILD_TIME) # Keep only the cache variable
     target_sources(cyqlone PRIVATE ${CYQLONE_BUILD_TIME_CPP})
 endif()
 
