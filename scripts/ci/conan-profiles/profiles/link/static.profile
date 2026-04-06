@@ -1,7 +1,6 @@
 # Links libstdc++ and libgcc statically (but not libgcc_eh)
 
 [settings]
-compiler.static-libgfortran=True
 compiler.static-libstdc++=True
 
 [conf]

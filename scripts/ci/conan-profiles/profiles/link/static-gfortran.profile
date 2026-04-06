@@ -14,3 +14,4 @@ tools.cmake.cmaketoolchain:extra_variables*={'CMAKE_MODULE_LINKER_FLAGS_RELWITHD
 
 [options]
 coinmumps/*:static_fortran_libs=True
+openblas/*:shared_libgfortran=False
