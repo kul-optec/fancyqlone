@@ -37,8 +37,6 @@ blasfeo/*: cmake/[<4]
 [conf]
 tools.build.cross_building:cross_build=True
 tools.build.cross_building:can_run=True
-tools.build:sharedlinkflags+=["-lgfortran"]
-tools.build:exelinkflags+=["-lgfortran"]
 # Package-specific configurations
 &:tools.cmake.cmaketoolchain:extra_variables*={"CMAKE_EXPORT_COMPILE_COMMANDS": "On"}
 &:tools.cmake.cmaketoolchain:extra_variables*={"BATMAT_WITH_ACCURATE_BUILD_TIME": "Off"}
