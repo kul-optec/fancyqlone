@@ -3,7 +3,7 @@ import os
 from conan import ConanFile
 from conan.tools.build import can_run
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
-from conan.tools.files import apply_conandata_patches, export_conandata_patches, get
+from conan.tools.files import apply_conandata_patches, export_conandata_patches, get, save
 
 
 class HyhoundRecipe(ConanFile):
@@ -46,6 +46,8 @@ class HyhoundRecipe(ConanFile):
         self.options["guanaqo/*"].with_blas = True
 
     def export_sources(self):
+        commit = self.conan_data["commits"][self.version]
+        save(self, os.path.join(self.export_sources_folder, "commit.txt"), commit)
         export_conandata_patches(self)
 
     def source(self):
@@ -58,11 +60,11 @@ class HyhoundRecipe(ConanFile):
         apply_conandata_patches(self)
 
     def layout(self):
-        cmake_layout(self, src_folder="src")
+        cmake_layout(self)
 
     def requirements(self):
         self.requires(
-            "guanaqo/[>=1.0.0-alpha.22 <1.0.0-alpha.27, include_prerelease]",
+            "guanaqo/[>=1.0.0-alpha.22 <1.0.0-alpha.28, include_prerelease]",
             transitive_headers=True,
             transitive_libs=True,
         )
