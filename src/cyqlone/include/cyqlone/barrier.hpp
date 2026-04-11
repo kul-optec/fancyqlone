@@ -8,11 +8,13 @@
 #include <batmat/assume.hpp>
 #include <array>
 #include <atomic>
+#include <cassert>
 #include <cstdint>
 #include <cstring>
 #include <functional>
 #include <memory>
 #include <type_traits>
+#include <utility>
 
 #ifndef CYQLONE_SANITY_CHECKS_BARRIER
 #ifndef NDEBUG
@@ -52,9 +54,10 @@ class TreeBarrier {
     enum class BarrierPhase : PhaseType {};
     class arrival_token {
         BarrierPhase phase;
+        explicit arrival_token(BarrierPhase phase) : phase{phase} {}
+        friend TreeBarrier;
 
       public:
-        explicit arrival_token(BarrierPhase phase) : phase{phase} {}
         arrival_token(const arrival_token &phase)            = delete;
         arrival_token(arrival_token &&phase)                 = default;
         arrival_token &operator=(const arrival_token &phase) = delete;
@@ -68,27 +71,53 @@ class TreeBarrier {
   private:
     static constexpr size_t cache_line_size = 64; ///< @todo increase to 128 on newer architectures
     /// Storage for small values used in reductions and broadcasts.
-    /// @todo use placement new and launder, drop trivial copyability requirement
     struct Storage {
-        alignas(cache_line_size) std::array<std::byte, cache_line_size> payload;
-        template <class T>
-        void store(T t) noexcept {
-            static_assert(sizeof(T) <= sizeof(payload));
-            static_assert(std::is_trivially_copyable_v<T>);
-            std::memcpy(payload.data(), &t, sizeof(T));
+        using destructor_t                        = void (*)(void *) noexcept;
+        static constexpr std::size_t payload_size = cache_line_size - sizeof(destructor_t);
+        alignas(cache_line_size) std::array<std::byte, payload_size> payload;
+        destructor_t destructor = nullptr;
+
+        Storage()                           = default;
+        Storage(const Storage &)            = delete;
+        Storage &operator=(const Storage &) = delete;
+        Storage(Storage &&)                 = delete;
+        Storage &operator=(Storage &&)      = delete;
+        ~Storage() { reset(); }
+
+        void reset() noexcept {
+            if (auto destroy = std::exchange(destructor, nullptr)) [[unlikely]]
+                destroy(payload.data());
         }
-        template <class T>
-        T load() const noexcept {
-            static_assert(sizeof(T) <= sizeof(payload));
-            static_assert(std::is_trivially_copyable_v<T>);
-            T t;
-            std::memcpy(&t, payload.data(), sizeof(T));
-            return t;
+
+        template <class T, class... Args>
+        T &emplace(Args &&...args) noexcept {
+            static_assert(is_compatible<T>);
+            reset();
+            T *ptr     = ::new (payload.data()) T(std::forward<Args>(args)...);
+            destructor = std::is_trivially_destructible_v<T> ? nullptr : +[](void *p) noexcept {
+                std::launder(reinterpret_cast<T *>(p))->~T();
+            };
+            return *ptr;
         }
+
+        template <class U>
+        void store(U &&value) noexcept {
+            emplace<std::remove_cvref_t<U>>(std::forward<U>(value));
+        }
+
+        template <class T>
+        T &load() noexcept {
+            static_assert(is_compatible<T>);
+            assert(std::is_trivially_destructible_v<T> == (destructor == nullptr));
+            return *std::launder(reinterpret_cast<T *>(payload.data()));
+        }
+
         template <class T>
         static constexpr bool is_compatible =
-            sizeof(T) <= sizeof(payload) && std::is_trivially_copyable_v<T>;
+            sizeof(T) <= payload_size && alignof(T) <= cache_line_size;
     };
+    static_assert(sizeof(Storage) == cache_line_size);
+    static_assert(alignof(Storage) == cache_line_size);
     /// Atomic counters for each level of the combining tree. Aligned to avoid false sharing.
     /// @todo figure out why the libstdc++ implementation does not reuse tickets across levels
     ///       (as is done with the storage in the reduction variant below).
@@ -105,19 +134,29 @@ class TreeBarrier {
     };
     using ticket_value_type = typename State::ticket_t::value_type;
 
-    uint32_t expected;                  ///< Number of participating threads.
-    std::unique_ptr<State[]> state;     ///< Combining tree state.
-    std::unique_ptr<Storage[]> storage; ///< Used for reductions.
-    Storage broadcast_storage;          ///< Used for broadcasts (including after reductions).
-    [[no_unique_address]] CompletionFn completion; ///< Called when last thread arrives.
+    /// Number of participating threads.
+    uint32_t expected;
+    /// Combining tree state.
+    std::unique_ptr<State[]> state;
+    /// Used for reductions and shuffles.
+    /// @invariant For each operation (shuffle or reduction), `storage[i]` is always written by
+    ///            thread `i`.
+    std::unique_ptr<Storage[]> storage;
+    /// Used for broadcasts (including after reductions).
+    Storage broadcast_storage;
+    /// Called when last thread arrives.
+    [[no_unique_address]] CompletionFn completion;
     alignas(cache_line_size) std::atomic<BarrierPhase> phase{};
 
-#if CYQLONE_SANITY_CHECKS_BARRIER
-    State::ticket_t &get_local_phase(uint32_t thread_id) noexcept {
+    State::ticket_t &get_shuffle_ticket(uint32_t thread_id) noexcept {
         return state[thread_id >> 1].tickets[State::num_levels - 1 - (thread_id & 1)];
     }
-    State::ticket_t &get_local_line(uint32_t thread_id) noexcept {
+#if CYQLONE_SANITY_CHECKS_BARRIER
+    State::ticket_t &get_local_phase(uint32_t thread_id) noexcept {
         return state[thread_id >> 1].tickets[State::num_levels - 3 - (thread_id & 1)];
+    }
+    State::ticket_t &get_local_line(uint32_t thread_id) noexcept {
+        return state[thread_id >> 1].tickets[State::num_levels - 5 - (thread_id & 1)];
     }
     void sanity_check_arrival(uint32_t thread_id, BarrierPhase cur_phase) noexcept {
         if (get_local_phase(thread_id).fetch_add(1, std::memory_order_relaxed) !=
@@ -219,13 +258,25 @@ class TreeBarrier {
         return arrival_token{cur_phase};
     }
 
+    template <class T>
+    void atomic_wait_acq(const std::atomic<T> &a, T old) const {
+        // barring overflow, we have that current_phase >= old_phase
+        if (a.load(std::memory_order_acquire) != old) [[likely]]
+            return;
+        // Spin before calling wait
+        for (auto spin = this->spin_count; spin-- > 0;)
+            if (a.load(std::memory_order_acquire) != old) [[unlikely]]
+                return;
+        a.wait(old, std::memory_order_acquire);
+    }
+
   public:
     /// Maximum number of threads supported by this barrier implementation.
     static constexpr uint32_t max() {
-#if CYQLONE_SANITY_CHECKS_BARRIER // Leave space for local phases for sanity checks
-        constexpr static uint32_t num_levels = State::num_levels - 4;
-#else
-        constexpr static uint32_t num_levels = State::num_levels;
+#if CYQLONE_SANITY_CHECKS_BARRIER // Leave space for local phases for sanity checks and shuffle
+        static constexpr uint32_t num_levels = State::num_levels - 6;
+#else // leave space for shuffle tickets
+        static constexpr uint32_t num_levels = State::num_levels - 2;
 #endif
         return num_levels > 31 ? 0xFFFFFFFF : uint32_t{1} << num_levels;
     }
@@ -240,10 +291,14 @@ class TreeBarrier {
         state                   = std::make_unique<State[]>(leaf_count);
         storage                 = std::make_unique<Storage[]>(expected);
     }
-    TreeBarrier(const TreeBarrier &)            = delete;
-    TreeBarrier(TreeBarrier &&)                 = default;
-    TreeBarrier &operator=(const TreeBarrier &) = delete;
-    TreeBarrier &operator=(TreeBarrier &&)      = default;
+    TreeBarrier(const TreeBarrier &) = delete;
+    TreeBarrier(TreeBarrier &&other) noexcept
+        : expected(std::exchange(other.expected, 0)), state(std::move(other.state)),
+          storage(std::move(other.storage)), completion(std::move(other.completion)),
+          phase(other.phase.load(std::memory_order_relaxed)) {}
+    TreeBarrier &operator=(const TreeBarrier &)               = delete;
+    TreeBarrier &operator=(TreeBarrier &&)                    = delete; // TODO
+    friend void swap(TreeBarrier &a, TreeBarrier &b) noexcept = delete; // TODO
 
     /// Arrive at the barrier with a custom completion function that is called by the last thread
     /// that arrives, before advancing the barrier phase and notifying all waiting threads.
@@ -319,14 +374,7 @@ class TreeBarrier {
     /// Waiting on the same token multiple times is not allowed.
     void wait(arrival_token &&token) const {
         const auto old_phase = token.get();
-        // barring overflow, we have that current_phase >= old_phase
-        if (phase.load(std::memory_order_acquire) != old_phase) [[likely]]
-            return;
-        // Spin before calling wait
-        for (auto spin = this->spin_count; spin-- > 0;)
-            if (phase.load(std::memory_order_acquire) != old_phase) [[unlikely]]
-                return;
-        phase.wait(old_phase, std::memory_order_acquire);
+        atomic_wait_acq(phase, old_phase);
     }
 
     /// Convenience function to arrive and wait in a single call.
@@ -407,6 +455,92 @@ class TreeBarrier {
         };
         wait(arrive_with_completion(thread_id, custom_completion));
         return broadcast_storage.template load<T>();
+    }
+
+    template <class T>
+    class shuffle_token {
+        uint32_t src;
+        shuffle_token(uint32_t src) : src{src} {}
+        friend TreeBarrier;
+
+      public:
+        shuffle_token(const shuffle_token &phase)            = delete;
+        shuffle_token(shuffle_token &&phase)                 = default;
+        shuffle_token &operator=(const shuffle_token &phase) = delete;
+        shuffle_token &operator=(shuffle_token &&phase)      = default;
+    };
+
+    /// Publish the value @p x to another thread, and prepare to receive the value from thread
+    /// @p src. Note that the @p src and @p thread_id arguments should define a complete
+    /// permutation, i.e. each thread sends its value to exactly one other thread.
+    /// @note This does not complete a barrier phase.
+    template <class T>
+    [[nodiscard]] shuffle_token<T> shuffle_start(uint32_t thread_id, T x, uint32_t src) {
+        auto &ticket = get_shuffle_ticket(thread_id);
+#if CYQLONE_SANITY_CHECKS_BARRIER
+        if (ticket.load(std::memory_order_relaxed))
+            throw std::logic_error(
+                std::format("Barrier sanity check failed: thread {} did not complete its previous "
+                            "shuffle before calling shuffle_start again",
+                            thread_id));
+#endif
+        storage[thread_id].store(std::move(x));
+        ticket.store(1, std::memory_order_release);
+        ticket.notify_one();
+        return {src};
+    }
+
+    /// Wait from the value sent by @ref shuffle_start, applying a function to it.
+    /// Note that if the value contains any references to local variables on the sending thread,
+    /// they can safely be accessed in @p func, but they become dangling after @p func returns,
+    /// because then the sending thread may continue execution asynchronously.
+    template <class T, class F>
+        requires(std::is_void_v<std::invoke_result_t<F &&, T &&>>)
+    void shuffle_wait(uint32_t thread_id, shuffle_token<T> &&token, F &&func) {
+        auto &ticket     = get_shuffle_ticket(thread_id);
+        auto &src_ticket = get_shuffle_ticket(token.src);
+        atomic_wait_acq(src_ticket, ticket_value_type{0});
+        std::invoke(std::forward<F>(func), std::move(storage[token.src].template load<T>()));
+        src_ticket.store(0, std::memory_order_release);
+        src_ticket.notify_one();
+        atomic_wait_acq(ticket, ticket_value_type{1});
+    }
+
+    template <class T, class F>
+        requires(!std::is_void_v<std::invoke_result_t<F &&, T &&>>)
+    [[nodiscard]]
+    std::invoke_result_t<F &&, T &&> shuffle_wait(uint32_t thread_id, shuffle_token<T> &&token,
+                                                  F &&func) {
+        auto &ticket     = get_shuffle_ticket(thread_id);
+        auto &src_ticket = get_shuffle_ticket(token.src);
+        atomic_wait_acq(src_ticket, ticket_value_type{0});
+        std::invoke_result_t<F &&, T &&> ret =
+            std::invoke(std::forward<F>(func), std::move(storage[token.src].template load<T>()));
+        src_ticket.store(0, std::memory_order_release);
+        src_ticket.notify_one();
+        atomic_wait_acq(ticket, ticket_value_type{1});
+        return ret;
+    }
+
+    /// @warning Any pointers or references in the return value should be assumed to be dangling.
+    ///          Use the variant that takes a function argument to access them safely.
+    template <class T>
+    T shuffle_wait(uint32_t thread_id, shuffle_token<T> &&token) {
+        return shuffle_wait(thread_id, std::move(token), [](T &&x) -> T { return std::move(x); });
+    }
+
+    /// Thread `thread_id` receives the value from thread `thread_id - n`.
+    template <class T>
+    [[nodiscard]] shuffle_token<T> shuffle_rotr_start(uint32_t thread_id, T x, uint32_t n) {
+        return shuffle_start(thread_id, std::move(x),
+                             thread_id >= n ? thread_id - n : thread_id + expected - n);
+    }
+
+    /// Thread `thread_id` receives the value from thread `thread_id + n`.
+    template <class T>
+    [[nodiscard]] shuffle_token<T> shuffle_rotl_start(uint32_t thread_id, T x, uint32_t n) {
+        return shuffle_start(thread_id, std::move(x),
+                             thread_id + n < expected ? thread_id + n : thread_id + n - expected);
     }
 };
 

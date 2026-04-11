@@ -72,6 +72,10 @@ struct Context {
 #else
     using arrival_token = typename shared_context_type::barrier_type::arrival_token;
 #endif
+    template <class T>
+    using arrival_token_typed = shared_context_type::barrier_type::template arrival_token_typed<T>;
+    template <class T>
+    using shuffle_token = shared_context_type::barrier_type::template shuffle_token<T>;
 
     shared_context_type &shared;
     const index_t index;
@@ -161,7 +165,7 @@ struct Context {
     /// Wait for the reduction initiated by @ref arrive_reduce() to complete and obtain the reduced
     /// value.
     template <class T>
-    T wait_reduce(shared_context_type::barrier_type::template arrival_token_typed<T> &&token) {
+    T wait_reduce(arrival_token_typed<T> &&token) {
         return shared.barrier.wait_reduce(std::move(token));
     }
 
@@ -186,6 +190,27 @@ struct Context {
     auto run_single_sync(F &&f) {
         return shared.barrier.arrive_and_wait_with_completion(static_cast<uint32_t>(index),
                                                               std::forward<F>(f));
+    }
+
+    template <class T, class F>
+    decltype(auto) shuffle_wait(shuffle_token<T> &&token, F &&func) {
+        return shared.barrier.shuffle_wait(static_cast<uint32_t>(index), std::move(token),
+                                           std::forward<F>(func));
+    }
+
+    template <class T, class F>
+    decltype(auto) shuffle_wait(shuffle_token<T> &&token) {
+        return shared.barrier.shuffle_wait(static_cast<uint32_t>(index), std::move(token));
+    }
+
+    template <class T>
+    [[nodiscard]] auto shuffle_rotr_start(T x, uint32_t n) {
+        return shared.barrier.shuffle_rotr_start(static_cast<uint32_t>(index), std::move(x), n);
+    }
+
+    template <class T>
+    [[nodiscard]] auto shuffle_rotl_start(T x, uint32_t n) {
+        return shared.barrier.shuffle_rotl_start(static_cast<uint32_t>(index), std::move(x), n);
     }
 };
 
