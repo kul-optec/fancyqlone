@@ -16,6 +16,63 @@
 #include <utility>
 
 // TODO: eventually move this to batmat
+
+namespace batmat::linalg::detail {
+
+template <class T, class S, class D, class L, StorageOrder O>
+    requires(D{} > S{})
+struct simdified_multi_view_type<batmat::matrix::View<T, index_t, S, D, L, O>> {
+    using value_type   = std::remove_const_t<T>;
+    using abi_type     = datapar::deduced_abi<value_type, S{}>;
+    using simd_type    = datapar::simd<value_type, abi_type>;
+    using stride       = datapar::simd_size<value_type, abi_type>;
+    using alignment    = datapar::simd_align<value_type, abi_type>;
+    using layer_stride = L;
+    using type         = batmat::matrix::View<T, index_t, stride, index_t, layer_stride, O>;
+    static_assert(stride::value * sizeof(value_type) >= alignment::value);
+};
+
+template <class T, class S, class D, class L, StorageOrder O>
+    requires(D{} > S{})
+struct simdified_multi_view_type<const batmat::matrix::View<T, index_t, S, D, L, O>> {
+    using value_type   = std::remove_const_t<T>;
+    using abi_type     = datapar::deduced_abi<value_type, S{}>;
+    using simd_type    = datapar::simd<value_type, abi_type>;
+    using stride       = datapar::simd_size<value_type, abi_type>;
+    using alignment    = datapar::simd_align<value_type, abi_type>;
+    using layer_stride = L;
+    using type         = batmat::matrix::View<T, index_t, stride, index_t, layer_stride, O>;
+    static_assert(stride::value * sizeof(value_type) >= alignment::value);
+};
+
+template <class T, class I, class S, class D, StorageOrder O, class A>
+    requires(D{} > S{})
+struct simdified_multi_view_type<batmat::matrix::Matrix<T, I, S, D, O, A>> {
+    using value_type   = T;
+    using abi_type     = datapar::deduced_abi<value_type, S{}>;
+    using simd_type    = datapar::simd<value_type, abi_type>;
+    using stride       = datapar::simd_size<value_type, abi_type>;
+    using alignment    = datapar::simd_align<value_type, abi_type>;
+    using layer_stride = batmat::matrix::DefaultStride;
+    using type         = batmat::matrix::View<T, index_t, stride, index_t, layer_stride, O>;
+    static_assert(A{} >= alignment::value);
+};
+
+template <class T, class I, class S, class D, class A, StorageOrder O>
+    requires(D{} > S{})
+struct simdified_multi_view_type<const batmat::matrix::Matrix<T, I, S, D, O, A>> {
+    using value_type   = T;
+    using abi_type     = datapar::deduced_abi<value_type, S{}>;
+    using simd_type    = datapar::simd<value_type, abi_type>;
+    using stride       = datapar::simd_size<value_type, abi_type>;
+    using alignment    = datapar::simd_align<value_type, abi_type>;
+    using layer_stride = batmat::matrix::DefaultStride;
+    using type         = batmat::matrix::View<const T, index_t, stride, index_t, layer_stride, O>;
+    static_assert(A{} >= alignment::value);
+};
+
+} // namespace batmat::linalg::detail
+
 namespace cyqlone::linalg {
 
 using namespace batmat::linalg;
