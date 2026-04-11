@@ -225,6 +225,15 @@ template <class T, class Abi, StorageOrder O>
     iter_elems_store<T, Abi, O>(clamp, z, x, lo, hi);
 }
 
+/// Elementwise clamping z = max(lo, min(x, hi)), with scalar lo and hi.
+template <class T, class Abi, StorageOrder O>
+[[gnu::flatten]] void clamp(view<const T, Abi, O> x, T lo, T hi, view<T, Abi, O> z) {
+    BATMAT_ASSERT(x.rows() == z.rows());
+    BATMAT_ASSERT(x.cols() == z.cols());
+    const auto clamp = [&](auto xi) { return fmax(decltype(xi){lo}, fmin(xi, decltype(xi){hi})); };
+    iter_elems_store<T, Abi, O>(clamp, z, x);
+}
+
 /// Elementwise clamping residual z = x - max(lo, min(x, hi)).
 template <class T, class Abi, StorageOrder O>
 [[gnu::flatten]] void clamp_resid(view<const T, Abi, O> x, view<const T, Abi, O> lo,
@@ -402,6 +411,15 @@ void clamp_resid(Vx &&x, Vlo &&lo, Vhi &&hi, Vz &&z) {
     GUANAQO_TRACE_LINALG("clamp_resid", 3 * detail::num_elem(simdify(x))); // sub, max, min
     detail::clamp_resid<simdified_value_t<Vx>, simdified_abi_t<Vx>>(
         simdify(x).as_const(), simdify(lo).as_const(), simdify(hi).as_const(), simdify(z));
+}
+
+/// Elementwise clamping z = max(lo, min(x, hi)), with scalar lo and hi.
+template <simdifiable Vx, simdifiable Vz>
+    requires simdify_compatible<Vx, Vz>
+void clamp(Vx &&x, simdified_value_t<Vx> lo, simdified_value_t<Vx> hi, Vz &&z) {
+    GUANAQO_TRACE_LINALG("clamp", 2 * detail::num_elem(simdify(x))); // max, min
+    detail::clamp<simdified_value_t<Vx>, simdified_abi_t<Vx>>(simdify(x).as_const(), lo, hi,
+                                                              simdify(z));
 }
 
 /// Add scaled vector z = αx + βy.
@@ -669,6 +687,15 @@ void clamp_resid(Vx &&x, Vlo &&lo, Vhi &&hi, Vz &&z) {
     BATMAT_ASSERT(x.num_batches() == z.num_batches());
     for (index_t b = 0; b < x.num_batches(); ++b)
         linalg::clamp_resid(x.batch(b), lo.batch(b), hi.batch(b), z.batch(b));
+}
+
+/// Elementwise clamping z = max(lo, min(x, hi)), with scalar lo and hi.
+template <simdifiable_multi Vx, simdifiable_multi Vz>
+    requires simdify_compatible<Vx, Vz>
+void clamp(Vx &&x, simdified_value_t<Vx> lo, simdified_value_t<Vx> hi, Vz &&z) {
+    BATMAT_ASSERT(x.num_batches() == z.num_batches());
+    for (index_t b = 0; b < x.num_batches(); ++b)
+        linalg::clamp(x.batch(b), lo, hi, z.batch(b));
 }
 
 /// Add scaled vector z = αx + βy.
