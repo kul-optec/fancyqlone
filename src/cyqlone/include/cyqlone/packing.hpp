@@ -200,6 +200,15 @@ void unpack(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
         simdify(A).as_const(), B.first_layers(A.depth()));
 }
 
+/// Add a compact batch of matrices @p A to multiple scalar matrices @p B.
+template <simdifiable VA, class VB, int Rot = 0>
+    requires(std::is_same_v<simdified_value_t<VA>, typename std::remove_cvref_t<VB>::value_type> &&
+             typename std::remove_cvref_t<VB>::batch_size_type() == 1)
+void unpack_add(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
+    detail::unpack_full<const simdified_value_t<VA>, simdified_abi_t<VA>, Rot, true>(
+        simdify(A).as_const(), B.first_layers(A.depth()));
+}
+
 /// Copy multiple scalar matrices @p A to a compact batch of matrices @p B.
 /// @post A(l, r, c) == B(l, r, c) for all valid l, r, c.
 template <class VA, simdifiable VB, int Rot = 0>
