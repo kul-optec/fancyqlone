@@ -483,8 +483,12 @@ auto open_vector_var(mat_t *mat, const std::string &varname) {
     if (!var)
         throw std::runtime_error(std::format("Missing variable: {}", varname));
     validate_mat_var(var.get(), varname, 2);
-    if (var->dims[1] != 1)
-        throw std::runtime_error(std::format("Variable {}: should have one column", varname));
+    if (var->dims[1] == 0 && var->dims[0] > 0)
+        throw std::runtime_error(
+            std::format("Variable {}: nonzero number of rows, but zero columns", varname));
+    if (var->dims[1] > 1)
+        throw std::runtime_error(
+            std::format("Variable {}: should have one column, got {}", varname, var->dims[1]));
     return var;
 }
 
