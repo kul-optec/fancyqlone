@@ -157,6 +157,57 @@ template <class T, class Abi, StorageOrder O, class F, class... Ys, class... Xs>
     }
 }
 
+/// Iterate element-wise over the diagonal elements of matrices and over the elements of vectors.
+/// Any argument can either be a square matrix or a vector, but this function has a fast path
+/// when the first input and output arguments are square matrices and all others are column vectors.
+template <class T, class Abi, class F, class... Ys, class... Xs>
+[[gnu::always_inline]] inline void iter_diag_store_n(F &&fun, std::tuple<Ys...> ys, Xs &&...xs) {
+    using std::get;
+    using types        = simd_view_types<T, Abi>;
+    const index_t rows = std::get<0>(ys).rows(), cols = std::get<0>(ys).cols();
+    const index_t n = std::get<0>(ys).storage_order == StorageOrder::ColMajor
+                          ? (cols > 1 ? std::min(rows, cols) : rows)
+                          : (rows > 1 ? std::min(rows, cols) : cols);
+    // Optimized implementation for the special case where the first input and the first output are
+    // square matrices and all others are column vectors.
+    static constexpr auto all_vectors_except_first = [](auto &x0, auto &...x1s) {
+        return x0.rows() == x0.cols() &&
+               ((x1s.storage_order == StorageOrder::ColMajor && x1s.cols() == 1) && ...);
+    };
+    const bool all_xs_vectors_except_first = all_vectors_except_first(xs...);
+    const bool all_ys_vector_except_first  = std::apply(all_vectors_except_first, ys);
+    if (all_xs_vectors_except_first && all_ys_vector_except_first) {
+        for (index_t r = 0; r < n; ++r) {
+            auto rs = [&](auto &x0, auto &...x1s) {
+                return fun(types::aligned_load(&x0(0, r, r)),
+                           types::aligned_load(&x1s(0, r, 0))...);
+            }(xs...);
+            static_assert(std::tuple_size_v<decltype(rs)> == sizeof...(Ys));
+            [&]<size_t... Is>(std::index_sequence<Is...>) {
+                ((types::aligned_store(get<Is>(rs), &get<Is>(ys)(0, r, Is == 0 ? r : 0))), ...);
+            }(std::index_sequence_for<Ys...>());
+        }
+    }
+    // Fully generic implementation
+    // (GCC does not seem to hoist the conditionals in the access function out of the loop, so we
+    //  pay for some cmovs here, even at -O3. Should be fine though, since we're most likely memory-
+    //  bound anyway.)
+    else {
+        static constexpr auto access = [](auto &x, index_t r) -> auto & {
+            return x.storage_order == StorageOrder::ColMajor
+                       ? (x.cols() > 1 ? x(0, r, r) : x(0, r, 0))
+                       : (x.rows() > 1 ? x(0, r, r) : x(0, 0, r));
+        };
+        for (index_t r = 0; r < n; ++r) {
+            auto rs = fun(types::aligned_load(&access(xs, r))...);
+            static_assert(std::tuple_size_v<decltype(rs)> == sizeof...(Ys));
+            [&]<size_t... Is>(std::index_sequence<Is...>) {
+                ((types::aligned_store(get<Is>(rs), &access(get<Is>(ys), r))), ...);
+            }(std::index_sequence_for<Ys...>());
+        }
+    }
+}
+
 template <class T, class Abi, StorageOrder O0, class Tinit, class F, class R, class... Args>
 auto reduce(Tinit init, F fun, R reduce, view<const T, Abi, O0> x0, const Args &...xs) {
     BATMAT_ASSERT(((x0.rows() == xs.rows()) && ...));
@@ -568,6 +619,63 @@ void transform_n_elementwise(F &&fun, std::tuple<VAs...> As, VBs &&...Bs) {
         std::forward<F>(fun),
         std::apply([](auto &&...a) { return std::make_tuple(simdify(a)...); }, As),
         simdify(Bs).as_const()...);
+}
+
+/// Apply a function to all elements of the given vectors and the diagonal elements of the given
+/// square matrices, storing the results in the tuple of vectors or matrices given as the first
+/// argument. Most efficient if only the first argument contains matrices, and all other arguments
+/// are column vectors.
+template <class F, simdifiable... VAs, simdifiable... VBs>
+    requires simdify_compatible<VAs..., VBs...>
+void transform_n_diag(F &&fun, std::tuple<VAs...> As, VBs &&...Bs) {
+    constexpr auto check_size = [](auto &x) {
+        if (x.rows() == x.cols())
+            return x.rows();
+        else if (x.storage_order == StorageOrder::ColMajor) {
+            BATMAT_ASSERT(x.cols() == 1);
+            return x.rows();
+        } else {
+            BATMAT_ASSERT(x.rows() == 1);
+            return x.cols();
+        }
+    };
+    [[maybe_unused]] const index_t n = check_size(std::get<0>(As));
+    [&]<size_t... Is>(std::index_sequence<Is...>) {
+        BATMAT_ASSERT(((check_size(get<Is>(As)) == n) && ...));
+    }(std::index_sequence_for<VAs...>());
+    BATMAT_ASSERT(((check_size(Bs) == n) && ...));
+    using VA0 = std::tuple_element_t<0, decltype(As)>;
+    detail::iter_diag_store_n<simdified_value_t<VA0>, simdified_abi_t<VA0>>(
+        std::forward<F>(fun),
+        std::apply([](auto &&...a) { return std::make_tuple(simdify(a)...); }, As),
+        simdify(Bs).as_const()...);
+}
+
+/// Copy the diagonal elements of a matrix. The arguments @p A and @p B must either be square
+/// matrices or vectors. This function supports setting the diagonal of a matrix to the values of
+/// a vector, copying the diagonal of one matrix to the diagonal of another, or copying the diagonal
+/// elements of a matrix to a vector.
+template <class F, simdifiable VA, simdifiable VB>
+    requires simdify_compatible<VA, VB>
+void copy_diag(VA &&A, VB &&B) {
+    [[maybe_unused]] const index_t n =
+        A.storage_order == StorageOrder::ColMajor ? A.rows() : A.cols();
+    if constexpr (A.storage_order == StorageOrder::ColMajor) {
+        BATMAT_ASSERT(A.rows() == n);
+        BATMAT_ASSERT(A.cols() == n || A.cols() == 1);
+    } else {
+        BATMAT_ASSERT(A.rows() == n || A.rows() == 1);
+        BATMAT_ASSERT(A.cols() == n);
+    }
+    if constexpr (B.storage_order == StorageOrder::ColMajor) {
+        BATMAT_ASSERT(B.rows() == n);
+        BATMAT_ASSERT(B.cols() == n || B.cols() == 1);
+    } else {
+        BATMAT_ASSERT(B.rows() == n || B.rows() == 1);
+        BATMAT_ASSERT(B.cols() == n);
+    }
+    detail::iter_diag_store_n<simdified_value_t<VA>, simdified_abi_t<VA>>(
+        [](auto Ai) { return Ai; }, std::make_tuple(simdify(B)), simdify(A).as_const());
 }
 
 /// @}
