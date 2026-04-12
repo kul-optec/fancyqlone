@@ -259,8 +259,7 @@ class TreeBarrier {
     }
 
     template <class T>
-    void atomic_wait_acq(const std::atomic<T> &a, T old) const {
-        // barring overflow, we have that current_phase >= old_phase
+    void atomic_wait_ne_acq(const std::atomic<T> &a, T old) const {
         if (a.load(std::memory_order_acquire) != old) [[likely]]
             return;
         // Spin before calling wait
@@ -268,6 +267,21 @@ class TreeBarrier {
             if (a.load(std::memory_order_acquire) != old) [[unlikely]]
                 return;
         a.wait(old, std::memory_order_acquire);
+    }
+
+    template <class T>
+    void atomic_wait_eq_acq(const std::atomic<T> &a, T target) const {
+        auto old = a.load(std::memory_order_acquire);
+        if (old == target) [[likely]]
+            return;
+        // Spin before calling wait
+        for (auto spin = this->spin_count; spin-- > 0;)
+            if (old = a.load(std::memory_order_acquire); old == target) [[unlikely]]
+                return;
+        do {
+            a.wait(old, std::memory_order_acquire);
+            old = a.load(std::memory_order_acquire);
+        } while (old != target);
     }
 
   public:
@@ -374,7 +388,8 @@ class TreeBarrier {
     /// Waiting on the same token multiple times is not allowed.
     void wait(arrival_token &&token) const {
         const auto old_phase = token.get();
-        atomic_wait_acq(phase, old_phase);
+        // barring overflow, we have that current_phase >= old_phase
+        atomic_wait_ne_acq(phase, old_phase);
     }
 
     /// Convenience function to arrive and wait in a single call.
@@ -460,7 +475,8 @@ class TreeBarrier {
     template <class T>
     class shuffle_token {
         uint32_t src;
-        shuffle_token(uint32_t src) : src{src} {}
+        ticket_value_type ticket;
+        shuffle_token(uint32_t src, ticket_value_type ticket) : src{src}, ticket{ticket} {}
         friend TreeBarrier;
 
       public:
@@ -476,18 +492,16 @@ class TreeBarrier {
     /// @note This does not complete a barrier phase.
     template <class T>
     [[nodiscard]] shuffle_token<T> shuffle_start(uint32_t thread_id, T x, uint32_t src) {
+        assert(thread_id < expected);
+        assert(src < expected);
         auto &ticket = get_shuffle_ticket(thread_id);
-#if CYQLONE_SANITY_CHECKS_BARRIER
-        if (ticket.load(std::memory_order_relaxed))
-            throw std::logic_error(
-                std::format("Barrier sanity check failed: thread {} did not complete its previous "
-                            "shuffle before calling shuffle_start again",
-                            thread_id));
-#endif
+        // If the ticket is odd, then the previous shuffle has not completed yet, so wait for it.
+        if (auto old_ticket = ticket.load(std::memory_order_acquire); old_ticket & 1) [[unlikely]]
+            atomic_wait_ne_acq(ticket, old_ticket);
         storage[thread_id].store(std::move(x));
-        ticket.store(1, std::memory_order_release);
+        auto old_ticket = ticket.fetch_add(1, std::memory_order_release);
         ticket.notify_one();
-        return {src};
+        return {src, old_ticket};
     }
 
     /// Wait from the value sent by @ref shuffle_start, applying a function to it.
@@ -499,11 +513,11 @@ class TreeBarrier {
     void shuffle_wait(uint32_t thread_id, shuffle_token<T> &&token, F &&func) {
         auto &ticket     = get_shuffle_ticket(thread_id);
         auto &src_ticket = get_shuffle_ticket(token.src);
-        atomic_wait_acq(src_ticket, ticket_value_type{0});
+        atomic_wait_eq_acq(src_ticket, static_cast<ticket_value_type>(token.ticket + 1));
         std::invoke(std::forward<F>(func), std::move(storage[token.src].template load<T>()));
-        src_ticket.store(0, std::memory_order_release);
+        src_ticket.fetch_add(1, std::memory_order_release);
         src_ticket.notify_one();
-        atomic_wait_acq(ticket, ticket_value_type{1});
+        atomic_wait_eq_acq(ticket, static_cast<ticket_value_type>(token.ticket + 2));
     }
 
     template <class T, class F>
@@ -513,12 +527,12 @@ class TreeBarrier {
                                                   F &&func) {
         auto &ticket     = get_shuffle_ticket(thread_id);
         auto &src_ticket = get_shuffle_ticket(token.src);
-        atomic_wait_acq(src_ticket, ticket_value_type{0});
+        atomic_wait_eq_acq(src_ticket, static_cast<ticket_value_type>(token.ticket + 1));
         std::invoke_result_t<F &&, T &&> ret =
             std::invoke(std::forward<F>(func), std::move(storage[token.src].template load<T>()));
-        src_ticket.store(0, std::memory_order_release);
+        src_ticket.fetch_add(1, std::memory_order_release);
         src_ticket.notify_one();
-        atomic_wait_acq(ticket, ticket_value_type{1});
+        atomic_wait_eq_acq(ticket, static_cast<ticket_value_type>(token.ticket + 2));
         return ret;
     }
 
@@ -526,7 +540,16 @@ class TreeBarrier {
     ///          Use the variant that takes a function argument to access them safely.
     template <class T>
     T shuffle_wait(uint32_t thread_id, shuffle_token<T> &&token) {
-        return shuffle_wait(thread_id, std::move(token), [](T &&x) -> T { return std::move(x); });
+        (void)thread_id;
+        auto &src_ticket = get_shuffle_ticket(token.src);
+        atomic_wait_eq_acq(src_ticket, static_cast<ticket_value_type>(token.ticket + 1));
+        T ret = std::move(storage[token.src].template load<T>());
+        src_ticket.fetch_add(1, std::memory_order_release);
+        src_ticket.notify_one();
+        // No need to wait for the value we sent to be consumed by the receiving thread, since it
+        // cannot contain any references to our local variables. The next shuffle_start will wait
+        // before overwriting the storage.
+        return ret;
     }
 
     /// Thread `thread_id` receives the value from thread `thread_id - n`.

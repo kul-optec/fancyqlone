@@ -132,6 +132,52 @@ TEST_P(BarrierTest, reduce) {
     }
 }
 
+TEST_P(BarrierTest, shuffle) {
+    if (old_kernel())
+        GTEST_SKIP() << "Skipping test on old Linux kernel";
+    const uint32_t num_workers = GetParam();
+    const auto hw_workers      = static_cast<uint32_t>(cyq_get_num_proc());
+    const uint32_t iterations  = num_workers <= hw_workers ? 30'000 : 100;
+
+    using Barrier = cyqlone::TreeBarrier<>;
+    ASSERT_GE(Barrier::max(), num_workers);
+    Barrier barrier(num_workers, {});
+
+    std::vector<std::jthread> threads;
+    threads.reserve(num_workers);
+
+    for (uint32_t i = 0; i < num_workers; ++i) {
+        threads.emplace_back([&, i] {
+            uint32_t success = 0;
+            for (uint32_t iter = 0; iter < iterations; ++iter) {
+                auto encode = [iter](uint32_t stage, uint32_t thread_id) {
+                    return stage * uint64_t{1'000'000'000} + iter * uint64_t{10'000} + thread_id;
+                };
+
+                // First shuffle: receive from thread_id - 1.
+                const uint32_t src_rotr = (i - 1 + num_workers) % num_workers;
+                auto token_rotr         = barrier.shuffle_rotr_start(i, encode(0, i), 1);
+                success += barrier.shuffle_wait(i, std::move(token_rotr)) == encode(0, src_rotr);
+
+                // Second shuffle: receive from thread_id + n, using the non-void callback overload.
+                const uint32_t rotl_n   = (num_workers + 1) / 2;
+                const uint32_t src_rotl = (i + rotl_n) % num_workers;
+                auto token_rotl         = barrier.shuffle_rotl_start(i, encode(1, i), rotl_n);
+                success += barrier.shuffle_wait(i, std::move(token_rotl), [](uint64_t x) {
+                    return x ^ uint64_t{0x5A5A5A5A5A5A5A5A};
+                }) == (encode(1, src_rotl) ^ uint64_t{0x5A5A5A5A5A5A5A5A});
+
+                // Third shuffle: explicit reverse permutation, using the void callback overload.
+                const uint32_t src_reverse = num_workers - 1 - i;
+                auto token_reverse         = barrier.shuffle_start(i, encode(2, i), src_reverse);
+                barrier.shuffle_wait(i, std::move(token_reverse),
+                                     [&](uint64_t x) { success += x == encode(2, src_reverse); });
+            }
+            EXPECT_EQ(success, 3 * iterations) << i;
+        });
+    }
+}
+
 // Instantiate the test with different numbers of worker threads
 INSTANTIATE_TEST_SUITE_P(BarrierTest, BarrierTest,
                          ::testing::Values(1, 2, 3, 4, 5, 6, 7, 8, 9, 254, 255, 256, 257));
