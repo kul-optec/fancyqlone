@@ -674,8 +674,37 @@ void copy_diag(VA &&A, VB &&B) {
         BATMAT_ASSERT(B.rows() == n || B.rows() == 1);
         BATMAT_ASSERT(B.cols() == n);
     }
+    GUANAQO_TRACE_LINALG("copy_diag", n * A.depth());
     detail::iter_diag_store_n<simdified_value_t<VA>, simdified_abi_t<VA>>(
-        [](auto Ai) { return Ai; }, std::make_tuple(simdify(B)), simdify(A).as_const());
+        [](auto Ai) { return std::make_tuple(Ai); }, std::make_tuple(simdify(B)),
+        simdify(A).as_const());
+}
+
+/// C = A + diag(b).
+template <simdifiable VA, simdifiable VB, simdifiable VC>
+    requires simdify_compatible<VA, VB, VC>
+void add_diag(VA &&A, VB &&b, VC &&C) {
+    BATMAT_ASSERT(A.rows() == A.cols());
+    BATMAT_ASSERT(A.rows() == C.rows());
+    BATMAT_ASSERT(A.cols() == C.cols());
+    if constexpr (b.storage_order == StorageOrder::ColMajor) {
+        BATMAT_ASSERT(b.rows() == A.rows());
+        BATMAT_ASSERT(b.cols() == 1);
+    } else {
+        BATMAT_ASSERT(b.rows() == 1);
+        BATMAT_ASSERT(b.cols() == A.cols());
+    }
+    GUANAQO_TRACE_LINALG("add_diag", detail::num_elem(simdify(b)));
+    detail::iter_diag_store_n<simdified_value_t<VA>, simdified_abi_t<VA>>(
+        [](auto Ai, auto bi) { return std::make_tuple(Ai + bi); }, std::make_tuple(simdify(C)),
+        simdify(A).as_const(), simdify(b).as_const());
+}
+
+/// A += diag(b).
+template <simdifiable VA, simdifiable VB>
+    requires simdify_compatible<VA, VB>
+void add_diag(VA &&A, VB &&b) {
+    add_diag(std::forward<VA>(A), std::forward<VB>(b), std::forward<VA>(A));
 }
 
 /// @}
