@@ -243,6 +243,28 @@ template <class T, class Abi, StorageOrder OA>
     return reduce<T, Abi>(simd{0}, fma, simd_reduce, a);
 }
 
+/// ∑ wᵢ aᵢ².
+template <class T, class Abi, StorageOrder OW, StorageOrder OA>
+[[gnu::flatten]] T weighted_norm(view<const T, Abi, OW> w, view<const T, Abi, OA> a) {
+    using simd       = batmat::datapar::simd<T, Abi>;
+    auto wnd         = [](auto accum, auto wi, auto ai) { return wi * (ai * ai) + accum; };
+    auto simd_reduce = [](auto accum) { return reduce(accum); };
+    return reduce<T, Abi>(simd{0}, wnd, simd_reduce, w, a);
+}
+
+/// ∑ wᵢ(aᵢ - bᵢ)².
+template <class T, class Abi, StorageOrder OW, StorageOrder OA, StorageOrder OB>
+[[gnu::flatten]] T weighted_norm_difference(view<const T, Abi, OW> w, view<const T, Abi, OA> a,
+                                            view<const T, Abi, OB> b) {
+    using simd = batmat::datapar::simd<T, Abi>;
+    auto wnd   = [](auto accum, auto wi, auto ai, auto bi) {
+        auto ei = ai - bi;
+        return wi * (ei * ei) + accum;
+    };
+    auto simd_reduce = [](auto accum) { return reduce(accum); };
+    return reduce<T, Abi>(simd{0}, wnd, simd_reduce, w, a, b);
+}
+
 /// Scalar product.
 template <class T, class Abi, StorageOrder OB, StorageOrder OC>
 [[gnu::flatten]] void scale(T a, view<const T, Abi, OB> B, view<T, Abi, OC> C) {
@@ -409,6 +431,24 @@ simdified_value_t<Vx> dot(Vx &&x, Vy &&y) {
     GUANAQO_TRACE_LINALG("dot", detail::num_elem(simdify(x)));
     return detail::dot<simdified_value_t<Vx>, simdified_abi_t<Vx>>(simdify(x).as_const(),
                                                                    simdify(y).as_const());
+}
+
+/// ∑ wᵢ aᵢ².
+template <simdifiable Vw, simdifiable Va>
+    requires simdify_compatible<Vw, Va>
+simdified_value_t<Vw> weighted_norm(Vw &&w, Va &&a) {
+    GUANAQO_TRACE_LINALG("weighted_norm", 2 * detail::num_elem(simdify(w)));
+    return detail::weighted_norm<simdified_value_t<Vw>, simdified_abi_t<Vw>>(simdify(w).as_const(),
+                                                                             simdify(a).as_const());
+}
+
+/// ∑ wᵢ(aᵢ - bᵢ)².
+template <simdifiable Vw, simdifiable Va, simdifiable Vb>
+    requires simdify_compatible<Vw, Va, Vb>
+simdified_value_t<Vw> weighted_norm_diff(Vw &&w, Va &&a, Vb &&b) {
+    GUANAQO_TRACE_LINALG("weighted_norm_difference", 3 * detail::num_elem(simdify(w)));
+    return detail::weighted_norm_difference<simdified_value_t<Vw>, simdified_abi_t<Vw>>(
+        simdify(w).as_const(), simdify(a).as_const(), simdify(b).as_const());
 }
 
 /// Multiply a vector by a scalar z = αx.
@@ -766,6 +806,29 @@ simdified_value_t<Vx> dot(Vx &&x, Vy &&y) {
     simdified_value_t<Vx> result{};
     for (index_t b = 0; b < x.num_batches(); ++b)
         result += linalg::dot(x.batch(b), y.batch(b));
+    return result;
+}
+
+/// ∑ wᵢ xᵢ².
+template <simdifiable_multi Vw, simdifiable_multi Vx>
+    requires simdify_compatible<Vw, Vx>
+simdified_value_t<Vw> weighted_norm(Vw &&w, Vx &&x) {
+    BATMAT_ASSERT(w.num_batches() == x.num_batches());
+    simdified_value_t<Vw> result{};
+    for (index_t b = 0; b < w.num_batches(); ++b)
+        result += linalg::weighted_norm(w.batch(b), x.batch(b));
+    return result;
+}
+
+/// ∑ wᵢ(xᵢ - yᵢ)².
+template <simdifiable_multi Vw, simdifiable_multi Vx, simdifiable_multi Vy>
+    requires simdify_compatible<Vw, Vx, Vy>
+simdified_value_t<Vw> weighted_norm_difference(Vw &&w, Vx &&x, Vy &&y) {
+    BATMAT_ASSERT(w.num_batches() == x.num_batches());
+    BATMAT_ASSERT(w.num_batches() == y.num_batches());
+    simdified_value_t<Vw> result{};
+    for (index_t b = 0; b < w.num_batches(); ++b)
+        result += linalg::weighted_norm_diff(w.batch(b), x.batch(b), y.batch(b));
     return result;
 }
 
