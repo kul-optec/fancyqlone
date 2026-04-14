@@ -5,6 +5,7 @@
 /// @ingroup topic-utilities
 
 #include <cyqlone/config.hpp>
+#include <batmat/simd.hpp>
 #include <cmath>
 #include <type_traits>
 
@@ -25,19 +26,12 @@ class NeumaierSum {
         using std::abs;
         T t = sum + v;
         if constexpr (std::is_floating_point_v<T>) {
-            if (abs(sum) >= abs(v))
-                compensation += (sum - t) + v;
-            else
-                compensation += (v - t) + sum;
+            compensation += abs(sum) >= abs(v) ? (sum - t) + v //
+                                               : (v - t) + sum;
         } else {
-            auto m = abs(sum) >= abs(v);
-#if BATMAT_WITH_GSI_HPC_SIMD
-            compensation =
-                select(m, compensation + ((sum - t) + v), compensation + ((v - t) + sum));
-#else
-            where(m, compensation) += (sum - t) + v;
-            where(!m, compensation) += (v - t) + sum;
-#endif
+            using batmat::datapar::select;
+            compensation = select(abs(sum) >= abs(v), compensation + ((sum - t) + v),
+                                  /*               */ compensation + ((v - t) + sum));
         }
         sum = t;
         return *this;

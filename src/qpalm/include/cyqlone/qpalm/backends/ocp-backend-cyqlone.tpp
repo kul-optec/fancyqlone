@@ -6,10 +6,10 @@
 #include <cyqlone/neumaier.hpp>
 #include <cyqlone/qpalm/backends/ocp-backend-cyqlone.hpp>
 #include <cyqlone/qpalm/implementation/breakpoint.hpp>
-#include <cyqlone/reduce.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/config.hpp>
 #include <batmat/linalg/copy.hpp>
+#include <batmat/linalg/norms.hpp>
 #include <batmat/openmp.h>
 #include <batmat/simd.hpp>
 #include <guanaqo/print.hpp>
@@ -40,7 +40,7 @@ struct CyQPALMBackend {
     using Context               = typename OCP_t::Context;
     using storage_t             = typename OCP_t::template matrix<>;
     using simd                  = typename OCP_t::simd;
-    static constexpr auto norms = cyqlone::norms<real_t, simd>{};
+    static constexpr auto norms = batmat::linalg::norms<real_t, simd>{};
     // clang-format off
     struct var_vec_t         : storage_t { friend CyQPALMBackend; var_vec_t() = default;         private: var_vec_t(storage_t &&o)         : storage_t{std::move(o)} {} };
     struct eq_constr_vec_t   : storage_t { friend CyQPALMBackend; eq_constr_vec_t() = default;   private: eq_constr_vec_t(storage_t &&o)   : storage_t{std::move(o)} {} };

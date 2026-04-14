@@ -1,5 +1,5 @@
 #include <cyqlone/ocp.hpp>
-#include <cyqlone/reduce.hpp>
+#include <batmat/linalg/norms.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>
 
 #include <limits>
@@ -36,7 +36,7 @@ auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError 
         guanaqo::blas::xgemv_T(real_t{1}, C(N), yN, real_t{1}, rN);
     for (index_t i = 0; i < nx; ++i)
         rN(i, 0) -= λN(i, 0);
-    const auto norms = cyqlone::norms<real_t>{};
+    const auto norms = batmat::linalg::norms<real_t>{};
     auto stat_norm   = std::accumulate(dual_residual.data, dual_residual.data + dual_residual.rows,
                                        norms.zero(), norms);
 

@@ -2,6 +2,7 @@
 
 #include <cyqlone/linalg.hpp>
 #include <cyqlone/qpalm/backends/ocp-backend-cyqlone.tpp>
+#include <batmat/simd.hpp>
 
 namespace CYQLONE_NS(cyqlone::qpalm) {
 
@@ -16,22 +17,15 @@ index_t CyQPALMBackend<VL, DefaultOrder>::update_penalty_y(Context &ctx, ineq_co
     const real_t norm_inf_e = fmax(min_denom, norm_inf(ctx, e));
     index_t num_changed     = 0;
     const auto update_simd  = [&](auto Σji, auto eji, auto eji_old) {
+        using batmat::datapar::select;
+        using batmat::datapar::reduce_count;
         auto insufficient_progress = abs(eji) >= settings.θ * abs(eji_old);
-#if BATMAT_WITH_GSI_HPC_SIMD
         simd update_factor =
             select(insufficient_progress, settings.Δy * abs(eji) / norm_inf_e, simd{1});
-#else
-        simd update_factor{1};
-        where(insufficient_progress, update_factor) = settings.Δy * abs(eji) / norm_inf_e;
-#endif
         update_factor *= settings.Δy_always;
         auto Σ_new = Σji * update_factor;
         Σ_new      = fmax(Σji * settings.Δy_always, fmin(Σ_new, simd{settings.max_penalty_y}));
-#if BATMAT_WITH_GSI_HPC_SIMD
         num_changed += reduce_count(Σ_new != Σji);
-#else
-        num_changed += popcount(Σ_new != Σji);
-#endif
         return Σ_new;
     };
     const auto update_batch = [&](auto, auto, auto Σj, auto ej, auto ej_old) {
@@ -57,13 +51,9 @@ void CyQPALMBackend<VL, DefaultOrder>::project_multipliers_ineq(Context &ctx,
                                                                 ineq_constr_vec_t &y) const {
     GUANAQO_TRACE("project_multipliers_ineq", 0);
     const auto proj_simd = [](auto yji, auto b_minji, auto b_maxji) {
-#if BATMAT_WITH_GSI_HPC_SIMD
+        using batmat::datapar::select;
         yji = select(isfinite(b_minji), yji, fmax(yji, simd{0}));
         yji = select(isfinite(b_maxji), yji, fmin(yji, simd{0}));
-#else
-        where(!isfinite(b_minji), yji) = fmax(yji, simd{0});
-        where(!isfinite(b_maxji), yji) = fmin(yji, simd{0});
-#endif
         return yji;
     };
     const auto proj_batch = [&](auto, auto, auto yji, auto b_minji, auto b_maxji) {
@@ -118,22 +108,18 @@ index_t CyQPALMBackend<VL, DefaultOrder>::calc_ŷ_Aᵀŷ(Context &ctx, const ine
                                                      active_set_t &J) {
     index_t count_J   = 0;
     const auto ŷ_simd = [&count_J](auto Σi, auto yi, auto Axi, auto li, auto ui) {
+        using batmat::datapar::select;
+        using batmat::datapar::reduce_count;
         auto ζ = Axi + yi / Σi, z = fmax(li, fmin(ζ, ui));
         auto Ji = z != ζ; // TODO: inclusive?
 #if 0
-            simd ŷi{0};
-            where(Ji, ŷi) = yi + Σi * (Axi - z);
+        simd ŷi{0};
+        where(Ji, ŷi) = yi + Σi * (Axi - z);
 #else
         auto ŷi = yi + Σi * (Axi - z);
 #endif
-#if BATMAT_WITH_GSI_HPC_SIMD
         simd ΣJi = select(Ji, Σi, simd{0});
         count_J += static_cast<index_t>(reduce_count(Ji));
-#else
-        simd ΣJi{};
-        where(Ji, ΣJi) = Σi;
-        count_J += static_cast<index_t>(popcount(Ji));
-#endif
         return std::make_pair(ŷi, ΣJi);
     };
     const auto ŷ_batch = [&ŷ_simd]([[maybe_unused]] auto j, auto, auto ŷi, auto Ji, auto Σi,
