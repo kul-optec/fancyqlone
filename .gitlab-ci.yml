@@ -63,10 +63,11 @@ build:
     - lscpu
     - pip install -U 'conan<3'
     - cd benchmarks/cyqpalm
-    - ./benchmark.sh deps --${COMPILER} 2>&1 > deps.log
+    - ./benchmark.sh deps --${COMPILER} &> deps.log
     - ./benchmark.sh build
-    - export OMP_PLACES='cores(4)'
+    - export OMP_PLACES='threads'
     - export OMP_NUM_THREADS=4
+    - export OMP_DISPLAY_ENV=TRUE
     - ./benchmark.sh benchmark-quick
   artifacts:
     when: always
