@@ -1,9 +1,9 @@
 #pragma once
 
 #include <guanaqo/trace.hpp>
-#include <cstdint>
 
 #if GUANAQO_WITH_TRACING
+#include <cstdint>
 #include <filesystem>
 #include <span>
 
@@ -15,8 +15,14 @@ struct TracingOptions {
     bool no_barrier = true; ///< Do not log barrier events.
 };
 
-void write_chrome_trace(const fs::path &filename, std::span<const guanaqo::TraceLogger::Log> logs,
+void write_chrome_trace(const fs::path &path,
+                        std::span<const std::span<const guanaqo::TraceLogger::Log>> loggers,
                         const TracingOptions &opts = {});
+inline void write_chrome_trace(const fs::path &filename,
+                               std::span<const guanaqo::TraceLogger::Log> logs,
+                               const TracingOptions &opts = {}) {
+    write_chrome_trace(filename, std::span{&logs, 1}, opts);
+}
 
 enum class TraceDataNames {
     M,
