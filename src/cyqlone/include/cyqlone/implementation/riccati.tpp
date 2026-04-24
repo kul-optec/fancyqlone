@@ -39,7 +39,7 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_riccati_solve(Context &ctx,
         // Note that Â(jₙ) is not copied explicitly, as it is not modified in-place
         copy(data_F.batch(dn).left_cols(nu), B̂s.left_cols(nu));
         // Compress the active constraint Jacobians to add them to the Hessian later
-        if (nyM > 0)
+        if (nyM > 0 && Σ.rows() > 0 && Σ.cols() > 0)
             m_syrk = compress_masks_sqrt(data_Gᵀ.batch(dn), Σ.batch(dn), VGᵀ.left_cols(nyM));
     }
     // Iterate over all stages in the interval (in reverse order)
@@ -118,7 +118,7 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_riccati_solve(Context &ctx,
                 trmm(F_next.transposed(), tril(Q), V_next);
                 m_syrk = nx; // columns of V(j-1)
                 // Compress the active constraint Jacobians to add them to the Hessian later
-                if (nyM > 0)
+                if (nyM > 0 && Σ.rows() > 0 && Σ.cols() > 0)
                     m_syrk += compress_masks_sqrt(data_Gᵀ.batch(di_next), Σ.batch(di_next), Gᵀnext);
             }
         } else {
