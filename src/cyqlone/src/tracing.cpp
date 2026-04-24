@@ -84,6 +84,14 @@ inline std::function<void(std::string_view)> get_writer(const fs::path &path) {
     }
 }
 
+bool write_chrome_trace_supports_gzip() {
+#if CYQLONE_WITH_ZLIB
+    return true;
+#else
+    return false;
+#endif
+}
+
 void write_chrome_trace(const fs::path &path,
                         std::span<const std::span<const guanaqo::TraceLogger::Log>> loggers,
                         const TracingOptions &opts) {

@@ -23,6 +23,7 @@ inline void write_chrome_trace(const fs::path &filename,
                                const TracingOptions &opts = {}) {
     write_chrome_trace(filename, std::span{&logs, 1}, opts);
 }
+bool write_chrome_trace_supports_gzip();
 
 enum class TraceDataNames {
     M,
