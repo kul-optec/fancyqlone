@@ -996,8 +996,17 @@ struct CyqloneSolver {
     /// @name Low-level reverse solve routines
     /// @{
 
+    template <class F>
+    void solve_riccati_reverse_impl(Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
+                                    const F &simulate, std::optional<mut_view<>> Mᵀλ) const;
     void solve_riccati_reverse(Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
                                std::optional<mut_view<>> Mᵀλ) const;
+    void solve_riccati_reverse_ddp(
+        Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
+        const std::function<void(Context &ctx, index_t i, batch_view<default_order> F,
+                                 batch_view<> ux, batch_view<> b, mut_batch_view<> x_next)>
+            &simulate,
+        std::optional<mut_view<>> Mᵀλ) const;
     void solve_reverse(Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
                        std::optional<mut_view<>> Mᵀλ = std::nullopt) const;
 

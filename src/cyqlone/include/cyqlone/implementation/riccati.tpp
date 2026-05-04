@@ -142,6 +142,29 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse(
     Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
     std::optional<mut_view<>> Mᵀλ) const {
+    // x(j) = A(j-1) x(j-1) + B u(j-1) + b(j-1)
+    const auto simulate = [] [[gnu::always_inline]] (Context &, index_t,
+                                                     batch_view<default_order> F, batch_view<> ux,
+                                                     batch_view<> b, mut_batch_view<> x_next) {
+        gemv_add(F, ux, b, x_next);
+    };
+    solve_riccati_reverse_impl(ctx, ux, λ, work, simulate, Mᵀλ);
+}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse_ddp(
+    Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
+    const std::function<void(Context &ctx, index_t i, batch_view<default_order> F, batch_view<> ux,
+                             batch_view<> b, mut_batch_view<> x_next)> &simulate,
+    std::optional<mut_view<>> Mᵀλ) const {
+    solve_riccati_reverse_impl(ctx, ux, λ, work, simulate, Mᵀλ);
+}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+template <class F>
+void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse_impl(
+    Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work, const F &simulate,
+    std::optional<mut_view<>> Mᵀλ) const {
     const index_t c       = riccati_thread_assignment(ctx);
     const index_t c_prev  = sub_wrap_p(c, 1);
     const index_t dn      = c * n;      // jₙ data batch index
@@ -169,7 +192,7 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse(
             // w = q(j)
             copy(x, w);
             // x(j) = A(j-1) x(j-1) + B u(j-1) + b(j-1)
-            gemv_add(F_prev, ux.batch(di_prev), λ_prev, x);
+            simulate(ctx, i + 1, F_prev, ux.batch(di_prev), λ.batch(di_prev), x);
             // u(j) = LR(j)⁻ᵀ(r(j) - LS(j)ᵀ x(j) - LB(j)ᵀ λ(jₙ))
             gemv_sub(LB.transposed(), λn, u);
             gemv_sub(LS.transposed(), x, u);
