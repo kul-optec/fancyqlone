@@ -143,7 +143,7 @@ TEST_P(CyqloneFactorTest, factor) {
     cyqlone::linalg::negate(rq, ux);
     λ = b;
 #if GUANAQO_WITH_TRACING
-    guanaqo::get_trace_logger().reset();
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
 #endif
     pctx->run([&](auto &ctx) {
         solver.factor(ctx, 1e100, 0, Σ);
@@ -205,11 +205,15 @@ TEST_P(CyqloneFactorTest, factor) {
         std::filesystem::create_directories(out_dir);
         std::ofstream csv{out_dir / name};
         guanaqo::TraceLogger::write_column_headings(csv) << '\n';
-        auto logs = guanaqo::get_trace_logger().get_logs();
-        for (const auto &log : logs)
-            csv << log << '\n';
+        std::vector<std::span<const guanaqo::TraceLogger::Log>> all_logs;
+        guanaqo::for_each_trace_logger([&](auto &logger) {
+            std::span logs = logger.get_logs();
+            all_logs.push_back(logs);
+            for (const auto &log : logs)
+                csv << log << '\n';
+        });
         std::cout << (out_dir / name) << std::endl;
-        write_chrome_trace((out_dir / name).replace_extension("json.gz"), logs);
+        write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
         std::cout << (out_dir / name).replace_extension("json.gz") << std::endl;
     }
 #endif
