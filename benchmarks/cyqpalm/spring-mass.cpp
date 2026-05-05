@@ -16,6 +16,7 @@
 #include <guanaqo/perfetto/trace.hpp>
 #include <guanaqo/string-util.hpp>
 #include <guanaqo/stringify.h>
+#include <guanaqo/trace.hpp>
 #include <batmat-version.h>
 #include <cyqlone-version.h>
 #include <algorithm>
@@ -117,7 +118,10 @@ qp::problems::SpringMassProblem create_problem(const SpringMassParams &params) {
 
 #if GUANAQO_WITH_TRACING
 std::map<std::string, fs::path> traces;
-void disable_tracing() { guanaqo::get_trace_logger().logs.resize(0); }
+void disable_tracing() {
+    guanaqo::trace_logger_set_default_size(0);
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.clear(); });
+}
 void trace_run(auto &&fun, const auto &name) {
     std::filesystem::path out_dir{"traces"};
     out_dir /= *cyqlone_commit_hash ? cyqlone_commit_hash : "unknown";
@@ -136,21 +140,24 @@ void trace_run(auto &&fun, const auto &name) {
 #endif
     guanaqo::trace::stop_tracing(std::move(trace), out_file.replace_extension(".pftrace"));
 #else
-    guanaqo::get_trace_logger().reset();
-    guanaqo::get_trace_logger().logs.resize(0);
-    guanaqo::get_trace_logger().logs.reserve(1'048'576);
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.clear(); });
     fun(); // warmup
-    guanaqo::get_trace_logger().reset();
-    guanaqo::get_trace_logger().logs.resize(1'048'576);
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+    guanaqo::trace_logger_set_default_size(1'048'576);
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reserve(1'048'576); });
     fun();
     std::filesystem::create_directories(out_dir);
     std::ofstream csv{out_file.replace_extension(".csv")};
-    auto logs = guanaqo::get_trace_logger().get_logs();
     guanaqo::TraceLogger::write_column_headings(csv) << '\n';
-    for (const auto &log : logs)
-        csv << log << '\n';
+    std::vector<std::span<const guanaqo::TraceLogger::Log>> all_logs;
+    guanaqo::for_each_trace_logger([&](auto &logger) {
+        std::span logs = logger.get_logs();
+        all_logs.push_back(logs);
+        for (const auto &log : logs)
+            csv << log << '\n';
+    });
 #if CYQLONE_WITH_ZLIB
-    cyqlone::write_chrome_trace(out_file.replace_extension(".json.gz"), logs);
+    cyqlone::write_chrome_trace(out_file.replace_extension(".json.gz"), all_logs);
 #endif
 #endif
 }
