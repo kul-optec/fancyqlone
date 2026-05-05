@@ -487,6 +487,98 @@ TEST(CyqloneTest, updateIndices5) {
     EXPECT_EQ(solver.tricyqle.cols_Ups_fwd(2, 0), std::make_pair(4, 5));
 }
 
+TEST(CyqloneTest, stageIndices) {
+    using namespace cyqlone;
+
+    const index_t p  = 2;
+    using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
+    const index_t ny = 1, ny_0 = 1, ny_N = 0;
+    OCPDim dim{.N_horiz = 24, .nx = 1, .nu = 1, .ny = ny, .ny_N = ny_N};
+    auto ocp = generate_random_ocp(dim);
+    ocp.D(0).bottom_rows(ny - ny_0).set_constant(0);
+    auto cocp     = CyqloneStorage<real_t>::build(ocp);
+    Solver solver = Solver::build(cocp, p, {.eliminate_u0_first = true});
+
+    // First block column, first lane
+    EXPECT_EQ(solver.stage_index(0, 0, 0), 0);
+    EXPECT_EQ(solver.stage_index(0, 1, 0), 23);
+    EXPECT_EQ(solver.stage_index(0, 2, 0), 22);
+    // First block column, second lane
+    EXPECT_EQ(solver.stage_index(0, 0, 1), 6);
+    EXPECT_EQ(solver.stage_index(0, 1, 1), 5);
+    EXPECT_EQ(solver.stage_index(0, 2, 1), 4);
+    // First block column, third lane
+    EXPECT_EQ(solver.stage_index(0, 0, 2), 12);
+    EXPECT_EQ(solver.stage_index(0, 1, 2), 11);
+    EXPECT_EQ(solver.stage_index(0, 2, 2), 10);
+    // First block column, fourth lane
+    EXPECT_EQ(solver.stage_index(0, 0, 3), 18);
+    EXPECT_EQ(solver.stage_index(0, 1, 3), 17);
+    EXPECT_EQ(solver.stage_index(0, 2, 3), 16);
+    // Second block column, first lane
+    EXPECT_EQ(solver.stage_index(1, 0, 0), 3);
+    EXPECT_EQ(solver.stage_index(1, 1, 0), 2);
+    EXPECT_EQ(solver.stage_index(1, 2, 0), 1);
+    // Second block column, second lane
+    EXPECT_EQ(solver.stage_index(1, 0, 1), 9);
+    EXPECT_EQ(solver.stage_index(1, 1, 1), 8);
+    EXPECT_EQ(solver.stage_index(1, 2, 1), 7);
+    // Second block column, third lane
+    EXPECT_EQ(solver.stage_index(1, 0, 2), 15);
+    EXPECT_EQ(solver.stage_index(1, 1, 2), 14);
+    EXPECT_EQ(solver.stage_index(1, 2, 2), 13);
+    // Second block column, fourth lane
+    EXPECT_EQ(solver.stage_index(1, 0, 3), 21);
+    EXPECT_EQ(solver.stage_index(1, 1, 3), 20);
+    EXPECT_EQ(solver.stage_index(1, 2, 3), 19);
+}
+
+TEST(CyqloneTest, stageIndicesU0Last) {
+    using namespace cyqlone;
+
+    const index_t p  = 2;
+    using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
+    const index_t ny = 1, ny_0 = 1, ny_N = 0;
+    OCPDim dim{.N_horiz = 24, .nx = 1, .nu = 1, .ny = ny, .ny_N = ny_N};
+    auto ocp = generate_random_ocp(dim);
+    ocp.D(0).bottom_rows(ny - ny_0).set_constant(0);
+    auto cocp     = CyqloneStorage<real_t>::build(ocp);
+    Solver solver = Solver::build(cocp, p, {.eliminate_u0_first = false});
+
+    // First block column, first lane
+    EXPECT_EQ(solver.stage_index(0, 0, 0), 2);
+    EXPECT_EQ(solver.stage_index(0, 1, 0), 1);
+    EXPECT_EQ(solver.stage_index(0, 2, 0), 0);
+    // First block column, second lane
+    EXPECT_EQ(solver.stage_index(0, 0, 1), 8);
+    EXPECT_EQ(solver.stage_index(0, 1, 1), 7);
+    EXPECT_EQ(solver.stage_index(0, 2, 1), 6);
+    // First block column, third lane
+    EXPECT_EQ(solver.stage_index(0, 0, 2), 14);
+    EXPECT_EQ(solver.stage_index(0, 1, 2), 13);
+    EXPECT_EQ(solver.stage_index(0, 2, 2), 12);
+    // First block column, fourth lane
+    EXPECT_EQ(solver.stage_index(0, 0, 3), 20);
+    EXPECT_EQ(solver.stage_index(0, 1, 3), 19);
+    EXPECT_EQ(solver.stage_index(0, 2, 3), 18);
+    // Second block column, first lane
+    EXPECT_EQ(solver.stage_index(1, 0, 0), 5);
+    EXPECT_EQ(solver.stage_index(1, 1, 0), 4);
+    EXPECT_EQ(solver.stage_index(1, 2, 0), 3);
+    // Second block column, second lane
+    EXPECT_EQ(solver.stage_index(1, 0, 1), 11);
+    EXPECT_EQ(solver.stage_index(1, 1, 1), 10);
+    EXPECT_EQ(solver.stage_index(1, 2, 1), 9);
+    // Second block column, third lane
+    EXPECT_EQ(solver.stage_index(1, 0, 2), 17);
+    EXPECT_EQ(solver.stage_index(1, 1, 2), 16);
+    EXPECT_EQ(solver.stage_index(1, 2, 2), 15);
+    // Second block column, fourth lane
+    EXPECT_EQ(solver.stage_index(1, 0, 3), 23);
+    EXPECT_EQ(solver.stage_index(1, 1, 3), 22);
+    EXPECT_EQ(solver.stage_index(1, 2, 3), 21);
+}
+
 INSTANTIATE_TEST_SUITE_P(CyqloneSolverConfigs, CyqloneFactorTest,
                          ::testing::Values(cyqlone::SolveMethod::StairPCG,
                                            cyqlone::SolveMethod::JacobiPCG,
