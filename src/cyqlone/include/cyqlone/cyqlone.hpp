@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <bit>
 #include <cassert>
+#include <optional>
 #include <utility>
 
 namespace CYQLONE_NS(cyqlone) {
@@ -134,8 +135,12 @@ struct TricyqleSolver {
     [[nodiscard]] index_t ν2p(index_t i) const;
     /// Add @p b to @p a modulo @ref ceil_p().
     [[nodiscard]] index_t add_wrap_ceil_p(index_t a, index_t b) const;
+    /// Add @p b to @p a modulo @ref p.
+    [[nodiscard]] index_t add_wrap_p(index_t a, index_t b) const;
     /// Subtract @p b from @p a modulo @ref ceil_p().
     [[nodiscard]] index_t sub_wrap_ceil_p(index_t a, index_t b) const;
+    /// Subtract @p b from @p a modulo @ref p.
+    [[nodiscard]] index_t sub_wrap_p(index_t a, index_t b) const;
 
     /// @}
 
@@ -193,6 +198,63 @@ struct TricyqleSolver {
     /// @ref cyqlone::linalg::pack function.
     decltype(auto) init_rhs(Context &ctx, mut_view<> b, auto &&func) const {
         return func(ctx.index, b.batch(ctx.index));
+    }
+    /**
+     * Initialize the factorization update matrices using a user-provided function.
+     * The block-tridiagional matrix is updated by adding the term @f$ \Xi \mathcal{S} \Xi^\top @f$,
+     * where
+     * @f[
+     * \begin{aligned}
+     * \Xi &= \begin{pmatrix}
+     * B_0^{\phantom\top} & 0 & 0 & 0 & \cdots & F_{N-1}^{\phantom\top} \\
+     * F_0^{\phantom\top} & B_1^{\phantom\top} & 0 & 0 & \cdots & 0 \\
+     * 0 & F_1^{\phantom\top} & B_2^{\phantom\top} & 0 & \cdots & 0 \\
+     * 0 & 0 & F_2^{\phantom\top} & B_3^{\phantom\top} & \cdots & 0 \\
+     * \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+     * 0 & 0 & 0 & 0 & F_{N-2}^{\phantom\top} & B_{N-1}^{\phantom\top}
+     * \end{pmatrix}, \\
+     * \mathcal{S} &= \begin{pmatrix}
+     * S_0^{\phantom\top} \\
+     * & S_1^{\phantom\top} \\
+     * && S_2^{\phantom\top} \\
+     * &&& S_3^{\phantom\top} \\
+     * &&&& \ddots \\
+     * &&&&& S_{N-1}^{\phantom\top}
+     * \end{pmatrix}.
+     * \end{aligned}
+     * @f]
+     * The function is called with arguments `(iS, S, sync_S, iB, B, iF, F)`, with indices
+     * `iS, iB, iF` in `[0, p)` and mutable views `S, B, F` of the batches of depth `v` where the
+     * diagonal blocks `B(iB+l*p)` and the subdiagonal blocks `F(iB+l*p)` of the update matrix and
+     * the diagonal elements `S(iS+l*p)` for `l` in `[0, v)` should be stored. Copying non-compact
+     * data to these batches can be achieved using the @ref cyqlone::linalg::pack function.
+     * The argument @p sync_S is a callable that can be called to indicate that the diagonal batch
+     * `S(iS+l*p)` has been fully initialized. It should be accepted by reference (`auto &`).
+     * The @p rank argument specifies the rank of the update for column with index `ctx.index`.
+     */
+    // TODO: Check for off-by-one errors in the indexing of the rank argument.
+    decltype(auto) init_update(Context &ctx, index_t rank, auto &&func) {
+        set_thread_update_rank(ctx, ctx.index, rank);
+        struct SyncDiag {
+            using shuffle_token_t = Context::template shuffle_token<std::tuple<>>;
+            Context &ctx;
+            std::optional<shuffle_token_t> shuffle_token = std::nullopt;
+            SyncDiag(Context &ctx) : ctx{ctx} {}
+            SyncDiag(const SyncDiag &)            = delete;
+            SyncDiag &operator=(const SyncDiag &) = delete;
+            void operator()() {
+                BATMAT_ASSERT(!shuffle_token.has_value());
+                shuffle_token.emplace(ctx.shuffle_rotr_start(std::tuple{}, 1));
+            }
+            ~SyncDiag() { // wait for other half of Σ (from previous thread)
+                if (!shuffle_token.has_value())
+                    shuffle_token.emplace(ctx.shuffle_rotr_start(std::tuple{}, 1));
+                ctx.shuffle_wait(std::move(*shuffle_token));
+            }
+        } sync_diag(ctx);
+        return func(ctx.index, work_Σ_fwd(0, add_wrap_p(ctx.index, 1)), sync_diag, ctx.index,
+                    work_Ups_bwd(0, ctx.index), sub_wrap_p(ctx.index, 1),
+                    work_Ups_fwd(0, ctx.index));
     }
     /// Get access to the solution computed by this thread using a user-provided function. The
     /// function is called with an index `i` in `[0, p)` and a view to the compact batch of @p λ
@@ -525,7 +587,7 @@ struct TricyqleSolver {
     [[nodiscard]] mut_batch_view<column_major> work_Σ_extra();
 
     template <bool Solve = true>
-    void update_solve_cr(Context &ctx, mut_view<> λ, index_t stride);
+    void update_solve_cr(Context &ctx, mut_view<> λ, index_t stride = 1);
     void update_L(index_t l, index_t i);
     void update_U(index_t l, index_t i);
     void update_Y(index_t l, index_t i);

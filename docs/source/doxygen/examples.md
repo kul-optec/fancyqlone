@@ -37,6 +37,35 @@ the local blocks into the solver's workspace directly.
 The solution produced by this example is stored in a `.mat` file, which can be loaded and verified
 using the Python script @ref solve-block-tridiagonal.py.
 
+The example also demonstrates how to perform a factorization update, which is useful when solving
+a sequence of related systems. The coefficient matrix is updated by the term
+@f[
+\begin{pmatrix}
+B_0^{\phantom\top} & 0 & 0 & 0 & \cdots & F_{N-1}^{\phantom\top} \\
+F_0^{\phantom\top} & B_1^{\phantom\top} & 0 & 0 & \cdots & 0 \\
+0 & F_1^{\phantom\top} & B_2^{\phantom\top} & 0 & \cdots & 0 \\
+0 & 0 & F_2^{\phantom\top} & B_3^{\phantom\top} & \cdots & 0 \\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & 0 & F_{N-2}^{\phantom\top} & B_{N-1}^{\phantom\top}
+\end{pmatrix}
+\begin{pmatrix}
+S_0^{\phantom\top} \\
+& S_1^{\phantom\top} \\
+&& S_2^{\phantom\top} \\
+&&& S_3^{\phantom\top} \\
+&&&& \ddots \\
+&&&&& S_{N-1}^{\phantom\top}
+\end{pmatrix}
+\begin{pmatrix}
+B_0^\top & F_0^\top & 0 & 0 & \cdots & 0 \\
+0 & B_1^\top & F_1^\top & 0 & \cdots & 0 \\
+0 & 0 & B_2^\top & F_2^\top & \cdots & 0 \\
+0 & 0 & 0 & B_3^\top & \cdots & 0 \\
+\vdots & \vdots & \vdots & \vdots & \ddots & F_{N-2}^\top \\
+F_{N-1}^\top & 0 & 0 & 0 & \cdots & B_{N-1}^\top
+\end{pmatrix}
+@f]
+
 @example{lineno} solve-block-tridiagonal.py
 
 @example{lineno} solve-ocp.cpp

@@ -198,7 +198,7 @@ struct Context {
                                            std::forward<F>(func));
     }
 
-    template <class T, class F>
+    template <class T>
     decltype(auto) shuffle_wait(shuffle_token<T> &&token) {
         return shared.barrier.shuffle_wait(static_cast<uint32_t>(index), std::move(token));
     }

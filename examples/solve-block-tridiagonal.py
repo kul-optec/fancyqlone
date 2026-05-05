@@ -1,3 +1,5 @@
+# %% Check the solution of the block tridiagonal system
+
 import sys
 import numpy as np
 import numpy.linalg as la
@@ -12,12 +14,18 @@ b = np.moveaxis(data["b"], -1, 0)  # (n, 1, N) -> (N, n, 1)
 x = np.moveaxis(data["x"], -1, 0)  # (n, 1, N) -> (N, n, 1)
 N, n, _ = M.shape
 
+
+def blk(A, r, c, br=n, bc=n):
+    r, c = (r + N) % N, (c + N) % N
+    return A[r * br : (r + 1) * br, c * bc : (c + 1) * bc]
+
+
 # Construct the full block tridiagonal system as a dense matrix for verification
 A = np.zeros((N * n, N * n))
 for i in range(N):
-    A[i * n : (i + 1) * n, i * n : (i + 1) * n] = np.tril(M[i]) + np.tril(M[i], -1).T
-    A[((i + 1) % N) * n : ((i + 1) % N + 1) * n, i * n : (i + 1) * n] = K[i]
-    A[i * n : (i + 1) * n, ((i + 1) % N) * n : ((i + 1) % N + 1) * n] = K[i].T
+    blk(A, i, i)[:] = np.tril(M[i]) + np.tril(M[i], -1).T
+    blk(A, i + 1, i)[:] = K[i]
+    blk(A, i, i + 1)[:] = K[i].T
 
 # Report the condition number and the residual of the solution
 print(f"Number of blocks:    {N}")
@@ -36,4 +44,39 @@ print(f"                    ‖Ax-b‖")
 print(f"Backward error η = ────────── = {err:.17e}")
 print(f"                   ‖A‖‖x‖+‖b‖")
 
-sys.exit(0 if err < 10 * np.finfo(M.dtype).eps * N * n else 1)
+if not err < 10 * np.finfo(M.dtype).eps * N * n:
+    sys.exit(1)
+
+# %% Check the solution of the updated block tridiagonal system
+
+B = np.moveaxis(data["B"], -1, 0)  # (n, n, N) -> (N, n, n)
+F = np.moveaxis(data["F"], -1, 0)  # (n, n, N) -> (N, n, n)
+S = np.moveaxis(data["S"], -1, 0)  # (n, 1, N) -> (N, n, 1)
+x2 = np.moveaxis(data["x2"], -1, 0)  # (n, 1, N) -> (N, n, 1)
+
+r = B.shape[2]
+Xis = np.zeros((N * n, N * r))
+Ss = np.zeros((N, r))
+for i in range(N):
+    blk(Xis, i, i, bc=r)[:] = B[i]
+    blk(Xis, i + 1, i, bc=r)[:] = F[i]
+    Ss[i] = S[i].ravel()
+Ss = Ss.ravel()
+A2 = A + Xis @ np.diag(Ss) @ Xis.T
+
+σA2 = la.eigvalsh(A2)
+nrmA2 = max(σA2)
+condA2 = nrmA2 / min(σA2)
+res2 = la.norm(A2 @ x2.ravel() - b.ravel())
+nrmx2, nrmb = la.norm(x2.ravel()), la.norm(b.ravel())
+err2 = res2 / (nrmA2 * nrmx2 + nrmb)
+
+print(f"Update rank:         {r}")
+print(f"Condition number κ(A) =         {condA2:.17e}")
+print(f"Relative residual ‖Ax-b‖/‖b‖ =  {res2 / nrmb:.17e}")
+print(f"                    ‖Ax-b‖")
+print(f"Backward error η = ────────── = {err2:.17e}")
+print(f"                   ‖A‖‖x‖+‖b‖")
+
+if not err2 < 10 * np.finfo(M.dtype).eps * N * n:
+    sys.exit(2)

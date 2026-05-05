@@ -16,15 +16,23 @@ using cyqlone::index_t;                                   // Integer type for in
 using cyqlone::real_t;                                    // Floating-point type for scalars
 using matrices = batmat::matrix::Matrix<real_t, index_t>; // Array of matrices
 
-constexpr index_t v = 4;                                  // Vector length to use
-using Solver        = cyqlone::TricyqleSolver<v, real_t>; // Block tridiagonal solver to use
+constexpr index_t v  = 4;                                  // Vector length to use
+using TricyqleSolver = cyqlone::TricyqleSolver<v, real_t>; // Block tridiagonal solver to use
 
 struct TridiagSystem {
     matrices M, K, b; // Diagonal blocks M, subdiagonal blocks K and right-hand side b
 };
 
+struct BidiagUpdate {
+    matrices B, F; // Diagonal and subdiagonal blocks of the update matrices
+    matrices S;    // Diagonal matrices Σ
+};
+
 // Generate a random SPD block tridiagonal system with given block size and number of blocks.
 TridiagSystem init_random_system(index_t block_size, index_t num_blocks, bool circular = false);
+// Generate a random bidiagonal update matrix for the block tridiagonal system.
+BidiagUpdate init_random_update(index_t block_size, index_t num_blocks, index_t rank,
+                                bool circular = false);
 
 // Example of solving a block tridiagonal system using the TricyqleSolver.
 int main(int argc, char *argv[]) try {
@@ -32,6 +40,7 @@ int main(int argc, char *argv[]) try {
     index_t p          = 8;     // Number of processors/threads
     index_t block_size = 5;     // Size of each block of the block tridiagonal system
     bool circular      = false; // Is K(num_blocks-1) nonzero?
+    index_t rank       = 2;     // Rank for the factorization updates
     // Parse arguments
     if (argc > 1)
         p = std::stoi(argv[1]);
@@ -39,6 +48,8 @@ int main(int argc, char *argv[]) try {
         block_size = std::stoi(argv[2]);
     if (argc > 3)
         circular = std::stoi(argv[3]) != 0;
+    if (argc > 4)
+        rank = std::stoi(argv[4]);
     // The number of blocks in the block tridiagonal system always equals p * v. If your system is
     // larger, first reduce it to this size (in parallel). If it is smaller, manually add padding,
     // or reduce p and/or v.
@@ -49,16 +60,17 @@ int main(int argc, char *argv[]) try {
     auto [M, K, b] = init_random_system(block_size, num_blocks, circular);
 
     // Create a solver for the block tridiagonal system
-    Solver solver{.block_size = block_size, .circular = circular, .p = p};
+    TricyqleSolver solver{
+        .block_size = block_size, .max_rank = p * rank, .circular = circular, .p = p};
     solver.params.solve_method = cyqlone::SolveMethod::PCR; // Use the PCR solver instead of PCG.
 
     // Create a compact copy of the right-hand side and allocate storage for the solution
-    Solver::matrix b_solve{{.depth = num_blocks, .rows = block_size, .cols = 1}};
+    TricyqleSolver::matrix b_solve{{.depth = num_blocks, .rows = block_size, .cols = 1}};
     matrices x{{.depth = num_blocks, .rows = block_size, .cols = 1}};
 
     // Call the solver in parallel, passing a lambda that is executed by each thread.
     auto pctx = solver.create_parallel_context();
-    pctx->run([&](Solver::Context &ctx) {
+    pctx->run([&](TricyqleSolver::Context &ctx) {
         // Copy the data to the solver's internal data structures
         using cyqlone::linalg::pack;
         auto pack_M = [&](index_t i, auto Ms) { return pack(M.middle_batches(i, v, p), Ms); };
@@ -76,6 +88,27 @@ int main(int argc, char *argv[]) try {
         solver.get_solution(ctx, b_solve, unpack_x);
     }); // blocks until all threads have joined
 
+    // Perform a factorization update and solve again
+    auto [B, F, S] = init_random_update(block_size, num_blocks, rank, circular);
+    matrices x2{{.depth = num_blocks, .rows = block_size, .cols = 1}};
+    pctx->run([&](TricyqleSolver::Context &ctx) {
+        using cyqlone::linalg::pack;
+        auto pack_b   = [&](index_t i, auto bs) { return pack(b.middle_batches(i, v, p), bs); };
+        auto pack_upd = [&](auto iS, auto Ss, auto &sync_S, auto iB, auto Bs, auto iF, auto Fs) {
+            pack(S.middle_batches(iS, v, p), Ss); // diagonal update matrix
+            sync_S(); // indicate that our part of S is ready (needs to be exchanged across threads)
+            pack(B.middle_batches(iB, v, p), Bs); // diagonal blocks of the update matrix
+            pack(F.middle_batches(iF, v, p), Fs); // subdiagonal blocks of the update matrix
+        };
+        solver.init_update(ctx, rank, pack_upd);
+        solver.init_rhs(ctx, b_solve, pack_b);
+        solver.update_solve_cr(ctx, b_solve);
+        solver.solve_reverse(ctx, b_solve);
+        using cyqlone::linalg::unpack;
+        auto unpack_x2 = [&](index_t i, auto xs) { return unpack(xs, x2.middle_batches(i, v, p)); };
+        solver.get_solution(ctx, b_solve, unpack_x2);
+    });
+
 #if CYQLONE_WITH_MATIO
     // Export the original system and the solution as a .mat file
     std::filesystem::path filename = "block_tridiagonal_system.mat";
@@ -84,6 +117,10 @@ int main(int argc, char *argv[]) try {
     cyqlone::add_to_mat(matfile.get(), "K", K);
     cyqlone::add_to_mat(matfile.get(), "b", b);
     cyqlone::add_to_mat(matfile.get(), "x", x);
+    cyqlone::add_to_mat(matfile.get(), "B", B);
+    cyqlone::add_to_mat(matfile.get(), "F", F);
+    cyqlone::add_to_mat(matfile.get(), "S", S);
+    cyqlone::add_to_mat(matfile.get(), "x2", x2);
     std::cout << "Saved system and solution to " << filename << "\n";
 #else
     // Print the original system and the solution in a format that's easy to check using Python
@@ -103,6 +140,18 @@ int main(int argc, char *argv[]) try {
     std::cout << "])\nx = np.array([\n";
     for (index_t i = 0; i < num_blocks; ++i)
         guanaqo::print_python(std::cout, x(i), ",\n");
+    std::cout << "])\nB = np.array([\n";
+    for (index_t i = 0; i < num_blocks; ++i)
+        guanaqo::print_python(std::cout, B(i), ",\n", false);
+    std::cout << "])\nF = np.array([\n";
+    for (index_t i = 0; i < num_blocks; ++i)
+        guanaqo::print_python(std::cout, F(i), ",\n", false);
+    std::cout << "])\nS = np.array([\n";
+    for (index_t i = 0; i < num_blocks; ++i)
+        guanaqo::print_python(std::cout, S(i), ",\n");
+    std::cout << "])\nx2 = np.array([\n";
+    for (index_t i = 0; i < num_blocks; ++i)
+        guanaqo::print_python(std::cout, x2(i), ",\n");
     std::cout << "])\n";
 #endif
 } catch (std::exception &e) {
@@ -136,4 +185,22 @@ TridiagSystem init_random_system(index_t block_size, index_t num_blocks, bool ci
         M(i).add_to_diagonal(1e-4);                              // Ensure positive definiteness
     }
     return TridiagSystem{.M = std::move(M), .K = std::move(K), .b = std::move(b)};
+}
+
+BidiagUpdate init_random_update(index_t block_size, index_t num_blocks, index_t rank,
+                                bool circular) {
+    using batmat::matrix::uninitialized;
+    std::mt19937 rng(54321);
+    std::normal_distribution<real_t> dist(0.0, 1.0);
+    // Generate a random bidiagonal matrix with diagonal blocks B(i) and subdiagonal blocks F(i), as
+    // well as random diagonal matrices Σ.
+    matrices B{{.depth = num_blocks, .rows = block_size, .cols = rank}, uninitialized};
+    matrices F{{.depth = num_blocks, .rows = block_size, .cols = rank}, uninitialized};
+    matrices S{{.depth = num_blocks, .rows = rank, .cols = 1}, uninitialized};
+    std::ranges::generate(B, [&] { return dist(rng); });
+    std::ranges::generate(F, [&] { return dist(rng); });
+    std::ranges::generate(S, [&] { return std::exp2(dist(rng)); });
+    if (!circular)
+        F(num_blocks - 1).set_constant(0); // No circular coupling
+    return BidiagUpdate{.B = std::move(B), .F = std::move(F), .S = std::move(S)};
 }

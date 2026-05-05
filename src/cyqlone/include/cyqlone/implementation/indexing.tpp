@@ -27,6 +27,24 @@ auto TricyqleSolver<VL, T, DefaultOrder, Ctx>::add_wrap_ceil_p(index_t a, index_
     return a >= c ? a - c : a;
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+auto TricyqleSolver<VL, T, DefaultOrder, Ctx>::sub_wrap_p(index_t a, index_t b) const -> index_t {
+    BATMAT_ASSUME(p > 0);
+    BATMAT_ASSUME(a >= 0);
+    BATMAT_ASSUME(b >= 0);
+    BATMAT_ASSUME(a < p);
+    a -= b;
+    return a < 0 ? a + p : a;
+}
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+auto TricyqleSolver<VL, T, DefaultOrder, Ctx>::add_wrap_p(index_t a, index_t b) const -> index_t {
+    BATMAT_ASSUME(p > 0);
+    BATMAT_ASSUME(a >= 0);
+    BATMAT_ASSUME(b >= 0);
+    BATMAT_ASSUME(a < p);
+    a += b;
+    return a >= p ? a - p : a;
+}
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 [[nodiscard]] index_t TricyqleSolver<VL, T, DefaultOrder, Ctx>::ν2(index_t bi) const {
     BATMAT_ASSUME(bi > 0);
     auto ui = static_cast<std::make_unsigned_t<index_t>>(bi);
@@ -62,21 +80,11 @@ auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::sub_wrap_ceil_N(index_t a, index_t
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::sub_wrap_p(index_t a, index_t b) const -> index_t {
-    BATMAT_ASSUME(p > 0);
-    BATMAT_ASSUME(a >= 0);
-    BATMAT_ASSUME(b >= 0);
-    BATMAT_ASSUME(a < p);
-    a -= b;
-    return a < 0 ? a + p : a;
+    return tricyqle.sub_wrap_p(a, b);
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::add_wrap_p(index_t a, index_t b) const -> index_t {
-    BATMAT_ASSUME(p > 0);
-    BATMAT_ASSUME(a >= 0);
-    BATMAT_ASSUME(b >= 0);
-    BATMAT_ASSUME(a < p);
-    a += b;
-    return a >= p ? a - p : a;
+    return tricyqle.add_wrap_p(a, b);
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::sub_wrap_ceil_p(index_t a, index_t b) const
