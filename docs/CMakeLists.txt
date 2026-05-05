@@ -3,11 +3,11 @@ find_package(Python3 COMPONENTS Interpreter)
 
 option(CYQLONE_DOCS_DOWNLOAD_TAGFILES
     "Whether to download tag files for external documentation" On)
-set(CYQLONE_DOCS_GUANAQO_VERSION "1.0.0-alpha.27" CACHE STRING
+set(CYQLONE_DOCS_GUANAQO_VERSION "1.0.0-alpha.28" CACHE STRING
     "Version of guanaqo to use for documentation")
 set(CYQLONE_DOCS_GUANAQO_URL "https://tttapa.github.io/guanaqo" CACHE STRING
     "URL of guanaqo documentation")
-set(CYQLONE_DOCS_BATMAT_VERSION "0.0.21" CACHE STRING
+set(CYQLONE_DOCS_BATMAT_VERSION "0.0.22" CACHE STRING
     "Version of batmat to use for documentation")
 set(CYQLONE_DOCS_BATMAT_URL "https://tttapa.github.io/batmat" CACHE STRING
     "URL of batmat documentation")
@@ -51,7 +51,11 @@ function(cyqlone_get_tag_files result)
     set(tag_files "")
     set(guanaqo_tag "${CMAKE_CURRENT_BINARY_DIR}/guanaqo-${CYQLONE_DOCS_GUANAQO_VERSION}.tag")
     set(guanaqo_url "${CYQLONE_DOCS_GUANAQO_URL}/${CYQLONE_DOCS_GUANAQO_VERSION}/Doxygen")
-    if(NOT EXISTS "${guanaqo_tag}")
+    set(guanaqo_tag_size 0)
+    if (EXISTS "${guanaqo_tag}")
+        file(SIZE "${guanaqo_tag}" guanaqo_tag_size)
+    endif()
+    if(guanaqo_tag_size EQUAL 0)
         file(DOWNLOAD "${guanaqo_url}/guanaqo.tag" "${guanaqo_tag}"
             STATUS download_status)
         if (NOT download_status EQUAL 0)
@@ -63,7 +67,11 @@ function(cyqlone_get_tag_files result)
     endif()
     set(batmat_tag "${CMAKE_CURRENT_BINARY_DIR}/batmat-${CYQLONE_DOCS_BATMAT_VERSION}.tag")
     set(batmat_url "${CYQLONE_DOCS_BATMAT_URL}/${CYQLONE_DOCS_BATMAT_VERSION}/Doxygen")
-    if(NOT EXISTS "${batmat_tag}")
+    set(batmat_tag_size 0)
+    if(EXISTS "${batmat_tag}")
+        file(SIZE "${batmat_tag}" batmat_tag_size)
+    endif()
+    if(batmat_tag_size EQUAL 0)
         file(DOWNLOAD "${batmat_url}/batmat.tag" "${batmat_tag}"
             STATUS download_status)
         if (NOT download_status EQUAL 0)
