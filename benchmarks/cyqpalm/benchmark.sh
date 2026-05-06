@@ -24,6 +24,7 @@ deps() {
         fi
         case $1 in
             --gcc) ;;
+            --gcc-*) extra_args+=("-s:h" "compiler.version=${1#--gcc-}");;
             --clang*) profiles+=("-pr:h" "${profiles_dir}/toolchain/clang-linux.profile")
                       export TTTAPA_CONAN_PROFILES_CLANG_SUFFIX="${1#--clang}" ;;
             --icx) profiles+=("-pr:h" "${profiles_dir}/toolchain/icx-linux.profile") ;;
@@ -33,7 +34,7 @@ deps() {
             --lock) lock=1 ;;
             --help|-h)
                 echo "Usage: $0 {deps|all} [--gcc|--clang|--icx] [--with-mkl] [--editable|-e] [--lock]" >&2;
-                echo "  --gcc            Use GCC toolchain (default)"                                   >&2;
+                echo "  --gcc[-VERSION]  Use GCC toolchain (default)"                                   >&2;
                 echo "  --clang[-SUFFIX] Use Clang toolchain, optional SUFFIX for specific versions"    >&2;
                 echo "  --icx            Use Intel oneAPI DPC++/C++ Compiler toolchain"                 >&2;
                 echo "  --with-mkl       Build with MKL support (OpenBLAS is used by default)"          >&2;
