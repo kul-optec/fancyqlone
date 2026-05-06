@@ -19,7 +19,9 @@
 #include <guanaqo/trace.hpp>
 #include <batmat-version.h>
 #include <cyqlone-version.h>
+#include <unistd.h>
 #include <algorithm>
+#include <cstdio>
 #include <cstdlib>
 #include <filesystem>
 #include <format>
@@ -484,7 +486,7 @@ void register_options(const char *program, CLI::App &app, Options &opts) {
     else if (std::getenv("CLICOLOR_FORCE"))
         opts.use_color = true;
     else
-        opts.use_color = isatty(fileno(stdout)) == 1;
+        opts.use_color = ::isatty(::fileno(stdout)) == 1;
 #if BATMAT_WITH_OPENMP
     opts.parallelism = {omp_get_max_threads()};
 #endif
