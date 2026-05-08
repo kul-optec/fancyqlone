@@ -1025,6 +1025,21 @@ struct CyqloneSolver {
     /// Fused variant of @ref solve_reverse and @ref transposed_dynamics_constr (for improved
     /// locality of the dynamics Jacobians).
     void solve_reverse_mul(Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> Mᵀλ);
+    using ddp_func_t = void(Context &ctx, index_t i, batch_view<default_order> F, batch_view<> ux,
+                            batch_view<> b, mut_batch_view<> x_next);
+    /// Perform a reverse solve with the Cyqlone factorization, using the given dynamics function,
+    /// which can be used to implement differential dynamic programming (DDP).
+    /// @param ctx Parallel context.
+    /// @param ux On entry, the result of the forward solve; on exit the solution of the primal
+    ///           variables of the KKT system.
+    /// @param λ On entry, the result of the forward solve; on exit the solution of the dual
+    ///          variables corresponding to the dynamics constraints of the KKT system.
+    void solve_reverse_ddp(Context &ctx, mut_view<> ux, mut_view<> λ, real_t α,
+                           const std::function<ddp_func_t> &simulate);
+    /// Fused variant of @ref solve_reverse_ddp and @ref transposed_dynamics_constr (for improved
+    /// locality of the dynamics Jacobians).
+    void solve_reverse_mul_ddp(Context &ctx, mut_view<> ux, mut_view<> λ, real_t α,
+                               const std::function<ddp_func_t> &simulate, mut_view<> Mᵀλ);
     /// Perform factorization updates of the Cyqlone factorization as described by
     /// Algorithm 4 in the paper.
     /// @param ctx Parallel context.
@@ -1060,15 +1075,13 @@ struct CyqloneSolver {
 
     template <class F>
     void solve_riccati_reverse_impl(Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
-                                    const F &simulate, std::optional<mut_view<>> Mᵀλ) const;
+                                    real_t α, const F &simulate,
+                                    std::optional<mut_view<>> Mᵀλ) const;
     void solve_riccati_reverse(Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
                                std::optional<mut_view<>> Mᵀλ) const;
-    void solve_riccati_reverse_ddp(
-        Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
-        const std::function<void(Context &ctx, index_t i, batch_view<default_order> F,
-                                 batch_view<> ux, batch_view<> b, mut_batch_view<> x_next)>
-            &simulate,
-        std::optional<mut_view<>> Mᵀλ) const;
+    void solve_riccati_reverse_ddp(Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
+                                   real_t α, const std::function<ddp_func_t> &simulate,
+                                   std::optional<mut_view<>> Mᵀλ) const;
     void solve_reverse(Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
                        std::optional<mut_view<>> Mᵀλ = std::nullopt) const;
 

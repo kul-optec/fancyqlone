@@ -264,6 +264,24 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx, mu
     solve_reverse(ctx, ux, λ, riccati_work, Mᵀλ);
 }
 
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_ddp(
+    Context &ctx, mut_view<> ux, mut_view<> λ, real_t α,
+    const std::function<ddp_func_t> &simulate) {
+    tricyqle.solve_reverse(ctx, λ, riccati_work, n);
+    ctx.arrive_and_wait(); // wait for λ(c-1)
+    solve_riccati_reverse_ddp(ctx, ux, λ, riccati_work, α, simulate, std::nullopt);
+}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul_ddp(
+    Context &ctx, mut_view<> ux, mut_view<> λ, real_t α, const std::function<ddp_func_t> &simulate,
+    mut_view<> Mᵀλ) {
+    tricyqle.solve_reverse(ctx, λ, riccati_work, n);
+    ctx.arrive_and_wait(); // wait for λ(c-1)
+    solve_riccati_reverse_ddp(ctx, ux, λ, riccati_work, α, simulate, Mᵀλ);
+}
+
 /// Adjust thread assignment for non-power-of-two p:
 /// The diagonal blocks M(⌊p/2⌋2) are usually mapped to increasing thread indices c as the CR level
 /// l increases, as can be seen in the functions above, where iY = c + 1 - 2^l, and from the way the

@@ -148,22 +148,20 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse(
                                                      batch_view<> b, mut_batch_view<> x_next) {
         gemv_add(F, ux, b, x_next);
     };
-    solve_riccati_reverse_impl(ctx, ux, λ, work, simulate, Mᵀλ);
+    solve_riccati_reverse_impl(ctx, ux, λ, work, real_t{1}, simulate, Mᵀλ);
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse_ddp(
-    Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work,
-    const std::function<void(Context &ctx, index_t i, batch_view<default_order> F, batch_view<> ux,
-                             batch_view<> b, mut_batch_view<> x_next)> &simulate,
-    std::optional<mut_view<>> Mᵀλ) const {
-    solve_riccati_reverse_impl(ctx, ux, λ, work, simulate, Mᵀλ);
+    Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work, real_t α,
+    const std::function<ddp_func_t> &simulate, std::optional<mut_view<>> Mᵀλ) const {
+    solve_riccati_reverse_impl(ctx, ux, λ, work, α, simulate, Mᵀλ);
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 template <class F>
 void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse_impl(
-    Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work, const F &simulate,
+    Context &ctx, mut_view<> ux, mut_view<> λ, mut_view<> work, real_t α, const F &simulate,
     std::optional<mut_view<>> Mᵀλ) const {
     const index_t c       = riccati_thread_assignment(ctx);
     const index_t c_prev  = sub_wrap_p(c, 1);
@@ -192,9 +190,12 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse_impl(
             // w = q(j)
             copy(x, w);
             // x(j) = A(j-1) x(j-1) + B u(j-1) + b(j-1)
+            // dx(j) = f(x̅(j-1) + dx(j-1), u̅(j-1) + du(j-1)) - x̅(j)
             simulate(ctx, i + 1, F_prev, ux.batch(di_prev), λ.batch(di_prev), x);
-            // u(j) = LR(j)⁻ᵀ(r(j) - LS(j)ᵀ x(j) - LB(j)ᵀ λ(jₙ))
+            // u(j) = LR(j)⁻ᵀ(α r(j) - α LB(j)ᵀ λ(jₙ) - LS(j)ᵀ x(j))
             gemv_sub(LB.transposed(), λn, u);
+            if (α != 1)
+                scale(α, u);
             gemv_sub(LS.transposed(), x, u);
             trsm(tril(LR).transposed(), u);
 
@@ -226,9 +227,14 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse_impl(
             trsm(tril(LQ).transposed(), w);
             // x(j₁) = LQ(j₁)⁻ᵀ(LQ(j₁)⁻¹ λ(j₀) - LA(j₁)ᵀ λ(jₙ)) + q(j₁)
             add(x1, w);
+            // x(j₁) = α (LQ(j₁)⁻ᵀ(LQ(j₁)⁻¹ λ(j₀) - LA(j₁)ᵀ λ(jₙ)) + q(j₁))
+            if (α != 1)
+                scale(α, x1);
 
-            // u(j₁) = LR(j₁)⁻ᵀ(r(j₁) - LB(j₁)ᵀ λ(jₙ) - LS(j₁)ᵀ x(j₁))
+            // u(j₁) = LR(j₁)⁻ᵀ(α r(j₁) - α LB(j₁)ᵀ λ(jₙ) - LS(j₁)ᵀ x(j₁))
             gemv_sub(LB.transposed(), λn, u1);
+            if (α != 1)
+                scale(α, u1);
             gemv_sub(LS.transposed(), x1, u1);
             trsm(tril(LR).transposed(), u1);
             if (Mᵀλ) {
