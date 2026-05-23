@@ -13,6 +13,7 @@
 #include <format>
 #include <memory>
 #include <stdexcept>
+#include <tuple>
 
 #include "common.py.hpp"
 
@@ -60,6 +61,8 @@ void register_cyqlone_solver(nb::module_ &m) {
     static constexpr auto view_as_batched = []<class T>(const np_batched_view<v, T> &t) {
         using View = batmat::matrix::View<T, index_t, std::integral_constant<index_t, v>, index_t,
                                           index_t, StorageOrder::ColMajor>;
+        if (t.size() == 0)
+            return View{};
         constexpr size_t alignment = v * alignof(T);
         if (reinterpret_cast<uintptr_t>(t.data()) % alignment != 0)
             throw std::invalid_argument(std::format("Data pointer not aligned to {} bytes for "
@@ -170,7 +173,7 @@ void register_cyqlone_solver(nb::module_ &m) {
             "initialize_bounds",
             [](Solver &self, const CyqloneStorage<> &ocp) {
                 auto [b_min, b_max] = self.initialize_bounds(ocp);
-                return std::make_pair(np_copy(std::move(b_min)), np_copy(std::move(b_max)));
+                return std::make_tuple(np_copy(std::move(b_min)), np_copy(std::move(b_max)));
             },
             "ocp"_a)
         .def(
