@@ -14,6 +14,7 @@ __pycache__
 
 # Virtual environments
 .venv*
+.cyqlone*
 
 # Python distribution and building
 dist

@@ -49,7 +49,7 @@ hpipm/*:tools.build:cflags+=["-fvisibility=default"]
 
 [options]
 guanaqo/*:with_blas=True
-guanaqo/*:with_mkl=True
+guanaqo/*:with_mkl=False
 guanaqo/*:blas_index_type=long long
 guanaqo/*:with_itt=False
 guanaqo/*:with_tracing=False
