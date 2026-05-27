@@ -39,14 +39,14 @@ struct TridiagonalSolver {
     }();
 
     void factor() {
-        for (index_t i = num_blocks-1; i >= 0; --i) {
+        for (index_t i = num_blocks - 1; i >= 0; --i) {
             auto Mi = bla::tril(L.batch(i));
-            if (i == num_blocks-1)
-                bla::potrf(Mi); //                             L(num_blocks-1) = chol(M(num_blocks-1))
+            if (i == num_blocks - 1)
+                bla::potrf(Mi); //                           L(num_blocks-1) = chol(M(num_blocks-1))
             else
-                bla::syrk_sub_potrf(Y.batch(i + 1), Mi); //    L(i) = chol(M(i) - Y(i+1) Y(i+1)ᵀ)
+                bla::syrk_sub_potrf(Y.batch(i + 1), Mi); //  L(i) = chol(M(i) - Y(i+1) Y(i+1)ᵀ)
             if (i > 0)
-                bla::trsm(Y.batch(i), Mi.transposed()); //     Y(i) = K(i) L(i)⁻ᵀ
+                bla::trsm(Y.batch(i), Mi.transposed()); //   Y(i) = K(i) L(i)⁻ᵀ
         }
     }
 
