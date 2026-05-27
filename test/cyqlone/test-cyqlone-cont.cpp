@@ -1,5 +1,7 @@
+#include <batmat/linalg/gemm.hpp>
 #include <batmat/linalg/potrf.hpp>
 #include <batmat/linalg/triangular.hpp>
+#include <batmat/lut.hpp>
 #include <gtest/gtest.h>
 
 #include <cyqlone/cyqlone.hpp>
@@ -33,44 +35,24 @@ using vl_t       = std::integral_constant<index_t, 1>;
 #define NO_PENALTY 0
 #define WITH_UPDATES 1
 
-class CyqloneFanFactorTest : public testing::TestWithParam<cyqlone::SolveMethod> {};
-
-template <class M>
-auto unpacked(const M &m) {
-    using Mat = batmat::matrix::Matrix<typename M::value_type, typename M::index_type>;
-    Mat res{{.depth = m.depth(), .rows = m.rows(), .cols = m.cols()}};
-    for (index_t b = 0; b < m.num_batches(); ++b)
-        cyqlone::linalg::unpack(m.batch(b), res.middle_batches(b * m.batch_size(), m.batch_size()));
-    return res;
-}
-
-// Get the maximum number of processors available, respecting CI limits,
-// and rounding down to the nearest power of two.
-index_t cyq_get_num_proc() {
-    int p = 8;
-#if BATMAT_WITH_OPENMP
-    p = omp_get_num_procs();
-#endif
-    if (const char *env_p = std::getenv("CI_JOB_CPU_LIMIT"))
-        p = std::min(p, std::atoi(env_p));
-    // floor to the nearest power of two
-    return static_cast<index_t>(std::bit_floor(static_cast<unsigned>(std::max(1, p))));
-}
+index_t cyq_get_num_proc();
 
 // Tests the factorization, factorization updates, and solution of the Cyqlone linear solver.
-TEST_P(CyqloneFanFactorTest, factor) {
+TEST(CyqloneFanFactorTest, factor) {
     using namespace cyqlone;
-    using batmat::linalg::simdify;
+    using batmat::matrix::uninitialized;
+    namespace la = cyqlone::linalg;
+    using la::tril;
 
     const index_t p = cyq_get_num_proc();
     using Solver    = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
     auto matfp      = cyqlone::open_mat("python/cmpc/ocp_data1024.mat");
     cyqlone::LinearOCPStorage ocp;
-    auto dim = ocp.dim;
-    int N = dim.N_horiz, nx = dim.nx, nu = dim.nu;
-    int ny   = 0;
-    int ny_0 = 0, ny_N = 0, nyM = 0;
-    int fanout        = 2;
+    auto dim  = ocp.dim;
+    index_t N = dim.N_horiz, nx = dim.nx, nu = dim.nu;
+    index_t ny   = 0;
+    index_t ny_0 = 0, ny_N = 0, nyM = 0;
+    index_t fanout    = 2;
     const index_t nux = dim.nu + dim.nx;
     std::mt19937 rng(102030405);
     std::uniform_real_distribution<real_t> uni(-1, 1);
@@ -79,15 +61,15 @@ TEST_P(CyqloneFanFactorTest, factor) {
     std::vector<cyqlone::parallel::SharedContext> contexts;
     std::vector<Solver> cyqlones;
     std::vector<SolverLast> last_solvers;
-    std::vector<batmat::matrix::Matrix<real_t, index_t, vl_t, index_t, StorageOrder::ColMajor>> Bs;
-    std::vector<batmat::matrix::Matrix<real_t, index_t, vl_t, index_t, StorageOrder::ColMajor>> SBs;
+    SolverLast::matrix Bs{{.depth = fanout, .rows = nu, .cols = nx}, uninitialized};
+    SolverLast::matrix LBs{{.depth = fanout, .rows = nu, .cols = nx}, uninitialized};
+    SolverLast::matrix SBs{{.depth = fanout, .rows = nu, .cols = nu}, uninitialized};
 
     contexts.reserve(fanout);
     cyqlones.reserve(fanout);
     last_solvers.reserve(fanout);
-    Bs.reserve(fanout);
-    SBs.reserve(fanout);
-    int p_fan = p / fanout;
+    index_t p_fan = p / fanout;
+    BATMAT_OMP(parallel for num_threads(fanout))
     for (index_t i = 0; i < fanout; ++i) {
         auto cocp                    = cyqlone::CyqloneStorage<>::build(ocp);
         auto &solver                 = cyqlones.emplace_back(Solver::build(cocp, p_fan));
@@ -101,12 +83,12 @@ TEST_P(CyqloneFanFactorTest, factor) {
         // Spin a bit longer to get more deterministic timings
         context.set_barrier_spin_count(std::numeric_limits<uint32_t>::max());
 
-        GUANAQO_IF_ITT(context.run(
-            [](auto &ctx) { __itt_thread_set_name(std::format("OMP({})", ctx.index).c_str()); }));
+        GUANAQO_IF_ITT(context.run([i](auto &ctx) {
+            __itt_thread_set_name(std::format("OMP({};{})", ctx.index, i).c_str());
+        }));
 
         // Solver for the final block-tridiagonal system.
-        auto &solver_last =
-            last_solvers.emplace_back(SolverLast{.block_size = solver.nx, .num_blocks = solver.v});
+        last_solvers.emplace_back(SolverLast{.block_size = solver.nx, .num_blocks = solver.v});
     }
     BATMAT_OMP(parallel for num_threads(fanout))
     for (index_t i = 0; i < fanout; ++i) {
@@ -144,40 +126,28 @@ TEST_P(CyqloneFanFactorTest, factor) {
 
             const auto factor_last = [&](auto &ctx) {
                 ctx.run_single_sync([&] {
-                    using batmat::linalg::tril;
-                    cyqlone::linalg::unpack(tril(solver.tricyqle.cr_L.batch(0)),
-                                            tril(solver_last.L));
-                    cyqlone::linalg::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.Y);
+                    la::unpack(tril(solver.tricyqle.cr_L.batch(0)), tril(solver_last.L));
+                    la::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.Y);
                     solver_last.factor();
                 });
             };
             const auto forward_solve_last = [&](auto &ctx) {
                 ctx.run_single_sync([&] {
-                    cyqlone::linalg::unpack(λ.batch(0), λ_last);
+                    la::unpack(λ.batch(0), λ_last);
                     solver_last.solve_forward(λ_last);
-                    cyqlone::linalg::pack(λ_last, λ.batch(0));
+                    la::pack(λ_last, λ.batch(0));
                 });
             };
             solver.factor(ctx, 1e100, 0, Σ);
             solver.solve_forward(ctx, ux, λ);
             factor_last(ctx);
             forward_solve_last(ctx);
-            namespace bla = batmat::linalg;
-            using batmat::linalg::tril;
-            batmat::matrix::Matrix<real_t, index_t, vl_t, index_t, StorageOrder::ColMajor> LB{
-                {.depth = 1, .rows = nu, .cols = nx}, batmat::matrix::uninitialized};
-            batmat::matrix::Matrix<real_t, index_t, vl_t, index_t, StorageOrder::ColMajor> SB{
-                {.depth = 1, .rows = nu, .cols = nu}, batmat::matrix::uninitialized};
-            bla::trsm(Bs[i].transposed(), tril(solver_last.L.batch(0)).transposed(), LB);
-            bla::syrk(LB, tril(SB));
-            SBs.emplace_back(SB);
-
-            // SB(j) = LB LBᵀ //
+            bla::trsm(Bs.batch(i).transposed(), tril(solver_last.L.batch(0)).transposed(),
+                      LBs.batch(i).transposed());
+            bla::syrk(LBs.batch(i), tril(SBs.batch(i)));
         });
     }
-    auto sum = SBs[0];
-    for (index_t i = 1; i < fanout; ++i) {
-        bla::add(sum, SBs[i], sum);
-    }
-    bla::potrf(sum);
+    for (index_t i = 1; i < fanout; ++i)
+        bla::add(SBs.batch(0), SBs.batch(i));
+    bla::potrf(tril(SBs.batch(0)));
 }
