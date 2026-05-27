@@ -104,7 +104,8 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::factor_solve_skip_first(Context &
                 ctx.arrive_and_wait(); // wait for off-diagonal block TODO: necessary?
             if (ν2p(c + 1) + 1 == lp() || p == 1)
                 solve_pcr(λ.batch(0), work_pcg.batch(0).left_cols(1));
-        } else {
+        } else if (params.solve_method == SolveMethod::StairPCG ||
+                   params.solve_method == SolveMethod::JacobiPCG) {
             ctx.arrive_and_wait(); // wait for off-diagonal block
             if (ν2p(c + 1) + 1 == lp() || p == 1)
                 solve_pcg(λ.batch(0), work_pcg.batch(0));

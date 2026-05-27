@@ -95,7 +95,7 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::update_L(index_t l, index_t i) {
         // Make sure the diagonal block M of the last CR level is up to date (it is needed for PCR).
         // This is done in two steps, the backward and the forward updates, the latter of which
         // requires a rotation first.
-        if (params.solve_method == SolveMethod::PCR)
+        if (params.solve_method == SolveMethod::PCR || params.solve_method == SolveMethod::None)
             syrk_diag_add(Υ0_bwd, M0, Σ_bwd);
         // When using PCG, we need the Cholesky factors L(0) of M(0) for the preconditioner, so
         // update them here. Like with the update of M(0), we do this in two steps.
@@ -104,7 +104,7 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::update_L(index_t l, index_t i) {
         // Rotate and repeat for the forward update.
         batmat::linalg::copy(Σ_fwd, Σ_fwd, with_rotate<-1>);
         batmat::linalg::copy(Υ0_fwd, Υ0_fwd, with_rotate<-1>);
-        if (params.solve_method == SolveMethod::PCR)
+        if (params.solve_method == SolveMethod::PCR || params.solve_method == SolveMethod::None)
             syrk_diag_add(Υ0_fwd, M0, Σ_fwd);
         if (!do_update_pcr)
             hyhound_diag(L0, Υ0_fwd, Σ_fwd);
@@ -335,10 +335,13 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::update_solve_cr(Context &ctx, mut
     if constexpr (Solve) {
         ctx.arrive_and_wait();
         // TODO: synchronize here if switching to parallel PCR factor in update_L
-        if (ν2p(c + 1) + 1 == lp() || p == 1)
-            params.solve_method == SolveMethod::PCR
-                ? solve_pcr(λ.batch(0), work_pcg.batch(0).left_cols(1))
-                : solve_pcg(λ.batch(0), work_pcg.batch(0));
+        if (ν2p(c + 1) + 1 == lp() || p == 1) {
+            if (params.solve_method == SolveMethod::PCR)
+                solve_pcr(λ.batch(0), work_pcg.batch(0).left_cols(1));
+            else if (params.solve_method == SolveMethod::JacobiPCG ||
+                     params.solve_method == SolveMethod::StairPCG)
+                solve_pcg(λ.batch(0), work_pcg.batch(0));
+        }
     }
 }
 //! [Cyqlone update CR]

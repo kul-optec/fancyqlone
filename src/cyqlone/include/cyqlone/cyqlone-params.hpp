@@ -9,9 +9,16 @@ namespace cyqlone {
 /// Defines how to solve the small linear system that remains after cyclic reduction.
 /// @ingroup topic-block-tridiag-solvers
 enum class SolveMethod {
-    StairPCG,  ///< Preconditioned Conjugate Gradient with staircase preconditioner (iterative)
-    JacobiPCG, ///< Preconditioned Conjugate Gradient with Jacobi preconditioner (iterative)
-    PCR,       ///< Parallel Cyclic Reduction (direct)
+    /// Preconditioned Conjugate Gradient with staircase preconditioner (iterative).
+    StairPCG,
+    /// Preconditioned Conjugate Gradient with Jacobi preconditioner (iterative).
+    JacobiPCG,
+    /// Parallel Cyclic Reduction (direct).
+    PCR,
+    /// The final Schur complement is not solved, so it should be handled manually by the user.
+    /// This is useful when Tricyqle is used to solve a block of a larger system and additional
+    /// coupling to other blocks is present.
+    None,
 };
 
 inline const char *enum_name(SolveMethod s) {
@@ -19,6 +26,7 @@ inline const char *enum_name(SolveMethod s) {
         case SolveMethod::StairPCG: return "StairPCG";
         case SolveMethod::JacobiPCG: return "JacobiPCG";
         case SolveMethod::PCR: return "PCR";
+        case SolveMethod::None: return "None";
         default:;
     }
     throw std::out_of_range("invalid value for cyqlone::SolveMethod");

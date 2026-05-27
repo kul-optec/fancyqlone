@@ -75,7 +75,7 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::factor_L(index_t l, index_t i) {
     // Final block L(0) is stored separately (for PCR/PCG later)
     auto M = tril(cr_L.batch(i)), L0 = tril(pcr_L.batch(0));
     // 28|  if ν₂(i) = l+1:  L(i) = chol(M(i)⁺)
-    const bool factor_next = ν2p(i) == l + 1;
+    const bool factor_next = ν2p(i) == l + 1 && (i > 0 || params.solve_method != SolveMethod::None);
     if constexpr (v == 1) {
         if (i == 0 && !circular) { // Y(iY)=0 for M on the first thread
             CYQ_TRACE_READ(M, i, 0);

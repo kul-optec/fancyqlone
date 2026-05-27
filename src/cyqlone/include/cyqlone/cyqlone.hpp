@@ -795,11 +795,11 @@ struct CyqloneSolver {
     /// Get a string representation of the main solver parameters. Used mainly for file names.
     [[nodiscard]] std::string get_params_string() const {
         const auto &tricyqle_params = get_tricyqle_params();
-        std::string_view solve      = tricyqle_params.solve_method == SolveMethod::PCR ? "pcr"
-                                      : tricyqle_params.solve_method == SolveMethod::StairPCG
-                                          ? "pcg=stair"
-                                          : "pcg=jacobi";
-        std::string_view order      = default_order == StorageOrder::RowMajor ? "rm" : "cm";
+        const auto *solve = tricyqle_params.solve_method == SolveMethod::PCR         ? "pcr"
+                            : tricyqle_params.solve_method == SolveMethod::StairPCG  ? "pcg=stair"
+                            : tricyqle_params.solve_method == SolveMethod::JacobiPCG ? "pcg=jacobi"
+                                                                                     : "none";
+        const auto *order = default_order == StorageOrder::RowMajor ? "rm" : "cm";
         return std::format("nx={}-nu={}-ny={}-N={}-p={}-v={}-{}-{}", nx, nu, ny, N_horiz, p, v,
                            solve, order);
     }
