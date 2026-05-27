@@ -5,6 +5,7 @@
 #include <cyqlone/packing.hpp>
 #include <cyqlone/random-ocp.hpp>
 #include <cyqlone/tracing.hpp>
+#include <cyqlone/tridiagonal-solver.hpp>
 #include <batmat/linalg/simdify.hpp>
 #include <guanaqo/print.hpp>
 #include <guanaqo/trace.hpp>
@@ -114,29 +115,63 @@ TEST_P(CyqloneFactorTest, factor) {
     solver.pack_constraints(Σ_lin2, Σ2);
     std::ranges::transform(Σ2, Σ, std::ranges::begin(ΔΣ), std::minus<>{});
 
+    // Solver for the final block-tridiagonal system.
+    using SolverLast = cyqlone::TridiagonalSolver<real_t>;
+    SolverLast solver_last{.block_size = solver.nx, .num_blocks = solver.v};
+    SolverLast::matrix λ_last{{.depth = solver.v, .rows = solver.nx, .cols = 1}};
+    const auto factor_last = [&](auto &ctx) {
+        if (tricyqle_params.solve_method == SolveMethod::None) {
+            ctx.run_single_sync([&] {
+                using batmat::linalg::tril;
+                cyqlone::linalg::unpack(tril(solver.tricyqle.cr_L.batch(0)), tril(solver_last.L));
+                for (index_t i = 0; i < solver.v; ++i) {
+                    guanaqo::print_python(std::cout << "M[" << i << "] (packed) =\n",
+                                          solver.tricyqle.cr_L.batch(0)(i));
+                    guanaqo::print_python(std::cout << "M[" << i << "] =\n", solver_last.L(i));
+                }
+                cyqlone::linalg::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.Y);
+                solver_last.factor();
+            });
+        }
+    };
+    const auto solve_last = [&](auto &ctx) {
+        if (tricyqle_params.solve_method == SolveMethod::None) {
+            ctx.run_single_sync([&] {
+                cyqlone::linalg::unpack(λ.batch(0), λ_last);
+                solver_last.solve_forward(λ_last);
+                solver_last.solve_reverse(λ_last);
+                cyqlone::linalg::pack(λ_last, λ.batch(0));
+            });
+        }
+    };
+
     // Initialize the right-hand side of the KKT system
     solver.initialize_gradient(cocp, rq);
     solver.initialize_rhs(cocp, b);
+
+    const auto factor_update_solve_all = [&](auto &ctx) {
+        solver.factor(ctx, 1e100, 0, Σ);
+#if WITH_UPDATES
+        solver.update(ctx, ΔΣ);
+#endif
+        factor_last(ctx);
+        solver.solve_forward(ctx, ux, λ);
+        solve_last(ctx);
+        solver.solve_reverse(ctx, ux, λ);
+        solver.residual_dynamics_constr(ctx, ux, b, Mxb);                  // Mz + b  (= 0)
+        solver.transposed_dynamics_constr(ctx, λ, Mᵀλ);                    // Mᵀλ
+        solver.cost_gradient(ctx, ux, 1, rq, 0, grad);                     // Qz + q
+        solver.general_constr(ctx, ux, DCux);                              // Gz
+        ctx.run_single_sync([&] { cyqlone::linalg::hadamard(DCux, Σ2); }); // ΣGz
+        solver.transposed_general_constr(ctx, DCux, DCᵀΣDCux);             // GᵀΣGz
+    };
 
     // Repeatedly factor and solve the KKT system (as a warm-up run for the timing and to make sure
     // the workspaces are still okay after a couple of iterations)
     for (int i = 0; i < 50; ++i) {
         cyqlone::linalg::negate(rq, ux);
         λ = b;
-        pctx->run([&](auto &ctx) {
-            solver.factor(ctx, 1e100, 0, Σ);
-#if WITH_UPDATES
-            solver.update(ctx, ΔΣ);
-#endif
-            solver.solve_forward(ctx, ux, λ);
-            solver.solve_reverse(ctx, ux, λ);
-            solver.residual_dynamics_constr(ctx, ux, b, Mxb);
-            solver.transposed_dynamics_constr(ctx, λ, Mᵀλ);
-            solver.cost_gradient(ctx, ux, 1, rq, 0, grad);
-            solver.general_constr(ctx, ux, DCux);
-            ctx.run_single_sync([&] { cyqlone::linalg::hadamard(DCux, Σ2); });
-            solver.transposed_general_constr(ctx, DCux, DCᵀΣDCux);
-        });
+        pctx->run(factor_update_solve_all);
     }
 
     // Now factor and solve the KKT system for real
@@ -145,20 +180,7 @@ TEST_P(CyqloneFactorTest, factor) {
 #if GUANAQO_WITH_TRACING
     guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
 #endif
-    pctx->run([&](auto &ctx) {
-        solver.factor(ctx, 1e100, 0, Σ);
-#if WITH_UPDATES
-        solver.update(ctx, ΔΣ);
-#endif
-        solver.solve_forward(ctx, ux, λ);
-        solver.solve_reverse(ctx, ux, λ);
-        solver.residual_dynamics_constr(ctx, ux, b, Mxb);                  // Mz + b  (= 0)
-        solver.transposed_dynamics_constr(ctx, λ, Mᵀλ);                    // Mᵀλ
-        solver.cost_gradient(ctx, ux, 1, rq, 0, grad);                     // Qz + q
-        solver.general_constr(ctx, ux, DCux);                              // Gz
-        ctx.run_single_sync([&] { cyqlone::linalg::hadamard(DCux, Σ2); }); // ΣGz
-        solver.transposed_general_constr(ctx, DCux, DCᵀΣDCux);             // GᵀΣGz
-    });
+    pctx->run(factor_update_solve_all);
 
     // Check the residuals
     using std::pow;
@@ -586,7 +608,7 @@ TEST(CyqloneTest, stageIndicesU0Last) {
 INSTANTIATE_TEST_SUITE_P(CyqloneSolverConfigs, CyqloneFactorTest,
                          ::testing::Values(cyqlone::SolveMethod::StairPCG,
                                            cyqlone::SolveMethod::JacobiPCG,
-                                           cyqlone::SolveMethod::PCR),
+                                           cyqlone::SolveMethod::PCR, cyqlone::SolveMethod::None),
                          ([](const ::testing::TestParamInfo<CyqloneFactorTest::ParamType> &info) {
                              return enum_name(info.param);
                          }));
