@@ -96,6 +96,7 @@ jobs:
   build-linux:
     name: Build (${{ matrix.host }})
     needs: [build-sdist]
+    if: ${{ github.event.action == 'released' || github.event.action == 'prereleased' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -137,6 +138,7 @@ jobs:
   test-linux-x:
     name: Test ${{ matrix.python-version }} ${{ matrix.host }}
     needs: [build-linux]
+    if: ${{ github.event.action == 'released' || github.event.action == 'prereleased' }}
     runs-on: ${{ matrix.os }}
     container: '${{ matrix.python }}:${{ matrix.python-version }}${{ matrix.image-suffix }}-bookworm'
     strategy:
@@ -256,6 +258,7 @@ jobs:
   check-release:
     name: Check release
     needs: [build-sdist, test-linux, build-linux]  # TODO: build-macos-windows
+    if: ${{ github.event.action == 'released' || github.event.action == 'prereleased' }}
     runs-on: ubuntu-latest
     container: python:3.12-bullseye
     steps:
