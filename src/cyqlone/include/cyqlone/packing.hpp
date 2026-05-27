@@ -4,6 +4,7 @@
 #include <batmat/linalg/shift.hpp>
 #include <batmat/linalg/simdify.hpp>
 #include <batmat/linalg/structure.hpp>
+#include <batmat/linalg/triangular.hpp>
 #include <batmat/linalg/uview.hpp>
 #include <batmat/loop.hpp>
 #include <batmat/lut.hpp>
@@ -68,16 +69,8 @@ inline void transpose_pack(const T *pa, index_t lda, T *pb, index_t ldb) {
 
 using batmat::index_constant;
 
-#if 0
-template <class T>
-using scalar_simd_size = batmat::datapar::simd_size<T, batmat::datapar::deduced_abi<T, 1>>;
-template <class T, StorageOrder O>
-using scalar_view =
-    batmat::matrix::View<T, index_t, scalar_simd_size<std::remove_cv_t<T>>, index_t, index_t, O>;
-#else
 template <class T, class D, class L, StorageOrder O>
 using scalar_view = batmat::matrix::View<T, index_t, index_constant<1>, D, L, O>;
-#endif
 
 template <class TA, class Abi, int Rot, bool Add, MatrixStructure Struc = MatrixStructure::General,
           StorageOrder OA, class TB, class DB, class LB, StorageOrder OB>
@@ -107,13 +100,12 @@ inline void unpack_full(view<TA, Abi, OA> A, scalar_view<TB, DB, LB, OB> B) {
     const auto bstrB           = B.layer_stride();
     static_assert(rstrB == 1);
     TA *pA           = A.data();
-    const auto pAend = pA + A.cols() * cstrA;
     TB *pB           = B.data();
     auto inner_count = Struc == LowerTriangular   ? std::max(A.rows(), A.cols())
-                       : Struc == UpperTriangular ? index_t{1}
+                       : Struc == UpperTriangular ? 1 + std::max(A.rows(), A.cols()) - A.cols()
                                                   : A.rows();
     using std::clamp;
-    while (pA < pAend) {
+    for (index_t c = 0; c < A.cols(); ++c) {
         TA *pA_ = pA;
         TB *pB_ = pB;
         batmat::foreach_chunked(
@@ -200,6 +192,16 @@ void unpack(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
         simdify(A).as_const(), B.first_layers(A.depth()));
 }
 
+/// Copy a compact batch of matrices @p A to multiple scalar matrices @p B.
+/// @post A(l, r, c) == B(l, r, c) for all valid l, r, c.
+template <simdifiable VA, class VB, MatrixStructure S, int Rot = 0>
+    requires(std::is_same_v<simdified_value_t<VA>, typename std::remove_cvref_t<VB>::value_type> &&
+             typename std::remove_cvref_t<VB>::batch_size_type() == 1)
+void unpack(Structured<VA, S> A, Structured<VB, S> B, with_rotate_t<Rot> = {}) {
+    detail::unpack_full<const simdified_value_t<VA>, simdified_abi_t<VA>, Rot, false, S>(
+        simdify(A.value).as_const(), B.value.first_layers(A.value.depth()));
+}
+
 /// Add a compact batch of matrices @p A to multiple scalar matrices @p B.
 template <simdifiable VA, class VB, int Rot = 0>
     requires(std::is_same_v<simdified_value_t<VA>, typename std::remove_cvref_t<VB>::value_type> &&
@@ -217,6 +219,16 @@ template <class VA, simdifiable VB, int Rot = 0>
 void pack(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
     detail::unpack_full<simdified_value_t<VB>, simdified_abi_t<VB>, Rot, false>(
         simdify(B), A.first_layers(B.depth()).as_const());
+}
+
+/// Copy multiple scalar matrices @p A to a compact batch of matrices @p B.
+/// @post A(l, r, c) == B(l, r, c) for all valid l, r, c.
+template <class VA, simdifiable VB, MatrixStructure S, int Rot = 0>
+    requires(std::is_same_v<typename std::remove_cvref_t<VA>::value_type, simdified_value_t<VB>> &&
+             typename std::remove_cvref_t<VA>::batch_size_type() == 1)
+void pack(Structured<VA, S> A, Structured<VB, S> B, with_rotate_t<Rot> = {}) {
+    detail::unpack_full<simdified_value_t<VB>, simdified_abi_t<VB>, Rot, false, S>(
+        simdify(B.value), A.value.first_layers(B.value.depth()).as_const());
 }
 
 /// Add multiple scalar matrices @p A to a compact batch of matrices @p B.

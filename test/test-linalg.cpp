@@ -2,6 +2,7 @@
 
 #include <cyqlone/linalg.hpp>
 #include <cyqlone/packing.hpp>
+#include <batmat/linalg/triangular.hpp>
 
 #include <tuple>
 #include <type_traits>
@@ -174,3 +175,114 @@ TEST(LinAlg, packGeneralTransA) {
         }
     }
 }
+
+using enum cyqlone::linalg::MatrixStructure;
+using enum cyqlone::linalg::StorageOrder;
+
+template <cyqlone::linalg::MatrixStructure Struc_, cyqlone::linalg::StorageOrder OrderA_,
+          cyqlone::linalg::StorageOrder OrderB_>
+struct TriangularOrders {
+    static constexpr auto Struc  = Struc_;
+    static constexpr auto OrderA = OrderA_;
+    static constexpr auto OrderB = OrderB_;
+
+    static std::string GetName() {
+        return std::format("{}.{}.{}",
+                           Struc == General           ? "General"
+                           : Struc == LowerTriangular ? "Lower"
+                                                      : "Upper",
+                           OrderA == ColMajor ? "cm" : "rm", OrderB == ColMajor ? "cm" : "rm");
+    }
+};
+
+struct TriangularOrdersName {
+    template <typename T>
+    static std::string GetName(int) {
+        return T::GetName();
+    }
+};
+
+using PackingTypes = ::testing::Types<TriangularOrders<General, ColMajor, ColMajor>,         //
+                                      TriangularOrders<General, ColMajor, RowMajor>,         //
+                                      TriangularOrders<General, RowMajor, ColMajor>,         //
+                                      TriangularOrders<General, RowMajor, RowMajor>,         //
+                                      TriangularOrders<LowerTriangular, ColMajor, ColMajor>, //
+                                      TriangularOrders<LowerTriangular, ColMajor, RowMajor>, //
+                                      TriangularOrders<LowerTriangular, RowMajor, ColMajor>, //
+                                      TriangularOrders<LowerTriangular, RowMajor, RowMajor>, //
+                                      TriangularOrders<UpperTriangular, ColMajor, ColMajor>, //
+                                      TriangularOrders<UpperTriangular, ColMajor, RowMajor>, //
+                                      TriangularOrders<UpperTriangular, RowMajor, ColMajor>, //
+                                      TriangularOrders<UpperTriangular, RowMajor, RowMajor>  //
+                                      >;
+
+template <class Config>
+class PackingTest : public testing::Test {};
+TYPED_TEST_SUITE_P(PackingTest);
+
+template <batmat::linalg::MatrixStructure Structure>
+constexpr bool in_structure(cyqlone::index_t rows, cyqlone::index_t cols, cyqlone::index_t row,
+                            cyqlone::index_t col) {
+    if constexpr (Structure == LowerTriangular)
+        return col <= row + std::max(rows, cols) - rows;
+    else if constexpr (Structure == UpperTriangular)
+        return row <= col + std::max(rows, cols) - cols;
+    else
+        return true;
+}
+
+template <batmat::linalg::MatrixStructure Struc, class MatrixA, class MatrixB>
+void compare_structured(const MatrixA &A, const MatrixB &B) {
+    using cyqlone::index_t;
+    for (index_t l = 0; l < A.depth(); ++l)
+        for (index_t r = 0; r < A.rows(); ++r)
+            for (index_t c = 0; c < A.cols(); ++c)
+                if (in_structure<Struc>(A.rows(), A.cols(), r, c))
+                    ASSERT_DOUBLE_EQ(B(l, r, c), A(l, r, c))
+                        << " at (" << l << ", " << r << ", " << c << ")";
+                else
+                    ASSERT_DOUBLE_EQ(B(l, r, c), -99.0)
+                        << " at (" << l << ", " << r << ", " << c << ") -- outside structure";
+}
+
+template <class Config>
+void test_unpack(cyqlone::index_t rows, cyqlone::index_t cols) {
+    using cyqlone::index_t;
+    using vl_t  = std::integral_constant<index_t, 4>;
+    using one_t = std::integral_constant<index_t, 1>;
+
+    using MatrixA = batmat::matrix::Matrix<double, index_t, vl_t, vl_t, Config::OrderA>;
+    using MatrixB = batmat::matrix::Matrix<double, index_t, one_t, vl_t, Config::OrderB>;
+
+    MatrixA A{{.rows = rows, .cols = cols}};
+    MatrixB B{{.rows = rows, .cols = cols}};
+    fill_linear(A, 0.5, 0.25);
+    fill_linear(B, -99.0, 0.0);
+
+    auto sA = batmat::linalg::make_structured<Config::Struc>(A);
+    auto sB = batmat::linalg::make_structured<Config::Struc>(B);
+    cyqlone::linalg::unpack(sA, sB);
+    compare_structured<Config::Struc>(A, B);
+}
+
+TYPED_TEST_P(PackingTest, square) {
+    for (cyqlone::index_t i : {1, 2, 3, 4, 5, 31})
+        test_unpack<TypeParam>(i, i);
+}
+
+TYPED_TEST_P(PackingTest, wide) {
+    for (cyqlone::index_t i : {1, 2, 3, 4, 5, 31})
+        for (cyqlone::index_t j : {1, 2, 3, 4, 5, 31})
+            if (j > i)
+                test_unpack<TypeParam>(i, j);
+}
+
+TYPED_TEST_P(PackingTest, tall) {
+    for (cyqlone::index_t i : {1, 2, 3, 4, 5, 31})
+        for (cyqlone::index_t j : {1, 2, 3, 4, 5, 31})
+            if (i > j)
+                test_unpack<TypeParam>(i, j);
+}
+
+REGISTER_TYPED_TEST_SUITE_P(PackingTest, square, wide, tall);
+INSTANTIATE_TYPED_TEST_SUITE_P(PackingOrders, PackingTest, PackingTypes, TriangularOrdersName);
