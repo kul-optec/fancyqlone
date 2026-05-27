@@ -75,7 +75,8 @@ traces
 
 # Media files
 *.mp4
-
+*.mat
+*.png
 /*.csv
 /*.mat
 /data/**/*.csv
