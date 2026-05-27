@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <cstdio>
 #include <filesystem>
 
 #include <cyqlone/matio.hpp>
@@ -6,10 +7,12 @@
 
 using cyqlone::index_t;
 using cyqlone::real_t;
+namespace fs = std::filesystem;
 
 TEST(Matio, ocp) {
-    std::filesystem::path pth = std::filesystem::temp_directory_path();
-    auto mat                  = cyqlone::create_mat(pth / "ocp.mat");
+    fs::path pth = fs::temp_directory_path() / ::tmpnam(std::string(L_tmpnam, '\0').data());
+    pth.replace_extension(".mat");
+    auto mat = cyqlone::create_mat(pth);
     cyqlone::LinearOCPStorage ocp{.dim = {.N_horiz = 31, .nx = 5, .nu = 3, .ny = 7, .ny_N = 2}};
     const auto N = ocp.dim.N_horiz;
     for (index_t i = 0; i < N; ++i) {
@@ -39,7 +42,7 @@ TEST(Matio, ocp) {
     cyqlone::add_to_mat(mat.get(), "ocp", ocp);
     mat.reset();
 
-    auto mat_loaded = cyqlone::open_mat(pth / "ocp.mat");
+    auto mat_loaded = cyqlone::open_mat(pth);
     cyqlone::LinearOCPStorage ocp_loaded;
     cyqlone::read_from_mat(mat_loaded.get(), "ocp", ocp_loaded);
 
