@@ -127,7 +127,7 @@ TEST(CyqloneFanFactorTest, factor) {
             const auto factor_last = [&](auto &ctx) {
                 ctx.run_single_sync([&] {
                     la::unpack(tril(solver.tricyqle.cr_L.batch(0)), tril(solver_last.L));
-                    la::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.Y);
+                    la::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.U.transposed());
                     solver_last.factor();
                 });
             };

@@ -31,42 +31,42 @@ struct TridiagonalSolver {
     matrix L = [this] {
         return matrix{{.depth = num_blocks, .rows = block_size, .cols = block_size}};
     }();
-    /// Subdiagonal blocks of the Cholesky factor.
+    /// Superdiagonal blocks of the Cholesky factor.
     /// Actually only contains num_blocks - 1 blocks, but we allocate num_blocks to simplify
     /// packing and unpacking to/from batched matrices.
-    matrix Y = [this] {
+    matrix U = [this] {
         return matrix{{.depth = num_blocks, .rows = block_size, .cols = block_size}};
     }();
 
     void factor() {
-        for (index_t i = num_blocks - 1; i >= 0; --i) {
+        for (index_t i = num_blocks; i-- > 0;) {
             auto Mi = bla::tril(L.batch(i));
-            if (i == num_blocks - 1)
-                bla::potrf(Mi); //                           L(num_blocks-1) = chol(M(num_blocks-1))
+            if (i + 1 == num_blocks)
+                bla::potrf(Mi); //                                L(n-1) = chol(M(n-1))
             else
-                bla::syrk_sub_potrf(Y.batch(i + 1), Mi); //  L(i) = chol(M(i) - Y(i+1) Y(i+1)ᵀ)
+                bla::syrk_sub_potrf(U.batch(i), Mi); //           L(i) = chol(M(i) - U(i) U(i)ᵀ)
             if (i > 0)
-                bla::trsm(Y.batch(i), Mi.transposed()); //   Y(i) = K(i) L(i)⁻ᵀ
+                bla::trsm(U.batch(i - 1), Mi.transposed()); //    U(i-1) = K(i-1) L(i)⁻ᵀ
         }
     }
 
     void solve_forward(mut_view λ) const {
-        for (index_t i = 0; i < num_blocks; ++i) {
+        for (index_t i = num_blocks; i-- > 0;) {
             auto Li = bla::tril(L.batch(i));
             bla::trsm(Li, λ.batch(i)); //                      λ(i) = L(i)⁻¹ λ(i)
-            if (i + 1 < num_blocks)
-                bla::gemv_sub(Y.batch(i), λ.batch(i),
-                              λ.batch(i + 1)); //              λ(i+1) -= Y(i) λ(i)
+            if (i > 0)
+                bla::gemv_sub(U.batch(i - 1), λ.batch(i),
+                              λ.batch(i - 1)); //              λ(i-1) -= U(i-1) λ(i)
         }
     }
 
     void solve_reverse(mut_view λ) const {
-        for (index_t i = num_blocks; i-- > 0;) {
+        for (index_t i = 0; i < num_blocks; ++i) {
             auto Li = bla::tril(L.batch(i));
             bla::trsm(Li.transposed(), λ.batch(i)); //         λ(i) = L(i)⁻ᵀ λ(i)
-            if (i > 0)
-                bla::gemv_sub(Y.batch(i - 1).transposed(), λ.batch(i),
-                              λ.batch(i - 1)); //              λ(i-1) -= Y(i-1)ᵀ λ(i)
+            if (i + 1 < num_blocks)
+                bla::gemv_sub(U.batch(i).transposed(), λ.batch(i),
+                              λ.batch(i + 1)); //              λ(i+1) -= U(i)ᵀ λ(i)
         }
     }
 };

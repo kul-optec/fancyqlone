@@ -124,7 +124,7 @@ TEST_P(CyqloneFactorTest, factor) {
             ctx.run_single_sync([&] {
                 using batmat::linalg::tril;
                 cyqlone::linalg::unpack(tril(solver.tricyqle.cr_L.batch(0)), tril(solver_last.L));
-                cyqlone::linalg::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.Y);
+                cyqlone::linalg::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.U.transposed());
                 solver_last.factor();
             });
         }
