@@ -35,6 +35,7 @@ jobs:
     - run: conan cache clean
 
   benchmarks:
+    if: false  # Takes over an hour to run
     name: "CyQPALM benchmarks (${{ matrix.compiler }})"
     strategy:
       matrix:
