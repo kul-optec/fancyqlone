@@ -146,6 +146,7 @@ TEST(CyqloneFanFactorTest, factor) {
     SolverLast::matrix rs{{.depth = fanout, .rows = nu, .cols = 1}, uninitialized};
     // Synchronization between the fanout branches
     cyqlone::TreeBarrier<> fan_barrier(static_cast<uint32_t>(fanout), {});
+    fan_barrier.spin_count = std::numeric_limits<uint32_t>::max();
 
     // Random initial state
     batmat::matrix::Matrix<real_t, index_t> x0{{.rows = nx, .cols = 1}};
@@ -188,7 +189,7 @@ TEST(CyqloneFanFactorTest, factor) {
             __itt_thread_set_name(std::format("OMP({};{})", ctx.index, i).c_str());
         }));
 #if GUANAQO_WITH_TRACING
-        pctx->run([i](auto &ctx) { GUANAQO_TRACE("thread_id", ctx.index + 100 * i); });
+        pctx->run([i](auto &ctx) { GUANAQO_TRACE("thread_id", ctx.index + 100 * (i + 1)); });
 #endif
 
         SolverLast::matrix λ_last{{.depth = solver.v, .rows = solver.nx, .cols = 1}};
@@ -211,21 +212,25 @@ TEST(CyqloneFanFactorTest, factor) {
 
         // Factor and forward solve most of each Cyqlone block
         pctx->run([&](auto ctx) { solver.factor_solve(ctx, 1e100, 0, {}, ux, λ); });
-        // Factor the final block-tridiagonal Schur complement of each Cyqlone block
-        la::unpack(tril(solver.tricyqle.cr_L.batch(0)), tril(solver_last.L));
-        la::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.U.transposed());
-        solver_last.factor();
-        // Compute the contribution to the final Schur complement (system involving only u(0))
-        la::trsm(Bs.batch(i), tril(solver_last.L.batch(0)).transposed(), LBs.batch(i));
-        i == 0 ? la::syrk_add(LBs.batch(i), tril(SBs.batch(i)))
-               : la::syrk(LBs.batch(i), tril(SBs.batch(i)));
-        // Forward solve of the final block-tridiagonal system, to get λ(0) for each Cyqlone block
-        la::unpack(λ.batch(0), λ_last);
-        solver_last.solve_forward(λ_last);
-        i == 0 ? la::gemv_sub(LBs.batch(i), λ_last.batch(0), rs.batch(i))
-               : la::gemv_neg(LBs.batch(i), λ_last.batch(0), rs.batch(i));
+        {
+            GUANAQO_TRACE_REGION("fan factor forward solve λ0", 0);
+            // Factor the final block-tridiagonal Schur complement of each Cyqlone block
+            la::unpack(tril(solver.tricyqle.cr_L.batch(0)), tril(solver_last.L));
+            la::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.U.transposed());
+            solver_last.factor();
+            // Compute the contribution to the final Schur complement (system involving only u(0))
+            la::trsm(Bs.batch(i), tril(solver_last.L.batch(0)).transposed(), LBs.batch(i));
+            i == 0 ? la::syrk_add(LBs.batch(i), tril(SBs.batch(i)))
+                   : la::syrk(LBs.batch(i), tril(SBs.batch(i)));
+            // Forward solve of the final block-tridiagonal system, to get λ(0) for each Cyqlone block
+            la::unpack(λ.batch(0), λ_last);
+            solver_last.solve_forward(λ_last);
+            i == 0 ? la::gemv_sub(LBs.batch(i), λ_last.batch(0), rs.batch(i))
+                   : la::gemv_neg(LBs.batch(i), λ_last.batch(0), rs.batch(i));
+        }
         // Solve for u(0) on a single thread
         fan_barrier.wait(fan_barrier.arrive_with_completion(static_cast<uint32_t>(i), [&] {
+            GUANAQO_TRACE_REGION("fan solve u0", 0);
             for (index_t i = 1; i < fanout; ++i)
                 la::add(SBs.batch(0), SBs.batch(i));
             la::potrf(tril(SBs.batch(0)));
@@ -235,12 +240,15 @@ TEST(CyqloneFanFactorTest, factor) {
             la::trsm(tril(SBs.batch(0)).transposed(), rs.batch(0)); // rs(0) now contains u(0)
             u0_sol(0) = rs(0);
         }));
-        // Compute the contribution of u(0) to λ(0) for each Cyqlone block
-        la::gemv_add(LBs.batch(i).transposed(), rs.batch(0), λ_last.batch(0));
-        // Reverse solve of the final block-tridiagonal system for each Cyqlone block
-        solver_last.solve_reverse(λ_last);
-        la::pack(λ_last, λ.batch(0));
-        λ0_sol(0).middle_rows(i * nx, nx) = λ_last(0);
+        {
+            GUANAQO_TRACE_REGION("fan solve reverse λ0", 0);
+            // Compute the contribution of u(0) to λ(0) for each Cyqlone block
+            la::gemv_add(LBs.batch(i).transposed(), rs.batch(0), λ_last.batch(0));
+            // Reverse solve of the final block-tridiagonal system for each Cyqlone block
+            solver_last.solve_reverse(λ_last);
+            la::pack(λ_last, λ.batch(0));
+            λ0_sol(0).middle_rows(i * nx, nx) = λ_last(0);
+        }
         // Solve each Cyqlone block with the updated multipliers λ
         pctx->run([&](auto ctx) { solver.solve_reverse(ctx, ux, λ); });
     };
@@ -273,6 +281,7 @@ TEST(CyqloneFanFactorTest, factor) {
     auto combined_λ      = combined_b;
     la::negate(combined_ux);
     auto pctx = combined_solver.create_parallel_context();
+    pctx->set_barrier_spin_count(std::numeric_limits<uint32_t>::max());
     pctx->run([&](auto &ctx) {
         combined_solver.factor_solve(ctx, 1e100, 0, {}, combined_ux, combined_λ);
         combined_solver.solve_reverse(ctx, combined_ux, combined_λ);
