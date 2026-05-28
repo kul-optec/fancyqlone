@@ -4,6 +4,9 @@ from re import U
 import numpy as np
 from scipy.fft import next_fast_len
 from scipy.io import savemat
+
+from scipy.linalg import block_diag
+
 from typing import List, Optional
 """
 Save Linear-Quadratic OCP data to MATLAB .mat file compatible with C++ reader.
@@ -325,7 +328,6 @@ def create_cont_double_integrator(N=100):
     b0 = np.array([1.0, 0.0, 1.0, 0.0])
     ocp.set_initial_state(b0)
     
-    # State and control constraints: -10 ≤ x ≤ 10, -5 ≤ u ≤ 5
     C =  np.zeros((ny, nx))  # First two states
     D = np.zeros((ny, nu))
     D = np.eye(nu)
@@ -348,11 +350,104 @@ def create_cont_double_integrator(N=100):
     ocp.set_terminal_constraints(C_N, l_N, u_N)
     
     return ocp
+def create_cont_double_integrator_combined(N=100):
+    """Create a simple example OCP for testing."""
+    fanout = 2
+    nx = 2   # State dimension
+    nu = 1   # Control dimension
+    ny = 0   # Output constraint dimension
+    ny_N = 0 # Terminal constraint dimension
+    
+    ocp_full = OCPData(N, fanout * nx, fanout * nu, fanout * ny, fanout * ny_N)
+    ocps = []
+    Qs = []
+    Rs = []
+    Ss = []
+    qs = []
+    rs = []
+    QNs = []
+    qNs = []
+    As = []
+    Bs = []
+    bs = []
+    b0s= []
+    for fan in range(fanout):
+        ocp=OCPData(N, nx, nu, ny, ny_N)
+        # Set cost matrices (LQR-like)
+        Q = np.eye(nx) * (fanout+1)**2
+        R = np.eye(nu) * 0.1 / ((fanout+1)**2)
+        S = np.zeros((nu, nx))
+        q = np.zeros(nx)
+        r = np.zeros(nu)
+        Qs.append(Q)
+        Rs.append(R)
+        Ss.append(S)
+        qs.append(q)
+        rs.append(r)
+        for i in range(N):
+         
+            ocp.set_stage_cost(i, Q, R, S, q, r)
+       
+        # Terminal cost
+        Q_N = 10 * np.eye(nx) * (fanout+1)**2
+        q_N = np.zeros(nx)
+        QNs.append(Q_N)
+        qNs.append(q_N)
+        ocp.set_terminal_cost(Q_N, q_N)
+        
+        # Dynamics: simple double integrator
+        if nx == 2:
+            dt = 0.1
+            A = np.array([[1, dt], [0, 1]])
+            B = np.array([[0.5 * dt**2], [dt]])
+            b = np.zeros(nx)
+        else:
+            A = np.eye(nx)
+            B = np.eye(nu, nx)
+            b = np.zeros(nx)
+        As.append(A)
+        Bs.append(B)
+        bs.append(b)
+        for i in range(N):
+            ocp.set_dynamics(i, A, B, b)
+            
+        # Initial state
+        b0 = np.zeros(nx)
+        b0[0] = 1.0
+        ocp.set_initial_state(b0)
+        b0s.append(b0)
+        ocp.save_to_mat(f"python/cmpc/ocp_data{N}_{fan}.mat", "ocp")
+    Q_full = np.array(block_diag(*Qs))
+    R_full = np.array(block_diag(*Rs))
+    S_full = np.array(block_diag(*Ss))
+    q_full = np.hstack(qs)
+    r_full = np.hstack(rs)
+    QN_full = np.array(block_diag(*QNs))
+    qN_full = np.hstack(qNs)
+    A_full = np.array(block_diag(*As))
+    B_full = np.array(block_diag(*Bs))
+    B0_full = np.zeros((fanout * nx, fanout * nu))
+    B0_full[:, :nu] = np.vstack(Bs)
+    b0_full = np.hstack(b0s)
+    b_full = np.hstack(bs)
+    for i in range(N):
+        if i == 0:
+            ocp_full.set_initial_state(b0_full)
+            ocp_full.set_dynamics(i, A_full, B0_full, b_full)
+        else:
+            ocp_full.set_dynamics(i, A_full, B_full, b_full)
+        ocp_full.set_stage_cost(i, Q_full, R_full, S_full, q_full, r_full)
+    ocp_full.set_terminal_cost(QN_full, qN_full)
+    ocp_full.save_to_mat(f"python/cmpc/ocp_data{N}_combined.mat", "ocp")
+    print(A_full)
+    print(B_full)
+    print(B0_full)
+    return ocp_full
 if __name__ == "__main__":
     # Create and save example OCP
-    N=1024
-    ocp = create_cont_double_integrator(N)
-    ocp.save_to_mat(f"python/cmpc/ocp_data{N}.mat", "ocp")
+    N=30
+    ocp = create_cont_double_integrator_combined(N)
+    # ocp.save_to_mat(f"python/cmpc/ocp_data{N}.mat", "ocp")
     
     print("\nExample usage:")
     print("=" * 60)

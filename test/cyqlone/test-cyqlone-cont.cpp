@@ -1,5 +1,6 @@
 #include <batmat/linalg/gemm.hpp>
 #include <batmat/linalg/potrf.hpp>
+#include <batmat/linalg/reduce.hpp>
 #include <batmat/linalg/triangular.hpp>
 #include <batmat/lut.hpp>
 #include <gtest/gtest.h>
@@ -31,7 +32,16 @@
 using cyqlone::index_t;
 using cyqlone::real_t;
 
-index_t cyq_get_num_proc();
+index_t cyq_get_num_proc() {
+    int p = 8;
+#if BATMAT_WITH_OPENMP
+    p = omp_get_num_procs();
+#endif
+    if (const char *env_p = std::getenv("CI_JOB_CPU_LIMIT"))
+        p = std::min(p, std::atoi(env_p));
+    // floor to the nearest power of two
+    return static_cast<index_t>(std::bit_floor(static_cast<unsigned>(std::max(1, p))));
+}
 
 // Tests the factorization, factorization updates, and solution of the Cyqlone linear solver.
 TEST(CyqloneFanFactorTest, factor) {
@@ -43,7 +53,10 @@ TEST(CyqloneFanFactorTest, factor) {
     const index_t p  = cyq_get_num_proc();
     using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
     using SolverLast = cyqlone::TridiagonalSolver<real_t>;
-    auto matfp       = cyqlone::open_mat("python/cmpc/ocp_data1024.mat");
+    int N=30;
+    char filename[256];
+    sprintf(filename, "python/cmpc/ocp_data%d_0.mat", N);
+    auto matfp       = cyqlone::open_mat(filename);
     cyqlone::LinearOCPStorage ocp;
     cyqlone::read_from_mat(matfp.get(), "ocp", ocp);
     auto dim   = ocp.dim;
@@ -59,6 +72,8 @@ TEST(CyqloneFanFactorTest, factor) {
     // B(0)ᵀ for each branch
     // TODO: initialize
     SolverLast::matrix Bs{{.depth = fanout, .rows = nu, .cols = nx}};
+    SolverLast::matrix uxs{{.depth = fanout, .rows = nux, .cols = 1}, uninitialized};
+    SolverLast::matrix λs{{.depth = fanout, .rows = nx, .cols = 1}, uninitialized};
     // B(0)ᵀ L(0)⁻ᵀ for each branch
     SolverLast::matrix LBs{{.depth = fanout, .rows = nu, .cols = nx}, uninitialized};
     // Schur complement contributions B(0)ᵀ L(0)⁻ᵀ L(0)⁻¹ B(0) for each branch,
@@ -80,11 +95,19 @@ TEST(CyqloneFanFactorTest, factor) {
     cyqlones.reserve(fanout);
     last_solvers.reserve(fanout);
     index_t p_fan = p / fanout;
-    BATMAT_OMP_IF(omp_set_max_active_levels(2));
-    BATMAT_OMP(parallel for num_threads(fanout))
+
     for (index_t i = 0; i < fanout; ++i) {
-        auto cocp = cyqlone::CyqloneStorage<>::build(ocp);
+        char filename[256];
+        sprintf(filename, "python/cmpc/ocp_data%d_%d.mat", N, i);
+        auto matfp       = cyqlone::open_mat(filename);
+        cyqlone::LinearOCPStorage ocp;
+        cyqlone::read_from_mat(matfp.get(), "ocp", ocp);
+        // printf("%d\n", );
+        std::cout << "||b||_2 = " << bla::norm_2(ocp.b()) << ":\n";
+
+        auto cocp = cyqlone::CyqloneStorage<real_t>::build(ocp);
         // Introduce an unused variable u(0) in each Cyqlone block
+        std::cout << "||F||_2 = " << bla::norm_2(cocp.data_F) << "\n";
         cocp.data_F(0).left_cols(nu).set_constant(0);    // B(0) = 0
         cocp.data_H(0).top_left(nu, nu).set_constant(0); // R(0) = I
         cocp.data_H(0).top_left(nu, nu).set_diagonal(1);
@@ -106,6 +129,7 @@ TEST(CyqloneFanFactorTest, factor) {
         // Solver for the final block-tridiagonal system.
         last_solvers.emplace_back(SolverLast{.block_size = solver.nx, .num_blocks = solver.v});
     }
+    BATMAT_OMP_IF(omp_set_max_active_levels(2));
     BATMAT_OMP(parallel for num_threads(fanout))
     for (index_t i = 0; i < fanout; ++i) {
         auto &solver      = cyqlones[i];
@@ -150,5 +174,47 @@ TEST(CyqloneFanFactorTest, factor) {
         la::pack(λ_last, λ.batch(0));
         // Solve each Cyqlone block with the updated multipliers λ
         contexts[i].run([&](auto ctx) { solver.solve_reverse(ctx, ux, λ); });
+        uxs.batch(i) = ux.batch(0);
+        λs.batch(i) = λ.batch(0);
+        std::cout << bla::norm_2(ux) << "\n";
+        std::cout << bla::norm_2(λ) << "\n";
     }
+
+    // Solve the System as a whole:
+    sprintf(filename, "python/cmpc/ocp_data%d_combined.mat", N);
+    auto matfp_full       = cyqlone::open_mat(filename);
+    cyqlone::LinearOCPStorage ocp_full;
+    cyqlone::read_from_mat(matfp_full.get(), "ocp", ocp_full);
+    dim   = ocp_full.dim;
+    nx = dim.nx, nu = dim.nu;
+    const index_t nux_full = dim.nu + dim.nx;
+    auto cocp = cyqlone::CyqloneStorage<real_t>::build(ocp_full);
+    Solver solver = Solver::build(cocp, p);
+    auto tricyqle_params = solver.get_tricyqle_params();
+    tricyqle_params.solve_method = cyqlone::SolveMethod::PCR;
+    tricyqle_params.cr_max_update_fraction_Y0 = 9999;
+    tricyqle_params.pcr_max_update_fraction   = 9999;
+    solver.update_tricyqle_params(tricyqle_params);
+    auto pctx = solver.create_parallel_context();
+        // Spin a bit longer to get more deterministic timings
+    pctx->set_barrier_spin_count(std::numeric_limits<uint32_t>::max());
+    GUANAQO_IF_ITT(pctx->run(
+        [](auto &ctx) { __itt_thread_set_name(std::format("OMP({})", ctx.index).c_str()); }));
+    Solver::matrix b{{.depth = solver.ceil_N(), .rows = dim.nx, .cols = 1}},
+            λ_full{{.depth = solver.ceil_N(), .rows = dim.nx, .cols = 1}},
+            rq{{.depth = solver.ceil_N(), .rows = nux_full, .cols = 1}},
+            ux_full{{.depth = solver.ceil_N(), .rows = nux_full, .cols = 1}},
+            Mᵀλ{{.depth = solver.ceil_N(), .rows = nux_full, .cols = 1}},
+            grad{{.depth = solver.ceil_N(), .rows = nux_full, .cols = 1}},
+            Mxb{{.depth = solver.ceil_N(), .rows = dim.nx, .cols = 1}};
+    pctx->run([&](auto &ctx) { 
+        solver.factor_solve(ctx, 1e100, 0, {}, ux_full, λ_full);
+        solver.solve_reverse(ctx, ux_full, λ_full); 
+    });
+    std::cout << bla::norm_2(ux_full) << "\n";
+    std::cout << bla::norm_2(uxs.batch(0)) << "\n";
+    std::cout << bla::norm_2(uxs.batch(1)) << "\n";
+
+
+
 }
