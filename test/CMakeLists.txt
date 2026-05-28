@@ -12,12 +12,9 @@ endif()
 
 add_executable(test-pcr "test-pcr.cpp")
 target_link_libraries(test-pcr PRIVATE cyqlone::cyqlone cyqlone::warnings)
-add_executable(test-cont "cyqlone/test-cyqlone-cont.cpp")
-target_include_directories(test-cont PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(test-cont PRIVATE cyqlone::cyqlone cyqlone::warnings GTest::gtest_main)
 add_executable(tests
     "cyqlone/test-cyqlone.cpp"
-    # "cyqlone/test-cyqlone-cont.cpp"
+    "cyqlone/test-cyqlone-cont.cpp"
     "cyqlone/test-tricyqle.cpp"
     "test-barrier.cpp"
     "test-linalg.cpp"
