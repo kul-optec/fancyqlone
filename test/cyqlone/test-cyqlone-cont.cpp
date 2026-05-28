@@ -187,6 +187,9 @@ TEST(CyqloneFanFactorTest, factor) {
         GUANAQO_IF_ITT(pctx->run([i](auto &ctx) {
             __itt_thread_set_name(std::format("OMP({};{})", ctx.index, i).c_str());
         }));
+#if GUANAQO_WITH_TRACING
+        pctx->run([i](auto &ctx) { GUANAQO_TRACE("thread_id", ctx.index + 100 * i); });
+#endif
 
         SolverLast::matrix λ_last{{.depth = solver.v, .rows = solver.nx, .cols = 1}};
         Solver::matrix b{{.depth = solver.ceil_N(), .rows = dim.nx, .cols = 1}},
@@ -203,6 +206,9 @@ TEST(CyqloneFanFactorTest, factor) {
         // Right-hand side of the KKT system is the negative gradient
         la::negate(rq, ux);
         la::copy(b, λ);
+
+        fan_barrier.arrive_and_wait(static_cast<uint32_t>(i)); // synchronize for tracing
+
         // Factor and forward solve most of each Cyqlone block
         pctx->run([&](auto ctx) { solver.factor_solve(ctx, 1e100, 0, {}, ux, λ); });
         // Factor the final block-tridiagonal Schur complement of each Cyqlone block
@@ -238,15 +244,24 @@ TEST(CyqloneFanFactorTest, factor) {
         // Solve each Cyqlone block with the updated multipliers λ
         pctx->run([&](auto ctx) { solver.solve_reverse(ctx, ux, λ); });
     };
+    auto do_solve_fan = [&] {
 #if BATMAT_WITH_OMP
-    omp_set_max_active_levels(2);
-    BATMAT_OMP(parallel for num_threads(fanout))
-    for (index_t i = 0; i < fanout; ++i)
-        solve_fan(i, fanout);
+        omp_set_max_active_levels(2);
+        BATMAT_OMP(parallel for num_threads(fanout))
+        for (index_t i = 0; i < fanout; ++i)
+            solve_fan(i, fanout);
 #else
-    batmat::thread_pool fan_pool(fanout);
-    fan_pool.sync_run_n(fanout, solve_fan);
+        batmat::thread_pool fan_pool(fanout);
+        fan_pool.sync_run_n(fanout, solve_fan);
 #endif
+    };
+
+    for (index_t i = 0; i < 50; ++i) // Warmup
+        do_solve_fan();
+#if GUANAQO_WITH_TRACING
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+#endif
+    do_solve_fan();
 
     // Solve the combined problem with a single Cyqlone solve, as a reference solution
     auto combined_ocp    = combine_branches(ocps);
@@ -281,4 +296,26 @@ TEST(CyqloneFanFactorTest, factor) {
     auto λ0_err = λ0_sol;
     la::sub(λ0_err(0), combined_λ0);
     EXPECT_LE(la::norm_inf(λ0_err), 5000 * ε);
+
+#if GUANAQO_WITH_TRACING
+    {
+        namespace fs     = std::filesystem;
+        std::string name = std::format("fan.csv");
+        fs::path out_dir{"traces"};
+        out_dir /= *cyqlone_commit_hash ? cyqlone_commit_hash : "unknown";
+        fs::create_directories(out_dir);
+        std::ofstream csv{out_dir / name};
+        guanaqo::TraceLogger::write_column_headings(csv) << '\n';
+        std::vector<std::span<const guanaqo::TraceLogger::Log>> all_logs;
+        guanaqo::for_each_trace_logger([&](auto &logger) {
+            std::span logs = logger.get_logs();
+            all_logs.push_back(logs);
+            for (const auto &log : logs)
+                csv << log << '\n';
+        });
+        std::cout << fs::absolute(out_dir / name) << std::endl;
+        write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
+        std::cout << fs::absolute((out_dir / name).replace_extension("json.gz")) << std::endl;
+    }
+#endif
 }
