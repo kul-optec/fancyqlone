@@ -110,7 +110,8 @@ TEST(CyqloneFanFactorTest, factor) {
         std::cout << "||F||_2 = " << bla::norm_2(cocp.data_F) << "\n";
         cocp.data_F(0).left_cols(nu).set_constant(0);    // B(0) = 0
         cocp.data_H(0).top_left(nu, nu).set_constant(0); // R(0) = I
-        cocp.data_H(0).top_left(nu, nu).set_diagonal(1);
+        cocp.data_H(0).top_left(nu, nu).set_diagonal(1); //
+        cocp.data_rq(0).top_rows(nu).set_constant(0);    // r(0) = 0
         auto &solver                 = cyqlones.emplace_back(Solver::build(cocp, p_fan));
         auto tricyqle_params         = solver.get_tricyqle_params();
         tricyqle_params.solve_method = cyqlone::SolveMethod::None;
@@ -142,6 +143,13 @@ TEST(CyqloneFanFactorTest, factor) {
             Mᵀλ{{.depth = solver.ceil_N(), .rows = nux, .cols = 1}},
             grad{{.depth = solver.ceil_N(), .rows = nux, .cols = 1}},
             Mxb{{.depth = solver.ceil_N(), .rows = dim.nx, .cols = 1}};
+        // Cost gradient r(j) and q(j)
+        solver.initialize_gradient(cocp, rq);
+        // Right-hand side of the constraints b(j)
+        solver.initialize_rhs(cocp, b);
+        // Right-hand side of the KKT system is the negative gradient
+        la::negate(rq, ux);
+        la::copy(b, λ);
         // Factor and forward solve most of each Cyqlone block
         contexts[i].run([&](auto ctx) { solver.factor_solve(ctx, 1e100, 0, {}, ux, λ); });
         // Factor the final block-tridiagonal Schur complement of each Cyqlone block
