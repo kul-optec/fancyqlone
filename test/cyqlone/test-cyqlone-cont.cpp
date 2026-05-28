@@ -130,7 +130,7 @@ TEST(CyqloneFanFactorTest, factor) {
     index_t fanout    = 2;
     std::mt19937 rng(102030405);
     std::uniform_real_distribution<real_t> uni(-1, 1);
-    std::vector<LinearOCPStorage> ocps;
+    std::vector<LinearOCPStorage> ocps(fanout);
     // B(0)ᵀ for each branch
     SolverLast::matrix Bs{{.depth = fanout, .rows = nu, .cols = nx}};
     // B(0)ᵀ L(0)⁻ᵀ for each branch
@@ -156,11 +156,9 @@ TEST(CyqloneFanFactorTest, factor) {
     BATMAT_OMP_IF(omp_set_max_active_levels(2));
     BATMAT_OMP(parallel for num_threads(fanout))
     for (index_t i = 0; i < fanout; ++i) {
-        auto ocp = generate_random_ocp(dim, static_cast<uint32_t>(i));
-        ocp.b(0) = x0(0); // same initial state for each branch
-        BATMAT_OMP(critical)
-        ocps.push_back(ocp); // Copy, but I don't really care about performance here
-        auto cocp = cyqlone::CyqloneStorage<>::build(ocp);
+        auto &ocp = ocps[i] = generate_random_ocp(dim, static_cast<uint32_t>(i));
+        ocp.b(0)            = x0(0); // same initial state for each branch
+        auto cocp           = cyqlone::CyqloneStorage<>::build(ocp);
         // Store B(0)ᵀ for each branch; R(0) and -r(0) for the first branch
         la::copy(cocp.data_F(0).left_cols(nu).transposed(), Bs(i));
         if (i == 0) {
