@@ -16,7 +16,7 @@
 #include <guanaqo/trace.hpp>
 #include <cyqlone-version.h>
 
-#if !BATMAT_WITH_OMP
+#if !BATMAT_WITH_OPENMP
 #include <batmat/thread-pool.hpp>
 #endif
 #if GUANAQO_WITH_TRACING
@@ -253,7 +253,7 @@ TEST(CyqloneFanFactorTest, factor) {
         pctx->run([&](auto ctx) { solver.solve_reverse(ctx, ux, λ); });
     };
     auto do_solve_fan = [&] {
-#if BATMAT_WITH_OMP
+#if BATMAT_WITH_OPENMP
         omp_set_max_active_levels(2);
         BATMAT_OMP(parallel for num_threads(fanout))
         for (index_t i = 0; i < fanout; ++i)
