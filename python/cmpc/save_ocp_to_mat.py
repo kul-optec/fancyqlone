@@ -374,8 +374,8 @@ def create_cont_double_integrator_combined(N=100):
     for fan in range(fanout):
         ocp=OCPData(N, nx, nu, ny, ny_N)
         # Set cost matrices (LQR-like)
-        Q = np.eye(nx) * (fanout+1)**2
-        R = np.eye(nu) * 0.1 / ((fanout+1)**2)
+        Q = np.eye(nx) * (fan+1)**2
+        R = np.eye(nu) * 0.1 / ((fan+1)**2)
         S = np.zeros((nu, nx))
         q = np.zeros(nx)
         r = np.zeros(nu)
@@ -389,7 +389,7 @@ def create_cont_double_integrator_combined(N=100):
             ocp.set_stage_cost(i, Q, R, S, q, r)
        
         # Terminal cost
-        Q_N = 10 * np.eye(nx) * (fanout+1)**2
+        Q_N = 10 * np.eye(nx) * (fan+1)**2
         q_N = np.zeros(nx)
         QNs.append(Q_N)
         qNs.append(q_N)
@@ -416,6 +416,7 @@ def create_cont_double_integrator_combined(N=100):
         b0[0] = 1.0
         ocp.set_initial_state(b0)
         b0s.append(b0)
+        print(f"Fanout {fan}: H=\n{ocp.H[:,:,0]}")
         ocp.save_to_mat(f"python/cmpc/ocp_data{N}_{fan}.mat", "ocp")
     Q_full = np.array(block_diag(*Qs))
     R_full = np.array(block_diag(*Rs))
