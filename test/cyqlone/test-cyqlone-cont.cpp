@@ -15,12 +15,15 @@
 #include <guanaqo/print.hpp>
 #include <guanaqo/trace.hpp>
 #include <cyqlone-version.h>
-#include <algorithm>
 
+#if !BATMAT_WITH_OMP
+#include <batmat/thread-pool.hpp>
+#endif
 #if GUANAQO_WITH_TRACING
 #include <filesystem>
 #include <fstream>
 #endif
+#include <algorithm>
 #include <iostream>
 #include <limits>
 
@@ -152,10 +155,8 @@ TEST(CyqloneFanFactorTest, factor) {
     batmat::matrix::Matrix<real_t, index_t> u0_sol{{.rows = nu, .cols = 1}};
     batmat::matrix::Matrix<real_t, index_t> λ0_sol{{.rows = fanout * nx, .cols = 1}};
 
-    index_t p_fan = p / fanout;
-    BATMAT_OMP_IF(omp_set_max_active_levels(2));
-    BATMAT_OMP(parallel for num_threads(fanout))
-    for (index_t i = 0; i < fanout; ++i) {
+    const index_t p_fan = std::max<index_t>(p / fanout, 1);
+    auto solve_fan      = [&](index_t i, index_t) {
         auto &ocp = ocps[i] = generate_random_ocp(dim, static_cast<uint32_t>(i));
         ocp.b(0)            = x0(0); // same initial state for each branch
         auto cocp           = cyqlone::CyqloneStorage<>::build(ocp);
@@ -236,7 +237,16 @@ TEST(CyqloneFanFactorTest, factor) {
         λ0_sol(0).middle_rows(i * nx, nx) = λ_last(0);
         // Solve each Cyqlone block with the updated multipliers λ
         pctx->run([&](auto ctx) { solver.solve_reverse(ctx, ux, λ); });
-    }
+    };
+#if BATMAT_WITH_OMP
+    omp_set_max_active_levels(2);
+    BATMAT_OMP(parallel for num_threads(fanout))
+    for (index_t i = 0; i < fanout; ++i)
+        solve_fan(i, fanout);
+#else
+    batmat::thread_pool fan_pool(fanout);
+    fan_pool.sync_run_n(fanout, solve_fan);
+#endif
 
     // Solve the combined problem with a single Cyqlone solve, as a reference solution
     auto combined_ocp    = combine_branches(ocps);
