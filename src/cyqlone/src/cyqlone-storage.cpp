@@ -164,12 +164,50 @@ CyqloneStorage<T> CyqloneStorage<T>::build(const LinearOCPStorage &ocp, index_t 
     res.update_impl(ocp);
     return res;
 }
+namespace la = cyqlone::linalg;
+
+template <class T>
+void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
+    num_branches = focp.num_branches();
+    // Check that all OCPs in the fan have the same dimensions
+    for (index_t i = 0; i < num_branches; ++i) {
+        if (focp.ocps[i].dim.N_horiz != focp.ocps[0].dim.N_horiz) {
+            throw std::invalid_argument("All OCPs in the fan must have the same horizon length");
+        }
+        if (focp.ocps[i].dim.nx != focp.ocps[0].dim.nx) {
+            throw std::invalid_argument("All OCPs in the fan must have the same state dimension");
+        }
+        if (focp.ocps[i].dim.nu != focp.ocps[0].dim.nu) {
+            throw std::invalid_argument("All OCPs in the fan must have the same input dimension");
+        }
+    }
+    N_horiz = focp.ocps[0].dim.N_horiz;
+    nx      = focp.ocps[0].dim.nx;
+    nu      = focp.ocps[0].dim.nu;
+    branches.reserve(num_branches);
+    la::copy(focp.R0, R0(0));
+    la::copy(focp.r0, r0(0));
+    for (index_t i = 0; i < num_branches; ++i) {
+        auto &cocp = branches[i] = CyqloneStorage<T>::build(focp.ocps[i]);
+        la::copy(cocp.data_F(0).left_cols(nu).transposed(), Bs(i));
+        // Introduce an unused variable u(0) in each Cyqlone block
+        cocp.data_F(0).left_cols(nu).set_constant(0);    // B(0) = 0
+        cocp.data_H(0).top_left(nu, nu).set_constant(0); // R(0) = I
+        cocp.data_H(0).top_left(nu, nu).set_diagonal(1); //
+        cocp.data_rq(0).top_rows(nu).set_constant(0);    // r(0) = 0
+    }
+}
+template <class T>
+FanCyqloneStorage<T> FanCyqloneStorage<T>::build(const FanOCPStorage &focp, index_t ny_0) {
+
+};
 
 #if 0 // TODO: make LinearOCPStorage templated
 #define CYQLONE_INSTANTIATE_CYQLONE_STORAGE(T) template struct CyqloneStorage<T>;
 BATMAT_FOREACH_DTYPE(CYQLONE_INSTANTIATE_CYQLONE_STORAGE)
 #else
 template struct CyqloneStorage<real_t>;
+template struct FanCyqloneStorage<real_t>;
 #endif
 
 } // namespace cyqlone

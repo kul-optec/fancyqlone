@@ -447,4 +447,12 @@ struct LinearOCPStorage {
     [[nodiscard]] KKTError compute_kkt_error(const Solution &sol) const;
 };
 
+struct FanOCPStorage {
+    std::vector<LinearOCPStorage> ocps;
+    guanaqo::MatrixView<real_t, index_t> x0;
+    guanaqo::MatrixView<real_t, index_t> R0;
+    guanaqo::MatrixView<real_t, index_t> r0;
+
+    [[nodiscard]] index_t num_branches() const { return ocps.size(); };
+};
 } // namespace cyqlone

@@ -5,7 +5,10 @@
 /// @ingroup topic-ocp-formulations
 
 #include <cyqlone/config.hpp>
+#include <cyqlone/linalg.hpp>
 #include <cyqlone/ocp.hpp>
+
+#include <batmat/linalg/simdify.hpp>
 #include <batmat/matrix/matrix.hpp>
 #include <span>
 #include <vector>
@@ -82,5 +85,28 @@ struct CyqloneStorage {
                                std::span<const value_type> y_compressed,
                                std::span<const value_type> λ_compressed) const;
 };
+template <class T = real_t>
+struct FanCyqloneStorage {
+    using value_type = T;
+    using vl_t       = std::integral_constant<index_t, 1>;
+    using matrix     = batmat::matrix::Matrix<value_type, index_t, vl_t, index_t>;
 
+    // One CyqloneStorage per branch, with the same initial state and introduced unused variable u(0) in each Cyqlone block
+    //B(0) = 0 and R(0) = I r(0) = 0
+    index_t num_branches;
+    index_t N_horiz;
+    index_t nx, nu;
+    std::vector<CyqloneStorage<value_type>> branches;
+
+    // B(0) for each branch
+    matrix Bs;
+    // r(0)
+    batmat::matrix::Matrix<real_t, index_t> r0;
+    // R(0)
+    batmat::matrix::Matrix<real_t, index_t> R0;
+
+    void update_impl(const FanOCPStorage &focp);
+    void update(const FanOCPStorage &focp);
+    static FanCyqloneStorage build(const FanOCPStorage &focp, index_t ny_0 = -1);
+};
 } // namespace cyqlone
