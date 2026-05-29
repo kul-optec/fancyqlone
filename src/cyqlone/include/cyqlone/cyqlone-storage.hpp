@@ -89,24 +89,24 @@ template <class T = real_t>
 struct FanCyqloneStorage {
     using value_type = T;
     using vl_t       = std::integral_constant<index_t, 1>;
-    using matrix     = batmat::matrix::Matrix<value_type, index_t, vl_t, index_t>;
+    using matrix     = batmat::matrix::Matrix<value_type, index_t>;
 
-    // One CyqloneStorage per branch, with the same initial state and introduced unused variable u(0) in each Cyqlone block
+    // One CyqloneStorage per branch, and introduce unused variable u(0) in each Cyqlone block
     //B(0) = 0 and R(0) = I r(0) = 0
     index_t num_branches;
-    index_t N_horiz;
-    index_t nx, nu;
+    index_t nu;
     std::vector<CyqloneStorage<value_type>> branches;
 
     // B(0) for each branch
-    matrix Bs;
+    std::vector<matrix> Bs;
     // r(0)
-    batmat::matrix::Matrix<real_t, index_t> r0;
+    matrix r0;
     // R(0)
-    batmat::matrix::Matrix<real_t, index_t> R0;
+    matrix R0;
 
     void update_impl(const FanOCPStorage &focp);
     void update(const FanOCPStorage &focp);
-    static FanCyqloneStorage build(const FanOCPStorage &focp, index_t ny_0 = -1);
+    // u(0) is dummy so no constraints on it
+    static FanCyqloneStorage build(const FanOCPStorage &focp, index_t ny_0 = 0);
 };
 } // namespace cyqlone

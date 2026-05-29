@@ -449,7 +449,7 @@ struct LinearOCPStorage {
 
 struct FanOCPStorage {
     std::vector<LinearOCPStorage> ocps;
-    guanaqo::MatrixView<real_t, index_t> x0;
+    // guanaqo::MatrixView<real_t, index_t> x0;
     guanaqo::MatrixView<real_t, index_t> R0;
     guanaqo::MatrixView<real_t, index_t> r0;
 

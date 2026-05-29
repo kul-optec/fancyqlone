@@ -171,25 +171,22 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
     num_branches = focp.num_branches();
     // Check that all OCPs in the fan have the same dimensions
     for (index_t i = 0; i < num_branches; ++i) {
-        if (focp.ocps[i].dim.N_horiz != focp.ocps[0].dim.N_horiz) {
-            throw std::invalid_argument("All OCPs in the fan must have the same horizon length");
-        }
-        if (focp.ocps[i].dim.nx != focp.ocps[0].dim.nx) {
-            throw std::invalid_argument("All OCPs in the fan must have the same state dimension");
-        }
         if (focp.ocps[i].dim.nu != focp.ocps[0].dim.nu) {
             throw std::invalid_argument("All OCPs in the fan must have the same input dimension");
         }
     }
-    N_horiz = focp.ocps[0].dim.N_horiz;
-    nx      = focp.ocps[0].dim.nx;
-    nu      = focp.ocps[0].dim.nu;
+
+    nu = focp.ocps[0].dim.nu;
     branches.reserve(num_branches);
+    Bs.reserve(num_branches);
+    R0 = matrix{{.depth = 1, .rows = nu, .cols = nu}};
+    r0 = matrix{{.depth = 1, .rows = nu, .cols = 1}};
     la::copy(focp.R0, R0(0));
     la::copy(focp.r0, r0(0));
     for (index_t i = 0; i < num_branches; ++i) {
         auto &cocp = branches[i] = CyqloneStorage<T>::build(focp.ocps[i]);
-        la::copy(cocp.data_F(0).left_cols(nu).transposed(), Bs(i));
+        Bs[i]                    = matrix{{.depth = 1, .rows = nu, .cols = nu}};
+        la::copy(cocp.data_F(0).left_cols(nu).transposed(), Bs[i](0));
         // Introduce an unused variable u(0) in each Cyqlone block
         cocp.data_F(0).left_cols(nu).set_constant(0);    // B(0) = 0
         cocp.data_H(0).top_left(nu, nu).set_constant(0); // R(0) = I
