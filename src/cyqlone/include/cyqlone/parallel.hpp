@@ -213,7 +213,13 @@ struct Context {
         return shared.barrier.shuffle_rotl_start(static_cast<uint32_t>(index), std::move(x), n);
     }
 };
+struct FanContext {
+    Context<SharedContext> branch_ctx;
+    Context<SharedContext> total_ctx;
+    [[nodiscard]] bool is_master() const { return total_ctx.is_master() && branch_ctx.is_master(); }
 
+    
+};
 template <class F>
 void SharedContext::run(F &&f) {
 #if !BATMAT_WITH_OPENMP
