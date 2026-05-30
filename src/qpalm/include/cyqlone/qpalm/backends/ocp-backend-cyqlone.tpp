@@ -122,7 +122,10 @@ struct CyQPALMBackend {
         if (settings.detailed_timings)
             ocp_timings = std::make_unique<Timings>();
     }
-
+    template <class F>
+    void run(F &&f)  {
+        parallel_ctx->run(std::forward<F>(f));
+    }
     void update_data(const CyqloneStorage<> &ocp) {
         this->ocp.update_data(ocp);
         this->ocp.initialize_rhs(ocp, b_eq_strided);

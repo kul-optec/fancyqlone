@@ -105,9 +105,9 @@ SolverStatus Solver<Backend>::do_solve() {
     impl->ensure_storage(*backend);
     SolverStatus status;
 #if GUANAQO_WITH_TRACING
-    backend->parallel_ctx->run([](auto &ctx) { GUANAQO_TRACE("thread_id", ctx.index); });
+    backend->run([](auto &ctx) { GUANAQO_TRACE("thread_id", ctx.index); });
 #endif
-    backend->parallel_ctx->run([&](backend_type::Context &ctx) {
+    backend->run([&](backend_type::Context &ctx) {
         SolverStats stats;
         auto status_local = impl->do_main_loop(ctx, *backend, settings, stop_signal, stats);
         if (ctx.is_master()) {
