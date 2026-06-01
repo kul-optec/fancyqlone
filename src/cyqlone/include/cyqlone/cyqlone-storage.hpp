@@ -95,6 +95,7 @@ struct FanCyqloneStorage {
     //B(0) = 0 and R(0) = I r(0) = 0
     index_t num_branches;
     index_t nu;
+    index_t ny_0; ///< Number of general constraints at stage 0, D(0) u(0).
     std::vector<CyqloneStorage<value_type>> branches;
 
     // B(0) for each branch

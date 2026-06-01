@@ -197,6 +197,10 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
 template <class T>
 FanCyqloneStorage<T> FanCyqloneStorage<T>::build(const FanOCPStorage &focp, index_t ny_0) {
 
+    FanCyqloneStorage res;
+    res.update_impl(focp);
+    res.ny_0 = ny_0;
+    return res;
 };
 
 #if 0 // TODO: make LinearOCPStorage templated

@@ -3,10 +3,10 @@
 /// @file
 /// The main header for the FanCyqlone linear solvers.
 /// @ingroup topic-lin-solvers
-
 #include <cyqlone/cyqlone.hpp>
 #include <cyqlone/tridiagonal-solver.hpp>
 #include <batmat/matrix/storage.hpp>
+#include <vector>
 namespace CYQLONE_NS(cyqlone) {
 
 using batmat::matrix::StorageOrder;
@@ -27,43 +27,41 @@ struct SolverStorage {
     using SharedContext = tricyqle_t::SharedContext;
 
     CyqloneSolver<VL, value_type, DefaultOrder, Ctx> cyqlone_solver;
-    SolverLast tridiagonal_solvers;
+    SolverLast tridiagonal_solver;
     matrix B0;
     matrix LB;
-    std::unique_ptr<SharedContext> shared_ctx;
+    std::unique_ptr<SharedContext> shared_ctx = cyqlone_solver.create_parallel_context();
 };
 template <index_t VL = 4, class T = real_t, StorageOrder DefaultOrder = StorageOrder::ColMajor,
-          class Ctx = parallel::Context<>>
+          class Ctx = parallel::FanContext>
 struct FanCyqloneSolver {
-    using value_type = T;
-    using tricyqle_t = TricyqleSolver<VL, T, DefaultOrder, Ctx>;
-    using Context    = Ctx;
+    using value_type    = T;
+    using tricyqle_t    = TricyqleSolver<VL, T, DefaultOrder, Ctx>;
+    using Context       = Ctx;
     using SolverLast    = TridiagonalSolver<value_type>;
     using SharedContext = tricyqle_t::SharedContext;
-
     /// @}
     /// @name  Cyqlone and tridiag solver + workspaces
     /// @{
     index_t num_branches;
+    // sizes of the problems
+    index_t nu;
+    index_t ny_0; ///< Number of general constraints at stage 0, D(0) u(0).
 
     // total shared context
     std::unique_ptr<SharedContext> create_parallel_context() const {
         return std::make_unique<SharedContext>(num_branches);
     }
-    std::vector<SolverStorage<VL, value_type, DefaultOrder, Ctx>> solver_storage;
+    std::vector<SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>>> solver_storages;
 
-    // sizes of the problems
-    index_t nu;
-    index_t total_nx;
-    index_t ny_0; ///< Number of general constraints at stage 0, D(0) u(0).
     /// Get the total number of primal variables in the OCP.
     /// @note The actual number of variable stored in Cyqlone's internal data structures may be
     ///       larger.
     [[nodiscard]] index_t num_variables() const {
         index_t num_var = 0;
-        for (const auto &s : solver_storage) {
-            num_var += nu * (s.solver_storage.N_horiz - 1) +
-                       s.cyqlone_solver.nx * s.solver_storage.N_horiz;
+        for (const auto &s : solver_storages) {
+            num_var += nu * (s.solver_storages.N_horiz - 1) +
+                       s.cyqlone_solver.nx * s.solver_storages.N_horiz;
         }
         return num_var + nu; // for u(0)
     }
@@ -72,8 +70,8 @@ struct FanCyqloneSolver {
     ///       larger.
     [[nodiscard]] index_t num_dynamics_constraints() const {
         index_t num_dyn_con = 0;
-        for (const auto &s : solver_storage) {
-            num_dyn_con += s.cyqlone_solver.nx * s.solver_storage.N_horiz;
+        for (const auto &s : solver_storages) {
+            num_dyn_con += s.cyqlone_solver.nx * s.solver_storages.N_horiz;
         }
         return num_dyn_con;
     }
@@ -82,11 +80,18 @@ struct FanCyqloneSolver {
     ///       larger.
     [[nodiscard]] index_t num_general_constraints() const {
         index_t num_gen_con = 0;
-        for (const auto &s : solver_storage) {
+        for (const auto &s : solver_storages) {
             num_gen_con +=
-                s.cyqlone_solver.ny * (s.solver_storage.N_horiz - 1) + s.cyqlone_solver.ny_N;
+                s.cyqlone_solver.ny * (s.solver_storages.N_horiz - 1) + s.cyqlone_solver.ny_N;
         }
         return num_gen_con + ny_0; // for D(0) u(0)
+    }
+    [[nodiscard]] index_t nx() const {
+        index_t nx_tot = 0;
+        for (const auto &s : solver_storages) {
+            nx_tot += s.cyqlone_solver.nx;
+        }
+        return nx_tot; // for D(0) u(0)
     }
 
     // Workspaces for contribution u(0)
@@ -95,7 +100,7 @@ struct FanCyqloneSolver {
     SolverLast::matrix rs{{.depth = num_branches, .rows = nu, .cols = 1},
                           batmat::matrix::uninitialized};
     SolverLast::matrix u0_sol{{.rows = nu, .cols = 1}};
-    SolverLast::matrix λ0_sol{{.rows = total_nx, .cols = 1}};
+    SolverLast::matrix λ0_sol{{.rows = nx(), .cols = 1}};
 
     /// Number of processors/threads.
     const index_t p_fan;
@@ -112,8 +117,6 @@ struct FanCyqloneSolver {
     /// Column-major storage order for column vectors and update matrices.
     static constexpr auto column_major = StorageOrder::ColMajor;
 
-
-
     /// Represents a SIMD vector of width @ref v storing values of type @ref value_type.
     using simd = batmat::datapar::deduced_simd<value_type, v>;
     /// Integral constant type for the vector length.
@@ -128,7 +131,8 @@ struct FanCyqloneSolver {
     using view = batmat::matrix::View<const value_type, index_t, vl_t, index_t, index_t, O>;
     /// Non-owning mutable view type for @ref matrix.
     template <StorageOrder O = column_major>
-    using mut_view     = batmat::matrix::View<value_type, index_t, vl_t, index_t, index_t, O>;
+    using mut_view =
+        std::vector<batmat::matrix::View<value_type, index_t, vl_t, index_t, index_t, O>>;
     using layer_stride = batmat::matrix::DefaultStride;
     /// Non-owning immutable view type for a single batch of v matrices.
     template <StorageOrder O = column_major>
@@ -137,14 +141,35 @@ struct FanCyqloneSolver {
     template <StorageOrder O = column_major>
     using mut_batch_view = batmat::matrix::View<value_type, index_t, vl_t, vl_t, layer_stride, O>;
 
+    /// Get the current Cyqlone solver parameters.
+    [[nodiscard]] CyqloneParams<value_type> get_params() const {
+        return solver_storages[0].cyqlone_solver.get_params();
+    }
+    /// Update the Cyqlone solver parameters.
+    void update_params(const CyqloneParams<value_type> &new_params) {
+        for (auto &s : solver_storages) {
+            s.cyqlone_solver.update_params(new_params);
+        }
+    }
 
+    /// Get the current Tricyqle solver parameters.
+    [[nodiscard]] TricyqleParams<value_type> get_tricyqle_params() const {
+        return solver_storages[0].cyqlone_solver.get_tricyqle_params();
+    }
+
+    /// Update the Tricyqle solver parameters.
+    void update_tricyqle_params(const TricyqleParams<value_type> &new_params) {
+        for (auto &s : solver_storages) {
+            s.cyqlone_solver.update_tricyqle_params(new_params);
+        }
+    }
 
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
     /// index, and optionally the corresponding batches of the given arrays.
     /// Iterates backwards in time (decreasing stage index j).
     void foreach_stage(Context &ctx, auto &&func, auto &&...xs) const {
         index_t i = ctx.total_context().index();
-        solver_storage[i].foreach_stage(ctx.branch_context(), func, xs...);
+        solver_storages[i].foreach_stage(ctx.branch_context(), func, xs[i]...);
         /// @todo: Handle u0 separately, since it is shared between branches
     }
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
@@ -152,30 +177,31 @@ struct FanCyqloneSolver {
     /// Iterates forward in time (increasing stage index j).
     void foreach_stage_fwd(Context &ctx, auto &&func, auto &&...xs) const {
         index_t i = ctx.total_context().index();
-        solver_storage[i].foreach_stage_fwd(ctx.branch_context(), func, xs...);
+        solver_storages[i].foreach_stage_fwd(ctx.branch_context(), func, xs[i]...);
         /// @todo: Handle u0 separately, since it is shared between branches
     }
-    static FanCyqloneSolver build(const CyqloneStorage<value_type> &ocp, index_t p,
-                               CyqloneParams<value_type> params = {});
+    static FanCyqloneSolver build(const FanCyqloneStorage<value_type> &ocp, std::vector<index_t> p,
+                                  CyqloneParams<value_type> params = {});
     /// Update the internal data structures to reflect changes in the OCP data (without changing
     /// the problem size).
-    void update_data(const CyqloneStorage<value_type> &ocp);
+    void update_data(const FanCyqloneStorage<value_type> &ocp, const std::vector<index_t> &p);
     /// Initialize the right-hand side vector for the dynamics constraints of the OCP, using the
     /// custom Cyqlone storage format.
-    void initialize_rhs(const CyqloneStorage<value_type> &ocp, mut_view<> rhs) const;
+    void initialize_rhs(const FanCyqloneStorage<value_type> &ocp, mut_view<> rhs) const;
     /// @copydoc initialize_rhs
-    matrix<> initialize_rhs(const CyqloneStorage<value_type> &ocp) const;
+    std::vector<matrix<>> initialize_rhs(const FanCyqloneStorage<value_type> &ocp) const;
     /// Initialize the gradient vector for the OCP cost function, using the custom Cyqlone storage
     /// format.
-    void initialize_gradient(const CyqloneStorage<value_type> &ocp, mut_view<> grad) const;
+    void initialize_gradient(const FanCyqloneStorage<value_type> &ocp, mut_view<> grad) const;
     /// @copydoc initialize_gradient
-    matrix<> initialize_gradient(const CyqloneStorage<value_type> &ocp) const;
+    std::vector<matrix<>> initialize_gradient(const FanCyqloneStorage<value_type> &ocp) const;
     /// Initialize the lower and upper bounds for the general constraints of the OCP, using the
     /// custom Cyqlone storage format.
-    void initialize_bounds(const CyqloneStorage<value_type> &ocp, mut_view<> b_min,
+    void initialize_bounds(const FanCyqloneStorage<value_type> &ocp, mut_view<> b_min,
                            mut_view<> b_max) const;
     /// @copydoc initialize_bounds
-    std::pair<matrix<>, matrix<>> initialize_bounds(const CyqloneStorage<value_type> &ocp) const;
+    std::vector<std::pair<matrix<>, matrix<>>>
+    initialize_bounds(const FanCyqloneStorage<value_type> &ocp) const;
 
     /// @todo check and document behavior when `N_horiz != ceil_N()`.
     void pack_variables(std::span<const value_type> ux_lin, mut_view<> ux) const;
@@ -347,7 +373,7 @@ struct FanCyqloneSolver {
     /// @name Build sparse representations for debugging and testing
     /// @{
 
-    [[nodiscard]] SparseMatrix build_sparse(const CyqloneStorage<value_type> &ocp,
+    [[nodiscard]] SparseMatrix build_sparse(const FanCyqloneStorage<value_type> &ocp,
                                             std::span<const value_type> Σ) const;
     [[nodiscard]] SparseMatrix build_sparse_no_penalty() const;
     [[nodiscard]] std::vector<value_type> build_rhs(view<> rq, view<> b, value_type scale_rq = -1,
@@ -358,6 +384,6 @@ struct FanCyqloneSolver {
     [[nodiscard]] SparseMatrix build_sparse_factor() const;
     [[nodiscard]] SparseMatrix build_sparse_diag() const;
     [[nodiscard]] SparseMatrix build_sparse_reg(real_t γ, real_t ρ_inv_internal,
-                                                real_t ρ_inv_windows) cons
+                                                real_t ρ_inv_windows) const;
 };
 } // namespace CYQLONE_NS(cyqlone)
