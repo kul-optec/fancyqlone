@@ -2,6 +2,7 @@
 
 #include <cyqlone/config.hpp>
 #include <cyqlone/cyqlone.hpp>
+#include <cyqlone/fan-cyqlone.hpp>
 
 #include <cyqlone/cyqlone-params.hpp>
 #include <cyqlone/cyqlone-storage.hpp>
@@ -12,6 +13,7 @@
 #include <limits>
 #include <memory>
 #include <span>
+#include <vector>
 
 namespace cyqlone::qpalm {
 
@@ -59,8 +61,10 @@ using guanaqo::StorageOrder;
 
 template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
 struct CyQPALMBackend;
-template <class>
+
+template <class LinearSolver>
 struct CycloneBackendTraits;
+// Traits for the CyqloneSolver
 template <index_t VL, StorageOrder DefaultOrder>
 struct CycloneBackendTraits<cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>> {
     using OCP_t    = cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>;
@@ -77,7 +81,23 @@ struct CycloneBackendTraits<cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>> {
         storage_t(store_t &&o) : store_t{std::move(o)} {}
     };
 };
+// Traits for FanCyqloneSolver
+template <index_t VL, StorageOrder DefaultOrder>
+struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>> {
+    using OCP_t    = cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>;
+    using simd     = typename OCP_t::simd;
+    using CStorage = FanCyqloneStorage<>;
+    using OCPStorage = FanOCPStorage;
+    using store_t  = std::vector<typename OCP_t::template matrix<>>;
+    template <class Tag>
+    struct storage_t : store_t {
+        friend CyQPALMBackend<VL, DefaultOrder, OCP_t>;
+        storage_t() = default;
 
+      private:
+        storage_t(store_t &&o) : store_t{std::move(o)} {}
+    };
+};
 namespace detail {
 
     
