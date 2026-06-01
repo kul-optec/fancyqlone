@@ -11,11 +11,11 @@ namespace CYQLONE_NS(cyqlone::qpalm) {
     template struct unique_CyQPALMBackend<v, order>;                                               \
                                                                                                    \
     template unique_CyQPALMBackend<v, order> make_cyqpalm_backend<v, order>(                 \
-        const CyqloneStorage<> &ocp, CyqloneData data, const CyQPALMBackendSettings &settings);    \
+        const CyQPALMBackend<v, order>::traits::CStorage &ocp, CyqloneData data, const CyQPALMBackendSettings &settings);    \
     template void update_cyqpalm_backend<v, order>(CyQPALMBackend<v, order> &,               \
-                                                         const CyqloneStorage<> &ocp);             \
+                                                         const CyQPALMBackend<v, order>::traits::CStorage &ocp);             \
     template void update_cyqpalm_backend<v, order>(CyQPALMBackend<v, order> &,               \
-                                                         const LinearOCPStorage &ocp);
+                                                         const typename CyQPALMBackend<v, order>::traits::OCPStorage &ocp);
 
 BATMAT_FOREACH_VL_DEFAULT(CYQLONE_INSTANTIATE_QPALM_Cyqlone, StorageOrder::ColMajor)
 BATMAT_FOREACH_VL_DEFAULT(CYQLONE_INSTANTIATE_QPALM_Cyqlone, StorageOrder::RowMajor)

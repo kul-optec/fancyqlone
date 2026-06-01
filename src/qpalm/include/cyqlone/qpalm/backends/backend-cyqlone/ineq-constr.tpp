@@ -6,8 +6,8 @@
 
 namespace CYQLONE_NS(cyqlone::qpalm) {
 
-template <index_t VL, StorageOrder DefaultOrder>
-index_t CyQPALMBackend<VL, DefaultOrder>::update_penalty_y(Context &ctx, ineq_constr_vec_t &Σ,
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+index_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::update_penalty_y(Context &ctx, ineq_constr_vec_t &Σ,
                                                            const ineq_constr_vec_t &e,
                                                            const ineq_constr_vec_t &e_old,
                                                            const PenaltySettings &settings) {
@@ -35,8 +35,8 @@ index_t CyQPALMBackend<VL, DefaultOrder>::update_penalty_y(Context &ctx, ineq_co
     return ctx.reduce(num_changed);
 }
 
-template <index_t VL, StorageOrder DefaultOrder>
-void CyQPALMBackend<VL, DefaultOrder>::ineq_constr_resid(Context &ctx, const ineq_constr_vec_t &Ax,
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::ineq_constr_resid(Context &ctx, const ineq_constr_vec_t &Ax,
                                                          ineq_constr_vec_t &e) const {
     GUANAQO_TRACE("ineq_constr_resid", 0);
     auto t                       = get_timed(&Timings::ineq_constr_resid);
@@ -46,8 +46,8 @@ void CyQPALMBackend<VL, DefaultOrder>::ineq_constr_resid(Context &ctx, const ine
     ocp.foreach_stage(ctx, ineq_constr_resid, Ax, b_min_strided, b_max_strided, e);
 }
 
-template <index_t VL, StorageOrder DefaultOrder>
-void CyQPALMBackend<VL, DefaultOrder>::project_multipliers_ineq(Context &ctx,
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::project_multipliers_ineq(Context &ctx,
                                                                 ineq_constr_vec_t &y) const {
     GUANAQO_TRACE("project_multipliers_ineq", 0);
     const auto proj_simd = [](auto yji, auto b_minji, auto b_maxji) {
@@ -62,9 +62,9 @@ void CyQPALMBackend<VL, DefaultOrder>::project_multipliers_ineq(Context &ctx,
     ocp.foreach_stage(ctx, proj_batch, y, b_min_strided, b_max_strided);
 }
 
-template <index_t VL, StorageOrder DefaultOrder>
-real_t CyQPALMBackend<VL, DefaultOrder>::ineq_constr_viol(Context &ctx,
-                                                          const ineq_constr_vec_t &Ax) const {
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+real_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::ineq_constr_viol(Context &ctx,
+                                                                          const ineq_constr_vec_t &Ax) const {
     GUANAQO_TRACE("ineq_constr_viol", 0);
     auto t               = get_timed(&Timings::ineq_constr_viol);
     auto nrm_simd        = norms.zero_simd();
@@ -79,12 +79,12 @@ real_t CyQPALMBackend<VL, DefaultOrder>::ineq_constr_viol(Context &ctx,
     return ctx.reduce(norms(nrm_simd), norms).norm_inf();
 }
 
-template <index_t VL, StorageOrder DefaultOrder>
-real_t CyQPALMBackend<VL, DefaultOrder>::ineq_constr_resid_al(Context &ctx,
-                                                              const ineq_constr_vec_t &y,
-                                                              const ineq_constr_vec_t &ŷ,
-                                                              const ineq_constr_vec_t &Σ,
-                                                              ineq_constr_vec_t &e) {
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+real_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::ineq_constr_resid_al(Context &ctx,
+                                                                            const ineq_constr_vec_t &y,
+                                                                            const ineq_constr_vec_t &ŷ,
+                                                                            const ineq_constr_vec_t &Σ,
+                                                                            ineq_constr_vec_t &e) {
     GUANAQO_TRACE("ineq_constr_resid_al", 0);
     auto t                = get_timed(&Timings::ineq_constr_resid_al);
     auto nrm_simd         = norms.zero_simd();
@@ -100,12 +100,12 @@ real_t CyQPALMBackend<VL, DefaultOrder>::ineq_constr_resid_al(Context &ctx,
     return ctx.reduce(norms(nrm_simd), norms).norm_inf();
 }
 
-template <index_t VL, StorageOrder DefaultOrder>
-index_t CyQPALMBackend<VL, DefaultOrder>::calc_ŷ_Aᵀŷ(Context &ctx, const ineq_constr_vec_t &Ax,
-                                                     const ineq_constr_vec_t &Σ,
-                                                     const ineq_constr_vec_t &y,
-                                                     ineq_constr_vec_t &ŷ, var_vec_t &Aᵀŷ,
-                                                     active_set_t &J) {
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+index_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::calc_ŷ_Aᵀŷ(Context &ctx, const ineq_constr_vec_t &Ax,
+                                                                   const ineq_constr_vec_t &Σ,
+                                                                   const ineq_constr_vec_t &y,
+                                                                   ineq_constr_vec_t &ŷ, var_vec_t &Aᵀŷ,
+                                                                   active_set_t &J) {
     index_t count_J   = 0;
     const auto ŷ_simd = [&count_J](auto Σi, auto yi, auto Axi, auto li, auto ui) {
         using batmat::datapar::select;

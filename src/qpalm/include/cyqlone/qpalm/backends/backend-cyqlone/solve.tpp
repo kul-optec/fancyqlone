@@ -12,12 +12,12 @@
 
 namespace CYQLONE_NS(cyqlone::qpalm) {
 
-template <index_t VL, StorageOrder DefaultOrder>
-void CyQPALMBackend<VL, DefaultOrder>::solve(Context &ctx, [[maybe_unused]] const var_vec_t &x,
-                                             const var_vec_t &grad, const var_vec_t &Mᵀλ,
-                                             const var_vec_t &Aᵀŷ, const eq_constr_vec_t &Mxb,
-                                             real_t S, [[maybe_unused]] const ineq_constr_vec_t &Σ,
-                                             const active_set_t &J, //
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(Context &ctx, [[maybe_unused]] const var_vec_t &x,
+                                                            const var_vec_t &grad, const var_vec_t &Mᵀλ,
+                                                            const var_vec_t &Aᵀŷ, const eq_constr_vec_t &Mxb,
+                                                            real_t S, [[maybe_unused]] const ineq_constr_vec_t &Σ,
+                                                            const active_set_t &J, //
                                              var_vec_t &d, var_vec_t &ξ, ineq_constr_vec_t &Ad,
                                              eq_constr_vec_t &Δλ, var_vec_t &MᵀΔλ) {
     const auto rhs = [&](auto, auto, auto di, auto gi, auto Mᵀλi, auto Aᵀŷi, auto Mxbi, auto Δλi) {
@@ -64,12 +64,12 @@ void CyQPALMBackend<VL, DefaultOrder>::solve(Context &ctx, [[maybe_unused]] cons
         print_solve_resid_norms(ctx, x, d, grad, ξ, Mᵀλ, Aᵀŷ, MᵀΔλ, Ad, J);
 }
 
-template <index_t VL, StorageOrder DefaultOrder>
-void CyQPALMBackend<VL, DefaultOrder>::print_solve_rhs_norms(Context &ctx, const var_vec_t &d,
-                                                             const eq_constr_vec_t &Δλ,
-                                                             const var_vec_t &grad,
-                                                             const var_vec_t &Mᵀλ,
-                                                             const var_vec_t &Aᵀŷ) const {
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_rhs_norms(Context &ctx, const var_vec_t &d,
+                                                                          const eq_constr_vec_t &Δλ,
+                                                                          const var_vec_t &grad,
+                                                                          const var_vec_t &Mᵀλ,
+                                                                          const var_vec_t &Aᵀŷ) const {
     int prec                   = settings.print_precision;
     auto grad_norm             = norm_inf_l1_sq(ctx, d);
     auto constr_norm           = norm_inf_l1_sq(ctx, Δλ);
@@ -89,8 +89,8 @@ void CyQPALMBackend<VL, DefaultOrder>::print_solve_rhs_norms(Context &ctx, const
     }
 }
 
-template <index_t VL, StorageOrder DefaultOrder>
-void CyQPALMBackend<VL, DefaultOrder>::print_solve_resid_norms(
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
     Context &ctx, const var_vec_t &x, const var_vec_t &d, const var_vec_t &grad, const var_vec_t &ξ,
     const var_vec_t &Mᵀλ, const var_vec_t &Aᵀŷ, const var_vec_t &MᵀΔλ, const ineq_constr_vec_t &Ad,
     const active_set_t &J) {

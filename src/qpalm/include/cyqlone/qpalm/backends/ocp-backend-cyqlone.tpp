@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cyqlone/config.hpp>
-#include <cyqlone/cyqlone.hpp>
 #include <cyqlone/linalg.hpp>
 #include <cyqlone/neumaier.hpp>
 #include <cyqlone/qpalm/backends/ocp-backend-cyqlone.hpp>
@@ -34,18 +33,20 @@ namespace CYQLONE_NS(cyqlone::qpalm) {
 
 namespace datapar = batmat::datapar;
 
-template <index_t VL, StorageOrder DefaultOrder>
+
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 struct CyQPALMBackend {
-    using OCP_t                 = cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>;
-    using Context               = typename OCP_t::Context;
-    using storage_t             = typename OCP_t::template matrix<>;
-    using simd                  = typename OCP_t::simd;
-    static constexpr auto norms = batmat::linalg::norms<real_t, simd>{};
+    using OCP_t  = LinearSolver;
+    using traits = CycloneBackendTraits<OCP_t>;
+    static constexpr auto norms = batmat::linalg::norms<real_t, typename traits::simd>{};
     // clang-format off
-    struct var_vec_t         : storage_t { friend CyQPALMBackend; var_vec_t() = default;         private: var_vec_t(storage_t &&o)         : storage_t{std::move(o)} {} };
-    struct eq_constr_vec_t   : storage_t { friend CyQPALMBackend; eq_constr_vec_t() = default;   private: eq_constr_vec_t(storage_t &&o)   : storage_t{std::move(o)} {} };
-    struct ineq_constr_vec_t : storage_t { friend CyQPALMBackend; ineq_constr_vec_t() = default; private: ineq_constr_vec_t(storage_t &&o) : storage_t{std::move(o)} {} };
-    struct active_set_t      : storage_t { friend CyQPALMBackend; active_set_t() = default;      private: active_set_t(storage_t &&o)      : storage_t{std::move(o)} {} };
+    using ineq_constr_vec_t = traits::template storage_t<struct ineq>;
+    using eq_constr_vec_t = traits::template storage_t<struct eq>;
+    using var_vec_t = traits::template storage_t<struct var>;
+    using active_set_t = traits::template storage_t<struct active_set>;
+    using Context = typename OCP_t::Context;
+    using simd = typename traits::simd;
+
     // clang-format on
 
     struct Timings {
@@ -94,7 +95,7 @@ struct CyQPALMBackend {
     index_t num_updates      = 0;
     std::unique_ptr<Timings> ocp_timings;
 
-    CyQPALMBackend(const CyqloneStorage<> &ocp, CyqloneData data,
+    CyQPALMBackend(const traits::CStorage &ocp, CyqloneData data,
                    const CyQPALMBackendSettings &settings)
         : ocp{OCP_t::build(ocp, settings.processors)}, settings{settings} {
         this->parallel_ctx->barrier.spin_count = settings.spin_count;
@@ -123,10 +124,10 @@ struct CyQPALMBackend {
             ocp_timings = std::make_unique<Timings>();
     }
     template <class F>
-    void run(F &&f)  {
+    void run(F &&f) {
         parallel_ctx->run(std::forward<F>(f));
     }
-    void update_data(const CyqloneStorage<> &ocp) {
+    void update_data(const traits::CStorage &ocp) {
         this->ocp.update_data(ocp);
         this->ocp.initialize_rhs(ocp, b_eq_strided);
         this->ocp.initialize_gradient(ocp, grad_strided);
@@ -597,26 +598,28 @@ struct CyQPALMBackend {
     }
 };
 
-template <index_t VL, StorageOrder DefaultOrder>
-unique_CyQPALMBackend<VL, DefaultOrder>::~unique_CyQPALMBackend() = default;
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+unique_CyQPALMBackend<VL, DefaultOrder, LinearSolver>::~unique_CyQPALMBackend() = default;
 
-template <index_t VL, StorageOrder DefaultOrder>
-unique_CyQPALMBackend<VL, DefaultOrder>
-make_cyqpalm_backend(const CyqloneStorage<> &ocp, CyqloneData data,
-                     const CyQPALMBackendSettings &settings) {
-    return {std::make_unique<CyQPALMBackend<VL, DefaultOrder>>(ocp, data, settings)};
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+unique_CyQPALMBackend<VL, DefaultOrder, LinearSolver>
+make_cyqpalm_backend(const typename CycloneBackendTraits<LinearSolver>::CStorage &ocp,
+                     CyqloneData data, const CyQPALMBackendSettings &settings) {
+    return {std::make_unique<CyQPALMBackend<VL, DefaultOrder, LinearSolver>>(ocp, data, settings)};
 }
 
-template <index_t VL, StorageOrder DefaultOrder>
-void update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder> &backend,
-                            const CyqloneStorage<real_t> &ocp) {
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+void update_cyqpalm_backend(
+    CyQPALMBackend<VL, DefaultOrder, LinearSolver> &backend,
+    const typename CycloneBackendTraits<LinearSolver>::CStorage &ocp) {
     backend.update_data(ocp);
 }
 
-template <index_t VL, StorageOrder DefaultOrder>
-void update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder> &backend,
-                            const LinearOCPStorage &ocp) {
-    const auto cocp = cyqlone::CyqloneStorage<>::build(ocp, backend.ocp.ny_0);
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+void update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder, LinearSolver> &backend,
+                            const typename CycloneBackendTraits<LinearSolver>::OCPStorage &ocp) {
+    const auto cocp = CycloneBackendTraits<LinearSolver>::CStorage::build(
+        ocp, backend.ocp.ny_0);
     update_cyqpalm_backend(backend, cocp);
 }
 
