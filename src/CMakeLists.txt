@@ -10,6 +10,7 @@ endif()
 add_library(cyqlone
     "cyqlone/src/conversion.cpp"
     "cyqlone/src/cyqlone.cpp"
+    "cyqlone/src/fan-cyqlone.cpp"
     "cyqlone/src/cyqlone-storage.cpp"
     "cyqlone/src/ocp.cpp"
     "cyqlone/src/tracing.cpp"
@@ -25,6 +26,7 @@ target_sources(cyqlone PUBLIC FILE_SET HEADERS
           "cyqlone/include/cyqlone/neumaier.hpp"
           "cyqlone/include/cyqlone/cyqlone.hpp"
           "cyqlone/include/cyqlone/fan-cyqlone.hpp"
+          "cyqlone/include/cyqlone/tridiagonal-solver.hpp"
           "cyqlone/include/cyqlone/implementation/indexing.tpp"
           "cyqlone/include/cyqlone/implementation/update.tpp"
           "cyqlone/include/cyqlone/implementation/factor.tpp"
