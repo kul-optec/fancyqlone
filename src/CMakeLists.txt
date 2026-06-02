@@ -10,7 +10,7 @@ endif()
 add_library(cyqlone
     "cyqlone/src/conversion.cpp"
     "cyqlone/src/cyqlone.cpp"
-    "cyqlone/src/fan-cyqlone.cpp"
+    # "cyqlone/src/fan-cyqlone.cpp"
     "cyqlone/src/cyqlone-storage.cpp"
     "cyqlone/src/ocp.cpp"
     "cyqlone/src/tracing.cpp"

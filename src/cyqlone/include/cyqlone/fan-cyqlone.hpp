@@ -101,6 +101,7 @@ struct FanCyqloneSolver {
                           batmat::matrix::uninitialized};
     SolverLast::matrix u0_sol{{.rows = nu, .cols = 1}};
     SolverLast::matrix λ0_sol{{.rows = nx(), .cols = 1}};
+    SolverLast::matrix y0 = {{.rows = ny_0, .cols = 1}};
 
     /// Number of processors/threads.
     const index_t p_fan;
@@ -200,30 +201,30 @@ struct FanCyqloneSolver {
     void initialize_bounds(const FanCyqloneStorage<value_type> &ocp, mut_view<> b_min,
                            mut_view<> b_max) const;
     /// @copydoc initialize_bounds
-    std::vector<std::pair<matrix<>, matrix<>>>
+    std::pair<std::vector<matrix<>>, std::vector<matrix<>>>
     initialize_bounds(const FanCyqloneStorage<value_type> &ocp) const;
 
     /// @todo check and document behavior when `N_horiz != ceil_N()`.
     void pack_variables(std::span<const value_type> ux_lin, mut_view<> ux) const;
-    matrix<> pack_variables(std::span<const value_type> ux_lin) const;
+    std::vector<matrix<>> pack_variables(std::span<const value_type> ux_lin) const;
     void unpack_variables(view<> ux, std::span<value_type> ux_lin) const;
     std::vector<value_type> unpack_variables(view<> ux) const;
     void pack_dynamics(std::span<const value_type> λ_lin, mut_view<> λ) const;
-    matrix<> pack_dynamics(std::span<const value_type> λ_lin) const;
+    std::vector<matrix<>> pack_dynamics(std::span<const value_type> λ_lin) const;
     void unpack_dynamics(view<> λ, std::span<value_type> λ_lin) const;
     std::vector<value_type> unpack_dynamics(view<> λ) const;
     void pack_constraints(std::span<const value_type> y_lin, mut_view<> y,
                           value_type fill = 0) const;
-    matrix<> pack_constraints(std::span<const value_type> y_lin, value_type fill = 0) const;
+    std::vector<matrix<>> pack_constraints(std::span<const value_type> y_lin, value_type fill = 0) const;
     void unpack_constraints(view<> y, std::span<value_type> y_lin) const;
     std::vector<value_type> unpack_constraints(view<> y) const;
 
     /// Get a zero-initialized matrix for the primal variables u and x.
-    matrix<> initialize_variables() const;
+    std::vector<matrix<>> initialize_variables() const;
     /// Get a zero-initialized matrix for the dynamics constraints (or their multipliers).
-    matrix<> initialize_dynamics_constraints() const;
+    std::vector<matrix<>> initialize_dynamics_constraints() const;
     /// Get a zero-initialized matrix for the general constraints (or their multipliers).
-    matrix<> initialize_general_constraints() const;
+    std::vector<matrix<>> initialize_general_constraints() const;
 
     /// @}
 
