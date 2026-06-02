@@ -453,6 +453,6 @@ struct FanOCPStorage {
     guanaqo::MatrixView<real_t, index_t> R0;
     guanaqo::MatrixView<real_t, index_t> r0;
 
-    [[nodiscard]] index_t num_branches() const { return ocps.size(); };
+    index_t num_branches() const { return static_cast<index_t>(ocps.size()); };
 };
 } // namespace cyqlone

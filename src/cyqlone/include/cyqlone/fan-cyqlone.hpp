@@ -33,7 +33,7 @@ struct SolverStorage {
     std::unique_ptr<SharedContext> shared_ctx = cyqlone_solver.create_parallel_context();
 };
 template <index_t VL = 4, class T = real_t, StorageOrder DefaultOrder = StorageOrder::ColMajor,
-          class Ctx = parallel::FanContext>
+          class Ctx = parallel::Context<>>
 struct FanCyqloneSolver {
     using value_type    = T;
     using tricyqle_t    = TricyqleSolver<VL, T, DefaultOrder, Ctx>;
