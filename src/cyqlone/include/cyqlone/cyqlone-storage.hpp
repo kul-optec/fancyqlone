@@ -85,11 +85,14 @@ struct CyqloneStorage {
                                std::span<const value_type> y_compressed,
                                std::span<const value_type> λ_compressed) const;
 };
+using batmat::matrix::StorageOrder;
+
 template <class T = real_t>
 struct FanCyqloneStorage {
     using value_type = T;
-    using vl_t       = std::integral_constant<index_t, 1>;
-    using matrix     = batmat::matrix::Matrix<value_type, index_t>;
+    using one_t       = std::integral_constant<index_t, 1>;
+
+    using matrix     = batmat::matrix::Matrix<value_type, index_t,one_t,one_t, StorageOrder::ColMajor>;
 
     // One CyqloneStorage per branch, and introduce unused variable u(0) in each Cyqlone block
     //B(0) = 0 and R(0) = I r(0) = 0

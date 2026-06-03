@@ -30,6 +30,7 @@ target_sources(cyqlone PUBLIC FILE_SET HEADERS
           "cyqlone/include/cyqlone/implementation/indexing.tpp"
           "cyqlone/include/cyqlone/implementation/update.tpp"
           "cyqlone/include/cyqlone/implementation/factor.tpp"
+          "cyqlone/include/cyqlone/implementation/fan-factor.tpp"
           "cyqlone/include/cyqlone/implementation/pcr.tpp"
           "cyqlone/include/cyqlone/implementation/cr.tpp"
           "cyqlone/include/cyqlone/implementation/mat-vec.tpp"

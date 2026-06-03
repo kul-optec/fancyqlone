@@ -421,10 +421,10 @@ struct CyQPALMBackend {
         const auto grad_norm_simd = [&](auto grad_fji, auto Mᵀλji, auto Aᵀŷji) {
             nrm_simd = norms(nrm_simd, grad_fji + Mᵀλji + Aᵀŷji);
         };
-        const auto grad_norm_batch = [&](auto, auto, auto grad_fj, auto Mᵀλj, auto Aᵀŷj) {
+        const auto grad_norm_batch = [&]( auto grad_fj, auto Mᵀλj, auto Aᵀŷj) {
             linalg::for_each_elementwise(grad_norm_simd, grad_fj, Mᵀλj, Aᵀŷj);
         };
-        ocp.foreach_stage(ctx, grad_norm_batch, grad_f, Mᵀλ, Aᵀŷ);
+        ocp.foreach_batch(ctx, grad_norm_batch, grad_f, Mᵀλ, Aᵀŷ);
         return ctx.reduce(norms(nrm_simd), norms).norm_inf();
     }
 
@@ -457,14 +457,14 @@ struct CyQPALMBackend {
         BATMAT_ASSERT(J.depth() == J_old.depth());
         BATMAT_ASSERT(J.cols() == 1);
         index_t num_different        = 0;
-        const auto active_set_change = [&](auto, auto, auto Ji, auto J_oldi) {
+        const auto active_set_change = [&](auto Ji, auto J_oldi) {
             num_different += std::inner_product(Ji.data(), Ji.data() + Ji.size(), J_oldi.data(), //
                                                 index_t{0}, std::plus<>{}, std::not_equal_to<>{});
         };
         {
             GUANAQO_TRACE("active_set_change", 0);
             auto t = get_timed(&Timings::update_active_set_change);
-            ocp.foreach_stage(ctx, active_set_change, J, J_old);
+            ocp.foreach_batch(ctx, active_set_change, J, J_old);
         }
         num_different = ctx.reduce(num_different);
         // If there are no changing constraints, or if we were going to
@@ -487,15 +487,15 @@ struct CyQPALMBackend {
         });
         auto t = get_timed(&Timings::update_factorization);
         if (prev_update_pending) {
-            const auto delta = [&](auto, auto, auto Ji, auto J_oldi, auto ΔΣi) {
+            const auto delta = [&](auto Ji, auto J_oldi, auto ΔΣi) {
                 linalg::axpy(ΔΣi, {1, -1}, Ji, J_oldi);
             };
-            ocp.foreach_stage(ctx, delta, J, J_old, ΔΣ);
+            ocp.foreach_batch(ctx, delta, J, J_old, ΔΣ);
         } else {
-            const auto delta = [&](auto, auto, auto Ji, auto J_oldi, auto ΔΣi) {
+            const auto delta = [&](auto Ji, auto J_oldi, auto ΔΣi) {
                 linalg::sub(Ji, J_oldi, ΔΣi);
             };
-            ocp.foreach_stage(ctx, delta, J, J_old, ΔΣ);
+            ocp.foreach_batch(ctx, delta, J, J_old, ΔΣ);
         }
         return num_different;
     }

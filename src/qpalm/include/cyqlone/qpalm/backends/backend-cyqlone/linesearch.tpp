@@ -68,12 +68,11 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
         }
         // Invariant: finite values in [fin_0, fin) and infinite values in [inf, inf_0)
     };
-    const auto brkpts_batch = [&]([[maybe_unused]] auto j, auto, auto Σj, auto yj, auto Adj,
+    const auto brkpts_batch = [&]( auto Σj, auto yj, auto Adj,
                                   auto Axj, auto b_min_j, auto b_max_j) {
-        GUANAQO_TRACE("linesearch breakpoints cyqlone", j);
         linalg::for_each_elementwise(brkpts_simd, Σj, yj, Adj, Axj, b_min_j, b_max_j);
     };
-    ocp.foreach_stage(ctx, brkpts_batch, Σ, y, Ad, Ax, b_min, b_max);
+    ocp.foreach_batch(ctx, brkpts_batch, Σ, y, Ad, Ax, b_min, b_max);
     // Now partition the finite breakpoints into negative and positive parts.
     // Partitioning the chunk of each thread separately improves partitioning performance
     // later on in the line search because of branch prediction.

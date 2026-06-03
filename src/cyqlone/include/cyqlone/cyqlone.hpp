@@ -692,6 +692,15 @@ struct CyqloneSolver {
             func(j, di, xs.batch(di)...);
         }
     }
+    void foreach_batch(Context &ctx, auto &&func, auto &&...xs) const {
+        BATMAT_ASSERT(((xs.batch_size() == v) && ...));
+        BATMAT_ASSERT(((xs.depth() == ceil_N()) && ...));
+        const index_t c = riccati_thread_assignment(ctx);
+        for (index_t i = 0; i < n; ++i) {
+            const index_t di = c * n + i;
+            func(xs.batch(di)...);
+        }
+    }
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
     /// index, and optionally the corresponding batches of the given arrays.
     /// Iterates forward in time (increasing stage index j).
@@ -703,6 +712,18 @@ struct CyqloneSolver {
             const index_t di = c * n + i;
             const index_t j  = stage_index(c, i, 0);
             func(j, di, xs.batch(di)...);
+        }
+    }
+        /// Call a function for each stage in the horizon, passing the stage index, the data batch
+    /// index, and optionally the corresponding batches of the given arrays.
+    /// Iterates forward in time (increasing stage index j).
+    void foreach_batch_fwd(Context &ctx, auto &&func, auto &&...xs) const {
+        BATMAT_ASSERT(((xs.batch_size() == v) && ...));
+        BATMAT_ASSERT(((xs.depth() == ceil_N()) && ...));
+        const index_t c = riccati_thread_assignment(ctx);
+        for (index_t i = n; i-- > 0;) {
+            const index_t di = c * n + i;
+            func(xs.batch(di)...);
         }
     }
 
