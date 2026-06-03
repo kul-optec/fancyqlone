@@ -1,7 +1,9 @@
 #include <cyqlone/fan-cyqlone.hpp>
 #include <cyqlone/linalg.hpp>
+#include "cyqlone/cyqlone.hpp"
 
 #include <batmat/assume.hpp>
+#include <batmat/linalg/copy.hpp>
 #include <batmat/linalg/simdify.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>
 #include <algorithm>
@@ -70,20 +72,21 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_data(
 
     for (index_t c = 0; c < num_branches; ++c) {
         const auto &branch_ocp = ocp.branches[c];
-        batmat::matrix::Matrix<real_t, index_t> LB{{.rows = nu, .cols = branch_ocp.nx}};
         SolverLast tridiagonal_solver{.block_size = branch_ocp.nx, .num_blocks = v};
         auto solver_storage    = SolverStorage<VL, value_type, DefaultOrder>{
             .cyqlone_solver =
-                CyqloneSolver<VL, value_type, DefaultOrder, Ctx>::build(branch_ocp, p[c]),
+                CyqloneSolver<VL, value_type, DefaultOrder>::build(branch_ocp, p[c]),
             .tridiagonal_solver = tridiagonal_solver,
-            .B0 = ocp.Bs[0],
-            .LB = LB
+    
         };
+        la::copy(ocp.Bs[c], solver_storage.B0);
+        // la::copy(ocp.LBs[c], solver_storage.LB);
         solver_storages.emplace_back(std::move(solver_storage));
+        
         /// @todo Check correctness
         if (c == 0) {
-            la::copy(ocp.R0(0), SBs(0));
-            la::negate(ocp.r0(0), rs(0));
+            la::copy(ocp.R0(0), R0(0));
+            la::negate(ocp.r0(0), r0(0));
         }
     }
 }

@@ -23,25 +23,27 @@ struct SolverStorage {
     using value_type    = T;
     using tricyqle_t    = TricyqleSolver<VL, T, DefaultOrder, Ctx>;
     using SolverLast    = TridiagonalSolver<value_type>;
-    using matrix        = batmat::matrix::Matrix<value_type, index_t>;
+    using one_t         = std::integral_constant<index_t, 1>;
+    using matrix        = batmat::matrix::Matrix<value_type, index_t, one_t, one_t, DefaultOrder>;
     using SharedContext = tricyqle_t::SharedContext;
 
     CyqloneSolver<VL, value_type, DefaultOrder, Ctx> cyqlone_solver;
     SolverLast tridiagonal_solver;
-    matrix B0;
-    matrix LB;
-    std::unique_ptr<SharedContext> shared_ctx = cyqlone_solver.create_parallel_context();
+    matrix B0 = {{.rows = cyqlone_solver.nx, .cols = cyqlone_solver.nu},
+                 batmat::matrix::uninitialized}; // B(0) for each branch
+    matrix LB = {{.rows = cyqlone_solver.nu, .cols = cyqlone_solver.nx},
+                 batmat::matrix::uninitialized}; // B(0) for each branch
 };
-template < class matrix, class T =real_t>
+template <class matrix, class T = real_t>
 struct FanStorage_t {
-        using value_type    = T;
-        using matrix_f    = TridiagonalSolver<value_type>::matrix;
+    using value_type = T;
+    using matrix_f   = TridiagonalSolver<value_type>::matrix;
 
-        std::vector<matrix> branches;
-        matrix_f first;
-    };  
+    std::vector<matrix> branches;
+    matrix_f first;
+};
 template <index_t VL = 4, class T = real_t, StorageOrder DefaultOrder = StorageOrder::ColMajor,
-          class Ctx = parallel::Context<>>
+          class Ctx = parallel::FanContext<>>
 struct FanCyqloneSolver {
     using value_type    = T;
     using tricyqle_t    = TricyqleSolver<VL, T, DefaultOrder, Ctx>;
@@ -57,17 +59,25 @@ struct FanCyqloneSolver {
     index_t ny_0; ///< Number of general constraints at stage 0, D(0) u(0).
 
     // total shared context
-    std::unique_ptr<SharedContext> create_parallel_context() const {
-        return std::make_unique<SharedContext>(num_branches);
+    std::unique_ptr<parallel::FanSharedContext> create_parallel_context() const {
+        std::vector<parallel::SharedContext> branch_contexts;
+        branch_contexts.reserve(num_branches);
+        for (index_t i = 0; i < num_branches; ++i) {
+            branch_contexts.emplace_back(
+                std::move(*solver_storages[i].cyqlone_solver.create_parallel_context()));
+        }
+        return std::make_unique<parallel::FanSharedContext>(num_branches,
+                                                            std::move(branch_contexts));
     }
     std::vector<SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>>> solver_storages;
-    
+
     /// Get the total number of primal variables in the OCP.
     /// @note The actual number of variable stored in Cyqlone's internal data structures may be
     ///       larger.
     [[nodiscard]] index_t num_variables() const {
         index_t num_var = 0;
-        for (const SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>> &s : solver_storages) {
+        for (const SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>> &s :
+             solver_storages) {
             num_var += nu * (s.cyqlone_solver.N_horiz - 1) +
                        s.cyqlone_solver.nx * s.cyqlone_solver.N_horiz;
         }
@@ -78,7 +88,8 @@ struct FanCyqloneSolver {
     ///       larger.
     [[nodiscard]] index_t num_dynamics_constraints() const {
         index_t num_dyn_con = 0;
-        for (const SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>> &s : solver_storages) {
+        for (const SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>> &s :
+             solver_storages) {
             num_dyn_con += s.cyqlone_solver.nx * s.cyqlone_solver.N_horiz;
         }
         return num_dyn_con;
@@ -88,7 +99,8 @@ struct FanCyqloneSolver {
     ///       larger.
     [[nodiscard]] index_t num_general_constraints() const {
         index_t num_gen_con = 0;
-        for (const SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>> &s : solver_storages) {
+        for (const SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>> &s :
+             solver_storages) {
             num_gen_con +=
                 s.cyqlone_solver.ny * (s.cyqlone_solver.N_horiz - 1) + s.cyqlone_solver.ny_N;
         }
@@ -96,7 +108,8 @@ struct FanCyqloneSolver {
     }
     [[nodiscard]] index_t nx() const {
         index_t nx_tot = 0;
-        for (const SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>> &s : solver_storages) {
+        for (const SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>> &s :
+             solver_storages) {
             nx_tot += s.cyqlone_solver.nx;
         }
         return nx_tot; // for D(0) u(0)
@@ -107,6 +120,8 @@ struct FanCyqloneSolver {
                            batmat::matrix::uninitialized};
     SolverLast::matrix rs{{.depth = num_branches, .rows = nu, .cols = 1},
                           batmat::matrix::uninitialized};
+    SolverLast::matrix R0{{.rows = nu, .cols = nu}, batmat::matrix::uninitialized};
+    SolverLast::matrix r0{{.rows = nu, .cols = 1}, batmat::matrix::uninitialized};
     SolverLast::matrix u0_sol{{.rows = nu, .cols = 1}, batmat::matrix::uninitialized};
     SolverLast::matrix λ0_sol{{.rows = nx(), .cols = 1}, batmat::matrix::uninitialized};
     SolverLast::matrix y0 = {{.rows = ny_0, .cols = 1}, batmat::matrix::uninitialized};
@@ -132,9 +147,8 @@ struct FanCyqloneSolver {
     using align_t = std::integral_constant<index_t, v * alignof(value_type)>;
     /// Owning type for a batch of matrices (with batch size v).
     template <StorageOrder O = column_major>
-    using matrix = batmat::matrix::Matrix<value_type, index_t, vl_t, index_t, O, align_t>;    
+    using matrix     = batmat::matrix::Matrix<value_type, index_t, vl_t, index_t, O, align_t>;
     using FanStorage = FanStorage_t<matrix<>, value_type>;
-
 
     /// Get the current Cyqlone solver parameters.
     [[nodiscard]] CyqloneParams<value_type> get_params() const {
@@ -201,14 +215,14 @@ struct FanCyqloneSolver {
 
     /// @todo check and document behavior when `N_horiz != ceil_N()`.
     void pack_variables(std::span<const value_type> ux_lin, FanStorage ux) const;
-    FanStorage pack_variables(std::span< const value_type> ux_lin) const;
+    FanStorage pack_variables(std::span<const value_type> ux_lin) const;
     void unpack_variables(FanStorage ux, std::span<value_type> ux_lin) const;
     std::vector<value_type> unpack_variables(FanStorage ux) const;
-    void pack_dynamics(std::span< const value_type> λ_lin, FanStorage λ) const;
-    FanStorage pack_dynamics(std::span< const value_type> λ_lin) const;
+    void pack_dynamics(std::span<const value_type> λ_lin, FanStorage λ) const;
+    FanStorage pack_dynamics(std::span<const value_type> λ_lin) const;
     void unpack_dynamics(FanStorage λ, std::span<value_type> λ_lin) const;
     std::vector<value_type> unpack_dynamics(FanStorage λ) const;
-    void pack_constraints(std::span< const value_type> y_lin, FanStorage y,
+    void pack_constraints(std::span<const value_type> y_lin, FanStorage y,
                           value_type fill = 0) const;
     FanStorage pack_constraints(std::span<const value_type> y_lin, value_type fill = 0) const;
     void unpack_constraints(FanStorage y, std::span<value_type> y_lin) const;
@@ -249,11 +263,11 @@ struct FanCyqloneSolver {
                        FanStorage grad_f) const;
     /// Compute the regularized cost gradient, with regularization parameter γ⁻¹, with respect to
     /// the point @p ux0.
-    void cost_gradient_regularized(Context &ctx, value_type γ, FanStorage ux, FanStorage ux0, FanStorage q,
-                                   FanStorage grad_f) const;
+    void cost_gradient_regularized(Context &ctx, value_type γ, FanStorage ux, FanStorage ux0,
+                                   FanStorage q, FanStorage grad_f) const;
     /// Subtract the regularization term from the cost gradient.
-    void cost_gradient_remove_regularization(Context &ctx, value_type γ, FanStorage x, FanStorage x0,
-                                             FanStorage grad_f) const;
+    void cost_gradient_remove_regularization(Context &ctx, value_type γ, FanStorage x,
+                                             FanStorage x0, FanStorage grad_f) const;
 
     /// @}
 
@@ -321,7 +335,8 @@ struct FanCyqloneSolver {
 
     // index_t riccati_thread_assignment(Context &ctx) const { return add_wrap_p(ctx.index, 1); }
     template <bool Factor = true, bool Solve = true>
-    void factor_riccati_solve(Context &ctx, value_type γ, FanStorage Σ, FanStorage ux, FanStorage λ);
+    void factor_riccati_solve(Context &ctx, value_type γ, FanStorage Σ, FanStorage ux,
+                              FanStorage λ);
     template <bool Factor = true, bool Solve = true>
     void compute_schur(Context &ctx, real_t ρ_inv, FanStorage ux, FanStorage λ);
 
@@ -335,21 +350,19 @@ struct FanCyqloneSolver {
                            FanStorage λ);
 
     /// @}
+    template <bool Factor = true, bool Solve = true>
+    void factor_solve_λ0(index_t branch, FanStorage λ);
+    template <bool Factor = true, bool Solve = true>
+
+    void factor_solve_u0(FanStorage ux);
 
     /// @name Low-level reverse solve routines
     /// @{
 
-    template <class F>
-    void solve_riccati_reverse_impl(Context &ctx, FanStorage ux, FanStorage λ, FanStorage work,
-                                    real_t α, const F &simulate,
-                                    std::optional<FanStorage> Mᵀλ) const;
-    void solve_riccati_reverse(Context &ctx, FanStorage ux, FanStorage λ, FanStorage work,
-                               std::optional<FanStorage> Mᵀλ) const;
-    // void solve_riccati_reverse_ddp(Context &ctx, FanStorage ux, FanStorage λ, FanStorage work,
-    //                                real_t α, const std::function<ddp_func_t> &simulate,
-    //                                std::optional<FanStorage> Mᵀλ) const;
-    void solve_reverse(Context &ctx, FanStorage ux, FanStorage λ, FanStorage work,
+    void solve_reverse(Context &ctx, FanStorage ux, FanStorage λ,
                        std::optional<FanStorage> Mᵀλ = std::nullopt) const;
+    void solve_reverse_u0(FanStorage ux) const;
+    void solve_reverse_λ0(index_t branch, FanStorage λ) const;
 
     /// @}
 
@@ -360,7 +373,9 @@ struct FanCyqloneSolver {
     /// Algorithm 3 in the paper.
     template <bool Solve = true>
     void update_riccati_solve(Context &ctx, FanStorage ΔΣ, FanStorage ux, FanStorage λ);
-    void update_riccati(Context &ctx, FanStorage ΔΣ) { update_riccati_solve<false>(ctx, ΔΣ, {}, {}); }
+    void update_riccati(Context &ctx, FanStorage ΔΣ) {
+        update_riccati_solve<false>(ctx, ΔΣ, {}, {});
+    }
     template <bool Solve = true>
     void update_solve_impl(Context &ctx, FanStorage ΔΣ, FanStorage ux, FanStorage λ);
 
@@ -372,8 +387,8 @@ struct FanCyqloneSolver {
     [[nodiscard]] SparseMatrix build_sparse(const FanCyqloneStorage<value_type> &ocp,
                                             std::span<const value_type> Σ) const;
     [[nodiscard]] SparseMatrix build_sparse_no_penalty() const;
-    [[nodiscard]] std::vector<value_type> build_rhs(FanStorage rq, FanStorage b, value_type scale_rq = -1,
-                                                    value_type scale_b = -1) const;
+    [[nodiscard]] std::vector<value_type>
+    build_rhs(FanStorage rq, FanStorage b, value_type scale_rq = -1, value_type scale_b = -1) const;
     [[nodiscard]] std::vector<value_type> build_sol(FanStorage ux, FanStorage λ) const {
         return build_rhs(ux, λ, 1, 1);
     }

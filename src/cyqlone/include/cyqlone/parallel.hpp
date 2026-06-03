@@ -21,8 +21,12 @@
 namespace cyqlone::parallel {
 
 struct SharedContext;
+struct FanSharedContext;
+
 template <class SC = SharedContext>
 struct Context;
+template <class SC = FanSharedContext>
+struct FanContext;
 
 /// Abstraction for a parallel execution context: a set of threads that can synchronize and
 /// communicate with each other using barriers.
@@ -38,6 +42,39 @@ struct SharedContext {
 #endif
     using barrier_type = TreeBarrier<completion_type, uint16_t>;
     const index_t num_thr;
+    barrier_type barrier{static_cast<uint32_t>(num_thr), {}};
+#if !BATMAT_WITH_OPENMP
+    batmat::thread_pool thread_pool{static_cast<size_t>(num_thr)};
+#endif
+    /// Execute the given function in parallel on all threads, blocking until completion.
+    /// The function will be called with a @ref Context that contains the thread index, and that can
+    /// be used to synchronize and communicate between threads.
+    template <class F>
+    void run(F &&);
+
+    /// Configure the barrier spin count used in parallel synchronization before falling back to a
+    /// futex wait.
+    uint32_t set_barrier_spin_count(uint32_t spin_count) {
+        static_assert(std::is_same_v<decltype(barrier.spin_count), decltype(spin_count)>);
+        return std::exchange(barrier.spin_count, spin_count);
+    }
+};
+/// Abstraction for a parallel execution context: a set of threads that can synchronize and
+/// communicate with each other using barriers.
+/// @see Context
+/// @ingroup topic-parallelization
+struct FanSharedContext {
+#if GUANAQO_WITH_TRACING
+    struct completion_type {
+        void operator()() const noexcept { GUANAQO_TRACE_INSTANT("barrier-complete", 0); }
+    };
+#else
+    using completion_type = EmptyCompletion;
+#endif
+    using barrier_type = TreeBarrier<completion_type, uint16_t>;
+    const index_t num_thr;
+    std::vector<SharedContext> branch_contexts;
+
     barrier_type barrier{static_cast<uint32_t>(num_thr), {}};
 #if !BATMAT_WITH_OPENMP
     batmat::thread_pool thread_pool{static_cast<size_t>(num_thr)};
@@ -213,15 +250,16 @@ struct Context {
         return shared.barrier.shuffle_rotl_start(static_cast<uint32_t>(index), std::move(x), n);
     }
 };
+template <class SC>
 struct FanContext {
+    using shared_context_type = SC;
     Context<SharedContext> branch_ctx;
-    Context<SharedContext> total_ctx;
+    Context<FanSharedContext> total_ctx;
     [[nodiscard]] bool is_master() const { return total_ctx.is_master() && branch_ctx.is_master(); }
-
-    
 };
 template <class F>
 void SharedContext::run(F &&f) {
+
 #if !BATMAT_WITH_OPENMP
     thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
         Context<SharedContext> ctx{.shared = *this, .index = i};
@@ -232,6 +270,33 @@ void SharedContext::run(F &&f) {
     for (index_t i = 0; i < num_thr; ++i) {
         Context<SharedContext> ctx{.shared = *this, .index = i};
         f(ctx);
+    }
+#endif
+}
+
+template <class F>
+void FanSharedContext::run(F &&f) {
+
+#if !BATMAT_WITH_OPENMP
+    thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
+        branch_contexts[i].thread_pool.sync_run_n(branch_contexts[i].num_thr, [this, &f, i](index_t j, index_t) {
+        Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
+        Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
+        FanContext<FanSharedContext> ctx{.branch_ctx = branch_ctx, .total_ctx = total_ctx};
+        f(ctx);});
+    });
+#else
+    BATMAT_OMP(parallel for num_threads(num_thr))
+    for (index_t i = 0; i < num_thr; ++i) {
+        
+        BATMAT_OMP(parallel for num_threads(branch_contexts[i].num_thr))
+        for (index_t j = 0; j < branch_contexts[i].num_thr; ++j) {
+        Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
+        Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
+        FanContext<FanSharedContext> ctx{.branch_ctx = branch_ctx, .total_ctx = total_ctx};
+        f(ctx);
+        }
+        
     }
 #endif
 }

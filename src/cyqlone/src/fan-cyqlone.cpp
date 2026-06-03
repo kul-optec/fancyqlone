@@ -1,5 +1,6 @@
 #include <cyqlone/fan-cyqlone.hpp>
 #include <cyqlone/implementation/fan-data.tpp>
+#include <cyqlone/implementation/fan-factor.tpp>
 
 
 namespace CYQLONE_NS(cyqlone) {
