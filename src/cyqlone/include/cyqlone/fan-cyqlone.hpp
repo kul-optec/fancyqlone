@@ -114,18 +114,22 @@ struct FanCyqloneSolver {
         }
         return nx_tot; // for D(0) u(0)
     }
-
     // Workspaces for contribution u(0)
-    SolverLast::matrix SBs{{.depth = num_branches, .rows = nu, .cols = nu},
+    SolverLast::matrix SBs = [this] {
+        return typename SolverLast::matrix{{.depth = num_branches, .rows = nu, .cols = nu},
                            batmat::matrix::uninitialized};
-    SolverLast::matrix rs{{.depth = num_branches, .rows = nu, .cols = 1},
-                          batmat::matrix::uninitialized};
-    SolverLast::matrix R0{{.rows = nu, .cols = nu}, batmat::matrix::uninitialized};
-    SolverLast::matrix r0{{.rows = nu, .cols = 1}, batmat::matrix::uninitialized};
-    SolverLast::matrix u0_sol{{.rows = nu, .cols = 1}, batmat::matrix::uninitialized};
-    SolverLast::matrix λ0_sol{{.rows = nx(), .cols = 1}, batmat::matrix::uninitialized};
-    SolverLast::matrix y0 = {{.rows = ny_0, .cols = 1}, batmat::matrix::uninitialized};
-
+                        }();
+    SolverLast::matrix rs = [this] {
+        return typename SolverLast::matrix{{.depth = num_branches, .rows = nu, .cols = 1},
+                           batmat::matrix::uninitialized};
+    }();
+    SolverLast::matrix R0 = [this] {
+        return typename SolverLast::matrix{{.rows = nu, .cols = nu}, batmat::matrix::uninitialized};
+    }();
+    SolverLast::matrix r0 = [this] {
+        return typename SolverLast::matrix{{.rows = nu, .cols = 1}, batmat::matrix::uninitialized};
+    }();
+    
     /// Vector length.
     static constexpr index_t v = VL;
     /// Number of stages per thread per vector lane (rounded up).
@@ -183,6 +187,15 @@ struct FanCyqloneSolver {
     }
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
     /// index, and optionally the corresponding batches of the given arrays.
+    /// Iterates backwards in time (decreasing stage index j).
+    void foreach_batch(Context &ctx, auto &&func, auto &&...xs) const {
+        index_t i = ctx.total_context().index();
+        solver_storages[i].foreach_stage(ctx.branch_context(), func, xs.branches[i]...);
+        func(xs.first...);
+        /// @todo: Handle u0 separately, since it is shared between branches
+    }
+    /// Call a function for each stage in the horizon, passing the stage index, the data batch
+    /// index, and optionally the corresponding batches of the given arrays.
     /// Iterates forward in time (increasing stage index j).
     void foreach_stage_fwd(Context &ctx, auto &&func, auto &&...xs) const {
         index_t i = ctx.total_context().index();
@@ -190,6 +203,12 @@ struct FanCyqloneSolver {
 
         /// @todo: Handle u0 separately, since it is shared between branches
     }
+    void foreach_batch_fwd(Context &ctx, auto &&func, auto &&...xs) const {
+        index_t i = ctx.total_context().index();
+        solver_storages[i].foreach_stage_fwd(ctx.branch_context(), func, xs.branches[i]...);
+        func(xs.first...);
+    }
+    /// Build a new FanCyqloneSolver instance.
     static FanCyqloneSolver build(const FanCyqloneStorage<value_type> &ocp, std::vector<index_t> p,
                                   CyqloneParams<value_type> params = {});
     /// Update the internal data structures to reflect changes in the OCP data (without changing
