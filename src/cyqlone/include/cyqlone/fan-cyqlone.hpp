@@ -29,10 +29,14 @@ struct SolverStorage {
 
     CyqloneSolver<VL, value_type, DefaultOrder, Ctx> cyqlone_solver;
     SolverLast tridiagonal_solver;
-    matrix B0 = {{.rows = cyqlone_solver.nx, .cols = cyqlone_solver.nu},
-                 batmat::matrix::uninitialized}; // B(0) for each branch
-    matrix LB = {{.rows = cyqlone_solver.nu, .cols = cyqlone_solver.nx},
-                 batmat::matrix::uninitialized}; // B(0) for each branch
+    matrix B0 = [this] {
+        return matrix{{.rows = cyqlone_solver.nx, .cols = cyqlone_solver.nu},
+                               batmat::matrix::uninitialized};
+    }(); // B(0) for each branch
+    matrix LB = [this] {
+        return matrix{{.rows = cyqlone_solver.nu, .cols = cyqlone_solver.nx},
+                                batmat::matrix::uninitialized};
+    }(); // B(0) for each branch
 };
 template <class matrix, class T = real_t>
 struct FanStorage_t {
