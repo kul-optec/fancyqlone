@@ -13,6 +13,7 @@
 #include <cstring>
 #include <functional>
 #include <memory>
+#include <optional>
 #include <type_traits>
 #include <utility>
 
@@ -199,7 +200,7 @@ class TreeBarrier {
     /// order in which threads arrive. In other words, for a given number of threads, the order of
     /// the reduction operations is fully deterministic.
     template <class T, class F>
-    bool arrive_impl(BarrierPhase old_phase, uint32_t thread_id, T value, F reduce) {
+    std::optional<T> arrive_impl(BarrierPhase old_phase, uint32_t thread_id, T value, F reduce) {
         static constexpr auto acq_rel = std::memory_order_acq_rel;
         const auto first_of_one       = static_cast<ticket_value_type>(old_phase),
                    second_of_two      = static_cast<ticket_value_type>(2 * first_of_one + 1);
@@ -214,8 +215,7 @@ class TreeBarrier {
         uint32_t level_size = expected; // Total sum in this level of the tree
         for (size_t level = 0;; ++level) {
             if (level_size <= 1) {
-                broadcast_storage.store(value);
-                return true;
+                return value;
             }
             BATMAT_ASSUME(level < 32);
             auto offset = size_t{1} << level;
@@ -228,7 +228,7 @@ class TreeBarrier {
             const auto target       = last_odd ? first_of_one : second_of_two;
             const auto old_value    = ticket.fetch_add(1, acq_rel);
             if (old_value != target)
-                return false;
+                return std::nullopt;
             if (!last_odd)
                 value = reduce(storage[write & ~offset].template load<T>(),
                                storage[write | +offset].template load<T>());
@@ -249,15 +249,18 @@ class TreeBarrier {
 #if CYQLONE_SANITY_CHECKS_BARRIER
         sanity_check_arrival(thread_id, cur_phase);
 #endif
-        if (arrival(cur_phase, thread_id)) {
-            std::invoke(std::forward<C>(custom_completion));
+        if (auto arrived = arrival(cur_phase, thread_id); arrived) {
+            if constexpr (std::is_same_v<decltype(arrived), bool>)
+                std::invoke(std::forward<C>(custom_completion));
+            else
+                std::invoke(std::forward<C>(custom_completion), std::move(*arrived));
             auto next_phase = static_cast<BarrierPhase>(static_cast<PhaseType>(cur_phase) + 1);
             phase.store(next_phase, std::memory_order_release);
             phase.notify_all();
         }
         return arrival_token{cur_phase};
     }
-
+   
     template <class T>
     void atomic_wait_ne_acq(const std::atomic<T> &a, T old) const {
         if (a.load(std::memory_order_acquire) != old) [[likely]]
@@ -324,6 +327,10 @@ class TreeBarrier {
             return arrive_impl(cur_phase, thread_id);
         };
         return arrive_with_completion(thread_id, arrival, std::forward<C>(custom_completion));
+    }
+    [[nodiscard]] arrival_token get_arrival_token() {
+        const auto cur_phase = phase.load(std::memory_order_relaxed);
+        return arrival_token{cur_phase};
     }
 
     /// Arrive at the barrier. The barrier's completion function is called by the last thread
@@ -419,13 +426,14 @@ class TreeBarrier {
 
     /// Combining tree reduction across all threads. Deterministic application order for a given
     /// number of threads.
-    template <class T, class F>
-    [[nodiscard]] arrival_token_typed<T> arrive_reduce(uint32_t thread_id, T x, F reduce) {
+    template <class T, class F, class CF>
+    [[nodiscard]] arrival_token_typed<T> arrive_reduce(uint32_t thread_id, T x, F reduce,
+                                                       CF custom_completion) {
 #if CYQLONE_SANITY_CHECKS_BARRIER
         auto hash = typeid(T).hash_code() ^ typeid(F).hash_code();
         get_local_line(thread_id).store(static_cast<ticket_value_type>(hash),
                                         std::memory_order_relaxed);
-        auto completion = [this, hash, thread_id] {
+        auto completion = [this, hash, thread_id, &custom_completion](T x) {
             for (uint32_t i = 0; i < expected; ++i)
                 if (get_local_line(i).load(std::memory_order_relaxed) !=
                     static_cast<ticket_value_type>(hash))
@@ -433,16 +441,23 @@ class TreeBarrier {
                         "Barrier sanity check failed: different types in arrive_reduce: "
                         "thread {} has hash {}, but thread {} has hash {}",
                         i, get_local_line(i).load(std::memory_order_relaxed), thread_id, hash));
+            std::invoke(custom_completion, x);
         };
 #else
-        auto completion = [] {};
+
+        auto &completion = custom_completion;
+
 #endif
         auto arrival = [this, &reduce, &x](BarrierPhase cur_phase, uint32_t thread_id) {
             return arrive_impl(cur_phase, thread_id, std::move(x), std::move(reduce));
         };
         return arrival_token_typed<T>{arrive_with_completion(thread_id, arrival, completion)};
     }
-
+    template <class T, class F>
+    [[nodiscard]] arrival_token_typed<T> arrive_reduce(uint32_t thread_id, T x, F reduce) {
+        return arrive_reduce(thread_id, std::move(x), std::move(reduce),
+                             [this](T x) { broadcast_storage.store(x); });
+    }
     /// Wait for the result of an @ref arrive_reduce call and obtain the reduced value.
     template <class T>
     [[nodiscard]] T wait_reduce(arrival_token_typed<T> &&token) {

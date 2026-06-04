@@ -198,6 +198,14 @@ struct Context {
         return shared.barrier.arrive_reduce(static_cast<uint32_t>(index), std::move(x),
                                             std::move(func));
     }
+    /// Perform a reduction of @p x across all threads using the given binary function @p func.
+    /// Returns a token that can be used to wait for the reduction to complete and obtain the
+    /// reduced value.
+    template <class T, class F, class CF>
+    [[nodiscard]] auto arrive_reduce_with_completion(T x, F func, CF completion) {
+        return shared.barrier.arrive_reduce(static_cast<uint32_t>(index), std::move(x),
+                                            std::move(func), std::move(completion));
+    }
 
     /// Wait for the reduction initiated by @ref arrive_reduce() to complete and obtain the reduced
     /// value.
@@ -250,21 +258,104 @@ struct Context {
         return shared.barrier.shuffle_rotl_start(static_cast<uint32_t>(index), std::move(x), n);
     }
 };
+
+template <class T>
+struct arrival_token_typed_fan {
+    using total_token_t  = typename FanSharedContext::barrier_type::template arrival_token_typed<T>;
+    using branch_token_t = typename SharedContext::barrier_type::template arrival_token_typed<T>;
+    total_token_t total_token;
+    branch_token_t branch_token;
+};
 template <class SC>
 struct FanContext {
     using shared_context_type = SC;
     Context<SharedContext> branch_ctx;
     Context<FanSharedContext> total_ctx;
+    index_t index = branch_ctx.index + total_ctx.index * total_ctx.num_thr();
+    template <class T>
+    using arrival_token_typed = arrival_token_typed_fan<T>;
+
     [[nodiscard]] bool is_master() const { return total_ctx.is_master() && branch_ctx.is_master(); }
+
+    /// Perform a reduction of @p x across all threads using the given binary function @p func.
+    /// Returns a token that can be used to wait for the reduction to complete and obtain the
+    /// reduced value.
+    template <class T, class F>
+    [[nodiscard]] auto arrive_reduce(T x, F func) {
+        std::optional<arrival_token_typed<T>> total_token =
+            total_ctx.shared.barrier.get_arrival_token();
+        auto branch_token =
+            branch_ctx.arrive_reduce_with_completion(std::move(x), std::move(func), [&] {
+                [&](T x_broad) { total_token = total_ctx.arrive_reduce(x_broad, std::move(func)); };
+            });
+        return arrival_token_typed_fan{.branch_token = branch_token, .total_token = total_token};
+    };
+    template <class T>
+    T wait_reduce(arrival_token_typed<T> &&token) {
+        branch_ctx.wait(std::move(token.branch_token));
+        return total_ctx.wait_reduce(std::move(token.total_token));
+    }
+/// @todo try to make more simpel probabily overkill by broadcasting again
+    template <class T, class F>
+    T reduce(T x, F func) {
+        auto branch_reduced = branch_ctx.reduce(std::move(x), std::move(func));
+        if (branch_ctx.index == 0) {
+            auto total_reduced = total_ctx.reduce(std::move(branch_reduced), std::move(func));
+            branch_ctx.broadcast(std::move(total_reduced), 0);
+            return total_reduced;
+        }
+        else {
+            auto total_reduced = branch_ctx.broadcast(std::move(branch_reduced), 0);
+            return total_reduced;
+        }
+    }
+    template <class T>
+    T reduce(T x) {
+        return reduce(std::move(x), std::plus<>{});
+    }
+    /// Wait for all threads to reach this point, then run the given function on a single thread
+    /// before releasing all threads again. Changes by all threads are visible during the call to
+    /// @p f and changes made by @p f are visible to all threads after this function returns.
+    template <class F>
+    auto run_single_sync(F &&f) {
+        return branch_ctx.run_single_sync([&] {total_ctx.run_single_sync(std::forward<F>(f)); });
+    }
+    /// Broadcast a value @p x from the thread with index @p src to all threads. @todo document
+    template <class T>
+    T broadcast(T x, index_t src = 0) {
+        if (index == src) {
+            total_ctx.broadcast(std::move(x), src);
+            return branch_ctx.broadcast(std::move(x), src % total_ctx.num_thr());
+        } else if (total_ctx.index != (src / total_ctx.num_thr()) && branch_ctx.index == 0) {
+            total_ctx.broadcast(std::move(x), src);
+            return branch_ctx.broadcast(std::move(x), 0);
+        } else if (total_ctx.index == (src / total_ctx.num_thr()))
+            return branch_ctx.broadcast(std::move(x), src % total_ctx.num_thr());
+        else
+            return branch_ctx.broadcast(std::move(x), 0);
+    }
+    /// Call a function @p f with the given @p args on a single thread and broadcast the return
+    /// value to all threads.
+    template <class F, class... Args>
+    auto call_broadcast(F &&f, Args &&...args) -> std::invoke_result_t<F, Args...> {
+        using T = std::invoke_result_t<F, Args...>;
+        // TODO: implement with a relaxed atomic that gets reset during the completion handler,
+        //       so only the first thread that arrives will execute the function, rather than always
+        //       executing on the master thread.
+        if (is_master())
+            return broadcast(std::invoke(std::forward<F>(f), std::forward<Args>(args)...), 0);
+        else
+            return broadcast(T{}, 0);
+    }
 };
-template <class F>
-void SharedContext::run(F &&f) {
+    template <class F>
+    void SharedContext::run(F &&f) {
 
 #if !BATMAT_WITH_OPENMP
-    thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
-        Context<SharedContext> ctx{.shared = *this, .index = i};
-        f(ctx);
-    });
+        thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
+            Context<SharedContext> ctx{.shared = *this, .index = i};
+            f(ctx);
+        });
 #else
     BATMAT_OMP(parallel for num_threads(num_thr))
     for (index_t i = 0; i < num_thr; ++i) {
@@ -272,33 +363,35 @@ void SharedContext::run(F &&f) {
         f(ctx);
     }
 #endif
-}
+    }
 
-template <class F>
-void FanSharedContext::run(F &&f) {
+    template <class F>
+    void FanSharedContext::run(F &&f) {
 
 #if !BATMAT_WITH_OPENMP
-    thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
-        branch_contexts[i].thread_pool.sync_run_n(branch_contexts[i].num_thr, [this, &f, i](index_t j, index_t) {
-        Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
-        Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
-        FanContext<FanSharedContext> ctx{.branch_ctx = branch_ctx, .total_ctx = total_ctx};
-        f(ctx);});
-    });
+        thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
+            branch_contexts[i].thread_pool.sync_run_n(
+                branch_contexts[i].num_thr, [this, &f, i](index_t j, index_t) {
+                    Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
+                    Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
+                    FanContext<FanSharedContext> ctx{.branch_ctx = branch_ctx,
+                                                     .total_ctx  = total_ctx};
+                    f(ctx);
+                });
+        });
 #else
     BATMAT_OMP(parallel for num_threads(num_thr))
     for (index_t i = 0; i < num_thr; ++i) {
-        
+
         BATMAT_OMP(parallel for num_threads(branch_contexts[i].num_thr))
         for (index_t j = 0; j < branch_contexts[i].num_thr; ++j) {
-        Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
-        Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
-        FanContext<FanSharedContext> ctx{.branch_ctx = branch_ctx, .total_ctx = total_ctx};
-        f(ctx);
+            Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
+            Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
+            FanContext<FanSharedContext> ctx{.branch_ctx = branch_ctx, .total_ctx = total_ctx};
+            f(ctx);
         }
-        
     }
 #endif
-}
+    }
 
 } // namespace cyqlone::parallel
