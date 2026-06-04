@@ -32,6 +32,13 @@ enum class WarmStartingStrategy {
     ShiftNoInequality,
 };
 
+enum class FanWarmStartingStrategy {
+    Zeros,
+    Copy,
+    Shift,
+    ShiftNoInequality,
+};
+
 struct CyQPALMBackendSettings {
     index_t processors   = 8;
     bool print_residuals = false;
@@ -79,7 +86,16 @@ struct CycloneBackendTraits<cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>> {
 
       private:
         storage_t(store_t &&o) : store_t{std::move(o)} {}
+        void check_dimensions_col(const storage_t &other, const index_t &dim_col) const {
+            BATMAT_ASSERT(this->cols() == dim_col);
+            BATMAT_ASSERT(other.cols() == dim_col);
+            BATMAT_ASSERT(this->rows() == other.rows());
+            BATMAT_ASSERT(this->depth() == other.depth());     
+        }
+    
     };
+    using warm_start_t = WarmStartingStrategy;
+
 };
 // Traits for FanCyqloneSolver
 template <index_t VL, StorageOrder DefaultOrder>
@@ -88,7 +104,7 @@ struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>>
     using simd     = typename OCP_t::simd;
     using CStorage = FanCyqloneStorage<>;
     using OCPStorage = FanOCPStorage;
-    using store_t  = std::vector<typename OCP_t::template matrix<>>;
+    using store_t  = FanStorage_t<typename OCP_t::template matrix<>>;
     template <class Tag>
     struct storage_t : store_t {
         friend CyQPALMBackend<VL, DefaultOrder, OCP_t>;
@@ -96,13 +112,35 @@ struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>>
 
       private:
         storage_t(store_t &&o) : store_t{std::move(o)} {}
+        void check_dimensions_col(const storage_t &other, const index_t &dim_col) const {
+            for (index_t c = 0; c < static_cast<index_t>(this->branches.size()); ++c) {
+                BATMAT_ASSERT(this->branches[c].cols() == dim_col);
+                BATMAT_ASSERT(other.branches[c].cols() == dim_col);
+                BATMAT_ASSERT(this->branches[c].rows() == other.branches[c].rows());
+                BATMAT_ASSERT(this->branches[c].depth() == other.branches[c].depth());
+            }  
+            BATMAT_ASSERT(this->first.cols() == dim_col);
+            BATMAT_ASSERT(other.first.cols() == dim_col);
+            BATMAT_ASSERT(this->first.rows() == other.first.rows());
+            BATMAT_ASSERT(this->first.depth() == other.first.depth()); 
+        }
+        index_t size() const {
+            index_t total_size = 0;
+            for (const auto &branch : this->branches) {
+                total_size += branch.size();
+            }
+            total_size += this->first.size();
+            return total_size;
+        }
+
     };
+    using warm_start_t = FanWarmStartingStrategy;
 };
 namespace detail {
 
     
-template <index_t VL, StorageOrder DefaultOrder>
-struct backend_stats_type<CyQPALMBackend<VL, DefaultOrder>> {
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+struct backend_stats_type<CyQPALMBackend<VL, DefaultOrder, LinearSolver>> {
     using type = CyQPALMBackendStats;
 };
 
@@ -135,9 +173,9 @@ void update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder, LinearSolver> &back
 
 /// @}
 
-template <index_t VL, StorageOrder DefaultOrder>
-struct detail::backend_type<unique_CyQPALMBackend<VL, DefaultOrder>> {
-    using type = CyQPALMBackend<VL, DefaultOrder>;
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+struct detail::backend_type<unique_CyQPALMBackend<VL, DefaultOrder, LinearSolver>> {
+    using type = CyQPALMBackend<VL, DefaultOrder, LinearSolver>;
 };
 
 } // namespace CYQLONE_NS(cyqlone::qpalm)

@@ -74,7 +74,7 @@ CyQPALMBackend<VL, DefaultOrder, LinearSolver>::dots(Context &ctx, const Args &.
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 template <class T>
 auto CyQPALMBackend<VL, DefaultOrder, LinearSolver>::norm_inf_l1_sq(Context &ctx, const T &x) const {
-    GUANAQO_TRACE("norm_inf_l1_sq", 0, 4 * x.batch_size() * x.rows() * ocp.n);
+    // GUANAQO_TRACE("norm_inf_l1_sq", 0, 4 * x.batch_size() * x.rows() * ocp.n);
     auto nrm                  = norms.zero();
     const auto norm_inf_l1_sq = [&](auto xi) {
         nrm = norms(nrm, linalg::norms_all(xi));

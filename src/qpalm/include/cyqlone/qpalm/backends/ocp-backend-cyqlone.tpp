@@ -19,6 +19,7 @@
 #include <array>
 #include <cassert>
 #include <cmath>
+#include <concepts>
 #include <functional>
 #include <limits>
 #include <map>
@@ -33,11 +34,10 @@ namespace CYQLONE_NS(cyqlone::qpalm) {
 
 namespace datapar = batmat::datapar;
 
-
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 struct CyQPALMBackend {
-    using OCP_t  = LinearSolver;
-    using traits = CycloneBackendTraits<OCP_t>;
+    using OCP_t                 = LinearSolver;
+    using traits                = CycloneBackendTraits<OCP_t>;
     static constexpr auto norms = batmat::linalg::norms<real_t, typename traits::simd>{};
     // clang-format off
     using ineq_constr_vec_t = traits::template storage_t<struct ineq>;
@@ -110,15 +110,15 @@ struct CyQPALMBackend {
         this->ocp.initialize_bounds(ocp, b_min_strided, b_max_strided);
         if (!data.initial_variables.empty()) {
             x0 = var_vec();
-            this->ocp.pack_variables(data.initial_variables, x0->view());
+            this->ocp.pack_variables(data.initial_variables, *x0);
         }
         if (!data.initial_inequality_multipliers.empty()) {
             y0 = ineq_constr_vec();
-            this->ocp.pack_constraints(data.initial_inequality_multipliers, y0->view());
+            this->ocp.pack_constraints(data.initial_inequality_multipliers, *y0);
         }
         if (!data.initial_equality_multipliers.empty()) {
             λ0 = eq_constr_vec();
-            this->ocp.pack_dynamics(data.initial_equality_multipliers, λ0->view());
+            this->ocp.pack_dynamics(data.initial_equality_multipliers, *λ0);
         }
         if (settings.detailed_timings)
             ocp_timings = std::make_unique<Timings>();
@@ -134,66 +134,81 @@ struct CyQPALMBackend {
         this->ocp.initialize_bounds(ocp, b_min_strided, b_max_strided);
     }
 
-    void set_b_eq(std::span<const real_t> b_eq) {
-        this->ocp.pack_dynamics(b_eq, b_eq_strided.view());
-    }
-    void set_b_lb(std::span<const real_t> b_lb) {
-        this->ocp.pack_constraints(b_lb, b_min_strided.view());
-    }
-    void set_b_ub(std::span<const real_t> b_ub) {
-        this->ocp.pack_constraints(b_ub, b_max_strided.view());
-    }
-
+    void set_b_eq(std::span<const real_t> b_eq) { this->ocp.pack_dynamics(b_eq, b_eq_strided); }
+    void set_b_lb(std::span<const real_t> b_lb) { this->ocp.pack_constraints(b_lb, b_min_strided); }
+    void set_b_ub(std::span<const real_t> b_ub) { this->ocp.pack_constraints(b_ub, b_max_strided); }
+    ///@todo better way of differentiating between strategies
     void warm_start(const var_vec_t &x, const ineq_constr_vec_t &y, const eq_constr_vec_t &λ) {
-        // TODO: this does not handle the case N_horiz != ceil_N() correctly
-        const auto k_to_l = [&](index_t k) {
-            const auto num_stages = ocp.n;
-            const auto i          = (ocp.ceil_N() - k) % num_stages;
-            const auto k1         = (k + i) / num_stages;
-            const auto k2         = k1 >> ocp.lp();
-            const auto v          = k2 % (1 << ocp.lv());
-            const auto t          = k1 - (k2 << ocp.lp());
-            return ((num_stages * t + i) << ocp.lv()) + v;
-        };
+        if constexpr (std::is_same_v<typename traits::warm_start_t, WarmStartingStrategy>) {
 
-        switch (settings.strategy) {
-            case WarmStartingStrategy::Zeros:
-                this->x0.reset();
-                this->λ0.reset();
-                this->y0.reset();
-                break;
-            case WarmStartingStrategy::Copy:
-                this->x0 = x;
-                this->λ0 = λ;
-                this->y0 = y;
-                break;
-            case WarmStartingStrategy::Shift: {
-                auto &x0 = this->x0.emplace(var_vec());         // TODO: zero init is redundant
-                auto &λ0 = this->λ0.emplace(eq_constr_vec());   // TODO: zero init is redundant
-                auto &y0 = this->y0.emplace(ineq_constr_vec()); // TODO: zero init is redundant
-                for (index_t k = 1; k < ocp.N_horiz; ++k)       // TODO: vectorize?
-                    x0(k_to_l(k - 1)) = x(k_to_l(k));
-                x0(k_to_l(ocp.N_horiz - 1)) = x(k_to_l(ocp.N_horiz - 1));
-                for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
-                    y0(k_to_l(k - 1)) = y(k_to_l(k));
-                y0(k_to_l(ocp.N_horiz - 1)) = y(k_to_l(ocp.N_horiz - 1));
-                for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
-                    λ0(k_to_l(k - 1)) = λ(k_to_l(k));
-                λ0(k_to_l(ocp.N_horiz - 1)) = λ(k_to_l(ocp.N_horiz - 1));
-            } break;
-            case WarmStartingStrategy::ShiftNoInequality: {
-                auto &x0 = this->x0.emplace(var_vec());       // TODO: zero init is redundant
-                auto &λ0 = this->λ0.emplace(eq_constr_vec()); // TODO: zero init is redundant
-                this->y0.emplace(y);
-                for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
-                    x0(k_to_l(k - 1)) = x(k_to_l(k));
-                x0(k_to_l(ocp.N_horiz - 1)) = x(k_to_l(ocp.N_horiz - 1));
-                for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
-                    λ0(k_to_l(k - 1)) = λ(k_to_l(k));
-                λ0(k_to_l(ocp.N_horiz - 1)) = λ(k_to_l(ocp.N_horiz - 1));
-            } break;
-            default: BATMAT_ASSERT(false);
-        }
+            // TODO: this does not handle the case N_horiz != ceil_N() correctly
+            const auto k_to_l = [&](index_t k) {
+                const auto num_stages = ocp.n;
+                const auto i          = (ocp.ceil_N() - k) % num_stages;
+                const auto k1         = (k + i) / num_stages;
+                const auto k2         = k1 >> ocp.lp();
+                const auto v          = k2 % (1 << ocp.lv());
+                const auto t          = k1 - (k2 << ocp.lp());
+                return ((num_stages * t + i) << ocp.lv()) + v;
+            };
+
+            switch (settings.strategy) {
+                case WarmStartingStrategy::Zeros:
+                    this->x0.reset();
+                    this->λ0.reset();
+                    this->y0.reset();
+                    break;
+                case WarmStartingStrategy::Copy:
+                    this->x0 = x;
+                    this->λ0 = λ;
+                    this->y0 = y;
+                    break;
+                case WarmStartingStrategy::Shift: {
+                    auto &x0 = this->x0.emplace(var_vec());         // TODO: zero init is redundant
+                    auto &λ0 = this->λ0.emplace(eq_constr_vec());   // TODO: zero init is redundant
+                    auto &y0 = this->y0.emplace(ineq_constr_vec()); // TODO: zero init is redundant
+                    for (index_t k = 1; k < ocp.N_horiz; ++k)       // TODO: vectorize?
+                        x0(k_to_l(k - 1)) = x(k_to_l(k));
+                    x0(k_to_l(ocp.N_horiz - 1)) = x(k_to_l(ocp.N_horiz - 1));
+                    for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
+                        y0(k_to_l(k - 1)) = y(k_to_l(k));
+                    y0(k_to_l(ocp.N_horiz - 1)) = y(k_to_l(ocp.N_horiz - 1));
+                    for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
+                        λ0(k_to_l(k - 1)) = λ(k_to_l(k));
+                    λ0(k_to_l(ocp.N_horiz - 1)) = λ(k_to_l(ocp.N_horiz - 1));
+                } break;
+                case WarmStartingStrategy::ShiftNoInequality: {
+                    auto &x0 = this->x0.emplace(var_vec());       // TODO: zero init is redundant
+                    auto &λ0 = this->λ0.emplace(eq_constr_vec()); // TODO: zero init is redundant
+                    this->y0.emplace(y);
+                    for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
+                        x0(k_to_l(k - 1)) = x(k_to_l(k));
+                    x0(k_to_l(ocp.N_horiz - 1)) = x(k_to_l(ocp.N_horiz - 1));
+                    for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
+                        λ0(k_to_l(k - 1)) = λ(k_to_l(k));
+                    λ0(k_to_l(ocp.N_horiz - 1)) = λ(k_to_l(ocp.N_horiz - 1));
+                } break;
+                default: BATMAT_ASSERT(false);
+            }
+        } else if constexpr (std::is_same_v<typename traits::warm_start_t,
+                                            FanWarmStartingStrategy>) {
+            switch (settings.strategy) {
+                case WarmStartingStrategy::Zeros:
+                    this->x0.reset();
+                    this->λ0.reset();
+                    this->y0.reset();
+                    break;
+                case WarmStartingStrategy::Copy:
+                    this->x0 = x;
+                    this->λ0 = λ;
+                    this->y0 = y;
+                    break;
+                case WarmStartingStrategy::Shift: BATMAT_ASSERT(false); break;
+                case WarmStartingStrategy::ShiftNoInequality: BATMAT_ASSERT(false); break;
+                default: BATMAT_ASSERT(false);
+            }
+        } else
+            BATMAT_ASSERT(false);
     }
 
     void reset() {
@@ -421,7 +436,7 @@ struct CyQPALMBackend {
         const auto grad_norm_simd = [&](auto grad_fji, auto Mᵀλji, auto Aᵀŷji) {
             nrm_simd = norms(nrm_simd, grad_fji + Mᵀλji + Aᵀŷji);
         };
-        const auto grad_norm_batch = [&]( auto grad_fj, auto Mᵀλj, auto Aᵀŷj) {
+        const auto grad_norm_batch = [&](auto grad_fj, auto Mᵀλj, auto Aᵀŷj) {
             linalg::for_each_elementwise(grad_norm_simd, grad_fj, Mᵀλj, Aᵀŷj);
         };
         ocp.foreach_batch(ctx, grad_norm_batch, grad_f, Mᵀλ, Aᵀŷ);
@@ -453,9 +468,7 @@ struct CyQPALMBackend {
 
     index_t active_set_change(Context &ctx, real_t, [[maybe_unused]] const ineq_constr_vec_t &Σ,
                               const active_set_t &J, const active_set_t &J_old) {
-        BATMAT_ASSERT(J.rows() == J_old.rows() && J.cols() == J_old.cols());
-        BATMAT_ASSERT(J.depth() == J_old.depth());
-        BATMAT_ASSERT(J.cols() == 1);
+        J.check_dimensions_col(J_old, 1);
         index_t num_different        = 0;
         const auto active_set_change = [&](auto Ji, auto J_oldi) {
             num_different += std::inner_product(Ji.data(), Ji.data() + Ji.size(), J_oldi.data(), //
@@ -609,17 +622,15 @@ make_cyqpalm_backend(const typename CycloneBackendTraits<LinearSolver>::CStorage
 }
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
-void update_cyqpalm_backend(
-    CyQPALMBackend<VL, DefaultOrder, LinearSolver> &backend,
-    const typename CycloneBackendTraits<LinearSolver>::CStorage &ocp) {
+void update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder, LinearSolver> &backend,
+                            const typename CycloneBackendTraits<LinearSolver>::CStorage &ocp) {
     backend.update_data(ocp);
 }
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 void update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder, LinearSolver> &backend,
                             const typename CycloneBackendTraits<LinearSolver>::OCPStorage &ocp) {
-    const auto cocp = CycloneBackendTraits<LinearSolver>::CStorage::build(
-        ocp, backend.ocp.ny_0);
+    const auto cocp = CycloneBackendTraits<LinearSolver>::CStorage::build(ocp, backend.ocp.ny_0);
     update_cyqpalm_backend(backend, cocp);
 }
 

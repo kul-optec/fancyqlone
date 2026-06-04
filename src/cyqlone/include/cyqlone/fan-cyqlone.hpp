@@ -31,11 +31,11 @@ struct SolverStorage {
     SolverLast tridiagonal_solver;
     matrix B0 = [this] {
         return matrix{{.rows = cyqlone_solver.nx, .cols = cyqlone_solver.nu},
-                               batmat::matrix::uninitialized};
+                      batmat::matrix::uninitialized};
     }(); // B(0) for each branch
     matrix LB = [this] {
         return matrix{{.rows = cyqlone_solver.nu, .cols = cyqlone_solver.nx},
-                                batmat::matrix::uninitialized};
+                      batmat::matrix::uninitialized};
     }(); // B(0) for each branch
 };
 template <class matrix, class T = real_t>
@@ -110,6 +110,16 @@ struct FanCyqloneSolver {
         }
         return num_gen_con + ny_0; // for D(0) u(0)
     }
+    [[nodiscard]] index_t num_internal_constraints() const {
+        index_t num_gen_con = 0;
+        for (const SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>> &s :
+             solver_storages) {
+            const index_t ny_M =
+                std::max(s.cyqlone_solver.ny, s.cyqlone_solver.ny_0 + s.cyqlone_solver.ny_N);
+            num_gen_con += ny_M * (s.cyqlone_solver.ceil_N());
+        }
+        return num_gen_con + ny_0; // for D(0) u(0)
+    }
     [[nodiscard]] index_t nx() const {
         index_t nx_tot = 0;
         for (const SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>> &s :
@@ -121,11 +131,11 @@ struct FanCyqloneSolver {
     // Workspaces for contribution u(0)
     SolverLast::matrix SBs = [this] {
         return typename SolverLast::matrix{{.depth = num_branches, .rows = nu, .cols = nu},
-                           batmat::matrix::uninitialized};
-                        }();
+                                           batmat::matrix::uninitialized};
+    }();
     SolverLast::matrix rs = [this] {
         return typename SolverLast::matrix{{.depth = num_branches, .rows = nu, .cols = 1},
-                           batmat::matrix::uninitialized};
+                                           batmat::matrix::uninitialized};
     }();
     SolverLast::matrix R0 = [this] {
         return typename SolverLast::matrix{{.rows = nu, .cols = nu}, batmat::matrix::uninitialized};
@@ -133,7 +143,8 @@ struct FanCyqloneSolver {
     SolverLast::matrix r0 = [this] {
         return typename SolverLast::matrix{{.rows = nu, .cols = 1}, batmat::matrix::uninitialized};
     }();
-    
+    /// Processors per branch
+    std::vector<index_t> p;
     /// Vector length.
     static constexpr index_t v = VL;
     /// Number of stages per thread per vector lane (rounded up).
@@ -181,43 +192,37 @@ struct FanCyqloneSolver {
         }
     }
 
-    /// Call a function for each stage in the horizon, passing the stage index, the data batch
-    /// index, and optionally the corresponding batches of the given arrays.
-    /// Iterates backwards in time (decreasing stage index j).
-    void foreach_stage(Context &ctx, auto &&func, auto &&...xs) const {
-        index_t i = ctx.total_context().index();
-        solver_storages[i].foreach_stage(ctx.branch_context(), func, xs.branches[i]...);
-        /// @todo: Handle u0 separately, since it is shared between branches
-    }
+
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
     /// index, and optionally the corresponding batches of the given arrays.
     /// Iterates backwards in time (decreasing stage index j).
     void foreach_batch(Context &ctx, auto &&func, auto &&...xs) const {
-        index_t i = ctx.total_context().index();
-        solver_storages[i].foreach_stage(ctx.branch_context(), func, xs.branches[i]...);
-        func(xs.first...);
+        index_t i = ctx.total_ctx.index;
+        solver_storages[i].cyqlone_solver.foreach_batch(ctx.branch_ctx, func, xs.branches[i]...);
+        if (ctx.is_master())
+            func(xs.first...);
         /// @todo: Handle u0 separately, since it is shared between branches
     }
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
     /// index, and optionally the corresponding batches of the given arrays.
     /// Iterates forward in time (increasing stage index j).
-    void foreach_stage_fwd(Context &ctx, auto &&func, auto &&...xs) const {
-        index_t i = ctx.total_context().index();
-        solver_storages[i].foreach_stage_fwd(ctx.branch_context(), func, xs.branches[i]...);
-
-        /// @todo: Handle u0 separately, since it is shared between branches
-    }
+    
     void foreach_batch_fwd(Context &ctx, auto &&func, auto &&...xs) const {
-        index_t i = ctx.total_context().index();
-        solver_storages[i].foreach_stage_fwd(ctx.branch_context(), func, xs.branches[i]...);
-        func(xs.first...);
+        index_t i = ctx.total_ctx.index;
+        solver_storages[i].cyqlone_solver.foreach_batch_fwd(ctx.branch_ctx, func,
+                                                            xs.branches[i]...);
+        if (ctx.is_master()) {
+            func(xs.first...);
+        }
     }
     /// Build a new FanCyqloneSolver instance.
     static FanCyqloneSolver build(const FanCyqloneStorage<value_type> &ocp, std::vector<index_t> p,
                                   CyqloneParams<value_type> params = {});
+    static FanCyqloneSolver build(const FanCyqloneStorage<value_type> &ocp, index_t p,
+                                  CyqloneParams<value_type> params = {});
     /// Update the internal data structures to reflect changes in the OCP data (without changing
     /// the problem size).
-    void update_data(const FanCyqloneStorage<value_type> &ocp, const std::vector<index_t> &p);
+    void update_data(const FanCyqloneStorage<value_type> &ocp);
     /// Initialize the right-hand side vector for the dynamics constraints of the OCP, using the
     /// custom Cyqlone storage format.
     void initialize_rhs(const FanCyqloneStorage<value_type> &ocp, FanStorage rhs) const;
