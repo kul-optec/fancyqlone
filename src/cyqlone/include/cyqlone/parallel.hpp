@@ -266,6 +266,12 @@ struct arrival_token_typed_fan {
     total_token_t total_token;
     branch_token_t branch_token;
 };
+struct arrival_token_fan {
+    using total_token_t  = typename Context<FanSharedContext>::arrival_token;
+    using branch_token_t = typename Context<SharedContext>::arrival_token;
+    std::optional<total_token_t> total_token;
+    branch_token_t branch_token;
+};
 template <class SC>
 struct FanContext {
     using shared_context_type = SC;
@@ -273,10 +279,62 @@ struct FanContext {
     Context<FanSharedContext> total_ctx;
     index_t index = branch_ctx.index + total_ctx.index * total_ctx.num_thr();
     template <class T>
-    using arrival_token_typed = arrival_token_typed_fan<T>;
+    using arrival_token_typed = FanSharedContext::barrier_type::template arrival_token_typed<T>;
+    using arrival_token = FanSharedContext::barrier_type::arrival_token;
+    using arrival_t = Context<SharedContext>::arrival_token;
+    using fan_arrival_t = Context<FanSharedContext>::arrival_token;
+
 
     [[nodiscard]] bool is_master() const { return total_ctx.is_master() && branch_ctx.is_master(); }
+   /// Arrive at the barrier and obtain a token that can be used to wait for completion of the
+    /// current barrier phase.
+    /// @note    Token must be awaited before any other call to arrive.
+    [[nodiscard]] auto arrive() {
+        std::optional<Context<FanSharedContext>::arrival_token> total_token;
+        if (branch_ctx.is_master()) {
+            total_token.emplace(total_ctx.arrive());
+        }
 
+        arrival_t branch_token = branch_ctx.arrive();
+        return arrival_token_fan{
+            .total_token = std::move(total_token),
+            .branch_token = std::move(branch_token)
+        };
+    }
+    /// Await a token returned by @ref arrive(), waiting for the barrier phase to complete.
+    void wait(arrival_token_fan &&token) {
+        if (branch_ctx.is_master()) {
+            total_ctx.wait(std::move(*token.total_token));
+        }
+        branch_ctx.wait(std::move(token.branch_token));
+
+    }
+
+    /// Arrive at the barrier and wait for the barrier phase to complete. This is a convenience
+    /// wrapper around @ref arrive() and @ref wait() for the common case where the thread does not
+    /// have other work to do while waiting.
+    void arrive_and_wait() {
+#if !GUANAQO_WITH_PERFETTO
+        GUANAQO_TRACE("barrier-arrive-and-wait", index);
+#endif
+        if (branch_ctx.is_master()) {
+            total_ctx.arrive_and_wait();
+        }
+        branch_ctx.arrive_and_wait();
+    }
+    /// Debug version of @ref arrive_and_wait() that performs a sanity check to ensure that all
+    /// threads are arriving at the same line of code. The @p line parameter should be the same
+    /// for all threads arriving at the same barrier. It is only verified in debug builds, and is
+    /// equivalent to @ref arrive_and_wait() in release builds.
+    void arrive_and_wait(int line) {
+#if !GUANAQO_WITH_PERFETTO
+        GUANAQO_TRACE("barrier-arrive-and-wait", index);
+#endif
+        if (branch_ctx.is_master()) {
+            total_ctx.arrive_and_wait(line);
+        }
+        branch_ctx.arrive_and_wait(line);
+    }
     /// Perform a reduction of @p x across all threads using the given binary function @p func.
     /// Returns a token that can be used to wait for the reduction to complete and obtain the
     /// reduced value.
