@@ -55,15 +55,27 @@ FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const FanCyqloneStorage<value_
         .nu           = ocp.nu,
         .ny_0         = ocp.ny_0,
         .solver_storages = {}, // initialized in update_data
+        .p          = std::move(p),
+
     };
-    res.update_data(ocp, p);
+    res.update_data(ocp);
     res.update_params(params);
     return res;
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+FanCyqloneSolver<VL, T, DefaultOrder, Ctx>
+FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const FanCyqloneStorage<value_type> &ocp,
+                                                  index_t p,
+                                                  CyqloneParams<value_type> params) {
+    BATMAT_ASSERT(p > 0);
+    index_t p_fan = p/ocp.num_branches;
+    std::vector<index_t> p_vector(ocp.num_branches, p_fan);
+    return build(ocp, p_vector, params);
+}
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_data(
-    const FanCyqloneStorage<value_type> &ocp, const std::vector<index_t> &p) {
+    const FanCyqloneStorage<value_type> &ocp) {
     using cyqlone::detail::copy;
     using cyqlone::detail::scale;
     namespace la = cyqlone::linalg;
