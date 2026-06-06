@@ -1,0 +1,135 @@
+#include <cyqlone/cyqlone.hpp>
+#include <cyqlone/fan-cyqlone.hpp>
+
+#include <cyqlone/linalg.hpp>
+
+#include <batmat/assume.hpp>
+#include <batmat/linalg/copy.hpp>
+#include <batmat/linalg/gemv.hpp>
+#include <batmat/linalg/simdify.hpp>
+#include <batmat/linalg/symv.hpp>
+#include <batmat/linalg/uview.hpp>
+#include <batmat/loop.hpp>
+
+namespace CYQLONE_NS(cyqlone) {
+
+namespace la = cyqlone::linalg;
+using namespace batmat::linalg;
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::residual_dynamics_constr(Context &ctx,
+                                                                          FanStorage x,
+                                                                          FanStorage b,
+                                                                          FanStorage Mxb) const {
+    // (Mx + b)(i,j) = A(i,j) x(i,j) + B(i,j) u(i,j) - x(i,j+1) + b(i,j)
+    auto arrival    = ctx.arrive();
+    const index_t c = ctx.total_ctx.index;
+    solver_storages[c].cyqlone_solver.residual_dynamics_constr(ctx.branch_ctx, x.branches[c],
+                                                               b.branches[c], Mxb.branches[c]);
+    index_t nx_offset = 0;
+    for (index_t i = 0; i < c; ++i)
+        nx_offset += solver_storages[i].cyqlone_solver.nx;
+    auto bc                    = b.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx);
+    decltype(Mxb.first.batch(0)) Mxb_row = Mxb.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx);
+    auto indices = solver_storages[c].cyqlone_solver.inverse_stage_index(1);
+    Mxb_row.batch(0)(0) = x.branches[c].batch(indices.c * solver_storages[c].cyqlone_solver.n + indices.i)(indices.l);
+
+    gemv_add(solver_storages[c].B0.batch(0), Mxb_row, bc,
+             Mxb.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx));
+    ctx.wait(std::move(arrival)); // x_next comes from next thread
+}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::transposed_dynamics_constr(Context &ctx,
+                                                                            FanStorage λ,
+                                                                            FanStorage Mᵀλ,
+                                                                            bool accum) const {
+    // (Mᵀλ)(i,j) = [ B(i,j)ᵀ ] λ(j) - [ 0 ] λ(i,j-1)
+    //            [ A(i,j)ᵀ ]        [ I ]
+    auto arrival      = ctx.arrive();
+    const index_t c   = ctx.total_ctx.index;
+    index_t nx_offset = 0;
+    for (index_t i = 0; i < c; ++i)
+        nx_offset += solver_storages[i].cyqlone_solver.nx;
+    auto indices = solver_storages[c].cyqlone_solver.inverse_stage_index(0);
+    decltype(λ.first.batch(0)) Mxb_row = Mᵀλ.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx);
+    Mxb_row.batch(0)(0)  = λ.branches[c].batch(indices.c * solver_storages[c].cyqlone_solver.n + indices.i)(indices.l);
+    la::copy(λ.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx), Mxb_row);
+    solver_storages[c].cyqlone_solver.transposed_dynamics_constr(ctx.branch_ctx, λ.branches[c],
+                                                                 Mᵀλ.branches[c], accum);
+
+                                                            
+    Mxb_row.batch(0)(0) = Mᵀλ.branches[c].batch(indices.c * solver_storages[c].cyqlone_solver.n + indices.i)(indices.l);
+    ctx.wait(std::move(arrival)); // λ_prev comes from previous thread
+}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::general_constr(Context &ctx, FanStorage ux,
+                                                                FanStorage DCux) const {
+    const auto mul_Gx = [](auto Gᵀj, auto uxj, auto DCuxj) { gemv(Gᵀj.transposed(), uxj, DCuxj); };
+    const index_t c   = ctx.total_ctx.index;
+    solver_storages[c].cyqlone_solver.general_constr(ctx.branch_ctx, ux.branches[c],
+                                                     DCux.branches[c]);
+    mul_Gx(D0(0).transposed(), ux.first.batch(0), DCux.first.batch(0));
+}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::transposed_general_constr(Context &ctx,
+                                                                           FanStorage y,
+                                                                           FanStorage DCᵀy) const {
+    const auto mul_Gᵀy = [](auto Gᵀj, auto yj, auto DCᵀyj) { gemv(Gᵀj, yj, DCᵀyj); };
+    const index_t c    = ctx.total_ctx.index;
+    solver_storages[c].cyqlone_solver.transposed_general_constr(ctx.branch_ctx, y.branches[c],
+                                                                DCᵀy.branches[c]);
+    mul_Gᵀy(D0(0).transposed(), y.first.batch(0), DCᵀy.first.batch(0));
+}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::cost_gradient(Context &ctx, FanStorage ux,
+                                                               value_type α, FanStorage q,
+                                                               value_type β,
+                                                               FanStorage grad_f) const {
+    const auto mul_Hx = [&](auto qj, auto Hj, auto uxj, auto grad_fj) {
+        // GUANAQO_TRACE("cost_gradient", j);
+        if (α != 0 || β != 1)
+            axpby(α, qj, β, grad_fj);
+        symv_add(tril(Hj), uxj, grad_fj);
+    };
+    const index_t c = ctx.total_ctx.index;
+    solver_storages[c].cyqlone_solver.cost_gradient(ctx.branch_ctx, ux.branches[c], α,
+                                                    q.branches[c], β, grad_f.branches[c]);
+    mul_Hx( q.first.batch(0), R0.batch(0), ux.first.batch(0),
+           grad_f.first.batch(0));
+}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::cost_gradient_regularized(
+    Context &ctx, value_type γ, FanStorage ux, FanStorage ux0, FanStorage q,
+    FanStorage grad_f) const {
+    auto inv_γ{1 / γ};
+    const auto reg_simd = [inv_γ](auto qji, auto xji, auto x0ji) {
+        return inv_γ * (xji - x0ji) + qji;
+    };
+    const auto mul_Hx = [&]( auto qj, auto Hj, auto uxj, auto ux0j,
+                            auto grad_fj) {
+        linalg::transform_elementwise(reg_simd, grad_fj, qj, uxj, ux0j);
+        symv_add(tril(Hj), uxj, grad_fj);
+    };
+    const index_t c = ctx.total_ctx.index;
+    solver_storages[c].cyqlone_solver.cost_gradient_regularized(ctx.branch_ctx, γ, ux.branches[c], ux0.branches[c], q.branches[c], grad_f.branches[c]);
+    mul_Hx(q.first.batch(0), D0.batch(0).batch(0), R0.batch(0), ux.first.batch(0), grad_f.first.batch(0));}
+
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::cost_gradient_remove_regularization(
+    Context &ctx, value_type γ, FanStorage ux, FanStorage ux0, FanStorage grad_f) const {
+    auto inv_γ{1 / γ};
+    const auto sub_reg_simd = [inv_γ](auto grad_fji, auto xji, auto x0ji) {
+        return grad_fji + inv_γ * (x0ji - xji);
+    };
+    const auto sub_reg = [&]([[maybe_unused]] auto uxj, auto ux0j, auto grad_fj) {
+        linalg::transform_elementwise(sub_reg_simd, grad_fj, grad_fj, uxj, ux0j);
+    };
+    foreach_batch(ctx, sub_reg, ux, ux0, grad_f);
+}
+
+} // namespace CYQLONE_NS(cyqlone)

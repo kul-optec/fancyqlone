@@ -55,7 +55,11 @@ using batmat::matrix::StorageOrder;
     auto l = get_level(i);
     return i >> (l + 1);
 }
-
+struct StageIndexInv {
+    index_t c;
+    index_t i;
+    index_t l;
+};
 /// Solver for block-tridiagonal systems using cyclic reduction (CR), parallel cyclic reduction
 /// (PCR), and preconditioned conjugate gradient (PCG) methods.
 /// @tparam VL              Vector length.
@@ -714,7 +718,7 @@ struct CyqloneSolver {
             func(j, di, xs.batch(di)...);
         }
     }
-        /// Call a function for each stage in the horizon, passing the stage index, the data batch
+    /// Call a function for each stage in the horizon, passing the stage index, the data batch
     /// index, and optionally the corresponding batches of the given arrays.
     /// Iterates forward in time (increasing stage index j).
     void foreach_batch_fwd(Context &ctx, auto &&func, auto &&...xs) const {
@@ -754,6 +758,8 @@ struct CyqloneSolver {
     /// column @p i, and the vector lane index @p l.
     /// Note that @p i is in factorization order, i.e. later stages first.
     [[nodiscard]] index_t stage_index(index_t c, index_t i, index_t l) const;
+
+    [[nodiscard]] StageIndexInv inverse_stage_index(index_t j) const;
 
     /// @todo refactor sparse.tpp
     [[nodiscard]] index_t sub_wrap_ceil_P(index_t a, index_t b) const;

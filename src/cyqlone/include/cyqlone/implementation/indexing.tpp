@@ -140,4 +140,57 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
                                      : sub_wrap_ceil_N(c * n + l * p * n + n - 1, i);
 }
 
+template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
+[[nodiscard]] StageIndexInv
+CyqloneSolver<VL, T, DefaultOrder, Ctx>::inverse_stage_index(index_t stage) const {
+    const index_t N = ceil_N();
+
+    BATMAT_ASSUME(stage >= 0);
+    BATMAT_ASSUME(stage < N);
+    BATMAT_ASSUME(n > 0);
+    BATMAT_ASSUME(N % n == 0);
+
+    const index_t K = N / n; // should be p * VL
+
+    const index_t q = stage / n;
+    const index_t r = stage - q * n;
+
+    index_t k;
+    index_t i;
+
+    if (params.eliminate_u0_first) {
+        // stage = n*k - i mod N
+        if (r == 0) {
+            k = q;
+            i = 0;
+        } else {
+            k = q + 1;
+            if (k == K)
+                k = 0;
+
+            i = n - r;
+        }
+    } else {
+        // stage = n*k + n - 1 - i mod N
+        k = q;
+        i = n - 1 - r;
+    }
+
+    const index_t c = k % p;
+    const index_t l = k / p;
+
+    BATMAT_ASSUME(c >= 0);
+    BATMAT_ASSUME(c < p);
+    BATMAT_ASSUME(l >= 0);
+    BATMAT_ASSUME(l < VL);
+    BATMAT_ASSUME(i >= 0);
+    BATMAT_ASSUME(i < n);
+    BATMAT_ASSERT(stage == stage_index(c, i, l));
+    return {
+        .c = c,
+        .i = i,
+        .l = l,
+    };
+}
+
 } // namespace CYQLONE_NS(cyqlone)
