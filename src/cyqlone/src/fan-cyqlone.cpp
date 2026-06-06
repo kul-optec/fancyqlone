@@ -1,6 +1,8 @@
 #include <cyqlone/fan-cyqlone.hpp>
 #include <cyqlone/implementation/fan-data.tpp>
 #include <cyqlone/implementation/fan-factor.tpp>
+#include <cyqlone/implementation/fan-mat-vec.tpp>
+#include <cyqlone/implementation/fan-update.tpp>
 
 
 namespace CYQLONE_NS(cyqlone) {

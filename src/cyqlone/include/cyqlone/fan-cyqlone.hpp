@@ -38,10 +38,12 @@ struct SolverStorage {
                       batmat::matrix::uninitialized};
     }(); // B(0) for each branch
 };
-template <class matrix, class T = real_t>
+template <class matrix, class T = real_t, StorageOrder DefaultOrder = StorageOrder::ColMajor>
 struct FanStorage_t {
     using value_type = T;
-    using matrix_f   = TridiagonalSolver<value_type>::matrix;
+    using one_t         = std::integral_constant<index_t, 1>;
+    using matrix_f = TridiagonalSolver<value_type>::matrix;
+    // using matrix_f        = batmat::matrix::Matrix<value_type, index_t, one_t, one_t, DefaultOrder>;
 
     std::vector<matrix> branches;
     matrix_f first;
@@ -143,6 +145,10 @@ struct FanCyqloneSolver {
     SolverLast::matrix r0 = [this] {
         return typename SolverLast::matrix{{.rows = nu, .cols = 1}, batmat::matrix::uninitialized};
     }();
+    SolverLast::matrix D0 = [this] {
+        return typename SolverLast::matrix{{.rows = nu, .cols = nu}, batmat::matrix::uninitialized};
+    }();
+
     /// Processors per branch
     std::vector<index_t> p;
     /// Vector length.
@@ -167,7 +173,7 @@ struct FanCyqloneSolver {
     /// Owning type for a batch of matrices (with batch size v).
     template <StorageOrder O = column_major>
     using matrix     = batmat::matrix::Matrix<value_type, index_t, vl_t, index_t, O, align_t>;
-    using FanStorage = FanStorage_t<matrix<>, value_type>;
+    using FanStorage = FanStorage_t<matrix<>, value_type, DefaultOrder>;
 
     /// Get the current Cyqlone solver parameters.
     [[nodiscard]] CyqloneParams<value_type> get_params() const {
@@ -200,8 +206,7 @@ struct FanCyqloneSolver {
         index_t i = ctx.total_ctx.index;
         solver_storages[i].cyqlone_solver.foreach_batch(ctx.branch_ctx, func, xs.branches[i]...);
         if (ctx.is_master())
-            func(xs.first...);
-        /// @todo: Handle u0 separately, since it is shared between branches
+            func(xs.first.batch(0)...);
     }
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
     /// index, and optionally the corresponding batches of the given arrays.
@@ -212,7 +217,7 @@ struct FanCyqloneSolver {
         solver_storages[i].cyqlone_solver.foreach_batch_fwd(ctx.branch_ctx, func,
                                                             xs.branches[i]...);
         if (ctx.is_master()) {
-            func(xs.first...);
+            func(xs.first.batch(0)...);
         }
     }
     /// Build a new FanCyqloneSolver instance.
@@ -352,8 +357,8 @@ struct FanCyqloneSolver {
     /// Algorithm 4 in the paper.
     /// @param ctx Parallel context.
     /// @param ΔΣ Changes to the ALM penalty factors Σ.
-    void update(Context &ctx, FanStorage ΔΣ);
-    /// Fused variant of @ref update and @ref solve_forward.
+    // void update(Context &ctx, FanStorage ΔΣ);
+    // /// Fused variant of @ref update and @ref solve_forward.
     void update_solve(Context &ctx, FanStorage ΔΣ, FanStorage ux, FanStorage λ);
 
     /// @}
@@ -361,12 +366,12 @@ struct FanCyqloneSolver {
     /// @name Low-level factorization and forward solve routines
     /// @{
 
-    // index_t riccati_thread_assignment(Context &ctx) const { return add_wrap_p(ctx.index, 1); }
-    template <bool Factor = true, bool Solve = true>
-    void factor_riccati_solve(Context &ctx, value_type γ, FanStorage Σ, FanStorage ux,
-                              FanStorage λ);
-    template <bool Factor = true, bool Solve = true>
-    void compute_schur(Context &ctx, real_t ρ_inv, FanStorage ux, FanStorage λ);
+    // // index_t riccati_thread_assignment(Context &ctx) const { return add_wrap_p(ctx.index, 1); }
+    // template <bool Factor = true, bool Solve = true>
+    // void factor_riccati_solve(Context &ctx, value_type γ, FanStorage Σ, FanStorage ux,
+    //                           FanStorage λ);
+    // template <bool Factor = true, bool Solve = true>
+    // void compute_schur(Context &ctx, real_t ρ_inv, FanStorage ux, FanStorage λ);
 
     /// @}
 
@@ -379,7 +384,7 @@ struct FanCyqloneSolver {
 
     /// @}
     template <bool Factor = true, bool Solve = true>
-    void factor_solve_λ0(index_t branch, FanStorage λ);
+    void factor_solve_λ0(index_t branch, FanStorage λ, FanStorage Σ);
     template <bool Factor = true, bool Solve = true>
 
     void factor_solve_u0(FanStorage ux);
@@ -398,31 +403,31 @@ struct FanCyqloneSolver {
     /// @{
 
     /// Update the modified Riccati factorization of a single block column as described by
-    /// Algorithm 3 in the paper.
-    template <bool Solve = true>
-    void update_riccati_solve(Context &ctx, FanStorage ΔΣ, FanStorage ux, FanStorage λ);
-    void update_riccati(Context &ctx, FanStorage ΔΣ) {
-        update_riccati_solve<false>(ctx, ΔΣ, {}, {});
-    }
-    template <bool Solve = true>
-    void update_solve_impl(Context &ctx, FanStorage ΔΣ, FanStorage ux, FanStorage λ);
+    // /// Algorithm 3 in the paper.
+    // template <bool Solve = true>
+    // void update_riccati_solve(Context &ctx, FanStorage ΔΣ, FanStorage ux, FanStorage λ);
+    // void update_riccati(Context &ctx, FanStorage ΔΣ) {
+    //     update_riccati_solve<false>(ctx, ΔΣ, {}, {});
+    // }
+    // template <bool Solve = true>
+    // void update_solve_impl(Context &ctx, FanStorage ΔΣ, FanStorage ux, FanStorage λ);
 
-    /// @}
+    // /// @}
 
-    /// @name Build sparse representations for debugging and testing
-    /// @{
+    // /// @name Build sparse representations for debugging and testing
+    // /// @{
 
-    [[nodiscard]] SparseMatrix build_sparse(const FanCyqloneStorage<value_type> &ocp,
-                                            std::span<const value_type> Σ) const;
-    [[nodiscard]] SparseMatrix build_sparse_no_penalty() const;
-    [[nodiscard]] std::vector<value_type>
-    build_rhs(FanStorage rq, FanStorage b, value_type scale_rq = -1, value_type scale_b = -1) const;
-    [[nodiscard]] std::vector<value_type> build_sol(FanStorage ux, FanStorage λ) const {
-        return build_rhs(ux, λ, 1, 1);
-    }
-    [[nodiscard]] SparseMatrix build_sparse_factor() const;
-    [[nodiscard]] SparseMatrix build_sparse_diag() const;
-    [[nodiscard]] SparseMatrix build_sparse_reg(real_t γ, real_t ρ_inv_internal,
-                                                real_t ρ_inv_windows) const;
+    // [[nodiscard]] SparseMatrix build_sparse(const FanCyqloneStorage<value_type> &ocp,
+    //                                         std::span<const value_type> Σ) const;
+    // [[nodiscard]] SparseMatrix build_sparse_no_penalty() const;
+    // [[nodiscard]] std::vector<value_type>
+    // build_rhs(FanStorage rq, FanStorage b, value_type scale_rq = -1, value_type scale_b = -1) const;
+    // [[nodiscard]] std::vector<value_type> build_sol(FanStorage ux, FanStorage λ) const {
+    //     return build_rhs(ux, λ, 1, 1);
+    // }
+    // [[nodiscard]] SparseMatrix build_sparse_factor() const;
+    // [[nodiscard]] SparseMatrix build_sparse_diag() const;
+    // [[nodiscard]] SparseMatrix build_sparse_reg(real_t γ, real_t ρ_inv_internal,
+    //                                             real_t ρ_inv_windows) const;
 };
 } // namespace CYQLONE_NS(cyqlone)

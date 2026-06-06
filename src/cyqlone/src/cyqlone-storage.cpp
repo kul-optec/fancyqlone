@@ -1,6 +1,7 @@
 #include <cyqlone/cyqlone-storage.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/config.hpp>
+#include <batmat/linalg/copy.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>
 
 namespace cyqlone {
@@ -183,6 +184,7 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
     r0 = matrix{{ .rows = nu, .cols = 1}};
     la::copy(focp.R0, R0(0));
     la::copy(focp.r0, r0(0));
+    la::copy(focp.D0, D0(0));
     for (index_t i = 0; i < num_branches; ++i) {
         auto &cocp = branches[i] = CyqloneStorage<T>::build(focp.ocps[i]);
         Bs[i]                    = matrix{{ .rows = nu, .cols = nu}};

@@ -119,14 +119,14 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
     real_t r_norm_sq = 0, grad_norm_sq = 0, r_norm_inf = 0;
     real_t r_kkt_norm_sq = 0, r_kkt_norm_inf = 0;
     const auto resid_simd = [&](auto gradi, auto ξi, auto Mᵀλi, auto Aᵀŷi, auto MᵀΔλi, auto ri) {
-        auto gi      = NeumaierSum(gradi) + Mᵀλi + Aᵀŷi;
-        simd r_kkt_i = gi + MᵀΔλi + ξi;
+        auto gi      = NeumaierSum(gradi).get() + Mᵀλi + Aᵀŷi;
+        auto r_kkt_i = gi + MᵀΔλi + ξi;
         ri += gi + MᵀΔλi + ξi;
         r_norm_inf = max(r_norm_inf, hmax(abs(ri)));
         r_norm_sq += reduce(ri * ri);
         r_kkt_norm_inf = max(r_kkt_norm_inf, hmax(abs(r_kkt_i)));
         r_kkt_norm_sq += reduce(r_kkt_i * r_kkt_i);
-        grad_norm_sq += reduce(simd{gi} * simd{gi});
+        grad_norm_sq += reduce(decltype(gi){gi} * decltype(gi){gi});
         return ri;
     };
     const auto resid_batch = [&](auto gradi, auto ξi, auto Mᵀλi, auto Aᵀŷi, auto MᵀΔλi,

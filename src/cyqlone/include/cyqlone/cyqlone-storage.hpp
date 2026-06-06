@@ -107,6 +107,7 @@ struct FanCyqloneStorage {
     matrix r0;
     // R(0)
     matrix R0;
+    matrix D0;
 
     void update_impl(const FanOCPStorage &focp);
     void update(const FanOCPStorage &focp);
