@@ -75,12 +75,14 @@ template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 template <class T>
 auto CyQPALMBackend<VL, DefaultOrder, LinearSolver>::norm_inf_l1_sq(Context &ctx, const T &x) const {
     // GUANAQO_TRACE("norm_inf_l1_sq", 0, 4 * x.batch_size() * x.rows() * ocp.n);
-    auto nrm                  = norms.zero();
+    static constexpr auto norms_simd = batmat::linalg::norms<real_t, typename traits::simd>{};
+
+    auto nrm                  = norms_simd.zero();
     const auto norm_inf_l1_sq = [&](auto xi) {
-        nrm = norms(nrm, linalg::norms_all(xi));
+        nrm = norms_simd(nrm, linalg::norms_all(xi));
     };
     ocp.foreach_batch(ctx, norm_inf_l1_sq, x);
-    return ctx.reduce(nrm, norms);
+    return ctx.reduce(nrm, norms_simd);
 }
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>

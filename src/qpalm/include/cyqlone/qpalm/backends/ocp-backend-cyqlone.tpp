@@ -38,7 +38,6 @@ template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 struct CyQPALMBackend {
     using OCP_t                 = LinearSolver;
     using traits                = CycloneBackendTraits<OCP_t>;
-    static constexpr auto norms = batmat::linalg::norms<real_t, typename traits::simd>{};
     // clang-format off
     using ineq_constr_vec_t = traits::template storage_t<struct ineq>;
     using eq_constr_vec_t = traits::template storage_t<struct eq>;
@@ -372,6 +371,17 @@ struct CyQPALMBackend {
                                   const ineq_constr_vec_t &Σ, const ineq_constr_vec_t &y,
                                   const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
                                   const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
+    BreakpointsResult
+    compute_partition_breakpoints_cyq(Context &ctx, std::vector<Breakpoint> &breakpoints,
+                                  const ineq_constr_vec_t &Σ, const ineq_constr_vec_t &y,
+                                  const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
+                                  const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
+    BreakpointsResult
+    compute_partition_breakpoints_fan(Context &ctx, std::vector<Breakpoint> &breakpoints,
+                                  const ineq_constr_vec_t &Σ, const ineq_constr_vec_t &y,
+                                  const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
+                                  const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
+
 
     friend BreakpointsResult
     guanaqo_tag_invoke(guanaqo::tag_t<get_breakpoints>, CyQPALMBackend &backend, Context &ctx,
@@ -431,16 +441,30 @@ struct CyQPALMBackend {
 
     real_t unscaled_aug_lagr_norm(Context &ctx, const var_vec_t &grad_f, const var_vec_t &Mᵀλ,
                                   const var_vec_t &Aᵀŷ) const {
+
         GUANAQO_TRACE("unscaled_aug_lagr_norm", 0);
-        auto nrm_simd             = norms.zero_simd();
+        static constexpr auto norms_simd = batmat::linalg::norms<real_t, typename traits::simd>{};
+        using simd_scal = batmat::datapar::simd<real_t, batmat::datapar::scalar_abi<real_t>>;
+        static constexpr auto norms_smid_scal = batmat::linalg::norms<real_t, simd_scal>{};
+        static constexpr auto norms_scal = batmat::linalg::norms<real_t>{};
+
+        auto nrm_simd             = norms_simd.zero_simd();
+        auto nrm_simd_scal       = norms_smid_scal.zero_simd();
         const auto grad_norm_simd = [&](auto grad_fji, auto Mᵀλji, auto Aᵀŷji) {
-            nrm_simd = norms(nrm_simd, grad_fji + Mᵀλji + Aᵀŷji);
+            if constexpr (std::is_same_v<decltype(grad_fji), simd_scal>) {
+                nrm_simd_scal = norms_smid_scal(nrm_simd_scal, grad_fji + Mᵀλji + Aᵀŷji);
+            } else {
+                nrm_simd = norms_simd(nrm_simd, grad_fji + Mᵀλji + Aᵀŷji);
+            }
         };
         const auto grad_norm_batch = [&](auto grad_fj, auto Mᵀλj, auto Aᵀŷj) {
             linalg::for_each_elementwise(grad_norm_simd, grad_fj, Mᵀλj, Aᵀŷj);
         };
         ocp.foreach_batch(ctx, grad_norm_batch, grad_f, Mᵀλ, Aᵀŷ);
-        return ctx.reduce(norms(nrm_simd), norms).norm_inf();
+        auto nrm_scal = norms_smid_scal(nrm_simd_scal);
+        nrm_scal = norms_scal(nrm_scal, norms_simd(nrm_simd));
+        // auto nrms_scal = norms_scal.zeros();
+        return ctx.reduce(nrm_scal, norms_scal).norm_inf();
     }
 
     void scale_variables(std::span<const real_t> in, var_vec_t &out) const {

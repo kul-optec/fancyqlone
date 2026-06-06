@@ -20,7 +20,7 @@ class NeumaierSum {
     NeumaierSum(T sum, T compensation) : sum{sum}, compensation{compensation} {}
     NeumaierSum(T value = {}) : sum(value) {}
     operator T() const { return sum + compensation; }
-
+    T get() const { return sum + compensation; }
     NeumaierSum operator-() const { return {-sum, -compensation}; }
     NeumaierSum &operator+=(T v) {
         using std::abs;
