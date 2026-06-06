@@ -260,7 +260,7 @@ class TreeBarrier {
         }
         return arrival_token{cur_phase};
     }
-   
+
     template <class T>
     void atomic_wait_ne_acq(const std::atomic<T> &a, T old) const {
         if (a.load(std::memory_order_acquire) != old) [[likely]]
@@ -331,6 +331,10 @@ class TreeBarrier {
     [[nodiscard]] arrival_token get_arrival_token() {
         const auto cur_phase = phase.load(std::memory_order_relaxed);
         return arrival_token{cur_phase};
+    }
+    template <class T>
+    [[nodiscard]] arrival_token_typed<T> get_typed_token() { 
+        return arrival_token_typed<T>{get_arrival_token()};
     }
 
     /// Arrive at the barrier. The barrier's completion function is called by the last thread

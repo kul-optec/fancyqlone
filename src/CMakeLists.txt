@@ -34,6 +34,7 @@ target_sources(cyqlone PUBLIC FILE_SET HEADERS
           "cyqlone/include/cyqlone/implementation/pcr.tpp"
           "cyqlone/include/cyqlone/implementation/cr.tpp"
           "cyqlone/include/cyqlone/implementation/mat-vec.tpp"
+          "cyqlone/include/cyqlone/implementation/fan-mat-vec.tpp"
           "cyqlone/include/cyqlone/implementation/schur.tpp"
           "cyqlone/include/cyqlone/implementation/pcg.tpp"
           "cyqlone/include/cyqlone/implementation/riccati.tpp"

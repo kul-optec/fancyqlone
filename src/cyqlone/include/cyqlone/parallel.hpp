@@ -339,18 +339,17 @@ struct FanContext {
     /// Returns a token that can be used to wait for the reduction to complete and obtain the
     /// reduced value.
     template <class T, class F>
-    [[nodiscard]] auto arrive_reduce(T x, F func) {
-        std::optional<arrival_token_typed<T>> total_token =
-            total_ctx.shared.barrier.get_arrival_token();
+    [[nodiscard]] arrival_token_typed_fan<T> arrive_reduce(T x, F func) {
+        arrival_token_typed<T> total_token =
+            total_ctx.shared.barrier.get_typed_token<T>();
         auto branch_token =
-            branch_ctx.arrive_reduce_with_completion(std::move(x), std::move(func), [&] {
-                [&](T x_broad) { total_token = total_ctx.arrive_reduce(x_broad, std::move(func)); };
+            branch_ctx.arrive_reduce_with_completion(std::move(x), std::move(func), 
+                [&](T x_broad) { total_token = total_ctx.arrive_reduce(x_broad, std::move(func));
             });
-        return arrival_token_typed_fan{.branch_token = branch_token, .total_token = total_token};
-    };
+        return arrival_token_typed_fan<T>{.total_token =  std::move(total_token), .branch_token =  std::move(branch_token)};    };
     template <class T>
-    T wait_reduce(arrival_token_typed<T> &&token) {
-        branch_ctx.wait(std::move(token.branch_token));
+    T wait_reduce(arrival_token_typed_fan<T> &&token) {
+        branch_ctx.wait_reduce(std::move(token.branch_token));
         return total_ctx.wait_reduce(std::move(token.total_token));
     }
 /// @todo try to make more simpel probabily overkill by broadcasting again
