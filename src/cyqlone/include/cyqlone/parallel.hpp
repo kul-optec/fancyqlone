@@ -437,6 +437,7 @@ struct FanContext {
                 });
         });
 #else
+    omp_set_max_active_levels(2);
     BATMAT_OMP(parallel for num_threads(num_thr))
     for (index_t i = 0; i < num_thr; ++i) {
 

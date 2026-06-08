@@ -21,6 +21,7 @@
 #include <cmath>
 #include <concepts>
 #include <functional>
+#include <iostream>
 #include <limits>
 #include <map>
 #include <memory>
@@ -105,6 +106,8 @@ struct CyQPALMBackend {
         b_eq_strided  = eq_constr_vec();
         grad_strided  = var_vec();
         this->ocp.initialize_rhs(ocp, b_eq_strided);
+        std::cout << "b_eq_strided: rhs " << b_eq_strided.size() << std::endl;
+        this->ocp.print_grad(b_eq_strided);
         this->ocp.initialize_gradient(ocp, grad_strided);
         this->ocp.initialize_bounds(ocp, b_min_strided, b_max_strided);
         if (!data.initial_variables.empty()) {
@@ -459,12 +462,22 @@ struct CyQPALMBackend {
         };
         const auto grad_norm_batch = [&](auto grad_fj, auto Mᵀλj, auto Aᵀŷj) {
             linalg::for_each_elementwise(grad_norm_simd, grad_fj, Mᵀλj, Aᵀŷj);
+            // guanaqo::print_python(std::cout << "unscaled_aug_lagr_norm: " << grad_fj(0) << std::endl);
+
         };
         ocp.foreach_batch(ctx, grad_norm_batch, grad_f, Mᵀλ, Aᵀŷ);
         auto nrm_scal = norms_smid_scal(nrm_simd_scal);
         nrm_scal = norms_scal(nrm_scal, norms_simd(nrm_simd));
+        // std::cout << "nrm_simd: " << nrm_simd.norm_inf() << ", nrm_scal: " << nrm_scal.norm_inf() << std::endl;
         // auto nrms_scal = norms_scal.zeros();
-        return ctx.reduce(nrm_scal, norms_scal).norm_inf();
+        real_t nrm = ctx.reduce(nrm_scal, norms_scal).norm_inf();
+        
+        // ocp.print_grad(ctx, grad_f);
+        // ocp.print_grad(ctx, Mᵀλ);
+
+
+        std::cout << "unscaled_aug_lagr_norm: " << nrm << std::endl;
+        return nrm;
     }
 
     void scale_variables(std::span<const real_t> in, var_vec_t &out) const {

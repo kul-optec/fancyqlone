@@ -21,8 +21,8 @@ using la::unpack;
 // Factor the first level corresponidng to u0 and λ0 sequentially
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 template <bool Factor, bool Solve>
-void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_λ0(index_t branch, FanStorage λ,
-                                                                 FanStorage Σ) {
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_λ0(index_t branch, FanStorage &λ,
+                                                                 FanStorage &Σ) {
     if constexpr (Factor) {
         // Factor the final block-tridiagonal Schur complement of each Cyqlone block
         la::unpack(tril(solver_storages[branch].cyqlone_solver.tricyqle.cr_L.batch(0)),
@@ -31,13 +31,13 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_λ0(index_t branch
                    solver_storages[branch].tridiagonal_solver.U.transposed());
         solver_storages[branch].tridiagonal_solver.factor();
         // Compute the contribution to the final Schur complement (system involving only u(0))
-        la::trsm(solver_storages[branch].B0,
+        la::trsm(solver_storages[branch].B0.transposed(),
                  tril(solver_storages[branch].tridiagonal_solver.L.batch(0)).transposed(),
                  solver_storages[branch].LB);
         if (branch == 0) {
             typename SolverLast::matrix temp{{.rows = nu, .cols = nu},
                                              batmat::matrix::uninitialized};
-            la::syrk_diag_add(D0.batch(0), tril(R0.batch(0)), tril(temp.batch(0)),
+            la::syrk_diag_add(D0.batch(0).transposed(), tril(R0.batch(0)), tril(temp.batch(0)),
                               batmat::linalg::simdify(Σ.first.batch(0)));
             // la::copy(R0.batch(0), temp.batch(0));
             la::syrk_add(solver_storages[branch].LB, tril(temp.batch(0)), tril(SBs.batch(branch)));
@@ -60,7 +60,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_λ0(index_t branch
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 template <bool Factor, bool Solve>
-void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_u0(FanStorage ux) {
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_u0(FanStorage &ux) {
     if constexpr (Factor) {
         for (index_t b = 0; b < num_branches; ++b)
             la::add(SBs.batch(0), SBs.batch(b));
@@ -69,19 +69,19 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_u0(FanStorage ux) 
     if constexpr (Solve) {
         for (index_t b = 0; b < num_branches; ++b)
             la::add(rs.batch(0), rs.batch(b));
-        la::trsm(tril(SBs.batch(0)), rs.batch(0), ux.first.batch(0));
+        la::trsm(tril(SBs.batch(0)), rs.batch(0), ux.first.batch(0).top_rows(nu));
     }
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_u0(FanStorage ux) const {
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_u0(FanStorage &ux) const {
     la::trsm(tril(SBs.batch(0)).transposed(),
-             ux.first.batch(0)); // ux.first now contains u(0)
+             ux.first.batch(0).top_rows(nu)); // ux.first now contains u(0)
 }
 // Reverse solve for λ(0) on each branch, after solving for u(0)
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_λ0(index_t branch,
-                                                                  FanStorage λ) const {
+                                                                  FanStorage &λ) const {
     GUANAQO_TRACE_REGION("fan solve reverse λ0", 0);
     // Compute the contribution of u(0) to λ(0) for each Cyqlone block
     index_t nx = solver_storages[branch].cyqlone_solver.nx;
@@ -89,7 +89,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_λ0(index_t branc
     typename SolverLast::matrix λ_last{{.depth = v, .rows = nx, .cols = 1},
                                        batmat::matrix::uninitialized};
     la::unpack(λ.first.batch(0).middle_rows(branch * nx, nx), λ_last);
-    la::gemv_add(solver_storages[branch].LB.batch(branch).transposed(), rs.batch(0),
+    la::gemv_add(solver_storages[branch].LB.batch(0).transposed(), rs.batch(0),
                  λ_last.batch(0));
     // Reverse solve of the final block-tridiagonal system for each Cyqlone block
     solver_storages[branch].tridiagonal_solver.solve_reverse(λ_last);
@@ -101,7 +101,7 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 template <bool Factor, bool Solve>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx, value_type γ,
                                                                    real_t ρ_inv, FanStorage Σ,
-                                                                   FanStorage ux, FanStorage λ) {
+                                                                   FanStorage &ux, FanStorage &λ) {
     index_t c = ctx.total_ctx.index;
     if constexpr (Factor && Solve)
         solver_storages[c].cyqlone_solver.factor_solve(ctx.branch_ctx, γ, ρ_inv, Σ.branches[c],
@@ -121,17 +121,18 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve(Context &ctx, value_type γ,
                                                               real_t ρ_inv, FanStorage Σ,
-                                                              FanStorage ux, FanStorage λ) {
+                                                              FanStorage &ux, FanStorage &λ) {
     factor_solve_impl<true, true>(ctx, γ, ρ_inv, Σ, ux, λ);
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor(Context &ctx, value_type γ, real_t ρ_inv,
                                                         FanStorage Σ) {
-    factor_solve_impl<true, false>(ctx, γ, ρ_inv, Σ, {}, {});
+    FanStorage ux, λ;
+    factor_solve_impl<true, false>(ctx, γ, ρ_inv, Σ, ux, λ);
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_forward(Context &ctx, FanStorage ux,
-                                                               FanStorage λ) {
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_forward(Context &ctx, FanStorage &ux,
+                                                               FanStorage &λ) {
     factor_solve_impl<false, true>(ctx, 0, 0, {}, ux, λ);
 }
 
@@ -144,8 +145,8 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_forward(Context &ctx, Fan
 // Depending on the problem size, either a parallel or serial version of the CR solve is used.
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse(Context &ctx, FanStorage ux,
-                                                               FanStorage λ) {
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse(Context &ctx, FanStorage &ux,
+                                                               FanStorage &λ) {
     const index_t c = ctx.total_ctx.index;
     if (ctx.branch_ctx.is_master()) {
         ctx.total_ctx.run_single_sync([&] { solve_reverse_u0(ux); });
@@ -155,8 +156,8 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse(Context &ctx, Fan
     solver_storages[c].cyqlone_solver.solve_reverse(ctx.branch_ctx, ux.branches[c], λ.branches[c]);
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx, FanStorage ux,
-                                                                   FanStorage λ, FanStorage Mᵀλ) {
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx, FanStorage &ux,
+                                                                   FanStorage &λ, FanStorage &Mᵀλ) {
     const index_t c = ctx.total_ctx.index;
     if (ctx.branch_ctx.is_master()) {
         ctx.total_ctx.run_single_sync([&] { solve_reverse_u0(ux); });

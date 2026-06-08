@@ -16,6 +16,7 @@
 #include <guanaqo/io/csv.hpp>
 #include <guanaqo/print.hpp>
 #include <guanaqo/trace.hpp>
+#include <iostream>
 #include <vector>
 using guanaqo::as_span;
 
@@ -59,22 +60,28 @@ TEST(QPALM, cyqlonefan) {
         cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
 
         ocps[i] = ocp_fan;
+        guanaqo::print_python(std::cout << "[fanout]   u(0) = ", ocp_fan.b(0), "\n");
+        std::cout << "Loaded OCP data from " << filename << " with N=" << ocp_fan.dim.N_horiz << ", nu=" << ocp_fan.dim.nu
+                  << ", ny=" << ocp_fan.dim.ny << "\n";
     }
+    std::cout << cyq_get_num_proc() << " processors detected\n";
     cyqlone::FanOCPStorage fan_ocp{.ocps = ocps, .R0=ocps[0].R(0), .r0=ocps[0].r(0), .D0=ocps[0].D(0)};
     auto cocp = cyqlone::FanCyqloneStorage<>::build(fan_ocp);
-    const bool verbose = false;
+    const bool verbose = true;
     auto &&backend     = qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>>(cocp, {},
-                                                     {.processors      = cyq_get_num_proc(),
+                                                     {.processors      = 4,
                                                       .print_residuals = verbose,
                                                       .print_precision = 17,
-                                                      .tricyqle_params = {.pcg_print_resid = verbose}});
+                                                      .tricyqle_params = {.solve_method = cyqlone::SolveMethod::None},}
+                                                      );
     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>> *> qpalm{
         backend.get(),
-        {.max_outer_iter = 500, .max_total_inner_iter = 1000, .verbose = verbose},
+        {.max_outer_iter = 500, .max_total_inner_iter = 1000, .verbose = verbose, .detailed_stats = true,
+},
     };
 
 #if GUANAQO_WITH_TRACING
-    for (index_t i = 0; !verbose && i < 50; ++i)
+    for (index_t i = 0; !verbose && i < 0; ++i)
         qpalm(); // warm up
     init_trace();
 #endif
@@ -96,5 +103,4 @@ TEST(QPALM, cyqlonefan) {
     guanaqo::print_csv(solution, std::span{x});
     guanaqo::print_csv(solution, std::span{λ});
     guanaqo::print_csv(solution, std::span{y});
-
 } 

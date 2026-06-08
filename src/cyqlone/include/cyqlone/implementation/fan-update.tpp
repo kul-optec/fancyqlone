@@ -2,7 +2,8 @@
 #include <cyqlone/fan-cyqlone.hpp>
 
 #include <cyqlone/linalg.hpp>
-
+#include <fstream>
+#include <iostream>
 #include <batmat/assume.hpp>
 #include <batmat/linalg/copy.hpp>
 #include <batmat/linalg/gemv.hpp>
@@ -16,11 +17,13 @@ namespace la = cyqlone::linalg;
 using la::tril;
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve(Context &ctx, FanStorage ΔΣ,
-                                                              FanStorage ux, FanStorage λ) {
-    auto temp5 = ctx.is_master();
-    auto temp2 = ΔΣ;
-    auto temp3 = ux;
-    auto temp4 = λ;
-    throw std::runtime_error("Not implemented");
+                                                              FanStorage &ux, FanStorage &λ) {
+    // std::cout << "update_solve not implemented yet" << std::endl;
+
+    // std::cout << "ΔΣ: " << ΔΣ.first.rows() << std::endl;
+    // std::cout << "ux: " << ux.first.rows() << std::endl;
+    // std::cout << "λ: " << λ.first.rows() << std::endl;
+    // std::cout << "ctx index: " << ctx.total_ctx.index << std::endl;
+    throw std::runtime_error("update_solve not implemented yet");
 }
 } // namespace CYQLONE_NS(cyqlone)

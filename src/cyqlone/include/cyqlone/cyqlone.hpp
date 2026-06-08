@@ -19,7 +19,10 @@
 #include <batmat/simd.hpp>
 #include <batmat/unroll.h>
 #include <guanaqo/trace.hpp>
+#include <guanaqo/print.hpp>
+#include <syncstream>
 
+#include <iostream>
 #include <algorithm>
 #include <bit>
 #include <cassert>
@@ -703,6 +706,27 @@ struct CyqloneSolver {
         for (index_t i = 0; i < n; ++i) {
             const index_t di = c * n + i;
             func(xs.batch(di)...);
+        }
+    }
+    void print_grad(Context &ctx, auto grad) const {
+        std::osyncstream tout(std::cout);
+
+        if (ctx.is_master()) {
+             tout << "grad shape: " << grad.size() << "\n";
+        }
+
+        for (index_t j = 0; j < N_horiz/v; ++j) {
+            for (index_t vi = 0; vi < v; ++vi) {
+                guanaqo::print_python(tout << "grad_" << j << "_" << vi << " = ", grad.batch(j)(vi));
+            }
+        }
+    }
+    void print_grad(auto grad) const {
+        std::osyncstream tout(std::cout);
+        for (index_t j = 0; j < N_horiz/v; ++j) {
+            for (index_t vi = 0; vi < v; ++vi) {
+                guanaqo::print_python(tout << "grad_" << j << "_" << vi << " = ", grad.batch(j)(vi));
+            }
         }
     }
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
