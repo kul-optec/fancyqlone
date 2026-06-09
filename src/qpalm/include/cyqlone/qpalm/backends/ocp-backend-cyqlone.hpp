@@ -109,6 +109,13 @@ struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>>
     struct storage_t : store_t {
         friend CyQPALMBackend<VL, DefaultOrder, OCP_t>;
         storage_t() = default;
+        
+        storage_t(storage_t&&) = default;
+        storage_t& operator=(storage_t&&) = default;
+
+        storage_t(const storage_t&) = delete;
+        storage_t& operator=(const storage_t&) = delete;
+
 
       private:
         storage_t(store_t &&o) : store_t{std::move(o)} {}
@@ -132,6 +139,10 @@ struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>>
             total_size += this->first.size();
             return total_size;
         }
+    public:
+        storage_t clone() const {
+            return storage_t(store_t::clone());
+}
 
     };
     using warm_start_t = FanWarmStartingStrategy;

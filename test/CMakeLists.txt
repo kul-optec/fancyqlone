@@ -15,7 +15,7 @@ target_link_libraries(test-pcr PRIVATE cyqlone::cyqlone cyqlone::warnings)
 add_executable(tests
     "cyqlone/test-cyqlone.cpp"
     "cyqlone/test-cyqlone-cont.cpp"
-    # "cyqlone/test-cyqlone-cont-mat.cpp"
+    "cyqlone/test-cyqlone-cont-mat.cpp"
     "cyqlone/test-cyqlone-cont-spmd-trace.cpp"
     "cyqlone/test-tricyqle.cpp"
     "test-barrier.cpp"

@@ -3,6 +3,7 @@
 #include <batmat/config.hpp>
 #include <batmat/linalg/copy.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>
+#include <iostream>
 
 namespace cyqlone {
 
@@ -182,6 +183,7 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
     Bs.resize(num_branches);
     R0 = matrix{{ .rows = nu, .cols = nu}};
     r0 = matrix{{ .rows = nu, .cols = 1}};
+    std::cout<< "Initializing FanCyqloneStorage with " << ny_0 << " ineq, nu = " << nu << std::endl;
     D0 = matrix{{ .rows = ny_0, .cols = nu}};
     la::copy(focp.R0, R0(0));
     la::copy(focp.r0, r0(0));
@@ -199,10 +201,11 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
 }
 template <class T>
 FanCyqloneStorage<T> FanCyqloneStorage<T>::build(const FanOCPStorage &focp, index_t ny_0) {
-
+    std::cout << "Building FanCyqloneStorage with " << focp.num_branches() << " branches, ny_0 = " << ny_0 << std::endl;
     FanCyqloneStorage res;
-    res.update_impl(focp);
     res.ny_0 = ny_0;
+
+    res.update_impl(focp);
     return res;
 };
 

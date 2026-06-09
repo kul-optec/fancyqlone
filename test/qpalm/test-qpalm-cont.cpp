@@ -11,14 +11,12 @@
 #include <cyqlone/conversion.hpp>
 #include <gtest/gtest.h>
 
-#include <guanaqo/eigen/span.hpp>
 #include <batmat/loop.hpp>
 #include <guanaqo/io/csv.hpp>
 #include <guanaqo/print.hpp>
 #include <guanaqo/trace.hpp>
 #include <iostream>
 #include <vector>
-using guanaqo::as_span;
 
 #include <cyqlone/conversion.hpp>
 using cyqlone::index_t;
@@ -60,23 +58,23 @@ TEST(QPALM, cyqlonefan) {
         cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
 
         ocps[i] = ocp_fan;
-        guanaqo::print_python(std::cout << "[fanout]   u(0) = ", ocp_fan.b(0), "\n");
+        guanaqo::print_python(std::cout << "x(0) = ", ocp_fan.b(0), "\n");
         std::cout << "Loaded OCP data from " << filename << " with N=" << ocp_fan.dim.N_horiz << ", nu=" << ocp_fan.dim.nu
                   << ", ny=" << ocp_fan.dim.ny << "\n";
     }
     std::cout << cyq_get_num_proc() << " processors detected\n";
     cyqlone::FanOCPStorage fan_ocp{.ocps = ocps, .R0=ocps[0].R(0), .r0=ocps[0].r(0), .D0=ocps[0].D(0)};
-    auto cocp = cyqlone::FanCyqloneStorage<>::build(fan_ocp);
+    auto cocp = cyqlone::FanCyqloneStorage<>::build(fan_ocp, 0);
     const bool verbose = true;
     auto &&backend     = qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>>(cocp, {},
-                                                     {.processors      = 4,
+                                                     {.processors      = 2,
                                                       .print_residuals = verbose,
                                                       .print_precision = 17,
                                                       .tricyqle_params = {.solve_method = cyqlone::SolveMethod::None},}
                                                       );
     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>> *> qpalm{
         backend.get(),
-        {.max_outer_iter = 500, .max_total_inner_iter = 1000, .verbose = verbose, .detailed_stats = true,
+        {.max_outer_iter = 1, .max_total_inner_iter = 1, .tolerance = 1e-6 , .verbose = verbose, .detailed_stats = true
 },
     };
 

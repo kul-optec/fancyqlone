@@ -3,12 +3,12 @@
 #include <cyqlone/barrier.hpp>
 #include <cyqlone/cyqlone.hpp>
 #include <cyqlone/linalg.hpp>
+#include <cyqlone/matio.hpp>
 #include <cyqlone/ocp.hpp>
 #include <cyqlone/packing.hpp>
 #include <cyqlone/random-ocp.hpp>
 #include <cyqlone/tracing.hpp>
 #include <cyqlone/tridiagonal-solver.hpp>
-#include <cyqlone/matio.hpp>
 #include <batmat/linalg/gemm.hpp>
 #include <batmat/linalg/potrf.hpp>
 #include <batmat/linalg/triangular.hpp>
@@ -45,7 +45,7 @@ TEST(CyqloneFanFactorTestMat, factor) {
     using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
     using SolverLast = cyqlone::TridiagonalSolver<real_t>;
 
-    const int N = 1048576;
+    const int N = 32;
 
     auto filename = std::format("python/cmpc/ocp_data{}_0.mat", N);
 
@@ -98,7 +98,7 @@ TEST(CyqloneFanFactorTestMat, factor) {
         cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
 
         auto &ocp = ocps[i] = ocp_fan;
-        ocp.b(0) = x0; // same initial state for each branch
+        ocp.b(0)            = x0; // same initial state for each branch
 
         auto cocp = cyqlone::CyqloneStorage<>::build(ocp);
 
@@ -113,12 +113,12 @@ TEST(CyqloneFanFactorTestMat, factor) {
         cocp.data_F(0).left_cols(nu).set_constant(0);    // B(0) = 0
         cocp.data_H(0).top_left(nu, nu).set_constant(0); // R(0) = I
         cocp.data_H(0).top_left(nu, nu).set_diagonal(1);
-        cocp.data_rq(0).top_rows(nu).set_constant(0);    // r(0) = 0
+        cocp.data_rq(0).top_rows(nu).set_constant(0); // r(0) = 0
 
         // Cyqlone solver
         auto solver = Solver::build(cocp, p_fan);
 
-        auto tricyqle_params = solver.get_tricyqle_params();
+        auto tricyqle_params                      = solver.get_tricyqle_params();
         tricyqle_params.solve_method              = cyqlone::SolveMethod::None;
         tricyqle_params.cr_max_update_fraction_Y0 = 9999;
         tricyqle_params.pcr_max_update_fraction   = 9999;
@@ -135,9 +135,7 @@ TEST(CyqloneFanFactorTestMat, factor) {
         }));
 
 #if GUANAQO_WITH_TRACING
-        pctx->run([i](auto &ctx) {
-            GUANAQO_TRACE("thread_id", ctx.index + 100 * (i + 1));
-        });
+        pctx->run([i](auto &ctx) { GUANAQO_TRACE("thread_id", ctx.index + 100 * (i + 1)); });
 #endif
 
         SolverLast::matrix λ_last{{.depth = solver.v, .rows = solver.nx, .cols = 1}};
@@ -163,9 +161,7 @@ TEST(CyqloneFanFactorTestMat, factor) {
         fan_barrier.arrive_and_wait(static_cast<uint32_t>(i)); // synchronize for tracing
 
         // Factor and forward solve most of each Cyqlone block
-        pctx->run([&](auto ctx) {
-            solver.factor_solve(ctx, 1e100, 0, {}, ux, λ);
-        });
+        pctx->run([&](auto ctx) { solver.factor_solve(ctx, 1e100, 0, {}, ux, λ); });
 
         {
             GUANAQO_TRACE_REGION("fan factor forward solve λ0", 0);
@@ -189,7 +185,13 @@ TEST(CyqloneFanFactorTestMat, factor) {
 
             i == 0 ? la::gemv_sub(LBs.batch(i), λ_last.batch(0), rs.batch(i))
                    : la::gemv_neg(LBs.batch(i), λ_last.batch(0), rs.batch(i));
+            std::osyncstream out(std::cout);
+            for (index_t vi = 0; vi < solver.v; ++vi)
+                guanaqo::print_python(out << "[forward]   λ(0) block " << vi << " = ",
+                                      λ_last.batch(vi)(0), "\n");
+            // guanaqo::print_python(std::cout << "[forward]   λ(0) = ", λ_last.batch(0)(0), "\n");
         }
+        std::osyncstream out(std::cout);
 
         // Solve for u(0) on a single thread
         fan_barrier.wait(fan_barrier.arrive_with_completion(static_cast<uint32_t>(i), [&] {
@@ -200,10 +202,15 @@ TEST(CyqloneFanFactorTestMat, factor) {
 
             la::potrf(tril(SBs.batch(0)));
 
-            for (index_t i = 1; i < fanout; ++i)
+            for (index_t i = 1; i < fanout; ++i){
                 la::add(rs.batch(0), rs.batch(i));
+                guanaqo::print_python(out << "[forward]   rs(" << i << ") = ", rs.batch(i)(0), "\n");}
+
 
             la::trsm(tril(SBs.batch(0)), rs.batch(0));
+            guanaqo::print_python(out << "[forward]   u(0) = ", rs.batch(0)(0), "\n");
+            guanaqo::print_python(out << "[forward]   rs(0) = ", rs.batch(0)(0), "\n");
+
             la::trsm(tril(SBs.batch(0)).transposed(), rs.batch(0)); // rs(0) now contains u(0)
 
             u0_sol(0) = rs(0);
@@ -211,9 +218,15 @@ TEST(CyqloneFanFactorTestMat, factor) {
 
         {
             GUANAQO_TRACE_REGION("fan solve reverse λ0", 0);
+            std::osyncstream out(std::cout);
+            guanaqo::print_python(out << "[reverse]   λ(0)"<<i<<" before reverse solve = ", λ_last.batch(0)(0), "\n");
+            guanaqo::print_python(out << "[reverse]   rs(0)"<<i<<" before reverse solve = ", rs.batch(0)(0), "\n");
+            guanaqo::print_python(out << "[reverse]   L"<<i<<" before reverse solve = ", LBs.batch(i)(0), "\n");
+
 
             // Compute the contribution of u(0) to λ(0) for each Cyqlone block
             la::gemv_add(LBs.batch(i).transposed(), rs.batch(0), λ_last.batch(0));
+            guanaqo::print_python(out << "[reverse]   λ(0)"<<i<<" after gemv = ", λ_last.batch(0)(0), "\n");
 
             // Reverse solve of the final block-tridiagonal system for each Cyqlone block
             solver_last.solve_reverse(λ_last);
@@ -223,9 +236,16 @@ TEST(CyqloneFanFactorTestMat, factor) {
         }
 
         // Solve each Cyqlone block with the updated multipliers λ
-        pctx->run([&](auto ctx) {
-            solver.solve_reverse(ctx, ux, λ);
-        });
+        pctx->run([&](auto ctx) { solver.solve_reverse(ctx, ux, λ); });
+        std::cout<< i << ": λ After solve_reverse\n";
+        solver.print_grad(λ);
+        std::cout<< i << ": u After solve_reverse\n";
+        solver.print_grad(ux);
+        SolverLast::matrix Mᵀλ_last{{ .rows = solver.nu, .cols = 1}};
+        la::gemv(la::simdify(Bs.batch(i)),la::simdify(λ0_sol.batch(0).middle_rows(i * nx, nx)), Mᵀλ_last.batch(0));
+        guanaqo::print_python(std::cout << "[fanout]   Mᵀλ(0) = ", Mᵀλ_last.batch(0)(0), "\n");
+
+
     };
 
     auto do_solve_fan = [&] {
@@ -240,13 +260,11 @@ TEST(CyqloneFanFactorTestMat, factor) {
 #endif
     };
 
-    for (index_t i = 0; i < 50; ++i) // Warmup
+    for (index_t i = 0; i < 1; ++i) // Warmup
         do_solve_fan();
 
 #if GUANAQO_WITH_TRACING
-    guanaqo::for_each_trace_logger([](auto &logger) {
-        logger.reset();
-    });
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
 #endif
 
     do_solve_fan();
@@ -258,13 +276,13 @@ TEST(CyqloneFanFactorTestMat, factor) {
     matfp = cyqlone::open_mat(filename);
     cyqlone::read_from_mat(matfp.get(), "ocp", combined_ocp);
 
-    auto combined_cocp   = cyqlone::CyqloneStorage<>::build(combined_ocp);
-    auto combined_solver = Solver::build(combined_cocp, p);
-    auto combined_tricyqle_params = combined_solver.get_tricyqle_params();
-        combined_tricyqle_params.solve_method              = cyqlone::SolveMethod::PCR;
-        combined_tricyqle_params.cr_max_update_fraction_Y0 = 9999;
-        combined_tricyqle_params.pcr_max_update_fraction   = 9999;
-        combined_solver.update_tricyqle_params(combined_tricyqle_params);
+    auto combined_cocp                    = cyqlone::CyqloneStorage<>::build(combined_ocp);
+    auto combined_solver                  = Solver::build(combined_cocp, p);
+    auto combined_tricyqle_params         = combined_solver.get_tricyqle_params();
+    combined_tricyqle_params.solve_method = cyqlone::SolveMethod::PCR;
+    combined_tricyqle_params.cr_max_update_fraction_Y0 = 9999;
+    combined_tricyqle_params.pcr_max_update_fraction   = 9999;
+    combined_solver.update_tricyqle_params(combined_tricyqle_params);
     auto combined_rq = combined_solver.initialize_gradient(combined_cocp);
     auto combined_b  = combined_solver.initialize_rhs(combined_cocp);
     auto combined_ux = combined_rq;

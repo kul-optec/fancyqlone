@@ -216,7 +216,6 @@ SolverStatus SolverImplementation<Backend>::do_main_loop(Backend::Context &ctx,
             bool stop        = stop_signal.stop_requested();
             bool fail        = out_of_iter || out_of_time || inf_err || stop;
             bool inner_conv  = stationarity <= inner_tol && eq_resid <= eq_tol;
-
             if (detailed_stats) {
                 detailed_stats->entries.push_back({
                     .outer_iter                  = outer_iter,

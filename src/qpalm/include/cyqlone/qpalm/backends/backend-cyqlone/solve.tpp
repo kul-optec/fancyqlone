@@ -158,6 +158,9 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
     ocp.foreach_batch(ctx, add_step, x, d, x_next);
     auto &res_x_next = temp_eq;
     eq_constr_resid(ctx, x_next, res_x_next);
+    // ocp.print_grad(res_x_next);
+    // ocp.print_grad(x_next);
+
     real_t inf_res = norm_inf(ctx, res_x_next);
     if (ctx.is_master())
         std::cout << "        RESID(eq. feasibility):  abs∞="

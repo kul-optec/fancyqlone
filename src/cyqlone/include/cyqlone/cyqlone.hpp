@@ -708,7 +708,7 @@ struct CyqloneSolver {
             func(xs.batch(di)...);
         }
     }
-    void print_grad(Context &ctx, auto grad) const {
+    void print_grad(Context &ctx,  const auto &grad) const {
         std::osyncstream tout(std::cout);
 
         if (ctx.is_master()) {
@@ -721,7 +721,7 @@ struct CyqloneSolver {
             }
         }
     }
-    void print_grad(auto grad) const {
+    void print_grad(const auto &grad) const {
         std::osyncstream tout(std::cout);
         for (index_t j = 0; j < N_horiz/v; ++j) {
             for (index_t vi = 0; vi < v; ++vi) {

@@ -16,7 +16,7 @@ namespace la = cyqlone::linalg;
 
 using la::tril;
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve(Context &ctx, FanStorage ΔΣ,
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve(Context &ctx, const FanStorage &ΔΣ,
                                                               FanStorage &ux, FanStorage &λ) {
     // std::cout << "update_solve not implemented yet" << std::endl;
 

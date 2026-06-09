@@ -106,8 +106,8 @@ struct CyQPALMBackend {
         b_eq_strided  = eq_constr_vec();
         grad_strided  = var_vec();
         this->ocp.initialize_rhs(ocp, b_eq_strided);
-        std::cout << "b_eq_strided: rhs " << b_eq_strided.size() << std::endl;
-        this->ocp.print_grad(b_eq_strided);
+        // std::cout << "b_eq_strided: rhs " << b_eq_strided.size() << std::endl;
+        // this->ocp.print_grad(b_eq_strided);
         this->ocp.initialize_gradient(ocp, grad_strided);
         this->ocp.initialize_bounds(ocp, b_min_strided, b_max_strided);
         if (!data.initial_variables.empty()) {
@@ -161,9 +161,9 @@ struct CyQPALMBackend {
                     this->y0.reset();
                     break;
                 case WarmStartingStrategy::Copy:
-                    this->x0 = x;
-                    this->λ0 = λ;
-                    this->y0 = y;
+                    this->x0 = std::move(x);
+                    this->λ0 = std::move(λ);
+                    this->y0 = std::move(y);
                     break;
                 case WarmStartingStrategy::Shift: {
                     auto &x0 = this->x0.emplace(var_vec());         // TODO: zero init is redundant
@@ -201,9 +201,9 @@ struct CyQPALMBackend {
                     this->y0.reset();
                     break;
                 case WarmStartingStrategy::Copy:
-                    this->x0 = x;
-                    this->λ0 = λ;
-                    this->y0 = y;
+                    this->x0 = x.clone();
+                    this->λ0 = λ.clone();
+                    this->y0 = y.clone();
                     break;
                 case WarmStartingStrategy::Shift: BATMAT_ASSERT(false); break;
                 case WarmStartingStrategy::ShiftNoInequality: BATMAT_ASSERT(false); break;
@@ -471,12 +471,9 @@ struct CyQPALMBackend {
         // std::cout << "nrm_simd: " << nrm_simd.norm_inf() << ", nrm_scal: " << nrm_scal.norm_inf() << std::endl;
         // auto nrms_scal = norms_scal.zeros();
         real_t nrm = ctx.reduce(nrm_scal, norms_scal).norm_inf();
-        
         // ocp.print_grad(ctx, grad_f);
         // ocp.print_grad(ctx, Mᵀλ);
-
-
-        std::cout << "unscaled_aug_lagr_norm: " << nrm << std::endl;
+        // std::cout << "unscaled_aug_lagr_norm: " << nrm << std::endl;
         return nrm;
     }
 

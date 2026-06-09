@@ -110,15 +110,17 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_rhs(
     const FanCyqloneStorage<value_type> &ocp, FanStorage &rhs) const {
     BATMAT_ASSERT(static_cast<index_t>(rhs.branches.size()) == num_branches);
-
+    index_t nx_offset=0;
     for (index_t c = 0; c < num_branches; ++c) {
         BATMAT_ASSERT(rhs.branches[c].depth() == solver_storages[c].cyqlone_solver.ceil_N());
         BATMAT_ASSERT(rhs.branches[c].rows() == solver_storages[c].cyqlone_solver.nx);
         BATMAT_ASSERT(rhs.branches[c].cols() == 1);
         solver_storages[c].cyqlone_solver.initialize_rhs(ocp.branches[c], rhs.branches[c]);
+        rhs.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx)(0) = rhs.branches[c].batch(0)(0);
+        nx_offset += solver_storages[c].cyqlone_solver.nx;
     };
-    std::cout << "FANRHS initialized: " << std::endl;
-    print_grad(rhs);
+    // std::cout << "FANRHS initialized: " << std::endl;
+    // print_grad(rhs);
 
 }
 
@@ -183,7 +185,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_variables(std::span<const 
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_variables(
-    FanStorage ux, std::span<value_type> ux_lin) const {
+    const FanStorage &ux, std::span<value_type> ux_lin) const {
     BATMAT_ASSERT(static_cast<index_t>(ux.branches.size()) == num_branches);
 
     index_t offset = static_cast<index_t>(ux_lin.size()); //put u0_sol at the end of ux_lin
@@ -228,7 +230,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_dynamics(std::span<const v
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_dynamics(
-    FanStorage λ, std::span<value_type> λ_lin) const {
+    const FanStorage &λ, std::span<value_type> λ_lin) const {
     BATMAT_ASSERT(static_cast<index_t>(λ.branches.size()) == num_branches);
     index_t offset = 0;
     for (index_t c = 0; c < num_branches; ++c) {
@@ -270,7 +272,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_constraints(std::span<cons
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_constraints(
-    FanStorage y, std::span<value_type> y_lin) const {
+    const FanStorage &y, std::span<value_type> y_lin) const {
     BATMAT_ASSERT(static_cast<index_t>(y.branches.size()) == num_branches);
     index_t offset = ny_0;
     using rview    = guanaqo::MatrixView<value_type, index_t>;
@@ -324,7 +326,7 @@ auto FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_variables(
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-auto FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_variables(FanStorage ux) const
+auto FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_variables(const FanStorage &ux) const
     -> std::vector<value_type> {
     std::vector<value_type> ux_lin(num_variables());
     unpack_variables(ux, ux_lin);
@@ -340,7 +342,7 @@ auto FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_dynamics(
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-auto FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_dynamics(FanStorage λ) const
+auto FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_dynamics(const FanStorage &λ) const
     -> std::vector<value_type> {
     std::vector<value_type> λ_lin(num_dynamics_constraints());
     unpack_dynamics(λ, λ_lin);
@@ -357,7 +359,7 @@ auto FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_constraints(std::span< con
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-auto FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_constraints(FanStorage y) const
+auto FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_constraints(const FanStorage &y) const
     -> std::vector<value_type> {
     std::vector<value_type> y_lin(num_general_constraints());
     unpack_constraints(y, y_lin);
