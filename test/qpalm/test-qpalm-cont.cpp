@@ -22,6 +22,7 @@
 using cyqlone::index_t;
 using cyqlone::real_t;
 using StorageOrder = cyqlone::StorageOrder;
+
 namespace qp = cyqlone::qpalm;
 index_t cyq_get_num_proc();
 #if GUANAQO_WITH_TRACING
@@ -65,21 +66,77 @@ TEST(QPALM, cyqlonefan) {
     std::cout << cyq_get_num_proc() << " processors detected\n";
     cyqlone::FanOCPStorage fan_ocp{.ocps = ocps, .R0=ocps[0].R(0), .r0=ocps[0].r(0), .D0=ocps[0].D(0)};
     auto cocp = cyqlone::FanCyqloneStorage<>::build(fan_ocp, 0);
-    const bool verbose = true;
+    const bool verbose = false;
     auto &&backend     = qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>>(cocp, {},
-                                                     {.processors      = 2,
+                                                     {.processors      = cyq_get_num_proc(),
                                                       .print_residuals = verbose,
                                                       .print_precision = 17,
                                                       .tricyqle_params = {.solve_method = cyqlone::SolveMethod::None},}
                                                       );
     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>> *> qpalm{
         backend.get(),
-        {.max_outer_iter = 1, .max_total_inner_iter = 1, .tolerance = 1e-6 , .verbose = verbose, .detailed_stats = true
+        {.max_outer_iter = 1, .max_total_inner_iter = 1, .tolerance = 1e-6 , .verbose = verbose, .detailed_stats = verbose
 },
     };
 
 #if GUANAQO_WITH_TRACING
     for (index_t i = 0; !verbose && i < 0; ++i)
+        qpalm(); // warm up
+    init_trace();
+#endif
+
+    auto status = qpalm();
+    EXPECT_EQ(status, qp::SolverStatus::Converged);
+
+#if GUANAQO_WITH_TRACING
+    std::cout << save_trace("test-FanCyQpalm.csv") << "\n\n";
+#endif
+
+    std::cout << "inner:   " << qpalm.stats->inner_iter << "\n"
+              << "outer:   " << qpalm.stats->outer_iter << "\n"
+              << "timings: " << qpalm.stats->timings.total << "\n";
+
+    std::ofstream solution{"solution-fan-cyqpalm.csv"};
+    auto x = qpalm.get_solution(), λ = qpalm.get_equality_multipliers(),
+         y = qpalm.get_inequality_multipliers();
+    guanaqo::print_csv(solution, std::span{x});
+    guanaqo::print_csv(solution, std::span{λ});
+    guanaqo::print_csv(solution, std::span{y});
+} 
+TEST(QPALM, with_inequality) {
+    index_t num_branches = 2;
+    index_t N            = 32;
+    std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
+    for(index_t i = 0; i < num_branches; ++i) {
+        auto filename = std::format("python/cmpc/ocp_data{}_{}.mat", N, i);
+
+        cyqlone::LinearOCPStorage ocp_fan;
+        auto matfp = cyqlone::open_mat(filename);
+        cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
+
+        ocps[i] = ocp_fan;
+        guanaqo::print_python(std::cout << "x(0) = ", ocp_fan.b(0), "\n");
+        std::cout << "Loaded OCP data from " << filename << " with N=" << ocp_fan.dim.N_horiz << ", nu=" << ocp_fan.dim.nu
+                  << ", ny=" << ocp_fan.dim.ny << "\n";
+    }
+    std::cout << cyq_get_num_proc() << " processors detected\n";
+    cyqlone::FanOCPStorage fan_ocp{.ocps = ocps, .R0=ocps[0].R(0), .r0=ocps[0].r(0), .D0=ocps[0].D(0)};
+    auto cocp = cyqlone::FanCyqloneStorage<>::build(fan_ocp, 0);
+    const bool verbose = true;
+    auto &&backend     = qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>>(cocp, {},
+                                                     {.processors      = cyq_get_num_proc(),
+                                                      .print_residuals = verbose,
+                                                      .print_precision = 17,
+                                                      .tricyqle_params = {.solve_method = cyqlone::SolveMethod::None},}
+                                                      );
+    qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>> *> qpalm{
+        backend.get(),
+        {.max_outer_iter = 1, .max_total_inner_iter = 1, .tolerance = 1e-6 , .verbose = verbose
+},
+    };
+
+#if GUANAQO_WITH_TRACING
+    for (index_t i = 0; !verbose && i < 50; ++i)
         qpalm(); // warm up
     init_trace();
 #endif

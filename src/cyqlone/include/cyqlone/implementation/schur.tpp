@@ -45,9 +45,13 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, real_t
         //  9|  T(c) = LQ(j₁)⁻ᵀ
         BATMAT_ASSERT(nu >= 1); // T = LQ⁻ᵀ is upper triangular, stored one row up from LQ itself
         auto Tc = triu(LH.right_cols(nx).middle_rows(nu - 1, nx));
+
         {
+#if GUANAQO_WITH_TRACING
+
             GUANAQO_TRACE("Invert Q", c);
             CYQ_TRACE_WRITE(T, c, 0);
+#endif
             trtri(LQ, Tc.transposed());
         }
         auto T_ready = ctx.arrive();
@@ -59,8 +63,11 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, real_t
             trmm_neg(Tc, LA1.transposed(), tricyqle.cr_U.batch(i_fwd));
         } else {
             const index_t i_bwd_wrap = sub_wrap_p(c, 1);
+#if GUANAQO_WITH_TRACING
+
             GUANAQO_TRACE("Compute first Y", i_bwd_wrap);
             CYQ_TRACE_WRITE(Kf, i_bwd_wrap, 0);
+#endif
             if (i_fwd > 0 || (v == 1 && !params.eliminate_u0_first))
                 trmm_neg(LA1, Tc.transposed(), tricyqle.cr_Y.batch(i_bwd_wrap));
             else if constexpr (v > 1)
@@ -77,8 +84,10 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, real_t
         // 12|  M(c)˂ = T(c+1) T(c+1)ᵀ
         auto Tc_next = triu(R̂ŜQ̂_next.right_cols(nx).middle_rows(nu - 1, nx));
         {
+#if GUANAQO_WITH_TRACING
             CYQ_TRACE_READ(T, c_next, 0);
             GUANAQO_TRACE("Compute TTᵀ", c_next);
+#endif
             if (c_next > 0 || v == 1)
                 trmm(Tc_next, Tc_next.transposed(), M);
             else
@@ -86,8 +95,11 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, real_t
         }
         //      And finally backward in time, optionally fused with the factorization.
         if (p == 1) { // no multi-threading
+#if GUANAQO_WITH_TRACING
+
             GUANAQO_TRACE("Factor M last", c);
             CYQ_TRACE_WRITE(L, c, 0);
+#endif
             auto L0 = tril(tricyqle.pcr_L.batch(0));
             // 13|  M(c)˃ = WWᵀ
             // 14|  M(c) = M(c)˂ + M(c)˃
@@ -97,16 +109,23 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, real_t
             // 16|  L(c) = chol(M(c))
             potrf(M, L0); // Final block is stored separately (for PCR/PCG later)
         } else if (ν2p(i_fwd) == 0) {
+#if GUANAQO_WITH_TRACING
+
             GUANAQO_TRACE("Factor M", c);
             CYQ_TRACE_WRITE(L, c, 0);
             CYQ_TRACE_WRITE(L, c, 1);
+#endif
             // 13|  M(c)˃ = WWᵀ
             // 14|  M(c) = M(c)˂ + M(c)˃
             // 16|  L(c) = chol(M(c))
             syrk_add_potrf(W, M, M, ρ_inv);
         } else {
+#if GUANAQO_WITH_TRACING
+
             GUANAQO_TRACE("Compute WWᵀ", c);
             CYQ_TRACE_WRITE(M, c, 0);
+#endif
+
             // 13|  M(c)˃ = WWᵀ
             // 14|  M(c) = M(c)˂ + M(c)˃
             syrk_add(W, M);
