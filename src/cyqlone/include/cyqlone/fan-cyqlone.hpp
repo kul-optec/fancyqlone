@@ -222,8 +222,7 @@ struct FanCyqloneSolver {
     void foreach_batch(Context &ctx, auto &&func, auto &&...xs) const {
 
         index_t i = ctx.total_ctx.index;
-        std::osyncstream out(std::cout);
-        // out << "[foreach_batch] branch " << i << ")n";
+      
         solver_storages[i].cyqlone_solver.foreach_batch(ctx.branch_ctx, func, xs.branches[i]...);
         if (ctx.is_master())
             func(xs.first.batch(0)...);

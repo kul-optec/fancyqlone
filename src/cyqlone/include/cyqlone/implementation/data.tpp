@@ -504,6 +504,7 @@ auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_dynamics_constraints() 
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_general_constraints() const -> matrix<> {
+    std::cout << "Initializing general constraints with ny = {}, ny_0 = {}, ny_N = {}, max(ny, ny_0 + ny_N) = {}\n" << ny << ny_0 << ny_N << std::max(ny, ny_0 + ny_N) << std::endl;
     return matrix<>{{.depth = ceil_N(), .rows = std::max(ny, ny_0 + ny_N), .cols = 1}};
 }
 

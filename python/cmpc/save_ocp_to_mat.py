@@ -444,10 +444,188 @@ def create_cont_double_integrator_combined(N=100):
     print(B_full)
     print(B0_full)
     return ocp_full
+
+def create_cont_double_integrator_combined_with_constraints(N=100):
+    """
+    Create a combined fanout OCP with simple input box constraints.
+    Each subsystem is a 2D double integrator with 1 input.
+    """
+
+    fanout = 2
+
+    nx = 2          # state dimension per subsystem
+    nu = 1          # input dimension per subsystem
+    ny = nu         # stage constraint dimension per subsystem
+    ny_N = nu       # terminal constraint dimension per subsystem
+
+    ocp_full = OCPData(
+        N,
+        fanout * nx,
+        fanout * nu,
+        fanout * ny,
+        fanout * ny_N,
+    )
+
+    # Per-subsystem data to assemble block-diagonal full problem
+    Qs, Rs, Ss, qs, rs = [], [], [], [], []
+    QNs, qNs = [], []
+    As, Bs, bs = [], [], []
+    b0s = []
+
+    Cs, Ds, ls, us = [], [], [], []
+    C_Ns, l_Ns, u_Ns = [], [], []
+
+    for fan in range(fanout):
+        ocp = OCPData(N, nx, nu, ny, ny_N)
+
+        # --------------------------------------------------
+        # Cost
+        # --------------------------------------------------
+        Q = np.eye(nx) * (fan + 1) ** 2
+        R = np.eye(nu) * 0.1 / ((fan + 1) ** 2)
+        S = np.zeros((nu, nx))
+        q = np.zeros(nx)
+        r = np.zeros(nu)
+
+        for i in range(N):
+            ocp.set_stage_cost(i, Q, R, S, q, r)
+
+        Q_N = 10.0 * np.eye(nx) * (fan + 1) ** 2
+        q_N = np.zeros(nx)
+        ocp.set_terminal_cost(Q_N, q_N)
+
+        Qs.append(Q)
+        Rs.append(R)
+        Ss.append(S)
+        qs.append(q)
+        rs.append(r)
+        QNs.append(Q_N)
+        qNs.append(q_N)
+
+        # --------------------------------------------------
+        # Dynamics: double integrator
+        # --------------------------------------------------
+        dt = 0.1
+        A = np.array([
+            [1.0, dt],
+            [0.0, 1.0],
+        ])
+        B = np.array([
+            [0.5 * dt**2],
+            [dt],
+        ])
+        b = np.zeros(nx)
+
+        for i in range(N):
+            ocp.set_dynamics(i, A, B, b)
+
+        As.append(A)
+        Bs.append(B)
+        bs.append(b)
+
+        # --------------------------------------------------
+        # Initial state
+        # --------------------------------------------------
+        b0 = np.zeros(nx)
+        b0[0] = 1.0
+        ocp.set_initial_state(b0)
+        b0s.append(b0)
+
+        # --------------------------------------------------
+        # Simple stage constraints: u_min <= u <= u_max
+        # y = C x + D u, with C = 0 and D = I
+        # --------------------------------------------------
+        C = np.zeros((ny, nx))
+        D = np.eye(nu)
+
+        # You can choose different bounds per subsystem if you want
+        u_min = -0.1 * np.ones(ny)
+        u_max =  0.1 * np.ones(ny)
+
+        # Example: make the second fan slightly tighter if desired
+        # if fan == 1:
+        #     u_min[:] = -0.05
+        #     u_max[:] =  0.05
+
+        for i in range(N):
+            ocp.set_stage_constraints(i, C, D, u_min, u_max)
+
+        Cs.append(C)
+        Ds.append(D)
+        ls.append(u_min)
+        us.append(u_max)
+
+        # --------------------------------------------------
+        # Terminal constraints
+        # Here: same style, simple box constraints
+        # --------------------------------------------------
+        C_N = np.zeros((ny_N, nx))
+        l_N = -0.05 * np.ones(ny_N)
+        u_N =  0.05 * np.ones(ny_N)
+
+        ocp.set_terminal_constraints(C_N, l_N, u_N)
+
+        C_Ns.append(C_N)
+        l_Ns.append(l_N)
+        u_Ns.append(u_N)
+
+        # Optional: save each subsystem separately
+        ocp.save_to_mat(f"python/cmpc/ocp_data_constr{N}_{fan}.mat", "ocp")
+
+    # ======================================================
+    # Assemble full combined OCP
+    # ======================================================
+
+    Q_full  = np.array(block_diag(*Qs))
+    R_full  = np.array(block_diag(*Rs))
+    S_full  = np.array(block_diag(*Ss))
+    q_full  = np.hstack(qs)
+    r_full  = np.hstack(rs)
+
+    QN_full = np.array(block_diag(*QNs))
+    qN_full = np.hstack(qNs)
+
+    A_full  = np.array(block_diag(*As))
+    B_full  = np.array(block_diag(*Bs))
+
+    # First-stage special input matrix (your original structure)
+    B0_full = np.zeros((fanout * nx, fanout * nu))
+    B0_full[:, :nu] = np.vstack(Bs)
+
+    b_full  = np.hstack(bs)
+    b0_full = np.hstack(b0s)
+
+    # Combined constraints
+    C_full   = np.array(block_diag(*Cs))
+    D_full   = np.array(block_diag(*Ds))
+    l_full   = np.hstack(ls)
+    u_full   = np.hstack(us)
+
+    C_N_full = np.array(block_diag(*C_Ns))
+    l_N_full = np.hstack(l_Ns)
+    u_N_full = np.hstack(u_Ns)
+
+    # Fill the combined OCP
+    for i in range(N):
+        if i == 0:
+            ocp_full.set_initial_state(b0_full)
+            ocp_full.set_dynamics(i, A_full, B0_full, b_full)
+        else:
+            ocp_full.set_dynamics(i, A_full, B_full, b_full)
+
+        ocp_full.set_stage_cost(i, Q_full, R_full, S_full, q_full, r_full)
+        ocp_full.set_stage_constraints(i, C_full, D_full, l_full, u_full)
+
+    ocp_full.set_terminal_cost(QN_full, qN_full)
+    ocp_full.set_terminal_constraints(C_N_full, l_N_full, u_N_full)
+    ocp_full.save_to_mat(f"python/cmpc/ocp_data{N}_combined_constr.mat", "ocp")
+    return ocp_full
+
 if __name__ == "__main__":
     # Create and save example OCP
-    N=1048576
-    ocp = create_cont_double_integrator_combined(N)
+    N=32
+    # ocp = create_cont_double_integrator_combined(N)
+    ocp = create_cont_double_integrator_combined_with_constraints(N)
     # ocp.save_to_mat(f"python/cmpc/ocp_data{N}.mat", "ocp")
     
     print("\nExample usage:")

@@ -358,6 +358,7 @@ SolverStatus SolverImplementation<Backend>::do_main_loop(Backend::Context &ctx,
                             return std::make_pair(η, β);
                         }
                     }();
+                    // throw std::runtime_error("Line search failed");
                     return linesearch(ctx, backend, η, β, Σ, y, Ad, Ax, backend.Ax_min(),
                                       backend.Ax_max());
                 });

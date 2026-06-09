@@ -154,7 +154,11 @@ CyqloneStorage<T> CyqloneStorage<T>::build(const LinearOCPStorage &ocp, index_t 
     const auto ny_0_ = count_constr_0(ocp, Ju0);
     if (ny_0 < 0)
         ny_0 = ny_0_;
-    else
+    else if (ny_0 == 0) {
+        ny_0 = 0;
+        Ju0.assign(ny, false);
+    }
+    else 
         BATMAT_ASSERT(ny_0_ <= ny_0);
     CyqloneStorage<T> res{.N_horiz = N,
                           .nx      = nx,
@@ -189,7 +193,8 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
     la::copy(focp.r0, r0(0));
     la::copy(focp.D0, D0(0));
     for (index_t i = 0; i < num_branches; ++i) {
-        auto &cocp = branches[i] = CyqloneStorage<T>::build(focp.ocps[i]);
+        // focp.ocps[i].D(0).set_constant(0); // Ensure that the first stage has no input constraints, as they are handled separately in the fan formulation   
+        auto &cocp = branches[i] = CyqloneStorage<T>::build(focp.ocps[i],0);
         Bs[i]                    = matrix{{ .rows = focp.ocps[i].dim.nx, .cols = nu}};
         la::copy(cocp.data_F(0).left_cols(nu), Bs[i](0));
         // Introduce an unused variable u(0) in each Cyqlone block
