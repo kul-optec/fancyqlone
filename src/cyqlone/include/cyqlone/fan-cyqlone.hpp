@@ -240,19 +240,24 @@ struct FanCyqloneSolver {
             func(xs.first.batch(0)...);
         }
     }
-    void print_grad(Context &ctx, const auto &grad) const {
+    void print_grad(Context &ctx, const auto &grad, const std::string &name) const {
+        ctx.arrive_and_wait();
+        std::osyncstream tout(std::cout);
         solver_storages[ctx.total_ctx.index].cyqlone_solver.print_grad(
-            ctx.branch_ctx, grad.branches[ctx.total_ctx.index]);
+            ctx.branch_ctx, grad.branches[ctx.total_ctx.index], name + "_branch" + std::to_string(ctx.total_ctx.index));
 
         if (ctx.is_master()) {
-            guanaqo::print_python(std::cout << "grad_first(0)(0) = ", grad.first.batch(0)(0), "\n");
+            guanaqo::print_python(tout<< name << "(0)(0) = ", grad.first.batch(0)(0), "\n");
         }
+        ctx.arrive_and_wait();
+
     }
-    void print_grad(const auto &grad) const {
+    void print_grad(const auto &grad, const std::string &name) const {
+
         for (index_t i = 0; i < num_branches; ++i) {
-            solver_storages[i].cyqlone_solver.print_grad(grad.branches[i]);
+            solver_storages[i].cyqlone_solver.print_grad(grad.branches[i], name + "_branch" + std::to_string(i));
         }
-        guanaqo::print_python(std::cout << "grad_first(0)(0) = ", grad.first.batch(0)(0), "\n");
+        guanaqo::print_python(std::cout << name << "(0)(0) = ", grad.first.batch(0)(0), "\n");
     }
     /// Build a new FanCyqloneSolver instance.
     static FanCyqloneSolver build(const FanCyqloneStorage<value_type> &ocp, std::vector<index_t> p,
@@ -422,7 +427,7 @@ struct FanCyqloneSolver {
     void factor_solve_λ0(index_t branch, FanStorage &λ, const FanStorage &Σ);
     template <bool Factor = true, bool Solve = true>
 
-    void factor_solve_u0(FanStorage &ux);
+    void factor_solve_u0(FanStorage &ux, value_type γ);
 
     /// @name Low-level reverse solve routines
     /// @{

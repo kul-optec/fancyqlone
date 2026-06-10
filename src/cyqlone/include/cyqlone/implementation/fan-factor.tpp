@@ -62,13 +62,13 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_λ0(index_t branch
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 template <bool Factor, bool Solve>
-void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_u0(FanStorage &ux) {
+void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_u0(FanStorage &ux,value_type γ) {
     std::osyncstream out(std::cout);
 
     if constexpr (Factor) {
         for (index_t b = 1; b < num_branches; ++b)
             la::add(SBs.batch(0), SBs.batch(b));
-        la::potrf(tril(SBs.batch(0)));
+        la::potrf(tril(SBs.batch(0)),1/γ);
     }
     if constexpr (Solve) {
         for (index_t b = 1; b < num_branches; ++b) {
@@ -130,7 +130,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
     ctx.branch_ctx.arrive_and_wait(); // wait for off-diagonal block
     if (ctx.branch_ctx.is_master()) {
         factor_solve_λ0<Factor, Solve>(c, λ, Σ);
-        ctx.total_ctx.run_single_sync([&, this] { factor_solve_u0<Factor, Solve>(ux); });
+        ctx.total_ctx.run_single_sync([&, this] { factor_solve_u0<Factor, Solve>(ux, γ); });
     }
 }
 
