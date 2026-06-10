@@ -238,9 +238,9 @@ TEST(CyqloneFanFactorTestMat, factor) {
         // Solve each Cyqlone block with the updated multipliers λ
         pctx->run([&](auto ctx) { solver.solve_reverse(ctx, ux, λ); });
         std::cout<< i << ": λ After solve_reverse\n";
-        solver.print_grad(λ);
+        solver.print_grad(λ, "λ");
         std::cout<< i << ": u After solve_reverse\n";
-        solver.print_grad(ux);
+        solver.print_grad(ux, "ux");
         SolverLast::matrix Mᵀλ_last{{ .rows = solver.nu, .cols = 1}};
         la::gemv(la::simdify(Bs.batch(i)),la::simdify(λ0_sol.batch(0).middle_rows(i * nx, nx)), Mᵀλ_last.batch(0));
         guanaqo::print_python(std::cout << "[fanout]   Mᵀλ(0) = ", Mᵀλ_last.batch(0)(0), "\n");

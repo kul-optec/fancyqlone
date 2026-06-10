@@ -708,7 +708,8 @@ struct CyqloneSolver {
             func(xs.batch(di)...);
         }
     }
-    void print_grad(Context &ctx,  const auto &grad) const {
+    void print_grad(Context &ctx,  const auto &grad, const std::string &name) const {
+        ctx.arrive_and_wait();
         std::osyncstream tout(std::cout);
 
         if (ctx.is_master()) {
@@ -717,15 +718,17 @@ struct CyqloneSolver {
 
         for (index_t j = 0; j < N_horiz/v; ++j) {
             for (index_t vi = 0; vi < v; ++vi) {
-                guanaqo::print_python(tout << "grad_" << j << "_" << vi << " = ", grad.batch(j)(vi));
+                guanaqo::print_python(tout << name << j << "_" << vi << " = ", grad.batch(j)(vi));
             }
         }
+        ctx.arrive_and_wait();
+
     }
-    void print_grad(const auto &grad) const {
+    void print_grad(const auto &grad, const std::string &name) const {
         std::osyncstream tout(std::cout);
         for (index_t j = 0; j < N_horiz/v; ++j) {
             for (index_t vi = 0; vi < v; ++vi) {
-                guanaqo::print_python(tout << "grad_" << j << "_" << vi << " = ", grad.batch(j)(vi));
+                guanaqo::print_python(tout << name << j << "_" << vi << " = ", grad.batch(j)(vi));
             }
         }
     }

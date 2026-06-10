@@ -148,6 +148,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_bounds(
     for (index_t c = 0; c < num_branches; ++c) {
         const index_t nyM = std::max(solver_storages[c].cyqlone_solver.ny,
                                       solver_storages[c].cyqlone_solver.ny_N);
+        std::cout << "Initializing bounds for branch " << c << " with nyM = " << nyM << std::endl;
         BATMAT_ASSERT(b_min.branches[c].depth() == solver_storages[c].cyqlone_solver.ceil_N());
         BATMAT_ASSERT(b_min.branches[c].rows() == nyM);
         BATMAT_ASSERT(b_min.branches[c].cols() == 1);
@@ -155,9 +156,13 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_bounds(
         BATMAT_ASSERT(b_max.branches[c].rows() == nyM);
         BATMAT_ASSERT(b_max.branches[c].cols() == 1);
         solver_storages[c].cyqlone_solver.initialize_bounds(ocp.branches[c], b_min.branches[c], b_max.branches[c]);
-
     }
-
+    
+    la::copy(ocp.b_min_0(0), b_min.first.batch(0));
+    la::copy(ocp.b_max_0(0), b_max.first.batch(0));
+    // std::cout << "Bounds initialized: " << std::endl;
+    // print_grad(b_min,"b_min");
+    // print_grad(b_max,"b_max");
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>

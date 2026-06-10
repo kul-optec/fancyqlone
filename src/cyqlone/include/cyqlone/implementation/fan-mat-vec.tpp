@@ -142,6 +142,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::cost_gradient(Context &ctx, con
     if (ctx.is_master())
         mul_Hx(q.first.batch(0).top_rows(nu), R0.batch(0), ux.first.batch(0).top_rows(nu),
                grad_f.first.batch(0).top_rows(nu));
+
     ctx.arrive_and_wait();
 }
 
@@ -161,8 +162,8 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::cost_gradient_regularized(
     solver_storages[c].cyqlone_solver.cost_gradient_regularized(
         ctx.branch_ctx, γ, ux.branches[c], ux0.branches[c], q.branches[c], grad_f.branches[c]);
     if (ctx.is_master())
-        mul_Hx(q.first.batch(0).top_rows(nu), D0.batch(0), R0.batch(0),
-               ux.first.batch(0).top_rows(nu), grad_f.first.batch(0).top_rows(nu));
+        mul_Hx(q.first.batch(0).top_rows(nu), R0.batch(0), ux.first.batch(0).top_rows(nu),
+               ux0.first.batch(0).top_rows(nu), grad_f.first.batch(0).top_rows(nu));
     ctx.arrive_and_wait();
 }
 

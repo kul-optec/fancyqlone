@@ -453,6 +453,8 @@ struct FanOCPStorage {
     guanaqo::MatrixView<real_t, index_t> R0;
     guanaqo::MatrixView<real_t, index_t> r0;
     guanaqo::MatrixView<real_t, index_t> D0;
+    guanaqo::MatrixView<real_t, index_t> b_min_0;
+    guanaqo::MatrixView<real_t, index_t> b_max_0;
 
     index_t num_branches() const { return static_cast<index_t>(ocps.size()); };
 };
