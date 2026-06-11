@@ -4,6 +4,7 @@
 #include <cyqlone/qpalm/backends/ocp-backend-cyqlone.tpp>
 
 #include <array>
+#include <iostream>
 #include <span>
 
 namespace CYQLONE_NS(cyqlone::qpalm) {

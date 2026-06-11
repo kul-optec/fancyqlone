@@ -277,7 +277,7 @@ struct FanContext {
     using shared_context_type = SC;
     Context<SharedContext> branch_ctx;
     Context<FanSharedContext> total_ctx;
-    index_t index = branch_ctx.index + total_ctx.index * total_ctx.num_thr();
+    index_t index = branch_ctx.index + total_ctx.index * branch_ctx.num_thr();
     template <class T>
     using arrival_token_typed = FanSharedContext::barrier_type::template arrival_token_typed<T>;
     using arrival_token       = FanSharedContext::barrier_type::arrival_token;
@@ -376,18 +376,23 @@ struct FanContext {
         return branch_ctx.run_single_sync([&] { total_ctx.run_single_sync(std::forward<F>(f)); });
     }
     /// Broadcast a value @p x from the thread with index @p src to all threads. @todo document
-    template <class T>
+    template <typename T>
     T broadcast(T x, index_t src = 0) {
+        const index_t branch_size = branch_ctx.num_thr();
+        const index_t src_total   = src / branch_size;
+        const index_t src_branch  = src % branch_size;
+
         if (index == src) {
-            total_ctx.broadcast(std::move(x), src);
-            return branch_ctx.broadcast(std::move(x), src % total_ctx.num_thr());
-        } else if (total_ctx.index != (src / total_ctx.num_thr()) && branch_ctx.index == 0) {
-            total_ctx.broadcast(std::move(x), src);
-            return branch_ctx.broadcast(std::move(x), 0);
-        } else if (total_ctx.index == (src / total_ctx.num_thr()))
-            return branch_ctx.broadcast(std::move(x), src % total_ctx.num_thr());
-        else
-            return branch_ctx.broadcast(std::move(x), 0);
+            auto x_broad = total_ctx.broadcast(x, src);
+            return branch_ctx.broadcast(x_broad, src_branch);
+        } else if ((total_ctx.index != src_total) && (branch_ctx.index == 0)) {
+            auto x_broad = total_ctx.broadcast(x, src);
+            return branch_ctx.broadcast(x_broad, 0);
+        } else if (total_ctx.index == src_total) {
+            return branch_ctx.broadcast(x, src_branch);
+        } else {
+            return branch_ctx.broadcast(x, 0);
+        }
     }
     /// Call a function @p f with the given @p args on a single thread and broadcast the return
     /// value to all threads.

@@ -57,6 +57,9 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_λ0(index_t branch
         branch == 0 ? la::gemv_sub(solver_storages[branch].LB, λ_last.batch(0), r0.batch(branch),
                                    rs.batch(branch))
                     : la::gemv_neg(solver_storages[branch].LB, λ_last.batch(0), rs.batch(branch));
+        // if (branch == 0) {
+        //     r0.set_constant(0); //todo dirty fix rs
+        // }
         la::pack(λ_last, λ.branches[branch].batch(0));
 
         la::copy(λ_last.batch(0), λ.first.batch(0).middle_rows(branch * nx, nx));
@@ -73,13 +76,14 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_u0(FanStorage &ux,
         la::potrf(tril(SBs.batch(0)),1/γ);
     }
     if constexpr (Solve) {
+
         for (index_t b = 1; b < num_branches; ++b) {
             la::add(rs.batch(0), rs.batch(b));
-            // guanaqo::print_python(out << "[forward]   rs(" << b << ") = ", rs.batch(b)(0), "\n");}
         }
         // guanaqo::print_python(out << "[forward]   rs(0) = ", rs.batch(0)(0), "\n");
 
         la::trsm(tril(SBs.batch(0)), rs.batch(0), ux.first.batch(0).top_rows(nu));
+
         // rs.batch(0)(0) = ux.first.batch(0).top_rows(nu)(0);
     }
 }
@@ -113,8 +117,10 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
                                                                    real_t ρ_inv,
                                                                    const FanStorage &Σ,
                                                                    FanStorage &ux, FanStorage &λ) {
-    ctx.arrive_and_wait(); // sync    
+    ctx.arrive_and_wait(); // sync  
 
+    ctx.run_single_sync([&, this] { r0.batch(0)=ux.first.batch(0).top_rows(nu); });
+    
     // print_grad(ctx, Σ, "Σ");                                                            
     index_t c = ctx.total_ctx.index;
     if constexpr (Factor && Solve)

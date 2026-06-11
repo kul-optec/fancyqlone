@@ -10,6 +10,8 @@
 #include <guanaqo/trace.hpp>
 #include <cmath>
 #include <ranges>
+#include <iostream>
+#include <syncstream>
 #include <span>
 #include <utility>
 #include <vector>
@@ -138,8 +140,10 @@ auto LineSearch<Vec>::operator()(
     auto [a, b]          = bp.ab_neg;
     a += η;
     b -= β;
+    std::cout << ": Line search step size:\n";
 
     return ctx.call_broadcast([&]() -> Result {
+        std::cout <<"in step size comp"<<ctx.index<<std::endl;
 #if LINE_SEARCH_COMPARE_IMPLEMENTATIONS
         std::vector<Breakpoint> pos_bp_debug(pos_bp.begin(), pos_bp.end());
         auto step_size_debug = find_stepsize_base(a, b, 0, std::span{pos_bp_debug});
@@ -178,7 +182,9 @@ auto LineSearch<Vec>::operator()(
             std::println(std::cerr, "Line search mismatch: {:.17e} (optimized) vs {:.17e} (debug)",
                          step_size.τ, step_size_debug.τ);
 #endif
+        std::cout << step_size.τ << ": Line search step size:\n";
         return step_size;
+
     });
 }
 

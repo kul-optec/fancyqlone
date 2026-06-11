@@ -10,6 +10,7 @@
 #include <cmath>
 #include <functional>
 #include <iostream>
+#include <syncstream>
 #include <limits>
 #include <optional>
 #include <utility>
@@ -367,7 +368,7 @@ SolverStatus SolverImplementation<Backend>::do_main_loop(Backend::Context &ctx,
                 detailed_stats->entries.back().linesearch_step_size        = ls.τ;
                 detailed_stats->entries.back().linesearch_breakpoint_index = ls.index;
             }
-
+            std::osyncstream out(std::cout);
             // Print some information about the Newton step and line search.
             const real_t τ_min = 1e-8 / scal_d, τ_max = 1e2 / scal_d;
             if (settings.verbose && ctx.is_master()) {
@@ -384,12 +385,17 @@ SolverStatus SolverImplementation<Backend>::do_main_loop(Backend::Context &ctx,
                           << ", eq constr resid=" << float_to_str(eq_resid, prec) << ", τ=" << color
                           << float_to_str(ls.τ) << "\x1b[0m (" << ls.index << ")\n";
             }
+            out<<ls.τ << ": Before capping τ:\n";
             ls.τ = std::clamp(ls.τ, τ_min, τ_max);
+            out <<ls.τ << ": After capping τ:\n";
+
 
             { // Apply step
                 GUANAQO_TRACE("apply step", inner_total);
+                out << ls.τ << ": Before applying step:\n";
                 backend.xaxpy(ctx, ls.τ, d, x);
                 backend.xaxpy(ctx, ls.τ, Δλ, λ);
+                out << ctx.index << ": After applying step:\n";
             }
 
             // Optionally recompute Ax and ∇f

@@ -7,6 +7,7 @@
 #include <cyqlone/tridiagonal-solver.hpp>
 #include <batmat/matrix/storage.hpp>
 #include <guanaqo/print.hpp>
+#include <iostream>
 #include <syncstream>
 #include <vector>
 
@@ -220,8 +221,10 @@ struct FanCyqloneSolver {
     /// index, and optionally the corresponding batches of the given arrays.
     /// Iterates backwards in time (decreasing stage index j).
     void foreach_batch(Context &ctx, auto &&func, auto &&...xs) const {
+        ctx.arrive_and_wait();
 
         index_t i = ctx.total_ctx.index;
+        // std::cout << "Branch " << i << " starting foreach_batch\n";
       
         solver_storages[i].cyqlone_solver.foreach_batch(ctx.branch_ctx, func, xs.branches[i]...);
         if (ctx.is_master())

@@ -634,9 +634,9 @@ TEST(QPALM, random_fan_matches_combined_no_ineq) {
     const index_t num_branches = 2;
 
     cyqlone::OCPDim dim{
-        .N_horiz = 4,
-        .nx      = 2,
-        .nu      = 1,
+        .N_horiz = 32,
+        .nx      = 5,
+        .nu      = 2,
         .ny      = 0,
         .ny_N    = 0,
     };
@@ -684,7 +684,7 @@ TEST(QPALM, random_fan_matches_combined_no_ineq) {
         qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
             fan_cocp, {},
             {
-                .processors      = 2,
+                .processors      = 4,
                 .print_residuals = verbose,
                 .print_precision = 17,
 
@@ -700,7 +700,7 @@ TEST(QPALM, random_fan_matches_combined_no_ineq) {
             fan_backend.get(),
             {
                 .max_outer_iter       = 100,
-                .max_total_inner_iter = 2,
+                .max_total_inner_iter = 100,
                 .tolerance            = 1e-9,
                 .verbose              = verbose,
                 .detailed_stats       = verbose,
@@ -739,7 +739,7 @@ TEST(QPALM, random_fan_matches_combined_no_ineq) {
             combined_backend.get(),
             {
                 .max_outer_iter       = 100 ,
-                .max_total_inner_iter = 2,
+                .max_total_inner_iter = 100,
                 .tolerance            = 1e-9,
                 .verbose              = verbose,
                 .detailed_stats       = verbose,
