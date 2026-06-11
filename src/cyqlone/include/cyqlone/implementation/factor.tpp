@@ -133,12 +133,9 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::solve_forward(Context &ctx, mut_v
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve(Context &ctx, value_type γ, real_t ρ_inv,
                                                            view<> Σ, mut_view<> ux, mut_view<> λ) {
-    print_grad(ctx, λ, "λ (before factor_solve)");
-    print_grad(ctx, ux, "u (before factor_solve)");
     // print_grad(ctx, Σ, "Σ");  
     factor_solve_impl<true, true>(ctx, γ, ρ_inv, Σ, ux, λ);
-    print_grad(ctx, λ, "λ (after factor_solve)");
-    print_grad(ctx, ux, "u (after factor_solve)");
+
     // print_grad(ctx, Σ, "Σ");  
      
 }

@@ -24,9 +24,9 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(
         batmat::linalg::copy(Mxbi, Δλi);
     };
     ocp.foreach_batch(ctx, rhs, d, grad, Mᵀλ, Aᵀŷ, Mxb, Δλ);
-    // ocp.print_grad(ctx, Δλ, "Δλ (before solve)");
-    // ocp.print_grad(ctx, d, "d (before solve)");
-    // ocp.print_grad(ctx, Mxb, "Mxb (before solve)");
+    ocp.print_grad(ctx, Δλ, "Δλ (before solve)");
+    ocp.print_grad(ctx, d, "d (before solve)");
+    ocp.print_grad(ctx, Mxb, "Mxb (before solve)");
     if (settings.print_residuals)
         print_solve_rhs_norms(ctx, d, Δλ, grad, Mᵀλ, Aᵀŷ);
     if (reset_factorization) {
@@ -50,15 +50,15 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(
         auto t = get_timed(&Timings::solve);
         ocp.solve_forward(ctx, d, Δλ);
     }
-    // ocp.print_grad(ctx, d, "d (after forward solve)");
-    // ocp.print_grad(ctx, Δλ, "Δλ (after forward solve)");
+    ocp.print_grad(ctx, d, "d (after forward solve)");
+    ocp.print_grad(ctx, Δλ, "Δλ (after forward solve)");
 
     { // (d, Δλ) ← L⁻ᵀ (d, Δλ) and MᵀΔλ ← Mᵀ Δλ
         auto t = get_timed(&Timings::solve);
         ocp.solve_reverse_mul(ctx, d, Δλ, MᵀΔλ);
     }
-    // ocp.print_grad(ctx, d, "d (after reverse solve)");
-    // ocp.print_grad(ctx, Δλ, "Δλ (after reverse solve)");
+    ocp.print_grad(ctx, d, "d (after reverse solve)");
+    ocp.print_grad(ctx, Δλ, "Δλ (after reverse solve)");
 
     { // Ad ← A d
         auto t = get_timed(&Timings::solve_A);

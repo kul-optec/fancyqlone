@@ -57,6 +57,8 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_λ0(index_t branch
         branch == 0 ? la::gemv_sub(solver_storages[branch].LB, λ_last.batch(0), r0.batch(branch),
                                    rs.batch(branch))
                     : la::gemv_neg(solver_storages[branch].LB, λ_last.batch(0), rs.batch(branch));
+        la::pack(λ_last, λ.branches[branch].batch(0));
+
         la::copy(λ_last.batch(0), λ.first.batch(0).middle_rows(branch * nx, nx));
     }
 }
@@ -112,8 +114,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
                                                                    const FanStorage &Σ,
                                                                    FanStorage &ux, FanStorage &λ) {
     ctx.arrive_and_wait(); // sync    
-    print_grad(ctx, λ, "λ (before factor_solve)");
-    print_grad(ctx, ux, "u (before factor_solve)");
+
     // print_grad(ctx, Σ, "Σ");                                                            
     index_t c = ctx.total_ctx.index;
     if constexpr (Factor && Solve)
@@ -132,8 +133,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
         ctx.total_ctx.run_single_sync([&, this] { factor_solve_u0<Factor, Solve>(ux, γ); });
     }
     ctx.arrive_and_wait(); // wait for λ(0) to be ready on each branch
-    print_grad(ctx, λ, "λ (after factor_solve)");
-    print_grad(ctx, ux, "u (after factor_solve)");
+  
     // print_grad(ctx, Σ, "Σ");     
 }
 
@@ -191,19 +191,15 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx,
     // ctx.run_single_sync([&] { print_grad( ux, "u (before reverse solve)"); });
 
     // ctx.arrive_and_wait(); // wait for off-diagonal block
-    print_grad(ctx, λ, "λ (before reverse solve)");
     // print_grad(ctx, ux, "u (before reverse solve)");
                                                          
     if (ctx.branch_ctx.is_master()) {
         ctx.total_ctx.run_single_sync([&,this] { solve_reverse_u0(ux); });
-        print_grad(ctx, λ, "λ (after local solve λ)");
         ctx.total_ctx.arrive_and_wait();
-        print_grad(ctx, λ, "λ (after local solve λ)");
 
         solve_reverse_λ0(c, ux, λ);
 
     }
-    print_grad(ctx, λ, "λ (after local solve)");
 
     ctx.arrive_and_wait(); // wait λ()(0) to be ready
 
@@ -229,8 +225,6 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx,
         ctx.total_ctx.arrive_and_wait();
     }
     ctx.arrive_and_wait();
-    print_grad(ctx, λ, "λ (after reverse solve)");
-    print_grad(ctx, ux, "u (after reverse solve)");
 }
 
 //![Cyqlone solve CR serial]
