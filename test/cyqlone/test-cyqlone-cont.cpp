@@ -112,7 +112,10 @@ cyqlone::LinearOCPStorage combine_branches(std::span<const cyqlone::LinearOCPSto
         combined_ocp.Q(0)(i, i) = 1; // regularize unused state variables in the cost
     for (index_t i = nu_max; i < combined_ocp.dim.nu; ++i)
         combined_ocp.R(0)(i, i) = 1; // regularize unused control variables in the cost
-
+    std::cout << "Combined OCP has N=" << combined_ocp.dim.N_horiz << ", nx=" << combined_ocp.dim.nx
+              << ", nu=" << combined_ocp.dim.nu << ", ny=" << combined_ocp.dim.ny
+              << ", ny_N=" << combined_ocp.dim.ny_N << "\n";
+    guanaqo::print_python(std::cout << "x(0) = ", combined_ocp.r(0), "\n");
     return combined_ocp;
 }
 

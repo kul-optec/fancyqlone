@@ -89,23 +89,16 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_u0(FanStorage &ux
 }
 // Reverse solve for λ(0) on each branch, after solving for u(0)
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_λ0(index_t branch, FanStorage &ux,
                                                                   FanStorage &λ) const {
     GUANAQO_TRACE_REGION("fan solve reverse λ0", 0);
     // Compute the contribution of u(0) to λ(0) for each Cyqlone block
     index_t nx = solver_storages[branch].cyqlone_solver.nx;
-
     typename SolverLast::matrix λ_last{{.depth = v, .rows = nx, .cols = 1},
                                        batmat::matrix::uninitialized};
-    la::unpack(λ.first.batch(0).middle_rows(branch * nx, nx), λ_last);
-    // std::osyncstream out(std::cout);
-    // guanaqo::print_python(out << "[reverse]   λ(0)<<" << branch << " before reverse solve = ", λ_last.batch(0)(0), "\n");
-    // guanaqo::print_python(out << "[reverse]   rs(0)"<<branch<<" before reverse solve = ", rs.batch(0)(0), "\n");
-    // guanaqo::print_python(out << "[reverse]   L"<<branch<<" before reverse solve = ", solver_storages[branch].LB.batch(0)(0), "\n");
+    la::unpack(λ.branches[branch].batch(0), λ_last);
     la::gemv_add(solver_storages[branch].LB.batch(0).transposed(), ux.first.batch(0).top_rows(nu),
                  λ_last.batch(0));
-    // guanaqo::print_python(out << "[reverse]   λ(0)<<" << branch << " after gemv = ", λ_last.batch(0)(0), "\n");
     // Reverse solve of the final block-tridiagonal system for each Cyqlone block
     solver_storages[branch].tridiagonal_solver.solve_reverse(λ_last);
     la::pack(λ_last, λ.branches[branch].batch(0));
@@ -118,6 +111,10 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
                                                                    real_t ρ_inv,
                                                                    const FanStorage &Σ,
                                                                    FanStorage &ux, FanStorage &λ) {
+    ctx.arrive_and_wait(); // sync    
+    print_grad(ctx, λ, "λ (before factor_solve)");
+    print_grad(ctx, ux, "u (before factor_solve)");
+    // print_grad(ctx, Σ, "Σ");                                                            
     index_t c = ctx.total_ctx.index;
     if constexpr (Factor && Solve)
         solver_storages[c].cyqlone_solver.factor_solve(ctx.branch_ctx, γ, ρ_inv, Σ.branches[c],
@@ -127,11 +124,17 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
     else if constexpr (Solve)
         solver_storages[c].cyqlone_solver.solve_forward(ctx.branch_ctx, ux.branches[c],
                                                         λ.branches[c]);
-    ctx.branch_ctx.arrive_and_wait(); // wait for off-diagonal block
+    ctx.arrive_and_wait(); // wait for off-diagonal block
     if (ctx.branch_ctx.is_master()) {
         factor_solve_λ0<Factor, Solve>(c, λ, Σ);
+        ctx.arrive_and_wait(); // wait for off-diagonal block
+
         ctx.total_ctx.run_single_sync([&, this] { factor_solve_u0<Factor, Solve>(ux, γ); });
     }
+    ctx.arrive_and_wait(); // wait for λ(0) to be ready on each branch
+    print_grad(ctx, λ, "λ (after factor_solve)");
+    print_grad(ctx, ux, "u (after factor_solve)");
+    // print_grad(ctx, Σ, "Σ");     
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
@@ -167,11 +170,14 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse(Context &ctx, FanStorage &ux,
                                                                FanStorage &λ) {
     const index_t c = ctx.total_ctx.index;
+    ctx.branch_ctx.arrive_and_wait(); // wait for off-diagonal block
+
     if (ctx.branch_ctx.is_master()) {
-        ctx.total_ctx.run_single_sync([&] { solve_reverse_u0(ux); });
+        ctx.total_ctx.run_single_sync([&, this] { solve_reverse_u0(ux); });
 
         solve_reverse_λ0(c, ux, λ);
     }
+    ctx.branch_ctx.arrive_and_wait(); // wait λ()(0) to be ready
 
     solver_storages[c].cyqlone_solver.solve_reverse(ctx.branch_ctx, ux.branches[c], λ.branches[c]);
 }
@@ -179,18 +185,31 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx, FanStorage &ux,
                                                                    FanStorage &λ, FanStorage &Mᵀλ) {
     const index_t c = ctx.total_ctx.index;
-    ctx.branch_ctx.arrive_and_wait(); // wait for off-diagonal block
-                                                                 
+    ctx.arrive_and_wait(); // wait for off-diagonal block
+    // std::cout << "Branch " << c << " starting reverse solve\n";                                                                
+    // print_grad(ctx, ux, "u (before reverse solve)");
+    // ctx.run_single_sync([&] { print_grad( ux, "u (before reverse solve)"); });
+
+    // ctx.arrive_and_wait(); // wait for off-diagonal block
+    print_grad(ctx, λ, "λ (before reverse solve)");
+    // print_grad(ctx, ux, "u (before reverse solve)");
+                                                         
     if (ctx.branch_ctx.is_master()) {
-        ctx.total_ctx.run_single_sync([&] { solve_reverse_u0(ux); });
+        ctx.total_ctx.run_single_sync([&,this] { solve_reverse_u0(ux); });
+        print_grad(ctx, λ, "λ (after local solve λ)");
+        ctx.total_ctx.arrive_and_wait();
+        print_grad(ctx, λ, "λ (after local solve λ)");
 
         solve_reverse_λ0(c, ux, λ);
+
     }
-    ctx.branch_ctx.arrive_and_wait(); // wait λ()(0) to be ready
+    print_grad(ctx, λ, "λ (after local solve)");
+
+    ctx.arrive_and_wait(); // wait λ()(0) to be ready
 
     solver_storages[c].cyqlone_solver.solve_reverse_mul(ctx.branch_ctx, ux.branches[c],
                                                         λ.branches[c], Mᵀλ.branches[c]);
-    ctx.branch_ctx.arrive_and_wait(); // wait λ()(0) to be ready
+    ctx.arrive_and_wait(); // wait λ()(0) to be ready
 
     if (ctx.branch_ctx.is_master()) {
         index_t nx_offset = 0; //
@@ -200,7 +219,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx,
         la::gemv(solver_storages[c].B0.batch(0).transposed(),
                  λ.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx),
                  Mᵀλ_row.batch(0));
-        auto reduced = ctx.total_ctx.reduce(std::move(Mᵀλ_row.batch(0)), [](auto a, auto b) {
+        auto reduced = ctx.total_ctx.reduce(Mᵀλ_row.batch(0), [](auto a, auto b) {
             la::add(a.batch(0), b.batch(0));
             return a;
         });
@@ -210,6 +229,8 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx,
         ctx.total_ctx.arrive_and_wait();
     }
     ctx.arrive_and_wait();
+    print_grad(ctx, λ, "λ (after reverse solve)");
+    print_grad(ctx, ux, "u (after reverse solve)");
 }
 
 //![Cyqlone solve CR serial]

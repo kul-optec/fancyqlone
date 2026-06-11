@@ -13,6 +13,7 @@ template <bool Factor, bool Solve>
 void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx, value_type γ,
                                                                 real_t ρ_inv, view<> Σ,
                                                                 mut_view<> ux, mut_view<> λ) {
+
     //  2|  factor-block-column-riccati(c)    -- steps 1 and 2
     factor_riccati_solve<Factor, Solve>(ctx, γ, Σ, ux, λ);
     //  3|  compute-schur(c)                  -- step 3
@@ -132,7 +133,14 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::solve_forward(Context &ctx, mut_v
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve(Context &ctx, value_type γ, real_t ρ_inv,
                                                            view<> Σ, mut_view<> ux, mut_view<> λ) {
+    print_grad(ctx, λ, "λ (before factor_solve)");
+    print_grad(ctx, ux, "u (before factor_solve)");
+    // print_grad(ctx, Σ, "Σ");  
     factor_solve_impl<true, true>(ctx, γ, ρ_inv, Σ, ux, λ);
+    print_grad(ctx, λ, "λ (after factor_solve)");
+    print_grad(ctx, ux, "u (after factor_solve)");
+    // print_grad(ctx, Σ, "Σ");  
+     
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void CyqloneSolver<VL, T, DefaultOrder, Ctx>::factor(Context &ctx, value_type γ, real_t ρ_inv,

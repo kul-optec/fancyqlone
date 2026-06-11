@@ -710,27 +710,25 @@ struct CyqloneSolver {
     }
     void print_grad(Context &ctx,  const auto &grad, const std::string &name) const {
         ctx.arrive_and_wait();
-        std::osyncstream tout(std::cout);
-
-        if (ctx.is_master()) {
-             tout << "grad shape: " << grad.size() << "\n";
-        }
+        std::osyncstream out(std::cout);
 
         for (index_t j = 0; j < N_horiz/v; ++j) {
             for (index_t vi = 0; vi < v; ++vi) {
-                guanaqo::print_python(tout << name << j << "_" << vi << " = ", grad.batch(j)(vi));
+                guanaqo::print_python(out << name << j << "_" << vi << " = ", grad.batch(j)(vi));
             }
         }
         ctx.arrive_and_wait();
 
     }
     void print_grad(const auto &grad, const std::string &name) const {
-        std::osyncstream tout(std::cout);
+        {
+        std::osyncstream sout(std::cout);
         for (index_t j = 0; j < N_horiz/v; ++j) {
             for (index_t vi = 0; vi < v; ++vi) {
-                guanaqo::print_python(tout << name << j << "_" << vi << " = ", grad.batch(j)(vi));
+                guanaqo::print_python(sout << name << j << "_" << vi << " = ", grad.batch(j)(vi));
             }
         }
+    }
     }
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
     /// index, and optionally the corresponding batches of the given arrays.

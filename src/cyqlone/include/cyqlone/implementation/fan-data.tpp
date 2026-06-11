@@ -120,7 +120,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_rhs(
         nx_offset += solver_storages[c].cyqlone_solver.nx;
     };
     // std::cout << "FANRHS initialized: " << std::endl;
-    // print_grad(rhs);
+    // print_grad(rhs,"fan_rhs");
 
 }
 
@@ -208,7 +208,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_variables(
         BATMAT_ASSERT(ux.branches[c].rows() == nux);
         BATMAT_ASSERT(ux.branches[c].cols() == 1);
         solver_storages[c].cyqlone_solver.unpack_variables(ux.branches[c], ux_lin.subspan(offset-nux * N_horiz, nux * N_horiz));
-        offset -= nux * N_horiz-1;
+        offset -= nux * N_horiz-nu;
     }
     la::copy(ux.first.batch(0).top_rows(nu), rview::as_column(ux_lin.first(nu))); // copy u0_sol from the first element of ux into the first nu elements of ux_lin
 }

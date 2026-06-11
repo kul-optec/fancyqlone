@@ -280,13 +280,12 @@ struct FanContext {
     index_t index = branch_ctx.index + total_ctx.index * total_ctx.num_thr();
     template <class T>
     using arrival_token_typed = FanSharedContext::barrier_type::template arrival_token_typed<T>;
-    using arrival_token = FanSharedContext::barrier_type::arrival_token;
-    using arrival_t = Context<SharedContext>::arrival_token;
-    using fan_arrival_t = Context<FanSharedContext>::arrival_token;
-
+    using arrival_token       = FanSharedContext::barrier_type::arrival_token;
+    using arrival_t           = Context<SharedContext>::arrival_token;
+    using fan_arrival_t       = Context<FanSharedContext>::arrival_token;
 
     [[nodiscard]] bool is_master() const { return total_ctx.is_master() && branch_ctx.is_master(); }
-   /// Arrive at the barrier and obtain a token that can be used to wait for completion of the
+    /// Arrive at the barrier and obtain a token that can be used to wait for completion of the
     /// current barrier phase.
     /// @note    Token must be awaited before any other call to arrive.
     [[nodiscard]] auto arrive() {
@@ -296,10 +295,8 @@ struct FanContext {
         }
 
         arrival_t branch_token = branch_ctx.arrive();
-        return arrival_token_fan{
-            .total_token = std::move(total_token),
-            .branch_token = std::move(branch_token)
-        };
+        return arrival_token_fan{.total_token  = std::move(total_token),
+                                 .branch_token = std::move(branch_token)};
     }
     /// Await a token returned by @ref arrive(), waiting for the barrier phase to complete.
     void wait(arrival_token_fan &&token) {
@@ -307,7 +304,6 @@ struct FanContext {
             total_ctx.wait(std::move(*token.total_token));
         }
         branch_ctx.wait(std::move(token.branch_token));
-
     }
 
     /// Arrive at the barrier and wait for the barrier phase to complete. This is a convenience
@@ -317,10 +313,12 @@ struct FanContext {
 #if !GUANAQO_WITH_PERFETTO
         GUANAQO_TRACE("barrier-arrive-and-wait", index);
 #endif
-        if (branch_ctx.is_master()) {
-            total_ctx.arrive_and_wait();
-        }
         branch_ctx.arrive_and_wait();
+
+        if (branch_ctx.is_master()) {
+            auto total_token = total_ctx.arrive();
+            total_ctx.wait(std::move(total_token));
+        }
     }
     /// Debug version of @ref arrive_and_wait() that performs a sanity check to ensure that all
     /// threads are arriving at the same line of code. The @p line parameter should be the same
@@ -340,19 +338,20 @@ struct FanContext {
     /// reduced value.
     template <class T, class F>
     [[nodiscard]] arrival_token_typed_fan<T> arrive_reduce(T x, F func) {
-        arrival_token_typed<T> total_token =
-            total_ctx.shared.barrier.get_typed_token<T>();
+        arrival_token_typed<T> total_token = total_ctx.shared.barrier.get_typed_token<T>();
         auto branch_token =
-            branch_ctx.arrive_reduce_with_completion(std::move(x), std::move(func), 
-                [&](T x_broad) { total_token = total_ctx.arrive_reduce(x_broad, std::move(func));
+            branch_ctx.arrive_reduce_with_completion(std::move(x), std::move(func), [&](T x_broad) {
+                total_token = total_ctx.arrive_reduce(x_broad, std::move(func));
             });
-        return arrival_token_typed_fan<T>{.total_token =  std::move(total_token), .branch_token =  std::move(branch_token)};    };
+        return arrival_token_typed_fan<T>{.total_token  = std::move(total_token),
+                                          .branch_token = std::move(branch_token)};
+    };
     template <class T>
     T wait_reduce(arrival_token_typed_fan<T> &&token) {
         branch_ctx.wait_reduce(std::move(token.branch_token));
         return total_ctx.wait_reduce(std::move(token.total_token));
     }
-/// @todo try to make more simpel probabily overkill by broadcasting again
+    /// @todo try to make more simpel probabily overkill by broadcasting again
     template <class T, class F>
     T reduce(T x, F func) {
         auto branch_reduced = branch_ctx.reduce(std::move(x), std::move(func));
@@ -360,8 +359,7 @@ struct FanContext {
             auto total_reduced = total_ctx.reduce(std::move(branch_reduced), std::move(func));
             branch_ctx.broadcast(std::move(total_reduced), 0);
             return total_reduced;
-        }
-        else {
+        } else {
             auto total_reduced = branch_ctx.broadcast(std::move(branch_reduced), 0);
             return total_reduced;
         }
@@ -375,7 +373,7 @@ struct FanContext {
     /// @p f and changes made by @p f are visible to all threads after this function returns.
     template <class F>
     auto run_single_sync(F &&f) {
-        return branch_ctx.run_single_sync([&] {total_ctx.run_single_sync(std::forward<F>(f)); });
+        return branch_ctx.run_single_sync([&] { total_ctx.run_single_sync(std::forward<F>(f)); });
     }
     /// Broadcast a value @p x from the thread with index @p src to all threads. @todo document
     template <class T>
@@ -405,14 +403,14 @@ struct FanContext {
             return broadcast(T{}, 0);
     }
 };
-    template <class F>
-    void SharedContext::run(F &&f) {
+template <class F>
+void SharedContext::run(F &&f) {
 
 #if !BATMAT_WITH_OPENMP
-        thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
-            Context<SharedContext> ctx{.shared = *this, .index = i};
-            f(ctx);
-        });
+    thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
+        Context<SharedContext> ctx{.shared = *this, .index = i};
+        f(ctx);
+    });
 #else
     BATMAT_OMP(parallel for num_threads(num_thr))
     for (index_t i = 0; i < num_thr; ++i) {
@@ -420,22 +418,21 @@ struct FanContext {
         f(ctx);
     }
 #endif
-    }
+}
 
-    template <class F>
-    void FanSharedContext::run(F &&f) {
+template <class F>
+void FanSharedContext::run(F &&f) {
 
 #if !BATMAT_WITH_OPENMP
-        thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
-            branch_contexts[i].thread_pool.sync_run_n(
-                branch_contexts[i].num_thr, [this, &f, i](index_t j, index_t) {
-                    Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
-                    Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
-                    FanContext<FanSharedContext> ctx{.branch_ctx = branch_ctx,
-                                                     .total_ctx  = total_ctx};
-                    f(ctx);
-                });
-        });
+    thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
+        branch_contexts[i].thread_pool.sync_run_n(
+            branch_contexts[i].num_thr, [this, &f, i](index_t j, index_t) {
+                Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
+                Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
+                FanContext<FanSharedContext> ctx{.branch_ctx = branch_ctx, .total_ctx = total_ctx};
+                f(ctx);
+            });
+    });
 #else
     omp_set_max_active_levels(2);
     BATMAT_OMP(parallel for num_threads(num_thr))
@@ -450,6 +447,6 @@ struct FanContext {
         }
     }
 #endif
-    }
+}
 
 } // namespace cyqlone::parallel

@@ -153,6 +153,14 @@ index_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::calc_ŷ_Aᵀŷ(
         ocp.foreach_batch(ctx, ŷ_batch, ŷ, J, Σ, y, Ax, b_min_strided, b_max_strided);
     }
     auto t = get_timed(&Timings::calc_y_hat_AT);
+    // ocp.print_grad(ctx,ŷ, "ŷ");
+    // ocp.print_grad(ctx, Ax, "Ax");
+    // ocp.print_grad(ctx, y, "Y");
+    // ocp.print_grad(ctx, b_min_strided, "b_min");
+    // ocp.print_grad(ctx, b_max_strided, "b_max");
+    // ocp.print_grad(ctx, Σ, "Σ")
+
+
     mat_vec_AT(ctx, ŷ, Aᵀŷ);
     return ctx.reduce(count_J);
 }

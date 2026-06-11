@@ -3,6 +3,7 @@
 #include <batmat/config.hpp>
 #include <batmat/linalg/copy.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>
+#include <guanaqo/print.hpp>
 #include <iostream>
 
 namespace cyqlone {
@@ -194,8 +195,7 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
     la::copy(focp.R0, R0(0));
     la::copy(focp.r0, r0(0));
     la::copy(focp.D0, D0(0));
-    la::copy(focp.b_min_0, b_min_0(0));
-    la::copy(focp.b_max_0, b_max_0(0));
+
     for (index_t i = 0; i < num_branches; ++i) {
         // focp.ocps[i].D(0).set_constant(0); // Ensure that the first stage has no input constraints, as they are handled separately in the fan formulation   
         auto &cocp = branches[i] = CyqloneStorage<T>::build(focp.ocps[i],0);
@@ -205,9 +205,17 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
         cocp.data_F(0).left_cols(nu).set_constant(0);    // B(0) = 0
         cocp.data_H(0).top_left(nu, nu).set_constant(0); // R(0) = I
         cocp.data_H(0).top_left(nu, nu).set_diagonal(1); //
+        if (i == 0) {
+            la::copy(cocp.data_rq(0).top_rows(nu), r0(0));
+            la::copy(cocp.data_lb0N(0).top_rows(ny_0), b_min_0(0));
+            la::copy(cocp.data_ub0N(0).top_rows(ny_0), b_max_0(0));
+        }
+        guanaqo::print_python(std::cout << "r0 = ", cocp.data_rq(0) , "\n");
+
+
         cocp.data_rq(0).top_rows(nu).set_constant(0);    // r(0) = 0
     }
-}
+    guanaqo::print_python(std::cout << "r0 = ",branches[0].data_rq(0) , "\n");}
 template <class T>
 FanCyqloneStorage<T> FanCyqloneStorage<T>::build(const FanOCPStorage &focp, index_t ny_0) {
     std::cout << "Building FanCyqloneStorage with " << focp.num_branches() << " branches, ny_0 = " << ny_0 << std::endl;

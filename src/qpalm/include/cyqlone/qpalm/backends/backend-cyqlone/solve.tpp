@@ -13,18 +13,20 @@
 namespace CYQLONE_NS(cyqlone::qpalm) {
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
-void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(Context &ctx, [[maybe_unused]] const var_vec_t &x,
-                                                            const var_vec_t &grad, const var_vec_t &Mᵀλ,
-                                                            const var_vec_t &Aᵀŷ, const eq_constr_vec_t &Mxb,
-                                                            real_t S, [[maybe_unused]] const ineq_constr_vec_t &Σ,
-                                                            const active_set_t &J, //
-                                             var_vec_t &d, var_vec_t &ξ, ineq_constr_vec_t &Ad,
-                                             eq_constr_vec_t &Δλ, var_vec_t &MᵀΔλ) {
+void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(
+    Context &ctx, [[maybe_unused]] const var_vec_t &x, const var_vec_t &grad, const var_vec_t &Mᵀλ,
+    const var_vec_t &Aᵀŷ, const eq_constr_vec_t &Mxb, real_t S,
+    [[maybe_unused]] const ineq_constr_vec_t &Σ,
+    const active_set_t &J, //
+    var_vec_t &d, var_vec_t &ξ, ineq_constr_vec_t &Ad, eq_constr_vec_t &Δλ, var_vec_t &MᵀΔλ) {
     const auto rhs = [&](auto di, auto gi, auto Mᵀλi, auto Aᵀŷi, auto Mxbi, auto Δλi) {
         linalg::axpy<0>(di, {-1, -1, -1}, gi, Mᵀλi, Aᵀŷi);
         batmat::linalg::copy(Mxbi, Δλi);
     };
     ocp.foreach_batch(ctx, rhs, d, grad, Mᵀλ, Aᵀŷ, Mxb, Δλ);
+    // ocp.print_grad(ctx, Δλ, "Δλ (before solve)");
+    // ocp.print_grad(ctx, d, "d (before solve)");
+    // ocp.print_grad(ctx, Mxb, "Mxb (before solve)");
     if (settings.print_residuals)
         print_solve_rhs_norms(ctx, d, Δλ, grad, Mᵀλ, Aᵀŷ);
     if (reset_factorization) {
@@ -48,10 +50,16 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(Context &ctx, [[maybe
         auto t = get_timed(&Timings::solve);
         ocp.solve_forward(ctx, d, Δλ);
     }
+    // ocp.print_grad(ctx, d, "d (after forward solve)");
+    // ocp.print_grad(ctx, Δλ, "Δλ (after forward solve)");
+
     { // (d, Δλ) ← L⁻ᵀ (d, Δλ) and MᵀΔλ ← Mᵀ Δλ
         auto t = get_timed(&Timings::solve);
         ocp.solve_reverse_mul(ctx, d, Δλ, MᵀΔλ);
     }
+    // ocp.print_grad(ctx, d, "d (after reverse solve)");
+    // ocp.print_grad(ctx, Δλ, "Δλ (after reverse solve)");
+
     { // Ad ← A d
         auto t = get_timed(&Timings::solve_A);
         mat_vec_A(ctx, d, Ad);
@@ -65,17 +73,16 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(Context &ctx, [[maybe
 }
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
-void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_rhs_norms(Context &ctx, const var_vec_t &d,
-                                                                          const eq_constr_vec_t &Δλ,
-                                                                          const var_vec_t &grad,
-                                                                          const var_vec_t &Mᵀλ,
-                                                                          const var_vec_t &Aᵀŷ) const {
+void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_rhs_norms(
+    Context &ctx, const var_vec_t &d, const eq_constr_vec_t &Δλ, const var_vec_t &grad,
+    const var_vec_t &Mᵀλ, const var_vec_t &Aᵀŷ) const {
     int prec                   = settings.print_precision;
     auto grad_norm             = norm_inf_l1_sq(ctx, d);
     auto constr_norm           = norm_inf_l1_sq(ctx, Δλ);
     auto cost_grad_norm        = norm_inf_l1_sq(ctx, grad);
     auto eq_constr_grad_norm   = norm_inf_l1_sq(ctx, Mᵀλ);
     auto ineq_constr_grad_norm = norm_inf_l1_sq(ctx, Aᵀŷ);
+    // ocp.print_grad(ctx,Aᵀŷ, "Aᵀŷ");
     if (ctx.is_master()) {
         std::cout << "                   gradient:    abs∞="
                   << guanaqo::float_to_str(grad_norm.norm_inf(), prec)
@@ -109,7 +116,7 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
     using std::max;
     using std::sqrt;
     // Compute the product Σ ⊙ (A d) and then Aᵀ(Σ ⊙ (A d))
-    const auto ΣAd = [&]( auto Ji, auto Adi, auto temp_ineqi) {
+    const auto ΣAd = [&](auto Ji, auto Adi, auto temp_ineqi) {
         linalg::hadamard(Ji, Adi, temp_ineqi);
     };
     ocp.foreach_batch(ctx, ΣAd, J, Ad, temp_ineq);
@@ -118,22 +125,41 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
     // Compute the augmented Lagrangian gradient norms
     real_t r_norm_sq = 0, grad_norm_sq = 0, r_norm_inf = 0;
     real_t r_kkt_norm_sq = 0, r_kkt_norm_inf = 0;
+    std::osyncstream out(std::cout);
+
     const auto resid_simd = [&](auto gradi, auto ξi, auto Mᵀλi, auto Aᵀŷi, auto MᵀΔλi, auto ri) {
         auto gi      = NeumaierSum(gradi).get() + Mᵀλi + Aᵀŷi;
         auto r_kkt_i = gi + MᵀΔλi + ξi;
         ri += gi + MᵀΔλi + ξi;
+
         r_norm_inf = max(r_norm_inf, hmax(abs(ri)));
+        if (r_norm_inf >= 1e-8){
+            out << "        r_i: " << guanaqo::float_to_str(r_norm_inf) << "\n";
+            out << "Large residual component: " << ri[0]
+                << " (grad=" << gradi[0]
+                << ", Mᵀλ=" << Mᵀλi[0]
+                << ", Aᵀŷ=" << Aᵀŷi[0]
+                << ", MᵀΔλ=" << MᵀΔλi[0]
+                << ", ξ=" << ξi[0]
+                << ")\n";
+
+        }
         r_norm_sq += reduce(ri * ri);
         r_kkt_norm_inf = max(r_kkt_norm_inf, hmax(abs(r_kkt_i)));
         r_kkt_norm_sq += reduce(r_kkt_i * r_kkt_i);
         grad_norm_sq += reduce(decltype(gi){gi} * decltype(gi){gi});
         return ri;
     };
-    const auto resid_batch = [&](auto gradi, auto ξi, auto Mᵀλi, auto Aᵀŷi, auto MᵀΔλi,
-                                 auto resi) {
+    const auto resid_batch = [&](auto gradi, auto ξi, auto Mᵀλi, auto Aᵀŷi, auto MᵀΔλi, auto resi) {
         linalg::transform_elementwise(resid_simd, resi, //
                                       gradi, ξi, Mᵀλi, Aᵀŷi, MᵀΔλi, resi);
     };
+    // ocp.print_grad(ctx, grad, "grad");
+    // ocp.print_grad(ctx, ξ, "ξ");
+    // // ocp.print_grad(ctx, Mᵀλ, "Mᵀλ");
+    // // ocp.print_grad(ctx, Aᵀŷ, "Aᵀŷ");
+    // ocp.print_grad(ctx, MᵀΔλ, "MᵀΔλ");
+
     ocp.foreach_batch(ctx, resid_batch, grad, ξ, Mᵀλ, Aᵀŷ, MᵀΔλ, res);
     r_norm_sq    = ctx.reduce(r_norm_sq);
     grad_norm_sq = ctx.reduce(grad_norm_sq);
@@ -152,9 +178,7 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
                   << ",  rel₂=" << guanaqo::float_to_str(sqrt(r_kkt_norm_sq / grad_norm_sq), prec)
                   << "\n";
     auto &x_next        = temp_var;
-    const auto add_step = [&](auto xi, auto dii, auto x_nexti) {
-        linalg::add(xi, dii, x_nexti);
-    };
+    const auto add_step = [&](auto xi, auto dii, auto x_nexti) { linalg::add(xi, dii, x_nexti); };
     ocp.foreach_batch(ctx, add_step, x, d, x_next);
     auto &res_x_next = temp_eq;
     eq_constr_resid(ctx, x_next, res_x_next);

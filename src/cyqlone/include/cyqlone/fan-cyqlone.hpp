@@ -242,12 +242,12 @@ struct FanCyqloneSolver {
     }
     void print_grad(Context &ctx, const auto &grad, const std::string &name) const {
         ctx.arrive_and_wait();
-        std::osyncstream tout(std::cout);
+        // std::osyncstream tout(std::cout);
         solver_storages[ctx.total_ctx.index].cyqlone_solver.print_grad(
             ctx.branch_ctx, grad.branches[ctx.total_ctx.index], name + "_branch" + std::to_string(ctx.total_ctx.index));
 
         if (ctx.is_master()) {
-            guanaqo::print_python(tout<< name << "(0)(0) = ", grad.first.batch(0)(0), "\n");
+            guanaqo::print_python(std::cout<< name << "(0)(0) = ", grad.first.batch(0)(0), "\n");
         }
         ctx.arrive_and_wait();
 

@@ -400,7 +400,7 @@ def create_cont_double_integrator_combined(N=100):
             dt = 0.1
             A = np.array([[1, dt], [0, 1]])
             B = np.array([[0.5 * dt**2], [dt]])
-            b = np.zeros(nx)
+            b = np.random.rand(nx)
         else:
             A = np.eye(nx)
             B = np.eye(nu, nx)
@@ -625,6 +625,8 @@ if __name__ == "__main__":
     # Create and save example OCP
     N=32
     # ocp = create_cont_double_integrator_combined(N)
+    ocp = create_cont_double_integrator_combined(16)
+
     ocp = create_cont_double_integrator_combined_with_constraints(N)
     # ocp.save_to_mat(f"python/cmpc/ocp_data{N}.mat", "ocp")
     

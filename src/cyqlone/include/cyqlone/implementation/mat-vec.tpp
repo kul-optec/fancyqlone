@@ -48,6 +48,11 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::residual_dynamics_constr(Context &
                 sub(Mxbj, x_next, with_rotate<1>);
         }
     }
+    // print_grad(ctx, b,"res_b");
+    // print_grad(ctx, x,"x");
+    // print_grad(ctx, Mxb,"Mxb");
+
+
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>

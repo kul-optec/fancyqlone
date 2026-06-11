@@ -54,6 +54,9 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::residual_dynamics_constr(Contex
             Mxb.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx)(0);
     }
     ctx.arrive_and_wait();
+    // print_grad(ctx, b,"res_b");
+    // print_grad(ctx, x,"x");
+    // print_grad(ctx, Mxb,"Mxb");
 
 }
 

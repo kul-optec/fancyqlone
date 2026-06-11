@@ -165,7 +165,7 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_rhs(const CyqloneStorag
         }
     }
     // std::cout << "RHS initialized: " << std::endl;
-    // print_grad(rhs);
+    print_grad(rhs,"rhs");
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
