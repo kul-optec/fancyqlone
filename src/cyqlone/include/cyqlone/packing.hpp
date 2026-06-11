@@ -188,6 +188,7 @@ template <simdifiable VA, class VB, int Rot = 0>
     requires(std::is_same_v<simdified_value_t<VA>, typename std::remove_cvref_t<VB>::value_type> &&
              typename std::remove_cvref_t<VB>::batch_size_type() == 1)
 void unpack(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
+    BATMAT_ASSERT(static_cast<index_t>(A.depth()) == static_cast<index_t>(B.depth()));
     detail::unpack_full<const simdified_value_t<VA>, simdified_abi_t<VA>, Rot, false>(
         simdify(A).as_const(), B.first_layers(A.depth()));
 }
@@ -207,6 +208,7 @@ template <simdifiable VA, class VB, int Rot = 0>
     requires(std::is_same_v<simdified_value_t<VA>, typename std::remove_cvref_t<VB>::value_type> &&
              typename std::remove_cvref_t<VB>::batch_size_type() == 1)
 void unpack_add(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
+    BATMAT_ASSERT(static_cast<index_t>(A.depth()) == static_cast<index_t>(B.depth()));
     detail::unpack_full<const simdified_value_t<VA>, simdified_abi_t<VA>, Rot, true>(
         simdify(A).as_const(), B.first_layers(A.depth()));
 }
@@ -217,6 +219,7 @@ template <class VA, simdifiable VB, int Rot = 0>
     requires(std::is_same_v<typename std::remove_cvref_t<VA>::value_type, simdified_value_t<VB>> &&
              typename std::remove_cvref_t<VA>::batch_size_type() == 1)
 void pack(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
+    BATMAT_ASSERT(static_cast<index_t>(A.depth()) == static_cast<index_t>(B.depth()));
     detail::unpack_full<simdified_value_t<VB>, simdified_abi_t<VB>, Rot, false>(
         simdify(B), A.first_layers(B.depth()).as_const());
 }
@@ -236,6 +239,7 @@ template <class VA, simdifiable VB, int Rot = 0>
     requires(std::is_same_v<typename std::remove_cvref_t<VA>::value_type, simdified_value_t<VB>> &&
              typename std::remove_cvref_t<VA>::batch_size_type() == 1)
 void pack_add(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
+    BATMAT_ASSERT(static_cast<index_t>(A.depth()) == static_cast<index_t>(B.depth()));
     detail::unpack_full<simdified_value_t<VB>, simdified_abi_t<VB>, Rot, true>(
         simdify(B), A.first_layers(B.depth()).as_const());
 }

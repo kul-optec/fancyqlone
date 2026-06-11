@@ -76,6 +76,17 @@ TEST(LinAlg, unpackGeneral) {
     }
 }
 
+TEST(LinAlg, unpackWrongDepth) {
+    using cyqlone::index_t;
+    using vl_t  = std::integral_constant<index_t, 4>;
+    using one_t = std::integral_constant<index_t, 1>;
+    batmat::matrix::Matrix<double, index_t, one_t, one_t> A{{.rows = 13, .cols = 17}};
+    batmat::matrix::Matrix<double, index_t, one_t, vl_t> B{{.rows = 13, .cols = 17}};
+    fill_linear(A, 0.5, 0.25);
+
+    EXPECT_THROW(cyqlone::linalg::unpack(A, B), std::logic_error);
+}
+
 TEST(LinAlg, unpackGeneralTransB) {
     using cyqlone::index_t;
     using vl_t  = std::integral_constant<index_t, 4>;
@@ -134,6 +145,17 @@ TEST(LinAlg, packGeneral) {
             }
         }
     }
+}
+
+TEST(LinAlg, packWrongDepth) {
+    using cyqlone::index_t;
+    using vl_t  = std::integral_constant<index_t, 4>;
+    using one_t = std::integral_constant<index_t, 1>;
+    batmat::matrix::Matrix<double, index_t, one_t, one_t> A{{.rows = 3, .cols = 5}};
+    batmat::matrix::Matrix<double, index_t, one_t, vl_t> B{{.rows = 3, .cols = 5}};
+    fill_linear(B, 0.5, 0.25);
+
+    EXPECT_THROW(cyqlone::linalg::pack(B, A), std::logic_error);
 }
 
 TEST(LinAlg, packGeneralTransB) {
