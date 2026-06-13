@@ -28,22 +28,41 @@ if [ "$(uname -m)" = "x86_64" ]; then
     echo "conan.profile_host+=[\"$profiles/arch/linux/x86-64-v3.profile\"]" >> "$pbc_config"
 fi
 
-# Build the Python package
-python3 -m pip install -U build
-python3 -m build -w "$pkg_dir" -o "$out_dir" -C local="$pbc_config"
+# Build the Python package (prefer uv)
+if hash uv 2> /dev/null; then
+    pbc_venv="$PWD/.venv-pbc"
+    uv venv --clear "$pbc_venv"
+    python_executable="$pbc_venv/bin/python"
+    uv build --python "$pbc_venv/bin/python" \
+        "$pkg_dir" --wheel --out-dir "$out_dir" --config-setting local="$pbc_config"
+elif python3 -m pip --version > /dev/null 2>&1; then
+    python3 -m pip install -U build
+    python3 -m build -w "$pkg_dir" -o "$out_dir" -C local="$pbc_config"
+else
+    echo "No suitable build tool found (uv or pip)"
+    exit 1
+fi
 
 # Install the Python stubs
 if [ -n "$install_stubs_dir" ]; then
-    # Install py-build-cmake
-    python3 -m pip install 'py-build-cmake~=0.6.0a2' 'numpy<3'
+    if hash uv 2> /dev/null; then
+        uv pip install --python "$python_executable" \
+            'py-build-cmake~=0.6.0a2' 'numpy<3'
+        pbc=( "$python_executable" -m py_build_cmake.cli -C "$pkg_dir" --local="$pbc_config" )
+    else
+        python_executable="$(which python3)"
+        "$python_executable" -m pip install 'py-build-cmake~=0.6.0a2' 'numpy<3'
+        pbc=( "$python_executable" -m py_build_cmake.cli -C "$pkg_dir" --local="$pbc_config" )
+    fi
     # Determine Conan's build directory
-    pbc=(python3 -m py_build_cmake.cli -C "$pkg_dir" --local="$pbc_config")
     build_config="$("${pbc[@]}" build-config-name)"
     build_dir="$pkg_dir/.py-build-cmake_cache/build/$build_config/Release"
     # Activate the Conan build environment (ensures that CMake is in PATH)
     set +x; source "$build_dir/generators/conanbuild.sh"; set -x
     # Re-run CMake to change Python executable (old one is in a temporary venv)
-    cmake "$build_dir" -D "Python_EXECUTABLE=$(which python3)"
+    cmake "$build_dir" \
+        -D "Python_EXECUTABLE=$python_executable" \
+        -D "Python3_EXECUTABLE=$python_executable"
     # Install the binary modules into the source tree
     cmake --install "$build_dir" --prefix "$install_stubs_dir" \
         --component python_modules

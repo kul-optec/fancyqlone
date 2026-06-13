@@ -72,5 +72,12 @@ conan.1.cmake.install_components+=["python_nanobind", "python_stubs"]
 EOF
 
 # Build the Python package
-python3 -m pip install -U build
-python3 -m build -w "$pkg_dir" -o "$out_dir" -C cross="$pbc_config"
+if hash uv 2> /dev/null; then  # Use uv (fast path)
+    uv build "$pkg_dir" --wheel --out-dir "$out_dir" --config-setting cross="$pbc_config"
+elif python3 -m pip --version > /dev/null 2>&1; then  # Fallback to pip + build
+    python3 -m pip install -U build
+    python3 -m build -w "$pkg_dir" -o "$out_dir" -C cross="$pbc_config"
+else
+    echo "No suitable build tool found (uv or pip)"
+    exit 1
+fi
