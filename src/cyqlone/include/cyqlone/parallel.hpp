@@ -7,6 +7,7 @@
 #include <cyqlone/barrier.hpp>
 #include <cyqlone/config.hpp>
 #include <batmat/config.hpp>
+#include <syncstream>
 #if BATMAT_WITH_OPENMP
 #include <batmat/openmp.h>
 #else
@@ -15,6 +16,7 @@
 #include <guanaqo/trace.hpp>
 #include <cstdint>
 #include <functional>
+#include <iostream>
 #include <type_traits>
 #include <utility>
 
@@ -138,6 +140,14 @@ struct Context {
 #else
         return shared.barrier.arrive(static_cast<uint32_t>(index));
 #endif
+    }
+    /// Arrive at the barrier and obtain a token that can be used to wait for completion of the
+    /// current barrier phase and call a function on completion.
+    /// @note    Token must be awaited before any other call to arrive.
+    template <class C>
+    [[nodiscard]] arrival_token arrive_with_completion(C func) {
+
+        return shared.barrier.arrive_with_completion(static_cast<uint32_t>(index), std::move(func));
     }
     /// Await a token returned by @ref arrive(), waiting for the barrier phase to complete.
     void wait(arrival_token &&token) {
@@ -277,7 +287,7 @@ struct FanContext {
     using shared_context_type = SC;
     Context<SharedContext> branch_ctx;
     Context<FanSharedContext> total_ctx;
-    index_t index = branch_ctx.index + total_ctx.index * branch_ctx.num_thr();
+    index_t index;
     template <class T>
     using arrival_token_typed = FanSharedContext::barrier_type::template arrival_token_typed<T>;
     using arrival_token       = FanSharedContext::barrier_type::arrival_token;
@@ -289,21 +299,17 @@ struct FanContext {
     /// current barrier phase.
     /// @note    Token must be awaited before any other call to arrive.
     [[nodiscard]] auto arrive() {
-        std::optional<Context<FanSharedContext>::arrival_token> total_token;
-        if (branch_ctx.is_master()) {
-            total_token.emplace(total_ctx.arrive());
-        }
+        arrival_token total_token = total_ctx.shared.barrier.get_arrival_token();
 
-        arrival_t branch_token = branch_ctx.arrive();
+        arrival_t branch_token =
+            branch_ctx.arrive_with_completion([&, this] { total_token = total_ctx.arrive(); });
         return arrival_token_fan{.total_token  = std::move(total_token),
                                  .branch_token = std::move(branch_token)};
     }
     /// Await a token returned by @ref arrive(), waiting for the barrier phase to complete.
     void wait(arrival_token_fan &&token) {
-        if (branch_ctx.is_master()) {
-            total_ctx.wait(std::move(*token.total_token));
-        }
         branch_ctx.wait(std::move(token.branch_token));
+        total_ctx.wait(std::move(*token.total_token));
     }
 
     /// Arrive at the barrier and wait for the barrier phase to complete. This is a convenience
@@ -313,12 +319,17 @@ struct FanContext {
 #if !GUANAQO_WITH_PERFETTO
         GUANAQO_TRACE("barrier-arrive-and-wait", index);
 #endif
+        // std::cout << "Branch " << total_ctx.index << " is waiting at barrier on thread " << index << "\n";
+        // std::cout << "Waiting for " << branch_ctx.num_thr() << " threads to arrive at barrier\n";
         branch_ctx.arrive_and_wait();
-
+        // std::cout << "Branch " << total_ctx.index << " is waiting at barrier on thread " << index << "\n";
+        // std::cout << "Waiting for " << total_ctx.num_thr() << " threads to arrive at barrier\n";
         if (branch_ctx.is_master()) {
-            auto total_token = total_ctx.arrive();
-            total_ctx.wait(std::move(total_token));
+            total_ctx.arrive_and_wait();
         }
+        // std::cout << "Branch " << total_ctx.index << " is waiting at barrier on thread " << index << "\n";
+        // std::cout << "Waiting for " << branch_ctx.num_thr() << " threads to arrive at barrier\n";
+        branch_ctx.arrive_and_wait();
     }
     /// Debug version of @ref arrive_and_wait() that performs a sanity check to ensure that all
     /// threads are arriving at the same line of code. The @p line parameter should be the same
@@ -328,6 +339,8 @@ struct FanContext {
 #if !GUANAQO_WITH_PERFETTO
         GUANAQO_TRACE("barrier-arrive-and-wait", index);
 #endif
+        branch_ctx.arrive_and_wait(line);
+
         if (branch_ctx.is_master()) {
             total_ctx.arrive_and_wait(line);
         }
@@ -348,22 +361,22 @@ struct FanContext {
     };
     template <class T>
     T wait_reduce(arrival_token_typed_fan<T> &&token) {
-        branch_ctx.wait_reduce(std::move(token.branch_token));
-        return total_ctx.wait_reduce(std::move(token.total_token));
+        T value = total_ctx.wait_reduce(std::move(token.total_token));
+        branch_ctx.wait(std::move(token.branch_token));
+        arrive_and_wait(); // ensure all threads have observed the reduced value before any thread can proceed
+        return value;
     }
     /// @todo try to make more simpel probabily overkill by broadcasting again
     template <class T, class F>
     T reduce(T x, F func) {
-        auto branch_reduced = branch_ctx.reduce(std::move(x), std::move(func));
+        T branch_reduced = branch_ctx.reduce(std::move(x), func);
+        T total_reduced{};
         if (branch_ctx.index == 0) {
-            auto total_reduced = total_ctx.reduce(std::move(branch_reduced), std::move(func));
-            branch_ctx.broadcast(std::move(total_reduced), 0);
-            return total_reduced;
-        } else {
-            auto total_reduced = branch_ctx.broadcast(std::move(branch_reduced), 0);
-            return total_reduced;
+            total_reduced = total_ctx.reduce(std::move(branch_reduced), func);
         }
+        return branch_ctx.broadcast(std::move(total_reduced), 0);
     }
+
     template <class T>
     T reduce(T x) {
         return reduce(std::move(x), std::plus<>{});
@@ -373,7 +386,8 @@ struct FanContext {
     /// @p f and changes made by @p f are visible to all threads after this function returns.
     template <class F>
     auto run_single_sync(F &&f) {
-        return branch_ctx.run_single_sync([&] { total_ctx.run_single_sync(std::forward<F>(f)); });
+        return branch_ctx.run_single_sync(
+            [&] { return total_ctx.run_single_sync(std::forward<F>(f)); });
     }
     /// Broadcast a value @p x from the thread with index @p src to all threads. @todo document
     template <typename T>
@@ -428,13 +442,28 @@ void SharedContext::run(F &&f) {
 template <class F>
 void FanSharedContext::run(F &&f) {
 
+    std::vector<index_t> cumulative(branch_contexts.size());
+
+    index_t sum = 0;
+    for (index_t i = 0; i < num_thr; ++i) {
+        cumulative[i] = sum;
+        sum += branch_contexts[i].num_thr;
+
+    }
+    // std::cout << "Cumulative: ";
+    // for (const auto &c : cumulative) {
+    //     std::cout << c << " ";
+    // }
+    // std::cout << "\n";
+
 #if !BATMAT_WITH_OPENMP
-    thread_pool.sync_run_n(num_thr, [this, &f](index_t i, index_t) {
+    thread_pool.sync_run_n(num_thr, [this, &f, &cumulative](index_t i, index_t) {
         branch_contexts[i].thread_pool.sync_run_n(
-            branch_contexts[i].num_thr, [this, &f, i](index_t j, index_t) {
+            branch_contexts[i].num_thr, [this, &f, i, &cumulative](index_t j, index_t) {
                 Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
                 Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
-                FanContext<FanSharedContext> ctx{.branch_ctx = branch_ctx, .total_ctx = total_ctx};
+                FanContext<FanSharedContext> ctx{
+                    .branch_ctx = branch_ctx, .total_ctx = total_ctx, .index = cumulative[i] + j};
                 f(ctx);
             });
     });
@@ -447,7 +476,8 @@ void FanSharedContext::run(F &&f) {
         for (index_t j = 0; j < branch_contexts[i].num_thr; ++j) {
             Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
             Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
-            FanContext<FanSharedContext> ctx{.branch_ctx = branch_ctx, .total_ctx = total_ctx};
+            FanContext<FanSharedContext> ctx{
+                .branch_ctx = branch_ctx, .total_ctx = total_ctx, .index = cumulative[i] + j};
             f(ctx);
         }
     }
