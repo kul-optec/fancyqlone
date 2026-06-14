@@ -139,6 +139,7 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
     auto thr_parts = std::span{thread_indices}.subspan(0, p_tot);
     const index_t ti =
         ocp.solver_storages[c].cyqlone_solver.riccati_thread_assignment(ctx.branch_ctx);
+    const index_t global_tmast = ocp.solver_storages[0].cyqlone_solver.add_wrap_p(0, 1);
     const index_t bpt_branch = 2 * ny_M_c * ocp.solver_storages[c].cyqlone_solver.n * ocp.v;
     index_t bpt_offset       = 0;
     index_t t_offset         = 0;
@@ -156,17 +157,16 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
     const index_t global_ti = t_offset + ti; // global thread index across all branches
     // Partition the breakpoints into a finite and an infinite part (per thread)
     Breakpoint *const fin_0 = breakpoints_temp.data() + bpt_offset + ti * bpt_branch +
-                              (global_ti == 0 ? 0 : 2 * ocp.ny_0);
-    Breakpoint *const inf_0 = fin_0 + bpt_branch + (global_ti == 0 ? 2 * ocp.ny_0 : 0);
+                              (global_ti <= global_tmast ? 0 : 2 * ocp.ny_0);
+    Breakpoint *const inf_0 = fin_0 + bpt_branch + (global_ti == global_tmast ? 2 * ocp.ny_0 : 0);
     Breakpoint *fin = fin_0, *inf = inf_0;
-
+    std::osyncstream out(std::cout);
     // Compute break points t[i] and intermediate values α[i] and δ[i]
     const auto brkpts_simd = [&](auto Σi, auto yi, auto Adi, auto Axi, auto li, auto ui) {
         const auto s  = sqrt(Σi);
         const auto δ2 = s * Adi, δ1 = -δ2;
         const auto α1 = (yi + Σi * (Axi - li)) / s, α2 = (Σi * (ui - Axi) - yi) / s;
         const auto t1 = α1 / δ1, t2 = α2 / δ2;
-        // out << " inf_0=" << (inf - base) << " size=" << (inf - fin) << std::endl;
         // using simd_scal = batmat::datapar::simd<real_t, batmat::datapar::scalar_abi<real_t>>;
         // out << "t1: " << typeid(t1).name() << " t2: " << typeid(t2).name() << typeid(simd_scal).name() << std::endl;
 
@@ -178,6 +178,7 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
             *(isfinite(t1[l]) ? fin++ : --inf) = {.t = t1[l], .δ = δ1[l]};
             *(isfinite(t2[l]) ? fin++ : --inf) = {.t = t2[l], .δ = δ2[l]};
         }
+
 
         // Invariant: finite values in [fin_0, fin) and infinite values in [inf, inf_0)
     };
