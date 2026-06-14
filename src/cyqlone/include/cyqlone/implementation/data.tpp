@@ -165,7 +165,6 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_rhs(const CyqloneStorag
         }
     }
     // std::cout << "RHS initialized: " << std::endl;
-    print_grad(rhs,"rhs");
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
@@ -424,7 +423,7 @@ auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_rhs(
     const CyqloneStorage<value_type> &ocp) const -> matrix<> {
     matrix<> rhs = initialize_dynamics_constraints();
     initialize_rhs(ocp, rhs);
-    
+
     return rhs;
 }
 

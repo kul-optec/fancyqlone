@@ -115,7 +115,6 @@ cyqlone::LinearOCPStorage combine_branches(std::span<const cyqlone::LinearOCPSto
     std::cout << "Combined OCP has N=" << combined_ocp.dim.N_horiz << ", nx=" << combined_ocp.dim.nx
               << ", nu=" << combined_ocp.dim.nu << ", ny=" << combined_ocp.dim.ny
               << ", ny_N=" << combined_ocp.dim.ny_N << "\n";
-    guanaqo::print_python(std::cout << "x(0) = ", combined_ocp.r(0), "\n");
     return combined_ocp;
 }
 

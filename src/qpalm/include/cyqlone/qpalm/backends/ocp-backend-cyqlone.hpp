@@ -132,11 +132,8 @@ struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>>
             BATMAT_ASSERT(this->first.depth() == other.first.depth()); 
         }
         index_t size() const {
-            index_t total_size = 0;
-            for (const auto &branch : this->branches) {
-                total_size += branch.size();
-            }
-            total_size += this->first.size();
+            index_t total_size = this->branches.size();
+
             return total_size;
         }
     public:

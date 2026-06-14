@@ -1,5 +1,9 @@
 #include <cyqlone/qpalm/backends/ocp-backend-cyqlone.tpp>
 #include <cyqlone/qpalm/implementation/solver.tpp>
+#include <cyqlone/qpalm/backends/backend-cyqlone/ineq-constr.tpp>
+#include <cyqlone/qpalm/backends/backend-cyqlone/linalg.tpp>
+#include <cyqlone/qpalm/backends/backend-cyqlone/linesearch.tpp>
+#include <cyqlone/qpalm/backends/backend-cyqlone/solve.tpp>
 #include "cyqlone/parallel.hpp"
 #include <batmat/config.hpp>
 

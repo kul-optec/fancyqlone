@@ -158,8 +158,7 @@ CyqloneStorage<T> CyqloneStorage<T>::build(const LinearOCPStorage &ocp, index_t 
     else if (ny_0 == 0) {
         ny_0 = 0;
         Ju0.assign(ny, false);
-    }
-    else 
+    } else
         BATMAT_ASSERT(ny_0_ <= ny_0);
     CyqloneStorage<T> res{.N_horiz = N,
                           .nx      = nx,
@@ -186,20 +185,21 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
     nu = focp.ocps[0].dim.nu;
     branches.resize(num_branches);
     Bs.resize(num_branches);
-    R0 = matrix{{ .rows = nu, .cols = nu}};
-    r0 = matrix{{ .rows = nu, .cols = 1}};
-    std::cout<< "Initializing FanCyqloneStorage with " << ny_0 << " ineq, nu = " << nu << std::endl;
-    D0 = matrix{{ .rows = ny_0, .cols = nu}};
-    b_min_0 = matrix{{ .rows = ny_0, .cols = 1}};
-    b_max_0 = matrix{{ .rows = ny_0, .cols = 1}};
+    R0 = matrix{{.rows = nu, .cols = nu}};
+    r0 = matrix{{.rows = nu, .cols = 1}};
+    std::cout << "Initializing FanCyqloneStorage with " << ny_0 << " ineq, nu = " << nu
+              << std::endl;
+    D0      = matrix{{.rows = ny_0, .cols = nu}};
+    b_min_0 = matrix{{.rows = ny_0, .cols = 1}};
+    b_max_0 = matrix{{.rows = ny_0, .cols = 1}};
     la::copy(focp.R0, R0(0));
     la::copy(focp.r0, r0(0));
     la::copy(focp.D0, D0(0));
 
     for (index_t i = 0; i < num_branches; ++i) {
-        // focp.ocps[i].D(0).set_constant(0); // Ensure that the first stage has no input constraints, as they are handled separately in the fan formulation   
-        auto &cocp = branches[i] = CyqloneStorage<T>::build(focp.ocps[i],0);
-        Bs[i]                    = matrix{{ .rows = focp.ocps[i].dim.nx, .cols = nu}};
+        // focp.ocps[i].D(0).set_constant(0); // Ensure that the first stage has no input constraints, as they are handled separately in the fan formulation
+        auto &cocp = branches[i] = CyqloneStorage<T>::build(focp.ocps[i], 0);
+        Bs[i]                    = matrix{{.rows = focp.ocps[i].dim.nx, .cols = nu}};
         la::copy(cocp.data_F(0).left_cols(nu), Bs[i](0));
         // Introduce an unused variable u(0) in each Cyqlone block
         cocp.data_F(0).left_cols(nu).set_constant(0);    // B(0) = 0
@@ -210,15 +210,14 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
             la::copy(cocp.data_lb0N(0).top_rows(ny_0), b_min_0(0));
             la::copy(cocp.data_ub0N(0).top_rows(ny_0), b_max_0(0));
         }
-        guanaqo::print_python(std::cout << "r0 = ", cocp.data_rq(0) , "\n");
 
-
-        cocp.data_rq(0).top_rows(nu).set_constant(0);    // r(0) = 0
+        cocp.data_rq(0).top_rows(nu).set_constant(0); // r(0) = 0
     }
-    guanaqo::print_python(std::cout << "r0 = ",branches[0].data_rq(0) , "\n");}
+}
 template <class T>
 FanCyqloneStorage<T> FanCyqloneStorage<T>::build(const FanOCPStorage &focp, index_t ny_0) {
-    std::cout << "Building FanCyqloneStorage with " << focp.num_branches() << " branches, ny_0 = " << ny_0 << std::endl;
+    std::cout << "Building FanCyqloneStorage with " << focp.num_branches()
+              << " branches, ny_0 = " << ny_0 << std::endl;
     FanCyqloneStorage res;
     res.ny_0 = ny_0;
 

@@ -15,7 +15,7 @@ target_link_libraries(test-pcr PRIVATE cyqlone::cyqlone cyqlone::warnings)
 add_executable(tests
     "cyqlone/test-cyqlone.cpp"
     "cyqlone/test-cyqlone-cont.cpp"
-    "cyqlone/test-cyqlone-cont-mat.cpp"
+    # "cyqlone/test-cyqlone-cont-mat.cpp"
     "cyqlone/test-cyqlone-cont-spmd-trace.cpp"
     "cyqlone/test-tricyqle.cpp"
     "test-barrier.cpp"
@@ -43,7 +43,7 @@ if (TARGET cyqlone::qpalm AND TARGET cyqlone::example-problems)
     endif()
 endif()
 if (CYQLONE_WITH_MATIO)
-    target_sources(tests PRIVATE "test-matio.cpp")
+    target_sources(tests PRIVATE "test-matio.cpp" "cyqlone/test-cyqlone-cont-mat.cpp")
 endif()
 
 option(CYQLONE_FORCE_TEST_DISCOVERY

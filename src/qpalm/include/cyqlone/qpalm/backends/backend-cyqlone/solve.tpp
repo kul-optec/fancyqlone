@@ -3,7 +3,10 @@
 #include <cyqlone/linalg.hpp>
 #include <cyqlone/qpalm/backends/ocp-backend-cyqlone.tpp>
 
+#include <concepts>
 #include <iostream>
+#include <syncstream>
+
 
 /** 
  * @file
@@ -55,16 +58,19 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(
     // ocp.print_grad(ctx, d, "d (after reverse solve)");
     // ocp.print_grad(ctx, Δλ, "Δλ (after reverse solve)");
 
-    { // Ad ← A d
+    { // Ad ← A d4
         auto t = get_timed(&Timings::solve_A);
         mat_vec_A(ctx, d, Ad);
     }
     { // ξ ← Q d + S⁻¹ d
+
         auto t = get_timed(&Timings::solve_grad);
         ocp.cost_gradient(ctx, d, 1 / S, d, 0, ξ);
+
+
     }
-    if (settings.print_residuals)
-        print_solve_resid_norms(ctx, x, d, grad, ξ, Mᵀλ, Aᵀŷ, MᵀΔλ, Ad, J);
+    // if (settings.print_residuals)
+    //     print_solve_resid_norms(ctx, x, d, grad, ξ, Mᵀλ, Aᵀŷ, MᵀΔλ, Ad, J);
 }
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
@@ -97,12 +103,19 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
     const var_vec_t &Mᵀλ, const var_vec_t &Aᵀŷ, const var_vec_t &MᵀΔλ, const ineq_constr_vec_t &Ad,
     const active_set_t &J) {
     // allocate workspaces
-    if (temp_var.size() == 0 || temp_eq.size() == 0 || temp_ineq.size() == 0)
+    if (temp_var.size() == 0 || temp_eq.size() == 0 || temp_ineq.size() == 0){
+        std::cout << "Needing to allocate workspaces\n";
+
         ctx.run_single_sync([this] {
             temp_var  = var_vec();
             temp_eq   = eq_constr_vec();
             temp_ineq = ineq_constr_vec();
-        });
+            
+            assert(temp_var.size()  != 0);
+            assert(temp_eq.size()   != 0);
+            assert(temp_ineq.size() != 0);
+
+        });}
     auto tm  = get_timed(&Timings::solve_resid);
     int prec = settings.print_precision;
     using batmat::datapar::hmax;
@@ -114,13 +127,17 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
     const auto ΣAd = [&](auto Ji, auto Adi, auto temp_ineqi) {
         linalg::hadamard(Ji, Adi, temp_ineqi);
     };
-    ocp.foreach_batch(ctx, ΣAd, J, Ad, temp_ineq);
     auto &res = temp_var;
-    mat_vec_AT(ctx, temp_ineq, res);
+
+    ctx.arrive_and_wait();
+    if (temp_ineq.size() != 0){
+        ocp.foreach_batch(ctx, ΣAd, J, Ad, temp_ineq);
+        mat_vec_AT(ctx, temp_ineq, res);
+
+    }
     // Compute the augmented Lagrangian gradient norms
     real_t r_norm_sq = 0, grad_norm_sq = 0, r_norm_inf = 0;
     real_t r_kkt_norm_sq = 0, r_kkt_norm_inf = 0;
-    std::osyncstream out(std::cout);
 
     const auto resid_simd = [&](auto gradi, auto ξi, auto Mᵀλi, auto Aᵀŷi, auto MᵀΔλi, auto ri) {
         auto gi      = NeumaierSum(gradi).get() + Mᵀλi + Aᵀŷi;
@@ -129,14 +146,7 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
 
         r_norm_inf = max(r_norm_inf, hmax(abs(ri)));
         if (r_norm_inf >= 1e-12){
-            out << "        r_i: " << guanaqo::float_to_str(r_norm_inf) << "\n";
-            out << "Large residual component: " << ri[0]
-                << " (grad=" << gradi[0]
-                << ", Mᵀλ=" << Mᵀλi[0]
-                << ", Aᵀŷ=" << Aᵀŷi[0]
-                << ", MᵀΔλ=" << MᵀΔλi[0]
-                << ", ξ=" << ξi[0]
-                << ")\n";
+
 
         }
         r_norm_sq += reduce(ri * ri);

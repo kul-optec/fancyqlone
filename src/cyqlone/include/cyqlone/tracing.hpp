@@ -42,7 +42,7 @@ enum class TraceDataNames {
 inline uint32_t tracing_data_ids[static_cast<size_t>(TraceDataNames::Sentinel)][256][8]{};
 
 } // namespace cyqlone
-
+#if 0
 #define CYQ_TRACE_WRITE(name, index, lr)                                                           \
     do {                                                                                           \
         using ::cyqlone::TraceDataNames;                                                           \
@@ -68,5 +68,10 @@ inline uint32_t tracing_data_ids[static_cast<size_t>(TraceDataNames::Sentinel)][
 
 #define CYQ_TRACE_WRITE(...) GUANAQO_NOOP()
 #define CYQ_TRACE_READ(...) GUANAQO_NOOP()
+#endif
 
+#else
+
+#define CYQ_TRACE_WRITE(...) GUANAQO_NOOP()
+#define CYQ_TRACE_READ(...) GUANAQO_NOOP()
 #endif

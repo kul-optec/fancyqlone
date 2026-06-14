@@ -385,17 +385,13 @@ SolverStatus SolverImplementation<Backend>::do_main_loop(Backend::Context &ctx,
                           << ", eq constr resid=" << float_to_str(eq_resid, prec) << ", τ=" << color
                           << float_to_str(ls.τ) << "\x1b[0m (" << ls.index << ")\n";
             }
-            out<<ls.τ << ": Before capping τ:\n";
             ls.τ = std::clamp(ls.τ, τ_min, τ_max);
-            out <<ls.τ << ": After capping τ:\n";
 
 
             { // Apply step
                 GUANAQO_TRACE("apply step", inner_total);
-                out << ls.τ << ": Before applying step:\n";
                 backend.xaxpy(ctx, ls.τ, d, x);
                 backend.xaxpy(ctx, ls.τ, Δλ, λ);
-                out << ctx.index << ": After applying step:\n";
             }
 
             // Optionally recompute Ax and ∇f

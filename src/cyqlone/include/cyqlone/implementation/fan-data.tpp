@@ -148,7 +148,6 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_bounds(
     for (index_t c = 0; c < num_branches; ++c) {
         const index_t nyM = std::max(solver_storages[c].cyqlone_solver.ny,
                                       solver_storages[c].cyqlone_solver.ny_N);
-        std::cout << "Initializing bounds for branch " << c << " with nyM = " << nyM << std::endl;
         BATMAT_ASSERT(b_min.branches[c].depth() == solver_storages[c].cyqlone_solver.ceil_N());
         BATMAT_ASSERT(b_min.branches[c].rows() == nyM);
         BATMAT_ASSERT(b_min.branches[c].cols() == 1);

@@ -31,8 +31,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::residual_dynamics_constr(Contex
     // ctx.arrive_and_wait(); // wait for x to be ready from the forward solve of the first level
 
     std::osyncstream out(std::cout);
-    ctx.branch_ctx.arrive_and_wait();
-
+    auto token = ctx.branch_ctx.arrive(); // wait for off-diagonal block
     if (ctx.branch_ctx.is_master()) {
 
         index_t nx_offset = 0;
@@ -50,14 +49,16 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::residual_dynamics_constr(Contex
                  Mxb.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx));
         sub(Mxb.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx),
             Mxb_row.batch(0));
+        ctx.branch_ctx.wait(std::move( token)); // branch master has to wait until all threads in a branch have done their part of the residual computation before writing to Mxb
         Mxb.branches[c].batch(0)(0) =
             Mxb.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx)(0);
     }
-    ctx.arrive_and_wait();
+    else {
+        ctx.branch_ctx.wait(std::move(token)); // wait for master to write the first stage residual into Mxb
+    }
     // print_grad(ctx, b,"res_b");
     // print_grad(ctx, x,"x");
     // print_grad(ctx, Mxb,"Mxb");
-
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
@@ -91,17 +92,15 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::transposed_dynamics_constr(Cont
         la::gemv(solver_storages[c].B0.batch(0).transposed(),
                  λ.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx),
                  Mᵀλ_row.batch(0));
-        auto reduced = ctx.total_ctx.reduce(std::move(Mᵀλ_row.batch(0)), [](auto a, auto b) {
+        auto token = ctx.total_ctx.arrive_reduce_with_completion(Mᵀλ_row.batch(0), [](auto a, auto b) {
             la::add(a.batch(0), b.batch(0));
             return a;
+        },[&]( auto &&x_broad) {
+            Mᵀλ.first.batch(0).top_rows(nu) = x_broad;
         });
-        if (ctx.is_master()) {
-            Mᵀλ.first.batch(0).top_rows(nu) = reduced;
-        }
-        ctx.total_ctx.arrive_and_wait();
+        ctx.total_ctx.wait_reduce(std::move(token));
     }
-    ctx.arrive_and_wait();
-
+    ctx.branch_ctx.arrive_and_wait();
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::general_constr(Context &ctx, const FanStorage &ux,
@@ -125,7 +124,6 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::transposed_general_constr(Conte
                                                                 DCᵀy.branches[c]);
     if (ctx.is_master())
         mul_Gᵀy(D0(0).transposed(), y.first.batch(0), DCᵀy.first.batch(0).top_rows(nu));
-    ctx.arrive_and_wait();
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
@@ -140,13 +138,13 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::cost_gradient(Context &ctx, con
         symv_add(tril(Hj), uxj, grad_fj);
     };
     const index_t c = ctx.total_ctx.index;
+
     solver_storages[c].cyqlone_solver.cost_gradient(ctx.branch_ctx, ux.branches[c], α,
                                                     q.branches[c], β, grad_f.branches[c]);
     if (ctx.is_master())
         mul_Hx(q.first.batch(0).top_rows(nu), R0.batch(0), ux.first.batch(0).top_rows(nu),
                grad_f.first.batch(0).top_rows(nu));
 
-    ctx.arrive_and_wait();
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
