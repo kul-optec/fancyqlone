@@ -188,8 +188,8 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx,
                                                                    FanStorage &λ, FanStorage &Mᵀλ) {
     const index_t c = ctx.total_ctx.index;
     std::osyncstream out(std::cout);
+    ctx.branch_ctx.arrive_and_wait(); // wait for off-diagonal block
 
-    ctx.arrive_and_wait(); // wait for off-diagonal block                                                      
     if (ctx.branch_ctx.is_master()) {
         ctx.total_ctx.run_single_sync([&,this] { solve_reverse_u0(ux); });
 
@@ -197,7 +197,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx,
     }
 
     
-    ctx.arrive_and_wait(); // wait for off-diagonal block                                                      
+    ctx.branch_ctx.arrive_and_wait(); // wait for off-diagonal block                                                      
 
     solver_storages[c].cyqlone_solver.solve_reverse_mul(ctx.branch_ctx, ux.branches[c],
                                                         λ.branches[c], Mᵀλ.branches[c]);

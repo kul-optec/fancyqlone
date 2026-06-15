@@ -598,6 +598,7 @@ def create_cont_double_integrator_combined_with_constraints(N=100):
     # Combined constraints
     C_full   = np.array(block_diag(*Cs))
     D_full   = np.array(block_diag(*Ds))
+    
     l_full   = np.hstack(ls)
     u_full   = np.hstack(us)
 

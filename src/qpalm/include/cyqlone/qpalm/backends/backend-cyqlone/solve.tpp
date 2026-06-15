@@ -69,8 +69,8 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(
 
 
     }
-    // if (settings.print_residuals)
-    //     print_solve_resid_norms(ctx, x, d, grad, ξ, Mᵀλ, Aᵀŷ, MᵀΔλ, Ad, J);
+    if (settings.print_residuals)
+        print_solve_resid_norms(ctx, x, d, grad, ξ, Mᵀλ, Aᵀŷ, MᵀΔλ, Ad, J);
 }
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>

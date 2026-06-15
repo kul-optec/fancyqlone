@@ -192,6 +192,7 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
     D0      = matrix{{.rows = ny_0, .cols = nu}};
     b_min_0 = matrix{{.rows = ny_0, .cols = 1}};
     b_max_0 = matrix{{.rows = ny_0, .cols = 1}};
+    guanaqo::print_python(std::cout << "D0 = ", focp.D0, "\n");
     la::copy(focp.R0, R0(0));
     la::copy(focp.r0, r0(0));
     la::copy(focp.D0, D0(0));
@@ -207,8 +208,8 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
         cocp.data_H(0).top_left(nu, nu).set_diagonal(1); //
         if (i == 0) {
             la::copy(cocp.data_rq(0).top_rows(nu), r0(0));
-            la::copy(cocp.data_lb0N(0).top_rows(ny_0), b_min_0(0));
-            la::copy(cocp.data_ub0N(0).top_rows(ny_0), b_max_0(0));
+            la::copy(focp.ocps[i].b_min(0), b_min_0(0));
+            la::copy(focp.ocps[i].b_max(0), b_max_0(0));
         }
 
         cocp.data_rq(0).top_rows(nu).set_constant(0); // r(0) = 0

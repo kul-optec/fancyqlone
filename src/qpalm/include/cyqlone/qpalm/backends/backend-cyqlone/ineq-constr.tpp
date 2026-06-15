@@ -3,6 +3,7 @@
 #include <cyqlone/linalg.hpp>
 #include <cyqlone/qpalm/backends/ocp-backend-cyqlone.tpp>
 #include <batmat/simd.hpp>
+#include <iostream>
 
 namespace CYQLONE_NS(cyqlone::qpalm) {
 
@@ -162,6 +163,8 @@ index_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::calc_ŷ_Aᵀŷ(
 
 
     mat_vec_AT(ctx, ŷ, Aᵀŷ);
+    // ocp.print_grad(ctx, Aᵀŷ, "Aᵀŷ");
+    // std::cout << "count_J = " << count_J << std::endl;
     return ctx.reduce(count_J);
 }
 
