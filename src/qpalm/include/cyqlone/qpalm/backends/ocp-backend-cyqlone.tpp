@@ -98,7 +98,7 @@ struct CyQPALMBackend {
     CyQPALMBackend(const traits::CStorage &ocp, CyqloneData data,
                    const CyQPALMBackendSettings &settings)
         : ocp{OCP_t::build(ocp, settings.processors)}, settings{settings} {
-        this->parallel_ctx->barrier.spin_count = settings.spin_count;
+        this->parallel_ctx->update_spin_count(settings.spin_count);
         this->ocp.update_tricyqle_params(settings.tricyqle_params);
         b_min_strided = ineq_constr_vec();
         b_max_strided = ineq_constr_vec();

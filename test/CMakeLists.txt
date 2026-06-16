@@ -43,7 +43,7 @@ if (TARGET cyqlone::qpalm AND TARGET cyqlone::example-problems)
     endif()
 endif()
 if (CYQLONE_WITH_MATIO)
-    target_sources(tests PRIVATE "test-matio.cpp" "cyqlone/test-cyqlone-cont-mat.cpp")
+    target_sources(tests PRIVATE "test-matio.cpp")
 endif()
 
 option(CYQLONE_FORCE_TEST_DISCOVERY

@@ -54,8 +54,10 @@ struct SharedContext {
     template <class F>
     void run(F &&);
 
-    /// Configure the barrier spin count used in parallel synchronization before falling back to a
-    /// futex wait.
+    void update_spin_count(uint32_t spin_count) {
+        set_barrier_spin_count(spin_count);
+    } // namespace cyqlone::parallel
+
     uint32_t set_barrier_spin_count(uint32_t spin_count) {
         static_assert(std::is_same_v<decltype(barrier.spin_count), decltype(spin_count)>);
         return std::exchange(barrier.spin_count, spin_count);
@@ -86,7 +88,12 @@ struct FanSharedContext {
     /// be used to synchronize and communicate between threads.
     template <class F>
     void run(F &&);
-
+    void update_spin_count(uint32_t spin_count) {
+        set_barrier_spin_count(spin_count);
+        for (auto &ctx : branch_contexts) {
+            ctx.set_barrier_spin_count(spin_count);
+        }
+    }
     /// Configure the barrier spin count used in parallel synchronization before falling back to a
     /// futex wait.
     uint32_t set_barrier_spin_count(uint32_t spin_count) {
@@ -141,14 +148,25 @@ struct Context {
         return shared.barrier.arrive(static_cast<uint32_t>(index));
 #endif
     }
+// #if GUANAQO_WITH_TRACING && !GUANAQO_WITH_PERFETTO
+//     /// Arrive at the barrier and obtain a token that can be used to wait for completion of the
+//     /// current barrier phase and call a function on completion.
+//     /// @note    Token must be awaited before any other call to arrive.
+//     template <class C>
+//     [[nodiscard]] arrival_token::token_t arrive_with_completion(C func) {
+
+//         return shared.barrier.arrive_with_completion(static_cast<uint32_t>(index), std::move(func));
+//     };
+// #else
     /// Arrive at the barrier and obtain a token that can be used to wait for completion of the
     /// current barrier phase and call a function on completion.
     /// @note    Token must be awaited before any other call to arrive.
     template <class C>
-    [[nodiscard]] arrival_token arrive_with_completion(C func) {
+    [[nodiscard]]  shared_context_type::barrier_type::arrival_token arrive_with_completion(C func) {
 
         return shared.barrier.arrive_with_completion(static_cast<uint32_t>(index), std::move(func));
     }
+// #endif
     /// Await a token returned by @ref arrive(), waiting for the barrier phase to complete.
     void wait(arrival_token &&token) {
 #if GUANAQO_WITH_TRACING && !GUANAQO_WITH_PERFETTO
@@ -277,8 +295,13 @@ struct arrival_token_typed_fan {
     branch_token_t branch_token;
 };
 struct arrival_token_fan {
+#if GUANAQO_WITH_TRACING && !GUANAQO_WITH_PERFETTO
+    using total_token_t  = typename Context<FanSharedContext>::arrival_token::token_t;
+    using branch_token_t = typename Context<SharedContext>::arrival_token::token_t;
+#else
     using total_token_t  = typename Context<FanSharedContext>::arrival_token;
     using branch_token_t = typename Context<SharedContext>::arrival_token;
+#endif
     std::optional<total_token_t> total_token;
     branch_token_t branch_token;
 };
@@ -291,8 +314,13 @@ struct FanContext {
     template <class T>
     using arrival_token_typed = FanSharedContext::barrier_type::template arrival_token_typed<T>;
     using arrival_token       = FanSharedContext::barrier_type::arrival_token;
+#if GUANAQO_WITH_TRACING&& !GUANAQO_WITH_PERFETTO
+    using arrival_t           = Context<SharedContext>::arrival_token::token_t;
+    using fan_arrival_t       = Context<FanSharedContext>::arrival_token::token_t;
+#else
     using arrival_t           = Context<SharedContext>::arrival_token;
     using fan_arrival_t       = Context<FanSharedContext>::arrival_token;
+#endif
 
     [[nodiscard]] bool is_master() const { return total_ctx.is_master() && branch_ctx.is_master(); }
     /// Arrive at the barrier and obtain a token that can be used to wait for completion of the
@@ -300,16 +328,21 @@ struct FanContext {
     /// @note    Token must be awaited before any other call to arrive.
     [[nodiscard]] auto arrive() {
         arrival_token total_token = total_ctx.shared.barrier.get_arrival_token();
-
+#if GUANAQO_WITH_TRACING && !GUANAQO_WITH_PERFETTO
+        arrival_t branch_token =
+            branch_ctx.arrive_with_completion([&, this] { total_token = total_ctx.arrive().token; });
+#else 
         arrival_t branch_token =
             branch_ctx.arrive_with_completion([&, this] { total_token = total_ctx.arrive(); });
+
+#endif
         return arrival_token_fan{.total_token  = std::move(total_token),
                                  .branch_token = std::move(branch_token)};
     }
     /// Await a token returned by @ref arrive(), waiting for the barrier phase to complete.
     void wait(arrival_token_fan &&token) {
-        branch_ctx.wait(std::move(token.branch_token));
-        total_ctx.wait(std::move(*token.total_token));
+        branch_ctx.shared.barrier.wait(std::move(token.branch_token));
+        total_ctx.shared.barrier.wait(std::move(*token.total_token));
     }
 
     /// Arrive at the barrier and wait for the barrier phase to complete. This is a convenience
@@ -362,7 +395,7 @@ struct FanContext {
     template <class T>
     T wait_reduce(arrival_token_typed_fan<T> &&token) {
         T value = total_ctx.wait_reduce(std::move(token.total_token));
-        branch_ctx.wait(std::move(token.branch_token));
+        branch_ctx.shared.barrier.wait(std::move(token.branch_token));
         arrive_and_wait(); // ensure all threads have observed the reduced value before any thread can proceed
         return value;
     }
@@ -483,5 +516,4 @@ void FanSharedContext::run(F &&f) {
     }
 #endif
 }
-
-} // namespace cyqlone::parallel
+}

@@ -29,6 +29,8 @@ struct SolverStorage {
     using SolverLast    = TridiagonalSolver<value_type>;
     using one_t         = std::integral_constant<index_t, 1>;
     using matrix        = batmat::matrix::Matrix<value_type, index_t, one_t, one_t, DefaultOrder>;
+    using matrix_s        = SolverLast::matrix;
+
     using SharedContext = tricyqle_t::SharedContext;
 
     CyqloneSolver<VL, value_type, DefaultOrder, Ctx> cyqlone_solver;
@@ -40,14 +42,26 @@ struct SolverStorage {
     matrix LB = [this] {
         return matrix{{.rows = cyqlone_solver.nu, .cols = cyqlone_solver.nx},
                       batmat::matrix::uninitialized};
-    }(); // B(0) for each branch
+    }(); // Workspace for each branch
+    matrix_s Mxb_row = [this] {
+        return matrix_s{{.rows = cyqlone_solver.nx, .cols = 1},
+                      batmat::matrix::uninitialized};
+    }(); // Workspace for each branch
+    matrix_s Mᵀλ_row = [this] {
+        return matrix_s{{.rows = cyqlone_solver.nu, .cols = 1},
+                      batmat::matrix::uninitialized};
+    }(); // Workspace for each branch
+    matrix_s λ_last = [this] {
+        return matrix_s{{.depth = cyqlone_solver.v, .rows = cyqlone_solver.nx, .cols = 1},
+                      batmat::matrix::uninitialized};
+    }(); // λ for the last stage of each branch, used in the forward solve of λ(0)
 };
 template <class matrix, class T = real_t, StorageOrder DefaultOrder = StorageOrder::ColMajor>
 struct FanStorage_t {
     FanStorage_t()                                = default; //
     FanStorage_t(const FanStorage_t &)            = delete;
     FanStorage_t &operator=(const FanStorage_t &) = delete;
-    FanStorage_t& operator=(FanStorage_t&&) = default;
+    FanStorage_t &operator=(FanStorage_t &&)      = default;
     FanStorage_t(FanStorage_t &&)                 = default;
     using value_type                              = T;
     using one_t                                   = std::integral_constant<index_t, 1>;
@@ -221,15 +235,13 @@ struct FanCyqloneSolver {
     /// index, and optionally the corresponding batches of the given arrays.
     /// Iterates backwards in time (decreasing stage index j).
     void foreach_batch(Context &ctx, auto &&func, auto &&...xs) const {
-        ctx.arrive_and_wait();
 
         index_t i = ctx.total_ctx.index;
         // std::cout << "Branch " << i << " starting foreach_batch\n";
-      
+
         solver_storages[i].cyqlone_solver.foreach_batch(ctx.branch_ctx, func, xs.branches[i]...);
         if (ctx.is_master())
             func(xs.first.batch(0)...);
-        ctx.arrive_and_wait();
     }
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
     /// index, and optionally the corresponding batches of the given arrays.
@@ -247,18 +259,19 @@ struct FanCyqloneSolver {
         ctx.arrive_and_wait();
         // std::osyncstream tout(std::cout);
         solver_storages[ctx.total_ctx.index].cyqlone_solver.print_grad(
-            ctx.branch_ctx, grad.branches[ctx.total_ctx.index], name + "_branch" + std::to_string(ctx.total_ctx.index));
+            ctx.branch_ctx, grad.branches[ctx.total_ctx.index],
+            name + "_branch" + std::to_string(ctx.total_ctx.index));
 
         if (ctx.is_master()) {
-            guanaqo::print_python(std::cout<< name << "(0)(0) = ", grad.first.batch(0)(0), "\n");
+            guanaqo::print_python(std::cout << name << "(0)(0) = ", grad.first.batch(0)(0), "\n");
         }
         ctx.arrive_and_wait();
-
     }
     void print_grad(const auto &grad, const std::string &name) const {
 
         for (index_t i = 0; i < num_branches; ++i) {
-            solver_storages[i].cyqlone_solver.print_grad(grad.branches[i], name + "_branch" + std::to_string(i));
+            solver_storages[i].cyqlone_solver.print_grad(grad.branches[i],
+                                                         name + "_branch" + std::to_string(i));
         }
         guanaqo::print_python(std::cout << name << "(0)(0) = ", grad.first.batch(0)(0), "\n");
     }
@@ -335,12 +348,13 @@ struct FanCyqloneSolver {
     void transposed_general_constr(const FanStorage &y, FanStorage &DCᵀy) const;
     /// Compute the cost gradient, with optional scaling factors.
     /// grad_f ← Q ux + α q + β grad_f
-    void cost_gradient(Context &ctx, const FanStorage &ux, value_type α,const FanStorage &q, value_type β,
-                       FanStorage &grad_f) const;
+    void cost_gradient(Context &ctx, const FanStorage &ux, value_type α, const FanStorage &q,
+                       value_type β, FanStorage &grad_f) const;
     /// Compute the regularized cost gradient, with regularization parameter γ⁻¹, with respect to
     /// the point @p ux0.
-    void cost_gradient_regularized(Context &ctx, value_type γ,const FanStorage &ux,const FanStorage &ux0,
-                                   const FanStorage &q, FanStorage &grad_f) const;
+    void cost_gradient_regularized(Context &ctx, value_type γ, const FanStorage &ux,
+                                   const FanStorage &ux0, const FanStorage &q,
+                                   FanStorage &grad_f) const;
     /// Subtract the regularization term from the cost gradient.
     void cost_gradient_remove_regularization(Context &ctx, value_type γ, const FanStorage &x,
                                              const FanStorage &x0, FanStorage &grad_f) const;
@@ -422,12 +436,12 @@ struct FanCyqloneSolver {
     /// @{
 
     template <bool Factor = true, bool Solve = true>
-    void factor_solve_impl(Context &ctx, value_type γ, real_t ρ_inv, const FanStorage &Σ, FanStorage &ux,
-                           FanStorage &λ);
+    void factor_solve_impl(Context &ctx, value_type γ, real_t ρ_inv, const FanStorage &Σ,
+                           FanStorage &ux, FanStorage &λ);
 
     /// @}
     template <bool Factor = true, bool Solve = true>
-    void factor_solve_λ0(index_t branch, FanStorage &λ, const FanStorage &Σ);
+    void factor_solve_λ0(index_t branch, FanStorage &λ, const FanStorage &ux, const FanStorage &Σ);
     template <bool Factor = true, bool Solve = true>
 
     void factor_solve_u0(FanStorage &ux, value_type γ);

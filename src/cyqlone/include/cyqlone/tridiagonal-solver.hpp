@@ -3,6 +3,7 @@
 #include <cyqlone/linalg.hpp>
 #include <batmat/linalg/gemv.hpp>
 #include <batmat/linalg/potrf.hpp>
+#include <batmat/linalg/small-potrf.hpp>
 #include <batmat/linalg/trsm.hpp>
 
 namespace cyqlone {
@@ -42,7 +43,7 @@ struct TridiagonalSolver {
         for (index_t i = num_blocks; i-- > 0;) {
             auto Mi = bla::tril(L.batch(i));
             if (i + 1 == num_blocks)
-                bla::potrf(Mi); //                                L(n-1) = chol(M(n-1))
+                bla::small_potrf_left(Mi); //                                L(n-1) = chol(M(n-1))
             else
                 bla::syrk_sub_potrf(U.batch(i), Mi); //           L(i) = chol(M(i) - U(i) U(i)ᵀ)
             if (i > 0)

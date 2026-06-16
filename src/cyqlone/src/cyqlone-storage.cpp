@@ -187,12 +187,12 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
     Bs.resize(num_branches);
     R0 = matrix{{.rows = nu, .cols = nu}};
     r0 = matrix{{.rows = nu, .cols = 1}};
-    std::cout << "Initializing FanCyqloneStorage with " << ny_0 << " ineq, nu = " << nu
-              << std::endl;
+    // std::cout << "Initializing FanCyqloneStorage with " << ny_0 << " ineq, nu = " << nu
+    //           << std::endl;
     D0      = matrix{{.rows = ny_0, .cols = nu}};
     b_min_0 = matrix{{.rows = ny_0, .cols = 1}};
     b_max_0 = matrix{{.rows = ny_0, .cols = 1}};
-    guanaqo::print_python(std::cout << "D0 = ", focp.D0, "\n");
+    // guanaqo::print_python(std::cout << "D0 = ", focp.D0, "\n");
     la::copy(focp.R0, R0(0));
     la::copy(focp.r0, r0(0));
     la::copy(focp.D0, D0(0));

@@ -25,12 +25,19 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::residual_dynamics_constr(Contex
     // (Mx + b)(i,j) = A(i,j) x(i,j) + B(i,j) u(i,j) - x(i,j+1) + b(i,j)
 
     const index_t c = ctx.total_ctx.index;
-    // ctx.arrive_and_wait(); // wait for x to be ready from the forward solve of the first level
-    solver_storages[c].cyqlone_solver.residual_dynamics_constr(ctx.branch_ctx, x.branches[c],
-                                                               b.branches[c], Mxb.branches[c]);
-    // ctx.arrive_and_wait(); // wait for x to be ready from the forward solve of the first level
+    if (ctx.branch_ctx.is_master()) {
+        auto total_token = ctx.total_ctx.arrive();
+        // ctx.arrive_and_wait(); // wait for x to be ready from the forward solve of the first level
+        solver_storages[c].cyqlone_solver.residual_dynamics_constr(ctx.branch_ctx, x.branches[c],
+                                                                   b.branches[c], Mxb.branches[c]);
+        ctx.total_ctx.wait(std::move(
+            total_token)); // Make sure all masters have arrived in teh functiona nd thus also teh amster master
+        // ctx.arrive_and_wait(); // wait for x to be ready from the forward solve of the first level
+    } else {
+        solver_storages[c].cyqlone_solver.residual_dynamics_constr(ctx.branch_ctx, x.branches[c],
+                                                                   b.branches[c], Mxb.branches[c]);
+    }
 
-    std::osyncstream out(std::cout);
     auto token = ctx.branch_ctx.arrive(); // wait for off-diagonal block
     if (ctx.branch_ctx.is_master()) {
 
@@ -38,8 +45,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::residual_dynamics_constr(Contex
         for (index_t i = 0; i < c; ++i)
             nx_offset += solver_storages[i].cyqlone_solver.nx;
         auto bc = b.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx);
-        typename SolverLast::matrix Mxb_row{
-            {.rows = solver_storages[c].cyqlone_solver.nx, .cols = 1}};
+        auto Mxb_row = solver_storages[c].Mxb_row;
         auto indices = solver_storages[c].cyqlone_solver.inverse_stage_index(1);
         Mxb_row.batch(0)(0) =
             x.branches[c]
@@ -49,12 +55,15 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::residual_dynamics_constr(Contex
                  Mxb.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx));
         sub(Mxb.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx),
             Mxb_row.batch(0));
-        ctx.branch_ctx.wait(std::move( token)); // branch master has to wait until all threads in a branch have done their part of the residual computation before writing to Mxb
+        ctx.branch_ctx.wait(std::move(
+            token)); // branch master has to wait until all threads in a branch have done their part of the residual computation before writing to Mxb
         Mxb.branches[c].batch(0)(0) =
             Mxb.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx)(0);
-    }
-    else {
-        ctx.branch_ctx.wait(std::move(token)); // wait for master to write the first stage residual into Mxb
+        ctx.total_ctx
+            .arrive_and_wait(); // wait for the master to write the first stage residual into Mxb before any branch thread can proceed, to ensure Mxb is ready on all branches when the master writes the first stage residual into Mxb
+    } else {
+        ctx.branch_ctx.wait(
+            std::move(token)); // wait for master to write the first stage residual into Mxb
     }
     // print_grad(ctx, b,"res_b");
     // print_grad(ctx, x,"x");
@@ -82,22 +91,33 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::transposed_dynamics_constr(Cont
     //     //                     indices.i)(indices.l) =
     //     //     λ.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx)(0);
     // }
-    solver_storages[c].cyqlone_solver.transposed_dynamics_constr(ctx.branch_ctx, λ.branches[c],
-                                                                 Mᵀλ.branches[c], accum);
+    if (ctx.branch_ctx.is_master()) {
+        auto total_token = ctx.total_ctx.arrive();
+        // ctx.arrive_and_wait(); // wait for λ to be ready from the forward solve of the first level
+        solver_storages[c].cyqlone_solver.transposed_dynamics_constr(ctx.branch_ctx, λ.branches[c],
+                                                                     Mᵀλ.branches[c], accum);
+        ctx.total_ctx.wait(std::move(
+            total_token)); // Make sure all masters have arrived in the function and thus also the master master
+        // ctx.arrive_and_wait(); // wait for λ to be ready from the forward solve of the first level
+    } else {
+        solver_storages[c].cyqlone_solver.transposed_dynamics_constr(ctx.branch_ctx, λ.branches[c],
+                                                                     Mᵀλ.branches[c], accum);
+    }
     if (ctx.branch_ctx.is_master()) {
         index_t nx_offset = 0; //
         for (index_t i = 0; i < c; ++i)
             nx_offset += solver_storages[i].cyqlone_solver.nx;
-        typename SolverLast::matrix Mᵀλ_row{{.rows = nu, .cols = 1}};
+        auto Mᵀλ_row = solver_storages[c].Mᵀλ_row;
         la::gemv(solver_storages[c].B0.batch(0).transposed(),
                  λ.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx),
                  Mᵀλ_row.batch(0));
-        auto token = ctx.total_ctx.arrive_reduce_with_completion(Mᵀλ_row.batch(0), [](auto a, auto b) {
-            la::add(a.batch(0), b.batch(0));
-            return a;
-        },[&]( auto &&x_broad) {
-            Mᵀλ.first.batch(0).top_rows(nu) = x_broad;
-        });
+        auto token = ctx.total_ctx.arrive_reduce_with_completion(
+            Mᵀλ_row.batch(0),
+            [](auto a, auto b) {
+                la::add(a.batch(0), b.batch(0));
+                return a;
+            },
+            [&](auto &&x_broad) { Mᵀλ.first.batch(0).top_rows(nu) = x_broad; });
         ctx.total_ctx.wait_reduce(std::move(token));
     }
     ctx.branch_ctx.arrive_and_wait();
@@ -111,7 +131,6 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::general_constr(Context &ctx, co
                                                      DCux.branches[c]);
     if (ctx.is_master())
         mul_Gx(D0(0).transposed(), ux.first.batch(0).top_rows(nu), DCux.first.batch(0));
-    ctx.arrive_and_wait();
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
@@ -144,7 +163,6 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::cost_gradient(Context &ctx, con
     if (ctx.is_master())
         mul_Hx(q.first.batch(0).top_rows(nu), R0.batch(0), ux.first.batch(0).top_rows(nu),
                grad_f.first.batch(0).top_rows(nu));
-
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
@@ -165,7 +183,6 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::cost_gradient_regularized(
     if (ctx.is_master())
         mul_Hx(q.first.batch(0).top_rows(nu), R0.batch(0), ux.first.batch(0).top_rows(nu),
                ux0.first.batch(0).top_rows(nu), grad_f.first.batch(0).top_rows(nu));
-    ctx.arrive_and_wait();
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>

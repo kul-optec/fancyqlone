@@ -185,6 +185,7 @@ SolverStatus SolverImplementation<Backend>::do_main_loop(Backend::Context &ctx,
         real_t stationarity           = std::numeric_limits<real_t>::infinity();
         real_t eq_resid               = std::numeric_limits<real_t>::infinity();
         bool increase_penalty_y       = true;
+        GUANAQO_TRACE("outer_iter", outer_iter);
         for (unsigned inner = 0; true; ++inner) {
             const unsigned inner_total = inner_iter + inner;
             // Compute gradient of augmented Lagrangian
