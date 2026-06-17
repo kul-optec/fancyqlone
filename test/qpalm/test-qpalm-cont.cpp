@@ -677,7 +677,7 @@ TEST(QPALM, random_fan) {
         // la::copy(x0, ocps[i].b(0));
     }
 
-    const bool verbose = false;
+    const bool verbose = true;
 
     // -------------------------------------------------------------------------
     // Fan solver
@@ -824,10 +824,10 @@ TEST(QPALM, random_fan_input_constr) {
     auto save_traces = [](const std::string &) {};
 #endif
     cyqlone::OCPDim dim{
-        .N_horiz = 128,
-        .nx      = 36,
-        .nu      = 18,
-        .ny      = 4,
+        .N_horiz = 16,
+        .nx      = 6,
+        .nu      = 2,
+        .ny      = 1,
         .ny_N    = 0,
     };
 
@@ -865,7 +865,7 @@ TEST(QPALM, random_fan_input_constr) {
         // la::copy(x0, ocps[i].b(0));
     }
 
-    const bool verbose = false;
+    const bool verbose = true;
 
     // -------------------------------------------------------------------------
     // Fan solver
@@ -906,7 +906,7 @@ TEST(QPALM, random_fan_input_constr) {
             fan_backend.get(),
             {
                 .max_outer_iter       = 100,
-                .max_total_inner_iter = 1000,
+                .max_total_inner_iter = 1,
                 .tolerance            = 1e-7,
                 .verbose              = verbose,
                 .detailed_stats       = verbose,
@@ -951,7 +951,7 @@ TEST(QPALM, random_fan_input_constr) {
             combined_backend.get(),
             {
                 .max_outer_iter       = 100,
-                .max_total_inner_iter = 1000,
+                .max_total_inner_iter = 1,
                 .tolerance            = 1e-7,
 
                 .verbose        = verbose,

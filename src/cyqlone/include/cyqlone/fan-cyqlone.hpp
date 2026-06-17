@@ -55,6 +55,10 @@ struct SolverStorage {
         return matrix_s{{.depth = cyqlone_solver.v, .rows = cyqlone_solver.nx, .cols = 1},
                       batmat::matrix::uninitialized};
     }(); // λ for the last stage of each branch, used in the forward solve of λ(0)
+    matrix_s temp = [this] {
+        return matrix_s{{.rows = cyqlone_solver.nu, .cols = cyqlone_solver.nu},
+                        batmat::matrix::uninitialized};
+    }();
 };
 template <class matrix, class T = real_t, StorageOrder DefaultOrder = StorageOrder::ColMajor>
 struct FanStorage_t {

@@ -13,6 +13,10 @@ endif()
 
 add_executable(solve-ocp solve-ocp.cpp)
 target_link_libraries(solve-ocp PRIVATE cyqlone::cyqlone )
+add_executable(fan-cyqlone fan-cyqlone.cpp)
+target_link_libraries(fan-cyqlone PRIVATE cyqlone::cyqlone )
+target_link_libraries(fan-cyqlone PRIVATE cyqlone::qpalm)
+
 if (NOT PROJECT_IS_TOP_LEVEL)
     target_link_libraries(solve-ocp PRIVATE cyqlone::warnings)
 endif()

@@ -3,8 +3,11 @@
 #include <cyqlone/linalg.hpp>
 #include <batmat/linalg/gemv.hpp>
 #include <batmat/linalg/potrf.hpp>
+#include <batmat/linalg/gemm.hpp>
+#include <guanaqo/print.hpp>
 #include <batmat/linalg/small-potrf.hpp>
 #include <batmat/linalg/trsm.hpp>
+#include <syncstream>
 
 namespace cyqlone {
 
@@ -40,19 +43,28 @@ struct TridiagonalSolver {
     }();
 
     void factor() {
+        std::osyncstream out(std::cout);
+
         for (index_t i = num_blocks; i-- > 0;) {
             auto Mi = bla::tril(L.batch(i));
+            // guanaqo::print_python(out << "[forward]   L(" << i << ") before forward solve = ", L.batch(i)(0), "\n");
+
             if (i + 1 == num_blocks)
-                bla::small_potrf_left(Mi); //                                L(n-1) = chol(M(n-1))
-            else
-                bla::syrk_sub_potrf(U.batch(i), Mi); //           L(i) = chol(M(i) - U(i) U(i)ᵀ)
+                bla::potrf(Mi); //                                L(n-1) = chol(M(n-1))
+            else{
+                // bla::syrk_sub(U.batch(i), Mi);
+                // bla::small_potrf_left(Mi); //   }        L(i) = chol(M(i) - U(i) U(i)ᵀ)
+                bla::syrk_add_potrf(U.batch(i), Mi); //           L(i) = chol(M(i) - U(i) U(i)ᵀ)
+            }
             if (i > 0)
                 bla::trsm(U.batch(i - 1), Mi.transposed()); //    U(i-1) = K(i-1) L(i)⁻ᵀ
         }
     }
 
     void solve_forward(mut_view λ) const {
+        std::osyncstream out(std::cout);
         for (index_t i = num_blocks; i-- > 0;) {
+            // guanaqo::print_python(out << "[forward]   L(" << i << ") before forward solve = ", L.batch(i)(0), "\n");
             auto Li = bla::tril(L.batch(i));
             bla::trsm(Li, λ.batch(i)); //                      λ(i) = L(i)⁻¹ λ(i)
             if (i > 0)
