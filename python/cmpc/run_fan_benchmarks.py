@@ -60,14 +60,19 @@ CSV_COLUMNS = [
     "num_branches",
     "num_proc",
     "fan_status",
+    "sfan_status",
     "combined_status",
+    "sfan_inner",
+    "sfan_outer",
     "fan_inner",
     "fan_outer",
     "combined_inner",
     "combined_outer",
     "fan_time_s",
+    "sfan_time_s",
     "combined_time_s",
     "speedup",
+    "speedup_serial",
 ]
 
 

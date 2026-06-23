@@ -140,9 +140,9 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
     const index_t ti =
         ocp.solver_storages[c].cyqlone_solver.riccati_thread_assignment(ctx.branch_ctx);
     const index_t global_tmast = ocp.solver_storages[0].cyqlone_solver.add_wrap_p(0, 1);
-    const index_t bpt_branch = 2 * ny_M_c * ocp.solver_storages[c].cyqlone_solver.n * ocp.v;
-    index_t bpt_offset       = 0;
-    index_t t_offset         = 0;
+    const index_t bpt_branch   = 2 * ny_M_c * ocp.solver_storages[c].cyqlone_solver.n * ocp.v;
+    index_t bpt_offset         = 0;
+    index_t t_offset           = 0;
 
     for (index_t i = 0; i < c; ++i) {
         const auto &solver_i = ocp.solver_storages[i].cyqlone_solver;
@@ -178,7 +178,6 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
             *(isfinite(t1[l]) ? fin++ : --inf) = {.t = t1[l], .δ = δ1[l]};
             *(isfinite(t2[l]) ? fin++ : --inf) = {.t = t2[l], .δ = δ2[l]};
         }
-
 
         // Invariant: finite values in [fin_0, fin) and infinite values in [inf, inf_0)
     };
@@ -226,6 +225,104 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
                        .pos_bp = std::span{first_pos, first_inf}},
             .ab_neg = ab_neg};
 }
+template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
+BreakpointsResult
+CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partition_breakpoints_sfan(
+    Context &ctx, std::vector<Breakpoint> &breakpoints, const ineq_constr_vec_t &Σ,
+    const ineq_constr_vec_t &y, const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
+    const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max) {
+    auto t = get_timed(&Timings::breakpoints);
+    using std::isfinite;
+    using std::sqrt;
+    // Allocate memory
+    const index_t p_tot = ocp.p;
+    ctx.run_single_sync([&] {
+        const index_t m = ocp.num_internal_constraints();
+        breakpoints.resize(2 * m);
+        breakpoints_temp.resize(2 * m);
+        thread_indices.resize(p_tot);
+    });
+    // Parallelization and vectorization
+    auto thr_parts      = std::span{thread_indices}.subspan(0, p_tot);
+    index_t bpt_per_thr = 0;
+    for (index_t c = 0; c < ocp.num_branches; ++c) {
+        const index_t ny_M_c = std::max(ocp.solver_storages[c].cyqlone_solver.ny,
+                                        ocp.solver_storages[c].cyqlone_solver.ny_N);
+        bpt_per_thr += 2 * ny_M_c * ocp.solver_storages[c].cyqlone_solver.n * ocp.v;
+    }
+    const index_t ti = ocp.solver_storages[0].cyqlone_solver.riccati_thread_assignment(ctx); //assume same p
+    const index_t global_tmast = ocp.solver_storages[0].cyqlone_solver.add_wrap_p(0, 1);
+
+    const index_t global_ti = ti; // global thread index across all branches
+    // Partition the breakpoints into a finite and an infinite part (per thread)
+    Breakpoint *const fin_0 = breakpoints_temp.data() + ti * bpt_per_thr +
+                              (global_ti <= global_tmast ? 0 : 2 * ocp.ny_0);
+    Breakpoint *const inf_0 = fin_0 + bpt_per_thr + (global_ti == global_tmast ? 2 * ocp.ny_0 : 0);
+    Breakpoint *fin = fin_0, *inf = inf_0;
+    // Compute break points t[i] and intermediate values α[i] and δ[i]
+    const auto brkpts_simd = [&](auto Σi, auto yi, auto Adi, auto Axi, auto li, auto ui) {
+        const auto s  = sqrt(Σi);
+        const auto δ2 = s * Adi, δ1 = -δ2;
+        const auto α1 = (yi + Σi * (Axi - li)) / s, α2 = (Σi * (ui - Axi) - yi) / s;
+        const auto t1 = α1 / δ1, t2 = α2 / δ2;
+        // using simd_scal = batmat::datapar::simd<real_t, batmat::datapar::scalar_abi<real_t>>;
+        // out << "t1: " << typeid(t1).name() << " t2: " << typeid(t2).name() << typeid(simd_scal).name() << std::endl;
+
+        using T1 = std::remove_cvref_t<decltype(t1)>; // deduced SIMD type for t1 and t2
+
+        // out << T1::size() << std::endl;
+
+        BATMAT_FULLY_UNROLLED_FOR (int l = 0; l < static_cast<int>(T1::size()); ++l) {
+            *(isfinite(t1[l]) ? fin++ : --inf) = {.t = t1[l], .δ = δ1[l]};
+            *(isfinite(t2[l]) ? fin++ : --inf) = {.t = t2[l], .δ = δ2[l]};
+        }
+
+        // Invariant: finite values in [fin_0, fin) and infinite values in [inf, inf_0)
+    };
+    const auto brkpts_batch = [&](auto Σj, auto yj, auto Adj, auto Axj, auto b_min_j,
+                                  auto b_max_j) {
+        linalg::for_each_elementwise(brkpts_simd, Σj, yj, Adj, Axj, b_min_j, b_max_j);
+    };
+
+    ocp.foreach_batch(ctx, brkpts_batch, Σ, y, Ad, Ax, b_min, b_max);
+    // Now partition the finite breakpoints into negative and positive parts.
+    // Partitioning the chunk of each thread separately improves partitioning performance
+    // later on in the line search because of branch prediction.
+    auto [pos, large] = [&] {
+        GUANAQO_TRACE("linesearch breakpoints cyqlone partition", ti);
+        auto pos   = partition(fin_0, fin, [](Breakpoint p) { return p.t <= 0; }).begin();
+        auto large = partition(pos, fin, [](Breakpoint p) { return p.t <= 1; }).begin();
+        return std::pair{pos, large};
+    }();
+    // Store the separator indices for all threads, to merge the partitions in parallel later.
+    thr_parts[global_ti][0] = pos - fin_0;   // index of first positive breakpoint (per thread)
+    thr_parts[global_ti][1] = large - fin_0; // index of first breakpoint larger than 1 (per thread)
+    thr_parts[global_ti][2] = fin - fin_0;   // index of first infinite breakpoint (per thread)
+    thr_parts[global_ti][3] = inf_0 - fin_0; // total number of breakpoints (per thread)
+    auto thr_parts_done     = ctx.arrive();  // all-to-all
+    // Compute the partial sums
+    PartitionedBreakpoints pos_neg_bp{.neg_bp = std::span{fin_0, pos},
+                                      .pos_bp = std::span{pos, fin}};
+    auto ab_neg = partial_sum_negative(pos_neg_bp);
+    // Synchronize the separator indices for all threads.
+    ctx.wait(std::move(thr_parts_done));
+    // Merge all local partitions of all threads into a single partitioned array.
+    GUANAQO_TRACE("linesearch breakpoints cyqlone merge", ti);
+    merge_chunk<Breakpoint, 4>(std::span{fin_0, inf_0},   ti, thr_parts,
+                               std::span{breakpoints});
+    // Compute the total sums across all threads.
+    auto ab_neg_and_merge_done = ctx.arrive_reduce(ab_neg, std::plus<>{});
+    // Compute the final partition indices by summing the partition sizes of all threads.
+    auto first_pos = std::accumulate(thr_parts.begin(), thr_parts.end(), breakpoints.begin(),
+                                     [](auto it, auto &i) { return it += i[0]; }),
+         first_inf = std::accumulate(thr_parts.begin(), thr_parts.end(), breakpoints.begin(),
+                                     [](auto it, auto &i) { return it += i[2]; });
+    // Wait for the total sums across all threads. Also synchronize the merged breakpoints.
+    ab_neg = ctx.wait_reduce(std::move(ab_neg_and_merge_done));
+    return {.bp     = {.neg_bp = std::span{breakpoints.begin(), first_pos},
+                       .pos_bp = std::span{first_pos, first_inf}},
+            .ab_neg = ab_neg};
+}
 /// @todo better way of differentiating functions
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partition_breakpoints(
@@ -237,7 +334,15 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
                                  CyqloneSolver<VL, real_t, DefaultOrder,
                                                parallel::Context<parallel::SharedContext>>>)
         return compute_partition_breakpoints_cyq(ctx, breakpoints, Σ, y, Ad, Ax, b_min, b_max);
-    else
+    else if constexpr (std::is_same_v<LinearSolver,
+                                    FanCyqloneSolver<VL, real_t, DefaultOrder,
+                                                  parallel::FanContext<parallel::FanSharedContext>>>)
         return compute_partition_breakpoints_fan(ctx, breakpoints, Σ, y, Ad, Ax, b_min, b_max);
+    else if constexpr (std::is_same_v<LinearSolver,
+                                    SerialFanCyqloneSolver<VL, real_t, DefaultOrder,
+                                                  parallel::Context<parallel::SharedContext>>>)
+        return compute_partition_breakpoints_sfan(ctx, breakpoints, Σ, y, Ad, Ax, b_min, b_max);
+    else
+       BATMAT_ASSERT(false);
 }
 } // namespace CYQLONE_NS(cyqlone::qpalm)

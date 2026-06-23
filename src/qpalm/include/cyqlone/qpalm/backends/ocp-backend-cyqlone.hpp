@@ -3,6 +3,7 @@
 #include <cyqlone/config.hpp>
 #include <cyqlone/cyqlone.hpp>
 #include <cyqlone/fan-cyqlone.hpp>
+#include <cyqlone/serial-fan-cyqlone.hpp>
 
 #include <cyqlone/cyqlone-params.hpp>
 #include <cyqlone/cyqlone-storage.hpp>
@@ -101,6 +102,53 @@ struct CycloneBackendTraits<cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>> {
 template <index_t VL, StorageOrder DefaultOrder>
 struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>> {
     using OCP_t    = cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>;
+    using simd     = typename OCP_t::simd;
+    using CStorage = FanCyqloneStorage<>;
+    using OCPStorage = FanOCPStorage;
+    using store_t  = FanStorage_t<typename OCP_t::template matrix<>>;
+    template <class Tag>
+    struct storage_t : store_t {
+        friend CyQPALMBackend<VL, DefaultOrder, OCP_t>;
+        storage_t() = default;
+        
+        storage_t(storage_t&&) = default;
+        storage_t& operator=(storage_t&&) = default;
+
+        storage_t(const storage_t&) = delete;
+        storage_t& operator=(const storage_t&) = delete;
+
+
+      private:
+        storage_t(store_t &&o) : store_t{std::move(o)} {}
+        void check_dimensions_col(const storage_t &other, const index_t &dim_col) const {
+            for (index_t c = 0; c < static_cast<index_t>(this->branches.size()); ++c) {
+                BATMAT_ASSERT(this->branches[c].cols() == dim_col);
+                BATMAT_ASSERT(other.branches[c].cols() == dim_col);
+                BATMAT_ASSERT(this->branches[c].rows() == other.branches[c].rows());
+                BATMAT_ASSERT(this->branches[c].depth() == other.branches[c].depth());
+            }  
+            BATMAT_ASSERT(this->first.cols() == dim_col);
+            BATMAT_ASSERT(other.first.cols() == dim_col);
+            BATMAT_ASSERT(this->first.rows() == other.first.rows());
+            BATMAT_ASSERT(this->first.depth() == other.first.depth()); 
+        }
+        index_t size() const {
+            index_t total_size = this->branches.size();
+
+            return total_size;
+        }
+    public:
+        storage_t clone() const {
+            return storage_t(store_t::clone());
+}
+
+    };
+    using warm_start_t = FanWarmStartingStrategy;
+};
+// Traits for SerialFanCyqloneSolver
+template <index_t VL, StorageOrder DefaultOrder>
+struct CycloneBackendTraits<cyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultOrder>> {
+    using OCP_t    = cyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultOrder>;
     using simd     = typename OCP_t::simd;
     using CStorage = FanCyqloneStorage<>;
     using OCPStorage = FanOCPStorage;

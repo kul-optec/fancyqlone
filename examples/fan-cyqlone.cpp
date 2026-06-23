@@ -198,9 +198,9 @@ static void write_csv_header_if_needed(const std::filesystem::path &file) {
     std::ofstream csv(file, std::ios::app);
 
     csv << "N,nx,nu,ny,ny_N,num_branches,num_proc,"
-        << "fan_status,combined_status,"
-        << "fan_inner,fan_outer,combined_inner,combined_outer,"
-        << "fan_time_s,combined_time_s,speedup\n";
+        << "fan_status,sfan_status, combined_status,"
+        << "fan_inner,fan_outer,sfan_inner,sfan_outer, combined_inner,combined_outer,"
+        << "fan_time_s,combined_time_s,speedup, speedup_serial\n";
 }
 
 static std::string status_to_string(cyqlone::qpalm::SolverStatus status) {
@@ -298,7 +298,41 @@ static int run_benchmark(const BenchConfig &cfg) {
 
     auto x_fan = fan_qpalm.get_solution();
     auto lambda_fan = fan_qpalm.get_equality_multipliers();
+    auto &&sfan_backend =
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>>(
+            fan_cocp,
+            {},
+            {
+                .processors             = cfg.processors,
+                .print_residuals        = cfg.verbose,
+                .print_precision        = 17,
+                .changing_constr_factor = 0,
+                .max_update_count       = 0,
+                .tricyqle_params =
+                    {
+                        .solve_method = cyqlone::SolveMethod::None,
+                    },
+                .spin_count = std::numeric_limits<std::uint32_t>::max(),
+            });
 
+    qp::Solver<qp::CyQPALMBackend<VL, Order, cyqlone::SerialFanCyqloneSolver<VL>> *> sfan_qpalm{
+        sfan_backend.get(),
+        {
+            .max_outer_iter       = 100,
+            .max_total_inner_iter = 1000,
+            .tolerance            = cfg.tolerance,
+            .verbose              = cfg.verbose,
+            .detailed_stats       = cfg.verbose,
+        },
+    };
+
+    for (index_t i = 0; !cfg.verbose && i < cfg.warmup; ++i)
+        sfan_qpalm();
+
+    auto sfan_status = sfan_qpalm();
+
+    auto x_sfan = sfan_qpalm.get_solution();
+    auto lambda_sfan = sfan_qpalm.get_equality_multipliers();    
     // -------------------------------------------------------------------------
     // Combined solver
     // -------------------------------------------------------------------------
@@ -375,11 +409,14 @@ static int run_benchmark(const BenchConfig &cfg) {
     // -------------------------------------------------------------------------
     const double fan_time_s =
         seconds_from_duration(fan_qpalm.stats->timings.total.wall_time);
+    const double sfan_time_s =
+        seconds_from_duration(sfan_qpalm.stats->timings.total.wall_time);
 
     const double combined_time_s =
         seconds_from_duration(combined_qpalm.stats->timings.total.wall_time);
 
     const double speedup = combined_time_s / fan_time_s;
+    const double speedup_serial = sfan_time_s / fan_time_s;
 
     std::cout << "N=" << cfg.N
               << ", nx=" << cfg.nx
@@ -389,13 +426,18 @@ static int run_benchmark(const BenchConfig &cfg) {
 
     std::cout << "fan status:      " << status_to_string(fan_status) << '\n';
     std::cout << "combined status: " << status_to_string(combined_status) << '\n';
+    std::cout << "serial fan status:      " << status_to_string(sfan_status) << '\n';
     std::cout << "fan inner:       " << fan_qpalm.stats->inner_iter << '\n';
     std::cout << "fan outer:       " << fan_qpalm.stats->outer_iter << '\n';
+    std::cout << "serial fan inner:       " << sfan_qpalm.stats->inner_iter << '\n';
+    std::cout << "serial fan outer:       " << sfan_qpalm.stats->outer_iter << '\n';
     std::cout << "combined inner:  " << combined_qpalm.stats->inner_iter << '\n';
     std::cout << "combined outer:  "<< combined_qpalm.stats->outer_iter << '\n';
     std::cout << "fan time:        " << fan_time_s << " s\n";
+    std::cout << "serial fan time: " << sfan_time_s << " s\n";
     std::cout << "combined time:   " << combined_time_s << " s\n";
     std::cout << "speedup:         " << speedup << '\n';
+    std::cout << "speedup serial:  " << speedup_serial << '\n';
 
     // -------------------------------------------------------------------------
     // CSV output
@@ -413,14 +455,20 @@ static int run_benchmark(const BenchConfig &cfg) {
         << cfg.num_branches << ','
         << cfg.processors << ','
         << status_to_string(fan_status) << ','
+        << status_to_string(sfan_status) << ','
         << status_to_string(combined_status) << ','
+
         << fan_qpalm.stats->inner_iter << ','
         << fan_qpalm.stats->outer_iter << ','
+        << sfan_qpalm.stats->inner_iter << ','
+        << sfan_qpalm.stats->outer_iter << ','
         << combined_qpalm.stats->inner_iter << ','
         << combined_qpalm.stats->outer_iter << ','
         << fan_time_s << ','
+        << sfan_time_s << ','
         << combined_time_s << ','
-        << speedup << '\n';
+        << speedup << ','
+        << speedup_serial << '\n';
 
     return 0;
 }

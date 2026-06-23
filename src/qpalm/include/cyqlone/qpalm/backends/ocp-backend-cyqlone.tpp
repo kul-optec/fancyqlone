@@ -384,6 +384,11 @@ struct CyQPALMBackend {
                                   const ineq_constr_vec_t &Σ, const ineq_constr_vec_t &y,
                                   const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
                                   const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
+    BreakpointsResult
+    compute_partition_breakpoints_sfan(Context &ctx, std::vector<Breakpoint> &breakpoints,
+                                  const ineq_constr_vec_t &Σ, const ineq_constr_vec_t &y,
+                                  const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
+                                  const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
 
 
     friend BreakpointsResult
