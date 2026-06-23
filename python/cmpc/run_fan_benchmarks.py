@@ -7,6 +7,11 @@
 #     nx in NX_VALUES
 #     nu = nx / 3
 
+# Filtering:
+#     Rows are removed if the fan and combined solver use a different number of
+#     inner iterations. This avoids comparing timings for runs that did not follow
+#     the same QPALM iteration path.
+
 # Outputs:
 #     - CSV with raw benchmark rows
 #     - PGFPlots .tex figure plotting nx vs speedup
@@ -17,7 +22,7 @@
 #         --exe build/Release/examples/fan-cyqlone \
 #         --N 256 \
 #         --processors 8 \
-#         --nx-values 6 9 12 15 18 24 30 36 48 60 \
+#         --nx-values 12 18 \
 #         --branches 2 4 8 \
 #         --out-csv fan_qpalm_sweep.csv \
 #         --out-tex fan_qpalm_speedup_vs_nx.tex
@@ -33,20 +38,49 @@
 from __future__ import annotations
 
 import argparse
-import csv
 import math
 import os
 import subprocess
 import sys
 from pathlib import Path
-from typing import Iterable
 
 import pandas as pd
 
 
-DEFAULT_NX_VALUES = [6, 9, 12, 15, 18, 24, 30, 36, 48, 60]
+# Moderate defaults, useful when sweeping multiple branch counts.
+# All values must be divisible by 3 because nu = nx / 3.
+DEFAULT_NX_VALUES = [12, 18]
 DEFAULT_BRANCHES = [2, 4, 8]
+CSV_COLUMNS = [
+    "N",
+    "nx",
+    "nu",
+    "ny",
+    "ny_N",
+    "num_branches",
+    "num_proc",
+    "fan_status",
+    "combined_status",
+    "fan_inner",
+    "fan_outer",
+    "combined_inner",
+    "combined_outer",
+    "fan_time_s",
+    "combined_time_s",
+    "speedup",
+]
 
+
+def ensure_csv_file(path: Path) -> None:
+    """Create the output CSV with header if it does not exist."""
+    print(f"Ensuring CSV file with header: {path}")
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    if not path.exists():
+        print(f"Creating CSV file with header: {path}")
+        with path.open("w", newline="") as f:
+            f.write(",".join(CSV_COLUMNS) + "\n")
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -56,14 +90,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--exe",
         type=Path,
-        default=Path("build/Release/examples/fan-cyqlone"),
+        default=Path(".build/Release/examples/fan-cyqlone"),
         help="Path to benchmark executable.",
     )
     parser.add_argument("--N", type=int, default=256, help="Prediction horizon.")
     parser.add_argument("--ny", type=int, default=5, help="Number of stage constraints.")
     parser.add_argument("--ny-N", type=int, default=0, help="Number of terminal constraints.")
     parser.add_argument("--processors", type=int, default=8, help="Number of processors.")
-    parser.add_argument("--warmup", type=int, default=50, help="Number of warmup runs.")
+    parser.add_argument("--warmup", type=int, default=5, help="Number of warmup runs.")
     parser.add_argument("--tol", type=str, default="1e-7", help="Solver tolerance.")
     parser.add_argument(
         "--nx-values",
@@ -113,17 +147,25 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Do not run benchmark; only regenerate PGFPlots files from existing CSV.",
     )
+    parser.add_argument(
+        "--keep-different-inner",
+        action="store_true",
+        help="Do not remove rows where fan and combined inner iteration counts differ.",
+    )
 
     return parser.parse_args()
 
 
-def run_command(cmd: list[str]) -> None:
-    print("Running:", " ".join(cmd), flush=True)
-    subprocess.run(cmd, check=True)
+def run_command(stress_cmd: list[str], cmd: list[str]) -> None:
+    print("Running stress test:", " ".join(stress_cmd), flush=True)
+    subprocess.run(stress_cmd)
+    subprocess.run(cmd)
+    print("Running benchmark:", " ".join(cmd), flush=True)
+    
 
 
 def run_sweep(args: argparse.Namespace) -> None:
-    exe = args.exe
+    exe =  args.exe
 
     if not exe.exists():
         raise FileNotFoundError(f"Benchmark executable does not exist: {exe}")
@@ -131,8 +173,8 @@ def run_sweep(args: argparse.Namespace) -> None:
     if not os.access(exe, os.X_OK):
         raise PermissionError(f"Benchmark executable is not executable: {exe}")
 
-    if not args.append and args.out_csv.exists():
-        args.out_csv.unlink()
+    # if not args.append and args.out_csv.exists():
+    #     args.out_csv.unlink()
 
     for branches in args.branches:
         for nx in args.nx_values:
@@ -141,33 +183,63 @@ def run_sweep(args: argparse.Namespace) -> None:
                 continue
 
             nu = nx // 3
-            if nu == 1:
-                ny=1
+            if nu < 8:
+                ny= 1 + nu // 3
             else:
-                ny = nu //2
+                ny = 5
             for rep in range(args.repeat):
                 print(
                     f"\n=== branches={branches}, nx={nx}, nu={nu}, repeat={rep + 1}/{args.repeat} ==="
                 )
 
                 cmd = [
+                    "taskset", "-c", "0-7",
                     str(exe),
                     "--N", str(args.N),
                     "--nx", str(nx),
                     "--nu", str(nu),
                     "--ny", str(ny),
-                    "--ny-N", str(args.ny_N),
                     "--branches", str(branches),
                     "--processors", str(args.processors),
                     "--warmup", str(args.warmup),
                     "--tol", str(args.tol),
                     "--out", str(args.out_csv),
                 ]
+                
+                stress_cmd = [
+                    "taskset", "-c", "0-7",
+                    "stress-ng",
+                    "-c", "8",
+                    "-t", "2",
+                    "--cpu-method=double",
+                ]
 
-                run_command(cmd)
+                run_command(stress_cmd,cmd)
+                # run_command(cmd)
 
 
-def normalize_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+def find_inner_columns(df: pd.DataFrame) -> tuple[str | None, str | None]:
+    """Find fan and combined inner iteration columns robustly."""
+    candidates = [
+        ("fan_inner", "combined_inner"),
+        ("inner", "inner_combined"),
+        ("inner_fan", "inner_combined"),
+        ("fan_inner_iter", "combined_inner_iter"),
+        ("inner_iter", "inner_iter_combined"),
+    ]
+
+    for fan_col, combined_col in candidates:
+        if fan_col in df.columns and combined_col in df.columns:
+            return fan_col, combined_col
+
+    return None, None
+
+
+def normalize_dataframe(
+    df: pd.DataFrame,
+    *,
+    keep_different_inner: bool = False,
+) -> pd.DataFrame:
     """Normalize column names and filter invalid rows."""
     if "branches" in df.columns and "num_branches" not in df.columns:
         df = df.rename(columns={"branches": "num_branches"})
@@ -187,13 +259,39 @@ def normalize_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         if col in df.columns:
             s = df[col].astype(str)
             mask = s.str.contains("Converged", case=False, regex=False) | (s == "0")
+            before = len(df)
             df = df[mask].copy()
+            print(f"Filtered {before - len(df)} rows using {col}.")
 
     for col in ["nx", "nu", "num_branches", "speedup"]:
         df[col] = pd.to_numeric(df[col], errors="coerce")
 
     df = df.dropna(subset=["nx", "nu", "num_branches", "speedup"])
     df = df[df["speedup"].map(math.isfinite)]
+
+    # Remove rows where fan and combined QPALM inner iteration counts differ.
+    if not keep_different_inner:
+        fan_inner_col, combined_inner_col = find_inner_columns(df)
+
+        if fan_inner_col is None or combined_inner_col is None:
+            print(
+                "Warning: could not find inner iteration columns. "
+                "Expected e.g. fan_inner/combined_inner or inner/inner_combined. "
+                "No inner-iteration filtering applied.",
+                file=sys.stderr,
+            )
+        else:
+            df[fan_inner_col] = pd.to_numeric(df[fan_inner_col], errors="coerce")
+            df[combined_inner_col] = pd.to_numeric(df[combined_inner_col], errors="coerce")
+
+            before = len(df)
+            df = df.dropna(subset=[fan_inner_col, combined_inner_col])
+            df = df[df[fan_inner_col] == df[combined_inner_col]].copy()
+            removed = before - len(df)
+
+            print(
+                f"Removed {removed} rows where {fan_inner_col} != {combined_inner_col}."
+            )
 
     return df
 
@@ -254,7 +352,6 @@ def write_pgfplots_tex(
     marks = ["*", "square*", "triangle*", "diamond*", "otimes*"]
 
     for idx, (branches, dat_path) in enumerate(sorted(dat_files.items())):
-        # Use path relative to tex file if possible.
         try:
             plot_path = dat_path.relative_to(tex_path.parent)
         except ValueError:
@@ -276,17 +373,25 @@ def write_pgfplots_tex(
 def main() -> None:
     args = parse_args()
 
+    ensure_csv_file(args.out_csv)
+
     if not args.skip_run:
         run_sweep(args)
 
     if not args.out_csv.exists():
         raise FileNotFoundError(f"CSV file does not exist: {args.out_csv}")
 
-    df = pd.read_csv(args.out_csv)
-    df = normalize_dataframe(df)
+    df_raw = pd.read_csv(args.out_csv)
+    df = normalize_dataframe(
+        df_raw,
+        keep_different_inner=args.keep_different_inner,
+    )
 
     if df.empty:
-        raise RuntimeError("No valid benchmark rows found after filtering.")
+        raise RuntimeError(
+            "No valid benchmark rows found after filtering. "
+            "Try --keep-different-inner to disable inner-iteration filtering."
+        )
 
     dat_files = write_dat_files(df, args.dat_dir)
     write_pgfplots_tex(
@@ -301,7 +406,7 @@ def main() -> None:
     print(f"  PGFPlots:  {args.out_tex}")
     print(f"  data dir:  {args.dat_dir}")
 
-    print("\nMean speedups:")
+    print("\nMean speedups after filtering:")
     summary = (
         df.groupby(["num_branches", "nx", "nu"], as_index=False)
         .agg(speedup_mean=("speedup", "mean"), samples=("speedup", "count"))

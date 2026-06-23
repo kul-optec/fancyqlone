@@ -83,3 +83,5 @@ traces
 /test/**/*.csv
 /results/**/*.json
 benchmark*.json
+pgfplots_data/*
+fan_qpalm_speedup_vs_nx.tex

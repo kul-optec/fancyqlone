@@ -389,6 +389,10 @@ static int run_benchmark(const BenchConfig &cfg) {
 
     std::cout << "fan status:      " << status_to_string(fan_status) << '\n';
     std::cout << "combined status: " << status_to_string(combined_status) << '\n';
+    std::cout << "fan inner:       " << fan_qpalm.stats->inner_iter << '\n';
+    std::cout << "fan outer:       " << fan_qpalm.stats->outer_iter << '\n';
+    std::cout << "combined inner:  " << combined_qpalm.stats->inner_iter << '\n';
+    std::cout << "combined outer:  "<< combined_qpalm.stats->outer_iter << '\n';
     std::cout << "fan time:        " << fan_time_s << " s\n";
     std::cout << "combined time:   " << combined_time_s << " s\n";
     std::cout << "speedup:         " << speedup << '\n';
