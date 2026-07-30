@@ -254,11 +254,6 @@ static int run_benchmark(const BenchConfig &cfg) {
     // -------------------------------------------------------------------------
     cyqlone::FanOCPStorage fan_ocp{
         .ocps    = ocps,
-        .R0      = ocps[0].R(0),
-        .r0      = ocps[0].r(0),
-        .D0      = ocps[0].D(0),
-        .b_min_0 = ocps[0].b_min(0),
-        .b_max_0 = ocps[0].b_max(0),
     };
 
     auto fan_cocp = cyqlone::FanCyqloneStorage<>::build(fan_ocp, dim.ny);

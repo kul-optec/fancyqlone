@@ -132,11 +132,17 @@ struct SpringMassProblem {
     LinearOCPStorage ocp;
     std::vector<real_t> ref;
 };
-
+struct FanSpringMassProblem {
+    FanOCPStorage ocp;
+    std::vector<real_t> ref;
+};
 } // namespace cyqlone::qpalm::problems
 
 namespace CYQLONE_NS(cyqlone::qpalm::problems) {
 
 SpringMassProblem CYQLONE_EXAMPLE_PROBLEMS_EXPORT spring_mass(SpringMassParams p);
+FanSpringMassProblem CYQLONE_EXAMPLE_PROBLEMS_EXPORT fan_spring_mass(SpringMassParams p,
+                                                                      index_t num_branches, real_t k_spring_diff = 0.1);
+
 
 } // namespace CYQLONE_NS(cyqlone::qpalm::problems)

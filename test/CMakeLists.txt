@@ -6,6 +6,9 @@ include(GoogleTest)
 # Dependencies
 find_package(GTest REQUIRED)
 find_package(guanaqo REQUIRED)
+find_package(hyhound REQUIRED COMPONENTS OCP)
+find_package(blasfeo REQUIRED)
+
 if (NOT TARGET cyqlone::cyqlone)
     find_package(cyqlone REQUIRED OPTIONAL_COMPONENTS QPALM Extra)
 endif()
@@ -15,6 +18,7 @@ target_link_libraries(test-pcr PRIVATE cyqlone::cyqlone cyqlone::warnings)
 add_executable(tests
     "cyqlone/test-cyqlone.cpp"
     "cyqlone/test-cyqlone-cont.cpp"
+    # "cyqlone/test-riccati.cpp"
     # "cyqlone/test-cyqlone-cont-mat.cpp"
     "cyqlone/test-cyqlone-cont-spmd-trace.cpp"
     "cyqlone/test-tricyqle.cpp"
@@ -24,11 +28,12 @@ add_executable(tests
 target_include_directories(tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_compile_definitions(tests PRIVATE _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(tests PRIVATE
-    cyqlone::cyqlone cyqlone::warnings
+    cyqlone::cyqlone cyqlone::warnings  hyhound::ocp blasfeo
     GTest::gtest_main)
 if (MSVC)
     target_compile_definitions(tests PRIVATE __PRETTY_FUNCTION__=__FUNCSIG__)
 endif()
+target_sources(tests PRIVATE "cyqlone/riccati-blasfeo-factor.cpp")
 if (TARGET cyqlone::qpalm)
     target_sources(tests PRIVATE "test-partition.cpp")
 endif()

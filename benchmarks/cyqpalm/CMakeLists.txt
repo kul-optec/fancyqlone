@@ -19,4 +19,5 @@ if (WITH_HPIPM)
     target_sources(spring-mass PRIVATE hpipm.cpp)
     target_link_libraries(spring-mass PRIVATE hpipm)
     target_compile_definitions(spring-mass PRIVATE WITH_HPIPM)
+
 endif()

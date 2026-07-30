@@ -76,12 +76,8 @@ TEST(QPALM, with_inequality_2iter) {
                   << ", nu=" << ocp_fan.dim.nu << ", ny=" << ocp_fan.dim.ny << "\n";
     }
     std::cout << cyq_get_num_proc() << " processors detected\n";
-    cyqlone::FanOCPStorage fan_ocp{.ocps    = ocps,
-                                   .R0      = ocps[0].R(0),
-                                   .r0      = ocps[0].r(0),
-                                   .D0      = ocps[0].D(0),
-                                   .b_min_0 = ocps[0].b_min(0),
-                                   .b_max_0 = ocps[0].b_max(0)};
+    cyqlone::FanOCPStorage fan_ocp{.ocps    = ocps
+    };
     auto cocp          = cyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
 
 };
