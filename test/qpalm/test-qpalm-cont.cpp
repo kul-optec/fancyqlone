@@ -536,16 +536,7 @@ cyqlone::LinearOCPStorage combine_branches_0(std::span<const cyqlone::LinearOCPS
     cyqlone::LinearOCPStorage combined_ocp(dim);
 
     index_t nx_offset = 0, nu_offset = 0, ny_offset = 0, ny_N_offset = 0;
-    { // Take cost of the first stage from the first OCP (there is only one x(0) and one u(0))
-        const auto &ocp = ocps.front();
-        // combined_ocp.b(0).top_rows(ocp.dim.nx) = ocp.b(0); // x0
-        combined_ocp.Q(0).block(0, 0, ocp.dim.nx, ocp.dim.nx) += ocp.Q(0);
-        combined_ocp.R(0).block(0, 0, ocp.dim.nu, ocp.dim.nu) += ocp.R(0);
-        combined_ocp.S(0).block(0, 0, ocp.dim.nu, ocp.dim.nx) += ocp.S(0);
-        combined_ocp.S_trans(0).block(0, 0, ocp.dim.nx, ocp.dim.nu) += ocp.S_trans(0);
-        combined_ocp.q(0).block(0, 0, ocp.dim.nx, 1) += ocp.q(0);
-        combined_ocp.r(0).block(0, 0, ocp.dim.nu, 1) += ocp.r(0);
-    }
+   
     // Later stages can diverge for the different OCPs, so these all become diagonal matrices,
     // except for the coupling from the first stage
     for (const auto &ocp : ocps) {
@@ -576,6 +567,12 @@ cyqlone::LinearOCPStorage combine_branches_0(std::span<const cyqlone::LinearOCPS
         combined_ocp.b_min(N).block(ny_N_offset, 0, ocp.dim.ny_N, 1)              = ocp.b_min(N);
         combined_ocp.b_max(N).block(ny_N_offset, 0, ocp.dim.ny_N, 1)              = ocp.b_max(N);
         // Copy cost
+        combined_ocp.Q(0).block(0, 0, ocp.dim.nx, ocp.dim.nx) += ocp.Q(0);
+        combined_ocp.R(0).block(0, 0, ocp.dim.nu, ocp.dim.nu) += ocp.R(0);
+        combined_ocp.S(0).block(0, 0, ocp.dim.nu, ocp.dim.nx) += ocp.S(0);
+        combined_ocp.S_trans(0).block(0, 0, ocp.dim.nx, ocp.dim.nu) += ocp.S_trans(0);
+        combined_ocp.q(0).block(0, 0, ocp.dim.nx, 1) += ocp.q(0);
+        combined_ocp.r(0).block(0, 0, ocp.dim.nu, 1) += ocp.r(0);
         for (index_t i = 1; i < N; ++i) {
             combined_ocp.Q(i).block(nx_offset, nx_offset, ocp.dim.nx, ocp.dim.nx) = ocp.Q(i);
             combined_ocp.R(i).block(nu_offset, nu_offset, ocp.dim.nu, ocp.dim.nu) = ocp.R(i);
@@ -684,11 +681,6 @@ TEST(QPALM, random_fan) {
     // -------------------------------------------------------------------------
     cyqlone::FanOCPStorage fan_ocp{
         .ocps    = ocps,
-        .R0      = ocps[0].R(0),
-        .r0      = ocps[0].r(0),
-        .D0      = ocps[0].D(0),
-        .b_min_0 = ocps[0].b_min(0),
-        .b_max_0 = ocps[0].b_max(0),
     };
 
     auto fan_cocp = cyqlone::FanCyqloneStorage<>::build(fan_ocp, dim.ny);
@@ -796,7 +788,7 @@ TEST(QPALM, random_fan_input_constr) {
     namespace la = cyqlone::linalg;
 
     constexpr index_t VL       = 4;
-    const index_t num_branches = 2;
+    const index_t num_branches = 4;
 
 #if GUANAQO_WITH_TRACING
     guanaqo::trace_logger_set_default_size(1'048'576);
@@ -824,17 +816,17 @@ TEST(QPALM, random_fan_input_constr) {
     auto save_traces = [](const std::string &) {};
 #endif
     cyqlone::OCPDim dim{
-        .N_horiz = 512,
-        .nx      = 18,
-        .nu      = 6,
-        .ny      = 3,
+        .N_horiz = 256,
+        .nx      = 36,
+        .nu      = 12,
+        .ny      = 2,
         .ny_N    = 0,
     };
 
     const index_t N  = dim.N_horiz;
     const index_t nx = dim.nx;
     const index_t nu = dim.nu;
-    index_t num_warmups = 0;
+    index_t num_warmups = 5;
 
     std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
 
@@ -859,6 +851,10 @@ TEST(QPALM, random_fan_input_constr) {
             ocps[i].b_min(0).set_constant(
                 -std::numeric_limits<real_t>::
                     infinity()); // no constraints on u(0) in the other branches, to test that the coupling is handled correctly
+            ocps[i].b(0)=ocps[0].b(0); // same initial state in every branch
+            // ocps[i].r(0).set_constant(0); // no cost on u(0) in the other branches, to test that the coupling is handled correctly
+            // ocps[i].S(0).set_constant(0); // no cost on u(0) in the other branches, to test that the coupling is handled correctly
+            // ocps[i].S_trans(0).set_constant(0); // no cost on u(0) in the other branches, to test that the coupling is handled correctly
         }
         // guanaqo::print_python(std::cout << "x(0) = ", ocps[i].b(0), "\n");
         // guanaqo::print_python(std::cout << "r(0) = ", ocps[i].r(0), "\n");
@@ -873,14 +869,9 @@ TEST(QPALM, random_fan_input_constr) {
     // -------------------------------------------------------------------------
     cyqlone::FanOCPStorage fan_ocp{
         .ocps    = ocps,
-        .R0      = ocps[0].R(0),
-        .r0      = ocps[0].r(0),
-        .D0      = ocps[0].D(0),
-        .b_min_0 = ocps[0].b_min(0),
-        .b_max_0 = ocps[0].b_max(0),
-    };
+        };
 
-    auto fan_cocp    = cyqlone::FanCyqloneStorage<>::build(fan_ocp, dim.ny);
+    auto fan_cocp    = cyqlone::FanCyqloneStorage<>::build(fan_ocp);
     index_t num_proc = 8;
     std::cout << "Running on " << num_proc << " processors\n";
     auto &&fan_backend =
@@ -1004,42 +995,42 @@ TEST(QPALM, random_fan_input_constr) {
                 .detailed_stats = verbose,
             },
         };
-//     for (index_t i = 0; !verbose && i < 50; ++i)
-//         combined_qpalm(); // warm up
-// #if GUANAQO_WITH_TRACING
-//     guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
-// #endif
-//     auto combined_status = combined_qpalm();
-//     EXPECT_EQ(combined_status, qp::SolverStatus::Converged);
-//     save_traces("fanout-combined.csv");
+    for (index_t i = 0; !verbose && i < 50; ++i)
+        combined_qpalm(); // warm up
+#if GUANAQO_WITH_TRACING
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+#endif
+    auto combined_status = combined_qpalm();
+    EXPECT_EQ(combined_status, qp::SolverStatus::Converged);
+    save_traces("fanout-combined.csv");
 
-//     auto x_combined = combined_qpalm.get_solution();
-//     auto λ_combined = combined_qpalm.get_equality_multipliers();
+    auto x_combined = combined_qpalm.get_solution();
+    auto λ_combined = combined_qpalm.get_equality_multipliers();
 
-//     // -------------------------------------------------------------------------
-//     // Layout-aware comparison
-//     // -------------------------------------------------------------------------
-//     std::vector<std::size_t> nx_per_branch;
-//     nx_per_branch.reserve(ocps.size());
-//     std::cout << "inner:   " << combined_qpalm.stats->inner_iter << "\n"
-//               << "outer:   " << combined_qpalm.stats->outer_iter << "\n"
-//               << "timings: " << combined_qpalm.stats->timings.total << "\n";
-//     std::cout << "speedup: " << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) / static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())  << "\n";
-//     for (const auto &ocp : ocps) {
-//         nx_per_branch.push_back(static_cast<std::size_t>(ocp.dim.nx));
-//     }
+    // -------------------------------------------------------------------------
+    // Layout-aware comparison
+    // -------------------------------------------------------------------------
+    std::vector<std::size_t> nx_per_branch;
+    nx_per_branch.reserve(ocps.size());
+    std::cout << "inner:   " << combined_qpalm.stats->inner_iter << "\n"
+              << "outer:   " << combined_qpalm.stats->outer_iter << "\n"
+              << "timings: " << combined_qpalm.stats->timings.total << "\n";
+    std::cout << "speedup: " << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) / static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())  << "\n";
+    for (const auto &ocp : ocps) {
+        nx_per_branch.push_back(static_cast<std::size_t>(ocp.dim.nx));
+    }
 
-//     compare_combined_normal(std::span<const double>(x_combined), std::span<const double>(x_fan),
-//                             static_cast<std::size_t>(N), static_cast<std::size_t>(nu),
-//                             std::span<const std::size_t>(nx_per_branch), 1e-6);
-//     compare_combined_normal(std::span<const double>(x_combined), std::span<const double>(x_sfan),
-//                             static_cast<std::size_t>(N), static_cast<std::size_t>(nu),
-//                             std::span<const std::size_t>(nx_per_branch), 1e-6);
+    compare_combined_normal(std::span<const double>(x_combined), std::span<const double>(x_fan),
+                            static_cast<std::size_t>(N), static_cast<std::size_t>(nu),
+                            std::span<const std::size_t>(nx_per_branch), 1e-8);
+    // compare_combined_normal(std::span<const double>(x_combined), std::span<const double>(x_sfan),
+    //                         static_cast<std::size_t>(N), static_cast<std::size_t>(nu),
+    //                         std::span<const std::size_t>(nx_per_branch), 1e-6);
 
-//     compare_combined_normal(std::span<const double>(λ_combined), std::span<const double>(λ_fan),
-//                             static_cast<std::size_t>(N), 0,
-//                             std::span<const std::size_t>(nx_per_branch), 1e-6);
-//     compare_combined_normal(std::span<const double>(λ_combined), std::span<const double>(λ_sfan),
-//                             static_cast<std::size_t>(N), 0,
-//                             std::span<const std::size_t>(nx_per_branch), 1e-6);
+    compare_combined_normal(std::span<const double>(λ_combined), std::span<const double>(λ_fan),
+                            static_cast<std::size_t>(N), 0,
+                            std::span<const std::size_t>(nx_per_branch), 1e-8);
+    // compare_combined_normal(std::span<const double>(λ_combined), std::span<const double>(λ_sfan),
+    //                         static_cast<std::size_t>(N), 0,
+    //                         std::span<const std::size_t>(nx_per_branch), 1e-6);
 }

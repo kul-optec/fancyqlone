@@ -7,7 +7,7 @@
 
 namespace cyqlone {
 
-auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError {
+auto LinearOCPStorage::compute_kkt_error(const Solution &sol, const bool skip) const -> KKTError {
     using std::clamp;
     const auto [N, nx, nu, ny, ny_N] = dim;
     std::vector<real_t> dual_residual_sto(sol.solution.size());
@@ -19,6 +19,9 @@ auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError 
     // Stationarity
     dual_residual = qr();
     for (index_t j = 0; j < N; ++j) {
+        if (skip && j == 0)
+            dual_residual.middle_rows(j * (nx + nu), nx + nu).set_constant(0);
+        else{
         auto xuj = x.middle_rows(j * (nx + nu), nx + nu), λj = λ.middle_rows(j * nx, nx),
              λj_next = λ.middle_rows((j + 1) * nx, nx), yj = y.middle_rows(j * ny, ny);
         auto rj = dual_residual.middle_rows(j * (nx + nu), nx + nu);
@@ -28,6 +31,7 @@ auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError 
             guanaqo::blas::xgemv_T(real_t{1}, CD(j), yj, real_t{1}, rj);
         for (index_t i = 0; i < nx; ++i)
             rj(i, 0) -= λj(i, 0);
+        }
     }
     auto xN = x.bottom_rows(nx), λN = λ.bottom_rows(nx), yN = y.bottom_rows(ny_N);
     auto rN = dual_residual.bottom_rows(nx);
@@ -48,9 +52,12 @@ auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError 
     using std::fmin;
     const auto eps = std::numeric_limits<real_t>::epsilon(), big = 1 / (eps * eps);
     for (index_t j = 0; j < N; ++j) {
-        auto xuj = x.middle_rows(j * (nx + nu), nx + nu), yj = y.middle_rows(j * ny, ny);
-        auto lbj = b_min(j), ubj = b_max(j);
-        auto cj = ineq_res.middle_rows(j * ny, ny);
+        if (skip && j == 0)
+            ineq_res.middle_rows(j * ny, ny).set_constant(0);
+        else {
+            auto xuj = x.middle_rows(j * (nx + nu), nx + nu), yj = y.middle_rows(j * ny, ny);
+            auto lbj = b_min(j), ubj = b_max(j);
+            auto cj = ineq_res.middle_rows(j * ny, ny);
         if (ny > 0)
             guanaqo::blas::xgemv_N(real_t{1}, CD(j), xuj, real_t{-1}, cj);
         for (index_t i = 0; i < ny; ++i) {
@@ -58,7 +65,7 @@ auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError 
                 norms(compl_norm, yj(i, 0) > 0 ? yj(i, 0) * (cj(i, 0) - fmin(ubj(i, 0), +big))
                                                : yj(i, 0) * (cj(i, 0) - fmax(lbj(i, 0), -big)));
             cj(i, 0) -= clamp(cj(i, 0), lbj(i, 0), ubj(i, 0));
-        }
+        }}
     }
     auto cN = ineq_res.bottom_rows(ny_N);
     if (ny_N > 0)
@@ -97,5 +104,25 @@ auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError 
         .complementarity     = compl_norm.norm_inf(),
     };
 }
-
+auto FanOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError {
+    KKTError kkt_error{
+        .stationarity        = 0,
+        .inequality_residual = 0,
+        .equality_residual   = 0,
+        .complementarity     = 0,
+    };
+// It is assumed that u^0=u^0_j for all branches j so we can skip this constraint in the KKT error computation
+    for (index_t i = 0; i < num_branches(); ++i) {
+        auto ocp_kkt_error = ocps[i].compute_kkt_error(sol.solutions[i],true);
+        kkt_error.stationarity =
+            std::max(kkt_error.stationarity, ocp_kkt_error.stationarity);
+        kkt_error.inequality_residual =
+            std::max(kkt_error.inequality_residual, ocp_kkt_error.inequality_residual);
+        kkt_error.equality_residual =
+            std::max(kkt_error.equality_residual, ocp_kkt_error.equality_residual);
+        kkt_error.complementarity =
+            std::max(kkt_error.complementarity, ocp_kkt_error.complementarity);
+    }
+    return kkt_error;
+}
 } // namespace cyqlone

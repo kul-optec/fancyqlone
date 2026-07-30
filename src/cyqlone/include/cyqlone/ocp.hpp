@@ -444,18 +444,20 @@ struct LinearOCPStorage {
         real_t stationarity, inequality_residual, equality_residual, complementarity;
     };
 
-    [[nodiscard]] KKTError compute_kkt_error(const Solution &sol) const;
+    [[nodiscard]] KKTError compute_kkt_error(const Solution &sol, const bool skip=false) const;
 };
 
 struct FanOCPStorage {
     std::vector<LinearOCPStorage> ocps;
     // guanaqo::MatrixView<real_t, index_t> x0;
-    guanaqo::MatrixView<real_t, index_t> R0;
-    guanaqo::MatrixView<real_t, index_t> r0;
-    guanaqo::MatrixView<real_t, index_t> D0;
-    guanaqo::MatrixView<real_t, index_t> b_min_0;
-    guanaqo::MatrixView<real_t, index_t> b_max_0;
 
     index_t num_branches() const { return static_cast<index_t>(ocps.size()); };
+    struct Solution {
+        std::vector<LinearOCPStorage::Solution> solutions;
+    };
+    struct KKTError {
+        real_t stationarity, inequality_residual, equality_residual, complementarity;
+    };
+    [[nodiscard]] KKTError compute_kkt_error(const Solution &sol) const;
 };
 } // namespace cyqlone

@@ -114,6 +114,20 @@ struct FanCyqloneStorage {
     void update_impl(const FanOCPStorage &focp);
     void update(const FanOCPStorage &focp);
     // u(0) is dummy so no constraints on it
-    static FanCyqloneStorage build(const FanOCPStorage &focp, index_t ny_0 = 0);
+    static FanCyqloneStorage build(const FanOCPStorage &focp, index_t ny_0 = -1);
+    
+    using Solution = FanOCPStorage::Solution;
+    using KKTError = FanOCPStorage::KKTError;
+    std::vector<value_type>
+    reconstruct_ineq_multipliers(std::span<const value_type> y_compressed) const;
+    Solution reconstruct_solution(const FanOCPStorage &ocp,
+                                  std::span<const value_type> ux_compressed,
+                                  std::span<const value_type> y_compressed,
+                                  std::span<const value_type> λ_compressed) const;
+
+    KKTError compute_kkt_error(const FanOCPStorage &ocp,
+                               std::span<const value_type> ux_compressed,
+                               std::span<const value_type> y_compressed,
+                               std::span<const value_type> λ_compressed) const;
 };
 } // namespace cyqlone
