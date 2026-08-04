@@ -47,7 +47,7 @@ class CustomReporter : public benchmark::BenchmarkReporter {
     fmt::text_style $(fmt::text_style s) const { return with_color ? s : fmt::text_style{}; }
 
     struct Field {
-        std::string name;
+        const char *name;
         int width;
         bool is_integer;
     };

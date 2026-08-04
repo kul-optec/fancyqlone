@@ -6,6 +6,7 @@
 #include <cyqlone/tracing.hpp>
 #include "cyqlone/cyqlone-storage.hpp"
 #include "cyqlone/fan-cyqlone.hpp"
+#include <cyqlone/qpalm/example-problems/spring-mass.hpp>
 
 #include "cyqlone/matio.hpp"
 #include "cyqlone/ocp.hpp"
@@ -1033,4 +1034,493 @@ TEST(QPALM, random_fan_input_constr) {
     // compare_combined_normal(std::span<const double>(λ_combined), std::span<const double>(λ_sfan),
     //                         static_cast<std::size_t>(N), 0,
     //                         std::span<const std::size_t>(nx_per_branch), 1e-6);
+}
+
+TEST(QPALM, spring_mass_1_branch) {
+    using cyqlone::index_t;
+    using cyqlone::real_t;
+    namespace qp = cyqlone::qpalm;
+    namespace la = cyqlone::linalg;
+
+    constexpr index_t VL       = 4;
+    const index_t num_branches = 1;
+
+#if GUANAQO_WITH_TRACING
+    guanaqo::trace_logger_set_default_size(1'048'576);
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reserve(1'048'576); });
+
+    auto save_traces = [&](const std::string &name) {
+        namespace fs = std::filesystem;
+        fs::path out_dir{"traces"};
+        out_dir /= *cyqlone_commit_hash ? cyqlone_commit_hash : "unknown";
+        fs::create_directories(out_dir);
+        std::ofstream csv{out_dir / name};
+        guanaqo::TraceLogger::write_column_headings(csv) << '\n';
+        std::vector<std::span<const guanaqo::TraceLogger::Log>> all_logs;
+        guanaqo::for_each_trace_logger([&](auto &logger) {
+            std::span logs = logger.get_logs();
+            all_logs.push_back(logs);
+            for (const auto &log : logs)
+                csv << log << '\n';
+        });
+        std::cout << fs::absolute(out_dir / name) << std::endl;
+        cyqlone::write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
+        std::cout << fs::absolute((out_dir / name).replace_extension("json.gz")) << std::endl;
+    };
+#else
+    auto save_traces = [](const std::string &) {};
+#endif
+
+    const index_t N  = 64;
+
+    const index_t M=16;
+    index_t num_warmups = 5;
+    auto seed=12345;
+
+    // Same initial condition for all branches.
+    std::mt19937 rng(seed);
+    std::uniform_real_distribution<real_t> dist(-1.0, 1.0);
+
+    auto k_spring_diff=0.1/num_branches;
+    auto params=qp::problems::SpringMassParams::wang_boyd_2008_width(M, N, seed, 1);
+    auto nx=static_cast<index_t>(params.masses.size()*2);
+
+    auto problem = qp::problems::fan_spring_mass(params, num_branches, k_spring_diff);
+    // Add a random disturbance to the initial position of the masses but make sure they are the same for all branches
+    using dist_t = std::uniform_real_distribution<real_t>;
+    auto nu = problem.ocp.ocps[0].dim.nu;
+    auto dist2    = params.p_max > 1 ? dist_t{-3, 3} : dist_t{-0.6, -0.1};
+    for (index_t r = 0; r < static_cast<index_t>(params.masses.size()); ++r) {
+        auto disturbance = dist2(rng);
+        for (index_t j = 0; j < num_branches; ++j)
+            problem.ocp.ocps[j].b(0)(r, 0) += disturbance;
+    
+        // guanaqo::print_python(std::cout << "x(0) = ", ocps[i].b(0), "\n");
+        // guanaqo::print_python(std::cout << "r(0) = ", ocps[i].r(0), "\n");
+        // Force the same initial state in every branch.
+        // la::copy(x0, ocps[i].b(0));
+    }
+
+    const bool verbose = false;
+
+    // -------------------------------------------------------------------------
+    // Fan solver
+    // -------------------------------------------------------------------------
+    auto ocps=problem.ocp.ocps;
+
+    auto fan_cocp    = cyqlone::FanCyqloneStorage<>::build(problem.ocp);
+    index_t num_proc = 8;
+    std::cout << "Running on " << num_proc << " processors\n";
+    auto &&fan_backend =
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
+            fan_cocp, {},
+            {
+                .processors             = num_proc,
+                .print_residuals        = verbose,
+                .print_precision        = 17,
+                .changing_constr_factor = 0,
+                .max_update_count       = 0,
+
+                // Fan solver handles the shared/root part itself.
+                .tricyqle_params =
+                    {
+                        .solve_method = cyqlone::SolveMethod::None,
+                    },
+                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+
+            });
+
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>> *>
+        fan_qpalm{
+            fan_backend.get(),
+            {
+                .max_outer_iter       = 100,
+                .max_total_inner_iter = 1000,
+                .tolerance            = 1e-7,
+                .verbose              = verbose,
+                .detailed_stats       = verbose,
+            },
+        };
+    for (index_t i = 0; !verbose && i < num_warmups; ++i) {
+        fan_qpalm(); // warm up
+    }
+#if GUANAQO_WITH_TRACING
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+#endif
+    auto fan_status = fan_qpalm();
+    save_traces("fanout-fan-qpalm.csv");
+
+    EXPECT_EQ(fan_status, qp::SolverStatus::Converged);
+    std::cout << "inner:   " << fan_qpalm.stats->inner_iter << "\n"
+              << "outer:   " << fan_qpalm.stats->outer_iter << "\n"
+              << "timings: " << fan_qpalm.stats->timings.total << "\n";
+    auto x_fan = fan_qpalm.get_solution();
+    auto λ_fan = fan_qpalm.get_equality_multipliers();
+    std::cout << "Running on " << num_proc << " processors\n";
+    auto &&sfan_backend =
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>>(
+            fan_cocp, {},
+            {
+                .processors             = num_proc,
+                .print_residuals        = verbose,
+                .print_precision        = 17,
+                .changing_constr_factor = 0,
+                .max_update_count       = 0,
+
+                // Fan solver handles the shared/root part itself.
+                .tricyqle_params =
+                    {
+                        .solve_method = cyqlone::SolveMethod::None,
+                    },
+                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+
+            });
+
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>> *>
+        sfan_qpalm{
+            sfan_backend.get(),
+            {
+                .max_outer_iter       = 100,
+                .max_total_inner_iter = 1000,
+                .tolerance            = 1e-7,
+                .verbose              = verbose,
+                .detailed_stats       = verbose,
+            },
+        };
+    for (index_t i = 0; !verbose && i < num_warmups; ++i) {
+        sfan_qpalm(); // warm up
+    }
+#if GUANAQO_WITH_TRACING
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+#endif
+    auto sfan_status = sfan_qpalm();
+    save_traces("fanout-sfan-qpalm.csv");
+
+    EXPECT_EQ(sfan_status, qp::SolverStatus::Converged);
+    std::cout << "inner:   " << sfan_qpalm.stats->inner_iter << "\n"
+              << "outer:   " << sfan_qpalm.stats->outer_iter << "\n"
+              << "timings: " << sfan_qpalm.stats->timings.total << "\n";
+    auto x_sfan = sfan_qpalm.get_solution();
+    auto λ_sfan = sfan_qpalm.get_equality_multipliers();
+    // -------------------------------------------------------------------------
+    // Combined solver
+    // -------------------------------------------------------------------------
+    auto combined_ocp  = ocps[0];
+    auto combined_cocp = cyqlone::CyqloneStorage<>::build(combined_ocp);
+
+    auto &&combined_backend =
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>>(
+            combined_cocp, {},
+            {
+                .processors             = num_proc,
+                .print_residuals        = verbose,
+                .print_precision        = 17,
+                .changing_constr_factor = 0,
+                .max_update_count       = 0,
+                .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::PCR},
+            });
+
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>> *>
+        combined_qpalm{
+            combined_backend.get(),
+            {
+                .max_outer_iter       = 100,
+                .max_total_inner_iter = 1000,
+                .tolerance            = 1e-7,
+
+                .verbose        = verbose,
+                .detailed_stats = verbose,
+            },
+        };
+    for (index_t i = 0; !verbose && i < 50; ++i)
+        combined_qpalm(); // warm up
+#if GUANAQO_WITH_TRACING
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+#endif
+    auto combined_status = combined_qpalm();
+    EXPECT_EQ(combined_status, qp::SolverStatus::Converged);
+    save_traces("fanout-combined.csv");
+
+    auto x_combined = combined_qpalm.get_solution();
+    auto λ_combined = combined_qpalm.get_equality_multipliers();
+
+    // -------------------------------------------------------------------------
+    // Layout-aware comparison
+    // -------------------------------------------------------------------------
+    std::vector<std::size_t> nx_per_branch;
+    nx_per_branch.reserve(ocps.size());
+    std::cout << "inner:   " << combined_qpalm.stats->inner_iter << "\n"
+              << "outer:   " << combined_qpalm.stats->outer_iter << "\n"
+              << "timings: " << combined_qpalm.stats->timings.total << "\n";
+    std::cout << "speedup: " << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) / static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())  << "\n";
+    for (const auto &ocp : ocps) {
+        nx_per_branch.push_back(static_cast<std::size_t>(ocp.dim.nx));
+        std::cout << "nx_per_branch: " << ocp.dim.nx << "\n";
+    }
+
+    compare_combined_normal(std::span<const double>(x_combined), std::span<const double>(x_fan),
+                            static_cast<std::size_t>(N), static_cast<std::size_t>(nu),
+                            std::span<const std::size_t>(nx_per_branch), 1e-8);
+    // compare_combined_normal(std::span<const double>(x_combined), std::span<const double>(x_sfan),
+    //                         static_cast<std::size_t>(N), static_cast<std::size_t>(nu),
+    //                         std::span<const std::size_t>(nx_per_branch), 1e-6);
+
+    compare_combined_normal(std::span<const double>(λ_combined), std::span<const double>(λ_fan),
+                            static_cast<std::size_t>(N), 0,
+                            std::span<const std::size_t>(nx_per_branch), 1e-8);
+    // compare_combined_normal(std::span<const double>(λ_combined), std::span<const double>(λ_sfan),
+    //                         static_cast<std::size_t>(N), 0,
+    //                         std::span<const std::size_t>(nx_per_branch), 1e-6);
+    
+}
+TEST(QPALM, spring_mass) {
+    using cyqlone::index_t;
+    using cyqlone::real_t;
+    namespace qp = cyqlone::qpalm;
+    namespace la = cyqlone::linalg;
+
+    constexpr index_t VL       = 4;
+    const index_t num_branches = 1;
+
+#if GUANAQO_WITH_TRACING
+    guanaqo::trace_logger_set_default_size(1'048'576);
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reserve(1'048'576); });
+
+    auto save_traces = [&](const std::string &name) {
+        namespace fs = std::filesystem;
+        fs::path out_dir{"traces"};
+        out_dir /= *cyqlone_commit_hash ? cyqlone_commit_hash : "unknown";
+        fs::create_directories(out_dir);
+        std::ofstream csv{out_dir / name};
+        guanaqo::TraceLogger::write_column_headings(csv) << '\n';
+        std::vector<std::span<const guanaqo::TraceLogger::Log>> all_logs;
+        guanaqo::for_each_trace_logger([&](auto &logger) {
+            std::span logs = logger.get_logs();
+            all_logs.push_back(logs);
+            for (const auto &log : logs)
+                csv << log << '\n';
+        });
+        std::cout << fs::absolute(out_dir / name) << std::endl;
+        cyqlone::write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
+        std::cout << fs::absolute((out_dir / name).replace_extension("json.gz")) << std::endl;
+    };
+#else
+    auto save_traces = [](const std::string &) {};
+#endif
+
+    const index_t N  = 4;
+
+    const index_t M=2;
+    index_t num_warmups = 5;
+    auto seed=12345;
+
+    // Same initial condition for all branches.
+    std::mt19937 rng(seed);
+    std::uniform_real_distribution<real_t> dist(-1.0, 1.0);
+
+    auto k_spring_diff=0.2/num_branches;
+    auto params=qp::problems::SpringMassParams::wang_boyd_2008(M, N, seed);
+
+    auto problem = qp::problems::fan_spring_mass(params, num_branches, k_spring_diff);
+    // Add a random disturbance to the initial position of the masses but make sure they are the same for all branches
+    using dist_t = std::uniform_real_distribution<real_t>;
+    auto nu = problem.ocp.ocps[0].dim.nu;
+    auto dist2    = params.p_max > 1 ? dist_t{-3, 3} : dist_t{-0.6, -0.1};
+    for (index_t r = 0; r < static_cast<index_t>(params.masses.size()); ++r) {
+        auto disturbance = -0.1;
+        for (index_t j = 0; j < num_branches; ++j)
+            problem.ocp.ocps[j].b(0)(r, 0) += disturbance;
+    
+        // guanaqo::print_python(std::cout << "x(0) = ", ocps[i].b(0), "\n");
+        // guanaqo::print_python(std::cout << "r(0) = ", ocps[i].r(0), "\n");
+        // Force the same initial state in every branch.
+        // la::copy(x0, ocps[i].b(0));
+    }
+
+    const bool verbose = true;
+
+    // -------------------------------------------------------------------------
+    // Fan solver
+    // -------------------------------------------------------------------------
+    auto ocps=problem.ocp.ocps;
+
+    auto fan_cocp    = cyqlone::FanCyqloneStorage<>::build(problem.ocp);
+    index_t num_proc = 1;
+    std::cout << "Running on " << num_proc << " processors\n";
+    auto &&fan_backend =
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
+            fan_cocp, {},
+            {
+                .processors             = num_proc,
+                .print_residuals        = verbose,
+                .print_precision        = 17,
+                .changing_constr_factor = 0,
+                .max_update_count       = 0,
+
+                // Fan solver handles the shared/root part itself.
+                .tricyqle_params =
+                    {
+                        .solve_method = cyqlone::SolveMethod::None,
+                    },
+                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+
+            });
+
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>> *>
+        fan_qpalm{
+            fan_backend.get(),
+            {
+                .max_outer_iter       = 100,
+                .max_total_inner_iter = 1000,
+                .tolerance            = 1e-7,
+                .verbose              = verbose,
+                .detailed_stats       = verbose,
+            },
+        };
+    for (index_t i = 0; !verbose && i < num_warmups; ++i) {
+        fan_qpalm(); // warm up
+    }
+    update_cyqpalm_backend(*fan_qpalm.backend, fan_cocp);
+#if GUANAQO_WITH_TRACING
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+#endif
+    auto fan_status = fan_qpalm();
+    save_traces("fanout-fan-qpalm.csv");
+
+    EXPECT_EQ(fan_status, qp::SolverStatus::Converged);
+    std::cout << "inner:   " << fan_qpalm.stats->inner_iter << "\n"
+              << "outer:   " << fan_qpalm.stats->outer_iter << "\n"
+              << "timings: " << fan_qpalm.stats->timings.total << "\n";
+    auto x_fan = fan_qpalm.get_solution();
+    auto λ_fan = fan_qpalm.get_equality_multipliers();
+    auto y_fan = fan_qpalm.get_inequality_multipliers();
+    std::cout << "Running on " << num_proc << " processors\n";
+    auto &&sfan_backend =
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>>(
+            fan_cocp, {},
+            {
+                .processors             = num_proc,
+                .print_residuals        = verbose,
+                .print_precision        = 17,
+                .changing_constr_factor = 0,
+                .max_update_count       = 0,
+
+                // Fan solver handles the shared/root part itself.
+                .tricyqle_params =
+                    {
+                        .solve_method = cyqlone::SolveMethod::None,
+                    },
+                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+
+            });
+
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>> *>
+        sfan_qpalm{
+            sfan_backend.get(),
+            {
+                .max_outer_iter       = 100,
+                .max_total_inner_iter = 1000,
+                .tolerance            = 1e-7,
+                .verbose              = verbose,
+                .detailed_stats       = verbose,
+            },
+        };
+    for (index_t i = 0; !verbose && i < num_warmups; ++i) {
+        sfan_qpalm(); // warm up
+    }
+#if GUANAQO_WITH_TRACING
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+#endif
+    auto sfan_status = sfan_qpalm();
+    save_traces("fanout-sfan-qpalm.csv");
+
+    EXPECT_EQ(sfan_status, qp::SolverStatus::Converged);
+    std::cout << "inner:   " << sfan_qpalm.stats->inner_iter << "\n"
+              << "outer:   " << sfan_qpalm.stats->outer_iter << "\n"
+              << "timings: " << sfan_qpalm.stats->timings.total << "\n";
+    auto x_sfan = sfan_qpalm.get_solution();
+    auto λ_sfan = sfan_qpalm.get_equality_multipliers();
+
+    // -------------------------------------------------------------------------
+    // Combined solver
+    // -------------------------------------------------------------------------
+    auto combined_ocp  = combine_branches_0(ocps);
+    auto combined_cocp = cyqlone::CyqloneStorage<>::build(combined_ocp);
+
+    auto &&combined_backend =
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>>(
+            combined_cocp, {},
+            {
+                .processors             = num_proc,
+                .print_residuals        = verbose,
+                .print_precision        = 17,
+                .changing_constr_factor = 0,
+                .max_update_count       = 0,
+                .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::PCR},
+            });
+
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>> *>
+        combined_qpalm{
+            combined_backend.get(),
+            {
+                .max_outer_iter       = 100,
+                .max_total_inner_iter = 1000,
+                .tolerance            = 1e-7,
+
+                .verbose        = verbose,
+                .detailed_stats = verbose,
+            },
+        };
+    for (index_t i = 0; !verbose && i < 50; ++i)
+        combined_qpalm(); // warm up
+#if GUANAQO_WITH_TRACING
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+#endif
+    auto combined_status = combined_qpalm();
+    EXPECT_EQ(combined_status, qp::SolverStatus::Converged);
+    save_traces("fanout-combined.csv");
+
+    auto x_combined = combined_qpalm.get_solution();
+    auto λ_combined = combined_qpalm.get_equality_multipliers();
+    auto y_combined = combined_qpalm.get_inequality_multipliers();
+
+    // -------------------------------------------------------------------------
+    // Layout-aware comparison
+    // -------------------------------------------------------------------------
+    std::vector<std::size_t> nx_per_branch;
+    nx_per_branch.reserve(ocps.size());
+    std::cout << "inner:   " << combined_qpalm.stats->inner_iter << "\n"
+              << "outer:   " << combined_qpalm.stats->outer_iter << "\n"
+              << "timings: " << combined_qpalm.stats->timings.total << "\n";
+    std::cout << "speedup: " << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) / static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())  << "\n";
+    for (const auto &ocp : ocps) {
+        nx_per_branch.push_back(static_cast<std::size_t>(ocp.dim.nx));
+        std::cout << "nx_per_branch: " << ocp.dim.nx << "\n";
+    }
+
+    compare_combined_normal(std::span<const double>(x_combined), std::span<const double>(x_fan),
+                            static_cast<std::size_t>(N), static_cast<std::size_t>(nu),
+                            std::span<const std::size_t>(nx_per_branch), 1e-8);
+    // compare_combined_normal(std::span<const double>(x_combined), std::span<const double>(x_sfan),
+    //                         static_cast<std::size_t>(N), static_cast<std::size_t>(nu),
+    //                         std::span<const std::size_t>(nx_per_branch), 1e-6);
+
+    compare_combined_normal(std::span<const double>(λ_combined), std::span<const double>(λ_fan),
+                            static_cast<std::size_t>(N), 0,
+                            std::span<const std::size_t>(nx_per_branch), 1e-8);
+    // compare_combined_normal(std::span<const double>(λ_combined), std::span<const double>(λ_sfan),
+    //                         static_cast<std::size_t>(N), 0,
+    //                         std::span<const std::size_t>(nx_per_branch), 1e-6);
+
+    auto kkt_fan = fan_cocp.compute_kkt_error(problem.ocp,x_fan, y_fan, λ_fan);
+    std::cout << "combined y_size: " << y_combined.size() << "\n";
+    auto kkt_combined = combined_cocp.compute_kkt_error(combined_ocp,x_combined, y_combined, λ_combined);
+    std::cout << "KKT error fan: " << kkt_fan.stationarity<< "\n";
+    std::cout << "KKT error combined: " << kkt_combined.stationarity<< "\n";
+    std::cout << "KKT error fan: " << kkt_fan.equality_residual<< "\n";
+    std::cout << "KKT error combined: " << kkt_combined.equality_residual<< "\n";
+    std::cout << "KKT error fan: " << kkt_fan.inequality_residual<< "\n";
+    std::cout << "KKT error combined: " << kkt_combined.inequality_residual<< "\n";
+    std::cout << "KKT error fan: " << kkt_fan.complementarity<< "\n";
+    std::cout << "KKT error combined: " << kkt_combined.complementarity<< "\n";
 }

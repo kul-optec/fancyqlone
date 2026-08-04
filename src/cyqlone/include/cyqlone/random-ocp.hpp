@@ -110,7 +110,7 @@ inline LinearOCPStorage generate_random_ocp_input_constr(OCPDim dim, uint_fast32
         auto Qi = ocp.Q(i), Ri = ocp.R(i), Si = ocp.S(i), Hi = ocp.H(i);
         Ai.generate([&] { return uni(rng) * 0.9; });
         Bi.generate([&] { return uni(rng); });
-        Ci.generate([&] { return uni(rng) * 0.0; });
+        Ci.generate([&] { return (i == 0) ? uni(rng) : 0.0; });
         Di.generate([&] { return uni(rng); });
         Qi.generate([&] { return uni(rng); });
         Ri.generate([&] { return uni(rng); });
@@ -127,6 +127,8 @@ inline LinearOCPStorage generate_random_ocp_input_constr(OCPDim dim, uint_fast32
     }
     auto Ci = ocp.C(N), Qi = ocp.Q(N);
     Ci.generate([&] { return uni(rng); });
+    ocp.D(0).top_rows(1).set_constant(0.0); // No input constraints at the first stage
+
     Qi.generate([&] { return uni(rng); });
     // Make sure Q(N) is SPD
     Qi.add_to_diagonal(2 * static_cast<real_t>(nx));
@@ -177,7 +179,6 @@ inline LinearOCPStorage generate_random_ocp_input_constr(OCPDim dim, uint_fast32
         if (bernoulli(rng))
             ocp.b_max(N)(j, 0) += abs(uni(rng));
     }
-
     return ocp;
 }
 

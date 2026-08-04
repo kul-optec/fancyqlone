@@ -110,7 +110,7 @@ def format_arg(arg: str) -> str | None:
     arg = arg.strip()
     if m := re.match(r"([pv])=(\d+)", arg):
         return f"${m.group(1)}$={m.group(2)}"
-    return {"cm": None, "rm": None, "zero": None, "shift": "warm", "upd=0": "no updates"}.get(arg)
+    return {"cm": None, "rm": None, "zero": None, "shift": "warm(s)", "copy": "warm(c)", "upd=0": "no updates"}.get(arg)
 
 
 def format_solver_name(solver: str) -> str:

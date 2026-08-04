@@ -153,7 +153,7 @@ struct CyQPALMBackend {
                 const auto t          = k1 - (k2 << ocp.lp());
                 return ((num_stages * t + i) << ocp.lv()) + v;
             };
-
+            // std::cout << "Warm starting with strategy: " << static_cast<int>(settings.strategy) << std::endl;
             switch (settings.strategy) {
                 case WarmStartingStrategy::Zeros:
                     this->x0.reset();
@@ -194,6 +194,7 @@ struct CyQPALMBackend {
             }
         } else if constexpr (std::is_same_v<typename traits::warm_start_t,
                                             FanWarmStartingStrategy>) {
+
             switch (settings.strategy) {
                 case WarmStartingStrategy::Zeros:
                     this->x0.reset();

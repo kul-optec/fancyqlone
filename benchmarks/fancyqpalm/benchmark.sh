@@ -57,11 +57,17 @@ deps() {
     conan config install "${CYQLONE_ROOT}/scripts/ci/conan-profiles/settings_user.yml"
     local conan_args=(
         "${profiles[@]}"
+        # -pr="${profiles_dir}/sanitizers/asan.profile"
+        # -pr="${profiles_dir}/sanitizers/ubsan.profile"
         -c tools.build:skip_test=True
         -o guanaqo/\*:with_mkl=$with_mkl
+        # -s build_type=Debug
+        # -c '*:tools.build:sharedlinkflags+=["-lgfortran"]'
+        # -c '*:tools.build:exelinkflags+=["-lgfortran"]'
         -s:b compiler.cppstd=20
         --build=missing
         --lockfile-partial
+        
         "${extra_args[@]}"
     )
     if [[ $editable -eq 1 ]]; then
@@ -129,31 +135,56 @@ benchmark() {
     OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" \
         "${build_folder}/spring-mass" "$@"
 }
-
+# Run a benchmark command
+benchmark2() {
+    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f conan.json ]]; then
+        echo "Conan files not found, please run the deps and build steps first." >&2; exit 1
+    fi
+    build_folder="$(_jq -r '.graph.nodes."0".build_folder' conan.json)"
+    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' conan.json)"
+    set +ux
+    source "${generators_folder}/conanrun.sh"
+    set -ux
+    if [[ ! -x "${build_folder}/spring-mass" ]]; then
+        echo "Benchmark executable not found, please run the build step first." >&2; exit 1
+    fi
+    echo $0
+    OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" \
+        "${build_folder}/spring-mass2" "$@"
+}
 # Run the quick benchmark as a sanity check
 benchmark_quick() {
     benchmark \
         --problem wang-boyd-2008 --cold -I 1 -p "${OMP_NUM_THREADS}" --cm \
-        -N 256 -M 12 \
-        --benchmark_repetitions=11 --benchmark_report_aggregates_only \
+        -N 4 -M 2 \
+        --benchmark_repetitions=1 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.1s "$@"
 }
 
 # Run the horizon scaling benchmark
 benchmark_scaling() {
     benchmark \
-        --problem wang-boyd-2008 --no-cold --warm-shift -I 20 -p "${OMP_NUM_THREADS}" --cm --no-updates \
+        --problem wang-boyd-2008 --cold -I 20 -p "${OMP_NUM_THREADS}" --cm --no-updates \
         -N 32  -N 64  -N 96  -N 128 -N 160 -N 192 -N 224 -N 256 \
-        -N 288 -N 320 -N 352 -N 384 -N 416 -N 448 -N 480 -N 512 \
+        -N 288  -N 352  -N 416 -N 448 -N 512 \
         -M 12 \
         --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.05s --benchmark_out=benchmark-scaling.json "$@"
 }
-
+# Run the horizon scaling benchmark
+benchmark_scaling2() {
+    benchmark2 \
+        --problem wang-boyd-2008 --cold -I 20 -p "${OMP_NUM_THREADS}" --cm --no-updates \
+        -N 32  -N 64  -N 96  -N 128 -N 160 -N 192 -N 224 -N 256 \
+        -N 288  -N 352  -N 416 -N 448 -N 512 \
+        -M 12 \
+        --benchmark_repetitions=3 --benchmark_report_aggregates_only \
+        --benchmark_min_time=0.05s --benchmark_out=benchmark-scaling2.json "$@"
+}
 # Run the states scaling benchmark
 benchmark_scaling_states() {
     benchmark \
-        --problem wang-boyd-2008 --no-cold --warm-shift -I 20 -p1 -p4 -p "${OMP_NUM_THREADS}" -v1 -v4 --cm \
+        --problem wang-boyd-2008 --cold -I 20 -p "${OMP_NUM_THREADS}" -v1 -v4 --cm \
         -N 256 \
         -M1 -M2 -M3 -M4 -M5 -M6 -M7 -M8 -M9 -M10 \
         -M11 -M12 -M13 -M14 -M15 -M16 -M17 -M18 -M19 -M20 \
@@ -161,13 +192,23 @@ benchmark_scaling_states() {
         --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-states.json "$@"
 }
-
+# Run the states scaling benchmark
+benchmark_scaling_states2() {
+    benchmark2 \
+        --problem wang-boyd-2008 --cold -I 20 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -N 256 \
+        -M1 -M2 -M3 -M4 -M5 -M6 -M7 -M8 -M9 -M10 \
+        -M11 -M12 -M13 -M14 -M15 -M16 -M17 -M18 -M19 -M20 \
+        -M21 -M22 -M23 -M24 -M25 -M26 -M27 -M28 -M29 -M30 \
+        --benchmark_repetitions=3 --benchmark_report_aggregates_only \
+        --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-states2.json "$@"
+}
 # Run the M×N grid benchmark. These are the green tables in the paper.
 # 8 values of N × 5 values of M × 150 instances each × 2 solvers × 2 initializations × 3 repetitions
 # × >0.05 seconds, so this takes a couple of hours to run.
 benchmark_grid() {
     benchmark \
-        --problem wang-boyd-2008 --cold --warm-shift -I 150 -p "${OMP_NUM_THREADS}" --cm \
+        --problem wang-boyd-2008 --cold -I 150 -p "${OMP_NUM_THREADS}" --cm \
         -N 32 -N 64 -N 96 -N 128 -N 160 -N 192 -N 224 -N 256 \
         -M 6 -M 12 -M 18 -M 24 -M 30 \
         --benchmark_repetitions=3 --benchmark_report_aggregates_only \
@@ -179,18 +220,29 @@ plot_scaling() {
     python3 plot-scaling.py benchmark-scaling.json \
         --output benchmark-scaling.pdf "$@"
 }
-
+# Plot the results of the horizon scaling benchmark
+plot_scaling2() {
+    python3 plot-scaling.py benchmark-scaling2.json \
+        --output benchmark-scaling2.pdf "$@"
+    python3 plot-scaling.py benchmark-scaling2.json \
+        --output benchmark-scaling2_zoom.pdf --ylim 0,0.5 "$@"
+}
 # Plot the results of the states scaling benchmark
 plot_scaling_states() {
     python3 plot-scaling.py benchmark-scaling-states.json \
         --output benchmark-scaling-states.pdf --xvar=M --log "$@"
 }
-
+plot_scaling_states2() {
+    python3 plot-scaling.py benchmark-scaling-states2.json \
+        --output benchmark-scaling-states2.pdf --xvar=M --log "$@"
+    python3 plot-scaling.py benchmark-scaling-states2.json \
+        --output benchmark-scaling-states2_zoom.pdf --xvar=M --log "$@"
+}
 # Clean up build files and benchmark results
 clean() {
     set -x
     rm -rf conan.json build CMakeUserPresets.json
-    rm -f benchmark-grid.json benchmark-scaling.json benchmark-scaling-states.json
+    rm -f benchmark-grid.json benchmark-scaling.json benchmark-scaling2.json benchmark-scaling-states.json
     rm -f benchmark-scaling.pdf benchmark-scaling-states.pdf
 }
 
@@ -208,23 +260,35 @@ main() {
             benchmark_quick "$@" ;;
         benchmark-scaling)
             benchmark_scaling "$@" ;;
+        benchmark-scaling2)
+            benchmark_scaling2 "$@" ;;
         benchmark-scaling-states)
             benchmark_scaling_states "$@" ;;
+        benchmark-scaling-states2)
+            benchmark_scaling_states2 "$@" ;;
         benchmark-grid)
             benchmark_grid "$@" ;;
         plot-scaling)
             plot_scaling "$@" ;;
+        plot-scaling2)
+            plot_scaling2 "$@" ;;
         plot-scaling-states)
             plot_scaling_states "$@" ;;
+        plot-scaling-states2)
+            plot_scaling_states2 "$@" ;;
         all)
             deps "$@"
             build
             benchmark_quick
             benchmark_scaling
+            benchmark_scaling2
             benchmark_scaling_states
+            benchmark_scaling_states2
             benchmark_grid
             plot_scaling
-            plot_scaling_states ;;
+            plot_scaling2
+            plot_scaling_states
+            plot_scaling_states2 ;;
         benchmark)
             benchmark "$@" ;;
         clean)

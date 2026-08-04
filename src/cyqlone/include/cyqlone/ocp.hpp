@@ -7,7 +7,9 @@
 #include <cyqlone/config.hpp>
 #include <batmat/config.hpp>
 #include <guanaqo/mat-view.hpp>
+#include <guanaqo/print.hpp>
 #include <vector>
+#include <iostream>
 
 namespace cyqlone {
 
@@ -443,8 +445,19 @@ struct LinearOCPStorage {
     struct KKTError {
         real_t stationarity, inequality_residual, equality_residual, complementarity;
     };
+      struct KKTErroru0Seperated {
+        KKTError kkt;
+        std::vector<real_t> stationarity_u0;
+    };
+    struct KKTErroru0x0Seperated {
+        KKTError kkt;
+        std::vector<real_t> stationarity_u0;
+        std::vector<real_t> stationarity_x0;
+    };
+    [[nodiscard]] KKTError compute_kkt_error(const Solution &sol) const;
+    [[nodiscard]] KKTErroru0Seperated compute_kkt_error_u0_seperated(const Solution &sol) const;
+    [[nodiscard]] KKTErroru0x0Seperated compute_kkt_error_u0x0_seperated(const Solution &sol) const;
 
-    [[nodiscard]] KKTError compute_kkt_error(const Solution &sol, const bool skip=false) const;
 };
 
 struct FanOCPStorage {
@@ -454,10 +467,18 @@ struct FanOCPStorage {
     index_t num_branches() const { return static_cast<index_t>(ocps.size()); };
     struct Solution {
         std::vector<LinearOCPStorage::Solution> solutions;
+        void print(std::vector<OCPDim> OCPdims) const {
+            for (std::size_t i = 0; i < solutions.size(); ++i) {
+                guanaqo::print_python(std::cout <<"Branch " << i << " x: ", solutions[i].x(OCPdims[i]), "\n");
+                guanaqo::print_python(std::cout <<"Branch " << i << " u: ", solutions[i].u(OCPdims[i]), "\n");
+                guanaqo::print_python(std::cout <<"Branch " << i << " λ: ", solutions[i].λ(OCPdims[i]), "\n");
+            
+            }
+        }
     };
     struct KKTError {
         real_t stationarity, inequality_residual, equality_residual, complementarity;
     };
-    [[nodiscard]] KKTError compute_kkt_error(const Solution &sol) const;
+    [[nodiscard]] KKTError compute_kkt_error(const Solution &sol, bool hpipm = false) const;
 };
 } // namespace cyqlone

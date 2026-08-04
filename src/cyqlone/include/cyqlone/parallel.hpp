@@ -92,7 +92,7 @@ struct FanSharedContext {
         set_barrier_spin_count(spin_count);
         for (auto &ctx : branch_contexts) {
             ctx.set_barrier_spin_count(spin_count);
-            std::cout << "branch spin count: " << ctx.barrier.spin_count << std::endl;
+            // std::cout << "branch spin count: " << ctx.barrier.spin_count << std::endl;
         }
     }
     /// Configure the barrier spin count used in parallel synchronization before falling back to a

@@ -11,13 +11,14 @@
 #include <ranges>
 #include <stdexcept>
 #include <string>
+#include <iostream>
 #include <utility>
 #include <vector>
 
 using cyqlone::index_t;
 using cyqlone::real_t;
 
-namespace {
+
 
 template <class T, class I, class S, guanaqo::StorageOrder O>
 std::vector<real_t>
@@ -95,7 +96,6 @@ std::size_t branch_offset(const HPIPMTreeQPData &data, int branch) {
     return offset;
 }
 
-} // namespace
 
 std::shared_ptr<HPIPMTreeQPData>
 build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
@@ -183,23 +183,75 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
     const auto &x0 = fan.ocps.front().b(0);
     d_tree_ocp_qp_set_lbx(0, const_cast<real_t *>(x0.data), d.qp.get());
     d_tree_ocp_qp_set_ubx(0, const_cast<real_t *>(x0.data), d.qp.get());
-    guanaqo::MatrixView<real_t, index_t> R0 = {{.rows = nu, .cols = nu}};
-    guanaqo::MatrixView< real_t, index_t> r0 = {{.rows = nu, .cols = 1}};
-    guanaqo::MatrixView< real_t, index_t> q0 = {{.rows = nx, .cols = 1}};
-    guanaqo::MatrixView<real_t, index_t> Q0 = {{.rows = nx, .cols = nx}};
-    guanaqo::MatrixView<real_t, index_t> S0 = {{.rows = nu, .cols = nx}};
+    std::vector<real_t> R0_data(static_cast<std::size_t>(nu) * nu);
+    std::vector<real_t> r0_data(static_cast<std::size_t>(nu));
+    std::vector<real_t> q0_data(static_cast<std::size_t>(nx));
+    std::vector<real_t> Q0_data(static_cast<std::size_t>(nx) * nx);
+    std::vector<real_t> S0_data(static_cast<std::size_t>(nu) * nx);
 
+    std::vector<real_t> D0_data(static_cast<std::size_t>(ng_0) * nu);
+    std::vector<real_t> lg0_data(static_cast<std::size_t>(ng_0));
+    std::vector<real_t> ug0_data(static_cast<std::size_t>(ng_0));
 
-    guanaqo::MatrixView<real_t, index_t> D0 = {{.rows = ng_0, .cols = nu}};
-    guanaqo::MatrixView<real_t, index_t> lg0 = {{.rows = ng_0, .cols = 1}};
-    guanaqo::MatrixView<real_t, index_t> ug0 = {{.rows = ng_0, .cols = 1}};
-    R0.set_constant(real_t{0});
-    r0.set_constant(real_t{0});
-    q0.set_constant(real_t{0});
-    Q0.set_constant(real_t{0});
-    S0.set_constant(real_t{0});
+guanaqo::MatrixView<real_t, index_t> R0 = {{
+    .data = R0_data.data(),
+    .rows = nu,
+    .cols = nu,
+}};
+
+guanaqo::MatrixView<real_t, index_t> r0 = {{
+    .data = r0_data.data(),
+    .rows = nu,
+    .cols = 1,
+}};
+
+guanaqo::MatrixView<real_t, index_t> q0 = {{
+    .data = q0_data.data(),
+    .rows = nx,
+    .cols = 1,
+}};
+
+guanaqo::MatrixView<real_t, index_t> Q0 = {{
+    .data = Q0_data.data(),
+    .rows = nx,
+    .cols = nx,
+}};
+
+guanaqo::MatrixView<real_t, index_t> S0 = {{
+    .data = S0_data.data(),
+    .rows = nu,
+    .cols = nx,
+}};
+
+guanaqo::MatrixView<real_t, index_t> D0 = {{
+    .data = D0_data.data(),
+    .rows = ng_0,
+    .cols = nu,
+}};
+
+guanaqo::MatrixView<real_t, index_t> lg0 = {{
+    .data = lg0_data.data(),
+    .rows = ng_0,
+    .cols = 1,
+}};
+
+guanaqo::MatrixView<real_t, index_t> ug0 = {{
+    .data = ug0_data.data(),
+    .rows = ng_0,
+    .cols = 1,
+}};
+    // std::cout << " Constraint Matrices initialized." << std::endl;
+
+    R0.set_constant(0);
+    // std::cout << " R0 initialized." << std::endl;
+
+    r0.set_constant(0);
+    q0.set_constant(0);
+    Q0.set_constant(0);
+    S0.set_constant(0);
 
     index_t row_offset = 0;
+    // std::cout << " Tree Matrices initialized." << std::endl;
 
     for (int branch = 0; branch < branches; ++branch) {
         const auto &ocp = fan.ocps[static_cast<std::size_t>(branch)]; 
@@ -244,6 +296,7 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
 
         row_offset += Dj.rows;
     }
+    // std::cout << " Matrices Calculated." << std::endl;
 
     assert(row_offset == D0.rows);
     assert(row_offset == lg0.rows);
@@ -668,7 +721,7 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
     }
 
     BATMAT_ASSERT(root_ineq_offset == dim.ng[root]);
-
+    
     return fan_sol;
 }
 

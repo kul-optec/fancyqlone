@@ -78,8 +78,11 @@ struct FanStorage_t {
         FanStorage_t<matrix, value_type, DefaultOrder> copy;
         copy.branches.resize(branches.size());
         for (index_t b = 0; b < static_cast<index_t>(branches.size()); ++b) {
+            copy.branches[b] = matrix{
+                {.depth = branches[b].depth(), .rows = branches[b].rows(), .cols = branches[b].cols()}, batmat::matrix::uninitialized}; 
             batmat::linalg::copy(branches[b], copy.branches[b]);
         }
+        copy.first =matrix_f{{.rows = first.rows(), .cols = first.cols()}, batmat::matrix::uninitialized};
         batmat::linalg::copy(first, copy.first);
         return copy;
     }
@@ -112,7 +115,7 @@ struct FanCyqloneSolver {
                                                             std::move(branch_contexts));
     }
     std::vector<SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>>> solver_storages;
-
+    CyqloneParams<value_type> params{};
     /// Get the total number of primal variables in the OCP.
     /// @note The actual number of variable stored in Cyqlone's internal data structures may be
     ///       larger.
@@ -213,11 +216,11 @@ struct FanCyqloneSolver {
     using FanStorage = FanStorage_t<matrix<>, value_type, DefaultOrder>;
 
     /// Get the current Cyqlone solver parameters.
-    [[nodiscard]] CyqloneParams<value_type> get_params() const {
-        return solver_storages[0].cyqlone_solver.get_params();
-    }
+    [[nodiscard]] CyqloneParams<value_type> get_params() const { return params; }
+
     /// Update the Cyqlone solver parameters.
     void update_params(const CyqloneParams<value_type> &new_params) {
+        params = new_params;
         for (auto &s : solver_storages) {
             s.cyqlone_solver.update_params(new_params);
         }
