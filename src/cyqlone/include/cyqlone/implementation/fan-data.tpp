@@ -52,11 +52,35 @@ FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const FanCyqloneStorage<value_
     BATMAT_ASSERT(!p.empty());
     for (index_t p_fan : p)
         BATMAT_ASSERT(v == 1 || is_pow_2(p_fan));
+    
+    std::vector<SolverStorage<VL, value_type, DefaultOrder>> solver_storages;
+    solver_storages.reserve(ocp.num_branches);
+
+    for (index_t c = 0; c < ocp.num_branches; ++c) {
+        const auto &branch_ocp = ocp.branches[c];
+        SolverLast tridiagonal_solver{.block_size = branch_ocp.nx, .num_blocks = v};
+        auto solver_storage    = SolverStorage<VL, value_type, DefaultOrder>{
+            .cyqlone_solver =
+                CyqloneSolver<VL, value_type, DefaultOrder>::build(branch_ocp, p[c],std::move(params)),
+            .tridiagonal_solver = std::move(tridiagonal_solver),
+    
+        };
+        // la::copy(ocp.LBs[c], solver_storage.LB);
+        solver_storages.emplace_back(std::move(solver_storage));
+        
+        /// @todo Check correctness
+ 
+        std::cout << "params"<< solver_storages[c].cyqlone_solver.get_params_string()<<std::endl;
+
+    }
+
+    
     FanCyqloneSolver<VL, T, DefaultOrder, Ctx> res{
         .num_branches = ocp.num_branches,
         .nu           = ocp.nu,
         .ny_0         = ocp.ny_0,
-        .solver_storages = {}, // initialized in update_data
+        .solver_storages = std::move(solver_storages),
+        .params     = std::move(params),
         .p          = std::move(p),
 
     };
@@ -81,29 +105,15 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_data(
     using cyqlone::detail::copy;
     using cyqlone::detail::scale;
     namespace la = cyqlone::linalg;
-    solver_storages.clear();
-    solver_storages.reserve(num_branches);
-
     for (index_t c = 0; c < num_branches; ++c) {
-        const auto &branch_ocp = ocp.branches[c];
-        SolverLast tridiagonal_solver{.block_size = branch_ocp.nx, .num_blocks = v};
-        auto solver_storage    = SolverStorage<VL, value_type, DefaultOrder>{
-            .cyqlone_solver =
-                CyqloneSolver<VL, value_type, DefaultOrder>::build(branch_ocp, p[c]),
-            .tridiagonal_solver = tridiagonal_solver,
-    
-        };
-        la::copy(ocp.Bs[c], solver_storage.B0);
-        // la::copy(ocp.LBs[c], solver_storage.LB);
-        solver_storages.emplace_back(std::move(solver_storage));
-        
-        /// @todo Check correctness
+        solver_storages[c].cyqlone_solver.update_data(ocp.branches[c]);
+        la::copy(ocp.Bs[c], solver_storages[c].B0);
         if (c == 0) {
             la::copy(ocp.R0(0), R0(0));
             la::negate(ocp.r0(0), r0(0));
             la::copy(ocp.D0(0), D0(0));
-        }
-    }
+        }}
+    
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>

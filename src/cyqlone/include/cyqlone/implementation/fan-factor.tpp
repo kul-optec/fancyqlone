@@ -32,9 +32,21 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_λ0(index_t branch
         // Factor the final block-tridiagonal Schur complement of each Cyqlone block
         la::unpack(tril(solver_storages[branch].cyqlone_solver.tricyqle.cr_L.batch(0)),
                    tril(solver_storages[branch].tridiagonal_solver.L));
+        // guanaqo::print_python(std::cout << branch << "[fanout]   L = ", solver_storages[branch].tridiagonal_solver.L.batch(0)(0), "\n");
+
         la::unpack(solver_storages[branch].cyqlone_solver.tricyqle.cr_Y.batch(0),
                    solver_storages[branch].tridiagonal_solver.U.transposed());
+        // for (index_t i = 0; i <= solver_storages[branch].tridiagonal_solver.num_blocks - 1; ++i) {
+        //     guanaqo::print_python(std::cout << branch << "[fanout]   U(" << i << ") = ", solver_storages[branch].tridiagonal_solver.U.batch(i)(0), "\n");
+        //     guanaqo::print_python(std::cout << branch << "[fanout]   L(" << i << ") = ", solver_storages[branch].tridiagonal_solver.L.batch(i)(0), "\n");
+
+        // }
         solver_storages[branch].tridiagonal_solver.factor();
+        // for (index_t i = 0; i <= solver_storages[branch].tridiagonal_solver.num_blocks - 1; ++i) {
+        //     guanaqo::print_python(std::cout << branch << "[fanout]   L(" << i << ") = ", solver_storages[branch].tridiagonal_solver.L.batch(i)(0), "\n");
+
+        // }
+
         // Compute the contribution to the final Schur complement (system involving only u(0))
         la::trsm(solver_storages[branch].B0.transposed(),
                  tril(solver_storages[branch].tridiagonal_solver.L.batch(0)).transposed(),
@@ -126,7 +138,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
                                                                    const FanStorage &Σ,
                                                                    FanStorage &ux, FanStorage &λ) {
     // print_grad(ctx, Σ, "Σ");
-
+    
     index_t c = ctx.total_ctx.index;
     if constexpr (Factor && Solve)
         solver_storages[c].cyqlone_solver.factor_solve(ctx.branch_ctx, γ, ρ_inv, Σ.branches[c],
@@ -137,14 +149,13 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
         solver_storages[c].cyqlone_solver.solve_forward(ctx.branch_ctx, ux.branches[c],
                                                         λ.branches[c]);
     ctx.branch_ctx.arrive_and_wait(); // wait for the branch to be ready
-
     if (ctx.branch_ctx.is_master()) {
         factor_solve_λ0<Factor, Solve>(c, λ, ux, Σ);
         ctx.total_ctx.run_single_sync([&, this] { factor_solve_u0<Factor, Solve>(ux, γ); });
     }
     ctx.branch_ctx.arrive_and_wait(); // wait for λ(0) to be ready on each branch
 
-    // print_grad(ctx, Σ, "Σ");
+
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
