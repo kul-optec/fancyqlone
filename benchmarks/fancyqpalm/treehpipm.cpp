@@ -373,7 +373,7 @@ create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
     double tol_ineq = 1e-8;
     double tol_comp = 1e-5;
 
-    d_tree_ocp_qp_ipm_arg_set_default(hpipm_mode::SPEED, d.arg.get());
+    d_tree_ocp_qp_ipm_arg_set_default(hpipm_mode::BALANCE, d.arg.get());
     d_tree_ocp_qp_ipm_arg_set_iter_max(&iter_max, d.arg.get());
     d_tree_ocp_qp_ipm_arg_set_tol_stat(&tol_stat, d.arg.get());
     d_tree_ocp_qp_ipm_arg_set_tol_eq(&tol_eq, d.arg.get());
@@ -753,17 +753,12 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
 
 void update_x0_hpipm_tree(cyqlone::FanOCPStorage &fan,
                           HPIPMTreeQPData &qp_data,
-                          const HPIPMTreeSolution &solution,
+                          std::vector<cyqlone::LinearOCPStorage::Solution> &solution,
                           index_t branch) {
-    BATMAT_ASSERT(branch >= 0 && branch < fan.num_branches());
     const int b = static_cast<int>(branch);
     const auto &dim = *qp_data.dim;
-    const int first_node = qp_data.node_index[b][1];
-    const std::size_t offset = branch_offset(qp_data, b);
-    BATMAT_ASSERT(solution.primal.size() >=
-                  offset + static_cast<std::size_t>(dim.nx[first_node]));
-
-    const real_t *x1 = solution.primal.data() + offset;
+    const int first_node = qp_data.node_index[b][1];    
+    const real_t *x1 = solution[b].solution.data() + dim.nx[0] + dim.nu[0];
     d_tree_ocp_qp_set_lbx(0, const_cast<real_t *>(x1), qp_data.qp.get());
     d_tree_ocp_qp_set_ubx(0, const_cast<real_t *>(x1), qp_data.qp.get());
 

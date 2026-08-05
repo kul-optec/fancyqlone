@@ -95,5 +95,5 @@ void warm_start_hpipm_tree(HPIPMTreeSolverData &solver_data,
 /// This is useful for receding-horizon simulation when one fan outcome is chosen.
 void update_x0_hpipm_tree(cyqlone::FanOCPStorage &fan,
                           HPIPMTreeQPData &qp_data,
-                          const HPIPMTreeSolution &solution,
+                          std::vector<cyqlone::LinearOCPStorage::Solution> &solution,
                           cyqlone::index_t branch);

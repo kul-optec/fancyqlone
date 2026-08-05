@@ -1251,7 +1251,8 @@ TEST(QPALM, spring_mass_1_branch) {
     nx_per_branch.reserve(ocps.size());
     std::cout << "inner:   " << combined_qpalm.stats->inner_iter << "\n"
               << "outer:   " << combined_qpalm.stats->outer_iter << "\n"
-              << "timings: " << combined_qpalm.stats->timings.total << "\n";
+              << "timings: " << combined_qpalm.stats->timings.total << "\n"
+              << "update_count: " << combined_qpalm.stats_backend->num_updates << "\n";
     std::cout << "speedup: " << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) / static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())  << "\n";
     for (const auto &ocp : ocps) {
         nx_per_branch.push_back(static_cast<std::size_t>(ocp.dim.nx));
@@ -1308,11 +1309,11 @@ TEST(QPALM, spring_mass) {
     auto save_traces = [](const std::string &) {};
 #endif
 
-    const index_t N  = 4;
+    const index_t N  = 256;
 
-    const index_t M=2;
-    index_t num_warmups = 5;
-    auto seed=12345;
+    const index_t M=12;
+    index_t num_warmups = 1;
+    auto seed=125;
 
     // Same initial condition for all branches.
     std::mt19937 rng(seed);
@@ -1327,7 +1328,7 @@ TEST(QPALM, spring_mass) {
     auto nu = problem.ocp.ocps[0].dim.nu;
     auto dist2    = params.p_max > 1 ? dist_t{-3, 3} : dist_t{-0.6, -0.1};
     for (index_t r = 0; r < static_cast<index_t>(params.masses.size()); ++r) {
-        auto disturbance = -0.1;
+        auto disturbance = dist2(rng);
         for (index_t j = 0; j < num_branches; ++j)
             problem.ocp.ocps[j].b(0)(r, 0) += disturbance;
     
@@ -1337,7 +1338,7 @@ TEST(QPALM, spring_mass) {
         // la::copy(x0, ocps[i].b(0));
     }
 
-    const bool verbose = true;
+    const bool verbose = false;
 
     // -------------------------------------------------------------------------
     // Fan solver
@@ -1345,7 +1346,7 @@ TEST(QPALM, spring_mass) {
     auto ocps=problem.ocp.ocps;
 
     auto fan_cocp    = cyqlone::FanCyqloneStorage<>::build(problem.ocp);
-    index_t num_proc = 1;
+    index_t num_proc = 8;
     std::cout << "Running on " << num_proc << " processors\n";
     auto &&fan_backend =
         qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
@@ -1354,8 +1355,8 @@ TEST(QPALM, spring_mass) {
                 .processors             = num_proc,
                 .print_residuals        = verbose,
                 .print_precision        = 17,
-                .changing_constr_factor = 0,
-                .max_update_count       = 0,
+                .changing_constr_factor = 0.01,
+                .max_update_count       = 20,
 
                 // Fan solver handles the shared/root part itself.
                 .tricyqle_params =
@@ -1372,7 +1373,9 @@ TEST(QPALM, spring_mass) {
             {
                 .max_outer_iter       = 100,
                 .max_total_inner_iter = 1000,
-                .tolerance            = 1e-7,
+                .tolerance = 1e-8,
+                .dual_tolerance    = 1e-8,
+                .initial_penalty_y = 20,
                 .verbose              = verbose,
                 .detailed_stats       = verbose,
             },
@@ -1380,7 +1383,6 @@ TEST(QPALM, spring_mass) {
     for (index_t i = 0; !verbose && i < num_warmups; ++i) {
         fan_qpalm(); // warm up
     }
-    update_cyqpalm_backend(*fan_qpalm.backend, fan_cocp);
 #if GUANAQO_WITH_TRACING
     guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
 #endif
@@ -1390,10 +1392,56 @@ TEST(QPALM, spring_mass) {
     EXPECT_EQ(fan_status, qp::SolverStatus::Converged);
     std::cout << "inner:   " << fan_qpalm.stats->inner_iter << "\n"
               << "outer:   " << fan_qpalm.stats->outer_iter << "\n"
-              << "timings: " << fan_qpalm.stats->timings.total << "\n";
-    auto x_fan = fan_qpalm.get_solution();
-    auto λ_fan = fan_qpalm.get_equality_multipliers();
-    auto y_fan = fan_qpalm.get_inequality_multipliers();
+              << "timings: " << fan_qpalm.stats->timings.total << "\n"
+              << "update_count: " << fan_qpalm.stats_backend->num_updates << "\n";
+        auto &&fan_backend_no_update =
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
+            fan_cocp, {},
+            {
+                .processors             = num_proc,
+                .print_residuals        = verbose,
+                .print_precision        = 17,
+                .changing_constr_factor = 0.0,
+                .max_update_count       = 0,
+
+                // Fan solver handles the shared/root part itself.
+                .tricyqle_params =
+                    {
+                        .solve_method = cyqlone::SolveMethod::None,
+                    },
+                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+
+            });
+
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>> *>
+        fan_qpalm_no_update{
+            fan_backend_no_update.get(),
+            {
+                .max_outer_iter       = 100,
+                .max_total_inner_iter = 1000,
+                .tolerance            = 1e-8,
+                .dual_tolerance    = 1e-8,
+                .initial_penalty_y = 20,
+                .verbose              = verbose,
+                .detailed_stats       = verbose,
+            },
+        };
+    for (index_t i = 0; !verbose && i < num_warmups; ++i) {
+        fan_qpalm_no_update(); // warm up
+    }
+#if GUANAQO_WITH_TRACING
+    guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+#endif
+    auto fan_status_no_update = fan_qpalm_no_update();
+    save_traces("fanout-fan-qpalm.csv");
+
+    EXPECT_EQ(fan_status_no_update, qp::SolverStatus::Converged);
+    std::cout << "inner:   " << fan_qpalm_no_update.stats->inner_iter << "\n"
+              << "outer:   " << fan_qpalm_no_update.stats->outer_iter << "\n"
+              << "timings: " << fan_qpalm_no_update.stats->timings.total << "\n";
+    auto x_fan = fan_qpalm_no_update.get_solution();
+    auto λ_fan = fan_qpalm_no_update.get_equality_multipliers();
+    auto y_fan = fan_qpalm_no_update.get_inequality_multipliers();
     std::cout << "Running on " << num_proc << " processors\n";
     auto &&sfan_backend =
         qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>>(
@@ -1454,8 +1502,8 @@ TEST(QPALM, spring_mass) {
                 .processors             = num_proc,
                 .print_residuals        = verbose,
                 .print_precision        = 17,
-                .changing_constr_factor = 0,
-                .max_update_count       = 0,
+                .changing_constr_factor = 0.01,
+                .max_update_count       = 20,
                 .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::PCR},
             });
 
@@ -1471,7 +1519,7 @@ TEST(QPALM, spring_mass) {
                 .detailed_stats = verbose,
             },
         };
-    for (index_t i = 0; !verbose && i < 50; ++i)
+    for (index_t i = 0; !verbose && i < num_warmups; ++i)
         combined_qpalm(); // warm up
 #if GUANAQO_WITH_TRACING
     guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
@@ -1491,7 +1539,8 @@ TEST(QPALM, spring_mass) {
     nx_per_branch.reserve(ocps.size());
     std::cout << "inner:   " << combined_qpalm.stats->inner_iter << "\n"
               << "outer:   " << combined_qpalm.stats->outer_iter << "\n"
-              << "timings: " << combined_qpalm.stats->timings.total << "\n";
+              << "timings: " << combined_qpalm.stats->timings.total << "\n"
+              << "update_count: " << combined_qpalm.stats_backend->num_updates << "\n";
     std::cout << "speedup: " << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) / static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())  << "\n";
     for (const auto &ocp : ocps) {
         nx_per_branch.push_back(static_cast<std::size_t>(ocp.dim.nx));

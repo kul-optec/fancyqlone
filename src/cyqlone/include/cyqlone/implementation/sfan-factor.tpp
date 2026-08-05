@@ -82,6 +82,8 @@ void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_u0(FanStorag
         for (index_t b = 1; b < num_branches; ++b)
             la::add(SBs.batch(0), SBs.batch(b));
         la::potrf(tril(SBs.batch(0)), 1 / γ);
+        // guanaqo::print_python(std::cout << "[fanout factor]   SBs(0) = ", SBs.batch(0)(0), "\n");
+
     }
     if constexpr (Solve) {
 

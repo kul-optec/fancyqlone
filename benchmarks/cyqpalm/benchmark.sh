@@ -134,7 +134,7 @@ benchmark() {
 benchmark_quick() {
     benchmark \
         --problem wang-boyd-2008 --cold --warm-shift -I 1 -p "${OMP_NUM_THREADS}" --cm \
-        -N 256 -M 12 \
+        -N 32 -N 64 -N 128 -N 256 -M 12 \
         --benchmark_repetitions=11 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.1s "$@"
 }
@@ -142,7 +142,7 @@ benchmark_quick() {
 # Run the horizon scaling benchmark
 benchmark_scaling() {
     benchmark \
-        --problem wang-boyd-2008 --cold --warm-shift --warm-copy -I 20 -p "${OMP_NUM_THREADS}" --cm --no-updates \
+        --problem wang-boyd-2008 --no-cold --warm-shift -I 20 -p "${OMP_NUM_THREADS}" --cm --no-updates \
         -N 32  -N 64  -N 96  -N 128 -N 160 -N 192 -N 224 -N 256 \
         -N 288 -N 320 -N 352 -N 384 -N 416 -N 448 -N 480 -N 512 \
         -M 12 \

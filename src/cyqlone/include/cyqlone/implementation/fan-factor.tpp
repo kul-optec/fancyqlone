@@ -51,6 +51,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_λ0(index_t branch
         la::trsm(solver_storages[branch].B0.transposed(),
                  tril(solver_storages[branch].tridiagonal_solver.L.batch(0)).transposed(),
                  solver_storages[branch].LB);
+        
         if (branch == 0) {
             auto temp = solver_storages[branch].temp;
             la::syrk_diag_add(D0.batch(0).transposed(), tril(R0.batch(0)), tril(temp.batch(0)),
@@ -94,6 +95,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_u0(FanStorage &ux,
         for (index_t b = 1; b < num_branches; ++b)
             la::add(SBs.batch(0), SBs.batch(b));
         la::potrf(tril(SBs.batch(0)), 1 / γ);
+        // guanaqo::print_python(std::cout << "[fanout factor]   SBs(0) = ", SBs.batch(0)(0), "\n");
     }
     if constexpr (Solve) {
 

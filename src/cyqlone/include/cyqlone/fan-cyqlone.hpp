@@ -174,6 +174,7 @@ struct FanCyqloneSolver {
         return typename SolverLast::matrix{{.depth = num_branches, .rows = nu, .cols = nu},
                                            batmat::matrix::uninitialized};
     }();
+    
     SolverLast::matrix rs = [this] {
         return typename SolverLast::matrix{{.depth = num_branches, .rows = nu, .cols = 1},
                                            batmat::matrix::uninitialized};
@@ -188,7 +189,11 @@ struct FanCyqloneSolver {
         return
             typename SolverLast::matrix{{.rows = ny_0, .cols = nu}, batmat::matrix::uninitialized};
     }();
-
+    //workspace for factor
+    SolverLast::matrix ΔSBs = [this] {
+        return typename SolverLast::matrix{{.depth = num_branches, .rows = nu, .cols = nu},
+                                           batmat::matrix::uninitialized};
+    }();
     /// Processors per branch
     std::vector<index_t> p;
     /// Vector length.
@@ -449,9 +454,15 @@ struct FanCyqloneSolver {
     /// @}
     template <bool Factor = true, bool Solve = true>
     void factor_solve_λ0(index_t branch, FanStorage &λ, const FanStorage &ux, const FanStorage &Σ);
-    template <bool Factor = true, bool Solve = true>
 
+    template <bool Factor = true, bool Solve = true>
     void factor_solve_u0(FanStorage &ux, value_type γ);
+    /// @}
+    template <bool Solve = true>
+    void update_solve_λ0(index_t branch, FanStorage &λ, const FanStorage &ux);
+
+    template <bool Solve = true>
+    void update_solve_u0(FanStorage &ux, const FanStorage &ΔΣ);
 
     /// @name Low-level reverse solve routines
     /// @{

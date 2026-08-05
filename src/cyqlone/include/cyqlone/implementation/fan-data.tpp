@@ -70,7 +70,7 @@ FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const FanCyqloneStorage<value_
         
         /// @todo Check correctness
  
-        std::cout << "params"<< solver_storages[c].cyqlone_solver.get_params_string()<<std::endl;
+        // std::cout << "params"<< solver_storages[c].cyqlone_solver.get_params_string()<<std::endl;
 
     }
 

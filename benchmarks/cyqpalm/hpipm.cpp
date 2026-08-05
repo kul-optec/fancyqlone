@@ -122,7 +122,7 @@ std::shared_ptr<HPIPMSolverData> create_hpipm_solver(std::shared_ptr<HPIPMQPData
     double tol_eq   = 1e-8;
     double tol_ineq = 1e-8;
     double tol_comp = 1e-5;
-    d_ocp_qp_ipm_arg_set_default(hpipm_mode::SPEED, d.arg.get());
+    d_ocp_qp_ipm_arg_set_default(hpipm_mode::BALANCE, d.arg.get());
     d_ocp_qp_ipm_arg_set_iter_max(&iter_max, d.arg.get());
     d_ocp_qp_ipm_arg_set_tol_stat(&tol_stat, d.arg.get());
     d_ocp_qp_ipm_arg_set_tol_eq(&tol_eq, d.arg.get());

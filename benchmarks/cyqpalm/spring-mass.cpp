@@ -252,7 +252,7 @@ void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params
                          WarmStartHPIPM warm = WarmStartHPIPM::NoWarmStart) {
     auto problem     = create_problem(params);
     auto qp_data     = build_hpipm_qp(problem.ocp);
-    auto solver_data = create_hpipm_solver(qp_data, warm != WarmStartHPIPM::NoWarmStart ? 1 : 0);
+    auto solver_data = create_hpipm_solver(qp_data, warm != WarmStartHPIPM::NoWarmStart ? 2 : 0);
     // Main benchmark
     solve_hpipm(*qp_data, *solver_data); // Warm up
     std::optional<cyqlone::LinearOCPStorage::Solution> prev_sol;
