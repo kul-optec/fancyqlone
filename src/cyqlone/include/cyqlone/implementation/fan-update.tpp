@@ -146,7 +146,7 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 template <bool Solve>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve_λ0(index_t branch, FanStorage &λ,
                                                                  const FanStorage &ux) {
-    GUANAQO_TRACE_REGION("fan solve λ0", 0);
+    GUANAQO_TRACE_REGION("fan update solve λ0", 0);
     // Factor the final block-tridiagonal Schur complement of each Cyqlone block
     la::unpack(tril(solver_storages[branch].cyqlone_solver.tricyqle.cr_L.batch(0)),
                tril(solver_storages[branch].tridiagonal_solver.L));
@@ -164,7 +164,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve_λ0(index_t branch
     //     guanaqo::print_python(std::cout << branch << "[fanout]   L(" << i << ") = ", solver_storages[branch].tridiagonal_solver.L.batch(i)(0), "\n");
 
     // }
-    la::syrk(solver_storages[branch].LB,tril(ΔSBs.batch(branch)));
+    
     // Compute the contribution to the final Schur complement (system involving only u(0))
     la::trsm(solver_storages[branch].B0.transposed(),
              tril(solver_storages[branch].tridiagonal_solver.L.batch(0)).transposed(),
@@ -177,8 +177,6 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve_λ0(index_t branch
     //     // la::copy(R0.batch(0), temp.batch(0));
     //     la::syrk_add(solver_storages[branch].LB, tril(temp.batch(0)), tril(SBs.batch(branch)));
     // } else {
-    la::syrk_sub(solver_storages[branch].LB, tril(ΔSBs.batch(branch)));
-
     // }
     if constexpr (Solve) {
         index_t nx  = solver_storages[branch].cyqlone_solver.nx;
@@ -207,13 +205,9 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 template <bool Solve>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve_u0(FanStorage &ux,
                                                                  const FanStorage &ΔΣ) {
-    GUANAQO_TRACE_REGION("fan solve u0", 0);
-    la::syrk(tril(SBs.batch(0)));
-    for (index_t b = 0; b < num_branches; ++b) {
-            la::add(SBs.batch(0), ΔSBs.batch(b));
-    }
-    // guanaqo::print_python(std::cout << "[fanout update]   SBs(0) = ", SBs.batch(0)(0), "\n");
 
+    // guanaqo::print_python(std::cout << "[fanout update]   SBs(0) = ", SBs.batch(0)(0), "\n");
+    la::syrk(tril(SBs.batch(0)));
     la::syrk_diag_add_potrf(D0.batch(0).transposed(), tril(SBs.batch(0)),
                             batmat::linalg::simdify(ΔΣ.first.batch(0)));
     // guanaqo::print_python(std::cout << "[fanout update]   SBs(0) = ", SBs.batch(0)(0), "\n");

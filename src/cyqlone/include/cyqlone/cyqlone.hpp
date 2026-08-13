@@ -756,8 +756,7 @@ struct CyqloneSolver {
         }
     }
 
-    /// @}
-
+   
     /// @name Indexing utilities
     /// @{
 
@@ -1151,7 +1150,41 @@ struct CyqloneSolver {
     void update_solve_impl(Context &ctx, view<> ΔΣ, mut_view<> ux, mut_view<> λ);
 
     /// @}
+ /// @}
+    /// @name Shifting utilities
+    /// @{
+     // TODO: this does not handle the case N_horiz != ceil_N() correctly
+    index_t k_to_l(index_t k) const {
+                const auto num_stages = n;
+                const auto i          = (ceil_N() - k) % num_stages;
+                const auto k1         = (k + i) / num_stages;
+                const auto k2         = k1 >> lp();
+                const auto v          = k2 % (1 << lv());
+                const auto t          = k1 - (k2 << lp());
+                return ((num_stages * t + i) << lv()) + v;
+            };
+                    
+                   
+                    
+    void shift_solution(view<> x, mut_view<> x_shifted) const {
+        // guanaqo::print_python(std::cout << "shift_solution: x = ", x(k_to_l(0)), "\n");
+        for (index_t k = 1; k < N_horiz; ++k)       // TODO: vectorize?
+            x_shifted(k_to_l(k - 1)) = x(k_to_l(k));
+        x_shifted(k_to_l(N_horiz - 1)) = x(k_to_l(N_horiz - 1));
+        // guanaqo::print_python(std::cout << "shifted_solution: x = ", x_shifted(k_to_l(0)), "\n");
 
+    }
+    void shift_dynamics(view<> λ, mut_view<> λ_shifted) const {
+        for (index_t k = 1; k < N_horiz; ++k) // TODO: vectorize?
+            λ_shifted(k_to_l(k - 1)) = λ(k_to_l(k));
+        λ_shifted(k_to_l(N_horiz - 1)) = λ(k_to_l(N_horiz - 1));
+    }
+    void shift_constraints(view<> y, mut_view<> y_shifted) const {
+         for (index_t k = 1; k < N_horiz; ++k) // TODO: vectorize?
+            y_shifted(k_to_l(k - 1)) = y(k_to_l(k));
+        y_shifted(k_to_l(N_horiz - 1)) = y(k_to_l(N_horiz - 1));
+    }
+    /// @}
     /// @name Build sparse representations for debugging and testing
     /// @{
 

@@ -106,7 +106,7 @@ struct SerialFanCyqloneSolver {
         return solver_storages[0].cyqlone_solver.create_parallel_context();
     }
     std::vector<SolverStorage<VL, value_type, DefaultOrder, parallel::Context<>>> solver_storages;
-
+    CyqloneParams<value_type> params{};
     /// Get the total number of primal variables in the OCP.
     /// @note The actual number of variable stored in Cyqlone's internal data structures may be
     ///       larger.
@@ -207,11 +207,12 @@ struct SerialFanCyqloneSolver {
     using FanStorage = FanStorage_t<matrix<>, value_type, DefaultOrder>;
 
     /// Get the current Cyqlone solver parameters.
-    [[nodiscard]] CyqloneParams<value_type> get_params() const {
-        return solver_storages[0].cyqlone_solver.get_params();
-    }
+    /// Get the current Cyqlone solver parameters.
+    [[nodiscard]] CyqloneParams<value_type> get_params() const { return params; }
+
     /// Update the Cyqlone solver parameters.
     void update_params(const CyqloneParams<value_type> &new_params) {
+        params = new_params;
         for (auto &s : solver_storages) {
             s.cyqlone_solver.update_params(new_params);
         }
@@ -272,6 +273,49 @@ struct SerialFanCyqloneSolver {
                                                          name + "_branch" + std::to_string(i));
         }
         guanaqo::print_python(std::cout << name << "(0)(0) = ", grad.first.batch(0)(0), "\n");
+    }
+    void shift_solution(const FanStorage &x, FanStorage &x_shifted) const {
+        index_t nu = solver_storages[0].cyqlone_solver.nu;
+        for (index_t i = 0; i < num_branches; ++i) {
+            solver_storages[i].cyqlone_solver.shift_solution(x.branches[i], x_shifted.branches[i]);
+            x_shifted.first.batch(0).top_rows(nu)(0) += x.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1)).top_rows(nu);
+            
+        }
+        // x_shifted.first.batch(0).top_rows(nu)(0) *= 1/num_branches;
+        cyqlone::linalg::scale( 1.0 / num_branches, x_shifted.first.batch(0).top_rows(nu));
+        // cyqlone::linalg::scale(x_shifted.first.top_rows(nu), 1.0 / num_branches);
+
+        // guanaqo::print_python(std::cout << "shift_solution: x(0)(0) = ", x.first.batch(0)(0), "\n");
+        // guanaqo::print_python(std::cout << "shifted_solution: x(0)(0) = ", x_shifted.first.batch(0)(0), "\n");
+
+        
+    }
+    void shift_dynamics(const FanStorage &λ, FanStorage &λ_shifted) const {
+        index_t nx_offset = 0;
+        for (index_t i = 0; i < num_branches; ++i) {
+            solver_storages[i].cyqlone_solver.shift_dynamics(λ.branches[i], λ_shifted.branches[i]);
+            // cyqlone::linalg::unpack(λ.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1)), solver_storages[i].cyqlone_solver.λ_shift);
+            // λ_shifted.first.middle_rows(nx_offset, solver_storages[i].cyqlone_solver.nx) =
+            //     λ.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1));
+            λ_shifted.first.batch(0).middle_rows(nx_offset, solver_storages[i].cyqlone_solver.nx)(0) =
+                λ.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1));
+            nx_offset += solver_storages[i].cyqlone_solver.nx;
+            // guanaqo::print_python(std::cout << "shifted_dynamics: λ(0)(0) = ", λ.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1)), "\n");
+
+        }
+        // guanaqo::print_python(std::cout << "shift_dynamics: λ(0)(0) = ", λ_shifted.first.batch(0)(0), "\n");
+
+
+    }
+    void shift_constraints(const FanStorage &y, FanStorage &y_shifted) const {
+        index_t ny_offset = 0;
+        for (index_t i = 0; i < num_branches; ++i) {
+            solver_storages[i].cyqlone_solver.shift_constraints(y.branches[i], y_shifted.branches[i]);
+            y_shifted.first.batch(0).middle_rows(ny_offset, solver_storages[i].cyqlone_solver.ny)(0) =
+                y.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1));
+            // cyqlone::linalg::pack(y.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1)), solver_storages[i].cyqlone_solver.y_shift);
+            ny_offset += solver_storages[i].cyqlone_solver.ny;
+        }
     }
     /// Build a new FanCyqloneSolver instance.
     static SerialFanCyqloneSolver build(const FanCyqloneStorage<value_type> &ocp, index_t p,

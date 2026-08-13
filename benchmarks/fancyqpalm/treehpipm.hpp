@@ -14,6 +14,13 @@
 #include <hpipm_d_tree_ocp_qp_ipm.h>
 #include <hpipm_d_tree_ocp_qp_sol.h>
 #include <hpipm_scenario_tree.h>
+#pragma once
+
+
+
+
+using real_t = double;
+
 
 struct HPIPMTreeQPData {
     std::unique_ptr<std::byte[]> tree_mem;
@@ -78,7 +85,7 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan);
 
 std::shared_ptr<HPIPMTreeSolverData>
 create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
-                         int warm_start);
+                         int warm_start, int mode = 0);
 
 std::chrono::nanoseconds
 solve_hpipm_tree(const HPIPMTreeQPData &qp_data,
@@ -97,3 +104,138 @@ void update_x0_hpipm_tree(cyqlone::FanOCPStorage &fan,
                           HPIPMTreeQPData &qp_data,
                           std::vector<cyqlone::LinearOCPStorage::Solution> &solution,
                           cyqlone::index_t branch);
+void tree_ocp_qp_sol_set_u(
+    int node,
+    std::span<const double> u,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_x(
+    int node,
+    std::span<const double> x,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_sl(
+    int node,
+    std::span<const double> sl,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_su(
+    int node,
+    std::span<const double> su,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_ux(
+    int node,
+    std::span<const double> ux,
+    d_tree_ocp_qp_sol &solution);
+
+// =============================================================================
+// Dynamics multiplier
+//
+// pi[edge] contains the multiplier associated with one tree edge.
+//
+// Under HPIPM's normal node/edge numbering:
+//
+//     edge = child_node - 1
+//     size(pi[edge]) = nx[child_node]
+// =============================================================================
+
+void tree_ocp_qp_sol_set_pi(
+    int edge,
+    std::span<const double> pi,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_pi_for_node(
+    int child_node,
+    std::span<const double> pi,
+    d_tree_ocp_qp_sol &solution);
+
+// =============================================================================
+// Inequality multipliers
+//
+// HPIPM layout:
+//
+//     lam[node] = [lb; lg; ub; ug; ls; us]
+// =============================================================================
+
+void tree_ocp_qp_sol_set_lam_lb(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_lam_lg(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_lam_ub(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_lam_ug(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_lam_ls(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_lam_us(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_lam(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+// =============================================================================
+// Inequality slacks
+//
+// HPIPM layout:
+//
+//     t[node] = [lb; lg; ub; ug; ls; us]
+// =============================================================================
+
+void tree_ocp_qp_sol_set_t_lb(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_t_lg(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_t_ub(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_t_ug(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_t_ls(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_t_us(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void tree_ocp_qp_sol_set_t(
+    int node,
+    std::span<const double> value,
+    d_tree_ocp_qp_sol &solution);
+
+void shift_hpipm_tree_solution(
+    HPIPMTreeSolverData &solver_data,
+    cyqlone::real_t positive_floor = 1e-8);
