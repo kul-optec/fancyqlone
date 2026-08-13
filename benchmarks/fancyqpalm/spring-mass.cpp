@@ -39,9 +39,15 @@ namespace fs = std::filesystem;
 #elif GUANAQO_WITH_OPENBLAS
 #include <openblas_config.h>
 #endif
-
+#if WITH_HPIPM
 #include "treehpipm.hpp"
-
+#endif
+#if WITH_PIQP
+#include "mspiqp.hpp"
+#endif
+#if WITH_TREEQP
+#include "treeqp.hpp"
+#endif
 #if defined(__ARM_NEON)
 constexpr auto v_native = std::is_same_v<batmat::real_t, double> ? 2 : 4;
 #else
@@ -84,10 +90,20 @@ struct Options {
 #else
     bool hpipm = false;
 #endif
+#if WITH_PIQP
+    bool piqp = true;
+#else
+    bool piqp = false;
+#endif
+#if WITH_TREEQP
+    bool treeqp = true;
+#else
+    bool treeqp = false;
+#endif
     std::vector<int> horizon{32, 64, 96, 128, 192, 256};
     std::vector<int> masses{6, 12, 30};
     uint64_t num_instances            = 50;
-    std::vector<int> num_branches{1,2,4,8};
+    std::vector<int> num_branches{8};
     uint64_t seed                     = 0;
     ProblemType problem_type          = ProblemType::WangBoyd2008;
     double pcr_max_update_fraction    = 0.25;
@@ -99,6 +115,7 @@ struct Options {
     bool print_extra                  = false;
     bool use_color                    = false;
     bool trace                        = false;
+    bool serial                       = false;
     std::string export_problem{};
 };
 
@@ -110,7 +127,7 @@ using seconds = std::chrono::duration<double>;
 
 qp::problems::FanSpringMassProblem
 create_problem(const SpringMassParams &params, index_t num_branches, real_t k_spring_diff = 0.2) {
-    auto problem = qp::problems::fan_spring_mass(params, num_branches, k_spring_diff/num_branches);
+    auto problem = qp::problems::fan_spring_mass(params, num_branches, k_spring_diff);
     // Add a random disturbance to the initial position of the masses but make sure they are the same for all branches
     std::seed_seq seed{params.seed, params.seed >> 32};
     std::mt19937 rng{seed};
@@ -197,7 +214,23 @@ void run_benchmark(benchmark::State &state, [[maybe_unused]] const std::string &
     double time_solve = 0, time_active_set_change = 0, time_line_search = 0,
            time_recompute_outer = 0, time_recompute_inner = 0, time_mat_vec = 0;
     qpalm(); // Warm up
-
+    if (warm) {
+        // std::cout << "Warm starting FanCyqlone" << std::endl;
+        const auto nx = problem.ocp.ocps.front().dim.nx, nu = problem.ocp.ocps.front().dim.nu;
+        // std::cout << "Warm starting with nx = " << nx << ", nu = " << nu << std::endl;
+        qpalm.warm_start_solution();
+        // std::cout << "Warm starting done" << std::endl;
+        auto x = qpalm.get_solution();
+        index_t offset = num_branches/2 * ((nu + nx)*problem.ocp.ocps.front().dim.N_horiz-nu);
+        
+        for (index_t j = 0; j < num_branches; ++j) {
+            std::copy_n(x.data() + nu+ offset, nx, problem.ocp.ocps[j].b(0).data);
+        }
+        // std::copy_n(x.data() + nu, nx, problem.ocp.ocps.front().b(0).data);
+        // std::cout << "Updating ocp and backend for warm start" << std::endl;
+        ocp.update(problem.ocp);
+        update_cyqpalm_backend(*qpalm.backend, ocp);
+    }
     for (auto _ : state) {
         status = qpalm();
         state.SetIterationTime(seconds(qpalm.stats->timings.total.wall_time).count());
@@ -217,10 +250,10 @@ void run_benchmark(benchmark::State &state, [[maybe_unused]] const std::string &
     auto sol       = ocp.reconstruct_solution(problem.ocp, qpalm.get_solution(),
                                               qpalm.get_inequality_multipliers(),
                                               qpalm.get_equality_multipliers());
-    // std::vector<cyqlone::OCPDim> OCPdims;
-    // for (const auto &ocp : problem.ocp.ocps) {
-    //     OCPdims.push_back(ocp.dim);
-    // }
+    std::vector<cyqlone::OCPDim> OCPdims;
+    for (const auto &ocp : problem.ocp.ocps) {
+        OCPdims.push_back(ocp.dim);
+    }
     // sol.print(OCPdims);
     auto kkt_error = problem.ocp.compute_kkt_error(sol);
     // std::cout << "kkt_error: " << kkt_error.stationarity << ", " << kkt_error.equality_residual << ", "
@@ -245,7 +278,88 @@ void run_benchmark(benchmark::State &state, [[maybe_unused]] const std::string &
 } catch (const std::exception &e) {
     state.SkipWithError(e.what());
 }
+template <index_t VL, qp::StorageOrder Order>
+void run_benchmark_serial(benchmark::State &state, [[maybe_unused]] const std::string &param_name,
+                   const SpringMassParams &params, qp::CyQPALMBackendSettings backend_settings,
+                   qp::Settings settings, index_t num_branches, bool warm = false, bool trace = false) try {
+    disable_tracing(); // No tracing during the actual benchmark
+    if (backend_settings.processors < 1)
+        return state.SkipWithMessage("Number of processors must be at least 1.");
+    auto problem = create_problem(params,num_branches);
+    // Build a QPALM Cyqlone solver
+    auto ocp     = cyqlone::FanCyqloneStorage<>::build(problem.ocp);
+    auto backend = qp::make_cyqpalm_backend<VL, Order, cyqlone::SerialFanCyqloneSolver<VL>>(ocp, {}, backend_settings);
+    qp::Solver<qp::CyQPALMBackend<VL, Order, cyqlone::SerialFanCyqloneSolver<VL>> *> qpalm{backend.get(), settings};
+    // Main benchmark
+    qp::SolverStatus status;
+    double time_solve = 0, time_active_set_change = 0, time_line_search = 0,
+           time_recompute_outer = 0, time_recompute_inner = 0, time_mat_vec = 0;
+    qpalm(); // Warm up
 
+    if (warm) {
+        // std::cout << "Warm starting SerialFanCyqlone" << std::endl;
+        const auto nx = problem.ocp.ocps.front().dim.nx, nu = problem.ocp.ocps.front().dim.nu;
+        // std::cout << "Warm starting with nx = " << nx << ", nu = " << nu << std::endl;
+        qpalm.warm_start_solution();
+        // std::cout << "Warm starting done" << std::endl;
+        auto x = qpalm.get_solution();
+        index_t offset = num_branches/2 * ((nu + nx)*problem.ocp.ocps.front().dim.N_horiz-nu);
+        
+        for (index_t j = 0; j < num_branches; ++j) {
+            std::copy_n(x.data() + nu+ offset, nx, problem.ocp.ocps[j].b(0).data);
+        }
+        // std::copy_n(x.data() + nu, nx, problem.ocp.ocps.front().b(0).data);
+        // std::cout << "Updating ocp and backend for warm start" << std::endl;
+        ocp.update(problem.ocp);
+        update_cyqpalm_backend(*qpalm.backend, ocp);
+    }
+    for (auto _ : state) {
+        status = qpalm();
+        state.SetIterationTime(seconds(qpalm.stats->timings.total.wall_time).count());
+        time_solve += seconds(qpalm.stats->timings.solve.wall_time).count();
+        time_active_set_change += seconds(qpalm.stats->timings.active_set_change.wall_time).count();
+        time_line_search += seconds(qpalm.stats->timings.line_search.wall_time).count();
+        time_recompute_outer += seconds(qpalm.stats->timings.recompute_outer.wall_time).count();
+        time_recompute_inner += seconds(qpalm.stats->timings.recompute_inner.wall_time).count();
+        time_mat_vec += seconds(qpalm.stats->timings.mat_vec_A.wall_time).count();
+        time_mat_vec += seconds(qpalm.stats->timings.mat_vec_AT.wall_time).count();
+        time_mat_vec += seconds(qpalm.stats->timings.mat_vec_M.wall_time).count();
+        time_mat_vec += seconds(qpalm.stats->timings.mat_vec_MT.wall_time).count();
+        time_mat_vec += seconds(qpalm.stats->timings.mat_vec_Q.wall_time).count();
+    }
+    if (trace)
+        trace_run([&] { qpalm(); }, param_name);
+    auto sol       = ocp.reconstruct_solution(problem.ocp, qpalm.get_solution(),
+                                              qpalm.get_inequality_multipliers(),
+                                              qpalm.get_equality_multipliers());
+    std::vector<cyqlone::OCPDim> OCPdims;
+    for (const auto &ocp : problem.ocp.ocps) {
+        OCPdims.push_back(ocp.dim);
+    }
+    // sol.print(OCPdims);
+    auto kkt_error = problem.ocp.compute_kkt_error(sol);
+    // std::cout << "kkt_error: " << kkt_error.stationarity << ", " << kkt_error.equality_residual << ", "
+    //           << kkt_error.inequality_residual << ", " << kkt_error.complementarity << std::endl;
+    state.counters["status"]              = counter(status);
+    state.counters["success"]             = counter(status == qp::SolverStatus::Converged);
+    state.counters["iter"]                = counter(qpalm.stats->inner_iter);
+    state.counters["outer_iter"]          = counter(qpalm.stats->outer_iter);
+    state.counters["num_factor"]          = counter(qpalm.stats_backend->num_factor);
+    state.counters["num_upd"]             = counter(qpalm.stats_backend->num_updates);
+    state.counters["rank_upd"]            = counter(qpalm.stats_backend->rank_updates);
+    state.counters["t_solve"]             = counter_avg(time_solve);
+    state.counters["t_active_set_change"] = counter_avg(time_active_set_change);
+    state.counters["t_line_search"]       = counter_avg(time_line_search);
+    state.counters["t_recompute_outer"]   = counter_avg(time_recompute_outer);
+    state.counters["t_recompute_inner"]   = counter_avg(time_recompute_inner);
+    state.counters["t_mat_vec"]           = counter_avg(time_mat_vec);
+    state.counters["res_dual"]            = counter(kkt_error.stationarity);
+    state.counters["res_eq"]              = counter(kkt_error.equality_residual);
+    state.counters["res_ineq"]            = counter(kkt_error.inequality_residual);
+    state.counters["compl"]               = counter(kkt_error.complementarity);
+} catch (const std::exception &e) {
+    state.SkipWithError(e.what());
+}
 enum class WarmStartHPIPM {
     NoWarmStart,
     WarmZero,
@@ -255,19 +369,30 @@ enum class WarmStartHPIPM {
 
 #if WITH_HPIPM
 void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params, index_t num_branches,
-                             WarmStartHPIPM warm = WarmStartHPIPM::NoWarmStart) {
+                             WarmStartHPIPM warm = WarmStartHPIPM::NoWarmStart, int mode = 0) {
         // std::cout << "Running HPIPM benchmark with " << num_branches << " branches" << std::endl;
     auto problem     = create_problem(params,num_branches);
     // std::cout << "Building HPIPM QP with stages" << std::endl;
     auto qp_data     = build_hpipm_tree_qp(problem.ocp);
-    auto solver_data = create_hpipm_tree_solver(qp_data, warm != WarmStartHPIPM::NoWarmStart ? 1 : 0);
+    auto solver_data = create_hpipm_tree_solver(qp_data, (warm != WarmStartHPIPM::NoWarmStart&&warm != WarmStartHPIPM::WarmZero) ? 2 : 0, mode);
     // Main benchmark
     solve_hpipm_tree(*qp_data, *solver_data); // Warm up
-    std::optional<cyqlone::LinearOCPStorage::Solution> prev_sol;
+    std::optional<cyqlone::FanOCPStorage::Solution> prev_sol;
+    if (warm == WarmStartHPIPM::WarmCopy) {
+        prev_sol = get_solution_hpipm_tree(*solver_data);
+        update_x0_hpipm_tree(problem.ocp, *qp_data, prev_sol->solutions, num_branches/2);
+        // std::cout << "Warm starting with solution from previous solve" << std::endl;
+    }
+    if (warm == WarmStartHPIPM::WarmShift) {
+        shift_hpipm_tree_solution(*solver_data);
+        prev_sol = get_solution_hpipm_tree(*solver_data);
+        update_x0_hpipm_tree(problem.ocp, *qp_data, prev_sol->solutions, num_branches/2);
+        // std::cout << "Warm starting with solution from previous solve" << std::endl;
+    }
     for (auto _ : state) {
-        // if (prev_sol)
-        //     warm_start_hpipm(*solver_data, prev_sol->solution);
+
         auto time_solve = solve_hpipm_tree(*qp_data, *solver_data);
+
         state.SetIterationTime(seconds(time_solve).count());
     }
     auto sol                       = get_solution_hpipm_tree(*solver_data);
@@ -292,7 +417,134 @@ void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params
     state.counters["compl"]        = counter(kkt_error.complementarity);
 }
 #endif
+#if WITH_TREEQP
 
+void run_benchmark_treeqp(
+    benchmark::State &state,
+    const SpringMassParams &params,
+    index_t num_branches)
+{
+    auto problem = create_problem(params, num_branches);
+
+    auto qp_data = build_tree_qp(problem.ocp);
+
+    auto solver_data = create_tree_qp_solver(
+        qp_data,
+        100,   // Maximum number of iterations
+        1e-8); // Stationarity tolerance
+
+    // Warm-up solve.
+    // solve_tree_qp(*qp_data, *solver_data);
+
+    for (auto _ : state) {
+        const auto time_solve =
+            solve_tree_qp(*qp_data, *solver_data);
+
+        state.SetIterationTime(
+            seconds(time_solve).count());
+    }
+
+    const auto solution =
+        get_solution_tree_qp(*solver_data);
+    std::vector<cyqlone::OCPDim> OCPdims;
+    for (const auto &ocp : problem.ocp.ocps) {
+        OCPdims.push_back(ocp.dim);
+    }
+    // solution.print(OCPdims);
+    const auto stats =
+        get_stats_tree_qp(*solver_data);
+
+    state.counters["status"] =
+        counter(stats.status);
+
+    state.counters["success"] =
+        counter(stats.status == 0);
+
+    state.counters["iter"] =
+        counter(stats.iterations);
+
+    const auto kkt_error =
+        problem.ocp.compute_kkt_error(
+            solution,
+            true);
+    state.counters["res_dual"] =
+        counter(kkt_error.stationarity);
+    state.counters["res_eq"] =
+        counter(kkt_error.equality_residual);
+    state.counters["res_ineq"] =
+        counter(kkt_error.inequality_residual);
+    state.counters["compl"] =
+        counter(kkt_error.complementarity);
+}
+
+#endif
+#if WITH_PIQP
+
+void run_benchmark_piqp(
+    benchmark::State &state,
+    const SpringMassParams &params,
+    index_t num_branches)
+{
+    auto problem =
+        create_problem(params, num_branches);
+
+    auto qp_data =
+        build_piqp_fan_qp(problem.ocp);
+
+    auto solver_data =
+        create_piqp_fan_solver(qp_data);
+
+    // Initial unmeasured solve, consistent with the HPIPM benchmark.
+    solve_piqp_fan(*solver_data);
+
+    for (auto _ : state) {
+        const auto time_solve =
+            solve_piqp_fan(*solver_data);
+
+        state.SetIterationTime(
+            seconds(time_solve).count());
+    }
+
+    const auto solution =
+        get_solution_piqp_fan(*solver_data);
+
+    const auto kkt_error =
+        problem.ocp.compute_kkt_error(
+            solution,
+            true);
+    // std::vector<cyqlone::OCPDim> OCPdims;
+    // for (const auto &ocp : problem.ocp.ocps) {
+    //     OCPdims.push_back(ocp.dim);
+    // }
+    // solution.print(OCPdims);
+    const auto stats =
+        get_stats_piqp_fan(*solver_data);
+
+    state.counters["status"] =
+        counter(static_cast<int>(stats.status));
+
+    state.counters["success"] =
+        counter(
+            stats.status ==
+            piqp::Status::PIQP_SOLVED);
+
+    state.counters["iter"] =
+        counter(stats.iter);
+
+    state.counters["res_dual"] =
+        counter(kkt_error.stationarity);
+
+    state.counters["res_eq"] =
+        counter(kkt_error.equality_residual);
+
+    state.counters["res_ineq"] =
+        counter(kkt_error.inequality_residual);
+
+    state.counters["compl"] =
+        counter(kkt_error.complementarity);
+}
+
+#endif
 struct Problem {
     std::string name;
     SpringMassParams params;
@@ -368,7 +620,17 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
         const auto param_name =
             std::format("fancyqlone(p={},v={},{},{})", backend.processors, VL, order(O), name);
         return Solver{param_name, [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
-                          run_benchmark<VL, O>(state, param_name, params, backend, settings, num_branches, true,
+                          run_benchmark<VL, O>(state, param_name, params, backend, settings, num_branches, backend.strategy!= qp::WarmStartingStrategy::Zeros ? true : false,
+                                               trace);
+                      }};
+    };
+    const auto serial_cyqlone_solver = [trace{opts.trace}](std::string_view name,
+                                                    const qp::CyQPALMBackendSettings &backend,
+                                                    const qp::Settings &settings) {
+        const auto param_name =
+            std::format("serial-fancyqlone(p={},v={},{},{})", backend.processors, VL, order(O), name);
+        return Solver{param_name, [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+                          run_benchmark_serial<VL, O>(state, param_name, params, backend, settings, num_branches, backend.strategy!= qp::WarmStartingStrategy::Zeros ? true : false,
                                                trace);
                       }};
     };
@@ -389,37 +651,44 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
 
         };
         qp::Settings settings{
-            .max_outer_iter = 100,
-            .max_total_inner_iter = 1000,
-            .tolerance = 1e-7,
+            .tolerance = 1e-8,
+            .dual_tolerance = 1e-8,
+            .initial_penalty_y = 20,
             .verbose           = verbose,
             .detailed_stats       = verbose,
 
         };
         qp::CyQPALMBackendSettings backend_no_upd = backend;
 
-        // qp::Settings settings_warm                = settings;
-        // settings_warm.initial_penalty_y           = 1e4;
-        // settings_warm.initial_inner_tolerance     = 1e-4;
+        qp::Settings settings_warm                = settings;
+        settings_warm.initial_penalty_y           = 1e4;
+        settings_warm.initial_inner_tolerance     = 1e-4;
         if (opts.cold) {
             std::cout << "Running cold start solver with " << p << " processors" << std::endl;
-            // backend.strategy = backend_no_upd.strategy = qp::WarmStartingStrategy::Zeros;
+            backend.strategy = backend_no_upd.strategy = qp::WarmStartingStrategy::Zeros;
+
             co_yield cyqlone_solver("zero", backend, settings);
+            if (opts.serial)
+                co_yield serial_cyqlone_solver("zero", backend, settings);  
     
         }
         if (opts.warm_shift) {
-            // backend.strategy = backend_no_upd.strategy = qp::WarmStartingStrategy::Shift;
+            backend.strategy = backend_no_upd.strategy = qp::WarmStartingStrategy::Shift;
             std::cout << "Running warm start (shift) solver with " << p << " processors" << std::endl;
-            co_yield cyqlone_solver("shift", backend, settings);
-            if (opts.no_updates)
-                co_yield cyqlone_solver("shift,upd=0", backend_no_upd, settings);
+            co_yield cyqlone_solver("shift", backend, settings_warm);
+            // if (opts.no_updates)
+            //     co_yield cyqlone_solver("shift,upd=0", backend_no_upd, settings_warm);
+            if (opts.serial)
+                co_yield serial_cyqlone_solver("shift", backend, settings_warm);
         }
         if (opts.warm_copy) {
             std::cout << "Running warm start (copy) solver with " << p << " processors" << std::endl;
-            // backend.strategy = backend_no_upd.strategy = qp::WarmStartingStrategy::Copy;
-            co_yield cyqlone_solver("copy", backend, settings);
-            if (opts.no_updates)
-                co_yield cyqlone_solver("copy,upd=0", backend_no_upd, settings);
+            backend.strategy = backend_no_upd.strategy = qp::WarmStartingStrategy::Copy;
+            co_yield cyqlone_solver("copy", backend, settings_warm);
+            if (opts.serial)
+                co_yield serial_cyqlone_solver("copy", backend, settings_warm);
+            // if (opts.no_updates)
+            //     co_yield cyqlone_solver("copy,upd=0", backend_no_upd, settings_warm);
         }
     }
 }
@@ -427,20 +696,68 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
 std::generator<Solver> get_hpipm_solvers(const Options &opts) {
     if (opts.hpipm) {
 #if WITH_HPIPM
-        if (opts.cold)
-            co_yield {"hpipm(zero)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
-                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmZero);
+        if (opts.cold){
+            co_yield {"hpipm(zero,speed)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmZero, 0);
                       }};
+            co_yield {"hpipm(zero,balance)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::NoWarmStart, 1);
+                      }};
+}
         if (opts.warm_shift)
-            co_yield {"hpipm(shift)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
-                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmShift);
+        {
+            co_yield {"hpipm(shift,speed)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmShift, 0);
                       }};
-        if (opts.warm_copy)
-            co_yield {"hpipm(copy)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
-                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmCopy);
+            co_yield {"hpipm(shift,balance)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmShift, 1);
                       }};
+        }
+        if (opts.warm_copy){
+            co_yield {"hpipm(copy,speed)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmCopy, 0);
+                      }};
+            co_yield {"hpipm(copy,balance)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmCopy, 1);
+                      }}; }
 #else
         throw std::invalid_argument("HPIPM support not enabled in this build");
+#endif
+    }
+}
+std::generator<Solver> get_treeqp_solvers(const Options &opts)
+{
+    if (opts.treeqp) {
+#if WITH_TREEQP
+        co_yield {
+            "treeqp",
+            [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+                run_benchmark_treeqp(
+                    state,
+                    params,
+                    num_branches);
+            }};
+#else
+        throw std::invalid_argument(
+            "TREEQP support not enabled in this build");
+#endif
+    }
+}
+std::generator<Solver> get_piqp_solvers(const Options &opts)
+{
+    if (opts.piqp) {
+#if WITH_PIQP
+        co_yield {
+            "piqp(multistage)",
+            [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+                run_benchmark_piqp(
+                    state,
+                    params,
+                    num_branches);
+            }};
+#else
+        throw std::invalid_argument(
+            "PIQP support not enabled in this build");
 #endif
     }
 }
@@ -464,8 +781,9 @@ std::generator<Solver> get_cyqlone_solvers_vl(const Options &opts) {
 }
 
 std::generator<Solver> get_solvers(const Options &opts) {
-    co_yield elements_of(get_hpipm_solvers(opts));
-
+    // co_yield elements_of(get_hpipm_solvers(opts));
+    // co_yield elements_of(get_piqp_solvers(opts));
+    co_yield elements_of(get_treeqp_solvers(opts));
     // if (opts.rm)
     //     co_yield elements_of(get_cyqlone_solvers_vl<qp::StorageOrder::ColMajor>(opts));
     // if (opts.cm)
@@ -522,6 +840,8 @@ void register_options(const char *program, CLI::App &app, Options &opts) {
     app.add_flag("--warm-copy,!--no-warm-copy", opts.warm_copy,
                  "Benchmark with warm starting (copy)");
     app.add_option("--horizon,-N", opts.horizon, "Specify a horizon length to benchmark");
+    app.add_option("--num-branches,-J", opts.num_branches, "Specify the number of branches to benchmark");
+
     app.add_option("--masses,-M", opts.masses, "Specify the number of masses to benchmark");
     app.add_option("--num-instances,-I", opts.num_instances,
                    "Number of random problem instances to generate for each (M,N) pair");
@@ -555,6 +875,8 @@ void register_options(const char *program, CLI::App &app, Options &opts) {
     app.add_flag("--print-extra,!--no-print-extra", opts.print_extra,
                  "Print additional counters in the benchmark report");
     app.add_flag("--color,!--no-color", opts.use_color, "Enable/disable colored output");
+    app.add_flag("--serial,!--no-serial", opts.serial, "Use serial implementation");
+
 }
 
 int initialize_google_benchmark(char *program, auto bm_args) {

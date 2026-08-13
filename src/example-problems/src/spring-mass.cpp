@@ -6,6 +6,7 @@
 #include <guanaqo/eigen/view.hpp>
 
 #include <algorithm>
+#include <iostream>
 #include <limits>
 #include <numeric>
 #include <random>
@@ -161,13 +162,19 @@ SpringMassProblem spring_mass(SpringMassParams p) {
 FanSpringMassProblem fan_spring_mass(SpringMassParams p, index_t num_branches, real_t k_spring_diff) {
     std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
     std::vector<real_t> ref;
+    p.k_spring -= k_spring_diff; // perturb spring constants for each branch
     for (index_t b = 0; b < num_branches; ++b) {
-        for (index_t v = 0; v < p.masses.size(); ++v) {
-            p.masses[v] += k_spring_diff * (static_cast<real_t>(b)-static_cast<real_t>(num_branches)/2); // perturb spring constants for each branch
-        }
+        
+        // std::cout << "Branch " << b << ": k_spring = " << p.k_spring << std::endl;
         auto ocp = ocps[b]  = spring_mass(p).ocp;
         ref = spring_mass(p).ref;
+        if (num_branches > 1) {
+            // Perturb spring constants for each branch
+            p.k_spring += 2*k_spring_diff/(num_branches-1); // perturb spring constants for each branch
+        }
+
     }
+    
     FanOCPStorage focp{.ocps = std::move(ocps)};
     return {.ocp = std::move(focp), .ref = std::move(ref)};   } 
 }

@@ -143,16 +143,7 @@ struct CyQPALMBackend {
     void warm_start(const var_vec_t &x, const ineq_constr_vec_t &y, const eq_constr_vec_t &λ) {
         if constexpr (std::is_same_v<typename traits::warm_start_t, WarmStartingStrategy>) {
 
-            // TODO: this does not handle the case N_horiz != ceil_N() correctly
-            const auto k_to_l = [&](index_t k) {
-                const auto num_stages = ocp.n;
-                const auto i          = (ocp.ceil_N() - k) % num_stages;
-                const auto k1         = (k + i) / num_stages;
-                const auto k2         = k1 >> ocp.lp();
-                const auto v          = k2 % (1 << ocp.lv());
-                const auto t          = k1 - (k2 << ocp.lp());
-                return ((num_stages * t + i) << ocp.lv()) + v;
-            };
+           
             // std::cout << "Warm starting with strategy: " << static_cast<int>(settings.strategy) << std::endl;
             switch (settings.strategy) {
                 case WarmStartingStrategy::Zeros:
@@ -166,29 +157,21 @@ struct CyQPALMBackend {
                     this->y0 = std::move(y);
                     break;
                 case WarmStartingStrategy::Shift: {
+                    // std::cout << "Warm starting with Shift strategy." << std::endl;
+
                     auto &x0 = this->x0.emplace(var_vec());         // TODO: zero init is redundant
                     auto &λ0 = this->λ0.emplace(eq_constr_vec());   // TODO: zero init is redundant
                     auto &y0 = this->y0.emplace(ineq_constr_vec()); // TODO: zero init is redundant
-                    for (index_t k = 1; k < ocp.N_horiz; ++k)       // TODO: vectorize?
-                        x0(k_to_l(k - 1)) = x(k_to_l(k));
-                    x0(k_to_l(ocp.N_horiz - 1)) = x(k_to_l(ocp.N_horiz - 1));
-                    for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
-                        y0(k_to_l(k - 1)) = y(k_to_l(k));
-                    y0(k_to_l(ocp.N_horiz - 1)) = y(k_to_l(ocp.N_horiz - 1));
-                    for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
-                        λ0(k_to_l(k - 1)) = λ(k_to_l(k));
-                    λ0(k_to_l(ocp.N_horiz - 1)) = λ(k_to_l(ocp.N_horiz - 1));
+                    this->ocp.shift_solution(x, x0);
+                    this->ocp.shift_dynamics(λ, λ0);
+                    this->ocp.shift_constraints(y, y0);
                 } break;
                 case WarmStartingStrategy::ShiftNoInequality: {
                     auto &x0 = this->x0.emplace(var_vec());       // TODO: zero init is redundant
                     auto &λ0 = this->λ0.emplace(eq_constr_vec()); // TODO: zero init is redundant
                     this->y0.emplace(y);
-                    for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
-                        x0(k_to_l(k - 1)) = x(k_to_l(k));
-                    x0(k_to_l(ocp.N_horiz - 1)) = x(k_to_l(ocp.N_horiz - 1));
-                    for (index_t k = 1; k < ocp.N_horiz; ++k) // TODO: vectorize?
-                        λ0(k_to_l(k - 1)) = λ(k_to_l(k));
-                    λ0(k_to_l(ocp.N_horiz - 1)) = λ(k_to_l(ocp.N_horiz - 1));
+                    this->ocp.shift_solution(x, x0);
+                    this->ocp.shift_dynamics(λ, λ0);
                 } break;
                 default: BATMAT_ASSERT(false);
             }
@@ -206,7 +189,15 @@ struct CyQPALMBackend {
                     this->λ0 = λ.clone();
                     this->y0 = y.clone();
                     break;
-                case WarmStartingStrategy::Shift: BATMAT_ASSERT(false); break;
+                case WarmStartingStrategy::Shift: {
+                    // std::cout << "Fan Warm starting with Shift strategy." << std::endl;
+                    auto &x0 = this->x0.emplace(var_vec());         // TODO: zero init is redundant
+                    auto &λ0 = this->λ0.emplace(eq_constr_vec());   // TODO: zero init is redundant
+                    auto &y0 = this->y0.emplace(ineq_constr_vec()); // TODO: zero init is redundant
+                    this->ocp.shift_solution(x, x0);
+                    this->ocp.shift_dynamics(λ, λ0);
+                    this->ocp.shift_constraints(y, y0);
+                    break;}
                 case WarmStartingStrategy::ShiftNoInequality: BATMAT_ASSERT(false); break;
                 default: BATMAT_ASSERT(false);
             }

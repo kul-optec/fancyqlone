@@ -117,7 +117,30 @@ build() {
     cmake --fresh --preset ${CONF_PRESET}
     cmake --build --preset ${BUILD_PRESET}
 }
+tests() {
+    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f conan.json ]]; then
+        echo "Conan files not found, please run the deps and build steps first." >&2
+        exit 1
+    fi
 
+    local build_folder
+    local generators_folder
+
+    build_folder="$(_jq -r '.graph.nodes."0".build_folder' conan.json)"
+    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' conan.json)"
+
+    set +ux
+    source "${generators_folder}/conanrun.sh"
+    set -ux
+
+    cmake --build \
+        --preset "${BUILD_PRESET}" \
+        --target testing
+
+    ctest \
+        --test-dir "${build_folder}" \
+        --output-on-failure
+}
 # Run a benchmark command
 benchmark() {
     if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f conan.json ]]; then
@@ -155,29 +178,28 @@ benchmark2() {
 # Run the quick benchmark as a sanity check
 benchmark_quick() {
     benchmark \
-        --problem wang-boyd-2008 --cold -I 1 -p "${OMP_NUM_THREADS}" --cm \
-        -N 4 -M 2 \
+        --problem wang-boyd-2008 --cold --no-serial -I 1 -p "${OMP_NUM_THREADS}"  --cm \
+        -N 16 -M 12 -J 2\
         --benchmark_repetitions=1 --benchmark_report_aggregates_only \
-        --benchmark_min_time=0.1s "$@"
+        --benchmark_min_time=0.01s "$@"
 }
 
 # Run the horizon scaling benchmark
 benchmark_scaling() {
     benchmark \
-        --problem wang-boyd-2008 --cold -I 20 -p "${OMP_NUM_THREADS}" --cm --no-updates \
-        -N 32  -N 64  -N 96  -N 128 -N 160 -N 192 -N 224 -N 256 \
-        -N 288  -N 352  -N 416 -N 448 -N 512 \
-        -M 12 \
+        --problem wang-boyd-2008 --cold --warm-shift -I 30 -p "${OMP_NUM_THREADS}" --cm --no-updates --serial \
+        -N 32  -N 64  -N 96  -N 128 -N 192 -N 256 \
+        -M 12 -J 1 \
         --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.05s --benchmark_out=benchmark-scaling.json "$@"
 }
 # Run the horizon scaling benchmark
 benchmark_scaling2() {
     benchmark2 \
-        --problem wang-boyd-2008 --cold -I 20 -p "${OMP_NUM_THREADS}" --cm --no-updates \
+        --problem wang-boyd-2008 --cold --warm-copy -I 20 -p "${OMP_NUM_THREADS}" --cm \
         -N 32  -N 64  -N 96  -N 128 -N 160 -N 192 -N 224 -N 256 \
         -N 288  -N 352  -N 416 -N 448 -N 512 \
-        -M 12 \
+        -M 20 \
         --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.05s --benchmark_out=benchmark-scaling2.json "$@"
 }
@@ -256,6 +278,8 @@ main() {
             deps "$@" ;;
         build)
             build ;;
+        tests)
+            tests ;;
         benchmark-quick)
             benchmark_quick "$@" ;;
         benchmark-scaling)

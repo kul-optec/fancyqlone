@@ -1281,7 +1281,7 @@ TEST(QPALM, spring_mass) {
     namespace la = cyqlone::linalg;
 
     constexpr index_t VL       = 4;
-    const index_t num_branches = 1;
+    const index_t num_branches = 8;
 
 #if GUANAQO_WITH_TRACING
     guanaqo::trace_logger_set_default_size(1'048'576);
@@ -1309,10 +1309,10 @@ TEST(QPALM, spring_mass) {
     auto save_traces = [](const std::string &) {};
 #endif
 
-    const index_t N  = 256;
+    const index_t N  = 128;
 
     const index_t M=12;
-    index_t num_warmups = 1;
+    index_t num_warmups = 50;
     auto seed=125;
 
     // Same initial condition for all branches.
@@ -1392,7 +1392,7 @@ TEST(QPALM, spring_mass) {
     EXPECT_EQ(fan_status, qp::SolverStatus::Converged);
     std::cout << "inner:   " << fan_qpalm.stats->inner_iter << "\n"
               << "outer:   " << fan_qpalm.stats->outer_iter << "\n"
-              << "timings: " << fan_qpalm.stats->timings.total << "\n"
+              << "timings: " << fan_qpalm.stats->timings.total.wall_time << "\n"
               << "update_count: " << fan_qpalm.stats_backend->num_updates << "\n";
         auto &&fan_backend_no_update =
         qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
@@ -1438,7 +1438,7 @@ TEST(QPALM, spring_mass) {
     EXPECT_EQ(fan_status_no_update, qp::SolverStatus::Converged);
     std::cout << "inner:   " << fan_qpalm_no_update.stats->inner_iter << "\n"
               << "outer:   " << fan_qpalm_no_update.stats->outer_iter << "\n"
-              << "timings: " << fan_qpalm_no_update.stats->timings.total << "\n";
+              << "timings: " << fan_qpalm_no_update.stats->timings.total.wall_time << "\n";
     auto x_fan = fan_qpalm_no_update.get_solution();
     auto λ_fan = fan_qpalm_no_update.get_equality_multipliers();
     auto y_fan = fan_qpalm_no_update.get_inequality_multipliers();
@@ -1468,7 +1468,9 @@ TEST(QPALM, spring_mass) {
             {
                 .max_outer_iter       = 100,
                 .max_total_inner_iter = 1000,
-                .tolerance            = 1e-7,
+                .tolerance            = 1e-8,
+                .dual_tolerance    = 1e-8,
+                .initial_penalty_y = 20,
                 .verbose              = verbose,
                 .detailed_stats       = verbose,
             },
@@ -1485,7 +1487,7 @@ TEST(QPALM, spring_mass) {
     EXPECT_EQ(sfan_status, qp::SolverStatus::Converged);
     std::cout << "inner:   " << sfan_qpalm.stats->inner_iter << "\n"
               << "outer:   " << sfan_qpalm.stats->outer_iter << "\n"
-              << "timings: " << sfan_qpalm.stats->timings.total << "\n";
+              << "timings: " << sfan_qpalm.stats->timings.total.wall_time << "\n";
     auto x_sfan = sfan_qpalm.get_solution();
     auto λ_sfan = sfan_qpalm.get_equality_multipliers();
 

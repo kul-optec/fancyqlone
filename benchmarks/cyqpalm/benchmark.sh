@@ -134,8 +134,8 @@ benchmark() {
 benchmark_quick() {
     benchmark \
         --problem wang-boyd-2008 --cold --warm-shift -I 1 -p "${OMP_NUM_THREADS}" --cm \
-        -N 32 -N 64 -N 128 -N 256 -M 12 \
-        --benchmark_repetitions=11 --benchmark_report_aggregates_only \
+        -N 32 -N 64 -N 128 -N 256 -M 12 -J 2 \
+        --benchmark_repetitions=1 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.1s "$@"
 }
 
