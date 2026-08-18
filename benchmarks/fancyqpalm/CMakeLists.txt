@@ -4,9 +4,9 @@ set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 
 project(cyqlone-benchmarks LANGUAGES CXX)
 
-option(WITH_HPIPM "Enable the HPIPM benchmarks and tests" OFF)
-option(WITH_PIQP "Enable the PIQP benchmarks and tests" OFF)
-option(WITH_TREEQP "Enable the TreeQP benchmarks and tests" ON)
+option(WITH_HPIPM "Enable the HPIPM benchmarks and tests" ON)
+option(WITH_PIQP "Enable the PIQP benchmarks and tests" ON)
+option(WITH_TREEQP "Enable the TreeQP benchmarks and tests" OFF)
 
 option(BUILD_TESTING "Build tests" OFF)
 

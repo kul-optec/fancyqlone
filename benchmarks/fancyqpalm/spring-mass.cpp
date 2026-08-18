@@ -781,9 +781,15 @@ std::generator<Solver> get_cyqlone_solvers_vl(const Options &opts) {
 }
 
 std::generator<Solver> get_solvers(const Options &opts) {
-    // co_yield elements_of(get_hpipm_solvers(opts));
-    // co_yield elements_of(get_piqp_solvers(opts));
+#if WITH_HPIPM
+    co_yield elements_of(get_hpipm_solvers(opts));
+#endif
+#if WITH_PIQP
+    co_yield elements_of(get_piqp_solvers(opts));
+#endif
+#if WITH_TREEQP
     co_yield elements_of(get_treeqp_solvers(opts));
+#endif
     // if (opts.rm)
     //     co_yield elements_of(get_cyqlone_solvers_vl<qp::StorageOrder::ColMajor>(opts));
     // if (opts.cm)

@@ -659,11 +659,17 @@ create_piqp_fan_solver(
      * Must be selected before setup().
      */
     solver.settings().kkt_solver =
-        piqp::KKTSolver::sparse_multistage;
+        piqp::KKTSolver::sparse_multistage_parallel;
 
     solver.settings().verbose = false;
     solver.settings().compute_timings = true;
     solver.settings().max_iter = 100;
+    solver.settings().eps_abs = 1e-8;
+    solver.settings().eps_rel = 0.0; // HPIPM and Cyqlone use absolute tolerances
+
+    solver.settings().check_duality_gap = true;
+    solver.settings().eps_duality_gap_abs = 1e-8;
+    solver.settings().eps_duality_gap_rel = 0.0;
 
     solver.setup(
         qp.P,

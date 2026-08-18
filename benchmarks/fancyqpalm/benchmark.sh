@@ -155,7 +155,8 @@ benchmark() {
         echo "Benchmark executable not found, please run the build step first." >&2; exit 1
     fi
     echo $0
-    OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" \
+    OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" OMP_PROC_BIND=close \
+    OMP_WAIT_POLICY=ACTIVE \
         "${build_folder}/spring-mass" "$@"
 }
 # Run a benchmark command
@@ -187,9 +188,9 @@ benchmark_quick() {
 # Run the horizon scaling benchmark
 benchmark_scaling() {
     benchmark \
-        --problem wang-boyd-2008 --cold --warm-shift -I 30 -p "${OMP_NUM_THREADS}" --cm --no-updates --serial \
-        -N 32  -N 64  -N 96  -N 128 -N 192 -N 256 \
-        -M 12 -J 1 \
+        --problem wang-boyd-2008 --cold -I 30 -p "${OMP_NUM_THREADS}" --cm --no-updates --serial \
+         -N 32 -N 64 -N 92 -N 128 -N 160 -N 192 -N 224 -N 256 \
+        -M 20 -J 1 \
         --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.05s --benchmark_out=benchmark-scaling.json "$@"
 }

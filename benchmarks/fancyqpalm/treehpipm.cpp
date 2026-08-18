@@ -374,7 +374,7 @@ create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
     double tol_stat = 1e-8;
     double tol_eq   = 1e-8;
     double tol_ineq = 1e-8;
-    double tol_comp = 1e-5;
+    double tol_comp = 1e-8;
     if (mode == 0) {
         d_tree_ocp_qp_ipm_arg_set_default(hpipm_mode::SPEED, d.arg.get());
     }

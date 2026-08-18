@@ -6,7 +6,7 @@ benchmark/1.9.4
 cli11/2.6.0
 fmt/12.1.0
 gtest/1.17.0 
-piqp/0.6.3
+piqp/fenglongsong
 treeqp/0.3.1
 [generators]
 CMakeDeps
