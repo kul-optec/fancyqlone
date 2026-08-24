@@ -186,6 +186,110 @@ class TreeqpConan(ConanFile):
             check=True,
         )
 
+    def _namespace_blasfeo_archives(self):
+        lib_dir = os.path.join(
+            self.source_folder,
+            "lib",
+        )
+        blasfeo_archive = os.path.join(
+            lib_dir,
+            "libblasfeo.a",
+        )
+
+        if not os.path.isfile(blasfeo_archive):
+            raise RuntimeError(
+                "BLASFEO archive was not created: {}".format(
+                    blasfeo_archive
+                )
+            )
+
+        nm = (
+            shutil.which("x86_64-bionic-linux-gnu-nm")
+            or shutil.which("nm")
+        )
+        objcopy = (
+            shutil.which("x86_64-bionic-linux-gnu-objcopy")
+            or shutil.which("objcopy")
+        )
+
+        if nm is None or objcopy is None:
+            raise RuntimeError(
+                "nm and objcopy are required to namespace TreeQP's "
+                "bundled BLASFEO"
+            )
+
+        nm_result = subprocess.run(
+            [
+                nm,
+                "--format=posix",
+                "--extern-only",
+                "--defined-only",
+                blasfeo_archive,
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+        symbol_types = set("ABCDGINRSTVW")
+        symbols = set()
+
+        for line in nm_result.stdout.splitlines():
+            fields = line.split()
+            if (
+                len(fields) >= 2
+                and len(fields[1]) == 1
+                and fields[1].upper() in symbol_types
+            ):
+                symbols.add(fields[0])
+
+        if "blasfeo_unpack_dvec" not in symbols:
+            raise RuntimeError(
+                "Could not find BLASFEO symbols to namespace"
+            )
+
+        symbol_map = os.path.join(
+            self.build_folder,
+            "treeqp-blasfeo-symbols.map",
+        )
+        save(
+            self,
+            symbol_map,
+            "".join(
+                "{} treeqp_{}\n".format(symbol, symbol)
+                for symbol in sorted(symbols)
+            ),
+        )
+
+        archives = [
+            "libtreeqp_cpp_interface.a",
+            "libtreeqp.a",
+            "libhpmpc.a",
+            "libhpipm.a",
+            "libblasfeo.a",
+        ]
+
+        self.output.info(
+            "Namespacing TreeQP's bundled BLASFEO symbols"
+        )
+
+        for archive_name in archives:
+            archive = os.path.join(lib_dir, archive_name)
+            if not os.path.isfile(archive):
+                raise RuntimeError(
+                    "TreeQP archive was not created: {}".format(
+                        archive
+                    )
+                )
+            subprocess.run(
+                [
+                    objcopy,
+                    "--redefine-syms={}".format(symbol_map),
+                    archive,
+                ],
+                check=True,
+            )
+
     def layout(self):
         self.folders.source = "src"
         self.folders.build = "build"
@@ -391,6 +495,7 @@ class TreeqpConan(ConanFile):
             cwd=self.source_folder,
         )
         self._namespace_qpoases_archive()
+        self._namespace_blasfeo_archives()
 
     def package(self):
         copy(

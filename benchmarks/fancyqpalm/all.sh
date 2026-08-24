@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
 cd "$(dirname "$0")"
-machine="${1:-nutella}"
+machine="${1:-vsc-sapph}"
 case "$machine" in
     blacksad*) p=8; v=4 ;;
     nutella*) p=8; v=4 ;;
     vsc-ice*) p=16; v=4 ;;
-    vsc-sapph) p=16; v=4 ;;
+    vsc-sapph) p=32; v=4 ;;
     hpc) p=16; v=4 ;;
     rpi5*) p=4; v=2 ;;
     *) p=8; v=4 ;;
 esac
-python3 hist_plot_from_json.py "benchmark-scaling.json" \
-    --output benchmark-grid-box-$machine-cold-J=2.pdf \
-    --metric=time --xlim=0,50 --box-plot --group-by=dataset --figsize=6,3.5 \
-    --solver "serial-fancyqlone(p=$p,v=$v,cm,zero)" --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero,balance)" --solver "hpipm(zero,speed)"\
+python3 hist_plot_from_json.py "benchmark-scalingms.json" \
+    --output benchmark-grid-box-$machine-cold-J=8ms.pdf \
+    --metric=time --xlim=0,800 --box-plot --group-by=dataset --figsize=6,3.5 \
+    --solver "serial-fancyqlone(p=$p,v=$v,cm,zero)" --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero,balance)" --solver "hpipm(zero,speed)" --solver "piqp(multistage)"\
     --dataset-regex 'MassSprings\(12, (32|64|96|128|192|256)\)'
-python3 hist_plot_from_json.py "benchmark-scaling.json" \
-    --output benchmark-grid-box-$machine-warm-J=2.pdf \
-    --metric=time --xlim=0,50 --box-plot --group-by=dataset --figsize=6,3.5 \
-    --solver "fancyqlone(p=$p,v=$v,cm,shift)" --solver "hpipm(shift,balance)" --solver "hpipm(shift,speed)"\
-    --dataset-regex 'MassSprings\(12, (32|64|96|128|192|256)\)'
+# python3 hist_plot_from_json.py "benchmark-scaling.json" \
+#     --output benchmark-grid-box-$machine-warm-J=1.pdf \
+#     --metric=time --xlim=0,50 --box-plot --group-by=dataset --figsize=6,3.5 \
+#     --solver "fancyqlone(p=$p,v=$v,cm,shift)" --solver "hpipm(shift,balance)" --solver "hpipm(shift,speed)"\
+#     --dataset-regex 'MassSprings\(12, (32|64|96|128|192|256)\)'
 # python3 hist_plot_from_json.py "$machine/benchmark-grid.json" \
 #     --output benchmark-grid-box-$machine.pdf \
 #     --metric=time --xlim=0,54 --box-plot --group-by=dataset --figsize=6,3.5 \

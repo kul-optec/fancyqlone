@@ -1,11 +1,13 @@
+extern "C" {
+#define blasfeo_unpack_dvec treeqp_blasfeo_unpack_dvec
+#include <blasfeo/blasfeo_d_aux.h>
+#undef blasfeo_unpack_dvec
+}
+
 #include "treeqp.hpp"
 
 #include <guanaqo/mat-view.hpp>
 #include <iostream>
-
-extern "C" {
-#include <blasfeo_d_aux.h>
-}
 
 #include <algorithm>
 #include <chrono>
@@ -263,7 +265,6 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan)
         std::vector<int>(
             static_cast<std::size_t>(horizon + 1),
             0));
-
     /*
      * Store the shared root constraints only once internally.
      */
@@ -440,6 +441,7 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan)
         copy_vector(
             root_ocp.b(0).data,
             state_size);
+    data->initial_state = initial_state_reference;
 
     for (std::size_t branch = 1;
          branch < fan.ocps.size();
@@ -641,6 +643,9 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan)
         }
     }
 
+    tree_qp_in_eliminate_x0(&qp.QpIn);
+    tree_qp_out_eliminate_x0(&qp.QpOut);
+
     return data;
 }
 
@@ -660,19 +665,18 @@ create_tree_qp_solver(std::shared_ptr<TreeQpData> qp_data,
     // std::cout << "created solver" << "\n";
 
     if (solver_data->solver->SetOption("clipping", false) != 0)
-
         throw std::runtime_error("Failed to configure the treeQP clipping solver");
     if (solver_data->solver->SetOption("maxIter", max_iterations) != 0)
         throw std::runtime_error("Failed to set the treeQP maximum iteration count");
     if (solver_data->solver->SetOption("stationarityTolerance", tolerance) != 0)
         throw std::runtime_error("Failed to set the treeQP stationarity tolerance");
     solver_data->solver->SetOption(
-    "regType",
-    "TREEQP_NO_REGULARIZATION");
+        "regType", "TREEQP_ALWAYS_LEVENBERG_MARQUARDT");
     solver_data->solver->TdunesOpts.checkLastActiveSet = 0;
 
     solver_data->solver->SetOption("regValue", 1e-8);
     solver_data->solver->SetOption("regTol", 1e-8);
+    solver_data->solver->TdunesOpts.lineSearchMaxIter = 60;
     
     return solver_data;
 }
@@ -768,18 +772,24 @@ get_solution_tree_qp(
             const int node =
                 mapping.node_index[branch][stage];
 
-            blasfeo_unpack_dvec(
-                mapping.nx[node],
-                &qp.QpOut.x[node],
-                0,
-                primal_out);
+            if (stage == 0) {
+                std::copy(mapping.initial_state.begin(),
+                          mapping.initial_state.end(),
+                          primal_out);
+            } else {
+                treeqp_blasfeo_unpack_dvec(
+                    mapping.nx[node],
+                    &qp.QpOut.x[node],
+                    0,
+                    primal_out);
+            }
 
             primal_out +=
                 mapping.nx[node];
 
             if (mapping.nu[node] > 0)
             {
-                blasfeo_unpack_dvec(
+                treeqp_blasfeo_unpack_dvec(
                     mapping.nu[node],
                     &qp.QpOut.u[node],
                     0,
@@ -815,11 +825,8 @@ get_solution_tree_qp(
             destination.inequality_multipliers.data();
 
         /*
-         * Shared root multiplier.
-         *
-         * treeQP contains one root constraint block and therefore
-         * one root multiplier block. This block is copied into the
-         * output of every scenario branch.
+         * Distribute treeQP's shared root multiplier across the
+         * duplicated branch constraints expected by FanOCPStorage.
          */
         const int branch_root_nc =
             mapping.branch_nc[branch][0];
@@ -833,27 +840,13 @@ get_solution_tree_qp(
                     "the deduplicated treeQP root constraint count");
             }
 
-            blasfeo_unpack_dvec(
+            treeqp_blasfeo_unpack_dvec(
                 branch_root_nc,
                 &qp.QpOut.mu_d[0],
                 0,
                 ineq_out);
-
-            /*
-             * Keep this sign conversion only if the destination
-             * FanOCPStorage convention is the opposite of treeQP's
-             * exported multiplier convention.
-             *
-             * stage_qp_qpoases_export_mu() already negates the
-             * native qpOASES multiplier before storing mu_d.
-             */
-            for (int index = 0;
-                 index < branch_root_nc;
-                 ++index)
-            {
-                ineq_out[index] =
-                    -ineq_out[index];
-            }
+            for (int index = 0; index < branch_root_nc; ++index)
+                ineq_out[index] /= mapping.num_branches;
 
             ineq_out +=
                 branch_root_nc;
@@ -882,33 +875,17 @@ get_solution_tree_qp(
                     "the corresponding treeQP node");
             }
 
-            blasfeo_unpack_dvec(
+            treeqp_blasfeo_unpack_dvec(
                 branch_stage_nc,
                 &qp.QpOut.mu_d[node],
                 0,
                 ineq_out);
 
-            for (int index = 0;
-                 index < branch_stage_nc;
-                 ++index)
-            {
-                ineq_out[index] =
-                    -ineq_out[index];
-            }
-
             ineq_out +=
                 branch_stage_nc;
         }
 
-        /*
-         * Equality multipliers.
-         *
-         * The initial-state equality is represented internally
-         * by xmin == xmax at the shared root. The corresponding
-         * signed root bound multiplier is copied into each branch.
-         *
-         * Dynamics multipliers remain branch-specific.
-         */
+        // Initial-state and branch-specific dynamics multipliers.
         std::size_t equality_count =
             static_cast<std::size_t>(
                 mapping.nx[0]);
@@ -931,14 +908,8 @@ get_solution_tree_qp(
         double *eq_out =
             destination.equality_multipliers.data();
 
-        /*
-         * Shared initial-state multiplier copied into each branch.
-         */
-        blasfeo_unpack_dvec(
-            mapping.nx[0],
-            &qp.QpOut.mu_x[0],
-            0,
-            eq_out);
+        // FanOCPStorage excludes x0 stationarity for an eliminated x0.
+        std::fill_n(eq_out, mapping.nx[0], 0.0);
 
         eq_out +=
             mapping.nx[0];
@@ -962,7 +933,7 @@ get_solution_tree_qp(
                     "Invalid treeQP dynamics edge index");
             }
 
-            blasfeo_unpack_dvec(
+            treeqp_blasfeo_unpack_dvec(
                 mapping.nx[node],
                 &qp.QpOut.lam[edge],
                 0,
@@ -1002,8 +973,8 @@ void update_x0_tree_qp(
     std::vector<double> next_state_vector(
         next_state, next_state + static_cast<std::ptrdiff_t>(state_size));
 
-    qp.SetVector("xmin", next_state_vector, 0);
-    qp.SetVector("xmax", std::move(next_state_vector), 0);
+    tree_qp_in_set_x0_colmaj(&qp.QpIn, next_state_vector.data());
+    qp_data.initial_state = next_state_vector;
 
     for (auto &ocp : fan.ocps)
         std::copy_n(next_state, state_size, ocp.b(0).data);

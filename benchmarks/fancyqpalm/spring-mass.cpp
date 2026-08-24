@@ -430,7 +430,7 @@ void run_benchmark_treeqp(
 
     auto solver_data = create_tree_qp_solver(
         qp_data,
-        100,   // Maximum number of iterations
+        200,   // Maximum number of iterations
         1e-8); // Stationarity tolerance
 
     // Warm-up solve.

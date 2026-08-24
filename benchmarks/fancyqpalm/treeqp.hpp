@@ -17,6 +17,7 @@ struct TreeQpData {
     std::vector<int> nu;
     std::vector<int> nc;
     std::vector<int> nk;
+    std::vector<double> initial_state;
     std::vector<std::vector<int>> branch_nc;
     std::vector<std::vector<int>> node_index;
     std::vector<std::vector<int>> edge_index;
