@@ -68,7 +68,9 @@ function(cyqlone_configure_python_ext tgt)
 endfunction()
 
 # Build the architecture-specific Python extension
-Python_add_library(_cyqlone MODULE WITH_SOABI ${USE_SABI} "src/cyqlone.py.cpp")
+Python_add_library(_cyqlone MODULE WITH_SOABI ${USE_SABI}
+    "src/cyqlone.py.cpp"
+    "src/fancyqlone.py.cpp")
 cyqlone_configure_python_ext(_cyqlone)
 target_link_libraries(_cyqlone PRIVATE Eigen3::Eigen cyqlone::qpalm cyqlone::example-problems)
 target_link_libraries(_cyqlone PRIVATE cyqlone::warnings)

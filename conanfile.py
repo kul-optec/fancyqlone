@@ -76,7 +76,7 @@ class CyqloneRecipe(ConanFile):
         self.requires("guanaqo/1.0.0-alpha.28", transitive_headers=True, transitive_libs=True)
         self.requires("batmat/0.0.24", transitive_headers=True, transitive_libs=True)
         if self.options.get_safe("with_zlib"):
-            self.requires("zlib/[~1]")
+            self.requires("zlib/[1.3.1]")
         if self.options.get_safe("with_python"):
             self.requires("nanobind/2.10.2")
             if self.options.with_python_dispatch:

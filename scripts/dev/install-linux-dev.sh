@@ -55,7 +55,7 @@ EOF
 
 # Build the Python package and install it in development mode
 export CLICOLOR_FORCE=1
-export CMAKE_INSTALL_MODE=REL_SYMLINK_OR_COPY
+export CMAKE_INSTALL_MODE=COPY
 uv pip install -ve "$pkg_dir" --no-build-isolation -C cross="$pbc_config"
 if [ ! -e "$pkg_dir/uv.toml" ]; then
     cat <<- EOF > "$pkg_dir/uv.toml"

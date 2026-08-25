@@ -57,6 +57,10 @@ auto CyqloneStorage<T>::reconstruct_solution(const LinearOCPStorage &ocp,
     guanaqo::blas::xsymv_L(value_type{1}, ocp.Q(0), x0, value_type{1}, λ0);
     guanaqo::blas::xgemv_T(value_type{1}, ocp.S(0), u0, value_type{1}, λ0);
     guanaqo::blas::xgemv_T(value_type{1}, ocp.A(0), λ1, value_type{1}, λ0);
+    if (ny > 0) {
+        auto y0 = MatrixView{{.data = sol.inequality_multipliers.data(), .rows = ny, .cols = 1}};
+        guanaqo::blas::xgemv_T(value_type{1}, ocp.C(0), y0, value_type{1}, λ0);
+    }
     return sol;
 }
 
@@ -132,10 +136,10 @@ void CyqloneStorage<T>::update_impl(const LinearOCPStorage &ocp) {
     data_rq(0).top_rows(nu)    = ocp.r(0);
     for (index_t r = 0; r < nu; ++r)
         for (index_t c = 0; c < nx; ++c)
-            data_rq(0, r, 0) += ocp.S_trans(0)(c, r) * ocp.b(0)(c, 0);
+            data_rq(0, r, 0) += ocp.S(0)(r, c) * ocp.b(0)(c, 0);
     for (index_t i = 1; i < N; ++i) {
         data_H(i).top_left(nu, nu)     = ocp.R(i);
-        data_H(i).bottom_left(nx, nu)  = ocp.S_trans(i);
+        batmat::linalg::copy(ocp.S(i).transposed(), data_H(i).bottom_left(nx, nu));
         data_H(i).top_right(nu, nx)    = ocp.S(i);
         data_H(i).bottom_right(nx, nx) = ocp.Q(i);
         data_F(i).left_cols(nu)        = ocp.B(i);
@@ -283,6 +287,12 @@ auto FanCyqloneStorage<T>::reconstruct_solution(const FanOCPStorage &ocp,
         guanaqo::blas::xsymv_L(value_type{1}, ocp.ocps[b].Q(0), x0, value_type{1}, λ0);
         guanaqo::blas::xgemv_T(value_type{1}, ocp.ocps[b].S(0), u0, value_type{1}, λ0);
         guanaqo::blas::xgemv_T(value_type{1}, ocp.ocps[b].A(0), λ1, value_type{1}, λ0);
+        if (ny_0i > 0) {
+            MatrixView y0{{.data = sol.solutions[b].inequality_multipliers.data(),
+                           .rows = ny_0i,
+                           .cols = 1}};
+            guanaqo::blas::xgemv_T(value_type{1}, ocp.ocps[b].C(0), y0, value_type{1}, λ0);
+        }
         offset_y += y_size;
         offset_λ += λ_size;
         offset_ux += ux_size;

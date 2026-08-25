@@ -16,6 +16,7 @@
 #include <tuple>
 
 #include "common.py.hpp"
+#include "fancyqlone.py.hpp"
 
 namespace CYQLONE_NS(cyqlone) {
 
@@ -456,6 +457,7 @@ struct overloaded : Ts... {
 #define CYQLONE_INSTANTIATE_MODULE(VL)                                                             \
     auto m##VL = m.def_submodule(VL == 1 ? "scalar" : "simd" #VL);                                 \
     cyqlone::register_qpalm_cyqlone<VL>(m##VL);                                                    \
-    cyqlone::register_cyqlone_solver<cyqlone::CyqloneSolver<VL>>(m##VL);
+    cyqlone::register_cyqlone_solver<cyqlone::CyqloneSolver<VL>>(m##VL);                            \
+    cyqlone::register_fancyqlone_solver<VL>(m##VL);
 
 NB_MODULE(MODULE_NAME, m) { BATMAT_FOREACH_VL_DEFAULT(CYQLONE_INSTANTIATE_MODULE) }
