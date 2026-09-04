@@ -422,23 +422,35 @@ void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params
 void run_benchmark_treeqp(
     benchmark::State &state,
     const SpringMassParams &params,
-    index_t num_branches)
+    index_t num_branches,
+    bool cold_start,
+    bool clipping =true
+)
 {
     auto problem = create_problem(params, num_branches);
 
-    auto qp_data = build_tree_qp(problem.ocp);
-
+    auto qp_data = build_tree_qp(problem.ocp,clipping);
+       
     auto solver_data = create_tree_qp_solver(
         qp_data,
         200,   // Maximum number of iterations
         1e-8); // Stationarity tolerance
 
     // Warm-up solve.
-    // solve_tree_qp(*qp_data, *solver_data);
-
+    solve_tree_qp(*qp_data, *solver_data);
+    if (!cold_start) {
+        const auto solution =
+            get_solution_tree_qp(*solver_data);
+        update_x0_tree_qp(
+            problem.ocp,
+            *qp_data,
+            solution.solutions,
+            num_branches / 2);
+        std::cout <<"warm starting with solution from previous solve)" << std::endl;
+    }
     for (auto _ : state) {
         const auto time_solve =
-            solve_tree_qp(*qp_data, *solver_data);
+            solve_tree_qp(*qp_data, *solver_data, cold_start);
 
         state.SetIterationTime(
             seconds(time_solve).count());
@@ -730,12 +742,25 @@ std::generator<Solver> get_treeqp_solvers(const Options &opts)
     if (opts.treeqp) {
 #if WITH_TREEQP
         co_yield {
-            "treeqp",
+            "treeqp(clip)",
             [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
                 run_benchmark_treeqp(
                     state,
                     params,
-                    num_branches);
+                    num_branches,
+                    opts.cold
+                );
+            }};
+               co_yield {
+            "treeqp(QPOasis)",
+            [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+                run_benchmark_treeqp(
+                    state,
+                    params,
+                    num_branches,
+                    opts.cold,
+                    false
+                );
             }};
 #else
         throw std::invalid_argument(

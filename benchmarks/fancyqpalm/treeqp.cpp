@@ -11,6 +11,7 @@ extern "C" {
 
 #include <algorithm>
 #include <chrono>
+#include <cmath>
 #include <cstddef>
 #include <functional>
 #include <memory>
@@ -193,10 +194,128 @@ void set_stage_objective(TreeQp &qp,
     qp.SetVector("r", std::move(r), node);
 }
 
+// Avoid mixed TDUNES stage solvers: the fast path is enabled only when every
+// constraint in every node is an exact, unique +1 selector row.
+struct NativeNodeBounds {
+    bool supported = true;
+    std::vector<double> xmin;
+    std::vector<double> xmax;
+    std::vector<double> umin;
+    std::vector<double> umax;
+    std::vector<TreeQpBoundMapping> mapping;
+};
+
+double tree_qp_bound(double value) {
+    if (std::isinf(value))
+        return std::copysign(static_cast<double>(TREEQP_INF), value);
+    return value;
+}
+
+template <class MatrixView>
+bool is_diagonal(const MatrixView &matrix) {
+    for (decltype(matrix.rows) row = 0; row < matrix.rows; ++row)
+        for (decltype(matrix.cols) column = 0; column < matrix.cols; ++column)
+            if (row != column && matrix(row, column) != 0)
+                return false;
+    return true;
+}
+
+template <class MatrixView>
+bool is_zero(const MatrixView &matrix) {
+    for (decltype(matrix.rows) row = 0; row < matrix.rows; ++row)
+        for (decltype(matrix.cols) column = 0; column < matrix.cols; ++column)
+            if (matrix(row, column) != 0)
+                return false;
+    return true;
+}
+
+bool supports_clipping_objective(const cyqlone::LinearOCPStorage &ocp,
+                                 int stage) {
+    if (!is_diagonal(ocp.Q(stage)))
+        return false;
+    if (stage == ocp.dim.N_horiz)
+        return true;
+    return is_diagonal(ocp.R(stage)) && is_zero(ocp.S(stage));
+}
+
+NativeNodeBounds extract_native_bounds(const cyqlone::LinearOCPStorage &ocp,
+                                       int stage) {
+    const int nx = static_cast<int>(ocp.dim.nx);
+    const int nu = stage < ocp.dim.N_horiz ? static_cast<int>(ocp.dim.nu) : 0;
+    const auto C = ocp.C(stage);
+    const auto lower = ocp.b_min(stage);
+    const auto upper = ocp.b_max(stage);
+
+    NativeNodeBounds result{
+        .xmin = std::vector<double>(static_cast<std::size_t>(nx), -TREEQP_INF),
+        .xmax = std::vector<double>(static_cast<std::size_t>(nx), TREEQP_INF),
+        .umin = std::vector<double>(static_cast<std::size_t>(nu), -TREEQP_INF),
+        .umax = std::vector<double>(static_cast<std::size_t>(nu), TREEQP_INF),
+        .mapping = std::vector<TreeQpBoundMapping>(static_cast<std::size_t>(C.rows)),
+    };
+    std::vector<bool> used(static_cast<std::size_t>(nx + nu), false);
+
+    for (cyqlone::index_t row = 0; row < C.rows; ++row) {
+        TreeQpBoundMapping mapping;
+        int nonzeros = 0;
+        for (int column = 0; column < nx; ++column) {
+            const double coefficient = C(row, column);
+            if (coefficient == 0)
+                continue;
+            if (coefficient != 1 || ++nonzeros != 1) {
+                result.supported = false;
+                return result;
+            }
+            mapping.kind = TreeQpBoundMapping::Kind::State;
+            mapping.index = column;
+        }
+        if (nu > 0) {
+            const auto D = ocp.D(stage);
+            for (int column = 0; column < nu; ++column) {
+                const double coefficient = D(row, column);
+                if (coefficient == 0)
+                    continue;
+                if (coefficient != 1 || ++nonzeros != 1) {
+                    result.supported = false;
+                    return result;
+                }
+                mapping.kind = TreeQpBoundMapping::Kind::Input;
+                mapping.index = column;
+            }
+        }
+        if (nonzeros != 1) {
+            result.supported = false;
+            return result;
+        }
+
+        const int offset = mapping.kind == TreeQpBoundMapping::Kind::Input ? nx : 0;
+        const auto variable = static_cast<std::size_t>(offset + mapping.index);
+        if (used.at(variable)) {
+            result.supported = false;
+            return result;
+        }
+        used.at(variable) = true;
+        result.mapping.at(static_cast<std::size_t>(row)) = mapping;
+
+        if (mapping.kind == TreeQpBoundMapping::Kind::State) {
+            result.xmin.at(static_cast<std::size_t>(mapping.index)) =
+                tree_qp_bound(lower(row, 0));
+            result.xmax.at(static_cast<std::size_t>(mapping.index)) =
+                tree_qp_bound(upper(row, 0));
+        } else {
+            result.umin.at(static_cast<std::size_t>(mapping.index)) =
+                tree_qp_bound(lower(row, 0));
+            result.umax.at(static_cast<std::size_t>(mapping.index)) =
+                tree_qp_bound(upper(row, 0));
+        }
+    }
+    return result;
+}
+
 } // namespace
 
 std::shared_ptr<TreeQpData>
-build_tree_qp(const cyqlone::FanOCPStorage &fan)
+build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
 {
     validate(fan);
 
@@ -265,6 +384,16 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan)
         std::vector<int>(
             static_cast<std::size_t>(horizon + 1),
             0));
+    data->bound_mapping.assign(
+        branches,
+        std::vector<std::vector<TreeQpBoundMapping>>(
+            static_cast<std::size_t>(horizon + 1)));
+
+    std::vector<NativeNodeBounds> native_node_bounds(
+        static_cast<std::size_t>(node_count));
+    native_node_bounds[0] = extract_native_bounds(root_ocp, 0);
+    bool native_bounds_supported = native_node_bounds[0].supported&&clipping;
+
     /*
      * Store the shared root constraints only once internally.
      */
@@ -283,7 +412,11 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan)
         const auto &ocp =
             fan.ocps[branch_index];
 
+        native_bounds_supported =
+            native_bounds_supported && supports_clipping_objective(ocp, 0);
+
         data->node_index[branch][0] = 0;
+        data->bound_mapping[branch][0] = native_node_bounds[0].mapping;
 
         /*
          * Each external branch still expects its own copy of
@@ -326,9 +459,36 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan)
             data->branch_nc[branch][stage] =
                 constraint_count;
 
+            native_node_bounds[static_cast<std::size_t>(node)] =
+                extract_native_bounds(ocp, stage);
+            const auto &bounds =
+                native_node_bounds[static_cast<std::size_t>(node)];
+            data->bound_mapping[branch][stage] = bounds.mapping;
+            native_bounds_supported =
+                native_bounds_supported && bounds.supported &&
+                supports_clipping_objective(ocp, stage);
+
             if (!terminal)
                 data->nk[node] = 1;
         }
+    }
+
+    for (int index = 0; index < state_size; ++index) {
+        const double initial = root_ocp.b(0)(index, 0);
+        const auto &root_bounds = native_node_bounds[0];
+        if (initial < root_bounds.xmin[static_cast<std::size_t>(index)] ||
+            initial > root_bounds.xmax[static_cast<std::size_t>(index)]) {
+            native_bounds_supported = false;
+            break;
+        }
+    }
+    data->native_bounds = native_bounds_supported;
+    if (data->native_bounds) {
+        data->root_xmin = native_node_bounds[0].xmin;
+        data->root_xmax = native_node_bounds[0].xmax;
+        std::fill(data->nc.begin(), data->nc.end(), 0);
+    } else {
+        data->bound_mapping.clear();
     }
 
     data->qp = std::make_unique<TreeQp>(
@@ -480,34 +640,40 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan)
         std::move(initial_state),
         0);
 
-    /*
-     * Deduplicated shared-root constraints.
-     *
-     * The identical root constraint block is inserted once.
-     */
-    auto root_C =
-        col_major(root_ocp.C(0));
+    if (data->native_bounds) {
+        auto &bounds = native_node_bounds[0];
+        qp.SetVector("umin", std::move(bounds.umin), 0);
+        qp.SetVector("umax", std::move(bounds.umax), 0);
+    } else {
+        /*
+         * Deduplicated shared-root constraints.
+         *
+         * The identical root constraint block is inserted once.
+         */
+        auto root_C =
+            col_major(root_ocp.C(0));
 
-    auto root_D =
-        col_major(root_ocp.D(0));
+        auto root_D =
+            col_major(root_ocp.D(0));
 
-    auto root_lower =
-        copy_vector(
-            root_ocp.b_min(0).data,
-            root_constraint_count);
+        auto root_lower =
+            copy_vector(
+                root_ocp.b_min(0).data,
+                root_constraint_count);
 
-    auto root_upper =
-        copy_vector(
-            root_ocp.b_max(0).data,
-            root_constraint_count);
+        auto root_upper =
+            copy_vector(
+                root_ocp.b_max(0).data,
+                root_constraint_count);
 
-    set_general_constraints(
-        qp,
-        std::move(root_C),
-        std::move(root_D),
-        std::move(root_lower),
-        std::move(root_upper),
-        0);
+        set_general_constraints(
+            qp,
+            std::move(root_C),
+            std::move(root_D),
+            std::move(root_lower),
+            std::move(root_upper),
+            0);
+    }
 
     /*
      * Construct each scenario branch.
@@ -607,39 +773,49 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan)
                     node);
             }
 
-            const int constraint_count =
-                data->nc[node];
+            if (data->native_bounds) {
+                auto &bounds = native_node_bounds[static_cast<std::size_t>(node)];
+                qp.SetVector("xmin", std::move(bounds.xmin), node);
+                qp.SetVector("xmax", std::move(bounds.xmax), node);
+                if (!terminal) {
+                    qp.SetVector("umin", std::move(bounds.umin), node);
+                    qp.SetVector("umax", std::move(bounds.umax), node);
+                }
+            } else {
+                const int constraint_count =
+                    data->nc[node];
 
-            auto C =
-                col_major(
-                    ocp.C(stage));
-
-            std::vector<double> D;
-
-            if (!terminal)
-            {
-                D =
+                auto C =
                     col_major(
-                        ocp.D(stage));
+                        ocp.C(stage));
+
+                std::vector<double> D;
+
+                if (!terminal)
+                {
+                    D =
+                        col_major(
+                            ocp.D(stage));
+                }
+
+                auto lower =
+                    copy_vector(
+                        ocp.b_min(stage).data,
+                        constraint_count);
+
+                auto upper =
+                    copy_vector(
+                        ocp.b_max(stage).data,
+                        constraint_count);
+
+                set_general_constraints(
+                    qp,
+                    std::move(C),
+                    std::move(D),
+                    std::move(lower),
+                    std::move(upper),
+                    node);
             }
-
-            auto lower =
-                copy_vector(
-                    ocp.b_min(stage).data,
-                    constraint_count);
-
-            auto upper =
-                copy_vector(
-                    ocp.b_max(stage).data,
-                    constraint_count);
-
-            set_general_constraints(
-                qp,
-                std::move(C),
-                std::move(D),
-                std::move(lower),
-                std::move(upper),
-                node);
         }
     }
 
@@ -664,7 +840,8 @@ create_tree_qp_solver(std::shared_ptr<TreeQpData> qp_data,
         std::make_unique<TdunesSolver>(solver_data->qp_data->qp.get());
     // std::cout << "created solver" << "\n";
 
-    if (solver_data->solver->SetOption("clipping", false) != 0)
+    if (solver_data->solver->SetOption(
+            "clipping", solver_data->qp_data->native_bounds) != 0)
         throw std::runtime_error("Failed to configure the treeQP clipping solver");
     if (solver_data->solver->SetOption("maxIter", max_iterations) != 0)
         throw std::runtime_error("Failed to set the treeQP maximum iteration count");
@@ -672,23 +849,39 @@ create_tree_qp_solver(std::shared_ptr<TreeQpData> qp_data,
         throw std::runtime_error("Failed to set the treeQP stationarity tolerance");
     solver_data->solver->SetOption(
         "regType", "TREEQP_ALWAYS_LEVENBERG_MARQUARDT");
-    solver_data->solver->TdunesOpts.checkLastActiveSet = 0;
+    solver_data->solver->TdunesOpts.checkLastActiveSet = 1;
 
-    solver_data->solver->SetOption("regValue", 1e-8);
-    solver_data->solver->SetOption("regTol", 1e-8);
-    solver_data->solver->TdunesOpts.lineSearchMaxIter = 60;
+    // Clipping needs stronger regularization on the active-state benchmarks.
+    const double regularization =
+        solver_data->qp_data->native_bounds ? 1e-2 : 1e-8;
+    solver_data->solver->SetOption("regValue", regularization);
+    solver_data->solver->SetOption("regTol", regularization);
+    solver_data->solver->TdunesOpts.lineSearchMaxIter =
+        solver_data->qp_data->native_bounds ? 50 : 60;
+
+    std::size_t dual_size = 0;
+    for (int block = 0; block < solver_data->solver->TdunesWork.Np; ++block)
+        dual_size += static_cast<std::size_t>(
+            solver_data->solver->TdunesWork.slambda[block].m);
+    solver_data->zero_dual.assign(dual_size, 0.0);
     
     return solver_data;
 }
 
 std::chrono::nanoseconds
 solve_tree_qp(const TreeQpData &qp_data,
-              TreeQpSolverData &solver_data) {
+              TreeQpSolverData &solver_data,
+              bool cold_start) {
     const TreeQp &qp = get_qp(qp_data);
     if (!solver_data.solver)
         throw std::logic_error("treeQP solver has not been initialized");
 
     const auto start = std::chrono::steady_clock::now();
+    if (cold_start) {
+        treeqp_tdunes_set_dual_initialization(
+            solver_data.zero_dual.data(),
+            &solver_data.solver->TdunesWork);
+    }
     solver_data.last_status =
         solver_data.solver->Solve(const_cast<TreeQp *>(&qp));
 
@@ -824,6 +1017,29 @@ get_solution_tree_qp(
         double *ineq_out =
             destination.inequality_multipliers.data();
 
+        if (mapping.native_bounds) {
+            for (int stage = 0; stage <= mapping.horizon; ++stage) {
+                const int node = mapping.node_index[branch][stage];
+                const auto &bound_mapping = mapping.bound_mapping[branch][stage];
+                if (bound_mapping.size() !=
+                    static_cast<std::size_t>(mapping.branch_nc[branch][stage])) {
+                    throw std::logic_error("Invalid native-bound multiplier mapping");
+                }
+                for (const auto &bound : bound_mapping) {
+                    double multiplier = 0;
+                    if (bound.kind == TreeQpBoundMapping::Kind::Input) {
+                        treeqp_blasfeo_unpack_dvec(
+                            1, &qp.QpOut.mu_u[node], bound.index, &multiplier);
+                    } else if (stage > 0) {
+                        treeqp_blasfeo_unpack_dvec(
+                            1, &qp.QpOut.mu_x[node], bound.index, &multiplier);
+                    }
+                    if (stage == 0)
+                        multiplier /= mapping.num_branches;
+                    *ineq_out++ = multiplier;
+                }
+            }
+        } else {
         /*
          * Distribute treeQP's shared root multiplier across the
          * duplicated branch constraints expected by FanOCPStorage.
@@ -883,6 +1099,7 @@ get_solution_tree_qp(
 
             ineq_out +=
                 branch_stage_nc;
+        }
         }
 
         // Initial-state and branch-specific dynamics multipliers.
@@ -972,6 +1189,16 @@ void update_x0_tree_qp(
     const double *next_state = branch_solution.data() + state_offset;
     std::vector<double> next_state_vector(
         next_state, next_state + static_cast<std::ptrdiff_t>(state_size));
+
+    if (qp_data.native_bounds) {
+        for (std::size_t index = 0; index < state_size; ++index) {
+            if (next_state_vector[index] < qp_data.root_xmin[index] ||
+                next_state_vector[index] > qp_data.root_xmax[index]) {
+                throw std::invalid_argument(
+                    "Updated initial state violates a TreeQP state bound");
+            }
+        }
+    }
 
     tree_qp_in_set_x0_colmaj(&qp.QpIn, next_state_vector.data());
     qp_data.initial_state = next_state_vector;

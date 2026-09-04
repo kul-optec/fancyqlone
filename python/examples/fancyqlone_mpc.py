@@ -107,6 +107,7 @@ def run_mpc(num_steps: int = 35, plot: bool = True) -> tuple[np.ndarray, np.ndar
     solver = FanCyQPALM(
         fan,
         processors_per_branch=2,
+        vector_length=4,
         backend_settings=backend_settings,
         settings=settings,
     )
@@ -144,7 +145,7 @@ def run_mpc(num_steps: int = 35, plot: bool = True) -> tuple[np.ndarray, np.ndar
             f"state=({state[0]:+.4f}, {state[1]:+.4f}) "
             f"inner={solver.stats.inner_iter} "
             f"outer={solver.stats.outer_iter} "
-            f"time={solver.stats.timings.total.wall_time.microseconds/1000} ms "
+            f"solve_time={solver.stats.timings.total.wall_time.microseconds/1000} ms "
             f"total_time={1000*(end_time - start_time):.3f} ms "
             f"kkt={max(error.stationarity, error.equality_residual):.2e}"
         )

@@ -32,6 +32,7 @@ autodoc_default_options = {
     "class-doc-from": "class",
     "special-members": "__init__, __call__",
 }
+numpydoc_class_members_toctree = False
 
 breathe_projects = {"cyqlone": "../build/xml"}
 breathe_default_project = "cyqlone"

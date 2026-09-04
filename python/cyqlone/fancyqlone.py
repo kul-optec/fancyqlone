@@ -115,6 +115,7 @@ class FanCyQPALM:
         self,
         problem: FanOCP,
         processors_per_branch: int = 1,
+        vector_length: Optional[int] = None,
         backend_settings: Optional[CyQPALMBackendSettings] = None,
         settings: Optional[Settings] = None,
     ):
@@ -124,7 +125,16 @@ class FanCyQPALM:
             raise ValueError("processors_per_branch must be a positive integer")
 
         problem._validate_unchanged_dimensions()
-        native_type = _select_native_solver(processors_per_branch)
+        if vector_length is not None:
+            if vector_length not in (1, 2, 4, 8):
+                raise ValueError("vector_length must be 1, 2, 4, or 8")
+            module_name = "scalar" if vector_length == 1 else f"simd{vector_length}"
+            module = getattr(_native, module_name, None)
+            if module is None or not hasattr(module, "_FanCyQPALM"):
+                raise RuntimeError(f"FanCyQPALM implementation for vector_length={vector_length} is not available")
+            native_type = getattr(module, "_FanCyQPALM")
+        else:
+            native_type = _select_native_solver(processors_per_branch)
         self._problem = problem
         self._native_solver = native_type(
             list(problem.branches),

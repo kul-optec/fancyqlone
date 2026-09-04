@@ -50,6 +50,7 @@ class FanCyQPALM:
         self,
         problem: FanOCP,
         processors_per_branch: int = ...,
+        vector_length: int = ...,
         backend_settings: Optional[CyQPALMBackendSettings] = ...,
         settings: Optional[Settings] = ...,
     ) -> None: ...
