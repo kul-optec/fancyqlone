@@ -15,9 +15,17 @@ endif()
 add_executable(spring-mass "spring-mass.cpp" "benchmark-reporter.cpp")
 target_link_libraries(spring-mass PRIVATE benchmark::benchmark CLI11::CLI11 fmt::fmt)
 target_link_libraries(spring-mass PRIVATE cyqlone::qpalm cyqlone::example-problems)
+
+add_executable(centroidal-quadruped "centroidal-quadruped.cpp" "benchmark-reporter.cpp")
+target_link_libraries(centroidal-quadruped PRIVATE benchmark::benchmark CLI11::CLI11 fmt::fmt)
+target_link_libraries(centroidal-quadruped PRIVATE cyqlone::qpalm cyqlone::example-problems)
+
 if (WITH_HPIPM)
     target_sources(spring-mass PRIVATE hpipm.cpp)
     target_link_libraries(spring-mass PRIVATE hpipm)
     target_compile_definitions(spring-mass PRIVATE WITH_HPIPM)
 
+    target_sources(centroidal-quadruped PRIVATE hpipm.cpp)
+    target_link_libraries(centroidal-quadruped PRIVATE hpipm)
+    target_compile_definitions(centroidal-quadruped PRIVATE WITH_HPIPM)
 endif()

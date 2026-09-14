@@ -116,13 +116,15 @@ if (CYQLONE_WITH_QPALM)
     if (CYQLONE_WITH_EXAMPLE_PROBLEMS)
         find_package(Eigen3 REQUIRED)
         add_library(example-problems
+            "example-problems/src/centroidal-quadruped.cpp"
             "example-problems/src/csv.cpp"
             "example-problems/src/platooning.cpp"
             "example-problems/src/spring-mass.cpp"
         )
         target_sources(example-problems PUBLIC FILE_SET HEADERS
             BASE_DIRS "example-problems/include"
-            FILES     "example-problems/include/cyqlone/qpalm/example-problems/platooning.hpp"
+            FILES     "example-problems/include/cyqlone/qpalm/example-problems/centroidal-quadruped.hpp"
+                      "example-problems/include/cyqlone/qpalm/example-problems/platooning.hpp"
                       "example-problems/include/cyqlone/qpalm/example-problems/zoh.hpp"
                       "example-problems/include/cyqlone/qpalm/example-problems/csv.hpp"
                       "example-problems/include/cyqlone/qpalm/example-problems/spring-mass.hpp"

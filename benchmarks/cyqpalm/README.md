@@ -58,6 +58,18 @@ For more details on the available benchmark parameters, run:
 ./benchmark.sh benchmark --help
 ```
 
+## Quadruped benchmark
+
+Run the QUADCMPC1 forward-motion problem at different sampling resolutions:
+```sh
+./benchmark.sh benchmark-quadruped -N 32 -N 64 -N 128 -N 256
+```
+The prediction window is fixed at 0.64 seconds, with `dt = 0.64 / N`. Its four
+alternating diagonal-contact phases each last 0.16 seconds (`N / 4` steps).
+Use a positive multiple of four for `N`. Increasing `N` refines the sampling of
+the same forward-motion reference and gait. The FancyQLone quadruped benchmark
+uses the same time-step and gait scaling.
+
 ## Docker
 
 If building locally is not an option, Docker files are provided for both GCC and Clang.

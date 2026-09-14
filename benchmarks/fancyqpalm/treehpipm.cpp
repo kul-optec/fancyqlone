@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <chrono>
+#include <cmath>
 #include <cstddef>
 #include <memory>
 #include <numeric>
@@ -39,6 +40,18 @@ std::vector<real_t> eye(index_t n) {
     for (index_t i = 0; i < n; ++i)
         data[static_cast<std::size_t>(i + i * n)] = real_t{1};
     return data;
+}
+
+template <class T, class I, class S, guanaqo::StorageOrder O>
+auto prepare_hpipm_bounds(guanaqo::MatrixView<T, I, S, O> bounds) {
+    std::vector<real_t> values(static_cast<std::size_t>(bounds.rows));
+    std::vector<real_t> mask(static_cast<std::size_t>(bounds.rows));
+    for (I i = 0; i < bounds.rows; ++i) {
+        const auto finite = std::isfinite(bounds(i, 0));
+        values[static_cast<std::size_t>(i)] = finite ? bounds(i, 0) : real_t{0};
+        mask[static_cast<std::size_t>(i)]   = finite ? real_t{1} : real_t{0};
+    }
+    return std::pair{std::move(values), std::move(mask)};
 }
 
 struct FanTreeIndex {
@@ -307,8 +320,12 @@ guanaqo::MatrixView<real_t, index_t> ug0 = {{
     d_tree_ocp_qp_set_R(0, const_cast<real_t *>(compress_col_major(R0).data()), d.qp.get());
     d_tree_ocp_qp_set_r(0, const_cast<real_t *>(compress_col_major(r0).data()), d.qp.get());
     d_tree_ocp_qp_set_D(0, const_cast<real_t *>(compress_col_major(D0).data()), d.qp.get());
-    d_tree_ocp_qp_set_lg(0, const_cast<real_t *>(compress_col_major(lg0).data()), d.qp.get());
-    d_tree_ocp_qp_set_ug(0, const_cast<real_t *>(compress_col_major(ug0).data()), d.qp.get());
+    auto [lg0_values, lg0_mask] = prepare_hpipm_bounds(lg0);
+    auto [ug0_values, ug0_mask] = prepare_hpipm_bounds(ug0);
+    d_tree_ocp_qp_set_lg(0, lg0_values.data(), d.qp.get());
+    d_tree_ocp_qp_set_lg_mask(0, lg0_mask.data(), d.qp.get());
+    d_tree_ocp_qp_set_ug(0, ug0_values.data(), d.qp.get());
+    d_tree_ocp_qp_set_ug_mask(0, ug0_mask.data(), d.qp.get());
     d_tree_ocp_qp_set_Q(0, const_cast<real_t *>(compress_col_major(Q0).data()), d.qp.get());
     d_tree_ocp_qp_set_S(0, const_cast<real_t *>(compress_col_major(S0).data()), d.qp.get());
     d_tree_ocp_qp_set_q(0, const_cast<real_t *>(compress_col_major(q0).data()), d.qp.get());
@@ -332,10 +349,12 @@ guanaqo::MatrixView<real_t, index_t> ug0 = {{
             d_tree_ocp_qp_set_q(node,
                 const_cast<real_t *>(ocp.q(stage).data), d.qp.get());
             d_tree_ocp_qp_set_C(node, C.data(), d.qp.get());
-            d_tree_ocp_qp_set_lg(node,
-                const_cast<real_t *>(ocp.b_min(stage).data), d.qp.get());
-            d_tree_ocp_qp_set_ug(node,
-                const_cast<real_t *>(ocp.b_max(stage).data), d.qp.get());
+            auto [lg, lg_mask] = prepare_hpipm_bounds(ocp.b_min(stage));
+            auto [ug, ug_mask] = prepare_hpipm_bounds(ocp.b_max(stage));
+            d_tree_ocp_qp_set_lg(node, lg.data(), d.qp.get());
+            d_tree_ocp_qp_set_lg_mask(node, lg_mask.data(), d.qp.get());
+            d_tree_ocp_qp_set_ug(node, ug.data(), d.qp.get());
+            d_tree_ocp_qp_set_ug_mask(node, ug_mask.data(), d.qp.get());
 
             if (stage < horizon) {
                 auto R = compress_col_major(ocp.R(stage));

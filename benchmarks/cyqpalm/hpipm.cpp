@@ -4,9 +4,11 @@
 #include <batmat/assume.hpp>
 #include <guanaqo/mat-view.hpp>
 #include <chrono>
+#include <cmath>
 #include <cstddef>
 #include <memory>
 #include <numeric>
+#include <utility>
 
 #include <hpipm_common.h>
 #include <hpipm_d_ocp_qp.h>
@@ -52,6 +54,18 @@ static std::vector<real_t> eye(index_t n) {
     return data;
 }
 
+template <class T, class I, class S, guanaqo::StorageOrder O>
+static auto prepare_hpipm_bounds(guanaqo::MatrixView<T, I, S, O> bounds) {
+    std::vector<real_t> values(static_cast<size_t>(bounds.rows));
+    std::vector<real_t> mask(static_cast<size_t>(bounds.rows));
+    for (I i = 0; i < bounds.rows; ++i) {
+        const auto finite = std::isfinite(bounds(i, 0));
+        values[static_cast<size_t>(i)] = finite ? bounds(i, 0) : real_t{0};
+        mask[static_cast<size_t>(i)]   = finite ? real_t{1} : real_t{0};
+    }
+    return std::pair{std::move(values), std::move(mask)};
+}
+
 std::shared_ptr<HPIPMQPData> build_hpipm_qp(const cyqlone::LinearOCPStorage &ocp) {
     HPIPMQPData d;
 
@@ -85,8 +99,12 @@ std::shared_ptr<HPIPMQPData> build_hpipm_qp(const cyqlone::LinearOCPStorage &ocp
         d_ocp_qp_set_b(j, const_cast<real_t *>(ocp.b(j + 1).data), d.qp.get());
         d_ocp_qp_set_C(j, compress_col_major(ocp.C(j)).data(), d.qp.get());
         d_ocp_qp_set_D(j, compress_col_major(ocp.D(j)).data(), d.qp.get());
-        d_ocp_qp_set_lg(j, const_cast<real_t *>(ocp.b_min(j).data), d.qp.get());
-        d_ocp_qp_set_ug(j, const_cast<real_t *>(ocp.b_max(j).data), d.qp.get());
+        auto [lg, lg_mask] = prepare_hpipm_bounds(ocp.b_min(j));
+        auto [ug, ug_mask] = prepare_hpipm_bounds(ocp.b_max(j));
+        d_ocp_qp_set_lg(j, lg.data(), d.qp.get());
+        d_ocp_qp_set_lg_mask(j, lg_mask.data(), d.qp.get());
+        d_ocp_qp_set_ug(j, ug.data(), d.qp.get());
+        d_ocp_qp_set_ug_mask(j, ug_mask.data(), d.qp.get());
         d_ocp_qp_set_Q(j, compress_col_major(ocp.Q(j)).data(), d.qp.get());
         d_ocp_qp_set_R(j, compress_col_major(ocp.R(j)).data(), d.qp.get());
         d_ocp_qp_set_S(j, compress_col_major(ocp.S(j)).data(), d.qp.get());
@@ -96,8 +114,12 @@ std::shared_ptr<HPIPMQPData> build_hpipm_qp(const cyqlone::LinearOCPStorage &ocp
     d_ocp_qp_set_Q(N, compress_col_major(ocp.Q(N)).data(), d.qp.get());
     d_ocp_qp_set_q(N, const_cast<real_t *>(ocp.q(N).data), d.qp.get());
     d_ocp_qp_set_C(N, compress_col_major(ocp.C(N)).data(), d.qp.get());
-    d_ocp_qp_set_lg(N, const_cast<real_t *>(ocp.b_min(N).data), d.qp.get());
-    d_ocp_qp_set_ug(N, const_cast<real_t *>(ocp.b_max(N).data), d.qp.get());
+    auto [lg, lg_mask] = prepare_hpipm_bounds(ocp.b_min(N));
+    auto [ug, ug_mask] = prepare_hpipm_bounds(ocp.b_max(N));
+    d_ocp_qp_set_lg(N, lg.data(), d.qp.get());
+    d_ocp_qp_set_lg_mask(N, lg_mask.data(), d.qp.get());
+    d_ocp_qp_set_ug(N, ug.data(), d.qp.get());
+    d_ocp_qp_set_ug_mask(N, ug_mask.data(), d.qp.get());
 
     return std::make_shared<HPIPMQPData>(std::move(d));
 }
@@ -117,11 +139,11 @@ std::shared_ptr<HPIPMSolverData> create_hpipm_solver(std::shared_ptr<HPIPMQPData
     d.arg            = std::make_unique<struct d_ocp_qp_ipm_arg>();
     d_ocp_qp_ipm_arg_create(qp_data->dim.get(), d.arg.get(), d.solver_arg_mem.get());
 
-    int iter_max    = 100;
+    int iter_max    = 1000;
     double tol_stat = 1e-8;
     double tol_eq   = 1e-8;
     double tol_ineq = 1e-8;
-    double tol_comp = 1e-5;
+    double tol_comp = 1e-8;
     d_ocp_qp_ipm_arg_set_default(hpipm_mode::BALANCE, d.arg.get());
     d_ocp_qp_ipm_arg_set_iter_max(&iter_max, d.arg.get());
     d_ocp_qp_ipm_arg_set_tol_stat(&tol_stat, d.arg.get());

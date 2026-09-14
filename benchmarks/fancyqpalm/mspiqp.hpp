@@ -34,8 +34,8 @@ struct PIQPBranchLayout {
     // Dynamics rows for transitions 0->1, 1->2, ..., N-1->N.
     std::vector<int> dynamics_rows;
 
-    // General inequality rows for stages 0 ... N.
-    std::vector<int> inequality_rows;
+    // PIQP row for each original general constraint, or -1 if fully unbounded.
+    std::vector<std::vector<int>> inequality_rows;
     std::vector<int> inequality_sizes;
 };
 

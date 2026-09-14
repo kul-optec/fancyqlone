@@ -35,6 +35,8 @@ class CyqloneRecipe(ConanFile):
         "with_ska_sort": False,
         "with_matio": True,
         "with_zlib": True,
+        "quadruple_sum_line_search": False,
+        
     }
     options = {
         "shared": [True, False],

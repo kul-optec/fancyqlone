@@ -158,6 +158,24 @@ benchmark() {
     OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" OMP_PROC_BIND=close OMP_WAIT_POLICY=ACTIVE\
         "${build_folder}/spring-mass" "$@"
 }
+
+benchmark_quadruped() {
+    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f conan.json ]]; then
+        echo "Conan files not found, please run the deps and build steps first." >&2; exit 1
+    fi
+    build_folder="$(_jq -r '.graph.nodes."0".build_folder' conan.json)"
+    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' conan.json)"
+    set +ux
+    source "${generators_folder}/conanrun.sh"
+    set -ux
+    if [[ ! -x "${build_folder}/centroidal-quadruped" ]]; then
+        echo "Quadruped benchmark executable not found, please run the build step first." >&2; exit 1
+    fi
+    OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" \
+        OMP_PROC_BIND=close OMP_WAIT_POLICY=ACTIVE \
+        "${build_folder}/centroidal-quadruped" -p "${OMP_NUM_THREADS}" -J 8 \
+        --benchmark_repetitions=1 --benchmark_min_time=0.1s "$@"
+}
 # Run a benchmark command
 benchmark2() {
     if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f conan.json ]]; then
@@ -315,6 +333,8 @@ main() {
             plot_scaling_states2 ;;
         benchmark)
             benchmark "$@" ;;
+        benchmark-quadruped)
+            benchmark_quadruped "$@" ;;
         clean)
             clean ;;
         help|*)
@@ -331,6 +351,7 @@ main() {
             echo "  plot-scaling-states       - Plot the results of the states scaling benchmark"   >&2
             echo "  all                       - Run all commands above in sequence"                 >&2
             echo "  benchmark [...]           - Run a custom benchmark"                             >&2
+            echo "  benchmark-quadruped [...] - Run the centroidal quadruped benchmark"            >&2
             echo "  clean                     - Remove all build files and benchmark results"       >&2
             echo ""                                                                                 >&2
             echo "Use $0 deps --help for more information on dependency installation options."      >&2

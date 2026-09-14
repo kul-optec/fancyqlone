@@ -181,6 +181,62 @@ void add_identity_block(
     }
 }
 
+bool is_fully_unbounded(real_t lower, real_t upper)
+{
+    return std::isinf(lower) && lower < 0 &&
+           std::isinf(upper) && upper > 0;
+}
+
+template <class TLower, class TUpper>
+int count_bounded_rows(const TLower &lower, const TUpper &upper)
+{
+    BATMAT_ASSERT(lower.rows == upper.rows);
+    int count = 0;
+    for (decltype(lower.rows) row = 0; row < lower.rows; ++row)
+        count += !is_fully_unbounded(lower(row, 0), upper(row, 0));
+    return count;
+}
+
+template <class TLower, class TUpper>
+void map_bounded_rows(
+    std::vector<int> &row_mapping,
+    PIQPVector &compact_lower,
+    PIQPVector &compact_upper,
+    int &next_row,
+    const TLower &lower,
+    const TUpper &upper)
+{
+    BATMAT_ASSERT(lower.rows == upper.rows);
+    row_mapping.assign(static_cast<std::size_t>(lower.rows), -1);
+    for (decltype(lower.rows) row = 0; row < lower.rows; ++row) {
+        if (is_fully_unbounded(lower(row, 0), upper(row, 0)))
+            continue;
+        row_mapping[static_cast<std::size_t>(row)] = next_row;
+        compact_lower[next_row] = lower(row, 0);
+        compact_upper[next_row] = upper(row, 0);
+        ++next_row;
+    }
+}
+
+template <class T, class I, class S, guanaqo::StorageOrder Order>
+void add_mapped_rows(
+    std::vector<PIQPTriplet> &triplets,
+    const std::vector<int> &row_mapping,
+    int column_offset,
+    guanaqo::MatrixView<T, I, S, Order> matrix)
+{
+    BATMAT_ASSERT(row_mapping.size() == static_cast<std::size_t>(matrix.rows));
+    for (I column = 0; column < matrix.cols; ++column) {
+        for (I row = 0; row < matrix.rows; ++row) {
+            const int destination_row = row_mapping[static_cast<std::size_t>(row)];
+            const real_t value = static_cast<real_t>(matrix(row, column));
+            if (destination_row >= 0 && value != real_t{0})
+                triplets.emplace_back(destination_row, column_offset + static_cast<int>(column),
+                                      value);
+        }
+    }
+}
+
 } // namespace
 std::shared_ptr<PIQPFanQPData>
 build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
@@ -237,9 +293,8 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
             static_cast<std::size_t>(N + 1),
             -1);
 
-        layout.inequality_rows.assign(
-            static_cast<std::size_t>(N + 1),
-            -1);
+        layout.inequality_rows.resize(
+            static_cast<std::size_t>(N + 1));
 
         layout.inequality_sizes.assign(
             static_cast<std::size_t>(N + 1),
@@ -280,10 +335,9 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
                 static_cast<std::size_t>(branch)];
 
         for (int stage = 0; stage <= N; ++stage) {
-            number_of_inequalities +=
-                stage < N
-                    ? static_cast<int>(ocp.dim.ny)
-                    : static_cast<int>(ocp.dim.ny_N);
+            number_of_inequalities += count_bounded_rows(
+                ocp.b_min(stage),
+                ocp.b_max(stage));
         }
     }
 
@@ -415,36 +469,28 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
         const auto lower0 = ocp.b_min(0);
         const auto upper0 = ocp.b_max(0);
 
-        layout.inequality_rows[0] =
-            inequality_row;
-
         layout.inequality_sizes[0] =
             static_cast<int>(C0.rows);
 
-        add_block(
-            G_triplets,
+        map_bounded_rows(
+            layout.inequality_rows[0],
+            data->h_lower,
+            data->h_upper,
             inequality_row,
+            lower0,
+            upper0);
+
+        add_mapped_rows(
+            G_triplets,
+            layout.inequality_rows[0],
             data->root_x_offset,
             C0);
 
-        add_block(
+        add_mapped_rows(
             G_triplets,
-            inequality_row,
+            layout.inequality_rows[0],
             data->root_u_offset,
             D0);
-
-        copy_vector(
-            data->h_lower,
-            inequality_row,
-            lower0);
-
-        copy_vector(
-            data->h_upper,
-            inequality_row,
-            upper0);
-
-        inequality_row +=
-            static_cast<int>(C0.rows);
 
         for (int stage = 1; stage <= N; ++stage) {
             const auto &current =
@@ -563,40 +609,34 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
             const auto lower = ocp.b_min(stage);
             const auto upper = ocp.b_max(stage);
 
-            layout.inequality_rows[
-                static_cast<std::size_t>(stage)] =
-                inequality_row;
-
             layout.inequality_sizes[
                 static_cast<std::size_t>(stage)] =
                 static_cast<int>(Ck.rows);
 
-            add_block(
-                G_triplets,
+            auto &row_mapping = layout.inequality_rows[
+                static_cast<std::size_t>(stage)];
+
+            map_bounded_rows(
+                row_mapping,
+                data->h_lower,
+                data->h_upper,
                 inequality_row,
+                lower,
+                upper);
+
+            add_mapped_rows(
+                G_triplets,
+                row_mapping,
                 current.x,
                 Ck);
 
             if (stage < N) {
-                add_block(
+                add_mapped_rows(
                     G_triplets,
-                    inequality_row,
+                    row_mapping,
                     current.u,
                     ocp.D(stage));
             }
-
-            copy_vector(
-                data->h_lower,
-                inequality_row,
-                lower);
-
-            copy_vector(
-                data->h_upper,
-                inequality_row,
-                upper);
-
-            inequality_row +=
-                static_cast<int>(Ck.rows);
         }
     }
 
@@ -825,18 +865,19 @@ get_solution_piqp_fan(
             branch_solution.inequality_multipliers.data();
 
         for (int stage = 0; stage <= N; ++stage) {
-            const int row =
-                layout.inequality_rows[
-                    static_cast<std::size_t>(stage)];
-
             const int count =
                 layout.inequality_sizes[
                     static_cast<std::size_t>(stage)];
 
+            const auto &row_mapping =
+                layout.inequality_rows[
+                    static_cast<std::size_t>(stage)];
+
             for (int i = 0; i < count; ++i) {
-                inequality_out[i] =
-                    result.z_u[row + i] -
-                    result.z_l[row + i];
+                const int row = row_mapping[static_cast<std::size_t>(i)];
+                inequality_out[i] = row >= 0
+                                        ? result.z_u[row] - result.z_l[row]
+                                        : real_t{0};
             }
 
             inequality_out += count;
