@@ -680,7 +680,7 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
 }
 std::shared_ptr<PIQPFanSolverData>
 create_piqp_fan_solver(
-    std::shared_ptr<PIQPFanQPData> qp_data)
+    std::shared_ptr<PIQPFanQPData> qp_data, real_t tol)
 {
     if (!qp_data)
         throw std::invalid_argument(
@@ -704,11 +704,11 @@ create_piqp_fan_solver(
     solver.settings().verbose = false;
     solver.settings().compute_timings = true;
     solver.settings().max_iter = 100;
-    solver.settings().eps_abs = 1e-8;
+    solver.settings().eps_abs = tol;
     solver.settings().eps_rel = 0.0; // HPIPM and Cyqlone use absolute tolerances
 
     solver.settings().check_duality_gap = true;
-    solver.settings().eps_duality_gap_abs = 1e-8;
+    solver.settings().eps_duality_gap_abs = tol;
     solver.settings().eps_duality_gap_rel = 0.0;
 
     solver.setup(

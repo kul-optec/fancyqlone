@@ -184,6 +184,10 @@ if(WITH_TREEQP)
     target_compile_definitions(spring-mass2 PRIVATE
         WITH_TREEQP=1
     )
+
+    target_sources(centroidal-quadruped PRIVATE treeqp.cpp)
+    target_link_libraries(centroidal-quadruped PRIVATE treeqp::treeqp)
+    target_compile_definitions(centroidal-quadruped PRIVATE WITH_TREEQP=1)
 endif()
 # -----------------------------------------------------------------------------
 # Tests

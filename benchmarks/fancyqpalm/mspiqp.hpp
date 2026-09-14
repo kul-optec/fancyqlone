@@ -82,7 +82,7 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan);
 
 std::shared_ptr<PIQPFanSolverData>
 create_piqp_fan_solver(
-    std::shared_ptr<PIQPFanQPData> qp_data);
+    std::shared_ptr<PIQPFanQPData> qp_data, real_t tol=1e-8);
 
 std::chrono::nanoseconds
 solve_piqp_fan(PIQPFanSolverData &solver_data);

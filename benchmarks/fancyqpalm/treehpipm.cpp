@@ -374,7 +374,7 @@ guanaqo::MatrixView<real_t, index_t> ug0 = {{
 
 std::shared_ptr<HPIPMTreeSolverData>
 create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
-                         int warm_start, int mode) {
+                         int warm_start, int mode, real_t tol) {
     BATMAT_ASSERT(qp_data);
     HPIPMTreeSolverData d;
 
@@ -390,10 +390,10 @@ create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
                                   d.solver_arg_mem.get());
 
     int iter_max    = 100;
-    double tol_stat = 1e-8;
-    double tol_eq   = 1e-8;
-    double tol_ineq = 1e-8;
-    double tol_comp = 1e-8;
+    double tol_stat = tol;
+    double tol_eq   = tol;
+    double tol_ineq = tol;
+    double tol_comp = tol;
     if (mode == 0) {
         d_tree_ocp_qp_ipm_arg_set_default(hpipm_mode::SPEED, d.arg.get());
     }

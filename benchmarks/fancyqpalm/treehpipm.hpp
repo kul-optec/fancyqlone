@@ -85,7 +85,7 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan);
 
 std::shared_ptr<HPIPMTreeSolverData>
 create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
-                         int warm_start, int mode = 0);
+                         int warm_start, int mode = 0, real_t tol = 1e-8);
 
 std::chrono::nanoseconds
 solve_hpipm_tree(const HPIPMTreeQPData &qp_data,

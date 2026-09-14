@@ -33,7 +33,7 @@ struct CentroidalQuadrupedParams {
         9.33810799e-06, -4.33680869e-19, 6.88650704e-02,
     };
     std::array<real_t, 12> state_weights{
-        2, 2, 10, 0.25, 0.25, 10, 0.2, 0.2, 0.2, 0, 0, 0.3,
+        2, 2, 10, 0.25, 0.25, 10, 0.2, 0.2, 0.2, 1e-10, 1e-10, 0.3,
     };
     std::array<real_t, 12> force_weights{
         1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6,

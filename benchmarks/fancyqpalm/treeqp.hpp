@@ -28,6 +28,7 @@ struct TreeQpData {
     std::vector<int> nc;
     std::vector<int> nk;
     bool native_bounds = false;
+    bool shared_root_constraints = true;
     std::vector<double> initial_state;
     std::vector<double> root_xmin;
     std::vector<double> root_xmax;

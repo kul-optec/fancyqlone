@@ -16,6 +16,7 @@ extern "C" {
 #include <functional>
 #include <memory>
 #include <stdexcept>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -50,6 +51,10 @@ bool nearly_equal(double first,
                   double absolute_tolerance = 1e-12,
                   double relative_tolerance = 1e-12)
 {
+    if (first == second)
+        return true;
+    if (!std::isfinite(first) || !std::isfinite(second))
+        return false;
     const double difference = std::abs(first - second);
     const double scale =
         std::max({1.0, std::abs(first), std::abs(second)});
@@ -58,7 +63,7 @@ bool nearly_equal(double first,
            absolute_tolerance + relative_tolerance * scale;
 }
 
-void validate_identical_root_constraints(
+bool identical_root_constraints(
     const cyqlone::FanOCPStorage &fan)
 {
     const auto &reference = fan.ocps.front();
@@ -75,9 +80,7 @@ void validate_identical_root_constraints(
 
         if (static_cast<int>(candidate.dim.ny) != ny)
         {
-            throw std::invalid_argument(
-                "Root constraints cannot be deduplicated because "
-                "the branches have different root constraint counts");
+            return false;
         }
 
         for (int row = 0; row < ny; ++row)
@@ -88,9 +91,7 @@ void validate_identical_root_constraints(
                         reference.C(0)(row, column),
                         candidate.C(0)(row, column)))
                 {
-                    throw std::invalid_argument(
-                        "Root constraints cannot be deduplicated because "
-                        "the branches have different root C matrices");
+                    return false;
                 }
             }
 
@@ -100,9 +101,7 @@ void validate_identical_root_constraints(
                         reference.D(0)(row, column),
                         candidate.D(0)(row, column)))
                 {
-                    throw std::invalid_argument(
-                        "Root constraints cannot be deduplicated because "
-                        "the branches have different root D matrices");
+                    return false;
                 }
             }
 
@@ -110,21 +109,18 @@ void validate_identical_root_constraints(
                     reference.b_min(0)(row, 0),
                     candidate.b_min(0)(row, 0)))
             {
-                throw std::invalid_argument(
-                    "Root constraints cannot be deduplicated because "
-                    "the branches have different root lower bounds");
+                return false;
             }
 
             if (!nearly_equal(
                     reference.b_max(0)(row, 0),
                     candidate.b_max(0)(row, 0)))
             {
-                throw std::invalid_argument(
-                    "Root constraints cannot be deduplicated because "
-                    "the branches have different root upper bounds");
+                return false;
             }
         }
     }
+    return true;
 }
 void validate(const cyqlone::FanOCPStorage &fan) {
     if (fan.ocps.empty())
@@ -157,12 +153,20 @@ const TreeQp &get_qp(const TreeQpData &data) {
     return *data.qp;
 }
 
+double tree_qp_bound(double value) {
+    if (std::isinf(value))
+        return std::copysign(static_cast<double>(TREEQP_INF), value);
+    return value;
+}
+
 void set_general_constraints(TreeQp &qp,
                              std::vector<double> C,
                              std::vector<double> D,
                              std::vector<double> lower,
                              std::vector<double> upper,
                              int node) {
+    std::transform(lower.begin(), lower.end(), lower.begin(), tree_qp_bound);
+    std::transform(upper.begin(), upper.end(), upper.begin(), tree_qp_bound);
     tree_qp_in_set_node_general_constraints(
         C.empty() ? nullptr : C.data(),
         D.empty() ? nullptr : D.data(),
@@ -204,12 +208,6 @@ struct NativeNodeBounds {
     std::vector<double> umax;
     std::vector<TreeQpBoundMapping> mapping;
 };
-
-double tree_qp_bound(double value) {
-    if (std::isinf(value))
-        return std::copysign(static_cast<double>(TREEQP_INF), value);
-    return value;
-}
 
 template <class MatrixView>
 bool is_diagonal(const MatrixView &matrix) {
@@ -319,14 +317,8 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
 {
     validate(fan);
 
-    /*
-     * All branches share the same treeQP root node. Consequently,
-     * root constraints can be represented once only if the branch
-     * descriptions contain identical root constraints.
-     */
-    validate_identical_root_constraints(fan);
-
     auto data = std::make_shared<TreeQpData>();
+    data->shared_root_constraints = identical_root_constraints(fan);
 
     const int branches =
         static_cast<int>(fan.ocps.size());
@@ -392,13 +384,14 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
     std::vector<NativeNodeBounds> native_node_bounds(
         static_cast<std::size_t>(node_count));
     native_node_bounds[0] = extract_native_bounds(root_ocp, 0);
-    bool native_bounds_supported = native_node_bounds[0].supported&&clipping;
+    bool native_bounds_supported = native_node_bounds[0].supported && clipping &&
+                                   data->shared_root_constraints;
 
-    /*
-     * Store the shared root constraints only once internally.
-     */
-    const int root_constraint_count =
-        static_cast<int>(root_ocp.dim.ny);
+    // Deduplicate identical roots; otherwise stack all scenario constraints.
+    int root_constraint_count = static_cast<int>(root_ocp.dim.ny);
+    if (!data->shared_root_constraints)
+        for (std::size_t branch = 1; branch < fan.ocps.size(); ++branch)
+            root_constraint_count += static_cast<int>(fan.ocps[branch].dim.ny);
 
     data->nc[0] = root_constraint_count;
 
@@ -645,26 +638,23 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
         qp.SetVector("umin", std::move(bounds.umin), 0);
         qp.SetVector("umax", std::move(bounds.umax), 0);
     } else {
-        /*
-         * Deduplicated shared-root constraints.
-         *
-         * The identical root constraint block is inserted once.
-         */
-        auto root_C =
-            col_major(root_ocp.C(0));
-
-        auto root_D =
-            col_major(root_ocp.D(0));
-
-        auto root_lower =
-            copy_vector(
-                root_ocp.b_min(0).data,
-                root_constraint_count);
-
-        auto root_upper =
-            copy_vector(
-                root_ocp.b_max(0).data,
-                root_constraint_count);
+        std::vector<double> root_C(root_constraint_count * state_size);
+        std::vector<double> root_D(root_constraint_count * input_size);
+        std::vector<double> root_lower(root_constraint_count), root_upper(root_constraint_count);
+        int offset = 0;
+        for (const auto &ocp : fan.ocps) {
+            for (int row = 0; row < ocp.dim.ny; ++row) {
+                for (int col = 0; col < state_size; ++col)
+                    root_C[offset + row + col * root_constraint_count] = ocp.C(0)(row, col);
+                for (int col = 0; col < input_size; ++col)
+                    root_D[offset + row + col * root_constraint_count] = ocp.D(0)(row, col);
+                root_lower[offset + row] = ocp.b_min(0)(row, 0);
+                root_upper[offset + row] = ocp.b_max(0)(row, 0);
+            }
+            offset += static_cast<int>(ocp.dim.ny);
+            if (data->shared_root_constraints)
+                break;
+        }
 
         set_general_constraints(
             qp,
@@ -847,8 +837,9 @@ create_tree_qp_solver(std::shared_ptr<TreeQpData> qp_data,
         throw std::runtime_error("Failed to set the treeQP maximum iteration count");
     if (solver_data->solver->SetOption("stationarityTolerance", tolerance) != 0)
         throw std::runtime_error("Failed to set the treeQP stationarity tolerance");
-    solver_data->solver->SetOption(
-        "regType", "TREEQP_ALWAYS_LEVENBERG_MARQUARDT");
+    if (solver_data->solver->SetOption(
+            "regType", std::string{"TREEQP_ALWAYS_LEVENBERG_MARQUARDT"}) != 0)
+        throw std::runtime_error("Failed to set the treeQP regularization type");
     solver_data->solver->TdunesOpts.checkLastActiveSet = 1;
 
     // Clipping needs stronger regularization on the active-state benchmarks.
@@ -1040,29 +1031,26 @@ get_solution_tree_qp(
                 }
             }
         } else {
-        /*
-         * Distribute treeQP's shared root multiplier across the
-         * duplicated branch constraints expected by FanOCPStorage.
-         */
+        // Map stacked root multipliers back to their scenarios, or distribute
+        // a deduplicated root multiplier over identical branch constraints.
         const int branch_root_nc =
             mapping.branch_nc[branch][0];
 
         if (branch_root_nc > 0)
         {
-            if (mapping.nc[0] != branch_root_nc)
-            {
-                throw std::logic_error(
-                    "Branch root constraint count does not match "
-                    "the deduplicated treeQP root constraint count");
-            }
+            int root_offset = 0;
+            if (!mapping.shared_root_constraints)
+                for (int previous = 0; previous < branch; ++previous)
+                    root_offset += mapping.branch_nc[previous][0];
 
             treeqp_blasfeo_unpack_dvec(
                 branch_root_nc,
                 &qp.QpOut.mu_d[0],
-                0,
+                root_offset,
                 ineq_out);
-            for (int index = 0; index < branch_root_nc; ++index)
-                ineq_out[index] /= mapping.num_branches;
+            if (mapping.shared_root_constraints)
+                for (int index = 0; index < branch_root_nc; ++index)
+                    ineq_out[index] /= mapping.num_branches;
 
             ineq_out +=
                 branch_root_nc;

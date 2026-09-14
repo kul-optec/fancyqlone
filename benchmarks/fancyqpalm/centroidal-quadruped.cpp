@@ -31,6 +31,9 @@
 #if WITH_PIQP
 #include "mspiqp.hpp"
 #endif
+#if WITH_TREEQP
+#include "treeqp.hpp"
+#endif
 
 namespace qp = cyqlone::qpalm;
 using cyqlone::index_t;
@@ -65,6 +68,11 @@ struct Options {
 #else
     bool piqp = false;
 #endif
+#if WITH_TREEQP
+    bool treeqp = true;
+#else
+    bool treeqp = false;
+#endif
     bool custom_reporter = true;
     bool print_extra     = false;
     bool use_color       = false;
@@ -91,8 +99,8 @@ void run_benchmark(benchmark::State &state, CentroidalQuadrupedParams params,
     auto backend = qp::make_cyqpalm_backend<VL, qp::StorageOrder::ColMajor, FanSolver>(
         ocp, {}, backend_settings);
     qp::Settings settings{
-        .tolerance         = 1e-8,
-        .dual_tolerance    = 1e-8,
+        .tolerance         = 1e-6,
+        .dual_tolerance    = 1e-6,
         .initial_penalty_y = 20,
         .verbose           = false,
     };
@@ -131,7 +139,7 @@ void run_benchmark_hpipm(benchmark::State &state, CentroidalQuadrupedParams para
     auto problem =
         qp::problems::fan_centroidal_quadruped(std::move(params), num_branches, mu_radius);
     auto qp_data     = build_hpipm_tree_qp(problem.ocp);
-    auto solver_data = create_hpipm_tree_solver(qp_data, 0, mode);
+    auto solver_data = create_hpipm_tree_solver(qp_data, 0, mode,1e-6);
 
     solve_hpipm_tree(*qp_data, *solver_data);
     for (auto _ : state) {
@@ -166,7 +174,7 @@ void run_benchmark_piqp(benchmark::State &state, CentroidalQuadrupedParams param
     auto problem =
         qp::problems::fan_centroidal_quadruped(std::move(params), num_branches, mu_radius);
     auto qp_data     = build_piqp_fan_qp(problem.ocp);
-    auto solver_data = create_piqp_fan_solver(qp_data);
+    auto solver_data = create_piqp_fan_solver(qp_data,1e-6);
 
     solve_piqp_fan(*solver_data);
     for (auto _ : state) {
@@ -180,6 +188,37 @@ void run_benchmark_piqp(benchmark::State &state, CentroidalQuadrupedParams param
     state.counters["status"]   = counter(static_cast<int>(stats.status));
     state.counters["success"]  = counter(stats.status == piqp::Status::PIQP_SOLVED);
     state.counters["iter"]     = counter(stats.iter);
+    state.counters["res_dual"] = counter(error.stationarity);
+    state.counters["res_eq"]   = counter(error.equality_residual);
+    state.counters["res_ineq"] = counter(error.inequality_residual);
+    state.counters["compl"]    = counter(error.complementarity);
+    state.counters["mu_min"]   = counter(problem.friction_coefficients.front());
+    state.counters["mu_max"]   = counter(problem.friction_coefficients.back());
+} catch (const std::exception &e) {
+    state.SkipWithError(e.what());
+}
+#endif
+
+#if WITH_TREEQP
+void run_benchmark_treeqp(benchmark::State &state, CentroidalQuadrupedParams params,
+                          index_t num_branches, real_t mu_radius) try {
+    auto problem =
+        qp::problems::fan_centroidal_quadruped(std::move(params), num_branches, mu_radius);
+    auto qp_data     = build_tree_qp(problem.ocp, false);
+    auto solver_data = create_tree_qp_solver(qp_data, 200, 1e-6);
+
+    solve_tree_qp(*qp_data, *solver_data, true);
+    for (auto _ : state) {
+        const auto solve_time = solve_tree_qp(*qp_data, *solver_data, true);
+        state.SetIterationTime(seconds(solve_time).count());
+    }
+
+    const auto solution = get_solution_tree_qp(*solver_data);
+    const auto error    = problem.ocp.compute_kkt_error(solution, true);
+    const auto stats    = get_stats_tree_qp(*solver_data);
+    state.counters["status"]   = counter(stats.status);
+    state.counters["success"]  = counter(stats.status == 0);
+    state.counters["iter"]     = counter(stats.iterations);
     state.counters["res_dual"] = counter(error.stationarity);
     state.counters["res_eq"]   = counter(error.equality_residual);
     state.counters["res_ineq"] = counter(error.inequality_residual);
@@ -219,6 +258,7 @@ void register_options(const char *program, CLI::App &app, Options &opts) {
                    "Number of threads used by the FancyQLone backend");
     app.add_flag("--hpipm,!--no-hpipm", opts.hpipm, "Use HPIPM for comparison");
     app.add_flag("--piqp,!--no-piqp", opts.piqp, "Use PIQP for comparison");
+    app.add_flag("--treeqp,!--no-treeqp", opts.treeqp, "Use TreeQP for comparison");
     app.add_flag("--custom-reporter,!--no-custom-reporter", opts.custom_reporter,
                  "Use the custom benchmark reporter");
     app.add_flag("--print-extra,!--no-print-extra", opts.print_extra,
@@ -250,7 +290,7 @@ int main(int argc, char **argv) try {
 
     CentroidalQuadrupedParams params;
     params.mu = opts.mu;
-    params.force_weights.fill(1e-6);
+    params.force_weights.fill(5e-5);
     size_t problem_name_width = 0;
     size_t solver_name_width  = 0;
     for (const auto horizon : opts.horizon) {
@@ -314,6 +354,29 @@ int main(int argc, char **argv) try {
 #else
             if (opts.piqp)
                 throw std::invalid_argument("PIQP support not enabled in this build");
+#endif
+#if WITH_TREEQP
+            if (opts.treeqp) {
+                constexpr std::string_view solver_name = "treeqp(QPOasis)";
+                solver_name_width = std::max(solver_name_width, solver_name.size());
+                benchmark::RegisterBenchmark(std::format("{}@{}", problem_name, solver_name),
+                                             [=](benchmark::State &state) {
+                                                 run_benchmark_treeqp(
+                                                     state, params, branches, opts.mu_radius);
+                                             })
+                    ->MeasureProcessCPUTime()
+                    ->UseManualTime()
+                    ->Unit(benchmark::kMillisecond)
+                    ->ComputeStatistics("max", [](auto &values) {
+                        return *std::ranges::max_element(values);
+                    })
+                    ->ComputeStatistics("min", [](auto &values) {
+                        return *std::ranges::min_element(values);
+                    });
+            }
+#else
+            if (opts.treeqp)
+                throw std::invalid_argument("TreeQP support not enabled in this build");
 #endif
             for (const auto processors : opts.parallelism) {
                 const auto solver_name =

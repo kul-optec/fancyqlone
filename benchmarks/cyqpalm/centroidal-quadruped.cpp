@@ -79,7 +79,7 @@ void run_benchmark(benchmark::State &state, CentroidalQuadrupedParams params,
     qp::Settings settings{
         .tolerance         = 1e-8,
         .dual_tolerance    = 1e-8,
-        .Δy = 500,
+        .Δy = 10,
         .initial_penalty_y = 0.01,
         .verbose           = false,
         .print_linesearch_inputs = false,
