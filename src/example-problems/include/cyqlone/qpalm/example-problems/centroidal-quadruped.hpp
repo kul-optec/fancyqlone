@@ -6,6 +6,7 @@
 
 #include <array>
 #include <vector>
+#include <stdexcept>
 
 namespace cyqlone::qpalm::problems {
 
@@ -22,30 +23,62 @@ struct CentroidalQuadrupedParams {
     real_t gravity = 9.81;
     index_t N_horiz = 32;
 
+    index_t initial_stage = 0;
+
     real_t base_height = 0.235;
     real_t foot_x      = 0.19;
     real_t foot_y      = 0.15;
 
     std::array<real_t, 3> v_ref{0.1, 0, 0};
+
     std::array<real_t, 9> inertia{
         3.06065356e-02, -7.44810900e-07, 9.33810799e-06,
         -7.44810900e-07, 5.12750881e-02, -4.33680869e-19,
         9.33810799e-06, -4.33680869e-19, 6.88650704e-02,
     };
+
     std::array<real_t, 12> state_weights{
-        2, 2, 10, 0.25, 0.25, 10, 0.2, 0.2, 0.2, 1e-10, 1e-10, 0.3,
-    };
-    std::array<real_t, 12> force_weights{
-        1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6,
-        1e-6, 1e-6, 1e-6, 1e-6, 1e-6, 1e-6,
-    };
-    std::vector<CentroidalQuadrupedGaitPhase> gait{
-        {8, {true, false, false, true}},
-        {8, {false, true, true, false}},
-        {8, {true, false, false, true}},
-        {8, {false, true, true, false}},
+        2, 2, 10, 0.25, 0.25, 10,
+        0.2, 0.2, 0.2, 1e-6, 1e-6, 0.3,
     };
 
+    std::array<real_t, 12> force_weights{
+        5e-5, 5e-5, 5e-5, 5e-5, 5e-5, 5e-5,
+        5e-5, 5e-5, 5e-5, 5e-5, 5e-5, 5e-5,
+    };
+
+    std::vector<CentroidalQuadrupedGaitPhase> gait;
+
+    uint64_t seed = 0;
+
+    CentroidalQuadrupedParams()
+        : gait(make_gait(N_horiz)) {}
+
+    CentroidalQuadrupedParams(index_t N, uint64_t seed, real_t Ts)
+        : dt(Ts),
+          N_horiz(N),
+          gait(make_gait(N)),
+          seed(seed) {}
+
+private:
+    static std::vector<CentroidalQuadrupedGaitPhase>
+    make_gait(index_t N)
+    {
+        if (N % 4 != 0) {
+            throw std::invalid_argument(
+                "CentroidalQuadrupedParams: N_horiz must be a multiple of 4"
+            );
+        }
+
+        const index_t phase_length = N / 4;
+
+        return {
+            {phase_length, {true,  false, false, true }},
+            {phase_length, {false, true,  true,  false}},
+            {phase_length, {true,  false, false, true }},
+            {phase_length, {false, true,  true,  false}},
+        };
+    }
 };
 
 struct CentroidalQuadrupedProblem {

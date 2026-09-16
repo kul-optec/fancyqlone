@@ -173,8 +173,8 @@ benchmark_quadruped() {
     fi
     OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" \
         OMP_PROC_BIND=close OMP_WAIT_POLICY=ACTIVE \
-        "${build_folder}/centroidal-quadruped" -p "${OMP_NUM_THREADS}" -J 8 \
-        --benchmark_repetitions=1 --benchmark_min_time=0.1s "$@"
+        "${build_folder}/centroidal-quadruped" -p "${OMP_NUM_THREADS}" \
+        --benchmark_repetitions=1 --benchmark_min_time=0.1s "$@" --benchmark_out=benchmark-quad.json
 }
 # Run a benchmark command
 benchmark2() {
@@ -205,8 +205,8 @@ benchmark_quick() {
 # Run the horizon scaling benchmark
 benchmark_scaling() {
     benchmark \
-        --problem wang-boyd-2008 --cold -I 100 -p "${OMP_NUM_THREADS}" --cm --no-updates --serial \
-         -N 32 -N 64 -N 92 -N 128 -N 160 -N 192 -N 224 -N 256 \
+        --problem wang-boyd-2008 --cold --warm-shift -I 100 -p "${OMP_NUM_THREADS}" --cm --no-updates --serial \
+         -N 32 -N 64 -N 92 -N 128 -N 192 -N 256 \
         -M 12 -J 4 \
         --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.05s --benchmark_out=benchmark-scaling.json "$@"
@@ -232,10 +232,17 @@ benchmark_scaling_states() {
         --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-states.json "$@"
 }
+benchmark_quad_scaling() {
+    benchmark_quadruped \
+        --cold --serial -I 1 -p "${OMP_NUM_THREADS}" -v4 -v1 --cm \
+        -N 32 64 92 128 192 256 -J 4\
+        --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+        --benchmark_min_time=0.01s --benchmark_out=benchmark-quad-scaling.json "$@"
+}
 # Run the states scaling benchmark
 benchmark_scaling_states2() {
     benchmark2 \
-        --problem wang-boyd-2008 --cold -I 20 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        --problem wang-boyd-2008 --cold -I 1 -p "${OMP_NUM_THREADS}" -v4 --cm \
         -N 256 \
         -M1 -M2 -M3 -M4 -M5 -M6 -M7 -M8 -M9 -M10 \
         -M11 -M12 -M13 -M14 -M15 -M16 -M17 -M18 -M19 -M20 \
@@ -310,6 +317,8 @@ main() {
             benchmark_scaling_states2 "$@" ;;
         benchmark-grid)
             benchmark_grid "$@" ;;
+        benchmark-quad-scaling)
+            benchmark_quad_scaling "$@" ;;
         plot-scaling)
             plot_scaling "$@" ;;
         plot-scaling2)

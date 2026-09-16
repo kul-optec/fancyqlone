@@ -122,6 +122,35 @@ bool identical_root_constraints(
     }
     return true;
 }
+
+template <class MatrixView>
+bool is_diagonal(const MatrixView &matrix) {
+    for (decltype(matrix.rows) row = 0; row < matrix.rows; ++row)
+        for (decltype(matrix.cols) column = 0; column < matrix.cols; ++column)
+            if (row != column && matrix(row, column) != 0)
+                return false;
+    return true;
+}
+
+template <class MatrixView>
+bool is_zero(const MatrixView &matrix) {
+    for (decltype(matrix.rows) row = 0; row < matrix.rows; ++row)
+        for (decltype(matrix.cols) column = 0; column < matrix.cols; ++column)
+            if (matrix(row, column) != 0)
+                return false;
+    return true;
+}
+
+bool supports_clipping_objective(const cyqlone::LinearOCPStorage &ocp,
+                                 int stage) {
+    if (!is_diagonal(ocp.Q(stage)))
+        return false;
+    if (stage == ocp.dim.N_horiz)
+        return true;
+    return is_diagonal(ocp.R(stage)) && is_zero(ocp.S(stage));
+}
+
+
 void validate(const cyqlone::FanOCPStorage &fan) {
     if (fan.ocps.empty())
         throw std::invalid_argument("FanOCPStorage must contain at least one branch");
@@ -198,8 +227,7 @@ void set_stage_objective(TreeQp &qp,
     qp.SetVector("r", std::move(r), node);
 }
 
-// Avoid mixed TDUNES stage solvers: the fast path is enabled only when every
-// constraint in every node is an exact, unique +1 selector row.
+
 struct NativeNodeBounds {
     bool supported = true;
     std::vector<double> xmin;
@@ -209,33 +237,10 @@ struct NativeNodeBounds {
     std::vector<TreeQpBoundMapping> mapping;
 };
 
-template <class MatrixView>
-bool is_diagonal(const MatrixView &matrix) {
-    for (decltype(matrix.rows) row = 0; row < matrix.rows; ++row)
-        for (decltype(matrix.cols) column = 0; column < matrix.cols; ++column)
-            if (row != column && matrix(row, column) != 0)
-                return false;
-    return true;
-}
 
-template <class MatrixView>
-bool is_zero(const MatrixView &matrix) {
-    for (decltype(matrix.rows) row = 0; row < matrix.rows; ++row)
-        for (decltype(matrix.cols) column = 0; column < matrix.cols; ++column)
-            if (matrix(row, column) != 0)
-                return false;
-    return true;
-}
 
-bool supports_clipping_objective(const cyqlone::LinearOCPStorage &ocp,
-                                 int stage) {
-    if (!is_diagonal(ocp.Q(stage)))
-        return false;
-    if (stage == ocp.dim.N_horiz)
-        return true;
-    return is_diagonal(ocp.R(stage)) && is_zero(ocp.S(stage));
-}
 
+/// Extract box constraints from a LinearOCPStorage stage.
 NativeNodeBounds extract_native_bounds(const cyqlone::LinearOCPStorage &ocp,
                                        int stage) {
     const int nx = static_cast<int>(ocp.dim.nx);
@@ -260,6 +265,7 @@ NativeNodeBounds extract_native_bounds(const cyqlone::LinearOCPStorage &ocp,
             const double coefficient = C(row, column);
             if (coefficient == 0)
                 continue;
+            // Maybe to strict (each row of C could be scaled by a positive constant)
             if (coefficient != 1 || ++nonzeros != 1) {
                 result.supported = false;
                 return result;
@@ -273,6 +279,7 @@ NativeNodeBounds extract_native_bounds(const cyqlone::LinearOCPStorage &ocp,
                 const double coefficient = D(row, column);
                 if (coefficient == 0)
                     continue;
+                // Maybe to strict (each row of D could be scaled by a positive constant)
                 if (coefficient != 1 || ++nonzeros != 1) {
                     result.supported = false;
                     return result;
@@ -288,6 +295,7 @@ NativeNodeBounds extract_native_bounds(const cyqlone::LinearOCPStorage &ocp,
 
         const int offset = mapping.kind == TreeQpBoundMapping::Kind::Input ? nx : 0;
         const auto variable = static_cast<std::size_t>(offset + mapping.index);
+        // Each variable may only appear in one constraint row. (Could pick the most strict bound if multiple rows constrain the same variable.)
         if (used.at(variable)) {
             result.supported = false;
             return result;
@@ -318,7 +326,7 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
     validate(fan);
 
     auto data = std::make_shared<TreeQpData>();
-    data->shared_root_constraints = identical_root_constraints(fan);
+
 
     const int branches =
         static_cast<int>(fan.ocps.size());
@@ -349,9 +357,7 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
     data->nc.assign(node_count, 0);
     data->nk.assign(node_count, 0);
 
-    /*
-     * The root has one child for each scenario branch.
-     */
+    // The root node is always node 0, and it has J children.
     data->nk[0] = branches;
 
     data->node_index.assign(
@@ -366,16 +372,13 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
             static_cast<std::size_t>(horizon + 1),
             -1));
 
-    /*
-     * Preserve the constraint counts expected by each original
-     * branch solution. This is distinct from data->nc, which
-     * describes the deduplicated internal treeQP problem.
-     */
+
     data->branch_nc.assign(
         branches,
         std::vector<int>(
             static_cast<std::size_t>(horizon + 1),
             0));
+
     data->bound_mapping.assign(
         branches,
         std::vector<std::vector<TreeQpBoundMapping>>(
@@ -384,14 +387,12 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
     std::vector<NativeNodeBounds> native_node_bounds(
         static_cast<std::size_t>(node_count));
     native_node_bounds[0] = extract_native_bounds(root_ocp, 0);
-    bool native_bounds_supported = native_node_bounds[0].supported && clipping &&
-                                   data->shared_root_constraints;
+    bool native_bounds_supported = native_node_bounds[0].supported && clipping;
 
     // Deduplicate identical roots; otherwise stack all scenario constraints.
     int root_constraint_count = static_cast<int>(root_ocp.dim.ny);
-    if (!data->shared_root_constraints)
-        for (std::size_t branch = 1; branch < fan.ocps.size(); ++branch)
-            root_constraint_count += static_cast<int>(fan.ocps[branch].dim.ny);
+    for (std::size_t branch = 1; branch < fan.ocps.size(); ++branch)
+        root_constraint_count += static_cast<int>(fan.ocps[branch].dim.ny);
 
     data->nc[0] = root_constraint_count;
 
@@ -410,11 +411,6 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
 
         data->node_index[branch][0] = 0;
         data->bound_mapping[branch][0] = native_node_bounds[0].mapping;
-
-        /*
-         * Each external branch still expects its own copy of
-         * the shared root multiplier.
-         */
         data->branch_nc[branch][0] =
             static_cast<int>(ocp.dim.ny);
 
@@ -431,9 +427,8 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
             data->node_index[branch][stage] =
                 node;
 
-            /*
-             * treeQP associates edge node-1 with non-root node.
-             */
+            // treeQP associates edge node-1 with non-root node.
+             
             data->edge_index[branch][stage] =
                 node - 1;
 
@@ -493,18 +488,6 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
     TreeQp &qp =
         get_qp(*data);
 
-    /*
-     * Root objective.
-     *
-     * This retains the original behavior: the stage-zero
-     * objective contributions of all branches are summed.
-     *
-     * If every branch stores an unweighted duplicate of the
-     * same root objective and that objective should occur only
-     * once, this summation must be replaced by the first
-     * branch's objective. That is independent of constraint
-     * deduplication.
-     */
     std::vector<double> root_Q(
         static_cast<std::size_t>(
             state_size * state_size),
@@ -586,10 +569,7 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
         std::move(root_r),
         0);
 
-    /*
-     * All branches must share the same initial state because
-     * treeQP represents the initial state with one root node.
-     */
+    // treeQP represents the initial state with one root node.
     const auto initial_state_reference =
         copy_vector(
             root_ocp.b(0).data,
@@ -665,9 +645,7 @@ build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
             0);
     }
 
-    /*
-     * Construct each scenario branch.
-     */
+    // Construct each scenario branch.
     for (int branch = 0;
          branch < branches;
          ++branch)
@@ -837,18 +815,6 @@ create_tree_qp_solver(std::shared_ptr<TreeQpData> qp_data,
         throw std::runtime_error("Failed to set the treeQP maximum iteration count");
     if (solver_data->solver->SetOption("stationarityTolerance", tolerance) != 0)
         throw std::runtime_error("Failed to set the treeQP stationarity tolerance");
-    if (solver_data->solver->SetOption(
-            "regType", std::string{"TREEQP_ALWAYS_LEVENBERG_MARQUARDT"}) != 0)
-        throw std::runtime_error("Failed to set the treeQP regularization type");
-    solver_data->solver->TdunesOpts.checkLastActiveSet = 1;
-
-    // Clipping needs stronger regularization on the active-state benchmarks.
-    const double regularization =
-        solver_data->qp_data->native_bounds ? 1e-2 : 1e-8;
-    solver_data->solver->SetOption("regValue", regularization);
-    solver_data->solver->SetOption("regTol", regularization);
-    solver_data->solver->TdunesOpts.lineSearchMaxIter =
-        solver_data->qp_data->native_bounds ? 50 : 60;
 
     std::size_t dual_size = 0;
     for (int block = 0; block < solver_data->solver->TdunesWork.Np; ++block)
@@ -922,12 +888,6 @@ get_solution_tree_qp(
             result.solutions[
                 static_cast<std::size_t>(branch)];
 
-        /*
-         * Primal solution.
-         *
-         * The root primal variables are copied into every branch
-         * because node_index[branch][0] equals zero.
-         */
         std::size_t primal_count = 0;
 
         for (int stage = 0;
@@ -984,13 +944,8 @@ get_solution_tree_qp(
             }
         }
 
-        /*
-         * General-constraint multipliers.
-         *
-         * branch_nc describes the original branch-wise layout,
-         * whereas mapping.nc describes the internal deduplicated
-         * treeQP representation.
-         */
+        // General-constraint multipliers.
+         
         std::size_t inequality_count = 0;
 
         for (int stage = 0;
@@ -1152,6 +1107,168 @@ get_solution_tree_qp(
     return result;
 }
 
+std::vector<double> make_dual_initialization_tree_qp(
+    const TreeQpSolverData &solver_data, const cyqlone::FanOCPStorage::Solution &guess) {
+    const auto &data = *solver_data.qp_data;
+    const auto &work = solver_data.solver->TdunesWork;
+    if (guess.solutions.size() != static_cast<size_t>(data.num_branches))
+        throw std::invalid_argument("TreeQP initial guess branch count mismatch");
+    std::vector<size_t> offsets(work.Np + 1, 0);
+    for (int parent = 0; parent < work.Np; ++parent)
+        offsets[parent + 1] = offsets[parent] + work.slambda[parent].m;
+    std::vector<double> dual(offsets.back(), 0);
+    for (int branch = 0; branch < data.num_branches; ++branch) {
+        const auto &src = guess.solutions[branch].equality_multipliers;
+        size_t source_offset = data.nx[0]; // Skip eliminated x0 multiplier.
+        for (int stage = 1; stage <= data.horizon; ++stage) {
+            const int node = data.node_index[branch][stage];
+            const int parent = data.node_index[branch][stage - 1];
+            const int nx = data.nx[node];
+            if (source_offset + nx > src.size())
+                throw std::invalid_argument("TreeQP initial guess dimensions mismatch");
+            std::copy_n(src.data() + source_offset, nx,
+                        dual.data() + offsets[parent] + work.idxpos[node]);
+            source_offset += nx;
+        }
+    }
+    return dual;
+}
+
+void set_dual_initialization_tree_qp(TreeQpSolverData &solver_data, std::span<const double> dual) {
+    if (dual.size() != solver_data.zero_dual.size())
+        throw std::invalid_argument("TreeQP initial dual size mismatch");
+    treeqp_tdunes_set_dual_initialization(dual.data(), &solver_data.solver->TdunesWork);
+}
+void shift_treeqp_solution(
+    TreeQpSolverData &solver_data,
+    const cyqlone::FanOCPStorage::Solution &solution)
+{
+    const auto &data = *solver_data.qp_data;
+    auto &work = solver_data.solver->TdunesWork;
+
+    const int B = data.num_branches;
+    const int N = data.horizon;
+
+    if (solution.solutions.size() != static_cast<std::size_t>(B))
+        throw std::invalid_argument(
+            "TreeQP warm-start branch count mismatch");
+
+    // -------------------------------------------------------------------------
+    // TDunes stores lambda in one block per parent node.
+    // Build offsets into the flattened initialization vector.
+    // -------------------------------------------------------------------------
+
+    std::vector<std::size_t> offsets(
+        static_cast<std::size_t>(work.Np + 1),
+        0);
+
+    for (int parent = 0; parent < work.Np; ++parent) {
+        offsets[static_cast<std::size_t>(parent + 1)] =
+            offsets[static_cast<std::size_t>(parent)]
+            + static_cast<std::size_t>(work.slambda[parent].m);
+    }
+
+    std::vector<double> dual(offsets.back(), 0.0);
+
+    // -------------------------------------------------------------------------
+    // Fan equality multipliers are stored as
+    //
+    //   [lambda_x0, lambda_1, ..., lambda_N]
+    //
+    // TreeQP does not have a multiplier corresponding to x0.
+    //
+    // Shift:
+    //
+    //   destination stage k <- source stage min(k + 1, N)
+    //
+    // Hence
+    //
+    //   new lambda_1 <- old lambda_2
+    //   new lambda_2 <- old lambda_3
+    //   ...
+    //   new lambda_N <- old lambda_N
+    //
+    // -------------------------------------------------------------------------
+
+    for (int b = 0; b < B; ++b) {
+
+        const auto &src =
+            solution.solutions[static_cast<std::size_t>(b)]
+                .equality_multipliers;
+
+        // Offset of every stage multiplier inside the Fan solution.
+        std::vector<std::size_t> source_offsets(
+            static_cast<std::size_t>(N + 1),
+            0);
+
+        std::size_t source_offset =
+            static_cast<std::size_t>(data.nx[0]);
+
+        for (int k = 1; k <= N; ++k) {
+            source_offsets[static_cast<std::size_t>(k)] =
+                source_offset;
+
+            const int node = data.node_index[b][k];
+
+            source_offset +=
+                static_cast<std::size_t>(data.nx[node]);
+        }
+
+        if (source_offset > src.size())
+            throw std::invalid_argument(
+                "TreeQP warm-start dimensions mismatch");
+
+        for (int k = 1; k <= N; ++k) {
+
+            const int destination_node =
+                data.node_index[b][k];
+
+            const int destination_parent =
+                data.node_index[b][k - 1];
+
+            const int source_stage =
+                std::min(k + 1, N);
+
+            const int source_node =
+                data.node_index[b][source_stage];
+
+            const int destination_nx =
+                data.nx[destination_node];
+
+            const int source_nx =
+                data.nx[source_node];
+
+            if (destination_nx != source_nx)
+                throw std::invalid_argument(
+                    "TreeQP shifted multiplier dimension mismatch");
+
+            const std::size_t src_offset =
+                source_offsets[
+                    static_cast<std::size_t>(source_stage)];
+
+            const std::size_t dst_offset =
+                offsets[
+                    static_cast<std::size_t>(destination_parent)]
+                + static_cast<std::size_t>(
+                    work.idxpos[destination_node]);
+
+            std::copy_n(
+                src.data() + src_offset,
+                destination_nx,
+                dual.data() + dst_offset);
+        }
+    }
+
+    // Set the shifted equality multipliers as the TDunes warm start.
+    treeqp_tdunes_set_dual_initialization(
+        dual.data(),
+        &work);
+}
+void reset_treeqp_solution(TreeQpSolverData &solver_data) {
+    treeqp_tdunes_set_dual_initialization(
+        solver_data.zero_dual.data(),
+        &solver_data.solver->TdunesWork);
+}
 void update_x0_tree_qp(
     cyqlone::FanOCPStorage &fan,
     TreeQpData &qp_data,

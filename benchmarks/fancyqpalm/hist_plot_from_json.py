@@ -310,6 +310,12 @@ def format_solver_name(solver_name: str, plot: Optional[str] = None) -> str:
         "hpipm": fr"HPIPM{sep}(cold)",
         "hpipm(zero)": fr"HPIPM{sep}(cold)",
         "hpipm(shift)": fr"HPIPM{sep}(warm)",
+        "piqp(multistage)": fr"PIQP",
+        "treeqp(qpOasis)": fr"TreeQP",
+        "treeqp(clip)": fr"TreeQP",
+        "fancyqlone(p=8,v=4,cm,zero)": fr"\textsc{{FanCyQPALM}}{sep}(p=8,v=4)",
+        "fancyqlone(p=8,v=1,cm,zero)": fr"\textsc{{FanCyQPALM}}{sep}(p=8,v=1)",
+        "serial-fancyqlone(p=8,v=4,cm,zero)": fr"\textsc{{FanCyQPALM}}{sep}(p=8,v=4,serial)",
     }
     solver_name = names.get(solver_name, solver_name)
     solver_name = solver_name.replace("cyqlone._cyqlone_", "")
@@ -585,8 +591,8 @@ def create_scaling_plot(
         
         solver_df = solver_df.copy()
         # Extract N using vectorized string operation
-        solver_df["N"] = solver_df["dataset_id"].str.extract(r",\s*(\d+)\)")[0].astype(int)
-        
+        solver_df["N"] = solver_df["dataset_id"].str.extract(r"N=(\d+)")[0].astype(int)
+        print(f"N values for solver '{solver}': {solver_df['N'].tolist()}")
         # Group by N and compute statistics
         solver_grouped_mean = solver_df.groupby("N")[metric].mean()
         solver_grouped_min = solver_df.groupby("N")[metric].min()
@@ -711,12 +717,14 @@ def create_scaling_plot(
         else:
             ax.set_title(f"{metric_pretty.capitalize()}\nfor increasing horizon length $N$")
     
-    ax.grid(True, alpha=0.3)
+    ax.grid(True, alpha=0.3, which="major")
+    ax.grid(True, alpha=0.15, which="minor")
+
     if logy:
         ax.set_yscale('log')
     if show_legend:
         ax.legend(loc="best", fontsize=9, framealpha=0.6)
-    
+
     # Set ylim with scaling applied
     if ylim is not None:
         if reference_solver is not None:
@@ -727,7 +735,10 @@ def create_scaling_plot(
             ax.set_ylim(ylim[0] * scale_factor, ylim[1] * scale_factor)
     elif reference_solver is None:
         # For absolute metric plots without explicit ylim, set lower bound to 0
-        ax.set_ylim(0, None)
+        if not logy:
+            ax.set_ylim(0, None)
+        else:
+            pass
     
     plt.tight_layout()
     

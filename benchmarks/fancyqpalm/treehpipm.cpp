@@ -133,18 +133,10 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
     // HPIPM's tree_create uses breadth-first node numbering and the number of
     // children of each node.  Therefore nodes are generated level-by-level:
     // root, all stage-1 nodes, all stage-2 nodes, ... .
-    //
-    // The public branch-oriented mapping below decouples callers from that
-    // HPIPM node order.
+
     auto bfs_node = [branches](int branch, int stage) {
         return 1 + (stage - 1) * branches + branch;
     };
-
-    // std::vector<int> nkids(static_cast<std::size_t>(map.num_nodes()), 0);
-    // nkids[0] = branches;
-    // for (int stage = 1; stage < horizon; ++stage)
-    //     for (int branch = 0; branch < branches; ++branch)
-    //         nkids[static_cast<std::size_t>(bfs_node(branch, stage))] = 1;
 
     d.tree_mem = std::make_unique<std::byte[]>(sctree_memsize(branches,1, horizon));
 
@@ -152,8 +144,6 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
     std::unique_ptr<struct sctree> sctree = std::make_unique<struct sctree>();
     sctree_create(branches, 1, horizon, sctree.get(), d.tree_mem.get());
     sctree_cast_to_tree(sctree.get(), d.tree.get());
-    // tree_create(map.num_nodes(), nkids.data(), d.tree.get(), d.tree_mem.get());
-
 
     d.dim_mem = std::make_unique<std::byte[]>(
         d_tree_ocp_qp_dim_memsize(map.num_nodes()));
@@ -209,66 +199,61 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
     std::vector<real_t> lg0_data(static_cast<std::size_t>(ng_0));
     std::vector<real_t> ug0_data(static_cast<std::size_t>(ng_0));
 
-guanaqo::MatrixView<real_t, index_t> R0 = {{
-    .data = R0_data.data(),
-    .rows = nu,
-    .cols = nu,
-}};
+    guanaqo::MatrixView<real_t, index_t> R0 = {{
+        .data = R0_data.data(),
+        .rows = nu,
+        .cols = nu,
+    }};
 
-guanaqo::MatrixView<real_t, index_t> r0 = {{
-    .data = r0_data.data(),
-    .rows = nu,
-    .cols = 1,
-}};
+    guanaqo::MatrixView<real_t, index_t> r0 = {{
+        .data = r0_data.data(),
+        .rows = nu,
+        .cols = 1,
+    }};
 
-guanaqo::MatrixView<real_t, index_t> q0 = {{
-    .data = q0_data.data(),
-    .rows = nx,
-    .cols = 1,
-}};
+    guanaqo::MatrixView<real_t, index_t> q0 = {{
+        .data = q0_data.data(),
+        .rows = nx,
+        .cols = 1,
+    }};
 
-guanaqo::MatrixView<real_t, index_t> Q0 = {{
-    .data = Q0_data.data(),
-    .rows = nx,
-    .cols = nx,
-}};
+    guanaqo::MatrixView<real_t, index_t> Q0 = {{
+        .data = Q0_data.data(),
+        .rows = nx,
+        .cols = nx,
+    }};
 
-guanaqo::MatrixView<real_t, index_t> S0 = {{
-    .data = S0_data.data(),
-    .rows = nu,
-    .cols = nx,
-}};
+    guanaqo::MatrixView<real_t, index_t> S0 = {{
+        .data = S0_data.data(),
+        .rows = nu,
+        .cols = nx,
+    }};
 
-guanaqo::MatrixView<real_t, index_t> D0 = {{
-    .data = D0_data.data(),
-    .rows = ng_0,
-    .cols = nu,
-}};
+    guanaqo::MatrixView<real_t, index_t> D0 = {{
+        .data = D0_data.data(),
+        .rows = ng_0,
+        .cols = nu,
+    }};
 
-guanaqo::MatrixView<real_t, index_t> lg0 = {{
-    .data = lg0_data.data(),
-    .rows = ng_0,
-    .cols = 1,
-}};
+    guanaqo::MatrixView<real_t, index_t> lg0 = {{
+        .data = lg0_data.data(),
+        .rows = ng_0,
+        .cols = 1,
+    }};
 
-guanaqo::MatrixView<real_t, index_t> ug0 = {{
-    .data = ug0_data.data(),
-    .rows = ng_0,
-    .cols = 1,
-}};
-    // std::cout << " Constraint Matrices initialized." << std::endl;
+    guanaqo::MatrixView<real_t, index_t> ug0 = {{
+        .data = ug0_data.data(),
+        .rows = ng_0,
+        .cols = 1,
+    }};
 
     R0.set_constant(0);
-    // std::cout << " R0 initialized." << std::endl;
-
     r0.set_constant(0);
     q0.set_constant(0);
     Q0.set_constant(0);
     S0.set_constant(0);
 
     index_t row_offset = 0;
-    // std::cout << " Tree Matrices initialized." << std::endl;
-
     for (int branch = 0; branch < branches; ++branch) {
         const auto &ocp = fan.ocps[static_cast<std::size_t>(branch)]; 
         const auto Rj  = ocp.R(0);
@@ -312,7 +297,6 @@ guanaqo::MatrixView<real_t, index_t> ug0 = {{
 
         row_offset += Dj.rows;
     }
-    // std::cout << " Matrices Calculated." << std::endl;
 
     assert(row_offset == D0.rows);
     assert(row_offset == lg0.rows);
@@ -456,9 +440,6 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
     fan_sol.solutions.resize(
         static_cast<std::size_t>(num_branches));
 
-    /*
-     * Extract the shared root variables once.
-     */
     std::vector<real_t> x0(
         static_cast<std::size_t>(dim.nx[root]));
 
@@ -473,8 +454,8 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
     /*
      * Root inequality multipliers are stacked branch-by-branch:
      *
-     *     [mu_0^(0)]
-     *     [mu_0^(1)]
+     *     [μ_0^(0)]
+     *     [μ_0^(1)]
      *     [   ...  ]
      *
      * because D0, lg0 and ug0 were vertically stacked in that order.
@@ -493,11 +474,8 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
             root, qp_sol, root_lam_lg.data());
     }
 
-    /*
-     * The root-state bound multiplier is shared by all branches.
-     *
-     * This is the multiplier of x0 = x_init in the merged tree QP.
-     */
+     //The root-state bound multiplier is shared by all branches.
+     //This is the multiplier of x0 = x_init in the merged tree QP.
     std::vector<real_t> root_lam_lbx(
         static_cast<std::size_t>(dim.nx[root]));
 
@@ -518,11 +496,6 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
         auto &branch_sol =
             fan_sol.solutions[static_cast<std::size_t>(branch)];
 
-        /*
-         * Compute the size of
-         *
-         * x0, u0, x1, u1, ..., xN.
-         */
         std::size_t primal_count =
             static_cast<std::size_t>(dim.nx[root]) +
             static_cast<std::size_t>(dim.nu[root]);
@@ -541,9 +514,6 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
 
         real_t *primal_out = branch_sol.solution.data();
 
-        /*
-         * Copy the shared x0 and u0 into this branch solution.
-         */
         std::copy(
             x0.begin(),
             x0.end(),
@@ -596,19 +566,10 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
          */
         int ng_branch_total = 0;
 
-        /*
-         * Root ng is the sum over branches, so obtain the root
-         * contribution from the original branch dimensions.
-         *
-         * If HPIPMTreeQPData stores branch_ng0, use that directly.
-         */
+        // Root ng is the sum over branches, so obtain the root
+        // contribution from the original branch dimensions.
+            
         const int first_node = data.node_index[branch][1];
-
-        /*
-         * For your construction, all nonterminal stages of a branch
-         * use the same ny. The first branch node therefore has the
-         * same ng as the branch's original stage zero.
-         */
         const int ng_branch_root =
             horizon > 1
                 ? dim.ng[first_node]
@@ -628,14 +589,13 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
         real_t *ineq_out =
             branch_sol.inequality_multipliers.data();
 
-        /*
-         * Extract this branch's block from the stacked root
-         * inequality multipliers.
-         *
-         * Signed multiplier convention:
-         *
-         *     mu = mu_upper - mu_lower.
-         */
+
+        // Extract this branch's block from the stacked root
+        // inequality multipliers.
+        // Signed multiplier convention:
+        //     mu = mu_upper - mu_lower.
+
+
         for (int i = 0; i < ng_branch_root; ++i) {
             const auto idx = static_cast<std::size_t>(
                 root_ineq_offset + i);
@@ -648,9 +608,6 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
         ineq_out += ng_branch_root;
         root_ineq_offset += ng_branch_root;
 
-        /*
-         * Extract branch-specific inequality multipliers.
-         */
         int ng_max = 0;
 
         for (int stage = 1; stage <= horizon; ++stage) {
@@ -690,12 +647,6 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
             branch_sol.inequality_multipliers.data() +
                 branch_sol.inequality_multipliers.size());
 
-        /*
-         * Equality multipliers:
-         *
-         * initial-state multiplier followed by one dynamics
-         * multiplier for every branch edge.
-         */
         std::size_t equality_count =
             static_cast<std::size_t>(dim.nx[root]);
 
@@ -712,13 +663,7 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
         real_t *eq_out =
             branch_sol.equality_multipliers.data();
 
-        /*
-         * This is the shared, aggregated root multiplier.
-         *
-         * Copying it into every branch is convenient, but it should
-         * not be interpreted as a separately recovered multiplier
-         * for each original branch initial-state constraint.
-         */
+
         for (int i = 0; i < dim.nx[root]; ++i) {
             eq_out[i] =
                 root_lam_lbx[static_cast<std::size_t>(i)] -
@@ -727,10 +672,6 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
 
         eq_out += dim.nx[root];
 
-        /*
-         * Each pi corresponds to the dynamics constraint on the
-         * edge entering the branch node.
-         */
         for (int stage = 1; stage <= horizon; ++stage) {
             const int node = data.node_index[branch][stage];
             const int edge = data.edge_index[branch][stage];
@@ -753,38 +694,9 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
     
     return fan_sol;
 }
-// TODO: Implement warm start for HPIPM tree solver.  The following code is commented out because HPIPM tree does,t provide any setters.
-// void warm_start_hpipm_tree(HPIPMTreeSolverData &solver_data,
-//                            std::span<const real_t> primal) {
-//     const auto &data = *solver_data.qp_data;
-//     const auto &dim  = *data.dim;
-//     BATMAT_ASSERT(primal.size() == primal_size(data));
-
-//     const real_t *in = primal.data();
-//     d_tree_ocp_qp_sol_set_x(0, const_cast<real_t *>(in), solver_data.qp_sol.get());
-//     in += dim.nx[0];
-//     d_tree_ocp_qp_sol_set_u(0, const_cast<real_t *>(in), solver_data.qp_sol.get());
-//     in += dim.nu[0];
-
-//     for (int branch = 0; branch < data.num_branches; ++branch)
-//         for (int stage = 1; stage <= data.horizon; ++stage) {
-//             const int node = data.node_index[branch][stage];
-//             d_tree_ocp_qp_sol_set_x(node, const_cast<real_t *>(in),
-//                                      solver_data.qp_sol.get());
-//             in += dim.nx[node];
-//             if (dim.nu[node] > 0) {
-//                 d_tree_ocp_qp_sol_set_u(node, const_cast<real_t *>(in),
-//                                          solver_data.qp_sol.get());
-//                 in += dim.nu[node];
-//             }
-//         }
-// }
 
 
-
-// =============================================================================
 // Validation helpers
-// =============================================================================
 
 void check_tree_solution(
     const d_tree_ocp_qp_sol &solution)
@@ -845,9 +757,7 @@ void check_size(
     }
 }
 
-// =============================================================================
 // BLASFEO packing helper
-// =============================================================================
 
 void pack_vector(
     std::span<const double> source,
@@ -870,11 +780,9 @@ void pack_vector(
         destination_offset);
 }
 
-// =============================================================================
 // ux offsets
 //
 // ux = [u; x; sl; su]
-// =============================================================================
 
 struct UXOffsets {
     int u;
@@ -903,12 +811,10 @@ UXOffsets get_ux_offsets(
     return offsets;
 }
 
-// =============================================================================
 // lam/t offsets
 //
 // lam = [lb; lg; ub; ug; ls; us]
 // t   = [lb; lg; ub; ug; ls; us]
-// =============================================================================
 
 struct InequalityOffsets {
     int lb;
@@ -1105,11 +1011,9 @@ void tree_ocp_qp_sol_set_pi_for_node(
         solution);
 }
 
-// =============================================================================
 // lam setters
 //
 // lam = [lb; lg; ub; ug; ls; us]
-// =============================================================================
 
 void tree_ocp_qp_sol_set_lam_lb(
     int node,
@@ -1274,11 +1178,9 @@ void tree_ocp_qp_sol_set_lam(
         0);
 }
 
-// =============================================================================
 // t setters
 //
 // t = [lb; lg; ub; ug; ls; us]
-// =============================================================================
 
 void tree_ocp_qp_sol_set_t_lb(
     int node,
@@ -1442,6 +1344,90 @@ void tree_ocp_qp_sol_set_t(
         solution.t[node],
         0);
 }
+void set_initial_guess_hpipm_tree(HPIPMTreeSolverData &solver_data,
+                                  const cyqlone::FanOCPStorage &fan,
+                                  const cyqlone::FanOCPStorage::Solution &guess) {
+    const auto &data = *solver_data.qp_data;
+    const auto &dim = *data.dim;
+    auto &sol = *solver_data.qp_sol;
+    constexpr real_t floor = 1e-8;
+    if (fan.ocps.size() != static_cast<size_t>(data.num_branches) ||
+        guess.solutions.size() != fan.ocps.size())
+        throw std::invalid_argument("HPIPM initial guess branch count mismatch");
+
+    // Root constraints are stacked by branch; other nodes belong to one branch.
+    std::vector<real_t> root_lg(dim.ng[0], floor), root_ug(dim.ng[0], floor);
+    std::vector<real_t> root_tl(dim.ng[0], floor), root_tu(dim.ng[0], floor);
+    std::vector<real_t> root_lambda(dim.nx[0], 0);
+    int root_offset = 0;
+    for (int branch = 0; branch < data.num_branches; ++branch) {
+        const auto &ocp = fan.ocps[branch];
+        const auto &src = guess.solutions[branch];
+        const auto N = ocp.dim.N_horiz, nx = ocp.dim.nx, nu = ocp.dim.nu;
+        if (src.solution.size() != static_cast<size_t>(N * (nx + nu) + nx) ||
+            src.equality_multipliers.size() != static_cast<size_t>((N + 1) * nx) ||
+            src.inequality_multipliers.size() != static_cast<size_t>(N * ocp.dim.ny + ocp.dim.ny_N))
+            throw std::invalid_argument("HPIPM initial guess dimensions mismatch");
+        for (int i = 0; i < nx; ++i)
+            root_lambda[i] += src.equality_multipliers[i];
+        size_t y_offset = 0;
+        for (int stage = 0; stage <= N; ++stage) {
+            const int node = data.node_index[branch][stage];
+            const auto x = stage == 0 ? std::span<const real_t>{ocp.b(0).data, static_cast<size_t>(nx)}
+                                     : std::span{src.solution}.subspan(stage * (nx + nu), nx);
+            const auto u = stage == N ? std::span<const real_t>{}
+                                     : std::span{src.solution}.subspan(stage * (nx + nu) + nx, nu);
+            tree_ocp_qp_sol_set_x(node, x, sol);
+            tree_ocp_qp_sol_set_u(node, u, sol);
+            if (stage > 0)
+                tree_ocp_qp_sol_set_pi(data.edge_index[branch][stage],
+                    std::span{src.equality_multipliers}.subspan(stage * nx, nx), sol);
+            const auto C = ocp.C(stage);
+            const auto lb = ocp.b_min(stage), ub = ocp.b_max(stage);
+            std::vector<real_t> lg(C.rows), ug(C.rows), tl(C.rows), tu(C.rows);
+            for (int row = 0; row < C.rows; ++row) {
+                real_t value = 0;
+                for (int col = 0; col < nx; ++col)
+                    value += C(row, col) * x[col];
+                if (stage < N)
+                    for (int col = 0; col < nu; ++col)
+                        value += ocp.D(stage)(row, col) * u[col];
+                const auto y = src.inequality_multipliers[y_offset + row];
+                lg[row] = std::max(-y, floor);
+                ug[row] = std::max(y, floor);
+                tl[row] = std::isfinite(lb(row, 0)) ? std::max(value - lb(row, 0), floor) : 1;
+                tu[row] = std::isfinite(ub(row, 0)) ? std::max(ub(row, 0) - value, floor) : 1;
+            }
+            y_offset += C.rows;
+            if (stage == 0) {
+                std::ranges::copy(lg, root_lg.begin() + root_offset);
+                std::ranges::copy(ug, root_ug.begin() + root_offset);
+                std::ranges::copy(tl, root_tl.begin() + root_offset);
+                std::ranges::copy(tu, root_tu.begin() + root_offset);
+                root_offset += C.rows;
+            } else {
+                tree_ocp_qp_sol_set_lam_lg(node, lg, sol);
+                tree_ocp_qp_sol_set_lam_ug(node, ug, sol);
+                tree_ocp_qp_sol_set_t_lg(node, tl, sol);
+                tree_ocp_qp_sol_set_t_ug(node, tu, sol);
+            }
+        }
+    }
+    std::vector<real_t> lb(dim.nb[0], floor), ub(dim.nb[0], floor), t(dim.nb[0], floor);
+    for (int i = 0; i < dim.nx[0]; ++i) {
+        lb[i] = std::max(root_lambda[i], floor);
+        ub[i] = std::max(-root_lambda[i], floor);
+    }
+    tree_ocp_qp_sol_set_lam_lb(0, lb, sol);
+    tree_ocp_qp_sol_set_lam_ub(0, ub, sol);
+    tree_ocp_qp_sol_set_t_lb(0, t, sol);
+    tree_ocp_qp_sol_set_t_ub(0, t, sol);
+    tree_ocp_qp_sol_set_lam_lg(0, root_lg, sol);
+    tree_ocp_qp_sol_set_lam_ug(0, root_ug, sol);
+    tree_ocp_qp_sol_set_t_lg(0, root_tl, sol);
+    tree_ocp_qp_sol_set_t_ug(0, root_tu, sol);
+}
+
 void shift_hpipm_tree_solution(
     HPIPMTreeSolverData &solver_data,
     real_t floor)

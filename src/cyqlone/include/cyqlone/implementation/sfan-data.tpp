@@ -164,25 +164,24 @@ void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_bounds(
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_variables(std::span<const value_type> ux_lin,
                                                                 FanStorage &ux) const {
-    index_t offset = 0; //put u0_sol
-    // copy the rest of the variables from ux_lin into each branch but leave out the dummy u0
+    BATMAT_ASSERT(static_cast<index_t>(ux_lin.size()) == num_variables());
+    BATMAT_ASSERT(static_cast<index_t>(ux.branches.size()) == num_branches);
+    index_t offset = 0;
     for (index_t c = 0; c < num_branches; ++c) {
-        index_t nux    = nu + solver_storages[c].cyqlone_solver.nx;
-        index_t N_horiz = solver_storages[c].cyqlone_solver.N_horiz;
-        index_t ceil_N = solver_storages[c].cyqlone_solver.ceil_N();
+        const auto &solver = solver_storages[c].cyqlone_solver;
+        const index_t nux = nu + solver.nx, N_horiz = solver.N_horiz;
 
-        BATMAT_ASSERT(ux.branches[c].depth() == ceil_N);
+        BATMAT_ASSERT(ux.branches[c].depth() == solver.ceil_N());
         BATMAT_ASSERT(ux.branches[c].rows() == nux);
         BATMAT_ASSERT(ux.branches[c].cols() == 1);
-        // std::span<const value_type> ux_lin_c = copy(ux_lin.subspan(offset - nu, nux * ceil_N));
-
-        // std::fill(ux_lin_c.first(nu).begin(), ux_lin_c.first(nu).end(), value_type{0});
-
-        solver_storages[c].cyqlone_solver.pack_variables(ux_lin.subspan(offset, nux * N_horiz), ux.branches[c]);
-        offset += nux * N_horiz;
+        // Match the compact export stride, excluding each branch's dummy u0.
+        solver.pack_variables(ux_lin.subspan(offset, nux * N_horiz), ux.branches[c]);
+        const auto root = solver.inverse_stage_index(0);
+        ux.branches[c].batch(root.c * solver.n + root.i)(root.l).top_rows(nu).set_constant(0);
+        offset += nux * N_horiz - nu;
     }
-    using crview                        = guanaqo::MatrixView<const value_type, index_t>;
-    la::copy(crview::as_column(ux_lin.first(nu)), ux.first.batch(0)); // copy u0_sol into the first element of ux_lin
+    using crview = guanaqo::MatrixView<const value_type, index_t>;
+    la::copy(crview::as_column(ux_lin.first(nu)), ux.first.batch(0));
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_variables(

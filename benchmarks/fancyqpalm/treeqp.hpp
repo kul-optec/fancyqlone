@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <memory>
+#include <span>
 #include <vector>
 #include <cmath>
 #include <cyqlone/ocp.hpp>
@@ -98,6 +99,13 @@ get_stats_tree_qp(TreeQpSolverData &solver_data);
 cyqlone::FanOCPStorage::Solution
 get_solution_tree_qp(TreeQpSolverData &solver_data);
 
+std::vector<double> make_dual_initialization_tree_qp(
+    const TreeQpSolverData &solver_data, const cyqlone::FanOCPStorage::Solution &guess);
+void set_dual_initialization_tree_qp(TreeQpSolverData &solver_data, std::span<const double> dual);
+void shift_treeqp_solution(
+    TreeQpSolverData &solver_data,
+    const cyqlone::FanOCPStorage::Solution &solution);
+void reset_treeqp_solution(TreeQpSolverData &solver_data);
 void update_x0_tree_qp(
     cyqlone::FanOCPStorage &fan,
     TreeQpData &qp_data,

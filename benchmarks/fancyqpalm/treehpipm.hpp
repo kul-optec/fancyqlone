@@ -95,6 +95,12 @@ HPIPMStats get_stats_hpipm_tree(HPIPMTreeSolverData &solver_data);
 
 cyqlone::FanOCPStorage::Solution get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data);
 
+/// Import a common fan primal/dual guess, rebuilding positive inequality slacks
+/// for the current QP. The root state is fixed to fan.b(0).
+void set_initial_guess_hpipm_tree(HPIPMTreeSolverData &solver_data,
+                                  const cyqlone::FanOCPStorage &fan,
+                                  const cyqlone::FanOCPStorage::Solution &guess);
+
 void warm_start_hpipm_tree(HPIPMTreeSolverData &solver_data,
                            std::span<const cyqlone::real_t> primal);
 

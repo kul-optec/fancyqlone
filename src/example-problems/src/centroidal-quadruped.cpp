@@ -63,13 +63,25 @@ Matrix3 skew(const Vector3 &v) {
 std::vector<std::array<bool, 4>> expand_gait(const CentroidalQuadrupedParams &p) {
     std::vector<std::array<bool, 4>> contacts;
     contacts.reserve(static_cast<size_t>(p.N_horiz));
+    index_t cycle_duration = 0;
+    for (const auto &phase : p.gait) {
+        if (phase.duration <= 0)
+            throw std::invalid_argument("Gait phase durations must be positive");
+        if (phase.duration > std::numeric_limits<index_t>::max() - cycle_duration)
+            throw std::invalid_argument("Gait cycle duration is too large");
+        cycle_duration += phase.duration;
+    }
+    auto offset = p.initial_stage % cycle_duration;
     while (static_cast<index_t>(contacts.size()) < p.N_horiz) {
         for (const auto &phase : p.gait) {
-            if (phase.duration <= 0)
-                throw std::invalid_argument("Gait phase durations must be positive");
-            for (index_t i = 0;
+            if (offset >= phase.duration) {
+                offset -= phase.duration;
+                continue;
+            }
+            for (index_t i = offset;
                  i < phase.duration && static_cast<index_t>(contacts.size()) < p.N_horiz; ++i)
                 contacts.push_back(phase.contacts);
+            offset = 0;
         }
     }
     return contacts;
@@ -80,6 +92,8 @@ void validate(const CentroidalQuadrupedParams &p) {
         throw std::invalid_argument("The gait must contain at least one phase");
     if (p.N_horiz <= 0)
         throw std::invalid_argument("The prediction horizon must be positive");
+    if (p.initial_stage < 0)
+        throw std::invalid_argument("The initial prediction stage must be nonnegative");
     if (p.dt <= 0)
         throw std::invalid_argument("The time step must be positive");
     if (p.mass <= 0)
@@ -114,7 +128,8 @@ CentroidalQuadrupedProblem centroidal_quadruped(CentroidalQuadrupedParams p) {
     std::vector<real_t> reference(static_cast<size_t>(N * (nx + nu) + nx));
     for (index_t i = 0; i <= N; ++i) {
         auto offset = static_cast<size_t>(i * (nx + nu));
-        set_reference_state(p, static_cast<real_t>(i) * p.dt, reference.data() + offset);
+        const auto time = (static_cast<real_t>(p.initial_stage) + static_cast<real_t>(i)) * p.dt;
+        set_reference_state(p, time, reference.data() + offset);
     }
 
     Matrix3 inertia;

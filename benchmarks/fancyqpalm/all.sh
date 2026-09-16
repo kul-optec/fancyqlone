@@ -11,15 +11,26 @@ case "$machine" in
     rpi5*) p=4; v=2 ;;
     *) p=8; v=4 ;;
 esac
-python3 hist_plot_from_json.py "benchmark-scaling.json" \
-    --output benchmark-grid-box-$machine-cold-J=4.pdf \
-    --metric=time --xlim=0,150 --box-plot --group-by=dataset --figsize=6,3.5 \
-    --solver "serial-fancyqlone(p=$p,v=$v,cm,zero)" --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero,balance)" --solver "hpipm(zero,speed)" --solver "piqp(multistage)" --solver "treeqp(clip)" --solver "treeqp(QPOasis)"\
-    --dataset-regex 'MassSprings\(12, (32|64|96|128|192|256)\)'
+# One panel per J, with shared axes; writes a PDF and a PNG preview.
+python3 hist_plot_from_json.py "benchmark-quad.json" \
+    --output "benchmark-quad-scaling-$machine.pdf" \
+    --metric=time_per_iter --scaling --figsize=5.75,5.75\
+     --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "fancyqlone(p=$p,v=1,cm,zero)" --solver "serial-fancyqlone(p=$p,v=$v,cm,zero)"--solver "hpipm(zero)" --solver "treeqp(qpOasis)" --solver "piqp(multistage)"
+python3 hist_plot_from_json.py "benchmark-quad.json" \
+    --output "benchmark-quad-scaling-$machine-log.pdf" \
+    --metric=time_per_iter --scaling --figsize=5.75,5.75 --logy\
+     --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "fancyqlone(p=$p,v=1,cm,zero)" --solver "serial-fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero)" --solver "treeqp(qpOasis)" --solver "piqp(multistage)"
+    
+    # --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "treeqp(zero,QPOasis)"
 # python3 hist_plot_from_json.py "benchmark-scaling.json" \
-#     --output benchmark-grid-box-$machine-warm-J=1.pdf \
-#     --metric=time --xlim=0,50 --box-plot --group-by=dataset --figsize=6,3.5 \
-#     --solver "fancyqlone(p=$p,v=$v,cm,shift)" --solver "hpipm(shift,balance)" --solver "hpipm(shift,speed)"\
+#     --output "benchmark-scaling-$machine-speed-J=4.pdf" \
+#     --metric=time --xlim=0,150 --box-plot  --group-by=dataset --figsize=6,3.5\
+#     --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "serial-fancyqlone(p=$p,v=$v,cm,zero)" --solver "treeqp(clip)"\
+#      --solver "hpipm(zero)" --solver "piqp(multistage)"  
+# python3 hist_plot_from_json.py "benchmark-scaling.json" \
+#     --output benchmark-grid-box-$machine-warm-J=4.pdf \
+#     --metric=time --xlim=0,180 --box-plot --group-by=dataset --figsize=6,3.5 \
+#     --solver "fancyqlone(p=$p,v=$v,cm,shift)" --solver "hpipm(shift,balance)" --solver "treeqp(clip,shift)"\
 #     --dataset-regex 'MassSprings\(12, (32|64|96|128|192|256)\)'
 # python3 hist_plot_from_json.py "$machine/benchmark-grid.json" \
 #     --output benchmark-grid-box-$machine.pdf \

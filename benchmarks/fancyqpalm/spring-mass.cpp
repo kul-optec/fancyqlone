@@ -390,7 +390,6 @@ void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params
         // std::cout << "Warm starting with solution from previous solve" << std::endl;
     }
     for (auto _ : state) {
-
         auto time_solve = solve_hpipm_tree(*qp_data, *solver_data);
 
         state.SetIterationTime(seconds(time_solve).count());
@@ -438,17 +437,20 @@ void run_benchmark_treeqp(
 
     // Warm-up solve.
     solve_tree_qp(*qp_data, *solver_data);
-    if (!cold_start) {
-        const auto solution =
+    const auto prev_solution =
             get_solution_tree_qp(*solver_data);
-        update_x0_tree_qp(
-            problem.ocp,
-            *qp_data,
-            solution.solutions,
-            num_branches / 2);
-        std::cout <<"warm starting with solution from previous solve)" << std::endl;
-    }
+   
     for (auto _ : state) {
+        if (!cold_start) {
+        
+            update_x0_tree_qp(
+                problem.ocp,
+                *qp_data,
+                prev_solution.solutions,
+                num_branches / 2);
+        
+            shift_treeqp_solution(*solver_data,prev_solution);
+            }
         const auto time_solve =
             solve_tree_qp(*qp_data, *solver_data, cold_start);
 
@@ -690,15 +692,15 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
             co_yield cyqlone_solver("shift", backend, settings_warm);
             // if (opts.no_updates)
             //     co_yield cyqlone_solver("shift,upd=0", backend_no_upd, settings_warm);
-            if (opts.serial)
-                co_yield serial_cyqlone_solver("shift", backend, settings_warm);
+            // if (opts.serial)
+            //     co_yield serial_cyqlone_solver("shift", backend, settings_warm);
         }
         if (opts.warm_copy) {
             std::cout << "Running warm start (copy) solver with " << p << " processors" << std::endl;
             backend.strategy = backend_no_upd.strategy = qp::WarmStartingStrategy::Copy;
             co_yield cyqlone_solver("copy", backend, settings_warm);
-            if (opts.serial)
-                co_yield serial_cyqlone_solver("copy", backend, settings_warm);
+            // if (opts.serial)
+            //     co_yield serial_cyqlone_solver("copy", backend, settings_warm);
             // if (opts.no_updates)
             //     co_yield cyqlone_solver("copy,upd=0", backend_no_upd, settings_warm);
         }
@@ -709,16 +711,16 @@ std::generator<Solver> get_hpipm_solvers(const Options &opts) {
     if (opts.hpipm) {
 #if WITH_HPIPM
         if (opts.cold){
-            co_yield {"hpipm(zero,speed)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+            co_yield {"hpipm(zero)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
                           run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmZero, 0);
                       }};
-            co_yield {"hpipm(zero,balance)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
-                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::NoWarmStart, 1);
-                      }};
+            // co_yield {"hpipm(zero,balance)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+            //               run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::NoWarmStart, 1);
+            //           }};
 }
         if (opts.warm_shift)
         {
-            co_yield {"hpipm(shift,speed)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+            co_yield {"hpipm(shift)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
                           run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmShift, 0);
                       }};
             co_yield {"hpipm(shift,balance)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
@@ -726,12 +728,13 @@ std::generator<Solver> get_hpipm_solvers(const Options &opts) {
                       }};
         }
         if (opts.warm_copy){
-            co_yield {"hpipm(copy,speed)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+            co_yield {"hpipm(copy)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
                           run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmCopy, 0);
                       }};
-            co_yield {"hpipm(copy,balance)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
-                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmCopy, 1);
-                      }}; }
+            // co_yield {"hpipm(copy,balance)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+            //               run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmCopy, 1);
+            //           }}; 
+            }
 #else
         throw std::invalid_argument("HPIPM support not enabled in this build");
 #endif
@@ -751,17 +754,29 @@ std::generator<Solver> get_treeqp_solvers(const Options &opts)
                     opts.cold
                 );
             }};
-               co_yield {
-            "treeqp(QPOasis)",
+        if (opts.warm_shift) {
+        co_yield {
+            "treeqp(clip,shift)",
             [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
                 run_benchmark_treeqp(
                     state,
                     params,
                     num_branches,
-                    opts.cold,
                     false
                 );
             }};
+        }
+            //    co_yield {
+            // "treeqp(QPOasis)",
+            // [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+            //     run_benchmark_treeqp(
+            //         state,
+            //         params,
+            //         num_branches,
+            //         opts.cold,
+            //         false
+            //     );
+            // }};
 #else
         throw std::invalid_argument(
             "TREEQP support not enabled in this build");
