@@ -205,11 +205,10 @@ benchmark_quick() {
 # Run the horizon scaling benchmark
 benchmark_scaling() {
     benchmark \
-        --problem wang-boyd-2008 --cold --warm-shift -I 100 -p "${OMP_NUM_THREADS}" --cm --no-updates --serial \
-         -N 32 -N 64 -N 92 -N 128 -N 192 -N 256 \
-        -M 12 -J 4 \
-        --benchmark_repetitions=3 --benchmark_report_aggregates_only \
-        --benchmark_min_time=0.05s --benchmark_out=benchmark-scaling.json "$@"
+        --cold --warm-shift -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -M 12 -N 32 64 92 128 192 256 -J 4\
+        --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+        --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling.json "$@"
 }
 # Run the horizon scaling benchmark
 benchmark_scaling2() {
@@ -234,7 +233,7 @@ benchmark_scaling_states() {
 }
 benchmark_quad_scaling() {
     benchmark_quadruped \
-        --cold --serial -I 1 -p "${OMP_NUM_THREADS}" -v4 -v1 --cm \
+        --cold --warm-shift --serial -I 20 -p "${OMP_NUM_THREADS}" -v4 -v1 --cm \
         -N 32 64 92 128 192 256 -J 4\
         --benchmark_repetitions=10 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-quad-scaling.json "$@"

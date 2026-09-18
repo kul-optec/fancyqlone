@@ -437,7 +437,7 @@ void run_benchmark_treeqp(
             }
         else {
             // Reset the solver to a cold start.
-            reset_tree_qp_solver(*solver_data);
+            reset_treeqp_solution(*solver_data);
         }
         const auto time_solve =
             solve_tree_qp(*qp_data, *solver_data, cold_start);

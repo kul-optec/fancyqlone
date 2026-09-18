@@ -121,14 +121,21 @@ def extract_dataset_from_problem(problem_id: str) -> str:
     """
     Extract dataset identifier from problem_id.
 
-    Example:
-        "spring-mass(M=12,N=32,seed=0)" -> "MassSprings(12, 32)"
+    Examples:
+        "spring-mass(M=12,N=32,seed=0)" -> "MassSprings(M=12, N=32)"
+        "centroidal-quadruped(N=32,J=4,seed=0)" -> "CentroidalQuadruped(N=32, J=4)"
     """
+    # Group quadruped instances by horizon and number of branches, ignoring seed.
+    match = re.search(r"centroidal-quadruped\(N=(\d+),\s*J=(\d+)\b", problem_id)
+    if match:
+        n, j = match.groups()
+        return f"CentroidalQuadruped(N={n}, J={j})"
+
     # Extract M and N parameters
     match = re.search(r"M=(\d+).*?N=(\d+)", problem_id)
     if match:
         m, n = match.groups()
-        return f"MassSprings({m}, {n})"
+        return f"MassSprings(M={m}, N={n})"
     return problem_id
 
 
@@ -245,12 +252,13 @@ def extract_timings(
 
 def format_dataset(dataset_id: str, all_datasets: Optional[list[str]] = None) -> tuple[str, Optional[str]]:
     """
-    Format dataset string, showing only M and N parameters that vary across datasets.
+    Format dataset string, showing only parameters that vary across datasets.
     
     Parameters
     ----------
     dataset_id : str
-        Single dataset identifier like "MassSprings(12, 128)"
+        Single dataset identifier like "MassSprings(M=12, N=128)" or
+        "CentroidalQuadruped(N=32, J=4)"
     all_datasets : list[str], optional
         List of all dataset IDs to determine which parameters vary
     
@@ -259,8 +267,26 @@ def format_dataset(dataset_id: str, all_datasets: Optional[list[str]] = None) ->
     tuple[Optional[str], Optional[str]]
         Formatted dataset string with LaTeX formatting for the current dataset, and for the fixed parameters.
     """
+    quadruped_pattern = r"CentroidalQuadruped\(N=(\d+), J=(\d+)\)"
+    match = re.fullmatch(quadruped_pattern, dataset_id)
+    if match:
+        labels = [f"${key}$=\\,{value}" for key, value in zip(("N", "J"), match.groups())]
+        if all_datasets is None or len(all_datasets) <= 1:
+            return ", ".join(labels), None
+
+        extracted = pd.Series(all_datasets).str.extract(quadruped_pattern)
+        varying_labels = []
+        fixed_labels = []
+        for index, label in enumerate(labels):
+            if extracted[index].nunique() > 1:
+                varying_labels.append(label)
+            else:
+                fixed_labels.append(label)
+        return ", ".join(varying_labels), ", ".join(fixed_labels) or None
+
     # Extract M and N from current dataset
-    match = re.search(r"MassSprings\((\d+), (\d+)\)", dataset_id)
+    match = re.search(r"MassSprings\(M=(\d+), N=(\d+)\)", dataset_id)
+    print(match)
     if not match:
         return dataset_id, None
     
@@ -270,7 +296,7 @@ def format_dataset(dataset_id: str, all_datasets: Optional[list[str]] = None) ->
     if all_datasets is not None and len(all_datasets) > 1:
         # Use pandas to extract M and N values efficiently
         datasets_series = pd.Series(all_datasets)
-        extracted = datasets_series.str.extract(r"MassSprings\((\d+), (\d+)\)")
+        extracted = datasets_series.str.extract(r"MassSprings\(M=(\d+), N=(\d+)\)")
         all_m_values = set(extracted[0].dropna().unique())
         all_n_values = set(extracted[1].dropna().unique())
         
@@ -308,7 +334,7 @@ def format_solver_name(solver_name: str, plot: Optional[str] = None) -> str:
         "cyqlone(p=4,v=2,cm,zero)": fr"\textsc{{CyQPALM}}{sep}(cold)",
         "cyqlone(p=4,v=2,cm,shift)": fr"\textsc{{CyQPALM}}{sep}(warm)",
         "hpipm": fr"HPIPM{sep}(cold)",
-        "hpipm(zero)": fr"HPIPM{sep}(cold)",
+        "hpipm(zero)": fr"HPIPM",
         "hpipm(shift)": fr"HPIPM{sep}(warm)",
         "piqp(multistage)": fr"PIQP",
         "treeqp(qpOasis)": fr"TreeQP",
@@ -547,7 +573,7 @@ def create_scaling_plot(
         
         ref_df = ref_df.copy()
         # Extract N using vectorized string operation
-        ref_df["N"] = ref_df["dataset_id"].str.extract(r",\s*(\d+)\)")[0].astype(int)
+        ref_df["N"] = ref_df["dataset_id"].str.extract(r"N=(\d+)")[0].astype(int)
         
         # Group by N and compute average metric for reference
         ref_grouped = ref_df.groupby("N")[metric].mean()
@@ -758,10 +784,11 @@ def create_box_plot(
     show_legend: bool = True,
     group_by: str = "dataset",
     xlim: Optional[tuple[float, float]] = None,
+    logy: bool = False,
 ):
     """
     Create box plots for multiple solvers on a single subplot.
-    The metric is shown on the horizontal axis, with one horizontal box plot
+    The metric is shown on the vertical axis, with one vertical box plot
     for each solver and dataset combination. Results can be grouped either by
     dataset or by solver.
 
@@ -794,7 +821,8 @@ def create_box_plot(
     group_by : str
         How to group the box plots: "dataset" or "solver" (default: "dataset")
     xlim : tuple[float, float], optional
-        X-axis limits (min, max). If None, auto-computed.
+        Metric-axis limits (min, max). For vertical box plots these are applied
+        to the y-axis. If None, auto-computed.
 
     Returns
     -------
@@ -904,14 +932,8 @@ def create_box_plot(
             for i, dataset in enumerate(all_datasets_sorted)
         }
 
-    # Create figure with fixed subplot position
+    # Create figure
     fig = plt.figure(figsize=figsize)
-    # Create axes with fixed horizontal position (left, width) but dynamic vertical (bottom, height)
-    # This ensures consistent horizontal plot area regardless of y-label lengths
-    # while allowing vertical spacing to adjust based on figsize
-    left = 0.15
-    width = 0.82
-    # Use matplotlib's default tight_layout-style vertical spacing
     ax = fig.add_subplot(111)
 
     # Prepare data for box plots
@@ -935,7 +957,7 @@ def create_box_plot(
             dataset_formatted, dataset_fixed = format_dataset(dataset_id, all_datasets_sorted)
             
             group_start_position = position
-            for solver_idx, solver_id in enumerate(reversed(selected_solvers)):
+            for solver_idx, solver_id in enumerate(selected_solvers):
                 df = solver_data[solver_id]
                 dataset_df = df[df["dataset_id"] == dataset_id]
                 
@@ -1004,13 +1026,13 @@ def create_box_plot(
             # Add gap between solvers
             position += gap_between_groups
 
-    # Create horizontal box plots
+    # Create vertical box plots
     bp = ax.boxplot(
         box_data,
         positions=box_positions,
         notch=True,
-        vert=False,
-        widths=0.6,
+        vert=True,
+        widths=0.5,
         patch_artist=True,
         showfliers=True,
         flierprops=dict(
@@ -1040,40 +1062,43 @@ def create_box_plot(
     for cap in bp['caps']:
         cap.set_linewidth(0.8)
 
-    # Set y-tick labels at the center of each group
-    ax.set_yticks(group_tick_positions)
-    ax.set_yticklabels(group_tick_labels, fontsize=10)
-    ax.set_ylim(-1, position - gap_between_groups)
+    # Set x-tick labels at the center of each group
+    ax.set_xticks(group_tick_positions)
+    ax.set_xticklabels(group_tick_labels, fontsize=10)
+    ax.set_xlim(-1, position - gap_between_groups)
     
     # Set x-axis label and title
     if reference_solver is not None:
         # Speedup plot
-        ax.set_xlabel("Speedup")
+        ax.set_ylabel("Speedup")
         metric_pretty = METRIC_PRETTY.get(metric, metric.replace("_", " "))
         ax.set_title(f"Speedup ({metric_pretty})")
-        # Add vertical line at speedup = 1.0
-        ax.axvline(x=1.0, color="black", linestyle="--", linewidth=1, alpha=0.7)
+        # Add horizontal line at speedup = 1.0
+        ax.axhline(y=1.0, color="black", linestyle="--", linewidth=1, alpha=0.7)
     else:
         # Absolute metric plot
-        ax.set_xlabel(METRIC_LABELS.get(metric, metric.replace("_", " ").capitalize()))
+        ax.set_ylabel(METRIC_LABELS.get(metric, metric.replace("_", " ").capitalize()))
         title = METRIC_PRETTY.get(metric, metric.replace("_", " ")).capitalize()
         if dataset_fixed is not None:
             # title = f"{title}\\rlap{{\\quad\\normalsize{{({dataset_fixed})}}}}"
             title = f"{title}\\hspace{{9em}}\\llap{{\\normalsize{{({dataset_fixed})}}}}"
         ax.set_title(title, loc="right")
     
-    # Grid
+    # Grid and metric-axis limits
     if xlim is not None:
-        ax.set_xlim(xlim)
+        ax.set_ylim(xlim)
         if xlim == (0, 52) or xlim == (0, 54):
-            ax.set_xticks([0, 10, 20, 30, 40, 50])
-            ax.set_xticks([2, 4, 6, 8], minor=True)
+            ax.set_yticks([0, 10, 20, 30, 40, 50])
+            ax.set_yticks([2, 4, 6, 8], minor=True)
     else:
-        ax.set_xlim(0, None)
-    if 175 <= ax.get_xlim()[1] <= 190:
-        ax.set_xticks([5, 10, 15, 20], minor=True)
-    ax.grid(True, alpha=0.3, axis="x")
-    ax.grid(True, alpha=0.15, axis="x", which="minor")
+        if not logy:
+            ax.set_ylim(0, None)
+    if logy:
+        ax.set_yscale('log')
+    if 175 <= ax.get_ylim()[1] <= 190:
+        ax.set_yticks([5, 10, 15, 20], minor=True)
+    ax.grid(True, alpha=0.3, axis="y")
+    ax.grid(True, alpha=0.15, axis="y", which="minor")
     # Create legend if requested and there are multiple items
     if show_legend:
         from matplotlib.patches import Patch
@@ -1107,15 +1132,9 @@ def create_box_plot(
             ]
             ax.legend(handles=legend_elements, loc="best", fontsize=9, framealpha=0.6)
     
-    # Apply tight_layout first to get proper vertical spacing
     plt.tight_layout()
-    # Then override only the horizontal position
-    pos = ax.get_position()
-    ax.set_position((left, pos.y0, width, pos.height))
     
     return fig
-
-
 def create_timing_breakdown_plot(
     all_results: dict[str, pd.DataFrame],
     solver: str,
@@ -1290,6 +1309,9 @@ def create_timing_breakdown_plot(
     elif all(l.startswith("$M$=\\,") for l in formatted_labels):
         ax.set_xlabel("Number of masses $M$")
         formatted_labels = [l.removeprefix("$M$=\\,") for l in formatted_labels]
+    elif all(l.startswith("$J$=\\,") for l in formatted_labels):
+        ax.set_xlabel("Number of branches $J$")
+        formatted_labels = [l.removeprefix("$J$=\\,") for l in formatted_labels]
     ax.set_xticklabels(formatted_labels, rotation=0)
     
     # Labels and title
@@ -1740,7 +1762,7 @@ def create_speedup_plot(
 )
 @click.option(
     "--dataset-regex",
-    help="Regex pattern to filter dataset_id (e.g., 'MassSprings\\(6, \\d+\\)')",
+    help="Regex pattern to filter dataset_id (e.g., 'CentroidalQuadruped\\(N=\\d+, J=4\\)')",
 )
 @click.option("--bins", default=50, help="Number of histogram bins (default: 50)")
 @click.option("--bin-range", help="Bin range as 'min,max' (default: auto)")
@@ -1863,6 +1885,12 @@ def main(
         # Create box plots
         python hist_plot_from_json.py spring-mass.json --metric time \\
             --solver "cyqlone(v=4,p=8)" --solver "hpipm" --box-plot
+
+        # Create quadruped box plots, grouping seeds by N and J
+        python hist_plot_from_json.py benchmark-quad-full.json --metric time \\
+            --solver "fancyqlone(p=8,v=4,cm,zero)" --solver "hpipm(zero)" \\
+            --box-plot --group-by dataset \\
+            --dataset-regex "CentroidalQuadruped\\(N=\\d+, J=4\\)"
         
         # Create box plots with speedup relative to reference solver
         python hist_plot_from_json.py spring-mass.json --metric time \\
@@ -2042,6 +2070,7 @@ def main(
                     show_legend=not no_legend,
                     group_by=group_by,
                     xlim=xlim_tuple,
+                    logy=logy
                 )
             else:
                 # Generate regular histogram

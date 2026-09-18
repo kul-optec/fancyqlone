@@ -20,7 +20,22 @@ python3 hist_plot_from_json.py "benchmark-quad.json" \
     --output "benchmark-quad-scaling-$machine-log.pdf" \
     --metric=time_per_iter --scaling --figsize=5.75,5.75 --logy\
      --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "fancyqlone(p=$p,v=1,cm,zero)" --solver "serial-fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero)" --solver "treeqp(qpOasis)" --solver "piqp(multistage)"
-    
+python3 hist_plot_from_json.py "benchmark-scaling.json" \
+    --output "benchmark-scaling-$machine-log.pdf" \
+    --metric=time_per_iter --scaling --figsize=5.75,5.75 --logy\
+     --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "fancyqlone(p=$p,v=1,cm,zero)" --solver "serial-fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero)" --solver "treeqp(clip)" --solver "piqp(multistage)"
+python3 hist_plot_from_json.py "benchmark-scaling.json" \
+    --output "benchmark-$machine-cold.pdf" \
+    --metric=time --box-plot --group-by=dataset --figsize=5.75,5.75\
+     --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero)" --solver "treeqp(clip)" --solver "piqp(multistage)"
+python3 hist_plot_from_json.py "benchmark-scaling.json" \
+    --output "benchmark-$machine-warm.pdf" \
+    --metric=time --box-plot --group-by=dataset --figsize=5.75,5.75\
+     --solver "fancyqlone(p=$p,v=$v,cm,shift)" --solver "hpipm(shift)" --solver "treeqp(clip,shift)"
+ 
+ 
+ 
+ 
     # --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "treeqp(zero,QPOasis)"
 # python3 hist_plot_from_json.py "benchmark-scaling.json" \
 #     --output "benchmark-scaling-$machine-speed-J=4.pdf" \
