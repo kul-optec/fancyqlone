@@ -39,7 +39,7 @@ struct CentroidalQuadrupedParams {
 
     std::array<real_t, 12> state_weights{
         2, 2, 10, 0.25, 0.25, 10,
-        0.2, 0.2, 0.2, 1e-6, 1e-6, 0.3,
+        0.2, 0.2, 0.2, 0, 0, 0.3,
     };
 
     std::array<real_t, 12> force_weights{
@@ -54,11 +54,13 @@ struct CentroidalQuadrupedParams {
     CentroidalQuadrupedParams()
         : gait(make_gait(N_horiz)) {}
 
-    CentroidalQuadrupedParams(index_t N, uint64_t seed, real_t Ts)
+    CentroidalQuadrupedParams(index_t N, uint64_t seed, real_t Ts, real_t force_weight = 5e-5, real_t reg = 0)
         : dt(Ts),
           N_horiz(N),
           gait(make_gait(N)),
-          seed(seed) {}
+          seed(seed) {force_weights.fill(force_weight);
+          for (auto& w : state_weights)
+            w += reg;}
 
 private:
     static std::vector<CentroidalQuadrupedGaitPhase>

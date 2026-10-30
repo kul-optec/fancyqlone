@@ -201,6 +201,7 @@ if(BUILD_TESTING AND WITH_HPIPM)
 
     add_executable(testing
         test.cpp
+        test-constraints.cpp
         treehpipm.cpp
     )
 
@@ -219,6 +220,17 @@ if(BUILD_TESTING AND WITH_HPIPM)
         cyqlone::example-problems
         hpipm
     )
+
+    if(WITH_PIQP)
+        target_sources(testing PRIVATE mspiqp.cpp)
+        target_link_libraries(testing PRIVATE piqp::piqp)
+        target_compile_definitions(testing PRIVATE WITH_PIQP=1)
+    endif()
+    if(WITH_TREEQP)
+        target_sources(testing PRIVATE treeqp.cpp)
+        target_link_libraries(testing PRIVATE treeqp::treeqp)
+        target_compile_definitions(testing PRIVATE WITH_TREEQP=1)
+    endif()
 
     gtest_discover_tests(
         testing

@@ -1,4 +1,5 @@
 #include "treehpipm.hpp"
+#include "root-elimination.hpp"
 
 #include <batmat/assume.hpp>
 #include <guanaqo/mat-view.hpp>
@@ -42,16 +43,54 @@ std::vector<real_t> eye(index_t n) {
     return data;
 }
 
-template <class T, class I, class S, guanaqo::StorageOrder O>
-auto prepare_hpipm_bounds(guanaqo::MatrixView<T, I, S, O> bounds) {
-    std::vector<real_t> values(static_cast<std::size_t>(bounds.rows));
-    std::vector<real_t> mask(static_cast<std::size_t>(bounds.rows));
-    for (I i = 0; i < bounds.rows; ++i) {
-        const auto finite = std::isfinite(bounds(i, 0));
-        values[static_cast<std::size_t>(i)] = finite ? bounds(i, 0) : real_t{0};
-        mask[static_cast<std::size_t>(i)]   = finite ? real_t{1} : real_t{0};
+static auto prepare_hpipm_bounds(std::span<const real_t> bounds) {
+    std::vector<real_t> values(bounds.size()), mask(bounds.size());
+    for (std::size_t i = 0; i < bounds.size(); ++i) {
+        const auto finite = std::isfinite(bounds[i]);
+        values[i] = finite ? bounds[i] : real_t{0};
+        mask[i]   = finite ? real_t{1} : real_t{0};
     }
     return std::pair{std::move(values), std::move(mask)};
+}
+
+static void set_hpipm_constraints(d_tree_ocp_qp &qp, int node,
+                                  fanqp::StageConstraints &constraints) {
+    if (!constraints.lower.empty()) {
+        if (!constraints.C.empty())
+            d_tree_ocp_qp_set_C(node, constraints.C.data(), &qp);
+        if (!constraints.D.empty())
+            d_tree_ocp_qp_set_D(node, constraints.D.data(), &qp);
+        auto [lg, lg_mask] = prepare_hpipm_bounds(constraints.lower);
+        auto [ug, ug_mask] = prepare_hpipm_bounds(constraints.upper);
+        d_tree_ocp_qp_set_lg(node, lg.data(), &qp);
+        d_tree_ocp_qp_set_ug(node, ug.data(), &qp);
+        d_tree_ocp_qp_set_lg_mask(node, lg_mask.data(), &qp);
+        d_tree_ocp_qp_set_ug_mask(node, ug_mask.data(), &qp);
+    }
+    auto compact = [](const auto &values, const auto &indices) {
+        std::vector<real_t> result;
+        for (int i : indices)
+            result.push_back(values[i]);
+        return result;
+    };
+    if (!constraints.state_indices.empty()) {
+        auto [lb, lb_mask] = prepare_hpipm_bounds(compact(constraints.xmin, constraints.state_indices));
+        auto [ub, ub_mask] = prepare_hpipm_bounds(compact(constraints.xmax, constraints.state_indices));
+        d_tree_ocp_qp_set_idxbx(node, constraints.state_indices.data(), &qp);
+        d_tree_ocp_qp_set_lbx(node, lb.data(), &qp);
+        d_tree_ocp_qp_set_ubx(node, ub.data(), &qp);
+        d_tree_ocp_qp_set_lbx_mask(node, lb_mask.data(), &qp);
+        d_tree_ocp_qp_set_ubx_mask(node, ub_mask.data(), &qp);
+    }
+    if (!constraints.input_indices.empty()) {
+        auto [lb, lb_mask] = prepare_hpipm_bounds(compact(constraints.umin, constraints.input_indices));
+        auto [ub, ub_mask] = prepare_hpipm_bounds(compact(constraints.umax, constraints.input_indices));
+        d_tree_ocp_qp_set_idxbu(node, constraints.input_indices.data(), &qp);
+        d_tree_ocp_qp_set_lbu(node, lb.data(), &qp);
+        d_tree_ocp_qp_set_ubu(node, ub.data(), &qp);
+        d_tree_ocp_qp_set_lbu_mask(node, lb_mask.data(), &qp);
+        d_tree_ocp_qp_set_ubu_mask(node, ub_mask.data(), &qp);
+    }
 }
 
 struct FanTreeIndex {
@@ -114,10 +153,13 @@ std::size_t branch_offset(const HPIPMTreeQPData &data, int branch) {
 
 
 std::shared_ptr<HPIPMTreeQPData>
-build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
+build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan, bool native_bounds, bool eliminate_x0) {
     validate_fan(fan);
 
     HPIPMTreeQPData d;
+    d.native_bounds = native_bounds;
+    d.eliminated_x0 = eliminate_x0;
+    d.initial_state = fanqp::initial_state(fan);
 
     const int branches = static_cast<int>(fan.num_branches());
     const int horizon  = static_cast<int>(fan.ocps.front().dim.N_horiz);
@@ -129,6 +171,15 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
     d.horizon      = horizon;
     d.node_index.assign(branches, std::vector<int>(horizon + 1, 0));
     d.edge_index.assign(branches, std::vector<int>(horizon + 1, -1));
+    d.constraints.resize(map.num_nodes());
+    fanqp::ReducedRoot reduced_root;
+    if (eliminate_x0) {
+        reduced_root = fanqp::eliminate_root_state(fan, d.initial_state, native_bounds);
+        d.constraints[0] = std::move(reduced_root.constraints);
+    } else {
+        d.constraints[0] = fanqp::analyze_constraints(fan.ocps, 0, native_bounds, false);
+    }
+
 
     // HPIPM's tree_create uses breadth-first node numbering and the number of
     // children of each node.  Therefore nodes are generated level-by-level:
@@ -151,14 +202,11 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
     d_tree_ocp_qp_dim_create(map.num_nodes(), d.dim.get(), d.dim_mem.get());
     d_tree_ocp_qp_dim_set_tree(d.tree.get(), d.dim.get());
 
-    d_tree_ocp_qp_dim_set_nx(0, nx, d.dim.get());
+    d_tree_ocp_qp_dim_set_nx(0, eliminate_x0 ? 0 : nx, d.dim.get());
     d_tree_ocp_qp_dim_set_nu(0, nu, d.dim.get());
-    d_tree_ocp_qp_dim_set_nbx(0, nx, d.dim.get());
-    int ng_0 = 0 ;
-    for (int branch = 0; branch < branches; ++branch) {
-        ng_0 += static_cast<int>(fan.ocps[static_cast<std::size_t>(branch)].dim.ny);
-    }
-    d_tree_ocp_qp_dim_set_ng(0, ng_0, d.dim.get());
+    d_tree_ocp_qp_dim_set_nbx(0, eliminate_x0 ? 0 : nx, d.dim.get());
+    d_tree_ocp_qp_dim_set_nbu(0, static_cast<int>(d.constraints[0].input_indices.size()), d.dim.get());
+    d_tree_ocp_qp_dim_set_ng(0, static_cast<int>(d.constraints[0].lower.size()), d.dim.get());
     for (int branch = 0; branch < branches; ++branch) {
         const auto &ocp = fan.ocps[static_cast<std::size_t>(branch)];
         d.node_index[branch][0] = 0;
@@ -172,11 +220,11 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
 
             d_tree_ocp_qp_dim_set_nx(node, nx, d.dim.get());
             d_tree_ocp_qp_dim_set_nu(node, stage < horizon ? nu : 0, d.dim.get());
-            d_tree_ocp_qp_dim_set_ng(
-                node,
-                stage < horizon ? static_cast<int>(ocp.dim.ny)
-                                : static_cast<int>(ocp.dim.ny_N),
-                d.dim.get());
+            auto &constraints = d.constraints[node];
+            constraints = fanqp::analyze_constraints({&ocp, 1}, stage, native_bounds);
+            d_tree_ocp_qp_dim_set_nbx(node, static_cast<int>(constraints.state_indices.size()), d.dim.get());
+            d_tree_ocp_qp_dim_set_nbu(node, static_cast<int>(constraints.input_indices.size()), d.dim.get());
+            d_tree_ocp_qp_dim_set_ng(node, static_cast<int>(constraints.lower.size()), d.dim.get());
         }
     }
 
@@ -184,20 +232,17 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
     d.qp = std::make_unique<struct d_tree_ocp_qp>();
     d_tree_ocp_qp_create(d.dim.get(), d.qp.get(), d.qp_mem.get());
 
-    auto Jbx0 = eye(nx);
-    d_tree_ocp_qp_set_Jbx(0, Jbx0.data(), d.qp.get());
-    const auto &x0 = fan.ocps.front().b(0);
-    d_tree_ocp_qp_set_lbx(0, const_cast<real_t *>(x0.data), d.qp.get());
-    d_tree_ocp_qp_set_ubx(0, const_cast<real_t *>(x0.data), d.qp.get());
+    if (!eliminate_x0) {
+        auto Jbx0 = eye(nx);
+        d_tree_ocp_qp_set_Jbx(0, Jbx0.data(), d.qp.get());
+        d_tree_ocp_qp_set_lbx(0, d.initial_state.data(), d.qp.get());
+        d_tree_ocp_qp_set_ubx(0, d.initial_state.data(), d.qp.get());
+    }
     std::vector<real_t> R0_data(static_cast<std::size_t>(nu) * nu);
     std::vector<real_t> r0_data(static_cast<std::size_t>(nu));
     std::vector<real_t> q0_data(static_cast<std::size_t>(nx));
     std::vector<real_t> Q0_data(static_cast<std::size_t>(nx) * nx);
     std::vector<real_t> S0_data(static_cast<std::size_t>(nu) * nx);
-
-    std::vector<real_t> D0_data(static_cast<std::size_t>(ng_0) * nu);
-    std::vector<real_t> lg0_data(static_cast<std::size_t>(ng_0));
-    std::vector<real_t> ug0_data(static_cast<std::size_t>(ng_0));
 
     guanaqo::MatrixView<real_t, index_t> R0 = {{
         .data = R0_data.data(),
@@ -229,40 +274,19 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
         .cols = nx,
     }};
 
-    guanaqo::MatrixView<real_t, index_t> D0 = {{
-        .data = D0_data.data(),
-        .rows = ng_0,
-        .cols = nu,
-    }};
-
-    guanaqo::MatrixView<real_t, index_t> lg0 = {{
-        .data = lg0_data.data(),
-        .rows = ng_0,
-        .cols = 1,
-    }};
-
-    guanaqo::MatrixView<real_t, index_t> ug0 = {{
-        .data = ug0_data.data(),
-        .rows = ng_0,
-        .cols = 1,
-    }};
-
     R0.set_constant(0);
     r0.set_constant(0);
     q0.set_constant(0);
     Q0.set_constant(0);
     S0.set_constant(0);
 
-    index_t row_offset = 0;
     for (int branch = 0; branch < branches; ++branch) {
         const auto &ocp = fan.ocps[static_cast<std::size_t>(branch)]; 
         const auto Rj  = ocp.R(0);
         const auto rj  = ocp.r(0);
+        const auto qj  = ocp.q(0);
         const auto Qj  = ocp.Q(0);
         const auto Sj  = ocp.S(0);
-        const auto Dj  = ocp.D(0);
-        const auto lgj = ocp.b_min(0);
-        const auto ugj = ocp.b_max(0);
 
         assert(Rj.rows == R0.rows);
         assert(Rj.cols == R0.cols);
@@ -273,46 +297,28 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
         assert(Sj.rows == S0.rows);
         assert(Sj.cols == S0.cols);
 
-        assert(Dj.cols == D0.cols);
-        assert(lgj.rows == Dj.rows);
-        assert(ugj.rows == Dj.rows);
-
         // R0 = sum_j Rj(0)
         R0 += Rj;
 
         // r0 = sum_j rj(0)
         r0 += rj;
+        q0 += qj;
         // Q0 = sum_j Qj(0)
         Q0 += Qj;
         // S0 = sum_j Sj(0)
         S0 += Sj;
-        // D0 = vstack_j Dj(0)
-        D0.middle_rows(row_offset, Dj.rows) = Dj;
-
-        // lg0 = vstack_j b_min,j(0)
-        lg0.middle_rows(row_offset, lgj.rows) = lgj;
-
-        // ug0 = vstack_j b_max,j(0)
-        ug0.middle_rows(row_offset, ugj.rows) = ugj;
-
-        row_offset += Dj.rows;
     }
 
-    assert(row_offset == D0.rows);
-    assert(row_offset == lg0.rows);
-    assert(row_offset == ug0.rows);
     d_tree_ocp_qp_set_R(0, const_cast<real_t *>(compress_col_major(R0).data()), d.qp.get());
-    d_tree_ocp_qp_set_r(0, const_cast<real_t *>(compress_col_major(r0).data()), d.qp.get());
-    d_tree_ocp_qp_set_D(0, const_cast<real_t *>(compress_col_major(D0).data()), d.qp.get());
-    auto [lg0_values, lg0_mask] = prepare_hpipm_bounds(lg0);
-    auto [ug0_values, ug0_mask] = prepare_hpipm_bounds(ug0);
-    d_tree_ocp_qp_set_lg(0, lg0_values.data(), d.qp.get());
-    d_tree_ocp_qp_set_lg_mask(0, lg0_mask.data(), d.qp.get());
-    d_tree_ocp_qp_set_ug(0, ug0_values.data(), d.qp.get());
-    d_tree_ocp_qp_set_ug_mask(0, ug0_mask.data(), d.qp.get());
-    d_tree_ocp_qp_set_Q(0, const_cast<real_t *>(compress_col_major(Q0).data()), d.qp.get());
-    d_tree_ocp_qp_set_S(0, const_cast<real_t *>(compress_col_major(S0).data()), d.qp.get());
-    d_tree_ocp_qp_set_q(0, const_cast<real_t *>(compress_col_major(q0).data()), d.qp.get());
+    if (eliminate_x0) {
+        d_tree_ocp_qp_set_r(0, reduced_root.r.data(), d.qp.get());
+    } else {
+        d_tree_ocp_qp_set_r(0, const_cast<real_t *>(compress_col_major(r0).data()), d.qp.get());
+        d_tree_ocp_qp_set_Q(0, const_cast<real_t *>(compress_col_major(Q0).data()), d.qp.get());
+        d_tree_ocp_qp_set_S(0, const_cast<real_t *>(compress_col_major(S0).data()), d.qp.get());
+        d_tree_ocp_qp_set_q(0, const_cast<real_t *>(compress_col_major(q0).data()), d.qp.get());
+    }
+    set_hpipm_constraints(*d.qp, 0, d.constraints[0]);
 
     for (int branch = 0; branch < branches; ++branch) {
         const auto &ocp = fan.ocps[static_cast<std::size_t>(branch)];
@@ -320,35 +326,30 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
             const int node = d.node_index[branch][stage];
             const int edge = d.edge_index[branch][stage];
 
-            auto A = compress_col_major(ocp.A(stage - 1));
             auto B = compress_col_major(ocp.B(stage - 1));
-            d_tree_ocp_qp_set_A(edge, A.data(), d.qp.get());
             d_tree_ocp_qp_set_B(edge, B.data(), d.qp.get());
-            d_tree_ocp_qp_set_b(edge,
-                const_cast<real_t *>(ocp.b(stage).data), d.qp.get());
+            if (eliminate_x0 && stage == 1) {
+                d_tree_ocp_qp_set_b(edge, reduced_root.b[branch].data(), d.qp.get());
+            } else {
+                auto A = compress_col_major(ocp.A(stage - 1));
+                d_tree_ocp_qp_set_A(edge, A.data(), d.qp.get());
+                d_tree_ocp_qp_set_b(edge,
+                    const_cast<real_t *>(ocp.b(stage).data), d.qp.get());
+            }
 
             auto Q = compress_col_major(ocp.Q(stage));
-            auto C = compress_col_major(ocp.C(stage));
             d_tree_ocp_qp_set_Q(node, Q.data(), d.qp.get());
             d_tree_ocp_qp_set_q(node,
                 const_cast<real_t *>(ocp.q(stage).data), d.qp.get());
-            d_tree_ocp_qp_set_C(node, C.data(), d.qp.get());
-            auto [lg, lg_mask] = prepare_hpipm_bounds(ocp.b_min(stage));
-            auto [ug, ug_mask] = prepare_hpipm_bounds(ocp.b_max(stage));
-            d_tree_ocp_qp_set_lg(node, lg.data(), d.qp.get());
-            d_tree_ocp_qp_set_lg_mask(node, lg_mask.data(), d.qp.get());
-            d_tree_ocp_qp_set_ug(node, ug.data(), d.qp.get());
-            d_tree_ocp_qp_set_ug_mask(node, ug_mask.data(), d.qp.get());
+            set_hpipm_constraints(*d.qp, node, d.constraints[node]);
 
             if (stage < horizon) {
                 auto R = compress_col_major(ocp.R(stage));
                 auto S = compress_col_major(ocp.S(stage));
-                auto D = compress_col_major(ocp.D(stage));
                 d_tree_ocp_qp_set_R(node, R.data(), d.qp.get());
                 d_tree_ocp_qp_set_S(node, S.data(), d.qp.get());
                 d_tree_ocp_qp_set_r(node,
                     const_cast<real_t *>(ocp.r(stage).data), d.qp.get());
-                d_tree_ocp_qp_set_D(node, D.data(), d.qp.get());
             }
         }
     }
@@ -358,7 +359,7 @@ build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan) {
 
 std::shared_ptr<HPIPMTreeSolverData>
 create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
-                         int warm_start, int mode, real_t tol) {
+                         int warm_start, int mode, real_t tol, int t0_init) {
     BATMAT_ASSERT(qp_data);
     HPIPMTreeSolverData d;
 
@@ -377,7 +378,7 @@ create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
     double tol_stat = tol;
     double tol_eq   = tol;
     double tol_ineq = tol;
-    double tol_comp = tol;
+    double tol_comp = tol*100; // set lower tolerance for complementarity as FanCyqlone does not check this explicitly
     if (mode == 0) {
         d_tree_ocp_qp_ipm_arg_set_default(hpipm_mode::SPEED, d.arg.get());
     }
@@ -393,7 +394,7 @@ create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
     d_tree_ocp_qp_ipm_arg_set_tol_ineq(&tol_ineq, d.arg.get());
     d_tree_ocp_qp_ipm_arg_set_tol_comp(&tol_comp, d.arg.get());
     d_tree_ocp_qp_ipm_arg_set_warm_start(&warm_start, d.arg.get());
-
+    d.arg.get()->t0_init = t0_init;
     d.solver_mem = std::make_unique<std::byte[]>(
         d_tree_ocp_qp_ipm_ws_memsize(qp_data->dim.get(), d.arg.get()));
     d.workspace = std::make_unique<struct d_tree_ocp_qp_ipm_ws>();
@@ -436,51 +437,53 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
     const int num_branches = data.num_branches;
     const int horizon      = data.horizon;
     const int root         = 0;
+    const int original_nx = static_cast<int>(data.initial_state.size());
 
     fan_sol.solutions.resize(
         static_cast<std::size_t>(num_branches));
 
-    std::vector<real_t> x0(
-        static_cast<std::size_t>(dim.nx[root]));
+    std::vector<real_t> x0 = data.initial_state;
 
     std::vector<real_t> u0(
         static_cast<std::size_t>(dim.nu[root]));
 
-    d_tree_ocp_qp_sol_get_x(root, qp_sol, x0.data());
+    if (!data.eliminated_x0)
+        d_tree_ocp_qp_sol_get_x(root, qp_sol, x0.data());
 
     if (dim.nu[root] > 0)
         d_tree_ocp_qp_sol_get_u(root, qp_sol, u0.data());
 
-    /*
-     * Root inequality multipliers are stacked branch-by-branch:
-     *
-     *     [μ_0^(0)]
-     *     [μ_0^(1)]
-     *     [   ...  ]
-     *
-     * because D0, lg0 and ug0 were vertically stacked in that order.
-     */
-    std::vector<real_t> root_lam_ug(
-        static_cast<std::size_t>(dim.ng[root]));
-
-    std::vector<real_t> root_lam_lg(
-        static_cast<std::size_t>(dim.ng[root]));
-
-    if (dim.ng[root] > 0) {
-        d_tree_ocp_qp_sol_get_lam_ug(
-            root, qp_sol, root_lam_ug.data());
-
-        d_tree_ocp_qp_sol_get_lam_lg(
-            root, qp_sol, root_lam_lg.data());
+    std::vector<std::vector<real_t>> multipliers(dim.Nn);
+    for (int node = 0; node < dim.Nn; ++node) {
+        const auto &constraints = data.constraints[node];
+        std::vector<real_t> lb(dim.nb[node]), ub(dim.nb[node]);
+        std::vector<real_t> lg(dim.ng[node]), ug(dim.ng[node]);
+        if (dim.nb[node] > 0) {
+            d_tree_ocp_qp_sol_get_lam_lb(node, qp_sol, lb.data());
+            d_tree_ocp_qp_sol_get_lam_ub(node, qp_sol, ub.data());
+        }
+        if (dim.ng[node] > 0) {
+            d_tree_ocp_qp_sol_get_lam_lg(node, qp_sol, lg.data());
+            d_tree_ocp_qp_sol_get_lam_ug(node, qp_sol, ug.data());
+        }
+        std::vector<real_t> x_duals(dim.nx[node]), u_duals(dim.nu[node]);
+        for (int i = 0; i < static_cast<int>(constraints.input_indices.size()); ++i)
+            u_duals[constraints.input_indices[i]] = ub[i] - lb[i];
+        for (int i = 0; i < static_cast<int>(constraints.state_indices.size()); ++i)
+            x_duals[constraints.state_indices[i]] = ub[dim.nbu[node] + i] - lb[dim.nbu[node] + i];
+        for (int i = 0; i < dim.ng[node]; ++i)
+            ug[i] -= lg[i];
+        for (const auto &row : constraints.rows)
+            multipliers[node].push_back(fanqp::constraint_multiplier(row, x_duals, u_duals, ug));
     }
 
      //The root-state bound multiplier is shared by all branches.
      //This is the multiplier of x0 = x_init in the merged tree QP.
     std::vector<real_t> root_lam_lbx(
-        static_cast<std::size_t>(dim.nx[root]));
+        static_cast<std::size_t>(dim.nb[root]));
 
     std::vector<real_t> root_lam_ubx(
-        static_cast<std::size_t>(dim.nx[root]));
+        static_cast<std::size_t>(dim.nb[root]));
 
     if (dim.nx[root] > 0) {
         d_tree_ocp_qp_sol_get_lam_lb(
@@ -490,14 +493,12 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
             root, qp_sol, root_lam_ubx.data());
     }
 
-    index_t root_ineq_offset = 0;
-
     for (int branch = 0; branch < num_branches; ++branch) {
         auto &branch_sol =
             fan_sol.solutions[static_cast<std::size_t>(branch)];
 
         std::size_t primal_count =
-            static_cast<std::size_t>(dim.nx[root]) +
+            static_cast<std::size_t>(original_nx) +
             static_cast<std::size_t>(dim.nu[root]);
 
         for (int stage = 1; stage <= horizon; ++stage) {
@@ -519,7 +520,7 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
             x0.end(),
             primal_out);
 
-        primal_out += dim.nx[root];
+        primal_out += original_nx;
 
         std::copy(
             u0.begin(),
@@ -556,99 +557,18 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
             branch_sol.solution.data() +
                 branch_sol.solution.size());
 
-        /*
-         * Inequality multiplier ordering:
-         *
-         * stage 0 constraints,
-         * stage 1 constraints,
-         * ...
-         * terminal-stage constraints.
-         */
-        int ng_branch_total = 0;
-
-        // Root ng is the sum over branches, so obtain the root
-        // contribution from the original branch dimensions.
-            
-        const int first_node = data.node_index[branch][1];
-        const int ng_branch_root =
-            horizon > 1
-                ? dim.ng[first_node]
-                : static_cast<int>(
-                      dim.ng[root] / num_branches);
-
-        ng_branch_total += ng_branch_root;
-
-        for (int stage = 1; stage <= horizon; ++stage) {
+        for (int stage = 0; stage <= horizon; ++stage) {
             const int node = data.node_index[branch][stage];
-            ng_branch_total += dim.ng[node];
+            const auto &offsets = data.constraints[node].row_offsets;
+            const int source = stage == 0 ? branch : 0;
+            branch_sol.inequality_multipliers.insert(
+                branch_sol.inequality_multipliers.end(),
+                multipliers[node].begin() + offsets[source],
+                multipliers[node].begin() + offsets[source + 1]);
         }
-
-        branch_sol.inequality_multipliers.resize(
-            static_cast<std::size_t>(ng_branch_total));
-
-        real_t *ineq_out =
-            branch_sol.inequality_multipliers.data();
-
-
-        // Extract this branch's block from the stacked root
-        // inequality multipliers.
-        // Signed multiplier convention:
-        //     mu = mu_upper - mu_lower.
-
-
-        for (int i = 0; i < ng_branch_root; ++i) {
-            const auto idx = static_cast<std::size_t>(
-                root_ineq_offset + i);
-
-            ineq_out[i] =
-                root_lam_ug[idx] -
-                root_lam_lg[idx];
-        }
-
-        ineq_out += ng_branch_root;
-        root_ineq_offset += ng_branch_root;
-
-        int ng_max = 0;
-
-        for (int stage = 1; stage <= horizon; ++stage) {
-            const int node = data.node_index[branch][stage];
-            ng_max = std::max(ng_max, dim.ng[node]);
-        }
-
-        std::vector<real_t> lam_lg(
-            static_cast<std::size_t>(ng_max));
-
-        for (int stage = 1; stage <= horizon; ++stage) {
-            const int node = data.node_index[branch][stage];
-            const int ng   = dim.ng[node];
-
-            if (ng == 0)
-                continue;
-
-            d_tree_ocp_qp_sol_get_lam_ug(
-                node,
-                qp_sol,
-                ineq_out);
-
-            d_tree_ocp_qp_sol_get_lam_lg(
-                node,
-                qp_sol,
-                lam_lg.data());
-
-            for (int i = 0; i < ng; ++i)
-                ineq_out[i] -=
-                    lam_lg[static_cast<std::size_t>(i)];
-
-            ineq_out += ng;
-        }
-
-        BATMAT_ASSERT(
-            ineq_out ==
-            branch_sol.inequality_multipliers.data() +
-                branch_sol.inequality_multipliers.size());
 
         std::size_t equality_count =
-            static_cast<std::size_t>(dim.nx[root]);
+            static_cast<std::size_t>(original_nx);
 
         for (int stage = 1; stage <= horizon; ++stage) {
             const int node = data.node_index[branch][stage];
@@ -664,13 +584,14 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
             branch_sol.equality_multipliers.data();
 
 
-        for (int i = 0; i < dim.nx[root]; ++i) {
-            eq_out[i] =
-                root_lam_lbx[static_cast<std::size_t>(i)] -
-                root_lam_ubx[static_cast<std::size_t>(i)];
+        // Preserve the original layout, with zero multipliers for eliminated x0.
+        for (int i = 0; i < original_nx; ++i) {
+            eq_out[i] = data.eliminated_x0 ? 0 :
+                root_lam_lbx[static_cast<std::size_t>(dim.nbu[root] + i)] -
+                root_lam_ubx[static_cast<std::size_t>(dim.nbu[root] + i)];
         }
 
-        eq_out += dim.nx[root];
+        eq_out += original_nx;
 
         for (int stage = 1; stage <= horizon; ++stage) {
             const int node = data.node_index[branch][stage];
@@ -690,8 +611,6 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
                 branch_sol.equality_multipliers.size());
     }
 
-    BATMAT_ASSERT(root_ineq_offset == dim.ng[root]);
-    
     return fan_sol;
 }
 
@@ -1711,13 +1630,29 @@ void update_x0_hpipm_tree(cyqlone::FanOCPStorage &fan,
                           index_t branch) {
     const int b = static_cast<int>(branch);
     const auto &dim = *qp_data.dim;
-    const int first_node = qp_data.node_index[b][1];    
-    const real_t *x1 = solution[b].solution.data() + dim.nx[0] + dim.nu[0];
-    d_tree_ocp_qp_set_lbx(0, const_cast<real_t *>(x1), qp_data.qp.get());
-    d_tree_ocp_qp_set_ubx(0, const_cast<real_t *>(x1), qp_data.qp.get());
+    const auto nx = qp_data.initial_state.size();
+    const auto &primal = solution.at(b).solution;
+    if (primal.size() < 2 * nx + dim.nu[0])
+        throw std::invalid_argument("HPIPM solution does not contain the next state");
+    const auto x1 = std::span<const real_t>{primal}.subspan(nx + dim.nu[0], nx);
+    if (qp_data.eliminated_x0) {
+        auto root = fanqp::eliminate_root_state(fan, x1, qp_data.native_bounds);
+        if (root.constraints.lower.size() != qp_data.constraints[0].lower.size())
+            throw std::invalid_argument("HPIPM root constraint dimensions changed");
+        qp_data.constraints[0] = std::move(root.constraints);
+        set_hpipm_constraints(*qp_data.qp, 0, qp_data.constraints[0]);
+        d_tree_ocp_qp_set_r(0, root.r.data(), qp_data.qp.get());
+        for (int branch_index = 0; branch_index < qp_data.num_branches; ++branch_index)
+            d_tree_ocp_qp_set_b(qp_data.edge_index[branch_index][1], root.b[branch_index].data(),
+                              qp_data.qp.get());
+    } else {
+        d_tree_ocp_qp_set_lbx(0, const_cast<real_t *>(x1.data()), qp_data.qp.get());
+        d_tree_ocp_qp_set_ubx(0, const_cast<real_t *>(x1.data()), qp_data.qp.get());
+    }
+    qp_data.initial_state.assign(x1.begin(), x1.end());
 
     for (auto &ocp : fan.ocps) {
-        BATMAT_ASSERT(ocp.dim.nx == dim.nx[0]);
-        std::ranges::copy_n(x1, dim.nx[0], ocp.b(0).data);
+        BATMAT_ASSERT(static_cast<std::size_t>(ocp.dim.nx) == nx);
+        std::ranges::copy(x1, ocp.b(0).data);
     }
 }

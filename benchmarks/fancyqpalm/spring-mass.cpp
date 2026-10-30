@@ -373,7 +373,8 @@ void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params
         // std::cout << "Running HPIPM benchmark with " << num_branches << " branches" << std::endl;
     auto problem     = create_problem(params,num_branches);
     // std::cout << "Building HPIPM QP with stages" << std::endl;
-    auto qp_data     = build_hpipm_tree_qp(problem.ocp);
+    const bool cold = warm == WarmStartHPIPM::NoWarmStart || warm == WarmStartHPIPM::WarmZero;
+    auto qp_data     = build_hpipm_tree_qp(problem.ocp, cold, cold);
     auto solver_data = create_hpipm_tree_solver(qp_data, (warm != WarmStartHPIPM::NoWarmStart&&warm != WarmStartHPIPM::WarmZero) ? 2 : 0, mode);
     // Main benchmark
     solve_hpipm_tree(*qp_data, *solver_data); // Warm up
@@ -667,11 +668,13 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
         qp::Settings settings{
             .tolerance = 1e-8,
             .dual_tolerance = 1e-8,
+            .eq_constr_tolerance = 1e-8,
+            // .initial_inner_tolerance     = 1e-4,
             .initial_penalty_y = 20,
             .verbose           = verbose,
             .detailed_stats       = verbose,
-
         };
+
         qp::CyQPALMBackendSettings backend_no_upd = backend;
 
         qp::Settings settings_warm                = settings;
@@ -901,6 +904,9 @@ void register_options(const char *program, CLI::App &app, Options &opts) {
     app.add_flag("--cm,!--no-cm", opts.cm, "Use column-major storage");
     app.add_flag("--pcr,!--pcg", opts.pcr, "Use parallel cyclic reduction in the Cyqlone backend");
     app.add_flag("--hpipm,!--no-hpipm", opts.hpipm, "Use HPIPM solver for comparison");
+    app.add_flag("--treeqp,!--no-treeqp", opts.treeqp, "Use TreeQP solver for comparison");
+    app.add_flag("--piqp,!--no-piqp", opts.piqp, "Use PIPQP solver for comparison");
+
     app.add_option("--problem", opts.problem_type, "Problem type to benchmark")
         ->transform(CLI::CheckedTransformer(problem_type_map, CLI::ignore_case));
     app.add_option("--pcr-max-update-fraction", opts.pcr_max_update_fraction,

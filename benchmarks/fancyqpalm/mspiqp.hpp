@@ -1,6 +1,8 @@
 #pragma once
 
-#include <cyqlone/ocp.hpp> // Replace with the header defining FanOCPStorage.
+#include "constraint-layout.hpp"
+
+#include <cyqlone/ocp.hpp>
 #include <piqp/piqp.hpp>
 
 #include <Eigen/Core>
@@ -33,10 +35,6 @@ struct PIQPBranchLayout {
 
     // Dynamics rows for transitions 0->1, 1->2, ..., N-1->N.
     std::vector<int> dynamics_rows;
-
-    // PIQP row for each original general constraint, or -1 if fully unbounded.
-    std::vector<std::vector<int>> inequality_rows;
-    std::vector<int> inequality_sizes;
 };
 
 struct PIQPFanQPData {
@@ -45,10 +43,15 @@ struct PIQPFanQPData {
     int nx = 0;
     int nu = 0;
 
-    int root_x_offset = -1;
+    int root_x_offset = -1; // -1 when x0 has been eliminated.
     int root_u_offset = -1;
+    bool native_bounds = true;
+    std::vector<real_t> initial_state;
+    real_t objective_offset = 0;
 
     std::vector<PIQPBranchLayout> branches;
+    std::vector<fanqp::StageConstraints> constraints;
+    std::vector<int> general_offsets;
 
     PIQPSparseMatrix P;
     PIQPVector c;
@@ -77,8 +80,10 @@ struct PIQPStats {
     real_t run_time = 0;
 };
 
+/// Eliminates fixed x0 by default; pass eliminate_x0=false to retain it for comparison.
 std::shared_ptr<PIQPFanQPData>
-build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan);
+build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan, bool native_bounds = true,
+                  bool eliminate_x0 = true);
 
 std::shared_ptr<PIQPFanSolverData>
 create_piqp_fan_solver(

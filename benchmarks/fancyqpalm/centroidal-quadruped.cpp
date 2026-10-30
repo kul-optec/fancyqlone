@@ -116,13 +116,12 @@ create_problem(const CentroidalQuadrupedParams &params, index_t num_branches, re
     std::seed_seq seed{params.seed, params.seed >> 32};
     std::mt19937 rng{seed};
     using dist_t = std::uniform_real_distribution<real_t>;
-    auto dist    =  dist_t{-0.06, -0.01};
+    auto dist    =  dist_t{-0.1, +0.1};
     for (index_t r = 0; r < static_cast<index_t>(3); ++r) {
         auto disturbance = dist(rng);
         for (index_t j = 0; j < num_branches; ++j)
             problem.ocp.ocps[j].b(0)(r, 0) += disturbance;
     }
-
     return problem;
 }
 
@@ -357,8 +356,9 @@ void run_benchmark_hpipm(benchmark::State &state, const CentroidalQuadrupedParam
         // std::cout << "Running HPIPM benchmark with " << num_branches << " branches" << std::endl;
     auto problem     = create_problem(params,num_branches);
     // std::cout << "Building HPIPM QP with stages" << std::endl;
-    auto qp_data     = build_hpipm_tree_qp(problem.ocp);
-    auto solver_data = create_hpipm_tree_solver(qp_data, (warm != WarmStartHPIPM::NoWarmStart&&warm != WarmStartHPIPM::WarmZero) ? 2 : 0, mode);
+    const bool cold = warm == WarmStartHPIPM::NoWarmStart || warm == WarmStartHPIPM::WarmZero;
+    auto qp_data     = build_hpipm_tree_qp(problem.ocp, 1, 1);
+    auto solver_data = create_hpipm_tree_solver(qp_data, (warm != WarmStartHPIPM::NoWarmStart&&warm != WarmStartHPIPM::WarmZero) ? 2 : 0, mode, 1e-8, 0);
     // Main benchmark
     solve_hpipm_tree(*qp_data, *solver_data); // Warm up
     std::optional<cyqlone::FanOCPStorage::Solution> prev_sol;
@@ -560,7 +560,7 @@ std::generator<Problem> get_quad_params(const Options &opts) {
                 for(auto J : opts.num_branches)
                         co_yield {
                                 .name   = format("centroidal-quadruped(N={},J={},seed={})", N, J, seed),
-                                .params = CentroidalQuadrupedParams(N, seed, 0.64/N),
+                                .params = CentroidalQuadrupedParams(N, seed, 0.64/N, 5e-5, 1e-8),
                                 .num_branches = J
                         };                        
     }
@@ -628,6 +628,8 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
         qp::Settings settings{
             .tolerance = 1e-8,
             .dual_tolerance = 1e-8,
+            .eq_constr_tolerance = 1e-8,
+            .initial_inner_tolerance = 1e-4,
             .initial_penalty_y = 20,
             .verbose           = verbose,
             .detailed_stats       = verbose,
@@ -675,9 +677,9 @@ std::generator<Solver> get_hpipm_solvers(const Options &opts) {
             co_yield {"hpipm(zero)", [=](benchmark::State &state, const CentroidalQuadrupedParams &params, index_t num_branches) {
                           run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::WarmZero, 0);
                       }};
-            // co_yield {"hpipm(zero,balance)", [=](benchmark::State &state, const CentroidalQuadrupedParams &params, index_t num_branches) {
-            //               run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::NoWarmStart, 1);
-            //           }};
+            co_yield {"hpipm(zero,balance)", [=](benchmark::State &state, const CentroidalQuadrupedParams &params, index_t num_branches) {
+                          run_benchmark_hpipm(state, params, num_branches, WarmStartHPIPM::NoWarmStart, 1);
+                      }};
 }
         if (opts.warm_shift)
         {

@@ -122,7 +122,7 @@ def extract_dataset_from_problem(problem_id: str) -> str:
     Extract dataset identifier from problem_id.
 
     Examples:
-        "spring-mass(M=12,N=32,seed=0)" -> "MassSprings(M=12, N=32)"
+        "spring-mass(M=12,N=32,J=4,seed=0)" -> "MassSprings(M=12, N=32, J=4)"
         "centroidal-quadruped(N=32,J=4,seed=0)" -> "CentroidalQuadruped(N=32, J=4)"
     """
     # Group quadruped instances by horizon and number of branches, ignoring seed.
@@ -132,10 +132,10 @@ def extract_dataset_from_problem(problem_id: str) -> str:
         return f"CentroidalQuadruped(N={n}, J={j})"
 
     # Extract M and N parameters
-    match = re.search(r"M=(\d+).*?N=(\d+)", problem_id)
+    match = re.search(r"M=(\d+).*?N=(\d+).*?J=(\d+)", problem_id)
     if match:
-        m, n = match.groups()
-        return f"MassSprings(M={m}, N={n})"
+        m, n , j = match.groups()
+        return f"MassSprings(M={m}, N={n}, J={j})"
     return problem_id
 
 
@@ -285,31 +285,35 @@ def format_dataset(dataset_id: str, all_datasets: Optional[list[str]] = None) ->
         return ", ".join(varying_labels), ", ".join(fixed_labels) or None
 
     # Extract M and N from current dataset
-    match = re.search(r"MassSprings\(M=(\d+), N=(\d+)\)", dataset_id)
+    match = re.search(r"MassSprings\(M=(\d+), N=(\d+), J=(\d+)\)", dataset_id)
     print(match)
     if not match:
         return dataset_id, None
     
-    current_m, current_n = match.groups()
+    current_m, current_n, current_j = match.groups()
     
     # If all_datasets provided, check which parameters vary
     if all_datasets is not None and len(all_datasets) > 1:
         # Use pandas to extract M and N values efficiently
         datasets_series = pd.Series(all_datasets)
-        extracted = datasets_series.str.extract(r"MassSprings\(M=(\d+), N=(\d+)\)")
+        extracted = datasets_series.str.extract(r"MassSprings\(M=(\d+), N=(\d+), J=(\d+)\)")
         all_m_values = set(extracted[0].dropna().unique())
         all_n_values = set(extracted[1].dropna().unique())
-        
+        all_j_values = set(extracted[2].dropna().unique())
+
         # Build label with only varying parameters
         m_varies = len(all_m_values) > 1
         n_varies = len(all_n_values) > 1
-        
-        if m_varies and n_varies:
-            return f"$M$=\\,{current_m}, $N$=\\,{current_n}", None
+        j_varies = len(all_j_values) > 1
+
+        if m_varies and n_varies and j_varies:
+            return f"$M$=\\,{current_m}, $N$=\\,{current_n}, $J$=\\,{current_j}", None
         elif m_varies:
-            return f"$M$=\\,{current_m}", f"$N$=\\,{current_n}"
+            return f"$M$=\\,{current_m}", f"$N$=\\,{current_n}, $J$=\\,{current_j}"
         elif n_varies:
-            return f"$N$=\\,{current_n}", f"$M$=\\,{current_m}"
+            return f"$N$=\\,{current_n}", f"$M$=\\,{current_m}, $J$=\\,{current_j}"
+        elif j_varies:
+            return f"$J$=\\,{current_j}", f"$M$=\\,{current_m}, $N$=\\,{current_n}"
         else: # Nothing varies
             return "", f"$M$=\\,{current_m}, $N$=\\,{current_n}"
     
@@ -319,6 +323,16 @@ def format_dataset(dataset_id: str, all_datasets: Optional[list[str]] = None) ->
 
 def format_solver_name(solver_name: str, plot: Optional[str] = None) -> str:
     sep = "\n" if plot == "box" else " "
+    fancy_match = re.fullmatch(
+        r"(serial-)?fancyqlone\(p=(\d+),v=(\d+),cm,zero\)", solver_name
+    )
+    if fancy_match:
+        serial, processors, vector_width = fancy_match.groups()
+        parameters = f"p={processors},v={vector_width}"
+        if serial:
+            parameters += ",serial"
+        return fr"\textsc{{FanCyQPALM}}{sep}({parameters})"
+
     names = {
         "cyqlone(p=8,v=4)": fr"\textsc{{CyQPALM}}{sep}(cold)",
         "cyqlone(p=8,v=4,cm)": fr"\textsc{{CyQPALM}}{sep}(cold)",
@@ -339,9 +353,6 @@ def format_solver_name(solver_name: str, plot: Optional[str] = None) -> str:
         "piqp(multistage)": fr"PIQP",
         "treeqp(qpOasis)": fr"TreeQP",
         "treeqp(clip)": fr"TreeQP",
-        "fancyqlone(p=8,v=4,cm,zero)": fr"\textsc{{FanCyQPALM}}{sep}(p=8,v=4)",
-        "fancyqlone(p=8,v=1,cm,zero)": fr"\textsc{{FanCyQPALM}}{sep}(p=8,v=1)",
-        "serial-fancyqlone(p=8,v=4,cm,zero)": fr"\textsc{{FanCyQPALM}}{sep}(p=8,v=4,serial)",
     }
     solver_name = names.get(solver_name, solver_name)
     solver_name = solver_name.replace("cyqlone._cyqlone_", "")
@@ -517,9 +528,10 @@ def create_scaling_plot(
     ylim: Optional[tuple[float, float]] = None,
     logy: bool = False,
     color_offset: int = 0,
+    xvar: str = "N",
 ):
     """
-    Create a scaling plot showing speedup (or absolute metric) vs horizon length N.
+    Create a scaling plot showing speedup (or absolute metric) vs N, M, or J.
     
     Parameters
     ----------
@@ -543,12 +555,17 @@ def create_scaling_plot(
         How to aggregate multiple runs of the same problem ("min", "max", "mean")
     logy : bool
         Whether to use logarithmic scale for y-axis (default: False)
+    xvar : str
+        Scaling variable: horizon length N, number of masses M, or branches J.
     
     Returns
     -------
     fig : matplotlib.figure.Figure
         The generated figure
     """
+    x_label = {"N": "Horizon length", "M": "Number of masses", "J": "Number of branches"}[xvar]
+    plotted_datasets: set[str] = set()
+
     # Extract and process reference solver data if provided
     ref_grouped = None
     ref_grouped_min = None
@@ -570,17 +587,18 @@ def create_scaling_plot(
         
         # Select the aggregate type
         ref_df = ref_df[ref_df["aggregate_name"] == reduce_metric]
+        plotted_datasets.update(ref_df["dataset_id"].unique())
         
         ref_df = ref_df.copy()
-        # Extract N using vectorized string operation
-        ref_df["N"] = ref_df["dataset_id"].str.extract(r"N=(\d+)")[0].astype(int)
+        # Extract the scaling variable using vectorized string operation
+        ref_df[xvar] = ref_df["dataset_id"].str.extract(rf"{xvar}=(\d+)")[0].astype(int)
         
-        # Group by N and compute average metric for reference
-        ref_grouped = ref_df.groupby("N")[metric].mean()
-        ref_grouped_min = ref_df.groupby("N")[metric].min()
-        ref_grouped_max = ref_df.groupby("N")[metric].max()
-        ref_grouped_q1 = ref_df.groupby("N")[metric].quantile(0.25)
-        ref_grouped_q3 = ref_df.groupby("N")[metric].quantile(0.75)
+        # Group by the scaling variable and compute statistics for reference
+        ref_grouped = ref_df.groupby(xvar)[metric].mean()
+        ref_grouped_min = ref_df.groupby(xvar)[metric].min()
+        ref_grouped_max = ref_df.groupby(xvar)[metric].max()
+        ref_grouped_q1 = ref_df.groupby(xvar)[metric].quantile(0.25)
+        ref_grouped_q3 = ref_df.groupby(xvar)[metric].quantile(0.75)
         
         # Get reference solver name for labels
         ref_name = reference_solver
@@ -614,17 +632,18 @@ def create_scaling_plot(
         
         # Select the aggregate type
         solver_df = solver_df[solver_df["aggregate_name"] == reduce_metric]
+        plotted_datasets.update(solver_df["dataset_id"].unique())
         
         solver_df = solver_df.copy()
-        # Extract N using vectorized string operation
-        solver_df["N"] = solver_df["dataset_id"].str.extract(r"N=(\d+)")[0].astype(int)
-        print(f"N values for solver '{solver}': {solver_df['N'].tolist()}")
-        # Group by N and compute statistics
-        solver_grouped_mean = solver_df.groupby("N")[metric].mean()
-        solver_grouped_min = solver_df.groupby("N")[metric].min()
-        solver_grouped_max = solver_df.groupby("N")[metric].max()
-        solver_grouped_q1 = solver_df.groupby("N")[metric].quantile(0.25)
-        solver_grouped_q3 = solver_df.groupby("N")[metric].quantile(0.75)
+        # Extract the scaling variable using vectorized string operation
+        solver_df[xvar] = solver_df["dataset_id"].str.extract(rf"{xvar}=(\d+)")[0].astype(int)
+        print(f"{xvar} values for solver '{solver}': {solver_df[xvar].tolist()}")
+        # Group by the scaling variable and compute statistics
+        solver_grouped_mean = solver_df.groupby(xvar)[metric].mean()
+        solver_grouped_min = solver_df.groupby(xvar)[metric].min()
+        solver_grouped_max = solver_df.groupby(xvar)[metric].max()
+        solver_grouped_q1 = solver_df.groupby(xvar)[metric].quantile(0.25)
+        solver_grouped_q3 = solver_df.groupby(xvar)[metric].quantile(0.75)
         
         # Get solver name for label
         solver_name = solver
@@ -640,7 +659,7 @@ def create_scaling_plot(
         if reference_solver is not None:
             # Compute speedup: reference / solver using pandas operations
             assert ref_grouped is not None  # Type guard: ref_grouped is set when reference_solver is not None
-            # Merge solver data with reference data on N
+            # Merge solver data with reference data on the scaling variable
             merged = pd.DataFrame({
                 "solver_mean": solver_grouped_mean,
                 "solver_min": solver_grouped_min,
@@ -653,7 +672,7 @@ def create_scaling_plot(
                 "ref_q1": ref_grouped_q1,
                 "ref_q3": ref_grouped_q3,
             }).dropna()
-            N_values = sorted(merged.index)
+            x_values = sorted(merged.index)
             y_values = (merged["ref_mean"] / merged["solver_mean"]).tolist()
             # Compute speedup range using min/max
             y_min = (merged["ref_min"] / merged["solver_max"]).tolist()
@@ -664,15 +683,15 @@ def create_scaling_plot(
             label = f"{solver_name} compared to {ref_name}"
         else:
             # Plot absolute metric values with min/max range
-            N_values = sorted(solver_grouped_mean.index)
-            y_values = solver_grouped_mean[N_values].tolist()
-            y_min = solver_grouped_min[N_values].tolist()
-            y_max = solver_grouped_max[N_values].tolist()
-            y_q1 = solver_grouped_q1[N_values].tolist()
-            y_q3 = solver_grouped_q3[N_values].tolist()
+            x_values = sorted(solver_grouped_mean.index)
+            y_values = solver_grouped_mean[x_values].tolist()
+            y_min = solver_grouped_min[x_values].tolist()
+            y_max = solver_grouped_max[x_values].tolist()
+            y_q1 = solver_grouped_q1[x_values].tolist()
+            y_q3 = solver_grouped_q3[x_values].tolist()
             label = solver_name
         
-        solver_data_list.append((solver_idx, N_values, y_values, y_min, y_max, y_q1, y_q3, label, solver_name))
+        solver_data_list.append((solver_idx, x_values, y_values, y_min, y_max, y_q1, y_q3, label, solver_name))
         all_y_values.extend(y_values)
     
     # Determine if we need to convert ms to μs
@@ -688,37 +707,45 @@ def create_scaling_plot(
             scale_factor = 1e3
             ylabel = ylabel.replace("[ms]", r"[$\mu$s]")
     
+    # Match serial and parallel colors for each solver configuration.
+    solver_variants = dict.fromkeys(solver.removeprefix("serial-") for solver in solvers)
+    solver_colors = {
+        solver: hist_colors[(index + color_offset) % len(hist_colors)]
+        for index, solver in enumerate(solver_variants)
+    }
+
     # Second pass: plot with scaling applied
     with_fill_between = False
-    for solver_idx, N_values, y_values, y_min, y_max, y_q1, y_q3, label, solver_name in solver_data_list:
+    for solver_idx, x_values, y_values, y_min, y_max, y_q1, y_q3, label, solver_name in solver_data_list:
         # Apply scaling using numpy for efficiency
         y_values_scaled = np.array(y_values) * scale_factor
         
-        color = hist_colors[(solver_idx + color_offset) % len(hist_colors)]
+        color = solver_colors[solvers[solver_idx].removeprefix("serial-")]
         
-        # Plot vs N
-        ax.plot(N_values, y_values_scaled, marker='o', linewidth=1.25, markersize=3,
+        # Plot vs the scaling variable
+        ax.plot(x_values, y_values_scaled, marker='o', linewidth=1.25, markersize=3,
+                linestyle='--' if solvers[solver_idx].startswith('serial-') else '-',
                 color=color, label=label)
         
         # Add fill_between for min/max range
         if y_min is not None and y_max is not None and with_fill_between:
             y_min_scaled = np.array(y_min) * scale_factor
             y_max_scaled = np.array(y_max) * scale_factor
-            ax.fill_between(N_values, y_min_scaled, y_max_scaled, 
+            ax.fill_between(x_values, y_min_scaled, y_max_scaled,
                            color=color, alpha=0.15, linewidth=0)
         
         # Add fill_between for quartile range (Q1-Q3)
         if y_q1 is not None and y_q3 is not None and with_fill_between:
             y_q1_scaled = np.array(y_q1) * scale_factor
             y_q3_scaled = np.array(y_q3) * scale_factor
-            ax.fill_between(N_values, y_q1_scaled, y_q3_scaled, 
+            ax.fill_between(x_values, y_q1_scaled, y_q3_scaled,
                            color=color, alpha=0.15, linewidth=0)
     
     # Add horizontal line at speedup = 1.0 (only for speedup plots)
     if reference_solver is not None:
         ax.axhline(y=1.0, color="black", linestyle="--", linewidth=1, alpha=0.7)
     
-    ax.set_xlabel("Horizon length $N$")
+    ax.set_xlabel(f"{x_label} ${xvar}$")
     
     if reference_solver is not None:
         # Speedup plot
@@ -731,7 +758,7 @@ def create_scaling_plot(
             _, _, _, _, _, _, _, _, solver_name = solver_data_list[0]
             ax.set_title(f"{speedup} of {solver_name}\ncompared to {ref_name}")
         else:
-            ax.set_title(f"{speedup}\nfor increasing horizon length $N$")
+            ax.set_title(speedup)
     else:
         # Absolute metric plot
         ax.set_ylabel(ylabel)
@@ -741,8 +768,25 @@ def create_scaling_plot(
             _, _, _, _, _, _, _, _, solver_name = solver_data_list[0]
             ax.set_title(f"{metric_pretty.capitalize()} of {solver_name}")
         else:
-            ax.set_title(f"{metric_pretty.capitalize()}\nfor increasing horizon length $N$")
-    
+            ax.set_title(metric_pretty.capitalize())
+
+    # Show parameters that are constant across the selected datasets and solvers.
+    datasets = pd.Series(sorted(plotted_datasets), dtype="string")
+    fixed_labels = []
+    for parameter in ("M", "N", "J"):
+        if parameter == xvar:
+            continue
+        values = datasets.str.extract(rf"\b{parameter}=(\d+)")[0]
+        if values.notna().all() and values.nunique() == 1:
+            fixed_labels.append(f"${parameter}$=\\,{values.iloc[0]}")
+    if fixed_labels:
+        title = ax.get_title()
+        ax.set_title(
+            f"({', '.join(fixed_labels)})" + "\n" * title.count("\n"),
+            loc="right",
+            fontsize=11,
+        )
+
     ax.grid(True, alpha=0.3, which="major")
     ax.grid(True, alpha=0.15, which="minor")
 
@@ -783,8 +827,9 @@ def create_box_plot(
     reduce_metric: str = "min",
     show_legend: bool = True,
     group_by: str = "dataset",
-    xlim: Optional[tuple[float, float]] = None,
+    xlim: Optional[tuple[Optional[float], Optional[float]]] = None,
     logy: bool = False,
+    xvar: Optional[str] = None,
 ):
     """
     Create box plots for multiple solvers on a single subplot.
@@ -820,9 +865,11 @@ def create_box_plot(
         Whether to show the legend
     group_by : str
         How to group the box plots: "dataset" or "solver" (default: "dataset")
-    xlim : tuple[float, float], optional
+    xlim : tuple[float or None, float or None], optional
         Metric-axis limits (min, max). For vertical box plots these are applied
-        to the y-axis. If None, auto-computed.
+        to the y-axis. None bounds are auto-computed.
+    xvar : str, optional
+        Position dataset groups proportionally to N, M, or J when specified.
 
     Returns
     -------
@@ -950,6 +997,19 @@ def create_box_plot(
     position = 0
     gap_between_groups = 1.5
     dataset_fixed = None
+    dataset_centers = {}
+    box_step = 1.0
+    if group_by == "dataset" and xvar is not None:
+        for dataset_id in all_datasets_sorted:
+            match = re.search(rf"\b{xvar}=(\d+)", dataset_id)
+            if match is None:
+                raise ValueError(f"Cannot extract {xvar} from dataset '{dataset_id}'")
+            dataset_centers[dataset_id] = int(match.group(1))
+        centers = sorted(set(dataset_centers.values()))
+        if len(centers) != len(all_datasets_sorted):
+            raise ValueError(f"Dataset groups must have distinct {xvar} values")
+        min_gap = min(np.diff(centers), default=1)
+        box_step = min_gap / (len(selected_solvers) + gap_between_groups)
 
     if group_by == "dataset":
         # Group by dataset (original behavior)
@@ -964,7 +1024,11 @@ def create_box_plot(
                 if len(dataset_df) > 0:
                     values = dataset_df[plot_metric].dropna().values
                     box_data.append(values)
-                    box_positions.append(position)
+                    box_positions.append(
+                        dataset_centers[dataset_id]
+                        + (solver_idx - (len(selected_solvers) - 1) / 2) * box_step
+                        if dataset_centers else position
+                    )
                     box_colors.append(color_map[solver_id])
                     
                     # Build label with reference solver if applicable
@@ -982,6 +1046,9 @@ def create_box_plot(
             # Calculate middle position of the group for the tick
             group_end_position = position - 1
             group_middle = (group_start_position + group_end_position) / 2
+            if dataset_centers:
+                group_middle = dataset_centers[dataset_id]
+                dataset_formatted = str(group_middle)
             group_tick_positions.append(group_middle)
             group_tick_labels.append(dataset_formatted)
             
@@ -1032,7 +1099,7 @@ def create_box_plot(
         positions=box_positions,
         notch=True,
         vert=True,
-        widths=0.5,
+        widths=0.5 * box_step,
         patch_artist=True,
         showfliers=True,
         flierprops=dict(
@@ -1065,7 +1132,16 @@ def create_box_plot(
     # Set x-tick labels at the center of each group
     ax.set_xticks(group_tick_positions)
     ax.set_xticklabels(group_tick_labels, fontsize=10)
-    ax.set_xlim(-1, position - gap_between_groups)
+    if dataset_centers:
+        padding = (len(selected_solvers) / 2 + 1) * box_step
+        ax.set_xlim(min(group_tick_positions) - padding, max(group_tick_positions) + padding)
+        ax.set_xlabel({
+            "N": "Horizon length $N$",
+            "M": "Number of masses $M$",
+            "J": "Number of branches $J$",
+        }[xvar])
+    else:
+        ax.set_xlim(-1, position - gap_between_groups)
     
     # Set x-axis label and title
     if reference_solver is not None:
@@ -1747,7 +1823,7 @@ def create_speedup_plot(
 )
 @click.option(
     "--aggregate",
-    default="min",
+    default="median",
     help="Aggregate type to use: min, max, mean, median (default: min)",
 )
 @click.option(
@@ -1793,7 +1869,13 @@ def create_speedup_plot(
     "--no-legend", is_flag=True, help="Hide the legend in the plots"
 )
 @click.option(
-    "--scaling", is_flag=True, help="Create a scaling plot (speedup vs horizon length N)"
+    "--scaling", is_flag=True, help="Create a scaling plot (absolute metric or speedup vs --xvar)"
+)
+@click.option(
+    "--xvar",
+    type=click.Choice(["N", "M", "J"]),
+    default=None,
+    help="X-axis variable (scaling default: N); proportionally space dataset box groups when set",
 )
 @click.option("--ylim", help="Y-axis limits for scaling plot as 'min,max' (default: auto)")
 @click.option(
@@ -1810,7 +1892,7 @@ def create_speedup_plot(
     default="solver",
     help="How to group box plots: 'dataset' or 'solver' (default: solver)",
 )
-@click.option("--xlim", help="X-axis limits for box plot as 'min,max' (default: auto)")
+@click.option("--xlim", help="Metric-axis limits for box plot as 'min,max'; leave either bound empty for auto")
 @click.option(
     "--timing-breakdown", is_flag=True, help="Create a stacked bar chart showing timing breakdown"
 )
@@ -1835,6 +1917,7 @@ def main(
     reference_solvers: tuple[str, ...],
     no_legend: bool,
     scaling: bool,
+    xvar: Optional[str],
     ylim: Optional[str],
     logy: bool,
     color_offset: int,
@@ -1957,7 +2040,9 @@ def main(
     xlim_tuple = None
     if xlim:
         try:
-            min_val, max_val = map(float, xlim.split(","))
+            min_val, max_val = (
+                float(value) if value.strip() else None for value in xlim.split(",")
+            )
             xlim_tuple = (min_val, max_val)
         except:
             print(f"Warning: Invalid xlim '{xlim}', using auto range")
@@ -2037,6 +2122,7 @@ def main(
                     ylim=ylim_tuple,
                     logy=logy,
                     color_offset=color_offset,
+                    xvar=xvar or "N",
                 )
             elif speedup:
                 # Generate speedup plot
@@ -2070,7 +2156,8 @@ def main(
                     show_legend=not no_legend,
                     group_by=group_by,
                     xlim=xlim_tuple,
-                    logy=logy
+                    logy=logy,
+                    xvar=xvar,
                 )
             else:
                 # Generate regular histogram

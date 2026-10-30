@@ -1,5 +1,7 @@
 #pragma once
 
+#include "constraint-layout.hpp"
+
 
 #include <cyqlone/ocp.hpp>
 
@@ -34,6 +36,9 @@ struct HPIPMTreeQPData {
 
     int num_branches{};
     int horizon{};
+    bool native_bounds = true;
+    bool eliminated_x0 = true;
+    std::vector<real_t> initial_state;
 
     // Indexed as node_index[branch][stage], stage in [0, horizon].
     // Stage zero maps to the common root node zero.
@@ -41,6 +46,7 @@ struct HPIPMTreeQPData {
 
     // Indexed as edge_index[branch][stage], stage in [1, horizon].
     std::vector<std::vector<int>> edge_index;
+    std::vector<fanqp::StageConstraints> constraints;
 };
 
 struct HPIPMTreeSolverData {
@@ -80,12 +86,15 @@ struct HPIPMStats {
     double max_res_ineq;
     double max_res_comp;
 };
+/// Native boxes and x0 elimination are supported for cold solves. Pass false
+/// for both options when using the existing warm-start import/shift helpers.
 std::shared_ptr<HPIPMTreeQPData>
-build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan);
+build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan, bool native_bounds = true,
+                    bool eliminate_x0 = true);
 
 std::shared_ptr<HPIPMTreeSolverData>
 create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
-                         int warm_start, int mode = 0, real_t tol = 1e-8);
+                         int warm_start, int mode = 0, real_t tol = 1e-8, int t0_init = 2);
 
 std::chrono::nanoseconds
 solve_hpipm_tree(const HPIPMTreeQPData &qp_data,

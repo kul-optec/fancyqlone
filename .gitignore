@@ -3,7 +3,7 @@ CMakeUserPresets.json
 py-build-cmake.local.toml
 .gdbinit
 .gdb_history
-
+benchmarks/fancyqpalm/paper-plots
 # Temporary build and cache folders
 build
 /build-*
@@ -88,3 +88,7 @@ fan_qpalm_speedup_vs_nx.tex
 r004tr/data.0/3885712-3885717.1-3886270.0.th
 r***tr/*
 docs/source/fancyqlone.rst
+
+# Local benchmark visualization (sources, build files, and generated pages)
+/benchmarks/fancyqpalm/visualization/
+/benchmarks/fancyqpalm/quadruped-closed-loop/

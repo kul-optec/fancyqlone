@@ -503,40 +503,40 @@ void FanSharedContext::run(F &&f) {
             });
     });
 #else
-    omp_set_max_active_levels(2);
-    BATMAT_OMP(parallel for num_threads(num_thr) proc_bind(spread))
-    for (index_t i = 0; i < num_thr; ++i) {
+    // omp_set_max_active_levels(2);
+    // BATMAT_OMP(parallel for num_threads(num_thr) proc_bind(spread))
+    // for (index_t i = 0; i < num_thr; ++i) {
 
-        BATMAT_OMP(parallel for num_threads(branch_contexts[i].num_thr) proc_bind(close))
-        for (index_t j = 0; j < branch_contexts[i].num_thr; ++j) {
-            Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
-            Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
-            FanContext<FanSharedContext> ctx{
-                .branch_ctx = branch_ctx, .total_ctx = total_ctx, .index = cumulative[i] + j};
-            f(ctx);
-        }
-    }
-//     BATMAT_OMP(parallel for num_threads(total_num_thr))
-//     for (index_t idx = 0; idx < total_num_thr; ++idx) {
+    //     BATMAT_OMP(parallel for num_threads(branch_contexts[i].num_thr) proc_bind(close))
+    //     for (index_t j = 0; j < branch_contexts[i].num_thr; ++j) {
+    //         Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
+    //         Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
+    //         FanContext<FanSharedContext> ctx{
+    //             .branch_ctx = branch_ctx, .total_ctx = total_ctx, .index = cumulative[i] + j};
+    //         f(ctx);
+    //     }
+    // }
+    BATMAT_OMP(parallel for num_threads(total_num_thr))
+    for (index_t idx = 0; idx < total_num_thr; ++idx) {
 
-//         // recover i
-//         index_t i = std::upper_bound(cumulative.begin(),
-//                                     cumulative.end(),
-//                                     idx) - cumulative.begin() - 1;
+        // recover i
+        index_t i = std::upper_bound(cumulative.begin(),
+                                    cumulative.end(),
+                                    idx) - cumulative.begin() - 1;
 
-//         index_t j = idx - cumulative[i];
+        index_t j = idx - cumulative[i];
 
-//         Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
-//         Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
+        Context<FanSharedContext> total_ctx{.shared = *this, .index = i};
+        Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
 
-//         FanContext<FanSharedContext> ctx{
-//             .branch_ctx = branch_ctx,
-//             .total_ctx = total_ctx,
-//             .index = idx
-//         };
+        FanContext<FanSharedContext> ctx{
+            .branch_ctx = branch_ctx,
+            .total_ctx = total_ctx,
+            .index = idx
+        };
 
-//         f(ctx);
-// }
+        f(ctx);
+}
 
 #endif
 }

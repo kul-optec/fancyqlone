@@ -155,7 +155,7 @@ benchmark() {
         echo "Benchmark executable not found, please run the build step first." >&2; exit 1
     fi
     echo $0
-    OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" OMP_PROC_BIND=close OMP_WAIT_POLICY=ACTIVE\
+    OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" OMP_PROC_BIND=close OMP_WAIT_POLICY=ACTIVE OMP_DYNAMIC=FALSE\
         "${build_folder}/spring-mass" "$@"
 }
 
@@ -172,7 +172,7 @@ benchmark_quadruped() {
         echo "Quadruped benchmark executable not found, please run the build step first." >&2; exit 1
     fi
     OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" \
-        OMP_PROC_BIND=close OMP_WAIT_POLICY=ACTIVE \
+        OMP_PROC_BIND=close OMP_WAIT_POLICY=ACTIVE OMP_DYNAMIC=FALSE \
         "${build_folder}/centroidal-quadruped" -p "${OMP_NUM_THREADS}" \
         --benchmark_repetitions=1 --benchmark_min_time=0.1s "$@" --benchmark_out=benchmark-quad.json
 }
@@ -205,11 +205,46 @@ benchmark_quick() {
 # Run the horizon scaling benchmark
 benchmark_scaling() {
     benchmark \
-        --cold --warm-shift -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
-        -M 12 -N 32 64 92 128 192 256 -J 4\
+        --cold -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -M 12 -N 32 64 96 128 160 192 224 256 -J 4\
         --benchmark_repetitions=10 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling.json "$@"
 }
+# # Run the horizon scaling benchmark
+# benchmark_scaling() {
+#     benchmark \
+#         --cold -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
+#         -M 12 -J 2\
+#         --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+#         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling.json "$@"
+# }
+benchmark_scaling_J() {
+    benchmark \
+        --cold -I 1 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -M 12 -J 1 2 4 8 -N 64\
+        --benchmark_repetitions=30 --benchmark_report_aggregates_only \
+        --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-J.json "$@" \
+        --no-hpipm --no-treeqp --no-piqp --serial
+
+}
+benchmark_scaling_p() {
+    benchmark \
+        --cold -I 1 -p4 -p8 -v1 -v4 --cm \
+        -M 12 -J 4 -N 32 64 96 128 160 192 224 256\
+        --benchmark_repetitions=30 --benchmark_report_aggregates_only \
+        --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-p.json "$@" \
+        --no-hpipm --no-treeqp --no-piqp --serial
+
+}
+# benchmark_scaling_p() {
+#     benchmark \
+#         --cold -I 1 -p8 -v4 --cm \
+#         -M 12 -J 1 -N 32 64 96 128 160 192 224 256\
+#         --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+#         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-p.json "$@" \
+#         --no-hpipm --no-treeqp --no-piqp --serial
+
+# }
 # Run the horizon scaling benchmark
 benchmark_scaling2() {
     benchmark2 \
@@ -223,20 +258,26 @@ benchmark_scaling2() {
 # Run the states scaling benchmark
 benchmark_scaling_states() {
     benchmark \
-        --problem wang-boyd-2008 --cold -I 20 -p "${OMP_NUM_THREADS}" -v1 -v4 --cm \
-        -N 256 \
-        -M1 -M2 -M3 -M4 -M5 -M6 -M7 -M8 -M9 -M10 \
-        -M11 -M12 -M13 -M14 -M15 -M16 -M17 -M18 -M19 -M20 \
-        -M21 -M22 -M23 -M24 -M25 -M26 -M27 -M28 -M29 -M30 \
-        --benchmark_repetitions=3 --benchmark_report_aggregates_only \
+        --problem wang-boyd-2008 --cold -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -N 64 \
+        -M6 -M10 -M14  -M18  -M22 \
+         -M26 -M30 -J 4\
+        --benchmark_repetitions=10 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-states.json "$@"
 }
 benchmark_quad_scaling() {
     benchmark_quadruped \
-        --cold --warm-shift --serial -I 20 -p "${OMP_NUM_THREADS}" -v4 -v1 --cm \
-        -N 32 64 92 128 192 256 -J 4\
+        --cold -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -N 32 64 96 128 160 192 224 256 -J 4\
         --benchmark_repetitions=10 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-quad-scaling.json "$@"
+}
+benchmark_quad_scaling_J() {
+    benchmark_quadruped \
+        --cold -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -N 64 -J 1 2 4 8\
+        --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+        --benchmark_min_time=0.01s --benchmark_out=benchmark-quad-scaling-J.json "$@"
 }
 # Run the states scaling benchmark
 benchmark_scaling_states2() {
@@ -266,6 +307,7 @@ plot_scaling() {
     python3 plot-scaling.py benchmark-scaling.json \
         --output benchmark-scaling.pdf "$@"
 }
+
 # Plot the results of the horizon scaling benchmark
 plot_scaling2() {
     python3 plot-scaling.py benchmark-scaling2.json \
@@ -308,6 +350,10 @@ main() {
             benchmark_quick "$@" ;;
         benchmark-scaling)
             benchmark_scaling "$@" ;;
+        benchmark-scaling-J)
+            benchmark_scaling_J "$@" ;;
+        benchmark-scaling-p)
+            benchmark_scaling_p "$@" ;;
         benchmark-scaling2)
             benchmark_scaling2 "$@" ;;
         benchmark-scaling-states)
@@ -318,6 +364,8 @@ main() {
             benchmark_grid "$@" ;;
         benchmark-quad-scaling)
             benchmark_quad_scaling "$@" ;;
+        benchmark-quad-scaling-J)
+            benchmark_quad_scaling_J "$@" ;;
         plot-scaling)
             plot_scaling "$@" ;;
         plot-scaling2)

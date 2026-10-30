@@ -1,4 +1,5 @@
 #include "mspiqp.hpp"
+#include "root-elimination.hpp"
 
 #include <batmat/assume.hpp>
 #include <guanaqo/mat-view.hpp>
@@ -181,69 +182,40 @@ void add_identity_block(
     }
 }
 
-bool is_fully_unbounded(real_t lower, real_t upper)
-{
-    return std::isinf(lower) && lower < 0 &&
-           std::isinf(upper) && upper > 0;
-}
-
-template <class TLower, class TUpper>
-int count_bounded_rows(const TLower &lower, const TUpper &upper)
-{
-    BATMAT_ASSERT(lower.rows == upper.rows);
-    int count = 0;
-    for (decltype(lower.rows) row = 0; row < lower.rows; ++row)
-        count += !is_fully_unbounded(lower(row, 0), upper(row, 0));
-    return count;
-}
-
-template <class TLower, class TUpper>
-void map_bounded_rows(
-    std::vector<int> &row_mapping,
-    PIQPVector &compact_lower,
-    PIQPVector &compact_upper,
-    int &next_row,
-    const TLower &lower,
-    const TUpper &upper)
-{
-    BATMAT_ASSERT(lower.rows == upper.rows);
-    row_mapping.assign(static_cast<std::size_t>(lower.rows), -1);
-    for (decltype(lower.rows) row = 0; row < lower.rows; ++row) {
-        if (is_fully_unbounded(lower(row, 0), upper(row, 0)))
-            continue;
-        row_mapping[static_cast<std::size_t>(row)] = next_row;
-        compact_lower[next_row] = lower(row, 0);
-        compact_upper[next_row] = upper(row, 0);
-        ++next_row;
+void set_constraints(PIQPFanQPData &data, int node, int x, int u,
+                     std::vector<PIQPTriplet> &triplets) {
+    const auto &constraints = data.constraints[node];
+    for (int i : constraints.state_indices) {
+        data.z_lower[x + i] = constraints.xmin[i];
+        data.z_upper[x + i] = constraints.xmax[i];
     }
-}
-
-template <class T, class I, class S, guanaqo::StorageOrder Order>
-void add_mapped_rows(
-    std::vector<PIQPTriplet> &triplets,
-    const std::vector<int> &row_mapping,
-    int column_offset,
-    guanaqo::MatrixView<T, I, S, Order> matrix)
-{
-    BATMAT_ASSERT(row_mapping.size() == static_cast<std::size_t>(matrix.rows));
-    for (I column = 0; column < matrix.cols; ++column) {
-        for (I row = 0; row < matrix.rows; ++row) {
-            const int destination_row = row_mapping[static_cast<std::size_t>(row)];
-            const real_t value = static_cast<real_t>(matrix(row, column));
-            if (destination_row >= 0 && value != real_t{0})
-                triplets.emplace_back(destination_row, column_offset + static_cast<int>(column),
-                                      value);
-        }
+    for (int i : constraints.input_indices) {
+        data.z_lower[u + i] = constraints.umin[i];
+        data.z_upper[u + i] = constraints.umax[i];
+    }
+    const int ng = static_cast<int>(constraints.lower.size());
+    const int offset = data.general_offsets[node];
+    for (int row = 0; row < ng; ++row) {
+        data.h_lower[offset + row] = constraints.lower[row];
+        data.h_upper[offset + row] = constraints.upper[row];
+        for (int col = 0; col < static_cast<int>(constraints.xmin.size()); ++col)
+            if (const double value = constraints.C[row + col * ng]; value != 0)
+                triplets.emplace_back(offset + row, x + col, value);
+        for (int col = 0; col < static_cast<int>(constraints.umin.size()); ++col)
+            if (const double value = constraints.D[row + col * ng]; value != 0)
+                triplets.emplace_back(offset + row, u + col, value);
     }
 }
 
 } // namespace
 std::shared_ptr<PIQPFanQPData>
-build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
+build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan, bool native_bounds, bool eliminate_x0)
 {
     validate_piqp_fan(fan);
 
     auto data = std::make_shared<PIQPFanQPData>();
+    data->native_bounds = native_bounds;
+    data->initial_state = fanqp::initial_state(fan);
 
     data->num_branches =
         static_cast<int>(fan.num_branches());
@@ -275,7 +247,7 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
      *     branch0: x1,u1,...,xN,
      *     branch1: x1,u1,...,xN,
      *     ...
-     *     global:  x0,u0
+     *     global:  u0 (preceded by x0 only when elimination is disabled)
      * ]
      */
 
@@ -292,13 +264,6 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
         layout.dynamics_rows.assign(
             static_cast<std::size_t>(N + 1),
             -1);
-
-        layout.inequality_rows.resize(
-            static_cast<std::size_t>(N + 1));
-
-        layout.inequality_sizes.assign(
-            static_cast<std::size_t>(N + 1),
-            0);
 
         for (int stage = 1; stage <= N; ++stage) {
             const int stage_nu =
@@ -318,8 +283,10 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
         }
     }
 
-    data->root_x_offset = number_of_variables;
-    number_of_variables += nx;
+    if (!eliminate_x0) {
+        data->root_x_offset = number_of_variables;
+        number_of_variables += nx;
+    }
 
     data->root_u_offset = number_of_variables;
     number_of_variables += nu;
@@ -327,18 +294,23 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
     const int number_of_equalities =
         B * N * nx;
 
+    data->constraints.resize(1 + B * N);
+    fanqp::ReducedRoot reduced_root;
+    if (eliminate_x0) {
+        reduced_root = fanqp::eliminate_root_state(fan, data->initial_state, native_bounds);
+        data->constraints[0] = std::move(reduced_root.constraints);
+        data->objective_offset = reduced_root.objective_offset;
+    } else {
+        data->constraints[0] = fanqp::analyze_constraints(fan.ocps, 0, native_bounds, false);
+    }
+    for (int branch = 0; branch < B; ++branch)
+        for (int stage = 1; stage <= N; ++stage)
+            data->constraints[fanqp::constraint_node(B, branch, stage)] =
+                fanqp::analyze_constraints({&fan.ocps[branch], 1}, stage, native_bounds);
     int number_of_inequalities = 0;
-
-    for (int branch = 0; branch < B; ++branch) {
-        const auto &ocp =
-            fan.ocps[
-                static_cast<std::size_t>(branch)];
-
-        for (int stage = 0; stage <= N; ++stage) {
-            number_of_inequalities += count_bounded_rows(
-                ocp.b_min(stage),
-                ocp.b_max(stage));
-        }
+    for (const auto &constraints : data->constraints) {
+        data->general_offsets.push_back(number_of_inequalities);
+        number_of_inequalities += static_cast<int>(constraints.lower.size());
     }
 
     const real_t infinity =
@@ -370,17 +342,7 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
     std::vector<PIQPTriplet> A_triplets;
     std::vector<PIQPTriplet> G_triplets;
 
-    /*
-     * Shared root objective.
-     *
-     * This is equivalent to your HPIPM root construction:
-     *
-     * Q0 = sum_branch Q_branch(0)
-     * R0 = sum_branch R_branch(0)
-     * S0 = sum_branch S_branch(0)
-     * q0 = sum_branch q_branch(0)
-     * r0 = sum_branch r_branch(0)
-     */
+    // Sum the root costs. After elimination only R0 and r0 + S0*x0 remain.
 
     for (int branch = 0; branch < B; ++branch) {
         const auto &ocp =
@@ -389,65 +351,29 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
 
         add_upper_triangular_block(
             P_triplets,
-            data->root_x_offset,
-            ocp.Q(0));
-
-        add_upper_triangular_block(
-            P_triplets,
             data->root_u_offset,
             ocp.R(0));
 
-        /*
-         * HPIPM order is [u;x]:
-         *
-         *     [R  S ]
-         *     [S' Q ]
-         *
-         * PIQP order here is [x;u]:
-         *
-         *     [Q  S']
-         *     [S  R ]
-         *
-         * S is nu-by-nx, so insert S' into the upper-right block.
-         */
-        add_transposed_block(
-            P_triplets,
-            data->root_x_offset,
-            data->root_u_offset,
-            ocp.S(0));
-
-        add_vector(
-            data->c,
-            data->root_x_offset,
-            ocp.q(0));
-
-        add_vector(
-            data->c,
-            data->root_u_offset,
-            ocp.r(0));
+        if (!eliminate_x0) {
+            add_upper_triangular_block(P_triplets, data->root_x_offset, ocp.Q(0));
+            // S is nu-by-nx; PIQP's ordering is [x;u].
+            add_transposed_block(P_triplets, data->root_x_offset, data->root_u_offset, ocp.S(0));
+            add_vector(data->c, data->root_x_offset, ocp.q(0));
+            add_vector(data->c, data->root_u_offset, ocp.r(0));
+        }
     }
 
-    /*
-     * Fix x0 through PIQP's variable bounds.
-     */
-
-    const auto &initial_state =
-        fan.ocps.front().b(0);
-
-    BATMAT_ASSERT(initial_state.rows == nx);
-
-    for (int i = 0; i < nx; ++i) {
-        const real_t value = initial_state.data[i];
-
-        data->z_lower[data->root_x_offset + i] =
-            value;
-
-        data->z_upper[data->root_x_offset + i] =
-            value;
+    if (eliminate_x0) {
+        std::copy(reduced_root.r.begin(), reduced_root.r.end(), data->c.data() + data->root_u_offset);
+    } else {
+        for (int i = 0; i < nx; ++i) {
+            data->z_lower[data->root_x_offset + i] = data->initial_state[i];
+            data->z_upper[data->root_x_offset + i] = data->initial_state[i];
+        }
     }
 
     int equality_row = 0;
-    int inequality_row = 0;
+    set_constraints(*data, 0, data->root_x_offset, data->root_u_offset, G_triplets);
 
     for (int branch = 0; branch < B; ++branch) {
         const auto &ocp =
@@ -457,40 +383,6 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
         auto &layout =
             data->branches[
                 static_cast<std::size_t>(branch)];
-
-        /*
-         * Stage-zero constraints:
-         *
-         * lower <= C0*x0 + D0*u0 <= upper
-         */
-
-        const auto C0 = ocp.C(0);
-        const auto D0 = ocp.D(0);
-        const auto lower0 = ocp.b_min(0);
-        const auto upper0 = ocp.b_max(0);
-
-        layout.inequality_sizes[0] =
-            static_cast<int>(C0.rows);
-
-        map_bounded_rows(
-            layout.inequality_rows[0],
-            data->h_lower,
-            data->h_upper,
-            inequality_row,
-            lower0,
-            upper0);
-
-        add_mapped_rows(
-            G_triplets,
-            layout.inequality_rows[0],
-            data->root_x_offset,
-            C0);
-
-        add_mapped_rows(
-            G_triplets,
-            layout.inequality_rows[0],
-            data->root_u_offset,
-            D0);
 
         for (int stage = 1; stage <= N; ++stage) {
             const auto &current =
@@ -555,12 +447,8 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
                 ocp.B(stage - 1);
 
             if (stage == 1) {
-                add_block(
-                    A_triplets,
-                    equality_row,
-                    data->root_x_offset,
-                    Ak,
-                    real_t{-1});
+                if (!eliminate_x0)
+                    add_block(A_triplets, equality_row, data->root_x_offset, Ak, real_t{-1});
 
                 add_block(
                     A_triplets,
@@ -592,59 +480,21 @@ build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan)
                     real_t{-1});
             }
 
-            copy_vector(
-                data->b,
-                equality_row,
-                ocp.b(stage));
+            if (eliminate_x0 && stage == 1)
+                std::copy(reduced_root.b[branch].begin(), reduced_root.b[branch].end(),
+                          data->b.data() + equality_row);
+            else
+                copy_vector(data->b, equality_row, ocp.b(stage));
 
             equality_row += nx;
 
-            /*
-             * General stage constraints:
-             *
-             * lower <= C*x + D*u <= upper
-             */
-
-            const auto Ck = ocp.C(stage);
-            const auto lower = ocp.b_min(stage);
-            const auto upper = ocp.b_max(stage);
-
-            layout.inequality_sizes[
-                static_cast<std::size_t>(stage)] =
-                static_cast<int>(Ck.rows);
-
-            auto &row_mapping = layout.inequality_rows[
-                static_cast<std::size_t>(stage)];
-
-            map_bounded_rows(
-                row_mapping,
-                data->h_lower,
-                data->h_upper,
-                inequality_row,
-                lower,
-                upper);
-
-            add_mapped_rows(
-                G_triplets,
-                row_mapping,
-                current.x,
-                Ck);
-
-            if (stage < N) {
-                add_mapped_rows(
-                    G_triplets,
-                    row_mapping,
-                    current.u,
-                    ocp.D(stage));
-            }
+            set_constraints(*data, fanqp::constraint_node(B, branch, stage),
+                            current.x, current.u, G_triplets);
         }
     }
 
     BATMAT_ASSERT(
         equality_row == number_of_equalities);
-
-    BATMAT_ASSERT(
-        inequality_row == number_of_inequalities);
 
     data->P.resize(
         number_of_variables,
@@ -707,7 +557,7 @@ create_piqp_fan_solver(
     solver.settings().eps_abs = tol;
     solver.settings().eps_rel = 0.0; // HPIPM and Cyqlone use absolute tolerances
 
-    solver.settings().check_duality_gap = true;
+    solver.settings().check_duality_gap = false;
     solver.settings().eps_duality_gap_abs = tol;
     solver.settings().eps_duality_gap_rel = 0.0;
 
@@ -753,7 +603,7 @@ get_stats_piqp_fan(
     stats.status = solver_data.status;
     stats.iter = result.info.iter;
     stats.primal_objective =
-        result.info.primal_obj;
+        result.info.primal_obj + solver_data.qp_data->objective_offset;
     stats.run_time =
         result.info.run_time;
     std::cout << result.info.run_time << std::endl;
@@ -772,6 +622,8 @@ get_solution_piqp_fan(
         solver_data.solver.result();
 
     const auto &z = result.x;
+    const PIQPVector bound_duals = result.z_bu - result.z_bl;
+    const PIQPVector general_duals = result.z_u - result.z_l;
 
     const int B = data.num_branches;
     const int N = data.horizon;
@@ -800,7 +652,7 @@ get_solution_piqp_fan(
             branch_solution.solution.data();
 
         std::copy_n(
-            z.data() + data.root_x_offset,
+            data.root_x_offset < 0 ? data.initial_state.data() : z.data() + data.root_x_offset,
             nx,
             primal_out);
 
@@ -844,51 +696,28 @@ get_solution_piqp_fan(
             branch_solution.solution.data() +
                 branch_solution.solution.size());
 
-        /*
-         * General inequality multipliers:
-         *
-         * signed convention = upper - lower
-         */
-        std::size_t inequality_count = 0;
-
+        // Restore the original row order, including native bounds and skipped rows.
         for (int stage = 0; stage <= N; ++stage) {
-            inequality_count +=
-                static_cast<std::size_t>(
-                    layout.inequality_sizes[
-                        static_cast<std::size_t>(stage)]);
+            const int node = fanqp::constraint_node(B, branch, stage);
+            const auto &constraints = data.constraints[node];
+            const int source = stage == 0 ? branch : 0;
+            const int x = stage == 0 ? data.root_x_offset : layout.stages[stage].x;
+            const int u = stage == 0 ? data.root_u_offset : layout.stages[stage].u;
+            const auto x_duals = std::span<const real_t>{x < 0 ? nullptr : bound_duals.data() + x,
+                                                        constraints.xmin.size()};
+            const auto u_duals = std::span<const real_t>{u < 0 ? nullptr : bound_duals.data() + u,
+                                                        constraints.umin.size()};
+            const auto g_duals = std::span<const real_t>{general_duals.data(),
+                                                        static_cast<std::size_t>(general_duals.size())}
+                                    .subspan(data.general_offsets[node], constraints.lower.size());
+            for (int row = constraints.row_offsets[source];
+                 row < constraints.row_offsets[source + 1]; ++row)
+                branch_solution.inequality_multipliers.push_back(
+                    fanqp::constraint_multiplier(constraints.rows[row], x_duals, u_duals, g_duals));
         }
 
-        branch_solution.inequality_multipliers.resize(
-            inequality_count);
-
-        real_t *inequality_out =
-            branch_solution.inequality_multipliers.data();
-
-        for (int stage = 0; stage <= N; ++stage) {
-            const int count =
-                layout.inequality_sizes[
-                    static_cast<std::size_t>(stage)];
-
-            const auto &row_mapping =
-                layout.inequality_rows[
-                    static_cast<std::size_t>(stage)];
-
-            for (int i = 0; i < count; ++i) {
-                const int row = row_mapping[static_cast<std::size_t>(i)];
-                inequality_out[i] = row >= 0
-                                        ? result.z_u[row] - result.z_l[row]
-                                        : real_t{0};
-            }
-
-            inequality_out += count;
-        }
-
-        /*
-         * Equality multipliers:
-         *
-         * root-state bound multiplier,
-         * followed by N dynamics multipliers.
-         */
+        // Keep the original equality layout, with zeros for eliminated x0,
+        // matching TreeQP's convention.
         branch_solution.equality_multipliers.resize(
             static_cast<std::size_t>(
                 (N + 1) * nx));
@@ -896,19 +725,8 @@ get_solution_piqp_fan(
         real_t *equality_out =
             branch_solution.equality_multipliers.data();
 
-        /*
-         * x0 is fixed using z_lower == z_upper.
-         *
-         * Match the HPIPM signed convention:
-         * upper multiplier - lower multiplier.
-         */
         for (int i = 0; i < nx; ++i) {
-            const int variable =
-                data.root_x_offset + i;
-
-            equality_out[i] =
-                -result.z_bl[variable] +
-                result.z_bu[variable];
+            equality_out[i] = data.root_x_offset < 0 ? 0 : bound_duals[data.root_x_offset + i];
         }
 
         equality_out += nx;
@@ -962,43 +780,49 @@ void update_x0_piqp_fan(
      *
      * x0,u0,x1,u1,...
      */
-    const real_t *x1 =
-        solution[branch].solution.data() +
-        nx + nu;
+    const auto &primal = solution.at(branch).solution;
+    if (primal.size() < static_cast<std::size_t>(2 * nx + nu))
+        throw std::invalid_argument("PIQP solution does not contain the next state");
+    const auto x1 = std::span<const real_t>{primal}.subspan(nx + nu, nx);
 
-    for (int i = 0; i < nx; ++i) {
-        data.z_lower[
-            data.root_x_offset + i] = x1[i];
-
-        data.z_upper[
-            data.root_x_offset + i] = x1[i];
+    if (data.root_x_offset < 0) {
+        auto root = fanqp::eliminate_root_state(fan, x1, data.native_bounds);
+        if (root.constraints.lower.size() != data.constraints[0].lower.size())
+            throw std::invalid_argument("PIQP root constraint dimensions changed");
+        std::copy(root.r.begin(), root.r.end(), data.c.data() + data.root_u_offset);
+        for (int b = 0; b < data.num_branches; ++b)
+            std::copy(root.b[b].begin(), root.b[b].end(),
+                      data.b.data() + data.branches[b].dynamics_rows[1]);
+        if (!root.constraints.lower.empty()) {
+            std::copy(root.constraints.lower.begin(), root.constraints.lower.end(),
+                      data.h_lower.data() + data.general_offsets[0]);
+            std::copy(root.constraints.upper.begin(), root.constraints.upper.end(),
+                      data.h_upper.data() + data.general_offsets[0]);
+        }
+        data.constraints[0] = std::move(root.constraints);
+        data.objective_offset = root.objective_offset;
+        solver_data.solver.update(
+            piqp::nullopt, data.c, piqp::nullopt, data.b, piqp::nullopt,
+            data.h_lower, data.h_upper, piqp::nullopt, piqp::nullopt);
+    } else {
+        for (int i = 0; i < nx; ++i) {
+            data.z_lower[data.root_x_offset + i] = x1[i];
+            data.z_upper[data.root_x_offset + i] = x1[i];
+        }
+        solver_data.solver.update(
+            piqp::nullopt, piqp::nullopt, piqp::nullopt, piqp::nullopt, piqp::nullopt,
+            piqp::nullopt, piqp::nullopt, data.z_lower, data.z_upper);
     }
 
+    data.initial_state.assign(x1.begin(), x1.end());
     for (auto &ocp : fan.ocps) {
         BATMAT_ASSERT(
             static_cast<int>(ocp.dim.nx) == nx);
 
         std::ranges::copy_n(
-            x1,
+            x1.data(),
             nx,
             ocp.b(0).data);
     }
 
-    /*
-     * PIQP 0.6.x update call.
-     *
-     * If your installed overload requires optional references,
-     * use the equivalent optional/ref-wrapper form from
-     * piqp/sparse/solver.hpp.
-     */
-    solver_data.solver.update(
-        piqp::nullopt,    // P
-        piqp::nullopt,    // c
-        piqp::nullopt,    // A
-        piqp::nullopt,    // b
-        piqp::nullopt,    // G
-        piqp::nullopt,    // h_lower
-        piqp::nullopt,    // h_upper
-        data.z_lower,
-        data.z_upper);
 }

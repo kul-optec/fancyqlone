@@ -160,7 +160,6 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
                               (global_ti <= global_tmast ? 0 : 2 * ocp.ny_0);
     Breakpoint *const inf_0 = fin_0 + bpt_branch + (global_ti == global_tmast ? 2 * ocp.ny_0 : 0);
     Breakpoint *fin = fin_0, *inf = inf_0;
-    std::osyncstream out(std::cout);
     // Compute break points t[i] and intermediate values α[i] and δ[i]
     const auto brkpts_simd = [&](auto Σi, auto yi, auto Adi, auto Axi, auto li, auto ui) {
         const auto s  = sqrt(Σi);

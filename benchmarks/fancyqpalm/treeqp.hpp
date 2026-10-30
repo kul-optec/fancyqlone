@@ -1,5 +1,7 @@
 #pragma once
 
+#include "constraint-layout.hpp"
+
 #include <chrono>
 #include <memory>
 #include <span>
@@ -10,16 +12,6 @@
 // Adjust this include path if your treeQP package exports it differently.
 #include <treeqp_cpp_interface/treeqp_cpp_interface.hpp>
 
-struct TreeQpBoundMapping {
-    enum class Kind {
-        State,
-        Input,
-    };
-
-    Kind kind = Kind::State;
-    int index = -1;
-};
-
 struct TreeQpData {
     int num_branches = 0;
     int horizon = 0;
@@ -29,12 +21,10 @@ struct TreeQpData {
     std::vector<int> nc;
     std::vector<int> nk;
     bool native_bounds = false;
-    bool shared_root_constraints = true;
     std::vector<double> initial_state;
     std::vector<double> root_xmin;
     std::vector<double> root_xmax;
-    std::vector<std::vector<int>> branch_nc;
-    std::vector<std::vector<std::vector<TreeQpBoundMapping>>> bound_mapping;
+    std::vector<fanqp::StageConstraints> constraints;
     std::vector<std::vector<int>> node_index;
     std::vector<std::vector<int>> edge_index;
 
