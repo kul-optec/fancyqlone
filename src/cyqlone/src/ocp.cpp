@@ -120,7 +120,6 @@ auto LinearOCPStorage::compute_kkt_error_u0_seperated(const Solution &sol) const
 
     // Stationarity
     dual_residual = qr();
-    // guanaqo::print_python(std::cout << "y: ", y, "\n");
     for (index_t j = 0; j < N; ++j) {
         
         auto xuj = x.middle_rows(j * (nx + nu), nx + nu), λj = λ.middle_rows(j * nx, nx),
@@ -224,7 +223,6 @@ auto LinearOCPStorage::compute_kkt_error_u0x0_seperated(const Solution &sol) con
 
     // Stationarity
     dual_residual = qr();
-    // guanaqo::print_python(std::cout << "y: ", y, "\n");
     for (index_t j = 0; j < N; ++j) {
         
         auto xuj = x.middle_rows(j * (nx + nu), nx + nu), λj = λ.middle_rows(j * nx, nx),

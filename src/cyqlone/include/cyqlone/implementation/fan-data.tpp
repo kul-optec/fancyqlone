@@ -270,7 +270,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_constraints(std::span<cons
     BATMAT_ASSERT(static_cast<index_t>(y.branches.size()) == num_branches);
     index_t offset = ny_0;
     using crview    = guanaqo::MatrixView<const value_type, index_t>;
-    la::copy(crview::as_column(y_lin.first(ny_0)), y.first.batch(0)(0).top_rows(nu));
+    la::copy(crview::as_column(y_lin.first(ny_0)), y.first.batch(0)(0).top_rows(ny_0));
     for (index_t c = 0; c < num_branches; ++c) {
         index_t ny     = solver_storages[c].cyqlone_solver.ny;
         index_t ny_N   = solver_storages[c].cyqlone_solver.ny_N;

@@ -16,14 +16,12 @@ namespace la = cyqlone::linalg;
 
 using la::tril;
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve(Context &ctx, const FanStorage &ΔΣ,
-                                                                    FanStorage &ux, FanStorage &λ) {
-    // std::cout << "update_solve not implemented yet" << std::endl;
-
-    // std::cout << "ΔΣ: " << ΔΣ.first.rows() << std::endl;
-    // std::cout << "ux: " << ux.first.rows() << std::endl;
-    // std::cout << "λ: " << λ.first.rows() << std::endl;
-    // std::cout << "ctx index: " << ctx.total_ctx.index << std::endl;
+void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve(
+    [[maybe_unused]] Context &ctx,
+    [[maybe_unused]] const FanStorage &ΔΣ,
+    [[maybe_unused]] FanStorage &ux,
+    [[maybe_unused]] FanStorage &λ)
+{
     throw std::runtime_error("update_solve not implemented yet");
 }
 } // namespace CYQLONE_NS(cyqlone)

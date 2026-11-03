@@ -473,7 +473,7 @@ struct FanOCPStorage {
                 guanaqo::print_python(std::cout <<"Branch " << i << " u: ", solutions[i].u(OCPdims[i]), "\n");
                 guanaqo::print_python(std::cout <<"Branch " << i << " λ: ", solutions[i].λ(OCPdims[i]), "\n");
                 for (std::size_t j = 0; j < static_cast<std::size_t>(OCPdims[i].N_horiz+1); ++j) {
-                    guanaqo::print_python(std::cout <<"Branch " << i << " y[" << j << "]: ", solutions[i].y(OCPdims[i], j));
+                    guanaqo::print_python(std::cout <<"Branch " << i << " y[" << j << "]: ", solutions[i].y(OCPdims[i], static_cast<index_t>(j)));
                 }
                 std::cout << std::endl;
             }

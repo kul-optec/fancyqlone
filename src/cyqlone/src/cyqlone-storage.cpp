@@ -196,18 +196,14 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
     Bs.resize(num_branches);
     R0 = matrix{{.rows = nu, .cols = nu}};
     r0 = matrix{{.rows = nu, .cols = 1}};
-    // std::cout << "Initializing FanCyqloneStorage with " << ny_0 << " ineq, nu = " << nu
-    //           << std::endl;
     D0      = matrix{{.rows = ny_0, .cols = nu}};
     b_min_0 = matrix{{.rows = ny_0, .cols = 1}};
     b_max_0 = matrix{{.rows = ny_0, .cols = 1}};
-    // guanaqo::print_python(std::cout << "D0 = ", focp.D0, "\n");
     R0.set_constant(0);
     r0.set_constant(0);
     index_t ny_offset = 0;
     for (index_t i = 0; i < num_branches; ++i) {
         index_t ny_0i = focp.ocps[i].D(0).rows;
-        // focp.ocps[i].D(0).set_constant(0); // Ensure that the first stage has no input constraints, as they are handled separately in the fan formulation
         auto &cocp = branches[i] = CyqloneStorage<T>::build(focp.ocps[i], 0);
         Bs[i]                    = matrix{{.rows = focp.ocps[i].dim.nx, .cols = nu}};
         la::copy(cocp.data_F(0).left_cols(nu), Bs[i](0));
@@ -226,13 +222,7 @@ void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
         
         ny_offset += ny_0i;
         cocp.data_rq(0).top_rows(nu).set_constant(0); // r(0) = 0
-        // std::cout <<cocp.ny_0 << std::endl;
-        // guanaqo::print_python(std::cout << "D0 = ", cocp.ny_0, "\n");
-
     }
-    // guanaqo::print_python(std::cout << "D0 = ", D0(0), "\n");
-    // guanaqo::print_python(std::cout << "b_max_0 = ", b_max_0(0), "\n");
-    // guanaqo::print_python(std::cout << "b_min_0 = ", b_min_0(0), "\n");
 
 }
 template <class T>
@@ -242,8 +232,7 @@ void FanCyqloneStorage<T>::update(const FanOCPStorage &focp) {
 }
 template <class T>
 FanCyqloneStorage<T> FanCyqloneStorage<T>::build(const FanOCPStorage &focp, index_t ny_0) {
-    // std::cout << "Building FanCyqloneStorage with " << focp.num_branches()
-    //           << " branches, ny_0 = " << ny_0 << std::endl;
+
     FanCyqloneStorage res;
     res.ny_0 = ny_0;
 
@@ -271,7 +260,6 @@ auto FanCyqloneStorage<T>::reconstruct_solution(const FanOCPStorage &ocp,
         const index_t ux_size = static_cast<std::size_t>((cocp.N_horiz-1) * (cocp.nu + cocp.nx)+cocp.nx);
         const index_t y_size = static_cast<std::size_t>((cocp.N_horiz-1) * (cocp.ny) + cocp.ny_N);
         const index_t λ_size = static_cast<std::size_t>(cocp.N_horiz * cocp.nx);
-        // std::cout <<"y_size: " << y_size << ", λ_size: " << λ_size << ", ux_size: " << ux_size << std::endl;
         std::ranges::copy_n(ocp.ocps[b].b(0).data, cocp.nx, sol.solutions[b].solution.begin()); // x0
         std::ranges::copy(ux_compressed.subspan(0, cocp.nu), sol.solutions[b].solution.begin() + cocp.nx); //u0
         std::ranges::copy(ux_compressed.subspan(cocp.nu+offset_ux, ux_size), sol.solutions[b].solution.begin() + cocp.nx + cocp.nu); // x1u1..xN-1uN-1xN

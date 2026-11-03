@@ -520,9 +520,7 @@ void FanSharedContext::run(F &&f) {
     for (index_t idx = 0; idx < total_num_thr; ++idx) {
 
         // recover i
-        index_t i = std::upper_bound(cumulative.begin(),
-                                    cumulative.end(),
-                                    idx) - cumulative.begin() - 1;
+        index_t i = static_cast<index_t>(std::upper_bound(cumulative.begin(), cumulative.end(), idx) - cumulative.begin() - 1);
 
         index_t j = idx - cumulative[i];
 

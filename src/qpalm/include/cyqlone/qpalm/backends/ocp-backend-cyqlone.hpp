@@ -133,7 +133,7 @@ struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>>
             BATMAT_ASSERT(this->first.depth() == other.first.depth()); 
         }
         index_t size() const {
-            index_t total_size = this->branches.size();
+            index_t total_size = static_cast<index_t>(this->branches.size());
 
             return total_size;
         }
@@ -180,7 +180,7 @@ struct CycloneBackendTraits<cyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultO
             BATMAT_ASSERT(this->first.depth() == other.first.depth()); 
         }
         index_t size() const {
-            index_t total_size = this->branches.size();
+            index_t total_size = static_cast<index_t>(this->branches.size());
 
             return total_size;
         }
