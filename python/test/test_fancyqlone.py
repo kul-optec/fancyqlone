@@ -49,10 +49,13 @@ def create_branch(model_scale: float, horizon: int = 8) -> OCP:
     )
 
 
-def create_solver() -> tuple[FanOCP, FanCyQPALM]:
-    fan = FanOCP([create_branch(0.9), create_branch(1.1)])
+def create_solver(
+    *,
+    horizon: int = 8,
+    processors_per_branch: int = 1,
+) -> tuple[FanOCP, FanCyQPALM]:
+    fan = FanOCP([create_branch(0.9, horizon), create_branch(1.1, horizon)])
     backend_settings = CyQPALMBackendSettings()
-    backend_settings.max_update_count = 0
     backend_settings.strategy = WarmStartingStrategy.Shift
     settings = Settings()
     settings.max_outer_iter = 40
@@ -60,7 +63,12 @@ def create_solver() -> tuple[FanOCP, FanCyQPALM]:
     settings.tolerance = 1e-9
     settings.dual_tolerance = 1e-9
     settings.eq_constr_tolerance = 1e-9
-    return fan, FanCyQPALM(fan, 1, backend_settings, settings)
+    return fan, FanCyQPALM(
+        fan,
+        processors_per_branch=processors_per_branch,
+        backend_settings=backend_settings,
+        settings=settings,
+    )
 
 
 def assert_branch_feasible(branch: OCP, states: np.ndarray, inputs: np.ndarray) -> None:
