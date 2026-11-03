@@ -46,6 +46,8 @@ struct CyQPALMBackendSettings {
     int print_precision  = 3;
     // bool init_x0               = false; // TODO
     double changing_constr_factor = 0.05;
+    /// Maximum number of factorization updates before refactorization.
+    /// Fan backends do not support updates and use an effective value of zero.
     index_t max_update_count      = 5;
     bool detailed_timings         = false;
     cyqlone::TricyqleParams<real_t> tricyqle_params{};
@@ -75,6 +77,7 @@ struct CycloneBackendTraits;
 // Traits for the CyqloneSolver
 template <index_t VL, StorageOrder DefaultOrder>
 struct CycloneBackendTraits<cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>> {
+    static constexpr bool supports_factorization_updates = true;
     using OCP_t    = cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>;
     using simd     = typename OCP_t::simd;
     using CStorage = CyqloneStorage<>;
@@ -101,6 +104,7 @@ struct CycloneBackendTraits<cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>> {
 // Traits for FanCyqloneSolver
 template <index_t VL, StorageOrder DefaultOrder>
 struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>> {
+    static constexpr bool supports_factorization_updates = false;
     using OCP_t    = cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>;
     using simd     = typename OCP_t::simd;
     using CStorage = FanCyqloneStorage<>;
@@ -148,6 +152,7 @@ struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>>
 // Traits for SerialFanCyqloneSolver
 template <index_t VL, StorageOrder DefaultOrder>
 struct CycloneBackendTraits<cyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultOrder>> {
+    static constexpr bool supports_factorization_updates = false;
     using OCP_t    = cyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultOrder>;
     using simd     = typename OCP_t::simd;
     using CStorage = FanCyqloneStorage<>;

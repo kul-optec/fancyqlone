@@ -98,6 +98,8 @@ struct CyQPALMBackend {
     CyQPALMBackend(const traits::CStorage &ocp, CyqloneData data,
                    const CyQPALMBackendSettings &settings)
         : ocp{OCP_t::build(ocp, settings.processors)}, settings{settings} {
+        if constexpr (!traits::supports_factorization_updates)
+            this->settings.max_update_count = 0;
         this->parallel_ctx->update_spin_count(settings.spin_count);
         this->ocp.update_tricyqle_params(settings.tricyqle_params);
         b_min_strided = ineq_constr_vec();
@@ -515,12 +517,16 @@ struct CyQPALMBackend {
         // re-factorize anyway, we don't need to do anything.
         if (num_different == 0 || reset_factorization)
             return num_different;
-        bool do_reset_fac = num_updates >= settings.max_update_count;
+        bool do_reset_fac = !traits::supports_factorization_updates ||
+                            num_updates >= settings.max_update_count;
         do_reset_fac |= static_cast<double>(num_different) >=
                         static_cast<double>(num_ineq_constr()) * settings.changing_constr_factor;
         bool prev_update_pending = update_pending;
         if (do_reset_fac) {
-            ctx.run_single_sync([&] { reset_factorization = true; });
+            ctx.run_single_sync([&] {
+                reset_factorization = true;
+                update_pending      = false;
+            });
             return num_different;
         }
         ctx.run_single_sync([&] {

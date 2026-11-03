@@ -196,7 +196,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_variables(std::span<const 
         offset += nux * N_horiz - nu;
     }
     using crview = guanaqo::MatrixView<const value_type, index_t>;
-    la::copy(crview::as_column(ux_lin.first(nu)), ux.first.batch(0));
+    la::copy(crview::as_column(ux_lin.first(nu)), ux.first.batch(0).top_rows(nu));
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_variables(
