@@ -31,6 +31,13 @@
 
 namespace fancyqlone {
 
+inline void atomic_notify_fence() noexcept {
+#if defined(__GLIBCXX__) && __GLIBCXX__ < 20261013
+    // Work around missed notifications in libstdc++ before the fix for GCC PR127757.
+    std::atomic_thread_fence(std::memory_order_seq_cst);
+#endif
+}
+
 /// No-op completion function for the @ref TreeBarrier.
 /// @ingroup topic-parallelization
 struct EmptyCompletion {
@@ -256,6 +263,7 @@ class TreeBarrier {
                 std::invoke(std::forward<C>(custom_completion), std::move(*arrived));
             auto next_phase = static_cast<BarrierPhase>(static_cast<PhaseType>(cur_phase) + 1);
             phase.store(next_phase, std::memory_order_release);
+            atomic_notify_fence();
             phase.notify_all();
         }
         return arrival_token{cur_phase};
@@ -519,6 +527,7 @@ class TreeBarrier {
             atomic_wait_ne_acq(ticket, old_ticket);
         storage[thread_id].store(std::move(x));
         auto old_ticket = ticket.fetch_add(1, std::memory_order_release);
+        atomic_notify_fence();
         ticket.notify_one();
         return {src, old_ticket};
     }
@@ -535,6 +544,7 @@ class TreeBarrier {
         atomic_wait_eq_acq(src_ticket, static_cast<ticket_value_type>(token.ticket + 1));
         std::invoke(std::forward<F>(func), std::move(storage[token.src].template load<T>()));
         src_ticket.fetch_add(1, std::memory_order_release);
+        atomic_notify_fence();
         src_ticket.notify_one();
         atomic_wait_eq_acq(ticket, static_cast<ticket_value_type>(token.ticket + 2));
     }
@@ -550,6 +560,7 @@ class TreeBarrier {
         std::invoke_result_t<F &&, T &&> ret =
             std::invoke(std::forward<F>(func), std::move(storage[token.src].template load<T>()));
         src_ticket.fetch_add(1, std::memory_order_release);
+        atomic_notify_fence();
         src_ticket.notify_one();
         atomic_wait_eq_acq(ticket, static_cast<ticket_value_type>(token.ticket + 2));
         return ret;
@@ -564,6 +575,7 @@ class TreeBarrier {
         atomic_wait_eq_acq(src_ticket, static_cast<ticket_value_type>(token.ticket + 1));
         T ret = std::move(storage[token.src].template load<T>());
         src_ticket.fetch_add(1, std::memory_order_release);
+        atomic_notify_fence();
         src_ticket.notify_one();
         // No need to wait for the value we sent to be consumed by the receiving thread, since it
         // cannot contain any references to our local variables. The next shuffle_start will wait
