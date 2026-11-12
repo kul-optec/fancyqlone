@@ -59,7 +59,7 @@ export CMAKE_INSTALL_MODE=COPY
 uv pip install -ve "$pkg_dir" --no-build-isolation -C cross="$pbc_config"
 if [ ! -e "$pkg_dir/uv.toml" ]; then
     cat <<- EOF > "$pkg_dir/uv.toml"
-	no-build-isolation-package = ["cyqlone"]
-	config-settings-package = { cyqlone = { cross = "$pbc_config" } }
+	no-build-isolation-package = ["fancyqlone"]
+	config-settings-package = { fancyqlone = { cross = "$pbc_config" } }
 	EOF
 fi

@@ -1,5 +1,5 @@
-#include <cyqlone/conversion.hpp>
-#include <cyqlone/qpalm/example-problems/centroidal-quadruped.hpp>
+#include <fancyqlone/conversion.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/centroidal-quadruped.hpp>
 #include <guanaqo/eigen/view.hpp>
 
 #include <Eigen/Core>

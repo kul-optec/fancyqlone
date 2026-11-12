@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
 
-#include <cyqlone/cyqlone.hpp>
-#include <cyqlone/linalg.hpp>
-#include <cyqlone/packing.hpp>
-#include <cyqlone/random-ocp.hpp>
-#include <cyqlone/tracing.hpp>
-#include <cyqlone/tridiagonal-solver.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/packing.hpp>
+#include <fancyqlone/random-ocp.hpp>
+#include <fancyqlone/tracing.hpp>
+#include <fancyqlone/cyqlone/tridiagonal-solver.hpp>
 #include <batmat/linalg/simdify.hpp>
 #include <guanaqo/print.hpp>
 #include <guanaqo/trace.hpp>
@@ -13,7 +13,7 @@
 #include <bit>
 #include <cstdlib>
 #if CYQLONE_WITH_MATIO
-#include <cyqlone/matio.hpp>
+#include <fancyqlone/matio.hpp>
 #endif
 
 #if GUANAQO_WITH_TRACING

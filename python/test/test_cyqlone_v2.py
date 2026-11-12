@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Union
-import cyqlone
+import fancyqlone as cyqlone
 import numpy as np
 import numpy.linalg as la
 import pytest

@@ -8,7 +8,7 @@ on:
 
 env:
   PACKAGE_VERSION: '0.0.1.dev0'
-  PACKAGE_NAME: cyqlone
+  PACKAGE_NAME: fancyqlone
 
 jobs:
   # First we build the wheels natively (build system == host system).
@@ -180,7 +180,7 @@ jobs:
         run: python3 -m pip install --find-links=dist "${PACKAGE_NAME}[test]==${PACKAGE_VERSION}"
 
       - name: Import
-        run: objdump -p "$(python3 -c 'import cyqlone; print(cyqlone.cyqlone.__file__)')"
+        run: objdump -p "$(python3 -c 'import fancyqlone; print(fancyqlone.cyqlone.__file__)')"
 
       - name: Test
         run: pytest -ra

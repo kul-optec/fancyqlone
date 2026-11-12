@@ -5,7 +5,7 @@
 #include <ranges>
 #include <vector>
 
-#include <cyqlone/qpalm/implementation/algorithms.hpp>
+#include <fancyqlone/fancyqpalm/implementation/algorithms.hpp>
 
 using cyqlone::qpalm::partition_min;
 

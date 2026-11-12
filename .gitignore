@@ -16,7 +16,7 @@ __pycache__
 # Virtual environments
 .venv*
 .cyqlone*
-
+.cyq*
 # Python distribution and building
 dist
 dist-debug
@@ -27,9 +27,9 @@ wheelhouse
 /staging
 /package
 /toolchains
-python/cyqlone/_common.pyi
-python/cyqlone/cyqlone/*.pyi
-python/cyqlone/_cyqlone_generic/*.pyi
+python/fancyqlone/_common.pyi
+python/fancyqlone/cyqlone/*.pyi
+python/fancyqlone/_cyqlone_generic/*.pyi
 *.cross.profile
 *.cross.pbc
 *.local.pbc

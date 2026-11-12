@@ -1,7 +1,7 @@
-#include <cyqlone/conversion.hpp>
-#include <cyqlone/qpalm/example-problems/spring-mass.hpp>
-#include <cyqlone/qpalm/example-problems/zoh.hpp>
-#include "cyqlone/ocp.hpp"
+#include <fancyqlone/conversion.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/spring-mass.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/zoh.hpp>
+#include "fancyqlone/ocp.hpp"
 #include <batmat/config.hpp>
 #include <guanaqo/eigen/view.hpp>
 
@@ -178,4 +178,3 @@ FanSpringMassProblem fan_spring_mass(SpringMassParams p, index_t num_branches, r
     FanOCPStorage focp{.ocps = std::move(ocps)};
     return {.ocp = std::move(focp), .ref = std::move(ref)};   } 
 }
-

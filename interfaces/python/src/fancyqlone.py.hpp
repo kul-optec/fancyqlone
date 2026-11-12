@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cyqlone/config.hpp>
+#include <fancyqlone/config.hpp>
 #include <nanobind/nanobind.h>
 
 namespace CYQLONE_NS(cyqlone) {

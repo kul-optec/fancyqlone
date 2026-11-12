@@ -1,6 +1,6 @@
 #include "hpipm.hpp"
 
-#include <cyqlone/ocp.hpp>
+#include <fancyqlone/ocp.hpp>
 #include <batmat/assume.hpp>
 #include <guanaqo/mat-view.hpp>
 #include <chrono>

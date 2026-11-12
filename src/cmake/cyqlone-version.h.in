@@ -11,7 +11,7 @@
 #define CYQLONE_COMMIT_HASH cyqlone_commit_hash
 // NOLINTEND(*-macro-to-enum)
 
-#include <cyqlone/export.h>
+#include <fancyqlone/export.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

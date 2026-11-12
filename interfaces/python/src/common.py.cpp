@@ -1,13 +1,13 @@
-#include <cyqlone/conversion.hpp>
-#include <cyqlone/cyqlone-params.hpp>
-#include <cyqlone/qpalm/backends/ocp-backend-cyqlone.hpp>
-#include <cyqlone/qpalm/detailed-stats.hpp>
-#include <cyqlone/qpalm/example-problems/platooning.hpp>
-#include <cyqlone/qpalm/example-problems/spring-mass.hpp>
-#include <cyqlone/qpalm/solver.hpp>
-#include <cyqlone/qpalm/status.hpp>
-#include <cyqlone/timing.hpp>
-#include <cyqlone/tracing.hpp>
+#include <fancyqlone/conversion.hpp>
+#include <fancyqlone/cyqlone/cyqlone-params.hpp>
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
+#include <fancyqlone/fancyqpalm/detailed-stats.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/platooning.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/spring-mass.hpp>
+#include <fancyqlone/fancyqpalm/solver.hpp>
+#include <fancyqlone/fancyqpalm/status.hpp>
+#include <fancyqlone/timing.hpp>
+#include <fancyqlone/tracing.hpp>
 #include <batmat-version.h>
 #include <cyqlone-version.h>
 

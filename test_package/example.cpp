@@ -1,9 +1,9 @@
-#include <cyqlone/cyqlone.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
 #include <cyqlone-version.h>
 #if WITH_QPALM
-#include <cyqlone/qpalm/backends/ocp-backend-cyqlone.hpp>
-#include <cyqlone/qpalm/example-problems/platooning.hpp>
-#include <cyqlone/qpalm/qpalm.hpp>
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/platooning.hpp>
+#include <fancyqlone/fancyqpalm/qpalm.hpp>
 #endif
 
 #include <iostream>

@@ -1,10 +1,10 @@
 #include <benchmark/benchmark.h>
 
-#include <cyqlone/qpalm/backends/ocp-backend-cyqlone.hpp>
-#include <cyqlone/qpalm/example-problems/centroidal-quadruped.hpp>
-#include <cyqlone/qpalm/settings.hpp>
-#include <cyqlone/qpalm/solver.hpp>
-#include <cyqlone/qpalm/status.hpp>
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/centroidal-quadruped.hpp>
+#include <fancyqlone/fancyqpalm/settings.hpp>
+#include <fancyqlone/fancyqpalm/solver.hpp>
+#include <fancyqlone/fancyqpalm/status.hpp>
 #include <CLI/CLI.hpp>
 #include <batmat/dtypes.hpp>
 #include <batmat/openmp.h>

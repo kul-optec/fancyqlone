@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cyqlone/ocp.hpp>
+#include <fancyqlone/ocp.hpp>
 #include <chrono>
 #include <memory>
 

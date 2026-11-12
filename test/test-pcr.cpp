@@ -1,7 +1,7 @@
-#include <cyqlone/config.hpp>
-#include <cyqlone/linalg.hpp>
-#include <cyqlone/matio.hpp>
-#include <cyqlone/packing.hpp>
+#include <fancyqlone/config.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/matio.hpp>
+#include <fancyqlone/packing.hpp>
 #include <batmat/dtypes.hpp>
 #include <batmat/linalg/gemm.hpp>
 #include <batmat/linalg/gemv.hpp>

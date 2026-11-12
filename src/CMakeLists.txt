@@ -8,53 +8,53 @@ endif()
 # Main library
 # ------------------------------------------------------------------------------
 add_library(cyqlone
-    "cyqlone/src/conversion.cpp"
-    "cyqlone/src/cyqlone.cpp"
-    "cyqlone/src/fan-cyqlone.cpp"
-    "cyqlone/src/serial-fan-cyqlone.cpp"
-    "cyqlone/src/cyqlone-storage.cpp"
-    "cyqlone/src/ocp.cpp"
-    "cyqlone/src/tracing.cpp"
+    "fancyqlone/src/conversion.cpp"
+    "fancyqlone/src/cyqlone/cyqlone.cpp"
+    "fancyqlone/src/fancyqlone/fancyqlone.cpp"
+    "fancyqlone/src/sequential-fancyqlone/serial-fancyqlone.cpp"
+    "fancyqlone/src/cyqlone/cyqlone-storage.cpp"
+    "fancyqlone/src/ocp.cpp"
+    "fancyqlone/src/tracing.cpp"
 )
 target_sources(cyqlone PUBLIC FILE_SET HEADERS
-    BASE_DIRS "cyqlone/include"
-    FILES "cyqlone/include/cyqlone/config.hpp"
-          "cyqlone/include/cyqlone/ocp.hpp"
-          "cyqlone/include/cyqlone/random-ocp.hpp"
-          "cyqlone/include/cyqlone/conversion.hpp"
-          "cyqlone/include/cyqlone/cyqlone-params.hpp"
-          "cyqlone/include/cyqlone/cyqlone-storage.hpp"
-          "cyqlone/include/cyqlone/neumaier.hpp"
-          "cyqlone/include/cyqlone/cyqlone.hpp"
-          "cyqlone/include/cyqlone/fan-cyqlone.hpp"
-          "cyqlone/include/cyqlone/serial-fan-cyqlone.hpp"
-          "cyqlone/include/cyqlone/tridiagonal-solver.hpp"
-          "cyqlone/include/cyqlone/implementation/indexing.tpp"
-          "cyqlone/include/cyqlone/implementation/update.tpp"
-          "cyqlone/include/cyqlone/implementation/fan-update.tpp"
-          "cyqlone/include/cyqlone/implementation/sfan-update.tpp"
-          "cyqlone/include/cyqlone/implementation/factor.tpp"
-          "cyqlone/include/cyqlone/implementation/fan-factor.tpp"
-          "cyqlone/include/cyqlone/implementation/sfan-factor.tpp"
-          "cyqlone/include/cyqlone/implementation/pcr.tpp"
-          "cyqlone/include/cyqlone/implementation/cr.tpp"
-          "cyqlone/include/cyqlone/implementation/mat-vec.tpp"
-          "cyqlone/include/cyqlone/implementation/fan-mat-vec.tpp"
-          "cyqlone/include/cyqlone/implementation/sfan-mat-vec.tpp"
-          "cyqlone/include/cyqlone/implementation/schur.tpp"
-          "cyqlone/include/cyqlone/implementation/pcg.tpp"
-          "cyqlone/include/cyqlone/implementation/riccati.tpp"
-          "cyqlone/include/cyqlone/implementation/data.tpp"
-          "cyqlone/include/cyqlone/implementation/fan-data.tpp"
-          "cyqlone/include/cyqlone/implementation/sfan-data.tpp"
-          "cyqlone/include/cyqlone/implementation/sparse.tpp"
-          "cyqlone/include/cyqlone/linalg.hpp"
-          "cyqlone/include/cyqlone/packing.hpp"
-          "cyqlone/include/cyqlone/parallel.hpp"
-          "cyqlone/include/cyqlone/timing.hpp"
-          "cyqlone/include/cyqlone/tracing.hpp"
-          "cyqlone/include/cyqlone/barrier.hpp"
-          "cyqlone/include/cyqlone/sparse.hpp"
+    BASE_DIRS "fancyqlone/include"
+    FILES "fancyqlone/include/fancyqlone/config.hpp"
+          "fancyqlone/include/fancyqlone/ocp.hpp"
+          "fancyqlone/include/fancyqlone/random-ocp.hpp"
+          "fancyqlone/include/fancyqlone/conversion.hpp"
+          "fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp"
+          "fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp"
+          "fancyqlone/include/fancyqlone/neumaier.hpp"
+          "fancyqlone/include/fancyqlone/cyqlone/cyqlone.hpp"
+          "fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp"
+          "fancyqlone/include/fancyqlone/sequential-fancyqlone/serial-fancyqlone.hpp"
+          "fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/indexing.tpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/update.tpp"
+          "fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-update.tpp"
+          "fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-update.tpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/factor.tpp"
+          "fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-factor.tpp"
+          "fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-factor.tpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/pcr.tpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/cr.tpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/mat-vec.tpp"
+          "fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-mat-vec.tpp"
+          "fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-mat-vec.tpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/schur.tpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/pcg.tpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/riccati.tpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/data.tpp"
+          "fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-data.tpp"
+          "fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-data.tpp"
+          "fancyqlone/include/fancyqlone/cyqlone/implementation/sparse.tpp"
+          "fancyqlone/include/fancyqlone/linalg.hpp"
+          "fancyqlone/include/fancyqlone/packing.hpp"
+          "fancyqlone/include/fancyqlone/parallel.hpp"
+          "fancyqlone/include/fancyqlone/timing.hpp"
+          "fancyqlone/include/fancyqlone/tracing.hpp"
+          "fancyqlone/include/fancyqlone/barrier.hpp"
+          "fancyqlone/include/fancyqlone/sparse.hpp"
 )
 target_link_libraries(cyqlone PUBLIC batmat::batmat guanaqo::guanaqo guanaqo::blas
                               PRIVATE cyqlone::warnings)
@@ -66,10 +66,10 @@ target_compile_definitions(cyqlone PUBLIC
     $<$<BOOL:${CYQLONE_WITH_ZLIB}>:CYQLONE_WITH_ZLIB>)
 if (CYQLONE_WITH_MATIO)
     find_package(matio REQUIRED)
-    target_sources(cyqlone PRIVATE "cyqlone/src/matio.cpp")
+    target_sources(cyqlone PRIVATE "fancyqlone/src/matio.cpp")
     target_sources(cyqlone PUBLIC FILE_SET HEADERS
-        BASE_DIRS "cyqlone/include"
-        FILES "cyqlone/include/cyqlone/matio.hpp")
+        BASE_DIRS "fancyqlone/include"
+        FILES "fancyqlone/include/fancyqlone/matio.hpp")
     target_link_libraries(cyqlone PUBLIC matio::matio)
 endif()
 if (CYQLONE_WITH_ZLIB)
@@ -80,32 +80,32 @@ endif()
 # ------------------------------------------------------------------------------
 if (CYQLONE_WITH_QPALM)
     add_library(qpalm
-        "qpalm/src/breakpoint.cpp"
-        "qpalm/src/qpalm.cpp"
-        "qpalm/src/status.cpp"
-        "qpalm/src/ocp-backend-cyqlone.cpp"
+        "fancyqpalm/src/breakpoint.cpp"
+        "fancyqpalm/src/qpalm.cpp"
+        "fancyqpalm/src/status.cpp"
+        "fancyqpalm/src/ocp-backend-cyqlone.cpp"
     )
     target_sources(qpalm PUBLIC FILE_SET HEADERS
-        BASE_DIRS "qpalm/include"
-        FILES "qpalm/include/cyqlone/qpalm/qpalm.hpp"
-              "qpalm/include/cyqlone/qpalm/status.hpp"
-              "qpalm/include/cyqlone/qpalm/solver.hpp"
-              "qpalm/include/cyqlone/qpalm/detailed-stats.hpp"
-              "qpalm/include/cyqlone/qpalm/settings.hpp"
-              "qpalm/include/cyqlone/qpalm/backends/ocp-backend-cyqlone.hpp"
-              "qpalm/include/cyqlone/qpalm/backends/ocp-backend-cyqlone.tpp"
-              "qpalm/include/cyqlone/qpalm/backends/backend-cyqlone/ineq-constr.tpp"
-              "qpalm/include/cyqlone/qpalm/backends/backend-cyqlone/linalg.tpp"
-              "qpalm/include/cyqlone/qpalm/backends/backend-cyqlone/linesearch.tpp"
-              "qpalm/include/cyqlone/qpalm/backends/backend-cyqlone/solve.tpp"
-              "qpalm/include/cyqlone/qpalm/implementation/algorithms.hpp"
-              "qpalm/include/cyqlone/qpalm/implementation/breakpoint.hpp"
-              "qpalm/include/cyqlone/qpalm/implementation/breakpoint.tpp"
-              "qpalm/include/cyqlone/qpalm/implementation/linesearch.tpp"
-              "qpalm/include/cyqlone/qpalm/implementation/solver.tpp"
+        BASE_DIRS "fancyqpalm/include"
+        FILES "fancyqpalm/include/fancyqlone/fancyqpalm/qpalm.hpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/status.hpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/ineq-constr.tpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linalg.tpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linesearch.tpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/solve.tpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.tpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp"
+              "fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp"
     )
     target_link_libraries(qpalm PUBLIC cyqlone::cyqlone)
-    cyqlone_configure_library(qpalm EXPORT_PREFIX cyqlone)
+    cyqlone_configure_library(qpalm EXPORT_PREFIX cyqlone HEADER_SUBDIR fancyqpalm)
     if (CYQLONE_WITH_SKA_SORT)
         find_package(ska-sort REQUIRED)
         target_link_libraries(qpalm PUBLIC ska-sort::ska-sort)
@@ -123,11 +123,11 @@ if (CYQLONE_WITH_QPALM)
         )
         target_sources(example-problems PUBLIC FILE_SET HEADERS
             BASE_DIRS "example-problems/include"
-            FILES     "example-problems/include/cyqlone/qpalm/example-problems/centroidal-quadruped.hpp"
-                      "example-problems/include/cyqlone/qpalm/example-problems/platooning.hpp"
-                      "example-problems/include/cyqlone/qpalm/example-problems/zoh.hpp"
-                      "example-problems/include/cyqlone/qpalm/example-problems/csv.hpp"
-                      "example-problems/include/cyqlone/qpalm/example-problems/spring-mass.hpp"
+            FILES     "example-problems/include/fancyqlone/fancyqpalm/example-problems/centroidal-quadruped.hpp"
+                      "example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp"
+                      "example-problems/include/fancyqlone/fancyqpalm/example-problems/zoh.hpp"
+                      "example-problems/include/fancyqlone/fancyqpalm/example-problems/csv.hpp"
+                      "example-problems/include/fancyqlone/fancyqpalm/example-problems/spring-mass.hpp"
         )
         target_link_libraries(example-problems
             PUBLIC cyqlone::cyqlone Eigen3::Eigen guanaqo::guanaqo guanaqo::blas)

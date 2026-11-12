@@ -1,0 +1,251 @@
+#pragma once
+
+#include <fancyqlone/config.hpp>
+#include <batmat/linalg/shift.hpp>
+#include <batmat/linalg/simdify.hpp>
+#include <batmat/linalg/structure.hpp>
+#include <batmat/linalg/triangular.hpp>
+#include <batmat/linalg/uview.hpp>
+#include <batmat/loop.hpp>
+#include <batmat/lut.hpp>
+#include <batmat/ops/rotate.hpp>
+#include <batmat/ops/transpose.hpp>
+#include <guanaqo/mat-view.hpp>
+#include <guanaqo/perfetto/trace.hpp>
+#include <guanaqo/trace.hpp>
+#include <type_traits>
+
+namespace cyqlone::linalg {
+
+using namespace batmat::linalg;
+
+/// @cond DETAIL
+
+namespace detail {
+
+/// Transposes the @p R × @p C matrix at @p pa with leading dimension @p lda, writing the result to
+/// @p pb with leading dimension @p ldb, writing only the @p d first columns of the result.
+template <index_t R, index_t C, class T, int RotIn, int RotOut, bool Add>
+[[gnu::always_inline]]
+inline void transpose_pack(const T *pa, index_t lda, T *pb, index_t ldb) {
+    using batmat::ops::rotl;
+    using simd = batmat::datapar::deduced_simd<T, R>;
+#ifdef __AVX2__
+    if constexpr (std::is_same_v<T, double> && R == 4 && C == 4) {
+        static constexpr auto write_out = [](simd v, T *p) {
+            v = rotl<RotOut>(v);
+            if constexpr (Add)
+                v += batmat::datapar::unaligned_load<simd>(p);
+            batmat::datapar::unaligned_store(v, p);
+        };
+        simd cols[4], shuf[4];
+        BATMAT_FULLY_UNROLLED_FOR (int i = 0; i < 4; ++i)
+            cols[i] = rotl<RotIn>(batmat::datapar::unaligned_load<simd>(pa + i * lda));
+        shuf[0] = simd{_mm256_shuffle_pd((__m256d)cols[0], (__m256d)cols[1], 0b0000)};
+        shuf[1] = simd{_mm256_shuffle_pd((__m256d)cols[0], (__m256d)cols[1], 0b1111)};
+        shuf[2] = simd{_mm256_shuffle_pd((__m256d)cols[2], (__m256d)cols[3], 0b0000)};
+        shuf[3] = simd{_mm256_shuffle_pd((__m256d)cols[2], (__m256d)cols[3], 0b1111)};
+        cols[0] = simd{_mm256_permute2f128_pd((__m256d)shuf[0], (__m256d)shuf[2], 0b00100000)};
+        write_out(cols[0], pb + 0 * ldb);
+        cols[1] = simd{_mm256_permute2f128_pd((__m256d)shuf[1], (__m256d)shuf[3], 0b00100000)};
+        write_out(cols[1], pb + 1 * ldb);
+        cols[2] = simd{_mm256_permute2f128_pd((__m256d)shuf[0], (__m256d)shuf[2], 0b00110001)};
+        write_out(cols[2], pb + 2 * ldb);
+        cols[3] = simd{_mm256_permute2f128_pd((__m256d)shuf[1], (__m256d)shuf[3], 0b00110001)};
+        write_out(cols[3], pb + 3 * ldb);
+        return;
+    }
+#endif
+    simd r[C];
+    BATMAT_FULLY_UNROLLED_FOR (int i = 0; i < C; ++i)
+        r[i] = rotl<RotIn>(batmat::datapar::unaligned_load<simd>(pa + i * lda));
+    BATMAT_FULLY_UNROLLED_FOR (int i = 0; i < R; ++i)
+        BATMAT_FULLY_UNROLLED_FOR (int j = 0; j < C; ++j)
+            if constexpr (Add)
+                pb[i * ldb + j] += r[(j + RotOut + C) % C][i];
+            else
+                pb[i * ldb + j] = r[(j + RotOut + C) % C][i];
+}
+
+using batmat::index_constant;
+
+template <class T, class D, class L, StorageOrder O>
+using scalar_view = batmat::matrix::View<T, index_t, index_constant<1>, D, L, O>;
+
+template <class TA, class Abi, int Rot, bool Add, MatrixStructure Struc = MatrixStructure::General,
+          StorageOrder OA, class TB, class DB, class LB, StorageOrder OB>
+    requires(OB == StorageOrder::ColMajor)
+inline void unpack_full(view<TA, Abi, OA> A, scalar_view<TB, DB, LB, OB> B) {
+    static_assert(std::is_const_v<TA> ^ std::is_const_v<TB>);
+    static_assert(typename decltype(B)::batch_size_type() == 1);
+    static constexpr bool Pack = std::is_const_v<TB>;
+    BATMAT_ASSERT(B.rows() == A.rows());
+    BATMAT_ASSERT(B.cols() == A.cols());
+    BATMAT_ASSERT(static_cast<index_t>(B.depth()) == static_cast<index_t>(A.depth()));
+    GUANAQO_TRACE_LINALG(GUANAQO_TRACE_STATIC_STR(Pack ? "pack" : "unpack"),
+                         A.rows() * A.cols() * A.depth());
+    using enum MatrixStructure;
+    using T                    = std::remove_const_t<TA>;
+    static constexpr index_t v = typename decltype(A)::batch_size_type();
+    static constexpr auto lut  = batmat::make_1d_lut<v>([]<index_t R>(index_constant<R>) {
+        if constexpr (Pack)
+            return transpose_pack<R + 1, v, T, 0, Rot, Add>;
+        else
+            return transpose_pack<v, R + 1, T, Rot, 0, Add>;
+    });
+    const auto cstrA           = A.col_stride() * v;
+    const auto rstrA           = A.row_stride() * v;
+    const auto cstrB           = B.col_stride();
+    const auto rstrB           = B.row_stride();
+    const auto bstrB           = B.layer_stride();
+    static_assert(rstrB == 1);
+    TA *pA           = A.data();
+    TB *pB           = B.data();
+    auto inner_count = Struc == LowerTriangular   ? std::max(A.rows(), A.cols())
+                       : Struc == UpperTriangular ? 1 + std::max(A.rows(), A.cols()) - A.cols()
+                                                  : A.rows();
+    using std::clamp;
+    for (index_t c = 0; c < A.cols(); ++c) {
+        TA *pA_ = pA;
+        TB *pB_ = pB;
+        batmat::foreach_chunked(
+            0, clamp(inner_count, index_t{0}, A.rows()), v,
+            [&](index_t) {
+                if constexpr (Pack)
+                    transpose_pack<v, v, T, 0, Rot, Add>(pB_, bstrB, pA_, rstrA);
+                else
+                    transpose_pack<v, v, T, Rot, 0, Add>(pA_, rstrA, pB_, bstrB);
+                pA_ += v * rstrA;
+                pB_ += v * rstrB;
+            },
+            [&](index_t, index_t nr) {
+                if constexpr (Pack)
+                    lut[nr - 1](pB_, bstrB, pA_, rstrA);
+                else
+                    lut[nr - 1](pA_, rstrA, pB_, bstrB);
+            });
+        pA += cstrA;
+        pB += cstrB;
+        if constexpr (Struc == LowerTriangular) {
+            --inner_count;
+            if (inner_count < A.rows()) {
+                pA += rstrA;
+                pB += rstrB;
+            }
+        } else if (Struc == UpperTriangular) {
+            ++inner_count;
+        }
+    }
+}
+
+template <class TA, class Abi, int Rot, bool Add, MatrixStructure Struc = MatrixStructure::General,
+          StorageOrder OA, class TB, class DB, class LB, StorageOrder OB>
+    requires(OB == StorageOrder::RowMajor)
+inline void unpack_full(view<TA, Abi, OA> A, scalar_view<TB, DB, LB, OB> B) {
+    return unpack_full<TA, Abi, Rot, Add, transpose(Struc)>(A.transposed(), B.transposed());
+}
+
+// TODO: mismatched storage order is currently not supported.
+
+/// @todo Test this function. Then benchmark it against unpack_full: if this variant is not much
+///       slower, we should consider using it for all unpacking so we don't need two variants.
+template <class T, class Abi, StorageOrder OA, class DB, class LB, StorageOrder OB>
+    requires(OA == OB)
+inline void unpack_partial(view<const T, Abi, OA> A, scalar_view<T, DB, LB, OB> B) {
+    if (B.depth() >= A.depth())
+        return unpack_full(A, B.first_layers(A.depth()));
+    static_assert(OA == StorageOrder::ColMajor); // TODO: row major
+    GUANAQO_TRACE_LINALG("unpack", A.rows() * A.cols() * A.depth());
+    static constexpr index_t v = A.batch_size();
+    static constexpr auto lut  = batmat::make_1d_lut<v>(
+        []<index_t R>(index_constant<R>) { return batmat::ops::transpose_dyn<v, R + 1, T>; });
+    for (index_t c = 0; c < A.cols(); ++c)
+        batmat::foreach_chunked(
+            0, A.rows(), v,
+            [&](index_t r) {
+                batmat::ops::transpose_dyn<v, v>(&A(0, r, c), v, &B(0, r, c), B.layer_stride(),
+                                                 B.depth());
+            },
+            [&](index_t r, index_t nr) {
+                lut[nr - 1](A.block(r, c, nr, 1).data, v, B.block(r, c, nr, 1).data,
+                            B.layer_stride(), B.depth());
+            });
+}
+
+} // namespace detail
+
+/// @endcond
+
+/// @addtogroup topic-linalg
+/// @{
+
+/// @name Packing and unpacking
+/// @{
+
+/// Copy a compact batch of matrices @p A to multiple scalar matrices @p B.
+/// @post A(l, r, c) == B(l, r, c) for all valid l, r, c.
+template <simdifiable VA, class VB, int Rot = 0>
+    requires(std::is_same_v<simdified_value_t<VA>, typename std::remove_cvref_t<VB>::value_type> &&
+             typename std::remove_cvref_t<VB>::batch_size_type() == 1)
+void unpack(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
+    BATMAT_ASSERT(static_cast<index_t>(A.depth()) == static_cast<index_t>(B.depth()));
+    detail::unpack_full<const simdified_value_t<VA>, simdified_abi_t<VA>, Rot, false>(
+        simdify(A).as_const(), B.first_layers(A.depth()));
+}
+
+/// Copy a compact batch of matrices @p A to multiple scalar matrices @p B.
+/// @post A(l, r, c) == B(l, r, c) for all valid l, r, c.
+template <simdifiable VA, class VB, MatrixStructure S, int Rot = 0>
+    requires(std::is_same_v<simdified_value_t<VA>, typename std::remove_cvref_t<VB>::value_type> &&
+             typename std::remove_cvref_t<VB>::batch_size_type() == 1)
+void unpack(Structured<VA, S> A, Structured<VB, S> B, with_rotate_t<Rot> = {}) {
+    detail::unpack_full<const simdified_value_t<VA>, simdified_abi_t<VA>, Rot, false, S>(
+        simdify(A.value).as_const(), B.value.first_layers(A.value.depth()));
+}
+
+/// Add a compact batch of matrices @p A to multiple scalar matrices @p B.
+template <simdifiable VA, class VB, int Rot = 0>
+    requires(std::is_same_v<simdified_value_t<VA>, typename std::remove_cvref_t<VB>::value_type> &&
+             typename std::remove_cvref_t<VB>::batch_size_type() == 1)
+void unpack_add(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
+    BATMAT_ASSERT(static_cast<index_t>(A.depth()) == static_cast<index_t>(B.depth()));
+    detail::unpack_full<const simdified_value_t<VA>, simdified_abi_t<VA>, Rot, true>(
+        simdify(A).as_const(), B.first_layers(A.depth()));
+}
+
+/// Copy multiple scalar matrices @p A to a compact batch of matrices @p B.
+/// @post A(l, r, c) == B(l, r, c) for all valid l, r, c.
+template <class VA, simdifiable VB, int Rot = 0>
+    requires(std::is_same_v<typename std::remove_cvref_t<VA>::value_type, simdified_value_t<VB>> &&
+             typename std::remove_cvref_t<VA>::batch_size_type() == 1)
+void pack(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
+    BATMAT_ASSERT(static_cast<index_t>(A.depth()) == static_cast<index_t>(B.depth()));
+    detail::unpack_full<simdified_value_t<VB>, simdified_abi_t<VB>, Rot, false>(
+        simdify(B), A.first_layers(B.depth()).as_const());
+}
+
+/// Copy multiple scalar matrices @p A to a compact batch of matrices @p B.
+/// @post A(l, r, c) == B(l, r, c) for all valid l, r, c.
+template <class VA, simdifiable VB, MatrixStructure S, int Rot = 0>
+    requires(std::is_same_v<typename std::remove_cvref_t<VA>::value_type, simdified_value_t<VB>> &&
+             typename std::remove_cvref_t<VA>::batch_size_type() == 1)
+void pack(Structured<VA, S> A, Structured<VB, S> B, with_rotate_t<Rot> = {}) {
+    detail::unpack_full<simdified_value_t<VB>, simdified_abi_t<VB>, Rot, false, S>(
+        simdify(B.value), A.value.first_layers(B.value.depth()).as_const());
+}
+
+/// Add multiple scalar matrices @p A to a compact batch of matrices @p B.
+template <class VA, simdifiable VB, int Rot = 0>
+    requires(std::is_same_v<typename std::remove_cvref_t<VA>::value_type, simdified_value_t<VB>> &&
+             typename std::remove_cvref_t<VA>::batch_size_type() == 1)
+void pack_add(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
+    BATMAT_ASSERT(static_cast<index_t>(A.depth()) == static_cast<index_t>(B.depth()));
+    detail::unpack_full<simdified_value_t<VB>, simdified_abi_t<VB>, Rot, true>(
+        simdify(B), A.first_layers(B.depth()).as_const());
+}
+
+/// @}
+
+/// @}
+
+} // namespace cyqlone::linalg

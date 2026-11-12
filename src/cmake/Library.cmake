@@ -22,19 +22,23 @@ add_library(cyqlone::common_options ALIAS common_options)
 # Takes care of configuring DLL export headers, visibility flags, warning flags,
 # SO version, C++ standard version, warning flags, and creation of an alias.
 function(cyqlone_configure_library tgt)
-    cmake_parse_arguments(CYQLONE_CFG_LIB "" "EXPORT_PREFIX" "" ${ARGN})
-    cmake_path(SET export_path "")
+    cmake_parse_arguments(CYQLONE_CFG_LIB "" "EXPORT_PREFIX;HEADER_SUBDIR" "" ${ARGN})
+    cmake_path(SET export_path "fancyqlone")
     set(name_prefix "")
+    if (DEFINED CYQLONE_CFG_LIB_HEADER_SUBDIR)
+        cmake_path(APPEND export_path ${CYQLONE_CFG_LIB_HEADER_SUBDIR})
+    elseif (DEFINED CYQLONE_CFG_LIB_EXPORT_PREFIX)
+        cmake_path(APPEND export_path ${tgt})
+    endif()
     if (DEFINED CYQLONE_CFG_LIB_EXPORT_PREFIX)
-        cmake_path(APPEND export_path ${CYQLONE_CFG_LIB_EXPORT_PREFIX})
         set(name_prefix "${CYQLONE_CFG_LIB_EXPORT_PREFIX}-")
     endif()
     set_property(TARGET ${tgt} PROPERTY OUTPUT_NAME "${name_prefix}${tgt}")
     generate_export_header(${tgt} BASE_NAME "${name_prefix}${tgt}"
-        EXPORT_FILE_NAME export/${export_path}/${tgt}/export.h)
+        EXPORT_FILE_NAME export/${export_path}/export.h)
     target_sources(${tgt} PUBLIC FILE_SET HEADERS
         BASE_DIRS   ${CMAKE_CURRENT_BINARY_DIR}/export
-        FILES       ${CMAKE_CURRENT_BINARY_DIR}/export/${export_path}/${tgt}/export.h)
+        FILES       ${CMAKE_CURRENT_BINARY_DIR}/export/${export_path}/export.h)
     set_target_properties(${tgt} PROPERTIES SOVERSION ${PROJECT_VERSION})
     cyqlone_configure_visibility(${tgt})
     target_compile_features(${tgt} PUBLIC cxx_std_20)

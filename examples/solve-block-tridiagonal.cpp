@@ -1,5 +1,5 @@
-#include <cyqlone/cyqlone.hpp>
-#include <cyqlone/packing.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/packing.hpp>
 #include <batmat/matrix/matrix.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>
 #include <guanaqo/print.hpp>
@@ -9,7 +9,7 @@
 #include <string>
 
 #if CYQLONE_WITH_MATIO
-#include <cyqlone/matio.hpp>
+#include <fancyqlone/matio.hpp>
 #endif
 
 using cyqlone::index_t;                                   // Integer type for indices

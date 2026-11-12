@@ -17,10 +17,10 @@ add_executable(test-pcr "test-pcr.cpp")
 target_link_libraries(test-pcr PRIVATE cyqlone::cyqlone cyqlone::warnings)
 add_executable(tests
     "cyqlone/test-cyqlone.cpp"
-    "cyqlone/test-cyqlone-cont.cpp"
+    "fancyqlone/test-fancyqlone.cpp"
     # "cyqlone/test-riccati.cpp"
-    # "cyqlone/test-cyqlone-cont-mat.cpp"
-    "cyqlone/test-cyqlone-cont-spmd-trace.cpp"
+    # "fancyqlone/test-fancyqlone-mat.cpp"
+    "fancyqlone/test-fancyqlone-spmd-trace.cpp"
     "cyqlone/test-tricyqle.cpp"
     "test-barrier.cpp"
     "test-linalg.cpp"
@@ -39,7 +39,7 @@ if (TARGET cyqlone::qpalm)
 endif()
 if (TARGET cyqlone::qpalm AND TARGET cyqlone::example-problems)
     find_package(Eigen3 REQUIRED)
-    target_sources(tests PRIVATE "qpalm/test-qpalm-ocp.cpp" "qpalm/test-qpalm-cont.cpp")
+    target_sources(tests PRIVATE "qpalm/test-qpalm-ocp.cpp" "qpalm/test-fanqpalm.cpp")
     target_link_libraries(tests PRIVATE cyqlone::qpalm cyqlone::example-problems Eigen3::Eigen)
     find_package(QPALM QUIET OPTIONAL_COMPONENTS cxx)
     if (TARGET QPALM::qpalm_cxx)

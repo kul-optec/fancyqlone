@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include <cyqlone/linalg.hpp>
-#include <cyqlone/packing.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/packing.hpp>
 #include <batmat/linalg/triangular.hpp>
 
 #include <tuple>

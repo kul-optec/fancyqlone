@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
-#include <cyqlone/config.hpp>
-#include <cyqlone/cyqlone.hpp>
-#include <cyqlone/linalg.hpp>
-#include <cyqlone/packing.hpp>
+#include <fancyqlone/config.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/packing.hpp>
 #include <batmat/config.hpp>
 #include <batmat/matrix/matrix.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>

@@ -1,6 +1,6 @@
-#include <cyqlone/conversion.hpp>
-#include <cyqlone/qpalm/example-problems/platooning.hpp>
-#include <cyqlone/qpalm/example-problems/zoh.hpp>
+#include <fancyqlone/conversion.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/platooning.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/zoh.hpp>
 #include <guanaqo/eigen/view.hpp>
 
 #include <algorithm>

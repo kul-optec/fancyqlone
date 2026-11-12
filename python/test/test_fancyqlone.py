@@ -2,7 +2,7 @@ import numpy as np
 import numpy.linalg as la
 import pytest
 
-from cyqlone import (
+from fancyqlone import (
     CyQPALMBackendSettings,
     FanCyQPALM,
     FanOCP,
@@ -178,7 +178,7 @@ def test_fancyqlone_scalar_override(monkeypatch: pytest.MonkeyPatch):
 def test_fancyqlone_validates_problem_and_settings():
     with pytest.raises(ValueError, match="at least one"):
         FanOCP([])
-    with pytest.raises(TypeError, match="cyqlone.OCP"):
+    with pytest.raises(TypeError, match="fancyqlone.OCP"):
         FanOCP([object()])
     with pytest.raises(ValueError, match="identical dimensions"):
         FanOCP([create_branch(1.0, 7), create_branch(1.0, 8)])

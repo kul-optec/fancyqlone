@@ -6,16 +6,16 @@
 #include <guanaqo/trace.hpp>
 #include <fstream>
 
-#include <cyqlone/qpalm/backends/ocp-backend-cyqlone.hpp>
-#include <cyqlone/qpalm/example-problems/csv.hpp>
-#include <cyqlone/qpalm/example-problems/platooning.hpp>
-#include <cyqlone/qpalm/solver.hpp>
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/csv.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/platooning.hpp>
+#include <fancyqlone/fancyqpalm/solver.hpp>
 #include <cyqlone-version.h>
 
-#include <cyqlone/conversion.hpp>
-#include <cyqlone/cyqlone-storage.hpp>
+#include <fancyqlone/conversion.hpp>
+#include <fancyqlone/cyqlone/cyqlone-storage.hpp>
 #if CYQLONE_WITH_MATIO
-#include <cyqlone/matio.hpp>
+#include <fancyqlone/matio.hpp>
 #endif
 
 using cyqlone::index_t;
@@ -149,7 +149,7 @@ TEST(QPALM, cyqloneSpringsMasses) try {
 }
 
 #if 0 // TODO: support elimination of x0 using LinearOCPSparseQP
-#include <cyqlone/qpalm/backends/ocp-backend-cyqlone.tpp>
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp>
 
 #include <guanaqo/eigen/span.hpp>
 #include <guanaqo/eigen/view.hpp>

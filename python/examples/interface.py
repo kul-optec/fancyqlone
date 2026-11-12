@@ -4,7 +4,7 @@ import time
 
 import numpy as np
 
-from cyqlone import (
+from fancyqlone import (
     CyQPALMBackendSettings,
     FanCyQPALM,
     FanOCP,

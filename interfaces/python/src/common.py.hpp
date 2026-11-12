@@ -1,9 +1,9 @@
 #pragma once
 
-#include <cyqlone/config.hpp>
-#include <cyqlone/matio.hpp>
-#include <cyqlone/ocp.hpp>
-#include <cyqlone/sparse.hpp>
+#include <fancyqlone/config.hpp>
+#include <fancyqlone/matio.hpp>
+#include <fancyqlone/ocp.hpp>
+#include <fancyqlone/sparse.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/matrix/matrix.hpp>
 

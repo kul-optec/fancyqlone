@@ -1,0 +1,310 @@
+#include <fancyqlone/cyqlone/cyqlone-storage.hpp>
+#include <batmat/assume.hpp>
+#include <batmat/config.hpp>
+#include <batmat/linalg/copy.hpp>
+#include <batmat/linalg/copy.hpp>
+
+#include <batmat/linalg/gemv.hpp>
+#include <guanaqo/blas/hl-blas-interface.hpp>
+#include <guanaqo/print.hpp>
+#include <iostream>
+
+namespace cyqlone {
+
+// TODO: make member function to reuse Ju0 and ny_0?
+template <class T>
+auto CyqloneStorage<T>::reconstruct_ineq_multipliers(std::span<const value_type> y_compressed) const
+    -> std::vector<value_type> {
+    std::vector<value_type> y(static_cast<size_t>(N_horiz * ny + ny_N));
+    reconstruct_ineq_multipliers(y_compressed, y);
+    return y;
+}
+
+template <class T>
+void CyqloneStorage<T>::reconstruct_ineq_multipliers(std::span<const value_type> y_compressed,
+                                                     std::span<value_type> y) const {
+    BATMAT_ASSERT(static_cast<index_t>(y.size()) == N_horiz * ny + ny_N);
+    BATMAT_ASSERT(static_cast<index_t>(y_compressed.size()) == (N_horiz - 1) * ny + ny_0 + ny_N);
+    for (index_t r = 0, j = 0; r < ny; ++r)
+        if (Ju0[r])
+            y[r] = y_compressed[j++];
+        else
+            y[r] = 0;
+    std::ranges::copy(y_compressed.subspan(ny_0), y.begin() + ny);
+    // TODO: copy_reverse to allow performing everything in-place
+}
+
+template <class T>
+auto CyqloneStorage<T>::reconstruct_solution(const LinearOCPStorage &ocp,
+                                             std::span<const value_type> ux_compressed,
+                                             std::span<const value_type> y_compressed,
+                                             std::span<const value_type> λ_compressed) const
+    -> Solution {
+    Solution sol;
+    sol.solution.resize(static_cast<size_t>(N_horiz * (nu + nx) + nx));
+    sol.inequality_multipliers.resize(static_cast<size_t>(N_horiz * ny + ny_N));
+    sol.equality_multipliers.resize(static_cast<size_t>(N_horiz * nx + nx));
+    reconstruct_ineq_multipliers(y_compressed, sol.inequality_multipliers);
+    std::ranges::copy_n(ocp.b(0).data, nx, sol.solution.begin()); // x0
+    std::ranges::copy(ux_compressed, sol.solution.begin() + nx);
+    std::ranges::copy(λ_compressed, sol.equality_multipliers.begin() + nx);
+    using MatrixView = guanaqo::MatrixView<value_type, index_t>;
+    MatrixView λ0{{.data = sol.equality_multipliers.data(), .rows = nx, .cols = 1}},
+        λ1{{.data = sol.equality_multipliers.data() + nx, .rows = nx, .cols = 1}},
+        x0{{.data = sol.solution.data(), .rows = nx, .cols = 1}},
+        u0{{.data = sol.solution.data() + nx, .rows = nu, .cols = 1}};
+    λ0 = ocp.q(0);
+    guanaqo::blas::xsymv_L(value_type{1}, ocp.Q(0), x0, value_type{1}, λ0);
+    guanaqo::blas::xgemv_T(value_type{1}, ocp.S(0), u0, value_type{1}, λ0);
+    guanaqo::blas::xgemv_T(value_type{1}, ocp.A(0), λ1, value_type{1}, λ0);
+    if (ny > 0) {
+        auto y0 = MatrixView{{.data = sol.inequality_multipliers.data(), .rows = ny, .cols = 1}};
+        guanaqo::blas::xgemv_T(value_type{1}, ocp.C(0), y0, value_type{1}, λ0);
+    }
+    return sol;
+}
+
+template <class T>
+auto CyqloneStorage<T>::compute_kkt_error(const LinearOCPStorage &ocp,
+                                          std::span<const value_type> ux_compressed,
+                                          std::span<const value_type> y_compressed,
+                                          std::span<const value_type> λ_compressed) const
+    -> KKTError {
+    return ocp.compute_kkt_error(
+        reconstruct_solution(ocp, ux_compressed, y_compressed, λ_compressed));
+}
+
+template <class T>
+index_t CyqloneStorage<T>::count_constr_0(const LinearOCPStorage &ocp, std::vector<bool> &Ju0) {
+    const auto [N, nx, nu, ny, ny_N] = ocp.dim;
+    const auto nJu0                  = static_cast<index_t>(Ju0.size());
+    BATMAT_ASSUME(nJu0 == ny);
+    for (index_t c = 0; c < nu; ++c)
+        for (index_t r = 0; r < ny; ++r)
+            Ju0[r] = Ju0[r] || ocp.D(0)(r, c) != 0;
+    return static_cast<index_t>(std::ranges::count(Ju0, true));
+}
+
+template <class T>
+void CyqloneStorage<T>::update(const LinearOCPStorage &ocp) {
+    const auto ny_0_ = count_constr_0(ocp, Ju0);
+    BATMAT_ASSERT(ny_0_ <= ny_0);
+    update_impl(ocp);
+}
+
+template <class T>
+void CyqloneStorage<T>::update_impl(const LinearOCPStorage &ocp) {
+    const auto N = N_horiz;
+    // H₀ = [ R₀ 0 ]
+    //      [ 0  Qₙ]
+    data_H(0).top_left(nu, nu)     = ocp.R(0);
+    data_H(0).bottom_right(nx, nx) = ocp.Q(N);
+    data_H(0).bottom_left(nx, nu).set_constant(0);
+    data_H(0).top_right(nu, nx).set_constant(0);
+    // F₀ = [ B₀ 0 ]
+    data_F(0).left_cols(nu) = ocp.B(0);
+    data_F(0).right_cols(nx).set_constant(0);
+    // G₀ = [ D₀ 0 ]  ny_0
+    //      [ 0  Cₙ]  ny_N
+    data_G0N(0).bottom_left(ny_N, nu).set_constant(0);
+    data_G0N(0).top_right(ny_0, nx).set_constant(0);
+    index_t j = 0;
+    for (index_t r = 0; r < ny; ++r) {
+        if (Ju0[r]) {
+            BATMAT_ASSUME(j < ny_0);
+            data_G0N(0).block(j, 0, 1, nu) = ocp.D(0).middle_rows(r, 1);
+            value_type t                   = 0;
+            for (index_t c = 0; c < nx; ++c) // lb - C₀ x₀
+                t += ocp.C(0)(r, c) * ocp.b(0)(c, 0);
+            data_lb0N(0, j, 0) = ocp.b_min(0)(r, 0) - t;
+            data_ub0N(0, j, 0) = ocp.b_max(0)(r, 0) - t;
+            indices_G0[j]      = r;
+            ++j;
+        }
+    }
+    data_G0N(0).block(j, 0, ny_0 - j, nu).set_constant(0);
+    data_G0N(0).bottom_right(ny_N, nx) = ocp.C(N);
+    data_lb0N(0).bottom_rows(ny_N)     = ocp.b_min().bottom_rows(ny_N);
+    data_ub0N(0).bottom_rows(ny_N)     = ocp.b_max().bottom_rows(ny_N);
+    // c̃₀ = c₀ + A₀ x₀      (b_eq = [x₀, c₀, ... cₙ₋₁])
+    data_c(0) = ocp.b(1);
+    for (index_t r = 0; r < nx; ++r)
+        for (index_t c = 0; c < nx; ++c)
+            data_c(0, r, 0) += ocp.A(0)(r, c) * ocp.b(0)(c, 0);
+    // r̃₀ = r₀ + S₀ x₀
+    data_rq(0).bottom_rows(nx) = ocp.q(N);
+    data_rq(0).top_rows(nu)    = ocp.r(0);
+    for (index_t r = 0; r < nu; ++r)
+        for (index_t c = 0; c < nx; ++c)
+            data_rq(0, r, 0) += ocp.S(0)(r, c) * ocp.b(0)(c, 0);
+    for (index_t i = 1; i < N; ++i) {
+        data_H(i).top_left(nu, nu)     = ocp.R(i);
+        batmat::linalg::copy(ocp.S(i).transposed(), data_H(i).bottom_left(nx, nu));
+        data_H(i).top_right(nu, nx)    = ocp.S(i);
+        data_H(i).bottom_right(nx, nx) = ocp.Q(i);
+        data_F(i).left_cols(nu)        = ocp.B(i);
+        data_F(i).right_cols(nx)       = ocp.A(i);
+        data_G(i - 1).left_cols(nu)    = ocp.D(i);
+        data_G(i - 1).right_cols(nx)   = ocp.C(i);
+        data_lb(i - 1)                 = ocp.b_min(i);
+        data_ub(i - 1)                 = ocp.b_max(i);
+        data_c(i)                      = ocp.b(i + 1);
+        data_rq(i).bottom_rows(nx)     = ocp.q(i);
+        data_rq(i).top_rows(nu)        = ocp.r(i);
+    }
+}
+
+template <class T>
+CyqloneStorage<T> CyqloneStorage<T>::build(const LinearOCPStorage &ocp, index_t ny_0) {
+    const auto [N, nx, nu, ny, ny_N] = ocp.dim;
+    // Count the number of input constraints in the first stage
+    std::vector<bool> Ju0(ny);
+    const auto ny_0_ = count_constr_0(ocp, Ju0);
+    if (ny_0 < 0)
+        ny_0 = ny_0_;
+    else if (ny_0 == 0) {
+        ny_0 = 0;
+        Ju0.assign(ny, false);
+    } else
+        BATMAT_ASSERT(ny_0_ <= ny_0);
+    CyqloneStorage<T> res{.N_horiz = N,
+                          .nx      = nx,
+                          .nu      = nu,
+                          .ny      = ny,
+                          .ny_0    = ny_0,
+                          .ny_N    = ny_N,
+                          .Ju0     = std::move(Ju0)};
+    res.update_impl(ocp);
+    return res;
+}
+namespace la = cyqlone::linalg;
+
+template <class T>
+void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
+    num_branches = focp.num_branches();
+    ny_0 =0;
+    // Check that all OCPs in the fan have the same dimensions
+    for (index_t i = 0; i < num_branches; ++i) {
+        if (focp.ocps[i].dim.nu != focp.ocps[0].dim.nu) {
+            throw std::invalid_argument("All OCPs in the fan must have the same input dimension");
+        }
+        ny_0 += focp.ocps[i].D(0).rows;
+
+    }
+    nu = focp.ocps[0].dim.nu;
+    branches.resize(num_branches);
+    Bs.resize(num_branches);
+    R0 = matrix{{.rows = nu, .cols = nu}};
+    r0 = matrix{{.rows = nu, .cols = 1}};
+    D0      = matrix{{.rows = ny_0, .cols = nu}};
+    b_min_0 = matrix{{.rows = ny_0, .cols = 1}};
+    b_max_0 = matrix{{.rows = ny_0, .cols = 1}};
+    R0.set_constant(0);
+    r0.set_constant(0);
+    index_t ny_offset = 0;
+    for (index_t i = 0; i < num_branches; ++i) {
+        index_t ny_0i = focp.ocps[i].D(0).rows;
+        auto &cocp = branches[i] = CyqloneStorage<T>::build(focp.ocps[i], 0);
+        Bs[i]                    = matrix{{.rows = focp.ocps[i].dim.nx, .cols = nu}};
+        la::copy(cocp.data_F(0).left_cols(nu), Bs[i](0));
+        // Introduce an unused variable u(0) in each Cyqlone block
+        cocp.data_F(0).left_cols(nu).set_constant(0);    // B(0) = 0
+        cocp.data_H(0).top_left(nu, nu).set_constant(0); // R(0) = I
+        cocp.data_H(0).top_left(nu, nu).set_diagonal(1); //
+        la::add(r0(0),cocp.data_rq(0).top_rows(nu));
+        la::add(R0(0), focp.ocps[i].R(0));
+
+        la::copy(focp.ocps[i].D(0), D0.middle_rows(ny_offset,ny_0i));
+        la::copy(focp.ocps[i].b_min(0), b_min_0.middle_rows(ny_offset, ny_0i));
+        la::copy(focp.ocps[i].b_max(0), b_max_0.middle_rows(ny_offset, ny_0i));
+        la::gemv_sub(focp.ocps[i].C(0), focp.ocps[i].b(0), b_min_0.middle_rows(ny_offset, ny_0i));
+        la::gemv_sub(focp.ocps[i].C(0), focp.ocps[i].b(0), b_max_0.middle_rows(ny_offset, ny_0i));
+        
+        ny_offset += ny_0i;
+        cocp.data_rq(0).top_rows(nu).set_constant(0); // r(0) = 0
+    }
+
+}
+template <class T>
+void FanCyqloneStorage<T>::update(const FanOCPStorage &focp) {
+
+    update_impl(focp);
+}
+template <class T>
+FanCyqloneStorage<T> FanCyqloneStorage<T>::build(const FanOCPStorage &focp, index_t ny_0) {
+
+    FanCyqloneStorage res;
+    res.ny_0 = ny_0;
+
+    res.update_impl(focp);
+    return res;
+};
+template <class T>
+auto FanCyqloneStorage<T>::reconstruct_solution(const FanOCPStorage &ocp,
+                                             std::span<const value_type> ux_compressed,
+                                             std::span<const value_type> y_compressed,
+                                             std::span<const value_type> λ_compressed) const
+    -> Solution {
+    Solution sol;
+    index_t offset_ux = 0;
+    index_t offset_y  = 0;
+    index_t offset_λ  = 0;
+    index_t ny_offset = 0;
+    sol.solutions.resize(num_branches);
+    for (index_t b = 0; b < num_branches; ++b) {
+        index_t ny_0i = ocp.ocps[b].D(0).rows;
+        const auto &cocp = branches[b];
+        sol.solutions[b].solution.resize(static_cast<size_t>(cocp.N_horiz * (cocp.nu + cocp.nx) + cocp.nx));
+        sol.solutions[b].inequality_multipliers.resize(static_cast<size_t>((cocp.N_horiz-1) * (cocp.ny) + cocp.ny_N+ny_0i));
+        sol.solutions[b].equality_multipliers.resize(static_cast<size_t>(cocp.N_horiz * cocp.nx + cocp.nx));
+        const index_t ux_size = static_cast<std::size_t>((cocp.N_horiz-1) * (cocp.nu + cocp.nx)+cocp.nx);
+        const index_t y_size = static_cast<std::size_t>((cocp.N_horiz-1) * (cocp.ny) + cocp.ny_N);
+        const index_t λ_size = static_cast<std::size_t>(cocp.N_horiz * cocp.nx);
+        std::ranges::copy_n(ocp.ocps[b].b(0).data, cocp.nx, sol.solutions[b].solution.begin()); // x0
+        std::ranges::copy(ux_compressed.subspan(0, cocp.nu), sol.solutions[b].solution.begin() + cocp.nx); //u0
+        std::ranges::copy(ux_compressed.subspan(cocp.nu+offset_ux, ux_size), sol.solutions[b].solution.begin() + cocp.nx + cocp.nu); // x1u1..xN-1uN-1xN
+        std::ranges::copy(λ_compressed.subspan(offset_λ, λ_size), sol.solutions[b].equality_multipliers.begin()+cocp.nx);
+        std::ranges::copy(y_compressed.subspan(ny_0+offset_y, y_size), sol.solutions[b].inequality_multipliers.begin()+ny_0i);
+        std::ranges::copy(y_compressed.subspan(ny_offset,ny_0i), sol.solutions[b].inequality_multipliers.begin());      
+        using MatrixView = guanaqo::MatrixView<value_type, index_t>;
+        MatrixView λ0{{.data = sol.solutions[b].equality_multipliers.data(), .rows = cocp.nx, .cols = 1}},
+        λ1{{.data = sol.solutions[b].equality_multipliers.data() + cocp.nx, .rows = cocp.nx, .cols = 1}},
+        x0{{.data = sol.solutions[b].solution.data(), .rows = cocp.nx, .cols = 1}},
+        u0{{.data = sol.solutions[b].solution.data() + cocp.nx, .rows = cocp.nu, .cols = 1}};
+        λ0 = ocp.ocps[b].q(0);
+        guanaqo::blas::xsymv_L(value_type{1}, ocp.ocps[b].Q(0), x0, value_type{1}, λ0);
+        guanaqo::blas::xgemv_T(value_type{1}, ocp.ocps[b].S(0), u0, value_type{1}, λ0);
+        guanaqo::blas::xgemv_T(value_type{1}, ocp.ocps[b].A(0), λ1, value_type{1}, λ0);
+        if (ny_0i > 0) {
+            MatrixView y0{{.data = sol.solutions[b].inequality_multipliers.data(),
+                           .rows = ny_0i,
+                           .cols = 1}};
+            guanaqo::blas::xgemv_T(value_type{1}, ocp.ocps[b].C(0), y0, value_type{1}, λ0);
+        }
+        offset_y += y_size;
+        offset_λ += λ_size;
+        offset_ux += ux_size;
+        ny_offset += ny_0i;
+    }
+
+    return sol;
+}
+
+template <class T>
+auto FanCyqloneStorage<T>::compute_kkt_error(const FanOCPStorage &ocp,
+                                          std::span<const value_type> ux_compressed,
+                                          std::span<const value_type> y_compressed,
+                                          std::span<const value_type> λ_compressed) const
+    -> KKTError {
+    return ocp.compute_kkt_error(
+        reconstruct_solution(ocp, ux_compressed, y_compressed, λ_compressed));
+}
+#if 0 // TODO: make LinearOCPStorage templated
+#define CYQLONE_INSTANTIATE_CYQLONE_STORAGE(T) template struct CyqloneStorage<T>;
+BATMAT_FOREACH_DTYPE(CYQLONE_INSTANTIATE_CYQLONE_STORAGE)
+#else
+template struct CyqloneStorage<real_t>;
+template struct FanCyqloneStorage<real_t>;
+#endif
+
+} // namespace cyqlone

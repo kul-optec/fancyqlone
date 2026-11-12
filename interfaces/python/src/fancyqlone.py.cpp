@@ -1,7 +1,7 @@
-#include <cyqlone/cyqlone-storage.hpp>
-#include <cyqlone/fan-cyqlone.hpp>
-#include <cyqlone/qpalm/backends/ocp-backend-cyqlone.hpp>
-#include <cyqlone/qpalm/solver.hpp>
+#include <fancyqlone/cyqlone/cyqlone-storage.hpp>
+#include <fancyqlone/fancyqlone/fancyqlone.hpp>
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
+#include <fancyqlone/fancyqpalm/solver.hpp>
 
 #include <batmat/config.hpp>
 

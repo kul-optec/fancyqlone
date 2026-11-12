@@ -1,7 +1,7 @@
-#include <cyqlone/cyqlone-storage.hpp>
-#include <cyqlone/cyqlone.hpp>
-#include <cyqlone/linalg.hpp>
-#include <cyqlone/ocp.hpp>
+#include <fancyqlone/cyqlone/cyqlone-storage.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/ocp.hpp>
 #include <batmat/dtypes.hpp>
 #include <iostream>
 #include <print>
@@ -9,7 +9,7 @@
 #include <string>
 
 #if CYQLONE_WITH_MATIO
-#include <cyqlone/matio.hpp>
+#include <fancyqlone/matio.hpp>
 #endif
 
 using cyqlone::index_t; // Integer type for indices

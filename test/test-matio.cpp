@@ -2,8 +2,8 @@
 #include <cstdio>
 #include <filesystem>
 
-#include <cyqlone/matio.hpp>
-#include <cyqlone/ocp.hpp>
+#include <fancyqlone/matio.hpp>
+#include <fancyqlone/ocp.hpp>
 
 using cyqlone::index_t;
 using cyqlone::real_t;

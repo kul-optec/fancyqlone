@@ -6,9 +6,9 @@
 #include <vector>
 using guanaqo::as_span;
 
-#include <cyqlone/conversion.hpp>
-#include <cyqlone/qpalm/example-problems/csv.hpp>
-#include <cyqlone/qpalm/example-problems/platooning.hpp>
+#include <fancyqlone/conversion.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/csv.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/platooning.hpp>
 using cyqlone::index_t;
 using cyqlone::real_t;
 namespace qp = cyqlone::qpalm;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cyqlone/linalg.hpp>
+#include <fancyqlone/linalg.hpp>
 #include <batmat/linalg/gemv.hpp>
 #include <batmat/linalg/potrf.hpp>
 #include <batmat/linalg/trsm.hpp>

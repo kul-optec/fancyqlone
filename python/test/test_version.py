@@ -1,6 +1,6 @@
-import cyqlone
+import fancyqlone
 
 
 def test_version():
-    assert cyqlone.__version__ == cyqlone.__c_version__
-    cyqlone.build_time
+    assert fancyqlone.__version__ == fancyqlone.__c_version__
+    fancyqlone.build_time

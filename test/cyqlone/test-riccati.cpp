@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
 
-#include <cyqlone/barrier.hpp>
-#include <cyqlone/cyqlone.hpp>
-#include <cyqlone/linalg.hpp>
-#include <cyqlone/ocp.hpp>
-#include <cyqlone/packing.hpp>
-#include <cyqlone/random-ocp.hpp>
-#include <cyqlone/tracing.hpp>
-#include <cyqlone/tridiagonal-solver.hpp>
+#include <fancyqlone/barrier.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/ocp.hpp>
+#include <fancyqlone/packing.hpp>
+#include <fancyqlone/random-ocp.hpp>
+#include <fancyqlone/tracing.hpp>
+#include <fancyqlone/cyqlone/tridiagonal-solver.hpp>
 #include <batmat/linalg/gemm.hpp>
 #include <batmat/linalg/potrf.hpp>
 #include <batmat/linalg/triangular.hpp>

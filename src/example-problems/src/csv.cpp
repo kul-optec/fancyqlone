@@ -1,4 +1,4 @@
-#include <cyqlone/qpalm/example-problems/csv.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/csv.hpp>
 #include <guanaqo/eigen/view.hpp>
 #include <guanaqo/io/csv.hpp>
 

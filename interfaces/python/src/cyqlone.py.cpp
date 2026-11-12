@@ -1,9 +1,9 @@
-#include <cyqlone/config.hpp>
-#include <cyqlone/cyqlone-storage.hpp>
-#include <cyqlone/cyqlone.hpp>
-#include <cyqlone/linalg.hpp>
-#include <cyqlone/qpalm/backends/ocp-backend-cyqlone.hpp>
-#include <cyqlone/qpalm/solver.hpp>
+#include <fancyqlone/config.hpp>
+#include <fancyqlone/cyqlone/cyqlone-storage.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
+#include <fancyqlone/fancyqpalm/solver.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/config.hpp>
 #include <batmat/linalg/simdify.hpp> // TODO: remove

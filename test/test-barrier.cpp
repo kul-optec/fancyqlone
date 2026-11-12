@@ -1,4 +1,4 @@
-#include <cyqlone/barrier.hpp>
+#include <fancyqlone/barrier.hpp>
 #include <gtest/gtest.h>
 #include <atomic>
 #include <thread>

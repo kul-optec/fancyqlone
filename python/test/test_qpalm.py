@@ -1,5 +1,5 @@
-from cyqlone import OCP, CyQPALMBackendSettings, Settings, LinearOCPSparseQP, SolverStatus
-from cyqlone.cyqlone.simd4 import QPALM_Cyqlone
+from fancyqlone import OCP, CyQPALMBackendSettings, Settings, LinearOCPSparseQP, SolverStatus
+from fancyqlone.cyqlone.simd4 import QPALM_Cyqlone
 import numpy as np
 import numpy.linalg as la
 import pytest
