@@ -95,3 +95,5 @@ docs/source/fancyqlone.rst
 /benchmarks/fancyqpalm/visualization/
 /benchmarks/fancyqpalm/quadruped-closed-loop/
 benchmarks/fancyqpalm/conan.json
+benchmarks/fancyqpalm/CXX-DetectStdlib.h.html
+remove.sh
