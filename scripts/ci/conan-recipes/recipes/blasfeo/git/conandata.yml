@@ -5,3 +5,4 @@ sources:
 patches:
   "tttapa.20260119":
     - patch_file: "patches/0003-sign-mask-section-size.patch"
+    - patch_file: "patches/0004-avx512-constant-section-size.patch"

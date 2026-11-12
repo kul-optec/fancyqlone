@@ -64,7 +64,7 @@ class HyhoundRecipe(ConanFile):
 
     def requirements(self):
         self.requires(
-            "guanaqo/[>=1.0.0-alpha.22 <1.0.0-alpha.29, include_prerelease]",
+            "guanaqo/[>=1.0.0-alpha.22 <1.0.0-alpha.30, include_prerelease]",
             transitive_headers=True,
             transitive_libs=True,
         )
@@ -75,7 +75,7 @@ class HyhoundRecipe(ConanFile):
         else:
             self.test_requires("eigen/[~3.4 || ~5.0]")
         if self.options.with_benchmarks:
-            self.requires("benchmark/1.9.4")
+            self.requires("benchmark/1.9.5")
 
     def build_requirements(self):
         self.test_requires("gtest/1.17.0")

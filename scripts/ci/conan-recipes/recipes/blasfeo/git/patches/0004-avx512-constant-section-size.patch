@@ -1,0 +1,39 @@
+AVX-512 kernels load 64-byte constants. Keep each constant in a single
+SHF_MERGE entry so linkers cannot deduplicate its 32-byte halves independently.
+
+diff --git a/kernel/avx512/kernel_dgemm_16x8_lib8.S b/kernel/avx512/kernel_dgemm_16x8_lib8.S
+--- a/kernel/avx512/kernel_dgemm_16x8_lib8.S
++++ b/kernel/avx512/kernel_dgemm_16x8_lib8.S
+@@ -16269,1 +16269,1 @@
+-	.section	.rodata.cst32,"aM",@progbits,32
++	.section	.rodata.cst64,"aM",@progbits,64
+diff --git a/kernel/avx512/kernel_dgemm_24x8_lib8.S b/kernel/avx512/kernel_dgemm_24x8_lib8.S
+--- a/kernel/avx512/kernel_dgemm_24x8_lib8.S
++++ b/kernel/avx512/kernel_dgemm_24x8_lib8.S
+@@ -8096,1 +8096,1 @@
+-	.section	.rodata.cst32,"aM",@progbits,32
++	.section	.rodata.cst64,"aM",@progbits,64
+diff --git a/kernel/avx512/kernel_dgemm_8x8_lib8.S b/kernel/avx512/kernel_dgemm_8x8_lib8.S
+--- a/kernel/avx512/kernel_dgemm_8x8_lib8.S
++++ b/kernel/avx512/kernel_dgemm_8x8_lib8.S
+@@ -14704,1 +14704,1 @@
+-	.section	.rodata.cst32,"aM",@progbits,32
++	.section	.rodata.cst64,"aM",@progbits,64
+diff --git a/kernel/avx512/kernel_dgemv_8_lib8.S b/kernel/avx512/kernel_dgemv_8_lib8.S
+--- a/kernel/avx512/kernel_dgemv_8_lib8.S
++++ b/kernel/avx512/kernel_dgemv_8_lib8.S
+@@ -5061,1 +5061,1 @@
+-	.section	.rodata.cst32,"aM",@progbits,32
++	.section	.rodata.cst64,"aM",@progbits,64
+diff --git a/kernel/avx512/kernel_dgelqf_lib8.S b/kernel/avx512/kernel_dgelqf_lib8.S
+--- a/kernel/avx512/kernel_dgelqf_lib8.S
++++ b/kernel/avx512/kernel_dgelqf_lib8.S
+@@ -8503,1 +8503,1 @@
+-	.section	.rodata.cst32,"aM",@progbits,32
++	.section	.rodata.cst64,"aM",@progbits,64
+diff --git a/kernel/avx512/kernel_dpack_lib8.S b/kernel/avx512/kernel_dpack_lib8.S
+--- a/kernel/avx512/kernel_dpack_lib8.S
++++ b/kernel/avx512/kernel_dpack_lib8.S
+@@ -5439,1 +5439,1 @@
+-	.section	.rodata.cst32,"aM",@progbits,32
++	.section	.rodata.cst64,"aM",@progbits,64

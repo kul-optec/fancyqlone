@@ -1,4 +1,10 @@
 sources:
+  "0.0.26":
+    url: "https://github.com/tttapa/batmat/archive/refs/tags/0.0.26.zip"
+    sha256: "96fb994c2d1951194d2fdf22dab3f87bfd9acd10aa17b4db19c99ae38f3b9739"
+  "0.0.25":
+    url: "https://github.com/tttapa/batmat/archive/refs/tags/0.0.25.zip"
+    sha256: "6fabb91aa9b7408d6228ff27b1d81086cb0e60496b35dc2163e831af7a7af229"
   "0.0.24":
     url: "https://github.com/tttapa/batmat/archive/refs/tags/0.0.24.zip"
     sha256: "4f6e225f735e8a7cac5737976397c8ae006961e5c021364c230986665246eed6"
@@ -48,6 +54,8 @@ sources:
     url: "https://github.com/tttapa/batmat/archive/refs/tags/0.0.9.zip"
     sha256: "99408ed99c94ecfb63ed3ed58e940cd143c27fba89294616a2bcd91be13ca39c"
 commits:
+  "0.0.26": "0e6e2585019c9505a417060005087078bea18a2d"
+  "0.0.25": "2497b1f2eb6dee4b4f61c71fd4fd4807d8376f3b"
   "0.0.24": "774c715b1325154873e5120154cae51721d625bd"
   "0.0.23": "b275537d439f360dbdec636f5739e1c00b47abbe"
   "0.0.22": "63abc73671d4e89e376bde6b98279ecdd8be0c59"
@@ -64,3 +72,8 @@ commits:
   "0.0.11": "569c517e159cd383a52300dae63abbd24801e39c"
   "0.0.10": "cb2b50099a6c14c4e716c768c4b2d8aaf49aa802"
   "0.0.9": "0fb68e82e39fb69c682f9e33087607a931758ee1"
+patches:
+  "0.0.25":
+    - patch_file: "patches/0001-qualify-test-index-type.patch"
+      patch_description: "Qualify batmat index type in small Cholesky tests"
+      patch_type: "bugfix"
