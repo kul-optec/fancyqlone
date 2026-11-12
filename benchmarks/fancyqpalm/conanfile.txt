@@ -2,7 +2,7 @@
 cyqlone/0.0.1
 hpipm/tttapa.20251105
 blasfeo/tttapa.20260119
-benchmark/1.9.4
+benchmark/1.9.5
 cli11/2.6.0
 fmt/12.1.0
 gtest/1.17.0 
