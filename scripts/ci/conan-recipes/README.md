@@ -10,4 +10,6 @@ Recipes for the Conan package manager to build open-source packages for mathemat
 - [hpipm](https://github.com/giaf/hpipm)
 - [ipopt](https://github.com/coin-or/Ipopt)
 - [ladel](https://github.com/kul-optec/LADEL)
+- [piqp](https://github.com/PREDICT-EPFL/piqp)
 - [qpalm](https://github.com/kul-optec/QPALM)
+- [treeQP](https://github.com/dkouzoup/treeQP)

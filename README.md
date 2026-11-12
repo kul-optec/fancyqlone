@@ -1,18 +1,18 @@
 [![arXiv Preprint](https://img.shields.io/badge/arXiv-Preprint-b31b1b)](https://arxiv.org/abs/2512.09058)
-[![Documentation](https://img.shields.io/badge/Documentation-develop-blue)](https://kul-optec.github.io/cyqlone/develop/Doxygen)
-[![CI: Linux](https://github.com/kul-optec/cyqlone/actions/workflows/linux.yml/badge.svg)](https://github.com/kul-optec/cyqlone/actions/workflows/linux.yml)
+[![Documentation](https://img.shields.io/badge/Documentation-develop-blue)](https://kul-optec.github.io/fancyqlone/develop/Doxygen)
+[![CI: Linux](https://github.com/kul-optec/cyqlone/actions/workflows/linux.yml/badge.svg)](https://github.com/kul-optec/fancyqlone/actions/workflows/linux.yml)
 [![GitHub License](https://img.shields.io/github/license/kul-optec/alpaqa?label=License&logo=gnu)](https://github.com/kul-optec/alpaqa/blob/develop/LICENSE)
 
 <p align="center">
 <img src="docs/source/images/cyqlone-logo-text.svg" width=300>
 </p>
 
-# Cyqlone
+# FanCyqlone
 
-Fast, **parallel and vectorized solver** for linear systems with **optimal control structure**.
+Fast, **parallel and vectorized solver** for linear systems with **multi-horizon optimal control structure**.
 
-Also includes an implementation of the **CyQPALM** solver that uses the Cyqlone linear solver as a
-backend, with parallel factorization update routines to handle active set changes and a parallel
+Also includes an implementation of the **FanCyQPALM** solver that uses the FanCyqlone linear solver as a
+backend, with a parallel
 exact line search.
 
 ## Preprint
@@ -33,10 +33,10 @@ The paper describing the algorithms in this repository can be found on arXiv: [*
 
 ## Reproduction of benchmark results from the paper
 
-A script to reproduce the benchmark results from the paper can be found in `benchmarks/cyqpalm`.
-See [`benchmarks/cyqpalm/README.md`](benchmarks/cyqpalm/README.md) for instructions.
+A script to reproduce the benchmark results from the paper can be found in `benchmarks/fancyqlone`.
+See [`benchmarks/fancyqlone/README.md`](benchmarks/cyqpalm/README.md) for instructions.
 
-## Documentation
+## Documentation Cyqlone
 
 - [Detailed algorithm descriptions](https://kul-optec.github.io/cyqlone/develop/Doxygen/algorithms.html) (matching the pseudocode in the paper)
 - [Examples](https://kul-optec.github.io/cyqlone/develop/Doxygen/examples.html)
@@ -57,7 +57,7 @@ conan config install scripts/ci/conan-profiles/settings_user.yml
 
 ### C++ project
 
-```sh
+```s
 # Install dependencies (including GCC) and build from source
 conan build . --build=missing -pr:h scripts/dev/profiles/dev -o \&:with_benchmarks=True -c tools.build:jobs=4
 ```
@@ -114,3 +114,4 @@ Either way, generated Wheel files will be placed in the `dist` directory.
 - [batmat](https://github.com/tttapa/batmat): high-performance batched linear algebra routines (used by cyqlone)
 - [hyhound](https://github.com/kul-optec/hyhound): low-rank Cholesky factorization up- and downdate routines based on hyperbolic Householder transformations (with applications to e.g. Riccati recursion)
 - [alpaqa](https://github.com/kul-optec/alpaqa): matrix-free, nonlinear programming solver
+- [cyqlone](https://github.com/kul-optec/cyqlone): Fast, **parallel and vectorized solver** for linear systems with **optimal control structure**.

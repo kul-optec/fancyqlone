@@ -94,3 +94,4 @@ docs/source/fancyqlone.rst
 # Local benchmark visualization (sources, build files, and generated pages)
 /benchmarks/fancyqpalm/visualization/
 /benchmarks/fancyqpalm/quadruped-closed-loop/
+benchmarks/fancyqpalm/conan.json
