@@ -36,8 +36,8 @@ inline ReducedRoot eliminate_root_state(const fancyqlone::FanOCPStorage &fan,
     ReducedRoot result;
     // Extract input bounds, keeping state-containing rows general until substitution.
     result.constraints = analyze_constraints(fan.ocps, 0, native_bounds, false);
-    auto &constraints = result.constraints;
-    const int ng = static_cast<int>(constraints.lower.size());
+    auto &constraints  = result.constraints;
+    const int ng       = static_cast<int>(constraints.lower.size());
     std::vector<int> kept, remap(ng, -1);
     std::vector<double> lower, upper;
     for (int row = 0; row < ng; ++row) {
@@ -71,7 +71,7 @@ inline ReducedRoot eliminate_root_state(const fancyqlone::FanOCPStorage &fan,
     constraints.C.clear();
     constraints.xmin.clear();
     constraints.xmax.clear();
-    constraints.D = std::move(D);
+    constraints.D     = std::move(D);
     constraints.lower = std::move(lower);
     constraints.upper = std::move(upper);
 
@@ -87,8 +87,8 @@ inline ReducedRoot eliminate_root_state(const fancyqlone::FanOCPStorage &fan,
             b[i] = ocp.b(1)(i, 0);
             for (int j = 0; j < nx; ++j)
                 b[i] += ocp.A(0)(i, j) * x0[j];
-            result.objective_offset += ocp.q(0)(i, 0) * x0[i] +
-                                       0.5 * ocp.Q(0)(i, i) * x0[i] * x0[i];
+            result.objective_offset +=
+                ocp.q(0)(i, 0) * x0[i] + 0.5 * ocp.Q(0)(i, i) * x0[i] * x0[i];
             for (int j = 0; j < i; ++j)
                 result.objective_offset += ocp.Q(0)(i, j) * x0[i] * x0[j];
         }

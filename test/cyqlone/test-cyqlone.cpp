@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 
+#include <batmat/linalg/simdify.hpp>
 #include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/cyqlone/tridiagonal-solver.hpp>
 #include <fancyqlone/linalg.hpp>
 #include <fancyqlone/packing.hpp>
 #include <fancyqlone/random-ocp.hpp>
 #include <fancyqlone/tracing.hpp>
-#include <fancyqlone/cyqlone/tridiagonal-solver.hpp>
-#include <batmat/linalg/simdify.hpp>
 #include <guanaqo/print.hpp>
 #include <guanaqo/trace.hpp>
 #include <cyqlone-version.h>
@@ -36,7 +36,8 @@ auto unpacked(const M &m) {
     using Mat = batmat::matrix::Matrix<typename M::value_type, typename M::index_type>;
     Mat res{{.depth = m.depth(), .rows = m.rows(), .cols = m.cols()}};
     for (index_t b = 0; b < m.num_batches(); ++b)
-        fancyqlone::linalg::unpack(m.batch(b), res.middle_batches(b * m.batch_size(), m.batch_size()));
+        fancyqlone::linalg::unpack(m.batch(b),
+                                   res.middle_batches(b * m.batch_size(), m.batch_size()));
     return res;
 }
 
@@ -123,8 +124,10 @@ TEST_P(CyqloneFactorTest, factor) {
         if (tricyqle_params.solve_method == SolveMethod::None) {
             ctx.run_single_sync([&] {
                 using batmat::linalg::tril;
-                fancyqlone::linalg::unpack(tril(solver.tricyqle.cr_L.batch(0)), tril(solver_last.L));
-                fancyqlone::linalg::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.U.transposed());
+                fancyqlone::linalg::unpack(tril(solver.tricyqle.cr_L.batch(0)),
+                                           tril(solver_last.L));
+                fancyqlone::linalg::unpack(solver.tricyqle.cr_Y.batch(0),
+                                           solver_last.U.transposed());
                 solver_last.factor();
             });
         }
@@ -153,12 +156,12 @@ TEST_P(CyqloneFactorTest, factor) {
         solver.solve_forward(ctx, ux, λ);
         solve_last(ctx);
         solver.solve_reverse(ctx, ux, λ);
-        solver.residual_dynamics_constr(ctx, ux, b, Mxb);                  // Mz + b  (= 0)
-        solver.transposed_dynamics_constr(ctx, λ, Mᵀλ);                    // Mᵀλ
-        solver.cost_gradient(ctx, ux, 1, rq, 0, grad);                     // Qz + q
-        solver.general_constr(ctx, ux, DCux);                              // Gz
+        solver.residual_dynamics_constr(ctx, ux, b, Mxb);                     // Mz + b  (= 0)
+        solver.transposed_dynamics_constr(ctx, λ, Mᵀλ);                       // Mᵀλ
+        solver.cost_gradient(ctx, ux, 1, rq, 0, grad);                        // Qz + q
+        solver.general_constr(ctx, ux, DCux);                                 // Gz
         ctx.run_single_sync([&] { fancyqlone::linalg::hadamard(DCux, Σ2); }); // ΣGz
-        solver.transposed_general_constr(ctx, DCux, DCᵀΣDCux);             // GᵀΣGz
+        solver.transposed_general_constr(ctx, DCux, DCᵀΣDCux);                // GᵀΣGz
     };
 
     // Repeatedly factor and solve the KKT system (as a warm-up run for the timing and to make sure
@@ -181,7 +184,8 @@ TEST_P(CyqloneFactorTest, factor) {
     using std::pow;
     const auto ε = pow(std::numeric_limits<real_t>::epsilon(), 0.6);
     fancyqlone::linalg::axpy(grad, {1, 1}, DCᵀΣDCux, Mᵀλ); // gradient of the Lagrangian
-    std::cout << "dynamics constraints: " << guanaqo::float_to_str(fancyqlone::linalg::norm_inf(Mxb))
+    std::cout << "dynamics constraints: "
+              << guanaqo::float_to_str(fancyqlone::linalg::norm_inf(Mxb))
               << "\nstationarity:         "
               << guanaqo::float_to_str(fancyqlone::linalg::norm_inf(grad)) << "\n";
     EXPECT_LE(fancyqlone::linalg::norm_inf(Mxb), ε);
@@ -603,7 +607,8 @@ TEST(CyqloneTest, stageIndicesU0Last) {
 INSTANTIATE_TEST_SUITE_P(CyqloneSolverConfigs, CyqloneFactorTest,
                          ::testing::Values(fancyqlone::SolveMethod::StairPCG,
                                            fancyqlone::SolveMethod::JacobiPCG,
-                                           fancyqlone::SolveMethod::PCR, fancyqlone::SolveMethod::None),
+                                           fancyqlone::SolveMethod::PCR,
+                                           fancyqlone::SolveMethod::None),
                          ([](const ::testing::TestParamInfo<CyqloneFactorTest::ParamType> &info) {
                              return enum_name(info.param);
                          }));

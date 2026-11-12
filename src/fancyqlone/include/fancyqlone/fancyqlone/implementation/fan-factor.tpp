@@ -1,13 +1,13 @@
-#include <fancyqlone/cyqlone/cyqlone.hpp>
-#include <fancyqlone/fancyqlone/fancyqlone.hpp>
-#include <fancyqlone/linalg.hpp>
-#include <fancyqlone/packing.hpp>
 #include <batmat/linalg/gemm-diag.hpp>
 #include <batmat/linalg/gemm.hpp>
 #include <batmat/linalg/potrf.hpp>
 #include <batmat/linalg/triangular.hpp>
 #include <batmat/lut.hpp>
 #include <batmat/openmp.h>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/fancyqlone/fancyqlone.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/packing.hpp>
 #include <guanaqo/print.hpp>
 #include <iostream>
 #include <syncstream>
@@ -51,12 +51,12 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_λ0(index_t branch
         la::trsm(solver_storages[branch].B0.transposed(),
                  tril(solver_storages[branch].tridiagonal_solver.L.batch(0)).transposed(),
                  solver_storages[branch].LB);
-        
+
         if (branch == 0) {
             auto temp = solver_storages[branch].temp;
             la::syrk_diag_add(D0.batch(0).transposed(), tril(R0.batch(0)), tril(temp.batch(0)),
                               batmat::linalg::simdify(Σ.first.batch(0)));
-            
+
             // la::copy(R0.batch(0), temp.batch(0));
             la::syrk_add(solver_storages[branch].LB, tril(temp.batch(0)), tril(SBs.batch(branch)));
         } else {
@@ -140,7 +140,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
                                                                    const FanStorage &Σ,
                                                                    FanStorage &ux, FanStorage &λ) {
     // print_grad(ctx, Σ, "Σ");
-    
+
     index_t c = ctx.total_ctx.index;
     if constexpr (Factor && Solve)
         solver_storages[c].cyqlone_solver.factor_solve(ctx.branch_ctx, γ, ρ_inv, Σ.branches[c],
@@ -156,8 +156,6 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::factor_solve_impl(Context &ctx,
         ctx.total_ctx.run_single_sync([&, this] { factor_solve_u0<Factor, Solve>(ux, γ); });
     }
     ctx.branch_ctx.arrive_and_wait(); // wait for λ(0) to be ready on each branch
-
-
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
@@ -199,7 +197,6 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse(Context &ctx, Fan
         ctx.total_ctx.run_single_sync([&, this] { solve_reverse_u0(ux); });
 
         solve_reverse_λ0(c, ux, λ);
-
     }
     ctx.branch_ctx.arrive_and_wait(); // wait λ()(0) to be ready
 
@@ -249,7 +246,6 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context &ctx,
         ctx.total_ctx.wait_reduce(std::move(token));
     }
     ctx.branch_ctx.arrive_and_wait();
-
 }
 
 //![Cyqlone solve CR serial]

@@ -90,9 +90,10 @@ using batmat::matrix::StorageOrder;
 template <class T = real_t>
 struct FanCyqloneStorage {
     using value_type = T;
-    using one_t       = std::integral_constant<index_t, 1>;
+    using one_t      = std::integral_constant<index_t, 1>;
 
-    using matrix     = batmat::matrix::Matrix<value_type, index_t,one_t,one_t, StorageOrder::ColMajor>;
+    using matrix =
+        batmat::matrix::Matrix<value_type, index_t, one_t, one_t, StorageOrder::ColMajor>;
 
     // One CyqloneStorage per branch, and introduce unused variable u(0) in each Cyqlone block
     //B(0) = 0 and R(0) = I r(0) = 0
@@ -115,7 +116,7 @@ struct FanCyqloneStorage {
     void update(const FanOCPStorage &focp);
     // u(0) is dummy so no constraints on it
     static FanCyqloneStorage build(const FanOCPStorage &focp, index_t ny_0 = -1);
-    
+
     using Solution = FanOCPStorage::Solution;
     using KKTError = FanOCPStorage::KKTError;
     std::vector<value_type>
@@ -125,8 +126,7 @@ struct FanCyqloneStorage {
                                   std::span<const value_type> y_compressed,
                                   std::span<const value_type> λ_compressed) const;
 
-    KKTError compute_kkt_error(const FanOCPStorage &ocp,
-                               std::span<const value_type> ux_compressed,
+    KKTError compute_kkt_error(const FanOCPStorage &ocp, std::span<const value_type> ux_compressed,
                                std::span<const value_type> y_compressed,
                                std::span<const value_type> λ_compressed) const;
 };

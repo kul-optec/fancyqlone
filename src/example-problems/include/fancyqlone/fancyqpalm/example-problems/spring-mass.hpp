@@ -142,7 +142,7 @@ namespace FANCYQLONE_NS(fancyqlone::qpalm::problems) {
 
 SpringMassProblem CYQLONE_EXAMPLE_PROBLEMS_EXPORT spring_mass(SpringMassParams p);
 FanSpringMassProblem CYQLONE_EXAMPLE_PROBLEMS_EXPORT fan_spring_mass(SpringMassParams p,
-                                                                      index_t num_branches, real_t k_spring_diff = 0.1);
-
+                                                                     index_t num_branches,
+                                                                     real_t k_spring_diff = 0.1);
 
 } // namespace FANCYQLONE_NS(fancyqlone::qpalm::problems)

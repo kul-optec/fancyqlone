@@ -95,7 +95,6 @@ void solve(RiccatiFactor &factor) {
     const auto nux  = static_cast<int>(ocp.nu + ocp.nx);
     for (index_t j = 0; j <= ocp.N; ++j) {
         GUANAQO_TRACE("riccati_solve", j);
-       
     }
 }
 void factor_solve(RiccatiFactor &factor, Eigen::Ref<const Eigen::MatrixX<real_t>> Σ) {

@@ -224,8 +224,8 @@ void register_ocp(nb::module_ &m) {
             return PythonOCP{std::move(p.ocp)};
         },
         "params"_a.sig("PlatooningParams()") = fancyqlone::qpalm::problems::PlatooningParams{});
-    nb::class_<fancyqlone::qpalm::problems::SpringMassParams> spring_mass_params(m,
-                                                                              "SpringMassParams");
+    nb::class_<fancyqlone::qpalm::problems::SpringMassParams> spring_mass_params(
+        m, "SpringMassParams");
     using ActuatorPlacement = fancyqlone::qpalm::problems::SpringMassParams::ActuatorPlacement;
     nb::enum_<ActuatorPlacement>(spring_mass_params, "ActuatorPlacement")
         .value("IndividualActuators", ActuatorPlacement::IndividualActuators)
@@ -256,8 +256,9 @@ void register_ocp(nb::module_ &m) {
         .def_rw("actuator_placement",
                 &fancyqlone::qpalm::problems::SpringMassParams::actuator_placement)
         .def_rw("seed", &fancyqlone::qpalm::problems::SpringMassParams::seed)
-        .def_static("wang_boyd_2008", &fancyqlone::qpalm::problems::SpringMassParams::wang_boyd_2008,
-                    "n_masses"_a, "N_horiz"_a = 30, "seed"_a = 0)
+        .def_static("wang_boyd_2008",
+                    &fancyqlone::qpalm::problems::SpringMassParams::wang_boyd_2008, "n_masses"_a,
+                    "N_horiz"_a = 30, "seed"_a = 0)
         .def_static("domahidi_2012", &fancyqlone::qpalm::problems::SpringMassParams::domahidi_2012,
                     "n_masses"_a, "N_horiz"_a, "seed"_a = 0);
     m.def(
@@ -278,7 +279,8 @@ void register_settings(nb::module_ &m) {
         .def_rw("pcg_print_resid", &fancyqlone::TricyqleParams<>::pcg_print_resid)
         .def_rw("solve_method", &fancyqlone::TricyqleParams<>::solve_method)
         .def_rw("pcr_max_update_fraction", &fancyqlone::TricyqleParams<>::pcr_max_update_fraction)
-        .def_rw("cr_max_update_fraction_Y0", &fancyqlone::TricyqleParams<>::cr_max_update_fraction_Y0)
+        .def_rw("cr_max_update_fraction_Y0",
+                &fancyqlone::TricyqleParams<>::cr_max_update_fraction_Y0)
         .def_rw("parallel_solve_cr_threshold",
                 &fancyqlone::TricyqleParams<>::parallel_solve_cr_threshold)
         .def_rw("parallel_factor_pcr_threshold",
@@ -549,7 +551,8 @@ void register_settings(nb::module_ &m) {
         .def_rw("recompute_inner", &fancyqlone::qpalm::Settings::recompute_inner)
         .def_rw("recompute", &fancyqlone::qpalm::Settings::recompute)
         .def_rw("verbose", &fancyqlone::qpalm::Settings::verbose)
-        .def_rw("max_no_changes_active_set", &fancyqlone::qpalm::Settings::max_no_changes_active_set)
+        .def_rw("max_no_changes_active_set",
+                &fancyqlone::qpalm::Settings::max_no_changes_active_set)
         .def_rw("linesearch_include_multipliers",
                 &fancyqlone::qpalm::Settings::linesearch_include_multipliers)
         .def_rw("force_linesearch_if_no_set_change",

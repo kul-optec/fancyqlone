@@ -4,12 +4,6 @@
 /// The main header for the Cyqlone and Tricyqle linear solvers.
 /// @ingroup topic-lin-solvers
 
-#include <fancyqlone/config.hpp>
-#include <fancyqlone/cyqlone/cyqlone-params.hpp>
-#include <fancyqlone/cyqlone/cyqlone-storage.hpp>
-#include <fancyqlone/parallel.hpp>
-#include <fancyqlone/sparse.hpp>
-#include <fancyqlone/timing.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/config.hpp>
 #include <batmat/linalg/hyhound.hpp> // TODO: isolate size functions
@@ -18,14 +12,20 @@
 #include <batmat/openmp.h>
 #include <batmat/simd.hpp>
 #include <batmat/unroll.h>
-#include <guanaqo/trace.hpp>
+#include <fancyqlone/config.hpp>
+#include <fancyqlone/cyqlone/cyqlone-params.hpp>
+#include <fancyqlone/cyqlone/cyqlone-storage.hpp>
+#include <fancyqlone/parallel.hpp>
+#include <fancyqlone/sparse.hpp>
+#include <fancyqlone/timing.hpp>
 #include <guanaqo/print.hpp>
+#include <guanaqo/trace.hpp>
 #include <syncstream>
 
-#include <iostream>
 #include <algorithm>
 #include <bit>
 #include <cassert>
+#include <iostream>
 #include <optional>
 #include <utility>
 
@@ -708,27 +708,27 @@ struct CyqloneSolver {
             func(xs.batch(di)...);
         }
     }
-    void print_grad(Context &ctx,  const auto &grad, const std::string &name) const {
+    void print_grad(Context &ctx, const auto &grad, const std::string &name) const {
         ctx.arrive_and_wait();
         std::osyncstream out(std::cout);
 
-        for (index_t j = 0; j < N_horiz/v; ++j) {
+        for (index_t j = 0; j < N_horiz / v; ++j) {
             for (index_t vi = 0; vi < v; ++vi) {
                 guanaqo::print_python(out << name << j << "_" << vi << " = ", grad.batch(j)(vi));
             }
         }
         ctx.arrive_and_wait();
-
     }
     void print_grad(const auto &grad, const std::string &name) const {
         {
-        std::osyncstream sout(std::cout);
-        for (index_t j = 0; j < N_horiz/v; ++j) {
-            for (index_t vi = 0; vi < v; ++vi) {
-                guanaqo::print_python(sout << name << j << "_" << vi << " = ", grad.batch(j)(vi));
+            std::osyncstream sout(std::cout);
+            for (index_t j = 0; j < N_horiz / v; ++j) {
+                for (index_t vi = 0; vi < v; ++vi) {
+                    guanaqo::print_python(sout << name << j << "_" << vi << " = ",
+                                          grad.batch(j)(vi));
+                }
             }
         }
-    }
     }
     /// Call a function for each stage in the horizon, passing the stage index, the data batch
     /// index, and optionally the corresponding batches of the given arrays.
@@ -756,7 +756,6 @@ struct CyqloneSolver {
         }
     }
 
-   
     /// @name Indexing utilities
     /// @{
 
@@ -1150,29 +1149,26 @@ struct CyqloneSolver {
     void update_solve_impl(Context &ctx, view<> ΔΣ, mut_view<> ux, mut_view<> λ);
 
     /// @}
- /// @}
+    /// @}
     /// @name Shifting utilities
     /// @{
-     // TODO: this does not handle the case N_horiz != ceil_N() correctly
+    // TODO: this does not handle the case N_horiz != ceil_N() correctly
     index_t k_to_l(index_t k) const {
-                const auto num_stages = n;
-                const auto i          = (ceil_N() - k) % num_stages;
-                const auto k1         = (k + i) / num_stages;
-                const auto k2         = k1 >> lp();
-                const auto v          = k2 % (1 << lv());
-                const auto t          = k1 - (k2 << lp());
-                return ((num_stages * t + i) << lv()) + v;
-            };
-                    
-                   
-                    
+        const auto num_stages = n;
+        const auto i          = (ceil_N() - k) % num_stages;
+        const auto k1         = (k + i) / num_stages;
+        const auto k2         = k1 >> lp();
+        const auto v          = k2 % (1 << lv());
+        const auto t          = k1 - (k2 << lp());
+        return ((num_stages * t + i) << lv()) + v;
+    };
+
     void shift_solution(view<> x, mut_view<> x_shifted) const {
         // guanaqo::print_python(std::cout << "shift_solution: x = ", x(k_to_l(0)), "\n");
-        for (index_t k = 1; k < N_horiz; ++k)       // TODO: vectorize?
+        for (index_t k = 1; k < N_horiz; ++k) // TODO: vectorize?
             x_shifted(k_to_l(k - 1)) = x(k_to_l(k));
         x_shifted(k_to_l(N_horiz - 1)) = x(k_to_l(N_horiz - 1));
         // guanaqo::print_python(std::cout << "shifted_solution: x = ", x_shifted(k_to_l(0)), "\n");
-
     }
     void shift_dynamics(view<> λ, mut_view<> λ_shifted) const {
         for (index_t k = 1; k < N_horiz; ++k) // TODO: vectorize?
@@ -1180,7 +1176,7 @@ struct CyqloneSolver {
         λ_shifted(k_to_l(N_horiz - 1)) = λ(k_to_l(N_horiz - 1));
     }
     void shift_constraints(view<> y, mut_view<> y_shifted) const {
-         for (index_t k = 1; k < N_horiz; ++k) // TODO: vectorize?
+        for (index_t k = 1; k < N_horiz; ++k) // TODO: vectorize?
             y_shifted(k_to_l(k - 1)) = y(k_to_l(k));
         y_shifted(k_to_l(N_horiz - 1)) = y(k_to_l(N_horiz - 1));
     }

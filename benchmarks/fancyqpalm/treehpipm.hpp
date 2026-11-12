@@ -2,7 +2,6 @@
 
 #include "constraint-layout.hpp"
 
-
 #include <fancyqlone/ocp.hpp>
 
 #include <chrono>
@@ -18,11 +17,7 @@
 #include <hpipm_scenario_tree.h>
 #pragma once
 
-
-
-
 using real_t = double;
-
 
 struct HPIPMTreeQPData {
     std::unique_ptr<std::byte[]> tree_mem;
@@ -88,17 +83,16 @@ struct HPIPMStats {
 };
 /// Native boxes and x0 elimination are supported for cold solves. Pass false
 /// for both options when using the existing warm-start import/shift helpers.
-std::shared_ptr<HPIPMTreeQPData>
-build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds = true,
-                    bool eliminate_x0 = true);
+std::shared_ptr<HPIPMTreeQPData> build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan,
+                                                     bool native_bounds = true,
+                                                     bool eliminate_x0  = true);
 
 std::shared_ptr<HPIPMTreeSolverData>
-create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
-                         int warm_start, int mode = 0, real_t tol = 1e-8, int t0_init = 2);
+create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data, int warm_start, int mode = 0,
+                         real_t tol = 1e-8, int t0_init = 2);
 
-std::chrono::nanoseconds
-solve_hpipm_tree(const HPIPMTreeQPData &qp_data,
-                 HPIPMTreeSolverData &solver_data);
+std::chrono::nanoseconds solve_hpipm_tree(const HPIPMTreeQPData &qp_data,
+                                          HPIPMTreeSolverData &solver_data);
 
 HPIPMStats get_stats_hpipm_tree(HPIPMTreeSolverData &solver_data);
 
@@ -115,34 +109,18 @@ void warm_start_hpipm_tree(HPIPMTreeSolverData &solver_data,
 
 /// Replace the common root state by the stage-one state of branch `branch`.
 /// This is useful for receding-horizon simulation when one fan outcome is chosen.
-void update_x0_hpipm_tree(fancyqlone::FanOCPStorage &fan,
-                          HPIPMTreeQPData &qp_data,
+void update_x0_hpipm_tree(fancyqlone::FanOCPStorage &fan, HPIPMTreeQPData &qp_data,
                           std::vector<fancyqlone::LinearOCPStorage::Solution> &solution,
                           fancyqlone::index_t branch);
-void tree_ocp_qp_sol_set_u(
-    int node,
-    std::span<const double> u,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_u(int node, std::span<const double> u, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_x(
-    int node,
-    std::span<const double> x,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_x(int node, std::span<const double> x, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_sl(
-    int node,
-    std::span<const double> sl,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_sl(int node, std::span<const double> sl, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_su(
-    int node,
-    std::span<const double> su,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_su(int node, std::span<const double> su, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_ux(
-    int node,
-    std::span<const double> ux,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_ux(int node, std::span<const double> ux, d_tree_ocp_qp_sol &solution);
 
 // =============================================================================
 // Dynamics multiplier
@@ -155,15 +133,10 @@ void tree_ocp_qp_sol_set_ux(
 //     size(pi[edge]) = nx[child_node]
 // =============================================================================
 
-void tree_ocp_qp_sol_set_pi(
-    int edge,
-    std::span<const double> pi,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_pi(int edge, std::span<const double> pi, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_pi_for_node(
-    int child_node,
-    std::span<const double> pi,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_pi_for_node(int child_node, std::span<const double> pi,
+                                     d_tree_ocp_qp_sol &solution);
 
 // =============================================================================
 // Inequality multipliers
@@ -173,40 +146,25 @@ void tree_ocp_qp_sol_set_pi_for_node(
 //     lam[node] = [lb; lg; ub; ug; ls; us]
 // =============================================================================
 
-void tree_ocp_qp_sol_set_lam_lb(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_lam_lb(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_lam_lg(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_lam_lg(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_lam_ub(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_lam_ub(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_lam_ug(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_lam_ug(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_lam_ls(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_lam_ls(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_lam_us(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_lam_us(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_lam(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_lam(int node, std::span<const double> value, d_tree_ocp_qp_sol &solution);
 
 // =============================================================================
 // Inequality slacks
@@ -216,41 +174,19 @@ void tree_ocp_qp_sol_set_lam(
 //     t[node] = [lb; lg; ub; ug; ls; us]
 // =============================================================================
 
-void tree_ocp_qp_sol_set_t_lb(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_t_lb(int node, std::span<const double> value, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_t_lg(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_t_lg(int node, std::span<const double> value, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_t_ub(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_t_ub(int node, std::span<const double> value, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_t_ug(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_t_ug(int node, std::span<const double> value, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_t_ls(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_t_ls(int node, std::span<const double> value, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_t_us(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_t_us(int node, std::span<const double> value, d_tree_ocp_qp_sol &solution);
 
-void tree_ocp_qp_sol_set_t(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution);
+void tree_ocp_qp_sol_set_t(int node, std::span<const double> value, d_tree_ocp_qp_sol &solution);
 
-void shift_hpipm_tree_solution(
-    HPIPMTreeSolverData &solver_data,
-    fancyqlone::real_t positive_floor = 1e-8);
+void shift_hpipm_tree_solution(HPIPMTreeSolverData &solver_data,
+                               fancyqlone::real_t positive_floor = 1e-8);

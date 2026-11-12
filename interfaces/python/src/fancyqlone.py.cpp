@@ -43,8 +43,8 @@ static FanOCPStorage copy_fan_ocp(const nb::list &branches) {
 template <index_t VL>
 struct PythonFanCyQPALM {
     using LinearSolver = FanCyqloneSolver<VL>;
-    using Backend = qp::unique_CyQPALMBackend<VL, StorageOrder::ColMajor, LinearSolver>;
-    using Solver  = qp::Solver<Backend>;
+    using Backend      = qp::unique_CyQPALMBackend<VL, StorageOrder::ColMajor, LinearSolver>;
+    using Solver       = qp::Solver<Backend>;
 
     FanOCPStorage fan_ocp;
     FanCyqloneStorage<> packed_ocp;
@@ -68,15 +68,15 @@ struct PythonFanCyQPALM {
             throw std::invalid_argument(
                 "ShiftNoInequality warm starting is not supported by FanCyQPALM");
 
-        settings.processors = num_branches * processors_per_branch;
+        settings.processors                   = num_branches * processors_per_branch;
         settings.tricyqle_params.solve_method = SolveMethod::None;
-        return qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, LinearSolver>(ocp, {}, settings);
+        return qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, LinearSolver>(ocp, {},
+                                                                                  settings);
     }
 
     PythonFanCyQPALM(const nb::list &branches, index_t processors_per_branch,
                      qp::CyQPALMBackendSettings backend_settings, qp::Settings settings)
-        : fan_ocp{copy_fan_ocp(branches)},
-          packed_ocp{FanCyqloneStorage<>::build(fan_ocp)},
+        : fan_ocp{copy_fan_ocp(branches)}, packed_ocp{FanCyqloneStorage<>::build(fan_ocp)},
           solver{make_backend(packed_ocp, fan_ocp.num_branches(), processors_per_branch,
                               backend_settings),
                  settings} {}
@@ -119,11 +119,11 @@ struct PythonFanCyQPALM {
     nb::tuple get_result() {
         std::scoped_lock lock{mutex};
         require_result();
-        auto x      = solver.get_solution();
-        auto y      = solver.get_inequality_multipliers();
-        auto lambda = solver.get_equality_multipliers();
+        auto x             = solver.get_solution();
+        auto y             = solver.get_inequality_multipliers();
+        auto lambda        = solver.get_equality_multipliers();
         auto reconstructed = packed_ocp.reconstruct_solution(fan_ocp, x, y, lambda);
-        auto kkt_error      = fan_ocp.compute_kkt_error(reconstructed);
+        auto kkt_error     = fan_ocp.compute_kkt_error(reconstructed);
 
         nb::list branches;
         for (auto &branch : reconstructed.solutions) {
@@ -189,15 +189,13 @@ void register_fancyqlone_solver(nb::module_ &m) {
         .def("warm_start_solution", &Wrapper::warm_start_solution)
         .def("stop", [](Wrapper &self) { self.solver.stop(); })
         .def_prop_ro("has_result", &Wrapper::has_result)
-        .def_prop_ro("num_variables", [](const Wrapper &self) {
-            return self.solver.get_num_variables();
-        })
-        .def_prop_ro("num_equality_constraints", [](const Wrapper &self) {
-            return self.solver.get_num_equality_constraints();
-        })
-        .def_prop_ro("num_inequality_constraints", [](const Wrapper &self) {
-            return self.solver.get_num_inequality_constraints();
-        })
+        .def_prop_ro("num_variables",
+                     [](const Wrapper &self) { return self.solver.get_num_variables(); })
+        .def_prop_ro("num_equality_constraints",
+                     [](const Wrapper &self) { return self.solver.get_num_equality_constraints(); })
+        .def_prop_ro(
+            "num_inequality_constraints",
+            [](const Wrapper &self) { return self.solver.get_num_inequality_constraints(); })
         .def_prop_ro("result", &Wrapper::get_result)
         .def_prop_ro("equality_constraints", &Wrapper::get_equality_constraints,
                      nb::rv_policy::move)

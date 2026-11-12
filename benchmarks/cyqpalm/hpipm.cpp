@@ -1,7 +1,7 @@
 #include "hpipm.hpp"
 
-#include <fancyqlone/ocp.hpp>
 #include <batmat/assume.hpp>
+#include <fancyqlone/ocp.hpp>
 #include <guanaqo/mat-view.hpp>
 #include <chrono>
 #include <cmath>
@@ -59,7 +59,7 @@ static auto prepare_hpipm_bounds(guanaqo::MatrixView<T, I, S, O> bounds) {
     std::vector<real_t> values(static_cast<size_t>(bounds.rows));
     std::vector<real_t> mask(static_cast<size_t>(bounds.rows));
     for (I i = 0; i < bounds.rows; ++i) {
-        const auto finite = std::isfinite(bounds(i, 0));
+        const auto finite              = std::isfinite(bounds(i, 0));
         values[static_cast<size_t>(i)] = finite ? bounds(i, 0) : real_t{0};
         mask[static_cast<size_t>(i)]   = finite ? real_t{1} : real_t{0};
     }

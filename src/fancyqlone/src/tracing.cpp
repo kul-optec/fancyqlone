@@ -105,7 +105,8 @@ void write_chrome_trace(const fs::path &path,
     std::size_t num_threads = 0;
     for (const auto &logs : loggers)
         for (const auto &log : logs)
-            if (log.name == "thread_id"sv && thread_ids.try_emplace(log.thread_id, log.instance).second)
+            if (log.name == "thread_id"sv &&
+                thread_ids.try_emplace(log.thread_id, log.instance).second)
                 num_threads = std::max(num_threads, static_cast<std::size_t>(log.instance + 1));
     for (const auto &logs : loggers)
         for (const auto &log : logs)
@@ -131,15 +132,15 @@ void write_chrome_trace(const fs::path &path,
                         buf.data(), static_cast<ptrdiff_t>(buf.size()),
                         "{}{{\"cat\":\"{}\",\"id\":{},\"ph\":\"f\",\"ts\":{:.3f},"
                         "\"pid\":0,\"tid\":{}}}",
-                        first ? "\n" : ",\n", std::string_view{log.name}.substr(2), log.instance, ts_us,
-                        tid);
+                        first ? "\n" : ",\n", std::string_view{log.name}.substr(2), log.instance,
+                        ts_us, tid);
                 } else if (is_write_event(log)) {
                     return std::format_to_n( //
                         buf.data(), static_cast<ptrdiff_t>(buf.size()),
                         "{}{{\"cat\":\"{}\",\"id\":{},\"ph\":\"s\",\"ts\":{:.3f},"
                         "\"pid\":0,\"tid\":{}}}",
-                        first ? "\n" : ",\n", std::string_view{log.name}.substr(2), log.instance, ts_us,
-                        tid);
+                        first ? "\n" : ",\n", std::string_view{log.name}.substr(2), log.instance,
+                        ts_us, tid);
                 } else if (log.flop_count == -1) {
                     std::string_view cat = is_barrier_event(log) ? "barrier" : "trace";
                     if (log.duration.count() > 0)
@@ -159,7 +160,7 @@ void write_chrome_trace(const fs::path &path,
                 } else {
                     uint64_t &total_flops = thread_flops[tid];
                     auto old_flops        = 1e-9 * static_cast<double>(total_flops);
-                    auto new_flops        = 1e-9 * static_cast<double>(total_flops += log.flop_count);
+                    auto new_flops = 1e-9 * static_cast<double>(total_flops += log.flop_count);
                     return std::format_to_n( //
                         buf.data(), static_cast<ptrdiff_t>(buf.size()),
                         "{0}{{\"name\":\"{1}\",\"cat\":\"gflops\",\"ph\":\"X\",\"ts\":{2:.3f},"

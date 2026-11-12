@@ -1,8 +1,8 @@
-#include <fancyqlone/cyqlone/cyqlone.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/loop.hpp>
 #include <batmat/openmp.h>
 #include <benchmark/benchmark.h>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
 #include <guanaqo/eigen/span.hpp>
 #include <guanaqo/openmp.h>
 #include <batmat-version.h>

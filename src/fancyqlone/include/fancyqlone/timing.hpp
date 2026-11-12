@@ -1,7 +1,7 @@
 #pragma once
 
-#include <fancyqlone/config.hpp>
 #include <batmat/timing.hpp>
+#include <fancyqlone/config.hpp>
 
 namespace fancyqlone {
 using DefaultTimings = batmat::DefaultTimings;

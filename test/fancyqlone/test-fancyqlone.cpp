@@ -1,17 +1,17 @@
 #include <gtest/gtest.h>
 
+#include <batmat/linalg/gemm.hpp>
+#include <batmat/linalg/potrf.hpp>
+#include <batmat/linalg/triangular.hpp>
+#include <batmat/lut.hpp>
 #include <fancyqlone/barrier.hpp>
 #include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/cyqlone/tridiagonal-solver.hpp>
 #include <fancyqlone/linalg.hpp>
 #include <fancyqlone/ocp.hpp>
 #include <fancyqlone/packing.hpp>
 #include <fancyqlone/random-ocp.hpp>
 #include <fancyqlone/tracing.hpp>
-#include <fancyqlone/cyqlone/tridiagonal-solver.hpp>
-#include <batmat/linalg/gemm.hpp>
-#include <batmat/linalg/potrf.hpp>
-#include <batmat/linalg/triangular.hpp>
-#include <batmat/lut.hpp>
 #include <guanaqo/print.hpp>
 #include <guanaqo/trace.hpp>
 #include <cyqlone-version.h>
@@ -106,8 +106,10 @@ fancyqlone::LinearOCPStorage combine_branches(std::span<const fancyqlone::Linear
         ny_N_offset += ocp.dim.ny_N;
     }
 
-    const index_t nx_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nx)),
-                  nu_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nu));
+    const index_t nx_max =
+                      std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nx)),
+                  nu_max =
+                      std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nu));
     for (index_t i = nx_max; i < combined_ocp.dim.nx; ++i)
         combined_ocp.Q(0)(i, i) = 1; // regularize unused state variables in the cost
     for (index_t i = nu_max; i < combined_ocp.dim.nu; ++i)

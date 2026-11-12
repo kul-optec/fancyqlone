@@ -1,16 +1,16 @@
 #include <benchmark/benchmark.h>
 
-#include <fancyqlone/matio.hpp>
+#include <CLI/CLI.hpp>
+#include <batmat/dtypes.hpp>
+#include <batmat/lut.hpp>
+#include <batmat/openmp.h>
 #include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/spring-mass.hpp>
 #include <fancyqlone/fancyqpalm/settings.hpp>
 #include <fancyqlone/fancyqpalm/solver.hpp>
 #include <fancyqlone/fancyqpalm/status.hpp>
+#include <fancyqlone/matio.hpp>
 #include <fancyqlone/tracing.hpp>
-#include <CLI/CLI.hpp>
-#include <batmat/dtypes.hpp>
-#include <batmat/lut.hpp>
-#include <batmat/openmp.h>
 #include <guanaqo/demangled-typename.hpp>
 #include <guanaqo/pcm/counters.hpp>
 #include <guanaqo/perfetto/trace.hpp>

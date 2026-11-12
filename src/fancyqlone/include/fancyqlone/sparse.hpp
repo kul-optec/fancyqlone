@@ -4,9 +4,9 @@
 /// Sparse matrix utilities.
 /// @ingroup topic-utilities
 
-#include <fancyqlone/config.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/linalg/structure.hpp>
+#include <fancyqlone/config.hpp>
 #include <guanaqo/linalg/sparsity.hpp>
 #include <guanaqo/mat-view.hpp>
 

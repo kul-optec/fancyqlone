@@ -1,8 +1,8 @@
 #pragma once
 
-#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp>
 #include "fancyqlone/cyqlone/cyqlone.hpp"
 #include "fancyqlone/fancyqpalm/implementation/breakpoint.hpp"
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp>
 #include <algorithm>
 #include <array>
 #include <iostream>
@@ -249,13 +249,14 @@ CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partition_breakpoints_sf
                                         ocp.solver_storages[c].cyqlone_solver.ny_N);
         bpt_per_thr += 2 * ny_M_c * ocp.solver_storages[c].cyqlone_solver.n * ocp.v;
     }
-    const index_t ti = ocp.solver_storages[0].cyqlone_solver.riccati_thread_assignment(ctx); //assume same p
+    const index_t ti =
+        ocp.solver_storages[0].cyqlone_solver.riccati_thread_assignment(ctx); //assume same p
     const index_t global_tmast = ocp.solver_storages[0].cyqlone_solver.add_wrap_p(0, 1);
 
     const index_t global_ti = ti; // global thread index across all branches
     // Partition the breakpoints into a finite and an infinite part (per thread)
-    Breakpoint *const fin_0 = breakpoints_temp.data() + ti * bpt_per_thr +
-                              (global_ti <= global_tmast ? 0 : 2 * ocp.ny_0);
+    Breakpoint *const fin_0 =
+        breakpoints_temp.data() + ti * bpt_per_thr + (global_ti <= global_tmast ? 0 : 2 * ocp.ny_0);
     Breakpoint *const inf_0 = fin_0 + bpt_per_thr + (global_ti == global_tmast ? 2 * ocp.ny_0 : 0);
     Breakpoint *fin = fin_0, *inf = inf_0;
     // Compute break points t[i] and intermediate values α[i] and δ[i]
@@ -307,8 +308,7 @@ CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partition_breakpoints_sf
     ctx.wait(std::move(thr_parts_done));
     // Merge all local partitions of all threads into a single partitioned array.
     GUANAQO_TRACE("linesearch breakpoints cyqlone merge", ti);
-    merge_chunk<Breakpoint, 4>(std::span{fin_0, inf_0},   ti, thr_parts,
-                               std::span{breakpoints});
+    merge_chunk<Breakpoint, 4>(std::span{fin_0, inf_0}, ti, thr_parts, std::span{breakpoints});
     // Compute the total sums across all threads.
     auto ab_neg_and_merge_done = ctx.arrive_reduce(ab_neg, std::plus<>{});
     // Compute the final partition indices by summing the partition sizes of all threads.
@@ -333,15 +333,17 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
                                  CyqloneSolver<VL, real_t, DefaultOrder,
                                                parallel::Context<parallel::SharedContext>>>)
         return compute_partition_breakpoints_cyq(ctx, breakpoints, Σ, y, Ad, Ax, b_min, b_max);
-    else if constexpr (std::is_same_v<LinearSolver,
-                                    FanCyqloneSolver<VL, real_t, DefaultOrder,
-                                                  parallel::FanContext<parallel::FanSharedContext>>>)
+    else if constexpr (std::is_same_v<
+                           LinearSolver,
+                           FanCyqloneSolver<VL, real_t, DefaultOrder,
+                                            parallel::FanContext<parallel::FanSharedContext>>>)
         return compute_partition_breakpoints_fan(ctx, breakpoints, Σ, y, Ad, Ax, b_min, b_max);
-    else if constexpr (std::is_same_v<LinearSolver,
-                                    SerialFanCyqloneSolver<VL, real_t, DefaultOrder,
+    else if constexpr (std::is_same_v<
+                           LinearSolver,
+                           SerialFanCyqloneSolver<VL, real_t, DefaultOrder,
                                                   parallel::Context<parallel::SharedContext>>>)
         return compute_partition_breakpoints_sfan(ctx, breakpoints, Σ, y, Ad, Ax, b_min, b_max);
     else
-       BATMAT_ASSERT(false);
+        BATMAT_ASSERT(false);
 }
 } // namespace FANCYQLONE_NS(fancyqlone::qpalm)

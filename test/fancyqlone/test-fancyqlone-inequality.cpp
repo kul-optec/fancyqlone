@@ -1,12 +1,12 @@
+#include "fancyqlone/cyqlone/cyqlone-storage.hpp"
+#include "fancyqlone/fancyqlone/fancyqlone.hpp"
+#include "fancyqlone/matio.hpp"
+#include "fancyqlone/ocp.hpp"
 #include <fancyqlone/conversion.hpp>
 #include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/csv.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/platooning.hpp>
 #include <fancyqlone/fancyqpalm/solver.hpp>
-#include "fancyqlone/cyqlone/cyqlone-storage.hpp"
-#include "fancyqlone/fancyqlone/fancyqlone.hpp"
-#include "fancyqlone/matio.hpp"
-#include "fancyqlone/ocp.hpp"
 #include <gtest/gtest.h>
 #include <cyqlone-version.h>
 #include <fstream>
@@ -76,8 +76,6 @@ TEST(QPALM, with_inequality_2iter) {
                   << ", nu=" << ocp_fan.dim.nu << ", ny=" << ocp_fan.dim.ny << "\n";
     }
     std::cout << cyq_get_num_proc() << " processors detected\n";
-    fancyqlone::FanOCPStorage fan_ocp{.ocps    = ocps
-    };
-    auto cocp          = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
-
+    fancyqlone::FanOCPStorage fan_ocp{.ocps = ocps};
+    auto cocp = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
 };

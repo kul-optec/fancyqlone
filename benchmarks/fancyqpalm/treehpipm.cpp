@@ -6,30 +6,26 @@
 
 #include <blasfeo_d_aux.h>
 
-
 #include <algorithm>
 #include <chrono>
 #include <cmath>
 #include <cstddef>
+#include <iostream>
 #include <memory>
 #include <numeric>
 #include <ranges>
 #include <stdexcept>
 #include <string>
-#include <iostream>
 #include <utility>
 #include <vector>
 
 using fancyqlone::index_t;
 using fancyqlone::real_t;
 
-
-
 template <class T, class I, class S, guanaqo::StorageOrder O>
-std::vector<real_t>
-compress_col_major(guanaqo::MatrixView<T, I, S, O> mat) {
-    std::vector<real_t> data(
-        static_cast<std::size_t>(mat.rows) * static_cast<std::size_t>(mat.cols));
+std::vector<real_t> compress_col_major(guanaqo::MatrixView<T, I, S, O> mat) {
+    std::vector<real_t> data(static_cast<std::size_t>(mat.rows) *
+                             static_cast<std::size_t>(mat.cols));
     for (I j = 0; j < mat.cols; ++j)
         for (I i = 0; i < mat.rows; ++i)
             data[static_cast<std::size_t>(i + j * mat.rows)] = mat(i, j);
@@ -47,8 +43,8 @@ static auto prepare_hpipm_bounds(std::span<const real_t> bounds) {
     std::vector<real_t> values(bounds.size()), mask(bounds.size());
     for (std::size_t i = 0; i < bounds.size(); ++i) {
         const auto finite = std::isfinite(bounds[i]);
-        values[i] = finite ? bounds[i] : real_t{0};
-        mask[i]   = finite ? real_t{1} : real_t{0};
+        values[i]         = finite ? bounds[i] : real_t{0};
+        mask[i]           = finite ? real_t{1} : real_t{0};
     }
     return std::pair{std::move(values), std::move(mask)};
 }
@@ -74,8 +70,10 @@ static void set_hpipm_constraints(d_tree_ocp_qp &qp, int node,
         return result;
     };
     if (!constraints.state_indices.empty()) {
-        auto [lb, lb_mask] = prepare_hpipm_bounds(compact(constraints.xmin, constraints.state_indices));
-        auto [ub, ub_mask] = prepare_hpipm_bounds(compact(constraints.xmax, constraints.state_indices));
+        auto [lb, lb_mask] =
+            prepare_hpipm_bounds(compact(constraints.xmin, constraints.state_indices));
+        auto [ub, ub_mask] =
+            prepare_hpipm_bounds(compact(constraints.xmax, constraints.state_indices));
         d_tree_ocp_qp_set_idxbx(node, constraints.state_indices.data(), &qp);
         d_tree_ocp_qp_set_lbx(node, lb.data(), &qp);
         d_tree_ocp_qp_set_ubx(node, ub.data(), &qp);
@@ -83,8 +81,10 @@ static void set_hpipm_constraints(d_tree_ocp_qp &qp, int node,
         d_tree_ocp_qp_set_ubx_mask(node, ub_mask.data(), &qp);
     }
     if (!constraints.input_indices.empty()) {
-        auto [lb, lb_mask] = prepare_hpipm_bounds(compact(constraints.umin, constraints.input_indices));
-        auto [ub, ub_mask] = prepare_hpipm_bounds(compact(constraints.umax, constraints.input_indices));
+        auto [lb, lb_mask] =
+            prepare_hpipm_bounds(compact(constraints.umin, constraints.input_indices));
+        auto [ub, ub_mask] =
+            prepare_hpipm_bounds(compact(constraints.umax, constraints.input_indices));
         d_tree_ocp_qp_set_idxbu(node, constraints.input_indices.data(), &qp);
         d_tree_ocp_qp_set_lbu(node, lb.data(), &qp);
         d_tree_ocp_qp_set_ubu(node, ub.data(), &qp);
@@ -106,9 +106,7 @@ struct FanTreeIndex {
         return 1 + branch * horizon + stage - 1;
     }
 
-    [[nodiscard]] int edge(int branch, int stage) const {
-        return node(branch, stage) - 1;
-    }
+    [[nodiscard]] int edge(int branch, int stage) const { return node(branch, stage) - 1; }
 };
 
 void validate_fan(const fancyqlone::FanOCPStorage &fan) {
@@ -126,11 +124,10 @@ void validate_fan(const fancyqlone::FanOCPStorage &fan) {
         if (ocp.dim.nx != first.dim.nx || ocp.dim.nu != first.dim.nu)
             throw std::invalid_argument("All fan branches must have equal nx and nu");
     }
-
 }
 
 std::size_t primal_size(const HPIPMTreeQPData &data) {
-    const auto &dim = *data.dim;
+    const auto &dim  = *data.dim;
     std::size_t size = static_cast<std::size_t>(dim.nx[0] + dim.nu[0]);
     for (int b = 0; b < data.num_branches; ++b)
         for (int stage = 1; stage <= data.horizon; ++stage) {
@@ -141,7 +138,7 @@ std::size_t primal_size(const HPIPMTreeQPData &data) {
 }
 
 std::size_t branch_offset(const HPIPMTreeQPData &data, int branch) {
-    const auto &dim = *data.dim;
+    const auto &dim    = *data.dim;
     std::size_t offset = static_cast<std::size_t>(dim.nx[0] + dim.nu[0]);
     for (int b = 0; b < branch; ++b)
         for (int stage = 1; stage <= data.horizon; ++stage) {
@@ -151,9 +148,8 @@ std::size_t branch_offset(const HPIPMTreeQPData &data, int branch) {
     return offset;
 }
 
-
-std::shared_ptr<HPIPMTreeQPData>
-build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds, bool eliminate_x0) {
+std::shared_ptr<HPIPMTreeQPData> build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan,
+                                                     bool native_bounds, bool eliminate_x0) {
     validate_fan(fan);
 
     HPIPMTreeQPData d;
@@ -174,12 +170,11 @@ build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds, bo
     d.constraints.resize(map.num_nodes());
     fanqp::ReducedRoot reduced_root;
     if (eliminate_x0) {
-        reduced_root = fanqp::eliminate_root_state(fan, d.initial_state, native_bounds);
+        reduced_root     = fanqp::eliminate_root_state(fan, d.initial_state, native_bounds);
         d.constraints[0] = std::move(reduced_root.constraints);
     } else {
         d.constraints[0] = fanqp::analyze_constraints(fan.ocps, 0, native_bounds, false);
     }
-
 
     // HPIPM's tree_create uses breadth-first node numbering and the number of
     // children of each node.  Therefore nodes are generated level-by-level:
@@ -189,47 +184,49 @@ build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds, bo
         return 1 + (stage - 1) * branches + branch;
     };
 
-    d.tree_mem = std::make_unique<std::byte[]>(sctree_memsize(branches,1, horizon));
+    d.tree_mem = std::make_unique<std::byte[]>(sctree_memsize(branches, 1, horizon));
 
-    d.tree = std::make_unique<struct tree>();
+    d.tree                                = std::make_unique<struct tree>();
     std::unique_ptr<struct sctree> sctree = std::make_unique<struct sctree>();
     sctree_create(branches, 1, horizon, sctree.get(), d.tree_mem.get());
     sctree_cast_to_tree(sctree.get(), d.tree.get());
 
-    d.dim_mem = std::make_unique<std::byte[]>(
-        d_tree_ocp_qp_dim_memsize(map.num_nodes()));
-    d.dim = std::make_unique<struct d_tree_ocp_qp_dim>();
+    d.dim_mem = std::make_unique<std::byte[]>(d_tree_ocp_qp_dim_memsize(map.num_nodes()));
+    d.dim     = std::make_unique<struct d_tree_ocp_qp_dim>();
     d_tree_ocp_qp_dim_create(map.num_nodes(), d.dim.get(), d.dim_mem.get());
     d_tree_ocp_qp_dim_set_tree(d.tree.get(), d.dim.get());
 
     d_tree_ocp_qp_dim_set_nx(0, eliminate_x0 ? 0 : nx, d.dim.get());
     d_tree_ocp_qp_dim_set_nu(0, nu, d.dim.get());
     d_tree_ocp_qp_dim_set_nbx(0, eliminate_x0 ? 0 : nx, d.dim.get());
-    d_tree_ocp_qp_dim_set_nbu(0, static_cast<int>(d.constraints[0].input_indices.size()), d.dim.get());
+    d_tree_ocp_qp_dim_set_nbu(0, static_cast<int>(d.constraints[0].input_indices.size()),
+                              d.dim.get());
     d_tree_ocp_qp_dim_set_ng(0, static_cast<int>(d.constraints[0].lower.size()), d.dim.get());
     for (int branch = 0; branch < branches; ++branch) {
-        const auto &ocp = fan.ocps[static_cast<std::size_t>(branch)];
+        const auto &ocp         = fan.ocps[static_cast<std::size_t>(branch)];
         d.node_index[branch][0] = 0;
 
         for (int stage = 1; stage <= horizon; ++stage) {
             const int node = bfs_node(branch, stage);
             // In a rooted tree with breadth-first numbering, edge node-1 enters node.
-            const int edge = node - 1;
+            const int edge              = node - 1;
             d.node_index[branch][stage] = node;
             d.edge_index[branch][stage] = edge;
 
             d_tree_ocp_qp_dim_set_nx(node, nx, d.dim.get());
             d_tree_ocp_qp_dim_set_nu(node, stage < horizon ? nu : 0, d.dim.get());
             auto &constraints = d.constraints[node];
-            constraints = fanqp::analyze_constraints({&ocp, 1}, stage, native_bounds);
-            d_tree_ocp_qp_dim_set_nbx(node, static_cast<int>(constraints.state_indices.size()), d.dim.get());
-            d_tree_ocp_qp_dim_set_nbu(node, static_cast<int>(constraints.input_indices.size()), d.dim.get());
+            constraints       = fanqp::analyze_constraints({&ocp, 1}, stage, native_bounds);
+            d_tree_ocp_qp_dim_set_nbx(node, static_cast<int>(constraints.state_indices.size()),
+                                      d.dim.get());
+            d_tree_ocp_qp_dim_set_nbu(node, static_cast<int>(constraints.input_indices.size()),
+                                      d.dim.get());
             d_tree_ocp_qp_dim_set_ng(node, static_cast<int>(constraints.lower.size()), d.dim.get());
         }
     }
 
     d.qp_mem = std::make_unique<std::byte[]>(d_tree_ocp_qp_memsize(d.dim.get()));
-    d.qp = std::make_unique<struct d_tree_ocp_qp>();
+    d.qp     = std::make_unique<struct d_tree_ocp_qp>();
     d_tree_ocp_qp_create(d.dim.get(), d.qp.get(), d.qp_mem.get());
 
     if (!eliminate_x0) {
@@ -281,12 +278,12 @@ build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds, bo
     S0.set_constant(0);
 
     for (int branch = 0; branch < branches; ++branch) {
-        const auto &ocp = fan.ocps[static_cast<std::size_t>(branch)]; 
-        const auto Rj  = ocp.R(0);
-        const auto rj  = ocp.r(0);
-        const auto qj  = ocp.q(0);
-        const auto Qj  = ocp.Q(0);
-        const auto Sj  = ocp.S(0);
+        const auto &ocp = fan.ocps[static_cast<std::size_t>(branch)];
+        const auto Rj   = ocp.R(0);
+        const auto rj   = ocp.r(0);
+        const auto qj   = ocp.q(0);
+        const auto Qj   = ocp.Q(0);
+        const auto Sj   = ocp.S(0);
 
         assert(Rj.rows == R0.rows);
         assert(Rj.cols == R0.cols);
@@ -333,14 +330,12 @@ build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds, bo
             } else {
                 auto A = compress_col_major(ocp.A(stage - 1));
                 d_tree_ocp_qp_set_A(edge, A.data(), d.qp.get());
-                d_tree_ocp_qp_set_b(edge,
-                    const_cast<real_t *>(ocp.b(stage).data), d.qp.get());
+                d_tree_ocp_qp_set_b(edge, const_cast<real_t *>(ocp.b(stage).data), d.qp.get());
             }
 
             auto Q = compress_col_major(ocp.Q(stage));
             d_tree_ocp_qp_set_Q(node, Q.data(), d.qp.get());
-            d_tree_ocp_qp_set_q(node,
-                const_cast<real_t *>(ocp.q(stage).data), d.qp.get());
+            d_tree_ocp_qp_set_q(node, const_cast<real_t *>(ocp.q(stage).data), d.qp.get());
             set_hpipm_constraints(*d.qp, node, d.constraints[node]);
 
             if (stage < horizon) {
@@ -348,8 +343,7 @@ build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds, bo
                 auto S = compress_col_major(ocp.S(stage));
                 d_tree_ocp_qp_set_R(node, R.data(), d.qp.get());
                 d_tree_ocp_qp_set_S(node, S.data(), d.qp.get());
-                d_tree_ocp_qp_set_r(node,
-                    const_cast<real_t *>(ocp.r(stage).data), d.qp.get());
+                d_tree_ocp_qp_set_r(node, const_cast<real_t *>(ocp.r(stage).data), d.qp.get());
             }
         }
     }
@@ -358,34 +352,32 @@ build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds, bo
 }
 
 std::shared_ptr<HPIPMTreeSolverData>
-create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
-                         int warm_start, int mode, real_t tol, int t0_init) {
+create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data, int warm_start, int mode,
+                         real_t tol, int t0_init) {
     BATMAT_ASSERT(qp_data);
     HPIPMTreeSolverData d;
 
-    d.qp_sol_mem = std::make_unique<std::byte[]>(
-        d_tree_ocp_qp_sol_memsize(qp_data->dim.get()));
-    d.qp_sol = std::make_unique<struct d_tree_ocp_qp_sol>();
+    d.qp_sol_mem = std::make_unique<std::byte[]>(d_tree_ocp_qp_sol_memsize(qp_data->dim.get()));
+    d.qp_sol     = std::make_unique<struct d_tree_ocp_qp_sol>();
     d_tree_ocp_qp_sol_create(qp_data->dim.get(), d.qp_sol.get(), d.qp_sol_mem.get());
 
-    d.solver_arg_mem = std::make_unique<std::byte[]>(
-        d_tree_ocp_qp_ipm_arg_memsize(qp_data->dim.get()));
+    d.solver_arg_mem =
+        std::make_unique<std::byte[]>(d_tree_ocp_qp_ipm_arg_memsize(qp_data->dim.get()));
     d.arg = std::make_unique<struct d_tree_ocp_qp_ipm_arg>();
-    d_tree_ocp_qp_ipm_arg_create(qp_data->dim.get(), d.arg.get(),
-                                  d.solver_arg_mem.get());
+    d_tree_ocp_qp_ipm_arg_create(qp_data->dim.get(), d.arg.get(), d.solver_arg_mem.get());
 
     int iter_max    = 100;
     double tol_stat = tol;
     double tol_eq   = tol;
     double tol_ineq = tol;
-    double tol_comp = tol*100; // set lower tolerance for complementarity as FanCyqlone does not check this explicitly
+    double tol_comp =
+        tol *
+        100; // set lower tolerance for complementarity as FanCyqlone does not check this explicitly
     if (mode == 0) {
         d_tree_ocp_qp_ipm_arg_set_default(hpipm_mode::SPEED, d.arg.get());
-    }
-    else if (mode == 1) {
+    } else if (mode == 1) {
         d_tree_ocp_qp_ipm_arg_set_default(hpipm_mode::BALANCE, d.arg.get());
-    }
-    else {
+    } else {
         throw std::invalid_argument("Invalid HPIPM mode. Use 0 for SPEED or 1 for BALANCE.");
     }
     d_tree_ocp_qp_ipm_arg_set_iter_max(&iter_max, d.arg.get());
@@ -395,22 +387,21 @@ create_hpipm_tree_solver(std::shared_ptr<HPIPMTreeQPData> qp_data,
     d_tree_ocp_qp_ipm_arg_set_tol_comp(&tol_comp, d.arg.get());
     d_tree_ocp_qp_ipm_arg_set_warm_start(&warm_start, d.arg.get());
     d.arg.get()->t0_init = t0_init;
-    d.solver_mem = std::make_unique<std::byte[]>(
+    d.solver_mem         = std::make_unique<std::byte[]>(
         d_tree_ocp_qp_ipm_ws_memsize(qp_data->dim.get(), d.arg.get()));
     d.workspace = std::make_unique<struct d_tree_ocp_qp_ipm_ws>();
-    d_tree_ocp_qp_ipm_ws_create(qp_data->dim.get(), d.arg.get(),
-                                 d.workspace.get(), d.solver_mem.get());
+    d_tree_ocp_qp_ipm_ws_create(qp_data->dim.get(), d.arg.get(), d.workspace.get(),
+                                d.solver_mem.get());
 
     d.qp_data = std::move(qp_data);
     return std::make_shared<HPIPMTreeSolverData>(std::move(d));
 }
 
-std::chrono::nanoseconds
-solve_hpipm_tree(const HPIPMTreeQPData &qp_data,
-                 HPIPMTreeSolverData &solver_data) {
+std::chrono::nanoseconds solve_hpipm_tree(const HPIPMTreeQPData &qp_data,
+                                          HPIPMTreeSolverData &solver_data) {
     const auto t0 = std::chrono::steady_clock::now();
-    d_tree_ocp_qp_ipm_solve(qp_data.qp.get(), solver_data.qp_sol.get(),
-                             solver_data.arg.get(), solver_data.workspace.get());
+    d_tree_ocp_qp_ipm_solve(qp_data.qp.get(), solver_data.qp_sol.get(), solver_data.arg.get(),
+                            solver_data.workspace.get());
     const auto t1 = std::chrono::steady_clock::now();
     return std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0);
 }
@@ -426,8 +417,7 @@ HPIPMStats get_stats_hpipm_tree(HPIPMTreeSolverData &solver_data) {
     return stats;
 }
 
-fancyqlone::FanOCPStorage::Solution
-get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
+fancyqlone::FanOCPStorage::Solution get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
     fancyqlone::FanOCPStorage::Solution fan_sol;
 
     const auto &data = *solver_data.qp_data;
@@ -437,15 +427,13 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
     const int num_branches = data.num_branches;
     const int horizon      = data.horizon;
     const int root         = 0;
-    const int original_nx = static_cast<int>(data.initial_state.size());
+    const int original_nx  = static_cast<int>(data.initial_state.size());
 
-    fan_sol.solutions.resize(
-        static_cast<std::size_t>(num_branches));
+    fan_sol.solutions.resize(static_cast<std::size_t>(num_branches));
 
     std::vector<real_t> x0 = data.initial_state;
 
-    std::vector<real_t> u0(
-        static_cast<std::size_t>(dim.nu[root]));
+    std::vector<real_t> u0(static_cast<std::size_t>(dim.nu[root]));
 
     if (!data.eliminated_x0)
         d_tree_ocp_qp_sol_get_x(root, qp_sol, x0.data());
@@ -477,55 +465,41 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
             multipliers[node].push_back(fanqp::constraint_multiplier(row, x_duals, u_duals, ug));
     }
 
-     //The root-state bound multiplier is shared by all branches.
-     //This is the multiplier of x0 = x_init in the merged tree QP.
-    std::vector<real_t> root_lam_lbx(
-        static_cast<std::size_t>(dim.nb[root]));
+    //The root-state bound multiplier is shared by all branches.
+    //This is the multiplier of x0 = x_init in the merged tree QP.
+    std::vector<real_t> root_lam_lbx(static_cast<std::size_t>(dim.nb[root]));
 
-    std::vector<real_t> root_lam_ubx(
-        static_cast<std::size_t>(dim.nb[root]));
+    std::vector<real_t> root_lam_ubx(static_cast<std::size_t>(dim.nb[root]));
 
     if (dim.nx[root] > 0) {
-        d_tree_ocp_qp_sol_get_lam_lb(
-            root, qp_sol, root_lam_lbx.data());
+        d_tree_ocp_qp_sol_get_lam_lb(root, qp_sol, root_lam_lbx.data());
 
-        d_tree_ocp_qp_sol_get_lam_ub(
-            root, qp_sol, root_lam_ubx.data());
+        d_tree_ocp_qp_sol_get_lam_ub(root, qp_sol, root_lam_ubx.data());
     }
 
     for (int branch = 0; branch < num_branches; ++branch) {
-        auto &branch_sol =
-            fan_sol.solutions[static_cast<std::size_t>(branch)];
+        auto &branch_sol = fan_sol.solutions[static_cast<std::size_t>(branch)];
 
         std::size_t primal_count =
-            static_cast<std::size_t>(original_nx) +
-            static_cast<std::size_t>(dim.nu[root]);
+            static_cast<std::size_t>(original_nx) + static_cast<std::size_t>(dim.nu[root]);
 
         for (int stage = 1; stage <= horizon; ++stage) {
             const int node = data.node_index[branch][stage];
 
-            primal_count +=
-                static_cast<std::size_t>(dim.nx[node]);
+            primal_count += static_cast<std::size_t>(dim.nx[node]);
 
-            primal_count +=
-                static_cast<std::size_t>(dim.nu[node]);
+            primal_count += static_cast<std::size_t>(dim.nu[node]);
         }
 
         branch_sol.solution.resize(primal_count);
 
         real_t *primal_out = branch_sol.solution.data();
 
-        std::copy(
-            x0.begin(),
-            x0.end(),
-            primal_out);
+        std::copy(x0.begin(), x0.end(), primal_out);
 
         primal_out += original_nx;
 
-        std::copy(
-            u0.begin(),
-            u0.end(),
-            primal_out);
+        std::copy(u0.begin(), u0.end(), primal_out);
 
         primal_out += dim.nu[root];
 
@@ -535,60 +509,47 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
         for (int stage = 1; stage <= horizon; ++stage) {
             const int node = data.node_index[branch][stage];
 
-            d_tree_ocp_qp_sol_get_x(
-                node,
-                qp_sol,
-                primal_out);
+            d_tree_ocp_qp_sol_get_x(node, qp_sol, primal_out);
 
             primal_out += dim.nx[node];
 
             if (dim.nu[node] > 0) {
-                d_tree_ocp_qp_sol_get_u(
-                    node,
-                    qp_sol,
-                    primal_out);
+                d_tree_ocp_qp_sol_get_u(node, qp_sol, primal_out);
 
                 primal_out += dim.nu[node];
             }
         }
 
-        BATMAT_ASSERT(
-            primal_out ==
-            branch_sol.solution.data() +
-                branch_sol.solution.size());
+        BATMAT_ASSERT(primal_out == branch_sol.solution.data() + branch_sol.solution.size());
 
         for (int stage = 0; stage <= horizon; ++stage) {
-            const int node = data.node_index[branch][stage];
+            const int node      = data.node_index[branch][stage];
             const auto &offsets = data.constraints[node].row_offsets;
-            const int source = stage == 0 ? branch : 0;
-            branch_sol.inequality_multipliers.insert(
-                branch_sol.inequality_multipliers.end(),
-                multipliers[node].begin() + offsets[source],
-                multipliers[node].begin() + offsets[source + 1]);
+            const int source    = stage == 0 ? branch : 0;
+            branch_sol.inequality_multipliers.insert(branch_sol.inequality_multipliers.end(),
+                                                     multipliers[node].begin() + offsets[source],
+                                                     multipliers[node].begin() +
+                                                         offsets[source + 1]);
         }
 
-        std::size_t equality_count =
-            static_cast<std::size_t>(original_nx);
+        std::size_t equality_count = static_cast<std::size_t>(original_nx);
 
         for (int stage = 1; stage <= horizon; ++stage) {
             const int node = data.node_index[branch][stage];
 
-            equality_count +=
-                static_cast<std::size_t>(dim.nx[node]);
+            equality_count += static_cast<std::size_t>(dim.nx[node]);
         }
 
-        branch_sol.equality_multipliers.resize(
-            equality_count);
+        branch_sol.equality_multipliers.resize(equality_count);
 
-        real_t *eq_out =
-            branch_sol.equality_multipliers.data();
-
+        real_t *eq_out = branch_sol.equality_multipliers.data();
 
         // Preserve the original layout, with zero multipliers for eliminated x0.
         for (int i = 0; i < original_nx; ++i) {
-            eq_out[i] = data.eliminated_x0 ? 0 :
-                root_lam_lbx[static_cast<std::size_t>(dim.nbu[root] + i)] -
-                root_lam_ubx[static_cast<std::size_t>(dim.nbu[root] + i)];
+            eq_out[i] = data.eliminated_x0
+                            ? 0
+                            : root_lam_lbx[static_cast<std::size_t>(dim.nbu[root] + i)] -
+                                  root_lam_ubx[static_cast<std::size_t>(dim.nbu[root] + i)];
         }
 
         eq_out += original_nx;
@@ -597,106 +558,70 @@ get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
             const int node = data.node_index[branch][stage];
             const int edge = data.edge_index[branch][stage];
 
-            d_tree_ocp_qp_sol_get_pi(
-                edge,
-                qp_sol,
-                eq_out);
+            d_tree_ocp_qp_sol_get_pi(edge, qp_sol, eq_out);
 
             eq_out += dim.nx[node];
         }
 
-        BATMAT_ASSERT(
-            eq_out ==
-            branch_sol.equality_multipliers.data() +
-                branch_sol.equality_multipliers.size());
+        BATMAT_ASSERT(eq_out == branch_sol.equality_multipliers.data() +
+                                    branch_sol.equality_multipliers.size());
     }
 
     return fan_sol;
 }
 
-
 // Validation helpers
 
-void check_tree_solution(
-    const d_tree_ocp_qp_sol &solution)
-{
+void check_tree_solution(const d_tree_ocp_qp_sol &solution) {
     if (solution.dim == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has a null dimension pointer");
+        throw std::invalid_argument("HPIPM tree solution has a null dimension pointer");
 }
 
-void check_node(
-    int node,
-    const d_tree_ocp_qp_sol &solution)
-{
+void check_node(int node, const d_tree_ocp_qp_sol &solution) {
     check_tree_solution(solution);
 
     if (node < 0 || node >= solution.dim->Nn) {
-        throw std::out_of_range(
-            "Invalid HPIPM tree node " +
-            std::to_string(node) +
-            "; number of nodes is " +
-            std::to_string(solution.dim->Nn));
+        throw std::out_of_range("Invalid HPIPM tree node " + std::to_string(node) +
+                                "; number of nodes is " + std::to_string(solution.dim->Nn));
     }
 }
 
-void check_edge(
-    int edge,
-    const d_tree_ocp_qp_sol &solution)
-{
+void check_edge(int edge, const d_tree_ocp_qp_sol &solution) {
     check_tree_solution(solution);
 
     const int number_of_edges = solution.dim->Nn - 1;
 
     if (edge < 0 || edge >= number_of_edges) {
-        throw std::out_of_range(
-            "Invalid HPIPM tree edge " +
-            std::to_string(edge) +
-            "; number of edges is " +
-            std::to_string(number_of_edges));
+        throw std::out_of_range("Invalid HPIPM tree edge " + std::to_string(edge) +
+                                "; number of edges is " + std::to_string(number_of_edges));
     }
 }
 
-void check_size(
-    std::span<const double> value,
-    int expected_size,
-    const char *field)
-{
+void check_size(std::span<const double> value, int expected_size, const char *field) {
     if (expected_size < 0) {
-        throw std::invalid_argument(
-            std::string{"Negative expected dimension for "} + field);
+        throw std::invalid_argument(std::string{"Negative expected dimension for "} + field);
     }
 
-    if (value.size() !=
-        static_cast<std::size_t>(expected_size)) {
-        throw std::invalid_argument(
-            std::string{"Invalid size for "} + field +
-            ": got " + std::to_string(value.size()) +
-            ", expected " + std::to_string(expected_size));
+    if (value.size() != static_cast<std::size_t>(expected_size)) {
+        throw std::invalid_argument(std::string{"Invalid size for "} + field + ": got " +
+                                    std::to_string(value.size()) + ", expected " +
+                                    std::to_string(expected_size));
     }
 }
 
 // BLASFEO packing helper
 
-void pack_vector(
-    std::span<const double> source,
-    blasfeo_dvec &destination,
-    int destination_offset)
-{
+void pack_vector(std::span<const double> source, blasfeo_dvec &destination,
+                 int destination_offset) {
     if (source.empty())
         return;
 
     if (destination_offset < 0)
-        throw std::invalid_argument(
-            "Negative BLASFEO destination offset");
+        throw std::invalid_argument("Negative BLASFEO destination offset");
 
     // BLASFEO's API takes double*, even though the source data is only read.
-    blasfeo_pack_dvec(
-        static_cast<int>(source.size()),
-        const_cast<double *>(source.data()),
-        1,
-        &destination,
-        destination_offset);
+    blasfeo_pack_dvec(static_cast<int>(source.size()), const_cast<double *>(source.data()), 1,
+                      &destination, destination_offset);
 }
 
 // ux offsets
@@ -711,10 +636,7 @@ struct UXOffsets {
     int total;
 };
 
-UXOffsets get_ux_offsets(
-    int node,
-    const d_tree_ocp_qp_sol &solution)
-{
+UXOffsets get_ux_offsets(int node, const d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     const auto &dim = *solution.dim;
@@ -745,10 +667,7 @@ struct InequalityOffsets {
     int total;
 };
 
-InequalityOffsets get_inequality_offsets(
-    int node,
-    const d_tree_ocp_qp_sol &solution)
-{
+InequalityOffsets get_inequality_offsets(int node, const d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     const auto &dim = *solution.dim;
@@ -766,509 +685,327 @@ InequalityOffsets get_inequality_offsets(
     return offsets;
 }
 
-
 // =============================================================================
 // ux setters
 // =============================================================================
 
-void tree_ocp_qp_sol_set_u(
-    int node,
-    std::span<const double> u,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_u(int node, std::span<const double> u, d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.ux == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null ux storage");
+        throw std::invalid_argument("HPIPM tree solution has null ux storage");
 
-    const auto &dim = *solution.dim;
+    const auto &dim    = *solution.dim;
     const auto offsets = get_ux_offsets(node, solution);
 
     check_size(u, dim.nu[node], "u");
 
-    pack_vector(
-        u,
-        solution.ux[node],
-        offsets.u);
+    pack_vector(u, solution.ux[node], offsets.u);
 }
 
-void tree_ocp_qp_sol_set_x(
-    int node,
-    std::span<const double> x,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_x(int node, std::span<const double> x, d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.ux == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null ux storage");
+        throw std::invalid_argument("HPIPM tree solution has null ux storage");
 
-    const auto &dim = *solution.dim;
+    const auto &dim    = *solution.dim;
     const auto offsets = get_ux_offsets(node, solution);
 
     check_size(x, dim.nx[node], "x");
 
-    pack_vector(
-        x,
-        solution.ux[node],
-        offsets.x);
+    pack_vector(x, solution.ux[node], offsets.x);
 }
 
-void tree_ocp_qp_sol_set_sl(
-    int node,
-    std::span<const double> sl,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_sl(int node, std::span<const double> sl, d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.ux == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null ux storage");
+        throw std::invalid_argument("HPIPM tree solution has null ux storage");
 
-    const auto &dim = *solution.dim;
+    const auto &dim    = *solution.dim;
     const auto offsets = get_ux_offsets(node, solution);
 
     check_size(sl, dim.ns[node], "sl");
 
-    pack_vector(
-        sl,
-        solution.ux[node],
-        offsets.sl);
+    pack_vector(sl, solution.ux[node], offsets.sl);
 }
 
-void tree_ocp_qp_sol_set_su(
-    int node,
-    std::span<const double> su,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_su(int node, std::span<const double> su, d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.ux == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null ux storage");
+        throw std::invalid_argument("HPIPM tree solution has null ux storage");
 
-    const auto &dim = *solution.dim;
+    const auto &dim    = *solution.dim;
     const auto offsets = get_ux_offsets(node, solution);
 
     check_size(su, dim.ns[node], "su");
 
-    pack_vector(
-        su,
-        solution.ux[node],
-        offsets.su);
+    pack_vector(su, solution.ux[node], offsets.su);
 }
 
-void tree_ocp_qp_sol_set_ux(
-    int node,
-    std::span<const double> ux,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_ux(int node, std::span<const double> ux, d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.ux == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null ux storage");
+        throw std::invalid_argument("HPIPM tree solution has null ux storage");
 
     const auto offsets = get_ux_offsets(node, solution);
 
-    check_size(
-        ux,
-        offsets.total,
-        "ux");
+    check_size(ux, offsets.total, "ux");
 
-    pack_vector(
-        ux,
-        solution.ux[node],
-        0);
+    pack_vector(ux, solution.ux[node], 0);
 }
 
 // =============================================================================
 // pi setters
 // =============================================================================
 
-void tree_ocp_qp_sol_set_pi(
-    int edge,
-    std::span<const double> pi,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_pi(int edge, std::span<const double> pi, d_tree_ocp_qp_sol &solution) {
     check_edge(edge, solution);
 
     if (solution.pi == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null pi storage");
+        throw std::invalid_argument("HPIPM tree solution has null pi storage");
 
     // HPIPM convention: pi[edge] corresponds to the edge entering
     // child node edge + 1.
     const int child_node = edge + 1;
 
-    check_size(
-        pi,
-        solution.dim->nx[child_node],
-        "pi");
+    check_size(pi, solution.dim->nx[child_node], "pi");
 
-    pack_vector(
-        pi,
-        solution.pi[edge],
-        0);
+    pack_vector(pi, solution.pi[edge], 0);
 }
 
-void tree_ocp_qp_sol_set_pi_for_node(
-    int child_node,
-    std::span<const double> pi,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_pi_for_node(int child_node, std::span<const double> pi,
+                                     d_tree_ocp_qp_sol &solution) {
     check_node(child_node, solution);
 
     if (child_node == 0)
-        throw std::invalid_argument(
-            "The root node has no incoming dynamics multiplier");
+        throw std::invalid_argument("The root node has no incoming dynamics multiplier");
 
-    tree_ocp_qp_sol_set_pi(
-        child_node - 1,
-        pi,
-        solution);
+    tree_ocp_qp_sol_set_pi(child_node - 1, pi, solution);
 }
 
 // lam setters
 //
 // lam = [lb; lg; ub; ug; ls; us]
 
-void tree_ocp_qp_sol_set_lam_lb(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_lam_lb(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.lam == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null lam storage");
+        throw std::invalid_argument("HPIPM tree solution has null lam storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.nb[node], "lam_lb");
 
-    pack_vector(
-        value,
-        solution.lam[node],
-        offsets.lb);
+    pack_vector(value, solution.lam[node], offsets.lb);
 }
 
-void tree_ocp_qp_sol_set_lam_lg(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_lam_lg(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.lam == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null lam storage");
+        throw std::invalid_argument("HPIPM tree solution has null lam storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.ng[node], "lam_lg");
 
-    pack_vector(
-        value,
-        solution.lam[node],
-        offsets.lg);
+    pack_vector(value, solution.lam[node], offsets.lg);
 }
 
-void tree_ocp_qp_sol_set_lam_ub(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_lam_ub(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.lam == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null lam storage");
+        throw std::invalid_argument("HPIPM tree solution has null lam storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.nb[node], "lam_ub");
 
-    pack_vector(
-        value,
-        solution.lam[node],
-        offsets.ub);
+    pack_vector(value, solution.lam[node], offsets.ub);
 }
 
-void tree_ocp_qp_sol_set_lam_ug(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_lam_ug(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.lam == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null lam storage");
+        throw std::invalid_argument("HPIPM tree solution has null lam storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.ng[node], "lam_ug");
 
-    pack_vector(
-        value,
-        solution.lam[node],
-        offsets.ug);
+    pack_vector(value, solution.lam[node], offsets.ug);
 }
 
-void tree_ocp_qp_sol_set_lam_ls(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_lam_ls(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.lam == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null lam storage");
+        throw std::invalid_argument("HPIPM tree solution has null lam storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.ns[node], "lam_ls");
 
-    pack_vector(
-        value,
-        solution.lam[node],
-        offsets.ls);
+    pack_vector(value, solution.lam[node], offsets.ls);
 }
 
-void tree_ocp_qp_sol_set_lam_us(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_lam_us(int node, std::span<const double> value,
+                                d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.lam == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null lam storage");
+        throw std::invalid_argument("HPIPM tree solution has null lam storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.ns[node], "lam_us");
 
-    pack_vector(
-        value,
-        solution.lam[node],
-        offsets.us);
+    pack_vector(value, solution.lam[node], offsets.us);
 }
 
-void tree_ocp_qp_sol_set_lam(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_lam(int node, std::span<const double> value, d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.lam == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null lam storage");
+        throw std::invalid_argument("HPIPM tree solution has null lam storage");
 
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto offsets = get_inequality_offsets(node, solution);
 
-    check_size(
-        value,
-        offsets.total,
-        "lam");
+    check_size(value, offsets.total, "lam");
 
-    pack_vector(
-        value,
-        solution.lam[node],
-        0);
+    pack_vector(value, solution.lam[node], 0);
 }
 
 // t setters
 //
 // t = [lb; lg; ub; ug; ls; us]
 
-void tree_ocp_qp_sol_set_t_lb(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_t_lb(int node, std::span<const double> value,
+                              d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.t == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null t storage");
+        throw std::invalid_argument("HPIPM tree solution has null t storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.nb[node], "t_lb");
 
-    pack_vector(
-        value,
-        solution.t[node],
-        offsets.lb);
+    pack_vector(value, solution.t[node], offsets.lb);
 }
 
-void tree_ocp_qp_sol_set_t_lg(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_t_lg(int node, std::span<const double> value,
+                              d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.t == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null t storage");
+        throw std::invalid_argument("HPIPM tree solution has null t storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.ng[node], "t_lg");
 
-    pack_vector(
-        value,
-        solution.t[node],
-        offsets.lg);
+    pack_vector(value, solution.t[node], offsets.lg);
 }
 
-void tree_ocp_qp_sol_set_t_ub(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_t_ub(int node, std::span<const double> value,
+                              d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.t == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null t storage");
+        throw std::invalid_argument("HPIPM tree solution has null t storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.nb[node], "t_ub");
 
-    pack_vector(
-        value,
-        solution.t[node],
-        offsets.ub);
+    pack_vector(value, solution.t[node], offsets.ub);
 }
 
-void tree_ocp_qp_sol_set_t_ug(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_t_ug(int node, std::span<const double> value,
+                              d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.t == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null t storage");
+        throw std::invalid_argument("HPIPM tree solution has null t storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.ng[node], "t_ug");
 
-    pack_vector(
-        value,
-        solution.t[node],
-        offsets.ug);
+    pack_vector(value, solution.t[node], offsets.ug);
 }
 
-void tree_ocp_qp_sol_set_t_ls(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_t_ls(int node, std::span<const double> value,
+                              d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.t == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null t storage");
+        throw std::invalid_argument("HPIPM tree solution has null t storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.ns[node], "t_ls");
 
-    pack_vector(
-        value,
-        solution.t[node],
-        offsets.ls);
+    pack_vector(value, solution.t[node], offsets.ls);
 }
 
-void tree_ocp_qp_sol_set_t_us(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_t_us(int node, std::span<const double> value,
+                              d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.t == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null t storage");
+        throw std::invalid_argument("HPIPM tree solution has null t storage");
 
-    const auto &dim = *solution.dim;
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto &dim    = *solution.dim;
+    const auto offsets = get_inequality_offsets(node, solution);
 
     check_size(value, dim.ns[node], "t_us");
 
-    pack_vector(
-        value,
-        solution.t[node],
-        offsets.us);
+    pack_vector(value, solution.t[node], offsets.us);
 }
 
-void tree_ocp_qp_sol_set_t(
-    int node,
-    std::span<const double> value,
-    d_tree_ocp_qp_sol &solution)
-{
+void tree_ocp_qp_sol_set_t(int node, std::span<const double> value, d_tree_ocp_qp_sol &solution) {
     check_node(node, solution);
 
     if (solution.t == nullptr)
-        throw std::invalid_argument(
-            "HPIPM tree solution has null t storage");
+        throw std::invalid_argument("HPIPM tree solution has null t storage");
 
-    const auto offsets =
-        get_inequality_offsets(node, solution);
+    const auto offsets = get_inequality_offsets(node, solution);
 
-    check_size(
-        value,
-        offsets.total,
-        "t");
+    check_size(value, offsets.total, "t");
 
-    pack_vector(
-        value,
-        solution.t[node],
-        0);
+    pack_vector(value, solution.t[node], 0);
 }
 void set_initial_guess_hpipm_tree(HPIPMTreeSolverData &solver_data,
                                   const fancyqlone::FanOCPStorage &fan,
                                   const fancyqlone::FanOCPStorage::Solution &guess) {
-    const auto &data = *solver_data.qp_data;
-    const auto &dim = *data.dim;
-    auto &sol = *solver_data.qp_sol;
+    const auto &data       = *solver_data.qp_data;
+    const auto &dim        = *data.dim;
+    auto &sol              = *solver_data.qp_sol;
     constexpr real_t floor = 1e-8;
     if (fan.ocps.size() != static_cast<size_t>(data.num_branches) ||
         guess.solutions.size() != fan.ocps.size())
@@ -1292,16 +1029,18 @@ void set_initial_guess_hpipm_tree(HPIPMTreeSolverData &solver_data,
         size_t y_offset = 0;
         for (int stage = 0; stage <= N; ++stage) {
             const int node = data.node_index[branch][stage];
-            const auto x = stage == 0 ? std::span<const real_t>{ocp.b(0).data, static_cast<size_t>(nx)}
-                                     : std::span{src.solution}.subspan(stage * (nx + nu), nx);
+            const auto x   = stage == 0
+                                 ? std::span<const real_t>{ocp.b(0).data, static_cast<size_t>(nx)}
+                                 : std::span{src.solution}.subspan(stage * (nx + nu), nx);
             const auto u = stage == N ? std::span<const real_t>{}
-                                     : std::span{src.solution}.subspan(stage * (nx + nu) + nx, nu);
+                                      : std::span{src.solution}.subspan(stage * (nx + nu) + nx, nu);
             tree_ocp_qp_sol_set_x(node, x, sol);
             tree_ocp_qp_sol_set_u(node, u, sol);
             if (stage > 0)
                 tree_ocp_qp_sol_set_pi(data.edge_index[branch][stage],
-                    std::span{src.equality_multipliers}.subspan(stage * nx, nx), sol);
-            const auto C = ocp.C(stage);
+                                       std::span{src.equality_multipliers}.subspan(stage * nx, nx),
+                                       sol);
+            const auto C  = ocp.C(stage);
             const auto lb = ocp.b_min(stage), ub = ocp.b_max(stage);
             std::vector<real_t> lg(C.rows), ug(C.rows), tl(C.rows), tu(C.rows);
             for (int row = 0; row < C.rows; ++row) {
@@ -1312,10 +1051,10 @@ void set_initial_guess_hpipm_tree(HPIPMTreeSolverData &solver_data,
                     for (int col = 0; col < nu; ++col)
                         value += ocp.D(stage)(row, col) * u[col];
                 const auto y = src.inequality_multipliers[y_offset + row];
-                lg[row] = std::max(-y, floor);
-                ug[row] = std::max(y, floor);
-                tl[row] = std::isfinite(lb(row, 0)) ? std::max(value - lb(row, 0), floor) : 1;
-                tu[row] = std::isfinite(ub(row, 0)) ? std::max(ub(row, 0) - value, floor) : 1;
+                lg[row]      = std::max(-y, floor);
+                ug[row]      = std::max(y, floor);
+                tl[row]      = std::isfinite(lb(row, 0)) ? std::max(value - lb(row, 0), floor) : 1;
+                tu[row]      = std::isfinite(ub(row, 0)) ? std::max(ub(row, 0) - value, floor) : 1;
             }
             y_offset += C.rows;
             if (stage == 0) {
@@ -1347,10 +1086,7 @@ void set_initial_guess_hpipm_tree(HPIPMTreeSolverData &solver_data,
     tree_ocp_qp_sol_set_t_ug(0, root_tu, sol);
 }
 
-void shift_hpipm_tree_solution(
-    HPIPMTreeSolverData &solver_data,
-    real_t floor)
-{
+void shift_hpipm_tree_solution(HPIPMTreeSolverData &solver_data, real_t floor) {
     auto &data = *solver_data.qp_data;
     auto &dim  = *data.dim;
     auto &sol  = *solver_data.qp_sol;
@@ -1362,34 +1098,34 @@ void shift_hpipm_tree_solution(
 
     // Snapshot helpers. The snapshot is necessary because shifting overwrites
     // values that later stages still need to read.
-    auto get_x = [&] (int node) {
+    auto get_x = [&](int node) {
         std::vector<real_t> x(static_cast<std::size_t>(dim.nx[node]));
         d_tree_ocp_qp_sol_get_x(node, &sol, x.data());
         return x;
     };
 
-    auto get_u = [&] (int node) {
+    auto get_u = [&](int node) {
         std::vector<real_t> u(static_cast<std::size_t>(dim.nu[node]));
         if (dim.nu[node] > 0)
             d_tree_ocp_qp_sol_get_u(node, &sol, u.data());
         return u;
     };
 
-    auto get_pi = [&] (int edge) {
+    auto get_pi = [&](int edge) {
         const int child = edge + 1;
         std::vector<real_t> pi(static_cast<std::size_t>(dim.nx[child]));
         d_tree_ocp_qp_sol_get_pi(edge, &sol, pi.data());
         return pi;
     };
 
-    auto get_lam_lg = [&] (int node) {
+    auto get_lam_lg = [&](int node) {
         std::vector<real_t> v(static_cast<std::size_t>(dim.ng[node]));
         if (dim.ng[node] > 0)
             d_tree_ocp_qp_sol_get_lam_lg(node, &sol, v.data());
         return v;
     };
 
-    auto get_lam_ug = [&] (int node) {
+    auto get_lam_ug = [&](int node) {
         std::vector<real_t> v(static_cast<std::size_t>(dim.ng[node]));
         if (dim.ng[node] > 0)
             d_tree_ocp_qp_sol_get_lam_ug(node, &sol, v.data());
@@ -1424,9 +1160,9 @@ void shift_hpipm_tree_solution(
             const int node = data.node_index[b][k];
             const int edge = data.edge_index[b][k];
 
-            s.x[static_cast<std::size_t>(k)] = get_x(node);
-            s.u[static_cast<std::size_t>(k)] = get_u(node);
-            s.pi[static_cast<std::size_t>(k)] = get_pi(edge);
+            s.x[static_cast<std::size_t>(k)]      = get_x(node);
+            s.u[static_cast<std::size_t>(k)]      = get_u(node);
+            s.pi[static_cast<std::size_t>(k)]     = get_pi(edge);
             s.lam_lg[static_cast<std::size_t>(k)] = get_lam_lg(node);
             s.lam_ug[static_cast<std::size_t>(k)] = get_lam_ug(node);
         }
@@ -1448,17 +1184,13 @@ void shift_hpipm_tree_solution(
         const auto &x1 = old[static_cast<std::size_t>(b)].x[1];
 
         for (int i = 0; i < nx; ++i)
-            mean_x1[static_cast<std::size_t>(i)] +=
-                x1[static_cast<std::size_t>(i)];
+            mean_x1[static_cast<std::size_t>(i)] += x1[static_cast<std::size_t>(i)];
 
         const auto &u_source =
-            N > 1
-                ? old[static_cast<std::size_t>(b)].u[1]
-                : old[static_cast<std::size_t>(b)].u[0];
+            N > 1 ? old[static_cast<std::size_t>(b)].u[1] : old[static_cast<std::size_t>(b)].u[0];
 
         for (int i = 0; i < nu; ++i)
-            mean_u1[static_cast<std::size_t>(i)] +=
-                u_source[static_cast<std::size_t>(i)];
+            mean_u1[static_cast<std::size_t>(i)] += u_source[static_cast<std::size_t>(i)];
     }
 
     for (auto &v : mean_x1)
@@ -1471,15 +1203,9 @@ void shift_hpipm_tree_solution(
     tree_ocp_qp_sol_set_u(0, mean_u1, sol);
 
     // The QP bound and the initial solution must use the same new x0.
-    d_tree_ocp_qp_set_lbx(
-        0,
-        mean_x1.data(),
-        data.qp.get());
+    d_tree_ocp_qp_set_lbx(0, mean_x1.data(), data.qp.get());
 
-    d_tree_ocp_qp_set_ubx(
-        0,
-        mean_x1.data(),
-        data.qp.get());
+    d_tree_ocp_qp_set_ubx(0, mean_x1.data(), data.qp.get());
 
     // -------------------------------------------------------------------------
     // New root equality multiplier:
@@ -1489,36 +1215,25 @@ void shift_hpipm_tree_solution(
     // Represent lambda = lam_lb - lam_ub using positive components.
     // -------------------------------------------------------------------------
 
-    std::vector<real_t> lambda_root(
-        static_cast<std::size_t>(nx),
-        0.0);
+    std::vector<real_t> lambda_root(static_cast<std::size_t>(nx), 0.0);
 
     for (int b = 0; b < B; ++b) {
-        const auto &pi1 =
-            old[static_cast<std::size_t>(b)].pi[1];
+        const auto &pi1 = old[static_cast<std::size_t>(b)].pi[1];
 
         for (int i = 0; i < nx; ++i)
-            lambda_root[static_cast<std::size_t>(i)] +=
-                pi1[static_cast<std::size_t>(i)];
+            lambda_root[static_cast<std::size_t>(i)] += pi1[static_cast<std::size_t>(i)];
     }
 
-    std::vector<real_t> root_lb(
-        static_cast<std::size_t>(dim.nb[0]),
-        floor);
+    std::vector<real_t> root_lb(static_cast<std::size_t>(dim.nb[0]), floor);
 
-    std::vector<real_t> root_ub(
-        static_cast<std::size_t>(dim.nb[0]),
-        floor);
+    std::vector<real_t> root_ub(static_cast<std::size_t>(dim.nb[0]), floor);
 
     for (int i = 0; i < nx; ++i) {
-        const real_t lambda =
-            lambda_root[static_cast<std::size_t>(i)];
+        const real_t lambda = lambda_root[static_cast<std::size_t>(i)];
 
-        root_lb[static_cast<std::size_t>(i)] =
-            std::max(lambda, real_t{0}) + floor;
+        root_lb[static_cast<std::size_t>(i)] = std::max(lambda, real_t{0}) + floor;
 
-        root_ub[static_cast<std::size_t>(i)] =
-            std::max(-lambda, real_t{0}) + floor;
+        root_ub[static_cast<std::size_t>(i)] = std::max(-lambda, real_t{0}) + floor;
     }
 
     tree_ocp_qp_sol_set_lam_lb(0, root_lb, sol);
@@ -1531,32 +1246,20 @@ void shift_hpipm_tree_solution(
     // branch's old stage-1 block into the corresponding root block.
     // -------------------------------------------------------------------------
 
-    std::vector<real_t> root_lg(
-        static_cast<std::size_t>(dim.ng[0]),
-        floor);
+    std::vector<real_t> root_lg(static_cast<std::size_t>(dim.ng[0]), floor);
 
-    std::vector<real_t> root_ug(
-        static_cast<std::size_t>(dim.ng[0]),
-        floor);
+    std::vector<real_t> root_ug(static_cast<std::size_t>(dim.ng[0]), floor);
 
     int root_offset = 0;
 
     for (int b = 0; b < B; ++b) {
-        const auto &lg1 =
-            old[static_cast<std::size_t>(b)].lam_lg[1];
+        const auto &lg1 = old[static_cast<std::size_t>(b)].lam_lg[1];
 
-        const auto &ug1 =
-            old[static_cast<std::size_t>(b)].lam_ug[1];
+        const auto &ug1 = old[static_cast<std::size_t>(b)].lam_ug[1];
 
-        std::copy(
-            lg1.begin(),
-            lg1.end(),
-            root_lg.begin() + root_offset);
+        std::copy(lg1.begin(), lg1.end(), root_lg.begin() + root_offset);
 
-        std::copy(
-            ug1.begin(),
-            ug1.end(),
-            root_ug.begin() + root_offset);
+        std::copy(ug1.begin(), ug1.end(), root_ug.begin() + root_offset);
 
         root_offset += static_cast<int>(lg1.size());
     }
@@ -1583,54 +1286,38 @@ void shift_hpipm_tree_solution(
 
             const int source_stage = std::min(k + 1, N);
 
-            tree_ocp_qp_sol_set_x(
-                destination_node,
-                s.x[static_cast<std::size_t>(source_stage)],
-                sol);
+            tree_ocp_qp_sol_set_x(destination_node, s.x[static_cast<std::size_t>(source_stage)],
+                                  sol);
 
             if (dim.nu[destination_node] > 0) {
                 // Terminal stage has no input. Hold the last available input.
-                const int source_input_stage =
-                    std::min(k + 1, N - 1);
+                const int source_input_stage = std::min(k + 1, N - 1);
 
-                tree_ocp_qp_sol_set_u(
-                    destination_node,
-                    s.u[static_cast<std::size_t>(source_input_stage)],
-                    sol);
+                tree_ocp_qp_sol_set_u(destination_node,
+                                      s.u[static_cast<std::size_t>(source_input_stage)], sol);
             }
 
-            tree_ocp_qp_sol_set_pi(
-                destination_edge,
-                s.pi[static_cast<std::size_t>(source_stage)],
-                sol);
+            tree_ocp_qp_sol_set_pi(destination_edge, s.pi[static_cast<std::size_t>(source_stage)],
+                                   sol);
 
             // Copy general-constraint multipliers only when dimensions match.
             if (dim.ng[destination_node] ==
-                static_cast<int>(
-                    s.lam_lg[
-                        static_cast<std::size_t>(source_stage)].size())) {
-                tree_ocp_qp_sol_set_lam_lg(
-                    destination_node,
-                    s.lam_lg[
-                        static_cast<std::size_t>(source_stage)],
-                    sol);
+                static_cast<int>(s.lam_lg[static_cast<std::size_t>(source_stage)].size())) {
+                tree_ocp_qp_sol_set_lam_lg(destination_node,
+                                           s.lam_lg[static_cast<std::size_t>(source_stage)], sol);
 
-                tree_ocp_qp_sol_set_lam_ug(
-                    destination_node,
-                    s.lam_ug[
-                        static_cast<std::size_t>(source_stage)],
-                    sol);
+                tree_ocp_qp_sol_set_lam_ug(destination_node,
+                                           s.lam_ug[static_cast<std::size_t>(source_stage)], sol);
             }
         }
     }
 }
-void update_x0_hpipm_tree(fancyqlone::FanOCPStorage &fan,
-                          HPIPMTreeQPData &qp_data,
+void update_x0_hpipm_tree(fancyqlone::FanOCPStorage &fan, HPIPMTreeQPData &qp_data,
                           std::vector<fancyqlone::LinearOCPStorage::Solution> &solution,
                           index_t branch) {
-    const int b = static_cast<int>(branch);
-    const auto &dim = *qp_data.dim;
-    const auto nx = qp_data.initial_state.size();
+    const int b        = static_cast<int>(branch);
+    const auto &dim    = *qp_data.dim;
+    const auto nx      = qp_data.initial_state.size();
     const auto &primal = solution.at(b).solution;
     if (primal.size() < 2 * nx + dim.nu[0])
         throw std::invalid_argument("HPIPM solution does not contain the next state");
@@ -1644,7 +1331,7 @@ void update_x0_hpipm_tree(fancyqlone::FanOCPStorage &fan,
         d_tree_ocp_qp_set_r(0, root.r.data(), qp_data.qp.get());
         for (int branch_index = 0; branch_index < qp_data.num_branches; ++branch_index)
             d_tree_ocp_qp_set_b(qp_data.edge_index[branch_index][1], root.b[branch_index].data(),
-                              qp_data.qp.get());
+                                qp_data.qp.get());
     } else {
         d_tree_ocp_qp_set_lbx(0, const_cast<real_t *>(x1.data()), qp_data.qp.get());
         d_tree_ocp_qp_set_ubx(0, const_cast<real_t *>(x1.data()), qp_data.qp.get());

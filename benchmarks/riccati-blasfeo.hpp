@@ -1,8 +1,8 @@
 #pragma once
 
-#include <fancyqlone/config.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/config.hpp>
+#include <fancyqlone/config.hpp>
 #include <hyhound/ocp/riccati.hpp>
 #include <blasfeo.h>
 #include <algorithm>

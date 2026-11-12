@@ -4,8 +4,8 @@
 /// Kahan-Babuška-Neumaier compensated summation.
 /// @ingroup topic-utilities
 
-#include <fancyqlone/config.hpp>
 #include <batmat/simd.hpp>
+#include <fancyqlone/config.hpp>
 #include <cmath>
 #include <type_traits>
 

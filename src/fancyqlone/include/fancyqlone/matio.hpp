@@ -4,10 +4,10 @@
 /// Functions for exporting and loading matrices and OCP data to and from .mat files
 /// @ingroup topic-util-matio
 
+#include <batmat/matrix/view.hpp>
 #include <fancyqlone/config.hpp>
 #include <fancyqlone/ocp.hpp>
 #include <fancyqlone/sparse.hpp>
-#include <batmat/matrix/view.hpp>
 #include <filesystem>
 #include <memory>
 #include <vector>

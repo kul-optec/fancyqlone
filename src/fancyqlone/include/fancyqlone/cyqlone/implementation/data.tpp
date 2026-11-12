@@ -186,14 +186,14 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_gradient(
                     } else {
                         grad.batch(di)(vi).top_rows(nu) = ocp.data_rq(0).top_rows(nu);
                         fancyqlone::detail::scale(scale_qN, ocp.data_rq(0).bottom_rows(nx),
-                                               grad.batch(di)(vi).bottom_rows(nx));
+                                                  grad.batch(di)(vi).bottom_rows(nx));
                     }
                 } else if (j < N_horiz) {
                     grad.batch(di)(vi) = ocp.data_rq(j);
                 } else {
                     grad.batch(di)(vi).top_rows(nu).set_constant(0);
                     fancyqlone::detail::scale(scale_qN, ocp.data_rq(0).bottom_rows(nx),
-                                           grad.batch(di)(vi).bottom_rows(nx));
+                                              grad.batch(di)(vi).bottom_rows(nx));
                 }
             }
         }

@@ -1,13 +1,13 @@
-#include <fancyqlone/config.hpp>
-#include <fancyqlone/cyqlone/cyqlone-storage.hpp>
-#include <fancyqlone/cyqlone/cyqlone.hpp>
-#include <fancyqlone/linalg.hpp>
-#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
-#include <fancyqlone/fancyqpalm/solver.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/config.hpp>
 #include <batmat/linalg/simdify.hpp> // TODO: remove
-#include <guanaqo/eigen/span.hpp>    // TODO: remove
+#include <fancyqlone/config.hpp>
+#include <fancyqlone/cyqlone/cyqlone-storage.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
+#include <fancyqlone/fancyqpalm/solver.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <guanaqo/eigen/span.hpp> // TODO: remove
 #include <guanaqo/eigen/view.hpp>
 
 #include <format>
@@ -33,8 +33,8 @@ struct PythonCyqloneSolver {
     PythonCyqloneSolver(const PythonOCP &ocp,
                         fancyqlone::qpalm::CyQPALMBackendSettings backend_settings,
                         fancyqlone::qpalm::Settings qpalm_settings)
-        : solver{fancyqlone::qpalm::make_cyqpalm_backend<VL>(fancyqlone::CyqloneStorage<>::build(ocp.ocp),
-                                                          {}, backend_settings),
+        : solver{fancyqlone::qpalm::make_cyqpalm_backend<VL>(
+                     fancyqlone::CyqloneStorage<>::build(ocp.ocp), {}, backend_settings),
                  qpalm_settings} {}
 };
 
@@ -457,7 +457,7 @@ struct overloaded : Ts... {
 #define CYQLONE_INSTANTIATE_MODULE(VL)                                                             \
     auto m##VL = m.def_submodule(VL == 1 ? "scalar" : "simd" #VL);                                 \
     fancyqlone::register_qpalm_cyqlone<VL>(m##VL);                                                 \
-    fancyqlone::register_cyqlone_solver<fancyqlone::CyqloneSolver<VL>>(m##VL);                      \
+    fancyqlone::register_cyqlone_solver<fancyqlone::CyqloneSolver<VL>>(m##VL);                     \
     fancyqlone::register_fancyqlone_solver<VL>(m##VL);
 
 NB_MODULE(MODULE_NAME, m) { BATMAT_FOREACH_VL_DEFAULT(CYQLONE_INSTANTIATE_MODULE) }

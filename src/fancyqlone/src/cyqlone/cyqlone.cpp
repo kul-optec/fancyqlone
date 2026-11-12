@@ -1,3 +1,4 @@
+#include <batmat/config.hpp>
 #include <fancyqlone/cyqlone/cyqlone.hpp>
 #include <fancyqlone/cyqlone/implementation/cr.tpp>
 #include <fancyqlone/cyqlone/implementation/data.tpp>
@@ -10,7 +11,6 @@
 #include <fancyqlone/cyqlone/implementation/schur.tpp>
 #include <fancyqlone/cyqlone/implementation/sparse.tpp>
 #include <fancyqlone/cyqlone/implementation/update.tpp>
-#include <batmat/config.hpp>
 
 namespace FANCYQLONE_NS(fancyqlone) {
 

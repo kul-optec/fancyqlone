@@ -1,8 +1,8 @@
+#include "fancyqlone/ocp.hpp"
+#include <batmat/config.hpp>
 #include <fancyqlone/conversion.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/spring-mass.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/zoh.hpp>
-#include "fancyqlone/ocp.hpp"
-#include <batmat/config.hpp>
 #include <guanaqo/eigen/view.hpp>
 
 #include <algorithm>
@@ -159,22 +159,24 @@ SpringMassProblem spring_mass(SpringMassParams p) {
         .ref = std::move(ref),
     };
 }
-FanSpringMassProblem fan_spring_mass(SpringMassParams p, index_t num_branches, real_t k_spring_diff) {
+FanSpringMassProblem fan_spring_mass(SpringMassParams p, index_t num_branches,
+                                     real_t k_spring_diff) {
     std::vector<fancyqlone::LinearOCPStorage> ocps(num_branches);
     std::vector<real_t> ref;
     p.k_spring -= k_spring_diff; // perturb spring constants for each branch
     for (index_t b = 0; b < num_branches; ++b) {
-        
+
         // std::cout << "Branch " << b << ": k_spring = " << p.k_spring << std::endl;
-        auto ocp = ocps[b]  = spring_mass(p).ocp;
-        ref = spring_mass(p).ref;
+        auto ocp = ocps[b] = spring_mass(p).ocp;
+        ref                = spring_mass(p).ref;
         if (num_branches > 1) {
             // Perturb spring constants for each branch
-            p.k_spring += 2*k_spring_diff/(num_branches-1); // perturb spring constants for each branch
+            p.k_spring +=
+                2 * k_spring_diff / (num_branches - 1); // perturb spring constants for each branch
         }
-
     }
-    
+
     FanOCPStorage focp{.ocps = std::move(ocps)};
-    return {.ocp = std::move(focp), .ref = std::move(ref)};   } 
+    return {.ocp = std::move(focp), .ref = std::move(ref)};
 }
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm::problems)

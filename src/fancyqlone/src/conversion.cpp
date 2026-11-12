@@ -1,5 +1,5 @@
-#include <fancyqlone/conversion.hpp>
 #include <batmat/assume.hpp>
+#include <fancyqlone/conversion.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>
 #include <algorithm>
 #include <numeric>

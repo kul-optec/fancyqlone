@@ -1,8 +1,8 @@
+#include <batmat/dtypes.hpp>
 #include <fancyqlone/cyqlone/cyqlone-storage.hpp>
 #include <fancyqlone/cyqlone/cyqlone.hpp>
 #include <fancyqlone/linalg.hpp>
 #include <fancyqlone/ocp.hpp>
-#include <batmat/dtypes.hpp>
 #include <iostream>
 #include <print>
 #include <random>
@@ -14,7 +14,7 @@
 
 using fancyqlone::index_t; // Integer type for indices
 using fancyqlone::real_t;  // Floating-point type for scalars
-constexpr index_t v =   // Vector length to use
+constexpr index_t v =      // Vector length to use
     batmat::types::vl_at_most<real_t, 4>;
 
 // Generate a random linear-quadratic OCP.
@@ -64,7 +64,8 @@ int main(int argc, char *argv[]) try {
     auto cocp = fancyqlone::CyqloneStorage<real_t>::build(ocp);
 
     // Create a Cyqlone solver for the OCP
-    fancyqlone::CyqloneSolver<v, real_t> solver = fancyqlone::CyqloneSolver<v, real_t>::build(cocp, p);
+    fancyqlone::CyqloneSolver<v, real_t> solver =
+        fancyqlone::CyqloneSolver<v, real_t>::build(cocp, p);
     // Optionally configure the solver parameters
     auto params         = solver.get_tricyqle_params();
     params.solve_method = fancyqlone::SolveMethod::PCR; // Use the PCR solver instead of PCG

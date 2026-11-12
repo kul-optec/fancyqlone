@@ -1,11 +1,11 @@
-#include <fancyqlone/ocp.hpp>
 #include <batmat/linalg/norms.hpp>
+#include <fancyqlone/ocp.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>
 #include <guanaqo/print.hpp>
 
+#include <iostream>
 #include <limits>
 #include <numeric>
-#include <iostream>
 namespace fancyqlone {
 
 auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError {
@@ -22,16 +22,16 @@ auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError 
     dual_residual = qr();
 
     for (index_t j = 0; j < N; ++j) {
-        
+
         auto xuj = x.middle_rows(j * (nx + nu), nx + nu), λj = λ.middle_rows(j * nx, nx),
              λj_next = λ.middle_rows((j + 1) * nx, nx), yj = y.middle_rows(j * ny, ny);
         auto rj = dual_residual.middle_rows(j * (nx + nu), nx + nu);
         guanaqo::blas::xsymv_L(real_t{1}, H(j), xuj, real_t{1}, rj);
         guanaqo::blas::xgemv_T(real_t{1}, AB(j), λj_next, real_t{1}, rj);
-        
+
         if (ny > 0)
             guanaqo::blas::xgemv_T(real_t{1}, CD(j), yj, real_t{1}, rj);
-        
+
         for (index_t i = 0; i < nx; ++i)
             rj(i, 0) -= λj(i, 0);
     }
@@ -53,10 +53,10 @@ auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError 
     using std::fmin;
     const auto eps = std::numeric_limits<real_t>::epsilon(), big = 1 / (eps * eps);
     for (index_t j = 0; j < N; ++j) {
-       
-            auto xuj = x.middle_rows(j * (nx + nu), nx + nu), yj = y.middle_rows(j * ny, ny);
-            auto lbj = b_min(j), ubj = b_max(j);
-            auto cj = ineq_res.middle_rows(j * ny, ny);
+
+        auto xuj = x.middle_rows(j * (nx + nu), nx + nu), yj = y.middle_rows(j * ny, ny);
+        auto lbj = b_min(j), ubj = b_max(j);
+        auto cj = ineq_res.middle_rows(j * ny, ny);
         if (ny > 0)
             guanaqo::blas::xgemv_N(real_t{1}, CD(j), xuj, real_t{-1}, cj);
         for (index_t i = 0; i < ny; ++i) {
@@ -85,7 +85,7 @@ auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError 
     auto eq_res_sto = std::vector<real_t>(sol.equality_multipliers.size());
     auto eq_res     = guanaqo::MatrixView<real_t, index_t>::as_column(eq_res_sto);
 
-    eq_res          = b();
+    eq_res = b();
 
     for (index_t j = 0; j <= N; ++j) {
         auto xj = x.middle_rows(j * (nx + nu), nx);
@@ -105,29 +105,30 @@ auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError 
         .complementarity     = compl_norm.norm_inf(),
     };
 }
-auto LinearOCPStorage::compute_kkt_error_u0_seperated(const Solution &sol) const -> KKTErroru0Seperated {
+auto LinearOCPStorage::compute_kkt_error_u0_seperated(const Solution &sol) const
+    -> KKTErroru0Seperated {
     // std::cout << "Computing KKT error..." << std::endl;
     using std::clamp;
     const auto [N, nx, nu, ny, ny_N] = dim;
     std::vector<real_t> dual_residual_sto(sol.solution.size());
     std::vector<real_t> dual_residual_u0_sto(nu);
-    auto dual_residual = guanaqo::MatrixView<real_t, index_t>::as_column(dual_residual_sto);
+    auto dual_residual    = guanaqo::MatrixView<real_t, index_t>::as_column(dual_residual_sto);
     auto dual_residual_u0 = guanaqo::MatrixView<real_t, index_t>::as_column(dual_residual_u0_sto);
 
-    auto x             = guanaqo::MatrixView<const real_t, index_t>::as_column(sol.solution),
+    auto x = guanaqo::MatrixView<const real_t, index_t>::as_column(sol.solution),
          y = guanaqo::MatrixView<const real_t, index_t>::as_column(sol.inequality_multipliers),
          λ = guanaqo::MatrixView<const real_t, index_t>::as_column(sol.equality_multipliers);
 
     // Stationarity
     dual_residual = qr();
     for (index_t j = 0; j < N; ++j) {
-        
+
         auto xuj = x.middle_rows(j * (nx + nu), nx + nu), λj = λ.middle_rows(j * nx, nx),
              λj_next = λ.middle_rows((j + 1) * nx, nx), yj = y.middle_rows(j * ny, ny);
         auto rj = dual_residual.middle_rows(j * (nx + nu), nx + nu);
         guanaqo::blas::xsymv_L(real_t{1}, H(j), xuj, real_t{1}, rj);
         guanaqo::blas::xgemv_T(real_t{1}, AB(j), λj_next, real_t{1}, rj);
-       
+
         if (ny > 0)
             guanaqo::blas::xgemv_T(real_t{1}, CD(j), yj, real_t{1}, rj);
         for (index_t i = 0; i < nx; ++i)
@@ -154,10 +155,10 @@ auto LinearOCPStorage::compute_kkt_error_u0_seperated(const Solution &sol) const
     using std::fmin;
     const auto eps = std::numeric_limits<real_t>::epsilon(), big = 1 / (eps * eps);
     for (index_t j = 0; j < N; ++j) {
-       
-            auto xuj = x.middle_rows(j * (nx + nu), nx + nu), yj = y.middle_rows(j * ny, ny);
-            auto lbj = b_min(j), ubj = b_max(j);
-            auto cj = ineq_res.middle_rows(j * ny, ny);
+
+        auto xuj = x.middle_rows(j * (nx + nu), nx + nu), yj = y.middle_rows(j * ny, ny);
+        auto lbj = b_min(j), ubj = b_max(j);
+        auto cj = ineq_res.middle_rows(j * ny, ny);
         if (ny > 0)
             guanaqo::blas::xgemv_N(real_t{1}, CD(j), xuj, real_t{-1}, cj);
         for (index_t i = 0; i < ny; ++i) {
@@ -186,7 +187,7 @@ auto LinearOCPStorage::compute_kkt_error_u0_seperated(const Solution &sol) const
     auto eq_res_sto = std::vector<real_t>(sol.equality_multipliers.size());
     auto eq_res     = guanaqo::MatrixView<real_t, index_t>::as_column(eq_res_sto);
 
-    eq_res          = b();
+    eq_res = b();
 
     for (index_t j = 0; j <= N; ++j) {
         auto xj = x.middle_rows(j * (nx + nu), nx);
@@ -200,37 +201,39 @@ auto LinearOCPStorage::compute_kkt_error_u0_seperated(const Solution &sol) const
     }
     auto eq_norm = std::accumulate(eq_res.data, eq_res.data + eq_res.rows, norms.zero(), norms);
     return {{
-        .stationarity        = stat_norm.norm_inf(),
-        .inequality_residual = ineq_norm.norm_inf(),
-        .equality_residual   = eq_norm.norm_inf(),
-        .complementarity     = compl_norm.norm_inf(),}  , dual_residual_u0_sto
-        };
+                .stationarity        = stat_norm.norm_inf(),
+                .inequality_residual = ineq_norm.norm_inf(),
+                .equality_residual   = eq_norm.norm_inf(),
+                .complementarity     = compl_norm.norm_inf(),
+            },
+            dual_residual_u0_sto};
 }
-auto LinearOCPStorage::compute_kkt_error_u0x0_seperated(const Solution &sol) const -> KKTErroru0x0Seperated {
+auto LinearOCPStorage::compute_kkt_error_u0x0_seperated(const Solution &sol) const
+    -> KKTErroru0x0Seperated {
     // std::cout << "Computing KKT error..." << std::endl;
     using std::clamp;
     const auto [N, nx, nu, ny, ny_N] = dim;
     std::vector<real_t> dual_residual_sto(sol.solution.size());
     std::vector<real_t> dual_residual_u0_sto(nu);
-    auto dual_residual = guanaqo::MatrixView<real_t, index_t>::as_column(dual_residual_sto);
-            auto dual_residual_u0 = guanaqo::MatrixView<real_t, index_t>::as_column(dual_residual_u0_sto);
+    auto dual_residual    = guanaqo::MatrixView<real_t, index_t>::as_column(dual_residual_sto);
+    auto dual_residual_u0 = guanaqo::MatrixView<real_t, index_t>::as_column(dual_residual_u0_sto);
     std::vector<real_t> dual_residual_x0_sto(nx);
     auto dual_residual_x0 = guanaqo::MatrixView<real_t, index_t>::as_column(dual_residual_x0_sto);
 
-    auto x             = guanaqo::MatrixView<const real_t, index_t>::as_column(sol.solution),
+    auto x = guanaqo::MatrixView<const real_t, index_t>::as_column(sol.solution),
          y = guanaqo::MatrixView<const real_t, index_t>::as_column(sol.inequality_multipliers),
          λ = guanaqo::MatrixView<const real_t, index_t>::as_column(sol.equality_multipliers);
 
     // Stationarity
     dual_residual = qr();
     for (index_t j = 0; j < N; ++j) {
-        
+
         auto xuj = x.middle_rows(j * (nx + nu), nx + nu), λj = λ.middle_rows(j * nx, nx),
              λj_next = λ.middle_rows((j + 1) * nx, nx), yj = y.middle_rows(j * ny, ny);
         auto rj = dual_residual.middle_rows(j * (nx + nu), nx + nu);
         guanaqo::blas::xsymv_L(real_t{1}, H(j), xuj, real_t{1}, rj);
         guanaqo::blas::xgemv_T(real_t{1}, AB(j), λj_next, real_t{1}, rj);
-       
+
         if (ny > 0)
             guanaqo::blas::xgemv_T(real_t{1}, CD(j), yj, real_t{1}, rj);
         for (index_t i = 0; i < nx; ++i)
@@ -260,10 +263,10 @@ auto LinearOCPStorage::compute_kkt_error_u0x0_seperated(const Solution &sol) con
     using std::fmin;
     const auto eps = std::numeric_limits<real_t>::epsilon(), big = 1 / (eps * eps);
     for (index_t j = 0; j < N; ++j) {
-       
-            auto xuj = x.middle_rows(j * (nx + nu), nx + nu), yj = y.middle_rows(j * ny, ny);
-            auto lbj = b_min(j), ubj = b_max(j);
-            auto cj = ineq_res.middle_rows(j * ny, ny);
+
+        auto xuj = x.middle_rows(j * (nx + nu), nx + nu), yj = y.middle_rows(j * ny, ny);
+        auto lbj = b_min(j), ubj = b_max(j);
+        auto cj = ineq_res.middle_rows(j * ny, ny);
         if (ny > 0)
             guanaqo::blas::xgemv_N(real_t{1}, CD(j), xuj, real_t{-1}, cj);
         for (index_t i = 0; i < ny; ++i) {
@@ -292,7 +295,7 @@ auto LinearOCPStorage::compute_kkt_error_u0x0_seperated(const Solution &sol) con
     auto eq_res_sto = std::vector<real_t>(sol.equality_multipliers.size());
     auto eq_res     = guanaqo::MatrixView<real_t, index_t>::as_column(eq_res_sto);
 
-    eq_res          = b();
+    eq_res = b();
 
     for (index_t j = 0; j <= N; ++j) {
         auto xj = x.middle_rows(j * (nx + nu), nx);
@@ -306,11 +309,13 @@ auto LinearOCPStorage::compute_kkt_error_u0x0_seperated(const Solution &sol) con
     }
     auto eq_norm = std::accumulate(eq_res.data, eq_res.data + eq_res.rows, norms.zero(), norms);
     return {{
-        .stationarity        = stat_norm.norm_inf(),
-        .inequality_residual = ineq_norm.norm_inf(),
-        .equality_residual   = eq_norm.norm_inf(),
-        .complementarity     = compl_norm.norm_inf(),}  , dual_residual_u0_sto, dual_residual_x0_sto
-        };
+                .stationarity        = stat_norm.norm_inf(),
+                .inequality_residual = ineq_norm.norm_inf(),
+                .equality_residual   = eq_norm.norm_inf(),
+                .complementarity     = compl_norm.norm_inf(),
+            },
+            dual_residual_u0_sto,
+            dual_residual_x0_sto};
 }
 
 auto FanOCPStorage::compute_kkt_error(const Solution &sol, bool hpipm) const -> KKTError {
@@ -326,11 +331,12 @@ auto FanOCPStorage::compute_kkt_error(const Solution &sol, bool hpipm) const -> 
     auto dual_residual_x0_sto = std::vector<real_t>(ocps[0].dim.nx);
     auto dual_residual_x0 = guanaqo::MatrixView<real_t, index_t>::as_column(dual_residual_x0_sto);
     dual_residual_u0.set_constant(0);
-// It is assumed that u^0=u^0_j for all branches j so we can skip this constraint in the KKT error computation
+    // It is assumed that u^0=u^0_j for all branches j so we can skip this constraint in the KKT error computation
     for (index_t i = 0; i < num_branches(); ++i) {
         if (hpipm) {
             auto ocp_kkt_error = ocps[i].compute_kkt_error_u0x0_seperated(sol.solutions[i]);
-            dual_residual_u0 += guanaqo::MatrixView<real_t, index_t>::as_column(ocp_kkt_error.stationarity_u0);
+            dual_residual_u0 +=
+                guanaqo::MatrixView<real_t, index_t>::as_column(ocp_kkt_error.stationarity_u0);
             kkt_error.stationarity =
                 std::max(kkt_error.stationarity, ocp_kkt_error.kkt.stationarity);
             kkt_error.inequality_residual =
@@ -340,29 +346,30 @@ auto FanOCPStorage::compute_kkt_error(const Solution &sol, bool hpipm) const -> 
             kkt_error.complementarity =
                 std::max(kkt_error.complementarity, ocp_kkt_error.kkt.complementarity);
         } else {
-        auto ocp_kkt_error = ocps[i].compute_kkt_error_u0_seperated(sol.solutions[i]);
-        dual_residual_u0 += guanaqo::MatrixView<real_t, index_t>::as_column(ocp_kkt_error.stationarity_u0);
-        kkt_error.stationarity =
-            std::max(kkt_error.stationarity, ocp_kkt_error.kkt.stationarity);
-        kkt_error.inequality_residual =
-            std::max(kkt_error.inequality_residual, ocp_kkt_error.kkt.inequality_residual);
-        kkt_error.equality_residual =
-            std::max(kkt_error.equality_residual, ocp_kkt_error.kkt.equality_residual);
-        kkt_error.complementarity =
-            std::max(kkt_error.complementarity, ocp_kkt_error.kkt.complementarity);
-        // std::cout << "Done KKT error..." << std::endl;
-        // std::cout << "Branch " << i << " KKT error: stationarity = " << ocp_kkt_error.kkt.stationarity
-        //           << ", inequality_residual = " << ocp_kkt_error.kkt.inequality_residual
-        //           << ", equality_residual = " << ocp_kkt_error.kkt.equality_residual
-        //           << ", complementarity = " << ocp_kkt_error.kkt.complementarity << std::endl;
-
-    }}
+            auto ocp_kkt_error = ocps[i].compute_kkt_error_u0_seperated(sol.solutions[i]);
+            dual_residual_u0 +=
+                guanaqo::MatrixView<real_t, index_t>::as_column(ocp_kkt_error.stationarity_u0);
+            kkt_error.stationarity =
+                std::max(kkt_error.stationarity, ocp_kkt_error.kkt.stationarity);
+            kkt_error.inequality_residual =
+                std::max(kkt_error.inequality_residual, ocp_kkt_error.kkt.inequality_residual);
+            kkt_error.equality_residual =
+                std::max(kkt_error.equality_residual, ocp_kkt_error.kkt.equality_residual);
+            kkt_error.complementarity =
+                std::max(kkt_error.complementarity, ocp_kkt_error.kkt.complementarity);
+            // std::cout << "Done KKT error..." << std::endl;
+            // std::cout << "Branch " << i << " KKT error: stationarity = " << ocp_kkt_error.kkt.stationarity
+            //           << ", inequality_residual = " << ocp_kkt_error.kkt.inequality_residual
+            //           << ", equality_residual = " << ocp_kkt_error.kkt.equality_residual
+            //           << ", complementarity = " << ocp_kkt_error.kkt.complementarity << std::endl;
+        }
+    }
     const auto norms = batmat::linalg::norms<real_t>{};
 
-    auto stat_norm   = std::accumulate(dual_residual_u0.data, dual_residual_u0.data + dual_residual_u0.rows,
-                                       norms.zero(), norms);
-    auto stat_norm_x0   = std::accumulate(dual_residual_x0.data, dual_residual_x0.data + dual_residual_x0.rows,
-                                       norms.zero(), norms);                                   
+    auto stat_norm = std::accumulate(
+        dual_residual_u0.data, dual_residual_u0.data + dual_residual_u0.rows, norms.zero(), norms);
+    auto stat_norm_x0 = std::accumulate(
+        dual_residual_x0.data, dual_residual_x0.data + dual_residual_x0.rows, norms.zero(), norms);
     kkt_error.stationarity = std::max(kkt_error.stationarity, stat_norm.norm_inf());
     kkt_error.stationarity = std::max(kkt_error.stationarity, stat_norm_x0.norm_inf());
 

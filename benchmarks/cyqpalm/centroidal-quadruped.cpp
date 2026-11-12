@@ -1,14 +1,15 @@
 #include <benchmark/benchmark.h>
 
+#include <CLI/CLI.hpp>
+#include <batmat/dtypes.hpp>
+#include <batmat/openmp.h>
 #include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/centroidal-quadruped.hpp>
 #include <fancyqlone/fancyqpalm/settings.hpp>
 #include <fancyqlone/fancyqpalm/solver.hpp>
 #include <fancyqlone/fancyqpalm/status.hpp>
-#include <CLI/CLI.hpp>
-#include <batmat/dtypes.hpp>
-#include <batmat/openmp.h>
 
+#include <unistd.h>
 #include <algorithm>
 #include <chrono>
 #include <cstdio>
@@ -20,7 +21,6 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
-#include <unistd.h>
 #include <utility>
 #include <vector>
 
@@ -48,7 +48,7 @@ auto counter(auto value) {
 struct Options {
     std::vector<int> parallelism{8};
     std::vector<int> horizon{32};
-    real_t mu            = 0.5;
+    real_t mu = 0.5;
 #if WITH_HPIPM
     bool hpipm = true;
 #else
@@ -69,19 +69,19 @@ void run_benchmark(benchmark::State &state, CentroidalQuadrupedParams params,
     auto ocp     = fancyqlone::CyqloneStorage<>::build(problem.ocp);
     qp::CyQPALMBackendSettings backend_settings{
         .processors             = processors,
-        .print_residuals                = false,
+        .print_residuals        = false,
         .changing_constr_factor = 0.01,
         .max_update_count       = 20,
         .tricyqle_params        = {.solve_method = fancyqlone::SolveMethod::PCR},
     };
-    auto backend = qp::make_cyqpalm_backend<VL, qp::StorageOrder::ColMajor>(ocp, {},
-                                                                            backend_settings);
+    auto backend =
+        qp::make_cyqpalm_backend<VL, qp::StorageOrder::ColMajor>(ocp, {}, backend_settings);
     qp::Settings settings{
-        .tolerance         = 1e-8,
-        .dual_tolerance    = 1e-8,
-        .Δy = 10,
-        .initial_penalty_y = 0.01,
-        .verbose           = false,
+        .tolerance               = 1e-8,
+        .dual_tolerance          = 1e-8,
+        .Δy                      = 10,
+        .initial_penalty_y       = 0.01,
+        .verbose                 = false,
         .print_linesearch_inputs = false,
     };
     qp::Solver<qp::CyQPALMBackend<VL, qp::StorageOrder::ColMajor> *> solver{backend.get(),
@@ -93,10 +93,10 @@ void run_benchmark(benchmark::State &state, CentroidalQuadrupedParams params,
         state.SetIterationTime(seconds(solver.stats->timings.total.wall_time).count());
     }
 
-    const auto solution = ocp.reconstruct_solution(problem.ocp, solver.get_solution(),
-                                                    solver.get_inequality_multipliers(),
-                                                    solver.get_equality_multipliers());
-    const auto error = problem.ocp.compute_kkt_error(solution);
+    const auto solution          = ocp.reconstruct_solution(problem.ocp, solver.get_solution(),
+                                                            solver.get_inequality_multipliers(),
+                                                            solver.get_equality_multipliers());
+    const auto error             = problem.ocp.compute_kkt_error(solution);
     state.counters["status"]     = counter(status);
     state.counters["success"]    = counter(status == qp::SolverStatus::Converged);
     state.counters["iter"]       = counter(solver.stats->inner_iter);
@@ -124,9 +124,9 @@ void run_benchmark_hpipm(benchmark::State &state, CentroidalQuadrupedParams para
         state.SetIterationTime(seconds(solve_time).count());
     }
 
-    const auto solution = get_solution_hpipm(*solver_data);
-    const auto error    = problem.ocp.compute_kkt_error(solution);
-    const auto stats    = get_stats_hpipm(*solver_data);
+    const auto solution            = get_solution_hpipm(*solver_data);
+    const auto error               = problem.ocp.compute_kkt_error(solution);
+    const auto stats               = get_stats_hpipm(*solver_data);
     state.counters["status"]       = counter(stats.status);
     state.counters["success"]      = counter(stats.status == 0);
     state.counters["iter"]         = counter(stats.iter);
@@ -144,9 +144,9 @@ void run_benchmark_hpipm(benchmark::State &state, CentroidalQuadrupedParams para
 #endif
 
 std::unique_ptr<benchmark::BenchmarkReporter> make_custom_reporter(size_t problem_name_width,
-                                                                    size_t solver_name_width,
-                                                                    bool print_extra,
-                                                                    bool with_color);
+                                                                   size_t solver_name_width,
+                                                                   bool print_extra,
+                                                                   bool with_color);
 
 void register_options(const char *program, CLI::App &app, Options &opts) {
     if (std::getenv("NO_COLOR"))
@@ -198,7 +198,7 @@ int main(int argc, char **argv) try {
     CentroidalQuadrupedParams params;
     params.mu = opts.mu;
     params.force_weights.fill(5e-5);
-    
+
     size_t problem_name_width = 0;
     size_t solver_name_width  = 0;
     for (const auto horizon : opts.horizon) {
@@ -216,19 +216,16 @@ int main(int argc, char **argv) try {
         if (opts.hpipm) {
             constexpr std::string_view solver_name = "hpipm";
             solver_name_width = std::max(solver_name_width, solver_name.size());
-            benchmark::RegisterBenchmark(std::format("{}@{}", problem_name, solver_name),
-                                         [=](benchmark::State &state) {
-                                             run_benchmark_hpipm(state, params);
-                                         })
+            benchmark::RegisterBenchmark(
+                std::format("{}@{}", problem_name, solver_name),
+                [=](benchmark::State &state) { run_benchmark_hpipm(state, params); })
                 ->MeasureProcessCPUTime()
                 ->UseManualTime()
                 ->Unit(benchmark::kMillisecond)
-                ->ComputeStatistics("max", [](auto &values) {
-                    return *std::ranges::max_element(values);
-                })
-                ->ComputeStatistics("min", [](auto &values) {
-                    return *std::ranges::min_element(values);
-                });
+                ->ComputeStatistics("max",
+                                    [](auto &values) { return *std::ranges::max_element(values); })
+                ->ComputeStatistics("min",
+                                    [](auto &values) { return *std::ranges::min_element(values); });
         }
 #else
         if (opts.hpipm)
@@ -240,17 +237,16 @@ int main(int argc, char **argv) try {
             solver_name_width = std::max(solver_name_width, solver_name.size());
             benchmark::RegisterBenchmark(std::format("{}@{}", problem_name, solver_name),
                                          [=](benchmark::State &state) {
-                                             run_benchmark<vector_length>(state, params, processors);
+                                             run_benchmark<vector_length>(state, params,
+                                                                          processors);
                                          })
                 ->MeasureProcessCPUTime()
                 ->UseManualTime()
                 ->Unit(benchmark::kMillisecond)
-                ->ComputeStatistics("max", [](auto &values) {
-                    return *std::ranges::max_element(values);
-                })
-                ->ComputeStatistics("min", [](auto &values) {
-                    return *std::ranges::min_element(values);
-                });
+                ->ComputeStatistics("max",
+                                    [](auto &values) { return *std::ranges::max_element(values); })
+                ->ComputeStatistics("min",
+                                    [](auto &values) { return *std::ranges::min_element(values); });
         }
     }
 

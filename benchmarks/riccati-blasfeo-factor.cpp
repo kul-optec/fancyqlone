@@ -89,4 +89,4 @@ void factor(RiccatiFactor &factor, Eigen::Ref<const Eigen::MatrixX<real_t>> Σ) 
     }
 }
 
-} // namespace fancyqlone::blasfeo
+} // namespace FANCYQLONE_NS(fancyqlone::blasfeo)

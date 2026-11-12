@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
 
+#include <batmat/config.hpp>
+#include <batmat/matrix/matrix.hpp>
 #include <fancyqlone/config.hpp>
 #include <fancyqlone/cyqlone/cyqlone.hpp>
 #include <fancyqlone/linalg.hpp>
 #include <fancyqlone/packing.hpp>
-#include <batmat/config.hpp>
-#include <batmat/matrix/matrix.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>
 #include <guanaqo/demangled-typename.hpp>
 #include <guanaqo/print.hpp>
@@ -132,8 +132,8 @@ template <class Solver>
 
     // Check that the residual is small
     using std::pow;
-    const auto tol = static_cast<real_t>(num_blocks * block_size) *
-                     pow(std::numeric_limits<real_t>::epsilon(), real_t(0.6));
+    const auto tol  = static_cast<real_t>(num_blocks * block_size) *
+                      pow(std::numeric_limits<real_t>::epsilon(), real_t(0.6));
     real_t residual = compute_residual_norm(sys, x, circular);
     EXPECT_LT(residual, tol) << "Relative residual too large: " << guanaqo::float_to_str(residual);
 }
@@ -144,12 +144,12 @@ template <class Solver>
 template <class T, index_t VL, fancyqlone::StorageOrder O, index_t BS, index_t P, bool Circ,
           fancyqlone::SolveMethod Method>
 struct TestConfig {
-    using real_t                                       = T;
-    static constexpr index_t v                         = VL;
+    using real_t                                          = T;
+    static constexpr index_t v                            = VL;
     static constexpr fancyqlone::StorageOrder order       = O;
-    static constexpr index_t block_size                = BS;
-    static constexpr index_t num_threads               = P;
-    static constexpr bool circular                     = Circ;
+    static constexpr index_t block_size                   = BS;
+    static constexpr index_t num_threads                  = P;
+    static constexpr bool circular                        = Circ;
     static constexpr fancyqlone::SolveMethod solve_method = Method;
 };
 

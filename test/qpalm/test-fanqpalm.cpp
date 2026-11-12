@@ -1,12 +1,12 @@
+#include "fancyqlone/cyqlone/cyqlone-storage.hpp"
+#include "fancyqlone/fancyqlone/fancyqlone.hpp"
 #include <fancyqlone/conversion.hpp>
 #include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/csv.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/platooning.hpp>
+#include <fancyqlone/fancyqpalm/example-problems/spring-mass.hpp>
 #include <fancyqlone/fancyqpalm/solver.hpp>
 #include <fancyqlone/tracing.hpp>
-#include "fancyqlone/cyqlone/cyqlone-storage.hpp"
-#include "fancyqlone/fancyqlone/fancyqlone.hpp"
-#include <fancyqlone/fancyqpalm/example-problems/spring-mass.hpp>
 
 #include "fancyqlone/matio.hpp"
 #include "fancyqlone/ocp.hpp"
@@ -519,7 +519,8 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //     compare_combined_normal(λ_combined, λ, N, 0, nx, 1e-12);
 // }
 
-fancyqlone::LinearOCPStorage combine_branches_0(std::span<const fancyqlone::LinearOCPStorage> ocps) {
+fancyqlone::LinearOCPStorage
+combine_branches_0(std::span<const fancyqlone::LinearOCPStorage> ocps) {
     BATMAT_ASSERT(!ocps.empty());
     auto fld_max = [](index_t(fancyqlone::OCPDim::*m)) {
         return [m](index_t acc, const auto &ocp) { return std::max(acc, ocp.dim.*m); };
@@ -537,7 +538,7 @@ fancyqlone::LinearOCPStorage combine_branches_0(std::span<const fancyqlone::Line
     fancyqlone::LinearOCPStorage combined_ocp(dim);
 
     index_t nx_offset = 0, nu_offset = 0, ny_offset = 0, ny_N_offset = 0;
-   
+
     // Later stages can diverge for the different OCPs, so these all become diagonal matrices,
     // except for the coupling from the first stage
     for (const auto &ocp : ocps) {
@@ -570,7 +571,7 @@ fancyqlone::LinearOCPStorage combine_branches_0(std::span<const fancyqlone::Line
         // Copy cost
         combined_ocp.Q(0).block(0, 0, ocp.dim.nx, ocp.dim.nx) += ocp.Q(0);
         combined_ocp.R(0).block(0, 0, ocp.dim.nu, ocp.dim.nu) += ocp.R(0);
-        combined_ocp.S(0).block(0, nx_offset, ocp.dim.nu, ocp.dim.nx) = ocp.S(0);
+        combined_ocp.S(0).block(0, nx_offset, ocp.dim.nu, ocp.dim.nx)       = ocp.S(0);
         combined_ocp.S_trans(0).block(nx_offset, 0, ocp.dim.nx, ocp.dim.nu) = ocp.S_trans(0);
         combined_ocp.q(0).block(0, 0, ocp.dim.nx, 1) += ocp.q(0);
         combined_ocp.r(0).block(0, 0, ocp.dim.nu, 1) += ocp.r(0);
@@ -592,8 +593,10 @@ fancyqlone::LinearOCPStorage combine_branches_0(std::span<const fancyqlone::Line
         ny_N_offset += ocp.dim.ny_N;
     }
 
-    const index_t nx_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nx)),
-                  nu_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nu));
+    const index_t nx_max =
+                      std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nx)),
+                  nu_max =
+                      std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nu));
     for (index_t i = nx_max; i < combined_ocp.dim.nx; ++i)
         combined_ocp.Q(0)(i, i) = 1; // regularize unused state variables in the cost
     for (index_t i = nu_max; i < combined_ocp.dim.nu; ++i)
@@ -681,7 +684,7 @@ TEST(QPALM, random_fan) {
     // Fan solver
     // -------------------------------------------------------------------------
     fancyqlone::FanOCPStorage fan_ocp{
-        .ocps    = ocps,
+        .ocps = ocps,
     };
 
     auto fan_cocp = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, dim.ny);
@@ -824,9 +827,9 @@ TEST(QPALM, random_fan_input_constr) {
         .ny_N    = 0,
     };
 
-    const index_t N  = dim.N_horiz;
-    const index_t nx = dim.nx;
-    const index_t nu = dim.nu;
+    const index_t N     = dim.N_horiz;
+    const index_t nx    = dim.nx;
+    const index_t nu    = dim.nu;
     index_t num_warmups = 5;
 
     std::vector<fancyqlone::LinearOCPStorage> ocps(num_branches);
@@ -841,7 +844,8 @@ TEST(QPALM, random_fan_input_constr) {
     }
 
     for (index_t i = 0; i < num_branches; ++i) {
-        ocps[i] = fancyqlone::generate_random_ocp_input_constr(dim, static_cast<uint32_t>(1000 + i));
+        ocps[i] =
+            fancyqlone::generate_random_ocp_input_constr(dim, static_cast<uint32_t>(1000 + i));
         std::cout << "Fan OCP" << i << " has N=" << ocps[i].dim.N_horiz << ", nx=" << ocps[i].dim.nx
                   << ", nu=" << ocps[i].dim.nu << ", ny=" << ocps[i].dim.ny
                   << ", ny_N=" << ocps[i].dim.ny_N << "\n";
@@ -852,7 +856,7 @@ TEST(QPALM, random_fan_input_constr) {
             ocps[i].b_min(0).set_constant(
                 -std::numeric_limits<real_t>::
                     infinity()); // no constraints on u(0) in the other branches, to test that the coupling is handled correctly
-            ocps[i].b(0)=ocps[0].b(0); // same initial state in every branch
+            ocps[i].b(0) = ocps[0].b(0); // same initial state in every branch
             // ocps[i].r(0).set_constant(0); // no cost on u(0) in the other branches, to test that the coupling is handled correctly
             // ocps[i].S(0).set_constant(0); // no cost on u(0) in the other branches, to test that the coupling is handled correctly
             // ocps[i].S_trans(0).set_constant(0); // no cost on u(0) in the other branches, to test that the coupling is handled correctly
@@ -869,30 +873,31 @@ TEST(QPALM, random_fan_input_constr) {
     // Fan solver
     // -------------------------------------------------------------------------
     fancyqlone::FanOCPStorage fan_ocp{
-        .ocps    = ocps,
-        };
+        .ocps = ocps,
+    };
 
     auto fan_cocp    = fancyqlone::FanCyqloneStorage<>::build(fan_ocp);
     index_t num_proc = 8;
     std::cout << "Running on " << num_proc << " processors\n";
-    auto &&fan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
-            fan_cocp, {},
-            {
-                .processors             = num_proc,
-                .print_residuals        = verbose,
-                .print_precision        = 17,
-                .changing_constr_factor = 0,
-                .max_update_count       = 0,
+    auto &&fan_backend = qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor,
+                                                  fancyqlone::FanCyqloneSolver<VL>>(
+        fan_cocp, {},
+        {
+            .processors             = num_proc,
+            .print_residuals        = verbose,
+            .print_precision        = 17,
+            .changing_constr_factor = 0,
+            .max_update_count       = 0,
 
-                // Fan solver handles the shared/root part itself.
-                .tricyqle_params =
-                    {
-                        .solve_method = fancyqlone::SolveMethod::None,
-                    },
-                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+            // Fan solver handles the shared/root part itself.
+            .tricyqle_params =
+                {
+                    .solve_method = fancyqlone::SolveMethod::None,
+                },
+            .spin_count = std::numeric_limits<uint32_t>::
+                max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
-            });
+        });
 
     qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>> *>
         fan_qpalm{
@@ -921,26 +926,28 @@ TEST(QPALM, random_fan_input_constr) {
     auto x_fan = fan_qpalm.get_solution();
     auto λ_fan = fan_qpalm.get_equality_multipliers();
     std::cout << "Running on " << num_proc << " processors\n";
-    auto &&sfan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>>(
-            fan_cocp, {},
-            {
-                .processors             = num_proc,
-                .print_residuals        = verbose,
-                .print_precision        = 17,
-                .changing_constr_factor = 0,
-                .max_update_count       = 0,
+    auto &&sfan_backend = qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor,
+                                                   fancyqlone::SerialFanCyqloneSolver<VL>>(
+        fan_cocp, {},
+        {
+            .processors             = num_proc,
+            .print_residuals        = verbose,
+            .print_precision        = 17,
+            .changing_constr_factor = 0,
+            .max_update_count       = 0,
 
-                // Fan solver handles the shared/root part itself.
-                .tricyqle_params =
-                    {
-                        .solve_method = fancyqlone::SolveMethod::None,
-                    },
-                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+            // Fan solver handles the shared/root part itself.
+            .tricyqle_params =
+                {
+                    .solve_method = fancyqlone::SolveMethod::None,
+                },
+            .spin_count = std::numeric_limits<uint32_t>::
+                max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
-            });
+        });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>> *>
+    qp::Solver<
+        qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>> *>
         sfan_qpalm{
             sfan_backend.get(),
             {
@@ -1016,7 +1023,10 @@ TEST(QPALM, random_fan_input_constr) {
     std::cout << "inner:   " << combined_qpalm.stats->inner_iter << "\n"
               << "outer:   " << combined_qpalm.stats->outer_iter << "\n"
               << "timings: " << combined_qpalm.stats->timings.total << "\n";
-    std::cout << "speedup: " << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) / static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())  << "\n";
+    std::cout << "speedup: "
+              << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) /
+                     static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())
+              << "\n";
     for (const auto &ocp : ocps) {
         nx_per_branch.push_back(static_cast<std::size_t>(ocp.dim.nx));
     }
@@ -1071,28 +1081,28 @@ TEST(QPALM, spring_mass_1_branch) {
     auto save_traces = [](const std::string &) {};
 #endif
 
-    const index_t N  = 64;
+    const index_t N = 64;
 
-    const index_t M=16;
+    const index_t M     = 16;
     index_t num_warmups = 5;
-    auto seed=12345;
+    auto seed           = 12345;
 
     // Same initial condition for all branches.
     std::mt19937 rng(seed);
     std::uniform_real_distribution<real_t> dist(-1.0, 1.0);
 
-    auto k_spring_diff=0.1/num_branches;
-    auto params=qp::problems::SpringMassParams::wang_boyd_2008_width(M, N, seed, 1);
-    auto problem = qp::problems::fan_spring_mass(params, num_branches, k_spring_diff);
+    auto k_spring_diff = 0.1 / num_branches;
+    auto params        = qp::problems::SpringMassParams::wang_boyd_2008_width(M, N, seed, 1);
+    auto problem       = qp::problems::fan_spring_mass(params, num_branches, k_spring_diff);
     // Add a random disturbance to the initial position of the masses but make sure they are the same for all branches
     using dist_t = std::uniform_real_distribution<real_t>;
-    auto nu = problem.ocp.ocps[0].dim.nu;
-    auto dist2    = params.p_max > 1 ? dist_t{-3, 3} : dist_t{-0.6, -0.1};
+    auto nu      = problem.ocp.ocps[0].dim.nu;
+    auto dist2   = params.p_max > 1 ? dist_t{-3, 3} : dist_t{-0.6, -0.1};
     for (index_t r = 0; r < static_cast<index_t>(params.masses.size()); ++r) {
         auto disturbance = dist2(rng);
         for (index_t j = 0; j < num_branches; ++j)
             problem.ocp.ocps[j].b(0)(r, 0) += disturbance;
-    
+
         // guanaqo::print_python(std::cout << "x(0) = ", ocps[i].b(0), "\n");
         // guanaqo::print_python(std::cout << "r(0) = ", ocps[i].r(0), "\n");
         // Force the same initial state in every branch.
@@ -1104,29 +1114,30 @@ TEST(QPALM, spring_mass_1_branch) {
     // -------------------------------------------------------------------------
     // Fan solver
     // -------------------------------------------------------------------------
-    auto ocps=problem.ocp.ocps;
+    auto ocps = problem.ocp.ocps;
 
     auto fan_cocp    = fancyqlone::FanCyqloneStorage<>::build(problem.ocp);
     index_t num_proc = 8;
     std::cout << "Running on " << num_proc << " processors\n";
-    auto &&fan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
-            fan_cocp, {},
-            {
-                .processors             = num_proc,
-                .print_residuals        = verbose,
-                .print_precision        = 17,
-                .changing_constr_factor = 0,
-                .max_update_count       = 0,
+    auto &&fan_backend = qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor,
+                                                  fancyqlone::FanCyqloneSolver<VL>>(
+        fan_cocp, {},
+        {
+            .processors             = num_proc,
+            .print_residuals        = verbose,
+            .print_precision        = 17,
+            .changing_constr_factor = 0,
+            .max_update_count       = 0,
 
-                // Fan solver handles the shared/root part itself.
-                .tricyqle_params =
-                    {
-                        .solve_method = fancyqlone::SolveMethod::None,
-                    },
-                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+            // Fan solver handles the shared/root part itself.
+            .tricyqle_params =
+                {
+                    .solve_method = fancyqlone::SolveMethod::None,
+                },
+            .spin_count = std::numeric_limits<uint32_t>::
+                max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
-            });
+        });
 
     qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>> *>
         fan_qpalm{
@@ -1155,26 +1166,28 @@ TEST(QPALM, spring_mass_1_branch) {
     auto x_fan = fan_qpalm.get_solution();
     auto λ_fan = fan_qpalm.get_equality_multipliers();
     std::cout << "Running on " << num_proc << " processors\n";
-    auto &&sfan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>>(
-            fan_cocp, {},
-            {
-                .processors             = num_proc,
-                .print_residuals        = verbose,
-                .print_precision        = 17,
-                .changing_constr_factor = 0,
-                .max_update_count       = 0,
+    auto &&sfan_backend = qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor,
+                                                   fancyqlone::SerialFanCyqloneSolver<VL>>(
+        fan_cocp, {},
+        {
+            .processors             = num_proc,
+            .print_residuals        = verbose,
+            .print_precision        = 17,
+            .changing_constr_factor = 0,
+            .max_update_count       = 0,
 
-                // Fan solver handles the shared/root part itself.
-                .tricyqle_params =
-                    {
-                        .solve_method = fancyqlone::SolveMethod::None,
-                    },
-                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+            // Fan solver handles the shared/root part itself.
+            .tricyqle_params =
+                {
+                    .solve_method = fancyqlone::SolveMethod::None,
+                },
+            .spin_count = std::numeric_limits<uint32_t>::
+                max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
-            });
+        });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>> *>
+    qp::Solver<
+        qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>> *>
         sfan_qpalm{
             sfan_backend.get(),
             {
@@ -1251,7 +1264,10 @@ TEST(QPALM, spring_mass_1_branch) {
               << "outer:   " << combined_qpalm.stats->outer_iter << "\n"
               << "timings: " << combined_qpalm.stats->timings.total << "\n"
               << "update_count: " << combined_qpalm.stats_backend->num_updates << "\n";
-    std::cout << "speedup: " << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) / static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())  << "\n";
+    std::cout << "speedup: "
+              << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) /
+                     static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())
+              << "\n";
     for (const auto &ocp : ocps) {
         nx_per_branch.push_back(static_cast<std::size_t>(ocp.dim.nx));
         std::cout << "nx_per_branch: " << ocp.dim.nx << "\n";
@@ -1270,7 +1286,6 @@ TEST(QPALM, spring_mass_1_branch) {
     // compare_combined_normal(std::span<const double>(λ_combined), std::span<const double>(λ_sfan),
     //                         static_cast<std::size_t>(N), 0,
     //                         std::span<const std::size_t>(nx_per_branch), 1e-6);
-    
 }
 TEST(QPALM, spring_mass) {
     using fancyqlone::index_t;
@@ -1307,29 +1322,29 @@ TEST(QPALM, spring_mass) {
     auto save_traces = [](const std::string &) {};
 #endif
 
-    const index_t N  = 128;
+    const index_t N = 128;
 
-    const index_t M=12;
+    const index_t M     = 12;
     index_t num_warmups = 50;
-    auto seed=125;
+    auto seed           = 125;
 
     // Same initial condition for all branches.
     std::mt19937 rng(seed);
     std::uniform_real_distribution<real_t> dist(-1.0, 1.0);
 
-    auto k_spring_diff=0.2/num_branches;
-    auto params=qp::problems::SpringMassParams::wang_boyd_2008(M, N, seed);
+    auto k_spring_diff = 0.2 / num_branches;
+    auto params        = qp::problems::SpringMassParams::wang_boyd_2008(M, N, seed);
 
     auto problem = qp::problems::fan_spring_mass(params, num_branches, k_spring_diff);
     // Add a random disturbance to the initial position of the masses but make sure they are the same for all branches
     using dist_t = std::uniform_real_distribution<real_t>;
-    auto nu = problem.ocp.ocps[0].dim.nu;
-    auto dist2    = params.p_max > 1 ? dist_t{-3, 3} : dist_t{-0.6, -0.1};
+    auto nu      = problem.ocp.ocps[0].dim.nu;
+    auto dist2   = params.p_max > 1 ? dist_t{-3, 3} : dist_t{-0.6, -0.1};
     for (index_t r = 0; r < static_cast<index_t>(params.masses.size()); ++r) {
         auto disturbance = dist2(rng);
         for (index_t j = 0; j < num_branches; ++j)
             problem.ocp.ocps[j].b(0)(r, 0) += disturbance;
-    
+
         // guanaqo::print_python(std::cout << "x(0) = ", ocps[i].b(0), "\n");
         // guanaqo::print_python(std::cout << "r(0) = ", ocps[i].r(0), "\n");
         // Force the same initial state in every branch.
@@ -1341,29 +1356,30 @@ TEST(QPALM, spring_mass) {
     // -------------------------------------------------------------------------
     // Fan solver
     // -------------------------------------------------------------------------
-    auto ocps=problem.ocp.ocps;
+    auto ocps = problem.ocp.ocps;
 
     auto fan_cocp    = fancyqlone::FanCyqloneStorage<>::build(problem.ocp);
     index_t num_proc = 8;
     std::cout << "Running on " << num_proc << " processors\n";
-    auto &&fan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
-            fan_cocp, {},
-            {
-                .processors             = num_proc,
-                .print_residuals        = verbose,
-                .print_precision        = 17,
-                .changing_constr_factor = 0.01,
-                .max_update_count       = 0,
+    auto &&fan_backend = qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor,
+                                                  fancyqlone::FanCyqloneSolver<VL>>(
+        fan_cocp, {},
+        {
+            .processors             = num_proc,
+            .print_residuals        = verbose,
+            .print_precision        = 17,
+            .changing_constr_factor = 0.01,
+            .max_update_count       = 0,
 
-                // Fan solver handles the shared/root part itself.
-                .tricyqle_params =
-                    {
-                        .solve_method = fancyqlone::SolveMethod::None,
-                    },
-                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+            // Fan solver handles the shared/root part itself.
+            .tricyqle_params =
+                {
+                    .solve_method = fancyqlone::SolveMethod::None,
+                },
+            .spin_count = std::numeric_limits<uint32_t>::
+                max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
-            });
+        });
 
     qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>> *>
         fan_qpalm{
@@ -1371,9 +1387,9 @@ TEST(QPALM, spring_mass) {
             {
                 .max_outer_iter       = 100,
                 .max_total_inner_iter = 1000,
-                .tolerance = 1e-8,
-                .dual_tolerance    = 1e-8,
-                .initial_penalty_y = 20,
+                .tolerance            = 1e-8,
+                .dual_tolerance       = 1e-8,
+                .initial_penalty_y    = 20,
                 .verbose              = verbose,
                 .detailed_stats       = verbose,
             },
@@ -1392,24 +1408,25 @@ TEST(QPALM, spring_mass) {
               << "outer:   " << fan_qpalm.stats->outer_iter << "\n"
               << "timings: " << fan_qpalm.stats->timings.total.wall_time << "\n"
               << "update_count: " << fan_qpalm.stats_backend->num_updates << "\n";
-        auto &&fan_backend_no_update =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
-            fan_cocp, {},
-            {
-                .processors             = num_proc,
-                .print_residuals        = verbose,
-                .print_precision        = 17,
-                .changing_constr_factor = 0.0,
-                .max_update_count       = 0,
+    auto &&fan_backend_no_update = qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor,
+                                                            fancyqlone::FanCyqloneSolver<VL>>(
+        fan_cocp, {},
+        {
+            .processors             = num_proc,
+            .print_residuals        = verbose,
+            .print_precision        = 17,
+            .changing_constr_factor = 0.0,
+            .max_update_count       = 0,
 
-                // Fan solver handles the shared/root part itself.
-                .tricyqle_params =
-                    {
-                        .solve_method = fancyqlone::SolveMethod::None,
-                    },
-                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+            // Fan solver handles the shared/root part itself.
+            .tricyqle_params =
+                {
+                    .solve_method = fancyqlone::SolveMethod::None,
+                },
+            .spin_count = std::numeric_limits<uint32_t>::
+                max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
-            });
+        });
 
     qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>> *>
         fan_qpalm_no_update{
@@ -1418,8 +1435,8 @@ TEST(QPALM, spring_mass) {
                 .max_outer_iter       = 100,
                 .max_total_inner_iter = 1000,
                 .tolerance            = 1e-8,
-                .dual_tolerance    = 1e-8,
-                .initial_penalty_y = 20,
+                .dual_tolerance       = 1e-8,
+                .initial_penalty_y    = 20,
                 .verbose              = verbose,
                 .detailed_stats       = verbose,
             },
@@ -1441,34 +1458,36 @@ TEST(QPALM, spring_mass) {
     auto λ_fan = fan_qpalm_no_update.get_equality_multipliers();
     auto y_fan = fan_qpalm_no_update.get_inequality_multipliers();
     std::cout << "Running on " << num_proc << " processors\n";
-    auto &&sfan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>>(
-            fan_cocp, {},
-            {
-                .processors             = num_proc,
-                .print_residuals        = verbose,
-                .print_precision        = 17,
-                .changing_constr_factor = 0,
-                .max_update_count       = 0,
+    auto &&sfan_backend = qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor,
+                                                   fancyqlone::SerialFanCyqloneSolver<VL>>(
+        fan_cocp, {},
+        {
+            .processors             = num_proc,
+            .print_residuals        = verbose,
+            .print_precision        = 17,
+            .changing_constr_factor = 0,
+            .max_update_count       = 0,
 
-                // Fan solver handles the shared/root part itself.
-                .tricyqle_params =
-                    {
-                        .solve_method = fancyqlone::SolveMethod::None,
-                    },
-                .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+            // Fan solver handles the shared/root part itself.
+            .tricyqle_params =
+                {
+                    .solve_method = fancyqlone::SolveMethod::None,
+                },
+            .spin_count = std::numeric_limits<uint32_t>::
+                max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
-            });
+        });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>> *>
+    qp::Solver<
+        qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>> *>
         sfan_qpalm{
             sfan_backend.get(),
             {
                 .max_outer_iter       = 100,
                 .max_total_inner_iter = 1000,
                 .tolerance            = 1e-8,
-                .dual_tolerance    = 1e-8,
-                .initial_penalty_y = 20,
+                .dual_tolerance       = 1e-8,
+                .initial_penalty_y    = 20,
                 .verbose              = verbose,
                 .detailed_stats       = verbose,
             },
@@ -1541,7 +1560,10 @@ TEST(QPALM, spring_mass) {
               << "outer:   " << combined_qpalm.stats->outer_iter << "\n"
               << "timings: " << combined_qpalm.stats->timings.total << "\n"
               << "update_count: " << combined_qpalm.stats_backend->num_updates << "\n";
-    std::cout << "speedup: " << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) / static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())  << "\n";
+    std::cout << "speedup: "
+              << static_cast<double>(combined_qpalm.stats->timings.total.wall_time.count()) /
+                     static_cast<double>(fan_qpalm.stats->timings.total.wall_time.count())
+              << "\n";
     for (const auto &ocp : ocps) {
         nx_per_branch.push_back(static_cast<std::size_t>(ocp.dim.nx));
         std::cout << "nx_per_branch: " << ocp.dim.nx << "\n";
@@ -1561,15 +1583,16 @@ TEST(QPALM, spring_mass) {
     //                         static_cast<std::size_t>(N), 0,
     //                         std::span<const std::size_t>(nx_per_branch), 1e-6);
 
-    auto kkt_fan = fan_cocp.compute_kkt_error(problem.ocp,x_fan, y_fan, λ_fan);
+    auto kkt_fan = fan_cocp.compute_kkt_error(problem.ocp, x_fan, y_fan, λ_fan);
     std::cout << "combined y_size: " << y_combined.size() << "\n";
-    auto kkt_combined = combined_cocp.compute_kkt_error(combined_ocp,x_combined, y_combined, λ_combined);
-    std::cout << "KKT error fan: " << kkt_fan.stationarity<< "\n";
-    std::cout << "KKT error combined: " << kkt_combined.stationarity<< "\n";
-    std::cout << "KKT error fan: " << kkt_fan.equality_residual<< "\n";
-    std::cout << "KKT error combined: " << kkt_combined.equality_residual<< "\n";
-    std::cout << "KKT error fan: " << kkt_fan.inequality_residual<< "\n";
-    std::cout << "KKT error combined: " << kkt_combined.inequality_residual<< "\n";
-    std::cout << "KKT error fan: " << kkt_fan.complementarity<< "\n";
-    std::cout << "KKT error combined: " << kkt_combined.complementarity<< "\n";
+    auto kkt_combined =
+        combined_cocp.compute_kkt_error(combined_ocp, x_combined, y_combined, λ_combined);
+    std::cout << "KKT error fan: " << kkt_fan.stationarity << "\n";
+    std::cout << "KKT error combined: " << kkt_combined.stationarity << "\n";
+    std::cout << "KKT error fan: " << kkt_fan.equality_residual << "\n";
+    std::cout << "KKT error combined: " << kkt_combined.equality_residual << "\n";
+    std::cout << "KKT error fan: " << kkt_fan.inequality_residual << "\n";
+    std::cout << "KKT error combined: " << kkt_combined.inequality_residual << "\n";
+    std::cout << "KKT error fan: " << kkt_fan.complementarity << "\n";
+    std::cout << "KKT error combined: " << kkt_combined.complementarity << "\n";
 }

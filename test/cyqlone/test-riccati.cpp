@@ -1,21 +1,21 @@
 #include <gtest/gtest.h>
 
+#include <cyqlone/riccati-blasfeo.hpp>
+#include <batmat/linalg/gemm.hpp>
+#include <batmat/linalg/potrf.hpp>
+#include <batmat/linalg/triangular.hpp>
+#include <batmat/lut.hpp>
 #include <fancyqlone/barrier.hpp>
 #include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/cyqlone/tridiagonal-solver.hpp>
 #include <fancyqlone/linalg.hpp>
 #include <fancyqlone/ocp.hpp>
 #include <fancyqlone/packing.hpp>
 #include <fancyqlone/random-ocp.hpp>
 #include <fancyqlone/tracing.hpp>
-#include <fancyqlone/cyqlone/tridiagonal-solver.hpp>
-#include <batmat/linalg/gemm.hpp>
-#include <batmat/linalg/potrf.hpp>
-#include <batmat/linalg/triangular.hpp>
-#include <batmat/lut.hpp>
 #include <guanaqo/print.hpp>
 #include <guanaqo/trace.hpp>
 #include <cyqlone-version.h>
-#include <cyqlone/riccati-blasfeo.hpp>
 
 #if !BATMAT_WITH_OPENMP
 #include <batmat/thread-pool.hpp>
@@ -27,7 +27,6 @@
 #include <algorithm>
 #include <iostream>
 #include <limits>
-#include <iostream>
 
 #include <print>
 
@@ -39,7 +38,7 @@ index_t cyq_get_num_proc();
 fancyqlone::LinearOCPStorage combine_branches(std::span<const fancyqlone::LinearOCPStorage> ocps);
 hyhound::ocp::OCPDataRiccati from_linear_ocp(fancyqlone::LinearOCPStorage &ocp) {
     hyhound::ocp::OCPDataRiccati ocp_riccati{};
-    ocp_riccati.N  = ocp.dim.N_horiz-1;
+    ocp_riccati.N  = ocp.dim.N_horiz - 1;
     ocp_riccati.nx = ocp.dim.nx;
     ocp_riccati.nu = ocp.dim.nu;
     ocp_riccati.ny = ocp.dim.ny;
@@ -53,26 +52,27 @@ hyhound::ocp::OCPDataRiccati from_linear_ocp(fancyqlone::LinearOCPStorage &ocp) 
         //     ocp_riccati.B(0) = hyhound::ocp::mat::Zero(ocp.dim.nx, ocp.dim.nu);
         //     ocp_riccati.C(0) = as_eigen(ocp.C(0));
         //     ocp_riccati.D(0) = as_eigen(ocp.D(0));
-        // } else{ 
-        ocp_riccati.A(i-1) = as_eigen(ocp.A(i));
-        ocp_riccati.B(i-1) = as_eigen(ocp.B(i));
-        ocp_riccati.C(i-1) = as_eigen(ocp.C(i));
-        ocp_riccati.D(i-1) = as_eigen(ocp.D(i));
-        ocp_riccati.Q(i-1) = as_eigen(ocp.Q(i));
-        ocp_riccati.R(i-1) = as_eigen(ocp.R(i));
-        ocp_riccati.S(i-1) = as_eigen(ocp.S_trans(i));}
-    ocp_riccati.C(ocp.dim.N_horiz-1) = as_eigen(ocp.C(ocp.dim.N_horiz));
-    ocp_riccati.Q(ocp.dim.N_horiz-1) = as_eigen(ocp.Q(ocp.dim.N_horiz));
-    return ocp_riccati;}
-// Tests the factorization, factorization updates, and solution of the Cyqlone linear solver.
-    using blasfeo_mat = fancyqlone::blasfeo::blasfeo_owning_xmat<real_t>;
-    static std::vector<blasfeo_mat> allocate(index_t n, index_t r, index_t c) {
-        std::vector<blasfeo_mat> mat(n);
-        std::ranges::generate(mat, [&] { return blasfeo_mat(r, c); });
-        return mat;
+        // } else{
+        ocp_riccati.A(i - 1) = as_eigen(ocp.A(i));
+        ocp_riccati.B(i - 1) = as_eigen(ocp.B(i));
+        ocp_riccati.C(i - 1) = as_eigen(ocp.C(i));
+        ocp_riccati.D(i - 1) = as_eigen(ocp.D(i));
+        ocp_riccati.Q(i - 1) = as_eigen(ocp.Q(i));
+        ocp_riccati.R(i - 1) = as_eigen(ocp.R(i));
+        ocp_riccati.S(i - 1) = as_eigen(ocp.S_trans(i));
     }
+    ocp_riccati.C(ocp.dim.N_horiz - 1) = as_eigen(ocp.C(ocp.dim.N_horiz));
+    ocp_riccati.Q(ocp.dim.N_horiz - 1) = as_eigen(ocp.Q(ocp.dim.N_horiz));
+    return ocp_riccati;
+}
+// Tests the factorization, factorization updates, and solution of the Cyqlone linear solver.
+using blasfeo_mat = fancyqlone::blasfeo::blasfeo_owning_xmat<real_t>;
+static std::vector<blasfeo_mat> allocate(index_t n, index_t r, index_t c) {
+    std::vector<blasfeo_mat> mat(n);
+    std::ranges::generate(mat, [&] { return blasfeo_mat(r, c); });
+    return mat;
+}
 TEST(CyqloneFanBlas, blas) {
-
 
     using namespace fancyqlone;
     using batmat::matrix::uninitialized;
@@ -114,11 +114,11 @@ TEST(CyqloneFanBlas, blas) {
     // Allocate space for the solution
     batmat::matrix::Matrix<real_t, index_t> u0_sol{{.rows = nu, .cols = 1}};
     batmat::matrix::Matrix<real_t, index_t> λ0_sol{{.rows = fanout * nx, .cols = 1}};
-    std::vector<blasfeo_mat> blas_Bs  = allocate(fanout, nu, nx);
+    std::vector<blasfeo_mat> blas_Bs = allocate(fanout, nu, nx);
 
-    std::vector<blasfeo_mat> blas_SBs = allocate(fanout, nu, nu);
-    std::vector<blasfeo_mat> blas_rs  = allocate(fanout, nu, 1);
-    std::vector<blasfeo_mat> blas_LBs = allocate(fanout, nu, nx);
+    std::vector<blasfeo_mat> blas_SBs    = allocate(fanout, nu, nu);
+    std::vector<blasfeo_mat> blas_rs     = allocate(fanout, nu, 1);
+    std::vector<blasfeo_mat> blas_LBs    = allocate(fanout, nu, nx);
     std::vector<blasfeo_mat> blas_R0_vec = allocate(1, nu, nu);
     std::vector<blasfeo_mat> blas_r0_vec = allocate(1, nu, 1);
 
@@ -126,12 +126,12 @@ TEST(CyqloneFanBlas, blas) {
     std::vector<blasfeo_mat> blas_r_total_vec = allocate(1, nu, 1);
     std::vector<blasfeo_mat> blas_tmp_vec     = allocate(1, nu, 1);
     std::vector<blasfeo_mat> blas_u0_vec      = allocate(1, nu, 1);
-    auto &blas_R0      = blas_R0_vec[0];
-    auto &blas_r0      = blas_r0_vec[0];
-    auto &blas_S_total = blas_S_total_vec[0];
-    auto &blas_r_total = blas_r_total_vec[0];
-    auto &blas_tmp     = blas_tmp_vec[0];
-    auto &blas_u0      = blas_u0_vec[0];
+    auto &blas_R0                             = blas_R0_vec[0];
+    auto &blas_r0                             = blas_r0_vec[0];
+    auto &blas_S_total                        = blas_S_total_vec[0];
+    auto &blas_r_total                        = blas_r_total_vec[0];
+    auto &blas_tmp                            = blas_tmp_vec[0];
+    auto &blas_u0                             = blas_u0_vec[0];
 
 #if GUANAQO_WITH_TRACING
     guanaqo::trace_logger_set_default_size(1'048'576);
@@ -218,9 +218,6 @@ TEST(CyqloneFanBlas, blas) {
             solver_last.solve_forward(λ_last);
             i == 0 ? la::gemv_sub(LBs.batch(i), λ_last.batch(0), r0.batch(0), rs.batch(i))
                    : la::gemv_neg(LBs.batch(i), λ_last.batch(0), rs.batch(i));
-
-                    
-
         };
         // Solve for u(0) (meant to be called on a single thread)
         auto solve_u0 = [&] {
@@ -233,9 +230,8 @@ TEST(CyqloneFanBlas, blas) {
             la::trsm(tril(SBs.batch(0)), rs.batch(0));
             la::trsm(tril(SBs.batch(0)).transposed(),
                      rs.batch(0)); // rs(0) now contains u(0)
-                
-            u0_sol(0) = rs(0);
 
+            u0_sol(0) = rs(0);
         };
         // Reverse solve for λ(0) on each branch, after solving for u(0)
         auto solve_reverse_λ0 = [&] {
@@ -305,126 +301,62 @@ TEST(CyqloneFanBlas, blas) {
     };
 
     auto solve_fan_blas = [&](index_t i, index_t) {
-        auto &ocp = ocps[i];
+        auto &ocp                                = ocps[i];
         hyhound::ocp::OCPDataRiccati ocp_riccati = from_linear_ocp(ocp);
         auto ocp_blasfeo = fancyqlone::blasfeo::OCPDataRiccati::from_riccati(ocp_riccati);
         fancyqlone::blasfeo::RiccatiFactor fac{.ocp = ocp_blasfeo};
         hyhound::ocp::mat Σ = hyhound::ocp::mat::Zero(0, ocp.dim.N_horiz + 1);
         clock::time_point t0, t1;
-        auto params = std::format("nx={}-nu={}-ny={}-N={}-thr={}", ocp.dim.nx, ocp.dim.nu, ocp.dim.ny, ocp.dim.N_horiz, 1);
+        auto params   = std::format("nx={}-nu={}-ny={}-N={}-thr={}", ocp.dim.nx, ocp.dim.nu,
+                                    ocp.dim.ny, ocp.dim.N_horiz, 1);
         auto solve_u0 = [&] {
-
             GUANAQO_TRACE_REGION("fan solve u0", 0);
 
             const int nu_i = static_cast<int>(nu);
             const int nx_i = static_cast<int>(nx);
 
-
-            blasfeo_dtrsm_rltn(
-                nu_i,
-                nx_i,
-                1.0,
-                fac.L[0], nx_i, nx_i,     // L_i, lower triangular state block
-                &blas_Bs[i], 0, 0,        // B_i^T
-                &blas_LBs[i], 0, 0        // output LBs_i
+            blasfeo_dtrsm_rltn(nu_i, nx_i, 1.0, fac.L[0], nx_i,
+                               nx_i,              // L_i, lower triangular state block
+                               &blas_Bs[i], 0, 0, // B_i^T
+                               &blas_LBs[i], 0, 0 // output LBs_i
             );
 
             if (i == 0) {
-                blasfeo_dsyrk_ln(
-                    nu_i,
-                    nx_i,
-                    1.0,
-                    &blas_LBs[i], 0, 0,
-                    &blas_LBs[i], 0, 0,
-                    1.0,
-                    &blas_R0, 0, 0,
-                    &blas_SBs[i], 0, 0
-                );
+                blasfeo_dsyrk_ln(nu_i, nx_i, 1.0, &blas_LBs[i], 0, 0, &blas_LBs[i], 0, 0, 1.0,
+                                 &blas_R0, 0, 0, &blas_SBs[i], 0, 0);
             } else {
-                blasfeo_dsyrk_ln(
-                    nu_i,
-                    nx_i,
-                    1.0,
-                    &blas_LBs[i], 0, 0,
-                    &blas_LBs[i], 0, 0,
-                    0.0,
-                    &blas_SBs[i], 0, 0,
-                    &blas_SBs[i], 0, 0
-                );
+                blasfeo_dsyrk_ln(nu_i, nx_i, 1.0, &blas_LBs[i], 0, 0, &blas_LBs[i], 0, 0, 0.0,
+                                 &blas_SBs[i], 0, 0, &blas_SBs[i], 0, 0);
             }
 
             if (i == 0) {
-                blasfeo_dgemm_nn(
-                    nu_i,
-                    1,
-                    nx_i,
-                    -1.0,
-                    &blas_LBs[i], 0, 0,
-                    &blas_lambda0[i], 0, 0,
-                    1.0,
-                    &blas_r0, 0, 0,
-                    &blas_rs[i], 0, 0
-                );
+                blasfeo_dgemm_nn(nu_i, 1, nx_i, -1.0, &blas_LBs[i], 0, 0, &blas_lambda0[i], 0, 0,
+                                 1.0, &blas_r0, 0, 0, &blas_rs[i], 0, 0);
             } else {
-                blasfeo_dgemm_nn(
-                    nu_i,
-                    1,
-                    nx_i,
-                    -1.0,
-                    &blas_LBs[i], 0, 0,
-                    &blas_lambda0[i], 0, 0,
-                    0.0,
-                    &blas_rs[i], 0, 0,
-                    &blas_rs[i], 0, 0
-                );
+                blasfeo_dgemm_nn(nu_i, 1, nx_i, -1.0, &blas_LBs[i], 0, 0, &blas_lambda0[i], 0, 0,
+                                 0.0, &blas_rs[i], 0, 0, &blas_rs[i], 0, 0);
             }
 
-            blasfeo_dgecp(
-                nu_i,
-                nu_i,
-                &blas_SBs[0], 0, 0,
-                &blas_S_total, 0, 0
-            );
+            blasfeo_dgecp(nu_i, nu_i, &blas_SBs[0], 0, 0, &blas_S_total, 0, 0);
 
             for (index_t k = 1; k < fanout; ++k) {
-                blasfeo_dgead(
-                    nu_i,
-                    nu_i,
-                    1.0,
-                    &blas_SBs[k], 0, 0,
-                    &blas_S_total, 0, 0
-                );
+                blasfeo_dgead(nu_i, nu_i, 1.0, &blas_SBs[k], 0, 0, &blas_S_total, 0, 0);
             }
 
             // ------------------------------------------------------------------
             // Factor S_total = L_S L_S^T.
             // ------------------------------------------------------------------
 
-            blasfeo_dpotrf_l(
-                nu_i,
-                &blas_S_total, 0, 0,
-                &blas_S_total, 0, 0
-            );
+            blasfeo_dpotrf_l(nu_i, &blas_S_total, 0, 0, &blas_S_total, 0, 0);
 
             // ------------------------------------------------------------------
             // Aggregate r_total = sum_i rs_i.
             // ------------------------------------------------------------------
 
-            blasfeo_dgecp(
-                nu_i,
-                1,
-                &blas_rs[0], 0, 0,
-                &blas_r_total, 0, 0
-            );
+            blasfeo_dgecp(nu_i, 1, &blas_rs[0], 0, 0, &blas_r_total, 0, 0);
 
             for (index_t k = 1; k < fanout; ++k) {
-                blasfeo_dgead(
-                    nu_i,
-                    1,
-                    1.0,
-                    &blas_rs[k], 0, 0,
-                    &blas_r_total, 0, 0
-                );
+                blasfeo_dgead(nu_i, 1, 1.0, &blas_rs[k], 0, 0, &blas_r_total, 0, 0);
             }
 
             // ------------------------------------------------------------------
@@ -434,63 +366,44 @@ TEST(CyqloneFanBlas, blas) {
             //     L_S^T u0 = tmp
             // ------------------------------------------------------------------
 
-            blasfeo_dtrsm_llnn(
-                nu_i,
-                1,
-                1.0,
-                &blas_S_total, 0, 0,
-                &blas_r_total, 0, 0,
-                &blas_tmp, 0, 0
-            );
+            blasfeo_dtrsm_llnn(nu_i, 1, 1.0, &blas_S_total, 0, 0, &blas_r_total, 0, 0, &blas_tmp, 0,
+                               0);
 
-            blasfeo_dtrsm_lltn(
-                nu_i,
-                1,
-                1.0,
-                &blas_S_total, 0, 0,
-                &blas_tmp, 0, 0,
-                &blas_u0, 0, 0
-            );
+            blasfeo_dtrsm_lltn(nu_i, 1, 1.0, &blas_S_total, 0, 0, &blas_tmp, 0, 0, &blas_u0, 0, 0);
         };
-
-            
-        };
-        auto do_solve = [&] {
-            // Synchronize for clearer tracing and timing
-            fan_barrier.arrive_and_wait_with_completion(static_cast<uint32_t>(i),
-                                                            [&] { t0 = clock::now(); });
-
-            factor_solve(fac, Σ);
-            fan_barrier.wait(fan_barrier.arrive_with_completion(static_cast<uint32_t>(i), solve_u0));
-            reverse_solve(fac);
-            fan_barrier.arrive_and_wait_with_completion(static_cast<uint32_t>(i),
-                                                            [&] { t1 = clock::now(); });
-        };
-    
-
-        for (int iter = 0; iter <= num_warmup; ++iter) {
-            GUANAQO_IF_ITT(
-                __itt_thread_set_name(std::format("OMP({};{})", ctx.index, i).c_str()));
-#if GUANAQO_WITH_TRACING
-                if (iter == num_warmup)
-                    fan_barrier.wait(
-                            fan_barrier.arrive_with_completion(static_cast<uint32_t>(i), [&] {
-                                guanaqo::for_each_trace_logger(
-                                    [](auto &logger) { logger.reset(); });
-                            }));
-                GUANAQO_TRACE("thread_id", 100 * (i + 1));
-#endif
-                do_solve();
-            }
     };
+    auto do_solve = [&] {
+        // Synchronize for clearer tracing and timing
+        fan_barrier.arrive_and_wait_with_completion(static_cast<uint32_t>(i),
+                                                    [&] { t0 = clock::now(); });
+
+        factor_solve(fac, Σ);
+        fan_barrier.wait(fan_barrier.arrive_with_completion(static_cast<uint32_t>(i), solve_u0));
+        reverse_solve(fac);
+        fan_barrier.arrive_and_wait_with_completion(static_cast<uint32_t>(i),
+                                                    [&] { t1 = clock::now(); });
+    };
+
+    for (int iter = 0; iter <= num_warmup; ++iter) {
+        GUANAQO_IF_ITT(__itt_thread_set_name(std::format("OMP({};{})", ctx.index, i).c_str()));
+#if GUANAQO_WITH_TRACING
+        if (iter == num_warmup)
+            fan_barrier.wait(fan_barrier.arrive_with_completion(static_cast<uint32_t>(i), [&] {
+                guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
+            }));
+        GUANAQO_TRACE("thread_id", 100 * (i + 1));
+#endif
+        do_solve();
+    }
+};
 #if BATMAT_WITH_OPENMP
-    omp_set_max_active_levels(2);
+omp_set_max_active_levels(2);
     BATMAT_OMP(parallel for num_threads(fanout))
     for (index_t i = 0; i < fanout; ++i)
         solve_fan(i, fanout);
 #else
-    batmat::thread_pool fan_pool(fanout);
-    fan_pool.sync_run_n(fanout, solve_fan);
+batmat::thread_pool fan_pool(fanout);
+fan_pool.sync_run_n(fanout, solve_fan);
 #endif
     save_traces("fanout-fan.csv");
 #if BATMAT_WITH_OPENMP
@@ -499,8 +412,8 @@ TEST(CyqloneFanBlas, blas) {
     for (index_t i = 0; i < fanout; ++i)
         solve_fan_blas(i, fanout);
 #else
-    batmat::thread_pool blas_fan_pool(fanout);
-    blas_fan_pool.sync_run_n(fanout, solve_fan_blas);
+batmat::thread_pool blas_fan_pool(fanout);
+blas_fan_pool.sync_run_n(fanout, solve_fan_blas);
 #endif
     save_traces("fanout-fan.csv");
     // Solve the combined problem with a single Cyqlone solve, as a reference solution
@@ -564,4 +477,4 @@ TEST(CyqloneFanBlas, blas) {
     auto λ0_err  = λ0_sol;
     la::sub(λ0_err(0), combined_λ0);
     EXPECT_LE(la::norm_inf(λ0_err), 10 * λ0_norm * static_cast<real_t>(N * (nx + nu)) * ε);
-}
+    }

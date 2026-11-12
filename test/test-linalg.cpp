@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
+#include <batmat/linalg/triangular.hpp>
 #include <fancyqlone/linalg.hpp>
 #include <fancyqlone/packing.hpp>
-#include <batmat/linalg/triangular.hpp>
 
 #include <tuple>
 #include <type_traits>
@@ -243,8 +243,8 @@ class PackingTest : public testing::Test {};
 TYPED_TEST_SUITE_P(PackingTest);
 
 template <batmat::linalg::MatrixStructure Structure>
-constexpr bool in_structure(fancyqlone::index_t rows, fancyqlone::index_t cols, fancyqlone::index_t row,
-                            fancyqlone::index_t col) {
+constexpr bool in_structure(fancyqlone::index_t rows, fancyqlone::index_t cols,
+                            fancyqlone::index_t row, fancyqlone::index_t col) {
     if constexpr (Structure == LowerTriangular)
         return col <= row + std::max(rows, cols) - rows;
     else if constexpr (Structure == UpperTriangular)

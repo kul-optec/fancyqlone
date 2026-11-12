@@ -136,14 +136,14 @@ CentroidalQuadrupedProblem centroidal_quadruped(CentroidalQuadrupedParams p) {
 
     std::vector<real_t> reference(static_cast<size_t>(N * (nx + nu) + nx));
     for (index_t i = 0; i <= N; ++i) {
-        auto offset = static_cast<size_t>(i * (nx + nu));
+        auto offset     = static_cast<size_t>(i * (nx + nu));
         const auto time = (static_cast<real_t>(p.initial_stage) + static_cast<real_t>(i)) * p.dt;
         set_reference_state(p, time, reference.data() + offset);
     }
 
     Matrix3 inertia;
-    inertia << p.inertia[0], p.inertia[1], p.inertia[2], p.inertia[3], p.inertia[4],
-        p.inertia[5], p.inertia[6], p.inertia[7], p.inertia[8];
+    inertia << p.inertia[0], p.inertia[1], p.inertia[2], p.inertia[3], p.inertia[4], p.inertia[5],
+        p.inertia[6], p.inertia[7], p.inertia[8];
     const std::array<Vector3, 4> footholds{
         Vector3{+p.foot_x, +p.foot_y, 0},
         Vector3{+p.foot_x, -p.foot_y, 0},
@@ -187,8 +187,8 @@ CentroidalQuadrupedProblem centroidal_quadruped(CentroidalQuadrupedParams p) {
             Ri(j, j) = p.force_weights[j];
 
         for (index_t foot = 0; foot < 4; ++foot) {
-            const auto row = 4 * foot;
-            const auto col = 3 * foot;
+            const auto row       = 4 * foot;
+            const auto col       = 3 * foot;
             Di(row + 0, col + 0) = +1;
             Di(row + 1, col + 0) = -1;
             Di(row + 2, col + 1) = +1;
@@ -198,7 +198,7 @@ CentroidalQuadrupedProblem centroidal_quadruped(CentroidalQuadrupedParams p) {
                 ubi(row + j, 0)      = 0;
             }
             for (index_t axis = 0; axis < 3; ++axis) {
-                const auto force_row = 16 + col + axis;
+                const auto force_row      = 16 + col + axis;
                 Di(force_row, col + axis) = 1;
                 if (!contacts[i][foot]) {
                     lbi(force_row, 0) = 0;
@@ -220,8 +220,7 @@ CentroidalQuadrupedProblem centroidal_quadruped(CentroidalQuadrupedParams p) {
 }
 
 FanCentroidalQuadrupedProblem fan_centroidal_quadruped(CentroidalQuadrupedParams p,
-                                                       index_t num_branches,
-                                                       real_t mu_radius) {
+                                                       index_t num_branches, real_t mu_radius) {
     if (num_branches <= 0)
         throw std::invalid_argument("The number of branches must be positive");
     if (mu_radius < 0 || p.mu - mu_radius < 0)
@@ -234,8 +233,9 @@ FanCentroidalQuadrupedProblem fan_centroidal_quadruped(CentroidalQuadrupedParams
     friction_coefficients.reserve(static_cast<size_t>(num_branches));
     for (index_t branch = 0; branch < num_branches; ++branch) {
         if (num_branches > 1)
-            p.mu = nominal_mu - mu_radius + 2 * mu_radius * static_cast<real_t>(branch) /
-                                                 static_cast<real_t>(num_branches - 1);
+            p.mu =
+                nominal_mu - mu_radius +
+                2 * mu_radius * static_cast<real_t>(branch) / static_cast<real_t>(num_branches - 1);
         friction_coefficients.push_back(p.mu);
         ocps.push_back(std::move(centroidal_quadruped(p).ocp));
     }

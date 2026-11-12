@@ -1,6 +1,6 @@
+#include <batmat/linalg/copy.hpp>
 #include <fancyqlone/matio.hpp>
 #include <fancyqlone/ocp.hpp>
-#include <batmat/linalg/copy.hpp>
 #include <guanaqo/string-util.hpp>
 #include <matio.h>
 

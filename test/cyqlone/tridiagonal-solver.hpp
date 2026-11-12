@@ -1,9 +1,9 @@
 #pragma once
 
-#include <fancyqlone/linalg.hpp>
 #include <batmat/linalg/gemv.hpp>
 #include <batmat/linalg/potrf.hpp>
 #include <batmat/linalg/trsm.hpp>
+#include <fancyqlone/linalg.hpp>
 
 namespace fancyqlone {
 

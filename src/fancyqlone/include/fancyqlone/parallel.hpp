@@ -4,9 +4,9 @@
 /// Parallel execution context and synchronization primitives.
 /// @ingroup topic-parallelization
 
+#include <batmat/config.hpp>
 #include <fancyqlone/barrier.hpp>
 #include <fancyqlone/config.hpp>
-#include <batmat/config.hpp>
 #include <syncstream>
 #if BATMAT_WITH_OPENMP
 #include <batmat/openmp.h>
@@ -149,25 +149,25 @@ struct Context {
         return shared.barrier.arrive(static_cast<uint32_t>(index));
 #endif
     }
-// #if GUANAQO_WITH_TRACING && !GUANAQO_WITH_PERFETTO
-//     /// Arrive at the barrier and obtain a token that can be used to wait for completion of the
-//     /// current barrier phase and call a function on completion.
-//     /// @note    Token must be awaited before any other call to arrive.
-//     template <class C>
-//     [[nodiscard]] arrival_token::token_t arrive_with_completion(C func) {
+    // #if GUANAQO_WITH_TRACING && !GUANAQO_WITH_PERFETTO
+    //     /// Arrive at the barrier and obtain a token that can be used to wait for completion of the
+    //     /// current barrier phase and call a function on completion.
+    //     /// @note    Token must be awaited before any other call to arrive.
+    //     template <class C>
+    //     [[nodiscard]] arrival_token::token_t arrive_with_completion(C func) {
 
-//         return shared.barrier.arrive_with_completion(static_cast<uint32_t>(index), std::move(func));
-//     };
-// #else
+    //         return shared.barrier.arrive_with_completion(static_cast<uint32_t>(index), std::move(func));
+    //     };
+    // #else
     /// Arrive at the barrier and obtain a token that can be used to wait for completion of the
     /// current barrier phase and call a function on completion.
     /// @note    Token must be awaited before any other call to arrive.
     template <class C>
-    [[nodiscard]]  shared_context_type::barrier_type::arrival_token arrive_with_completion(C func) {
+    [[nodiscard]] shared_context_type::barrier_type::arrival_token arrive_with_completion(C func) {
 
         return shared.barrier.arrive_with_completion(static_cast<uint32_t>(index), std::move(func));
     }
-// #endif
+    // #endif
     /// Await a token returned by @ref arrive(), waiting for the barrier phase to complete.
     void wait(arrival_token &&token) {
 #if GUANAQO_WITH_TRACING && !GUANAQO_WITH_PERFETTO
@@ -315,12 +315,12 @@ struct FanContext {
     template <class T>
     using arrival_token_typed = FanSharedContext::barrier_type::template arrival_token_typed<T>;
     using arrival_token       = FanSharedContext::barrier_type::arrival_token;
-#if GUANAQO_WITH_TRACING&& !GUANAQO_WITH_PERFETTO
-    using arrival_t           = Context<SharedContext>::arrival_token::token_t;
-    using fan_arrival_t       = Context<FanSharedContext>::arrival_token::token_t;
+#if GUANAQO_WITH_TRACING && !GUANAQO_WITH_PERFETTO
+    using arrival_t     = Context<SharedContext>::arrival_token::token_t;
+    using fan_arrival_t = Context<FanSharedContext>::arrival_token::token_t;
 #else
-    using arrival_t           = Context<SharedContext>::arrival_token;
-    using fan_arrival_t       = Context<FanSharedContext>::arrival_token;
+    using arrival_t     = Context<SharedContext>::arrival_token;
+    using fan_arrival_t = Context<FanSharedContext>::arrival_token;
 #endif
 
     [[nodiscard]] bool is_master() const { return total_ctx.is_master() && branch_ctx.is_master(); }
@@ -330,9 +330,9 @@ struct FanContext {
     [[nodiscard]] auto arrive() {
         arrival_token total_token = total_ctx.shared.barrier.get_arrival_token();
 #if GUANAQO_WITH_TRACING && !GUANAQO_WITH_PERFETTO
-        arrival_t branch_token =
-            branch_ctx.arrive_with_completion([&, this] { total_token = total_ctx.arrive().token; });
-#else 
+        arrival_t branch_token = branch_ctx.arrive_with_completion(
+            [&, this] { total_token = total_ctx.arrive().token; });
+#else
         arrival_t branch_token =
             branch_ctx.arrive_with_completion([&, this] { total_token = total_ctx.arrive(); });
 
@@ -482,7 +482,6 @@ void FanSharedContext::run(F &&f) {
     for (index_t i = 0; i < num_thr; ++i) {
         cumulative[i] = sum;
         sum += branch_contexts[i].num_thr;
-
     }
     // std::cout << "Cumulative: ";
     // for (const auto &c : cumulative) {
@@ -520,7 +519,8 @@ void FanSharedContext::run(F &&f) {
     for (index_t idx = 0; idx < total_num_thr; ++idx) {
 
         // recover i
-        index_t i = static_cast<index_t>(std::upper_bound(cumulative.begin(), cumulative.end(), idx) - cumulative.begin() - 1);
+        index_t i = static_cast<index_t>(
+            std::upper_bound(cumulative.begin(), cumulative.end(), idx) - cumulative.begin() - 1);
 
         index_t j = idx - cumulative[i];
 
@@ -528,14 +528,11 @@ void FanSharedContext::run(F &&f) {
         Context<SharedContext> branch_ctx{.shared = branch_contexts[i], .index = j};
 
         FanContext<FanSharedContext> ctx{
-            .branch_ctx = branch_ctx,
-            .total_ctx = total_ctx,
-            .index = idx
-        };
+            .branch_ctx = branch_ctx, .total_ctx = total_ctx, .index = idx};
 
         f(ctx);
-}
+    }
 
 #endif
 }
-}
+} // namespace fancyqlone::parallel

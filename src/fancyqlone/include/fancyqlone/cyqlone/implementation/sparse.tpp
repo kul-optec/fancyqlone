@@ -145,10 +145,11 @@ auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::build_sparse_no_penalty() const ->
                 if (i == 0) {
                     mat.add(sλA, s, data_F.batch(di)(l).left_cols(nu));              // B(j)
                     j > 0 ? mat.add(sλA, s + nu, data_F.batch(di)(l).right_cols(nx)) // A(j)
-                          : void();                                         // A(0) = 0
+                          : void();                                                  // A(0) = 0
                 } else {
-                    mat.add(s, s - nx, data_F.batch(di)(l).left_cols(nu).transposed());       // B(j)
-                    mat.add(s + nu, s - nx, data_F.batch(di)(l).right_cols(nx).transposed()); // A(j)
+                    mat.add(s, s - nx, data_F.batch(di)(l).left_cols(nu).transposed()); // B(j)
+                    mat.add(s + nu, s - nx,
+                            data_F.batch(di)(l).right_cols(nx).transposed()); // A(j)
                 }
                 // end of subinterval: coupling constraints at the bottom (row sλI)
                 i + 1 == n ? mat.add_diag(sλI, s + nu, -1, nx)      // E = -I

@@ -1,18 +1,18 @@
 #pragma once
 
 #include <fancyqlone/config.hpp>
-#include <fancyqlone/neumaier.hpp>
 #include <fancyqlone/fancyqpalm/implementation/algorithms.hpp>
 #include <fancyqlone/fancyqpalm/implementation/breakpoint.hpp>
 #include <fancyqlone/fancyqpalm/implementation/breakpoint.tpp>
+#include <fancyqlone/neumaier.hpp>
 
 #include <batmat/assume.hpp>
 #include <guanaqo/trace.hpp>
 #include <cmath>
-#include <ranges>
 #include <iostream>
-#include <syncstream>
+#include <ranges>
 #include <span>
+#include <syncstream>
 #include <utility>
 #include <vector>
 
@@ -181,7 +181,6 @@ auto LineSearch<Vec>::operator()(
                          step_size.τ, step_size_debug.τ);
 #endif
         return step_size;
-
     });
 }
 

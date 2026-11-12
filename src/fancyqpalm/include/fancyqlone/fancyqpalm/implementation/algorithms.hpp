@@ -1,7 +1,7 @@
 #pragma once
 
-#include <fancyqlone/config.hpp>
 #include <batmat/assume.hpp>
+#include <fancyqlone/config.hpp>
 #include <guanaqo/trace.hpp>
 #include <algorithm>
 #include <iterator>

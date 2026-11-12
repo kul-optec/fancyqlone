@@ -1,6 +1,6 @@
+#include <batmat/matrix/matrix.hpp>
 #include <fancyqlone/cyqlone/cyqlone.hpp>
 #include <fancyqlone/packing.hpp>
-#include <batmat/matrix/matrix.hpp>
 #include <guanaqo/blas/hl-blas-interface.hpp>
 #include <guanaqo/print.hpp>
 #include <algorithm>
@@ -12,11 +12,11 @@
 #include <fancyqlone/matio.hpp>
 #endif
 
-using fancyqlone::index_t;                                   // Integer type for indices
-using fancyqlone::real_t;                                    // Floating-point type for scalars
+using fancyqlone::index_t;                                // Integer type for indices
+using fancyqlone::real_t;                                 // Floating-point type for scalars
 using matrices = batmat::matrix::Matrix<real_t, index_t>; // Array of matrices
 
-constexpr index_t v  = 4;                                  // Vector length to use
+constexpr index_t v  = 4;                                     // Vector length to use
 using TricyqleSolver = fancyqlone::TricyqleSolver<v, real_t>; // Block tridiagonal solver to use
 
 struct TridiagSystem {

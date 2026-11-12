@@ -1,18 +1,18 @@
 #include <gtest/gtest.h>
 
-#include <fancyqlone/barrier.hpp>
-#include <fancyqlone/cyqlone/cyqlone.hpp>
-#include <fancyqlone/linalg.hpp>
-#include <fancyqlone/ocp.hpp>
-#include <fancyqlone/packing.hpp>
-#include <fancyqlone/random-ocp.hpp>
-#include <fancyqlone/tracing.hpp>
-#include <fancyqlone/cyqlone/tridiagonal-solver.hpp>
 #include <batmat/linalg/gemm.hpp>
 #include <batmat/linalg/potrf.hpp>
 #include <batmat/linalg/triangular.hpp>
 #include <batmat/lut.hpp>
 #include <batmat/openmp.h>
+#include <fancyqlone/barrier.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
+#include <fancyqlone/cyqlone/tridiagonal-solver.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/ocp.hpp>
+#include <fancyqlone/packing.hpp>
+#include <fancyqlone/random-ocp.hpp>
+#include <fancyqlone/tracing.hpp>
 #include <guanaqo/print.hpp>
 #include <guanaqo/trace.hpp>
 #include <cyqlone-version.h>
@@ -163,12 +163,9 @@ TEST(CyqloneFanFactorTest, factorSPMD) {
             solver_last.solve_forward(λ_last);
             i == 0 ? la::gemv_sub(LBs.batch(i), λ_last.batch(0), r0.batch(0), rs.batch(i))
                    : la::gemv_neg(LBs.batch(i), λ_last.batch(0), rs.batch(i));
-            for(index_t k= 0; k<solver.v; ++k)
-                guanaqo::print_python(std::cout << "[forward]   λ(0) block " << k << " = ", λ_last.batch(k)(0), "\n");
-            
-
-                    
-
+            for (index_t k = 0; k < solver.v; ++k)
+                guanaqo::print_python(std::cout << "[forward]   λ(0) block " << k << " = ",
+                                      λ_last.batch(k)(0), "\n");
         };
         // Solve for u(0) (meant to be called on a single thread)
         auto solve_u0 = [&] {
@@ -181,19 +178,20 @@ TEST(CyqloneFanFactorTest, factorSPMD) {
             la::trsm(tril(SBs.batch(0)), rs.batch(0));
             la::trsm(tril(SBs.batch(0)).transposed(),
                      rs.batch(0)); // rs(0) now contains u(0)
-                
-            u0_sol(0) = rs(0);
 
+            u0_sol(0) = rs(0);
         };
         // Reverse solve for λ(0) on each branch, after solving for u(0)
         auto solve_reverse_λ0 = [&] {
             GUANAQO_TRACE_REGION("fan solve reverse λ0", 0);
             // Compute the contribution of u(0) to λ(0) for each Cyqlone block
             std::osyncstream out(std::cout);
-            guanaqo::print_python(out << "[reverse]   λ(0)"<<i<<" before reverse solve = ", λ_last.batch(0)(0), "\n");
+            guanaqo::print_python(out << "[reverse]   λ(0)" << i << " before reverse solve = ",
+                                  λ_last.batch(0)(0), "\n");
 
             la::gemv_add(LBs.batch(i).transposed(), rs.batch(0), λ_last.batch(0));
-            guanaqo::print_python(out << "[reverse]   λ(0)" << i << " after gemv = ", λ_last.batch(0)(0), "\n");
+            guanaqo::print_python(
+                out << "[reverse]   λ(0)" << i << " after gemv = ", λ_last.batch(0)(0), "\n");
             // Reverse solve of the final block-tridiagonal system for each Cyqlone block
             solver_last.solve_reverse(λ_last);
             la::pack(λ_last, λ.batch(0));

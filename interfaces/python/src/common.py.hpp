@@ -1,11 +1,11 @@
 #pragma once
 
+#include <batmat/assume.hpp>
+#include <batmat/matrix/matrix.hpp>
 #include <fancyqlone/config.hpp>
 #include <fancyqlone/matio.hpp>
 #include <fancyqlone/ocp.hpp>
 #include <fancyqlone/sparse.hpp>
-#include <batmat/assume.hpp>
-#include <batmat/matrix/matrix.hpp>
 
 using fancyqlone::index_t;
 using fancyqlone::real_t;
@@ -267,10 +267,11 @@ struct type_caster<fancyqlone::SparseMatrix> {
     template <class T>
     static handle from_cpp(T &&src, rv_policy, cleanup_list *) {
         object coo_array = module_::import_("scipy.sparse").attr("coo_array");
-        return coo_array(make_tuple(fancyqlone::np_copy(std::forward<T>(src).values),
-                                    make_tuple(fancyqlone::np_copy(std::forward<T>(src).row_indices),
-                                               fancyqlone::np_copy(std::forward<T>(src).col_indices))),
-                         "shape"_a = make_tuple(src.sparsity.rows, src.sparsity.cols))
+        return coo_array(
+                   make_tuple(fancyqlone::np_copy(std::forward<T>(src).values),
+                              make_tuple(fancyqlone::np_copy(std::forward<T>(src).row_indices),
+                                         fancyqlone::np_copy(std::forward<T>(src).col_indices))),
+                   "shape"_a = make_tuple(src.sparsity.rows, src.sparsity.cols))
             .release();
     }
 

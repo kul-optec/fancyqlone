@@ -1,15 +1,15 @@
 #include <benchmark/benchmark.h>
 
+#include <CLI/CLI.hpp>
+#include <batmat/dtypes.hpp>
+#include <batmat/lut.hpp>
+#include <batmat/openmp.h>
 #include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/spring-mass.hpp>
 #include <fancyqlone/fancyqpalm/settings.hpp>
 #include <fancyqlone/fancyqpalm/solver.hpp>
 #include <fancyqlone/fancyqpalm/status.hpp>
 #include <fancyqlone/tracing.hpp>
-#include <CLI/CLI.hpp>
-#include <batmat/dtypes.hpp>
-#include <batmat/lut.hpp>
-#include <batmat/openmp.h>
 #include <guanaqo/demangled-typename.hpp>
 #include <guanaqo/pcm/counters.hpp>
 #include <guanaqo/perfetto/trace.hpp>
@@ -94,15 +94,15 @@ struct Options {
 #endif
     std::vector<int> horizon{32, 64, 96, 128, 192, 256};
     std::vector<int> masses{6, 12, 30};
-    uint64_t num_instances            = 50;
+    uint64_t num_instances = 50;
     std::vector<int> num_branches{8};
-    uint64_t seed                     = 0;
-    ProblemType problem_type          = ProblemType::WangBoyd2008;
-    bool custom_reporter              = true;
-    bool print_extra                  = false;
-    bool use_color                    = false;
-    bool trace                        = false;
-    bool serial                       = false;
+    uint64_t seed            = 0;
+    ProblemType problem_type = ProblemType::WangBoyd2008;
+    bool custom_reporter     = true;
+    bool print_extra         = false;
+    bool use_color           = false;
+    bool trace               = false;
+    bool serial              = false;
 };
 
 namespace qp = fancyqlone::qpalm;
@@ -190,11 +190,13 @@ void run_benchmark(benchmark::State &state, [[maybe_unused]] const std::string &
     disable_tracing(); // No tracing during the actual benchmark
     if (backend_settings.processors < 1)
         return state.SkipWithMessage("Number of processors must be at least 1.");
-    auto problem = create_problem(params,num_branches);
+    auto problem = create_problem(params, num_branches);
     // Build a QPALM Cyqlone solver
     auto ocp     = fancyqlone::FanCyqloneStorage<>::build(problem.ocp);
-    auto backend = qp::make_cyqpalm_backend<VL, Order, fancyqlone::FanCyqloneSolver<VL>>(ocp, {}, backend_settings);
-    qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::FanCyqloneSolver<VL>> *> qpalm{backend.get(), settings};
+    auto backend = qp::make_cyqpalm_backend<VL, Order, fancyqlone::FanCyqloneSolver<VL>>(
+        ocp, {}, backend_settings);
+    qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::FanCyqloneSolver<VL>> *> qpalm{
+        backend.get(), settings};
     // Main benchmark
     qp::SolverStatus status;
     double time_solve = 0, time_active_set_change = 0, time_line_search = 0,
@@ -216,18 +218,18 @@ void run_benchmark(benchmark::State &state, [[maybe_unused]] const std::string &
     }
     if (trace)
         trace_run([&] { qpalm(); }, param_name);
-    auto sol       = ocp.reconstruct_solution(problem.ocp, qpalm.get_solution(),
-                                              qpalm.get_inequality_multipliers(),
-                                              qpalm.get_equality_multipliers());
-    auto kkt_error = problem.ocp.compute_kkt_error(sol);
-    state.counters["status"]              = counter(status);
-    state.counters["success"]             = counter(status == qp::SolverStatus::Converged);
-    state.counters["iter"]                = counter(qpalm.stats->inner_iter);
-    state.counters["outer_iter"]          = counter(qpalm.stats->outer_iter);
-    state.counters["num_factor"]          = counter(qpalm.stats_backend->num_factor);
-    state.counters["num_upd"]             = counter(qpalm.stats_backend->num_updates);
-    state.counters["rank_upd"]            = counter(qpalm.stats_backend->rank_updates);
-    state.counters["t_solve"]             = counter_avg(time_solve);
+    auto sol                     = ocp.reconstruct_solution(problem.ocp, qpalm.get_solution(),
+                                                            qpalm.get_inequality_multipliers(),
+                                                            qpalm.get_equality_multipliers());
+    auto kkt_error               = problem.ocp.compute_kkt_error(sol);
+    state.counters["status"]     = counter(status);
+    state.counters["success"]    = counter(status == qp::SolverStatus::Converged);
+    state.counters["iter"]       = counter(qpalm.stats->inner_iter);
+    state.counters["outer_iter"] = counter(qpalm.stats->outer_iter);
+    state.counters["num_factor"] = counter(qpalm.stats_backend->num_factor);
+    state.counters["num_upd"]    = counter(qpalm.stats_backend->num_updates);
+    state.counters["rank_upd"]   = counter(qpalm.stats_backend->rank_updates);
+    state.counters["t_solve"]    = counter_avg(time_solve);
     state.counters["t_active_set_change"] = counter_avg(time_active_set_change);
     state.counters["t_line_search"]       = counter_avg(time_line_search);
     state.counters["t_recompute_outer"]   = counter_avg(time_recompute_outer);
@@ -242,16 +244,19 @@ void run_benchmark(benchmark::State &state, [[maybe_unused]] const std::string &
 }
 template <index_t VL, qp::StorageOrder Order>
 void run_benchmark_serial(benchmark::State &state, [[maybe_unused]] const std::string &param_name,
-                   const SpringMassParams &params, qp::CyQPALMBackendSettings backend_settings,
-                   qp::Settings settings, index_t num_branches, bool trace = false) try {
+                          const SpringMassParams &params,
+                          qp::CyQPALMBackendSettings backend_settings, qp::Settings settings,
+                          index_t num_branches, bool trace = false) try {
     disable_tracing(); // No tracing during the actual benchmark
     if (backend_settings.processors < 1)
         return state.SkipWithMessage("Number of processors must be at least 1.");
-    auto problem = create_problem(params,num_branches);
+    auto problem = create_problem(params, num_branches);
     // Build a QPALM Cyqlone solver
     auto ocp     = fancyqlone::FanCyqloneStorage<>::build(problem.ocp);
-    auto backend = qp::make_cyqpalm_backend<VL, Order, fancyqlone::SerialFanCyqloneSolver<VL>>(ocp, {}, backend_settings);
-    qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::SerialFanCyqloneSolver<VL>> *> qpalm{backend.get(), settings};
+    auto backend = qp::make_cyqpalm_backend<VL, Order, fancyqlone::SerialFanCyqloneSolver<VL>>(
+        ocp, {}, backend_settings);
+    qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::SerialFanCyqloneSolver<VL>> *> qpalm{
+        backend.get(), settings};
     // Main benchmark
     qp::SolverStatus status;
     double time_solve = 0, time_active_set_change = 0, time_line_search = 0,
@@ -273,18 +278,18 @@ void run_benchmark_serial(benchmark::State &state, [[maybe_unused]] const std::s
     }
     if (trace)
         trace_run([&] { qpalm(); }, param_name);
-    auto sol       = ocp.reconstruct_solution(problem.ocp, qpalm.get_solution(),
-                                              qpalm.get_inequality_multipliers(),
-                                              qpalm.get_equality_multipliers());
-    auto kkt_error = problem.ocp.compute_kkt_error(sol);
-    state.counters["status"]              = counter(status);
-    state.counters["success"]             = counter(status == qp::SolverStatus::Converged);
-    state.counters["iter"]                = counter(qpalm.stats->inner_iter);
-    state.counters["outer_iter"]          = counter(qpalm.stats->outer_iter);
-    state.counters["num_factor"]          = counter(qpalm.stats_backend->num_factor);
-    state.counters["num_upd"]             = counter(qpalm.stats_backend->num_updates);
-    state.counters["rank_upd"]            = counter(qpalm.stats_backend->rank_updates);
-    state.counters["t_solve"]             = counter_avg(time_solve);
+    auto sol                     = ocp.reconstruct_solution(problem.ocp, qpalm.get_solution(),
+                                                            qpalm.get_inequality_multipliers(),
+                                                            qpalm.get_equality_multipliers());
+    auto kkt_error               = problem.ocp.compute_kkt_error(sol);
+    state.counters["status"]     = counter(status);
+    state.counters["success"]    = counter(status == qp::SolverStatus::Converged);
+    state.counters["iter"]       = counter(qpalm.stats->inner_iter);
+    state.counters["outer_iter"] = counter(qpalm.stats->outer_iter);
+    state.counters["num_factor"] = counter(qpalm.stats_backend->num_factor);
+    state.counters["num_upd"]    = counter(qpalm.stats_backend->num_updates);
+    state.counters["rank_upd"]   = counter(qpalm.stats_backend->rank_updates);
+    state.counters["t_solve"]    = counter_avg(time_solve);
     state.counters["t_active_set_change"] = counter_avg(time_active_set_change);
     state.counters["t_line_search"]       = counter_avg(time_line_search);
     state.counters["t_recompute_outer"]   = counter_avg(time_recompute_outer);
@@ -298,9 +303,9 @@ void run_benchmark_serial(benchmark::State &state, [[maybe_unused]] const std::s
     state.SkipWithError(e.what());
 }
 #if WITH_HPIPM
-void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params, index_t num_branches,
-                             int mode = 0) {
-    auto problem     = create_problem(params,num_branches);
+void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params,
+                         index_t num_branches, int mode = 0) {
+    auto problem     = create_problem(params, num_branches);
     auto qp_data     = build_hpipm_tree_qp(problem.ocp, true, true);
     auto solver_data = create_hpipm_tree_solver(qp_data, 0, mode);
     // Main benchmark
@@ -311,7 +316,7 @@ void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params
         state.SetIterationTime(seconds(time_solve).count());
     }
     auto sol                       = get_solution_hpipm_tree(*solver_data);
-    auto kkt_error                 = problem.ocp.compute_kkt_error(sol,true);
+    auto kkt_error                 = problem.ocp.compute_kkt_error(sol, true);
     auto stats                     = get_stats_hpipm_tree(*solver_data);
     state.counters["status"]       = counter(stats.status);
     state.counters["success"]      = counter(stats.status == 0);
@@ -328,120 +333,78 @@ void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params
 #endif
 #if WITH_TREEQP
 
-void run_benchmark_treeqp(
-    benchmark::State &state,
-    const SpringMassParams &params,
-    index_t num_branches,
-    bool clipping =true
-)
-{
+void run_benchmark_treeqp(benchmark::State &state, const SpringMassParams &params,
+                          index_t num_branches, bool clipping = true) {
     auto problem = create_problem(params, num_branches);
 
-    auto qp_data = build_tree_qp(problem.ocp,clipping);
-       
-    auto solver_data = create_tree_qp_solver(
-        qp_data,
-        200,   // Maximum number of iterations
-        1e-8); // Stationarity tolerance
+    auto qp_data = build_tree_qp(problem.ocp, clipping);
+
+    auto solver_data = create_tree_qp_solver(qp_data,
+                                             200,   // Maximum number of iterations
+                                             1e-8); // Stationarity tolerance
 
     // Warm-up solve.
     solve_tree_qp(*qp_data, *solver_data, true);
-   
-    for (auto _ : state) {
-        const auto time_solve =
-            solve_tree_qp(*qp_data, *solver_data, true);
 
-        state.SetIterationTime(
-            seconds(time_solve).count());
+    for (auto _ : state) {
+        const auto time_solve = solve_tree_qp(*qp_data, *solver_data, true);
+
+        state.SetIterationTime(seconds(time_solve).count());
     }
 
-    const auto solution =
-        get_solution_tree_qp(*solver_data);
-    const auto stats =
-        get_stats_tree_qp(*solver_data);
+    const auto solution = get_solution_tree_qp(*solver_data);
+    const auto stats    = get_stats_tree_qp(*solver_data);
 
-    state.counters["status"] =
-        counter(stats.status);
+    state.counters["status"] = counter(stats.status);
 
-    state.counters["success"] =
-        counter(stats.status == 0);
-    state.counters["iter"] =
-        counter(stats.iterations);
+    state.counters["success"] = counter(stats.status == 0);
+    state.counters["iter"]    = counter(stats.iterations);
 
-    const auto kkt_error =
-        problem.ocp.compute_kkt_error(
-            solution,
-            true);
-    state.counters["res_dual"] =
-        counter(kkt_error.stationarity);
-    state.counters["res_eq"] =
-        counter(kkt_error.equality_residual);
-    state.counters["res_ineq"] =
-        counter(kkt_error.inequality_residual);
-    state.counters["compl"] =
-        counter(kkt_error.complementarity);
+    const auto kkt_error       = problem.ocp.compute_kkt_error(solution, true);
+    state.counters["res_dual"] = counter(kkt_error.stationarity);
+    state.counters["res_eq"]   = counter(kkt_error.equality_residual);
+    state.counters["res_ineq"] = counter(kkt_error.inequality_residual);
+    state.counters["compl"]    = counter(kkt_error.complementarity);
 }
 
 #endif
 #if WITH_PIQP
 
-void run_benchmark_piqp(
-    benchmark::State &state,
-    const SpringMassParams &params,
-    index_t num_branches)
-{
-    auto problem =
-        create_problem(params, num_branches);
+void run_benchmark_piqp(benchmark::State &state, const SpringMassParams &params,
+                        index_t num_branches) {
+    auto problem = create_problem(params, num_branches);
 
-    auto qp_data =
-        build_piqp_fan_qp(problem.ocp);
+    auto qp_data = build_piqp_fan_qp(problem.ocp);
 
-    auto solver_data =
-        create_piqp_fan_solver(qp_data);
+    auto solver_data = create_piqp_fan_solver(qp_data);
 
     // Initial unmeasured solve, consistent with the HPIPM benchmark.
     solve_piqp_fan(*solver_data);
 
     for (auto _ : state) {
-        const auto time_solve =
-            solve_piqp_fan(*solver_data);
+        const auto time_solve = solve_piqp_fan(*solver_data);
 
-        state.SetIterationTime(
-            seconds(time_solve).count());
+        state.SetIterationTime(seconds(time_solve).count());
     }
 
-    const auto solution =
-        get_solution_piqp_fan(*solver_data);
+    const auto solution = get_solution_piqp_fan(*solver_data);
 
-    const auto kkt_error =
-        problem.ocp.compute_kkt_error(
-            solution,
-            true);
-    const auto stats =
-        get_stats_piqp_fan(*solver_data);
+    const auto kkt_error = problem.ocp.compute_kkt_error(solution, true);
+    const auto stats     = get_stats_piqp_fan(*solver_data);
 
-    state.counters["status"] =
-        counter(static_cast<int>(stats.status));
+    state.counters["status"] = counter(static_cast<int>(stats.status));
 
-    state.counters["success"] =
-        counter(
-            stats.status ==
-            piqp::Status::PIQP_SOLVED);
+    state.counters["success"] = counter(stats.status == piqp::Status::PIQP_SOLVED);
 
-    state.counters["iter"] =
-        counter(stats.iter);
+    state.counters["iter"] = counter(stats.iter);
 
-    state.counters["res_dual"] =
-        counter(kkt_error.stationarity);
+    state.counters["res_dual"] = counter(kkt_error.stationarity);
 
-    state.counters["res_eq"] =
-        counter(kkt_error.equality_residual);
+    state.counters["res_eq"] = counter(kkt_error.equality_residual);
 
-    state.counters["res_ineq"] =
-        counter(kkt_error.inequality_residual);
+    state.counters["res_ineq"] = counter(kkt_error.inequality_residual);
 
-    state.counters["compl"] =
-        counter(kkt_error.complementarity);
+    state.counters["compl"] = counter(kkt_error.complementarity);
 }
 
 #endif
@@ -456,38 +419,42 @@ std::generator<Problem> get_spring_mass_params(const Options &opts) {
     for (auto M : opts.masses)
         for (auto N : opts.horizon)
             for (uint64_t seed = opts.seed; seed < opts.seed + opts.num_instances; ++seed)
-                for(auto J : opts.num_branches)
+                for (auto J : opts.num_branches)
                     switch (opts.problem_type) {
                         case ProblemType::WangBoyd2008:
                             co_yield {
-                                .name   = format("spring-mass(M={},N={},J={},seed={}) wb2008", M, N, J, seed),
+                                .name   = format("spring-mass(M={},N={},J={},seed={}) wb2008", M, N,
+                                                 J, seed),
                                 .params = SpringMassParams::wang_boyd_2008(M, N, seed),
                                 .num_branches = J,
                             };
                             break;
                         case ProblemType::WangBoyd2008Width:
                             co_yield {
-                                .name   = format("spring-mass(M={},N={},J={},seed={}) wb2008w", M, N, J, seed),
+                                .name = format("spring-mass(M={},N={},J={},seed={}) wb2008w", M, N,
+                                               J, seed),
                                 .params = SpringMassParams::wang_boyd_2008_width(M, N, seed, 1),
                                 .num_branches = J,
                             };
                             break;
                         case ProblemType::Domahidi2012:
                             co_yield {
-                                .name   = format("spring-mass(M={},N={},J={}seed={}) d2012", M, N, J, seed),
-                                .params = SpringMassParams::domahidi_2012(M, N, seed),
+                                .name = format("spring-mass(M={},N={},J={}seed={}) d2012", M, N, J,
+                                               seed),
+                                .params       = SpringMassParams::domahidi_2012(M, N, seed),
                                 .num_branches = J,
                             };
                             break;
                         case ProblemType::ActiveStateConstr:
                             co_yield {
-                                .name   = format("spring-mass(M={},N={},J={},seed={}) act", M, N, J, seed),
+                                .name   = format("spring-mass(M={},N={},J={},seed={}) act", M, N, J,
+                                                 seed),
                                 .params = SpringMassParams::active_state_constr(M, N, seed),
                                 .num_branches = J,
                             };
                             break;
                         default: throw std::runtime_error("Unknown problem type");
-                }
+                    }
 }
 
 struct Solver {
@@ -503,16 +470,19 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
                                                     const qp::Settings &settings) {
         const auto param_name =
             std::format("fancyqlone(p={},v={},{},zero)", backend.processors, VL, order(O));
-        return Solver{param_name, [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+        return Solver{param_name, [=](benchmark::State &state, const SpringMassParams &params,
+                                      index_t num_branches) {
                           run_benchmark<VL, O>(state, param_name, params, backend, settings,
                                                num_branches, trace);
                       }};
     };
-    const auto serial_cyqlone_solver = [trace{opts.trace}](const qp::CyQPALMBackendSettings &backend,
-                                                    const qp::Settings &settings) {
+    const auto serial_cyqlone_solver = [trace{opts.trace}](
+                                           const qp::CyQPALMBackendSettings &backend,
+                                           const qp::Settings &settings) {
         const auto param_name =
             std::format("serial-fancyqlone(p={},v={},{},zero)", backend.processors, VL, order(O));
-        return Solver{param_name, [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+        return Solver{param_name, [=](benchmark::State &state, const SpringMassParams &params,
+                                      index_t num_branches) {
                           run_benchmark_serial<VL, O>(state, param_name, params, backend, settings,
                                                       num_branches, trace);
                       }};
@@ -530,16 +500,17 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
                     .solve_method = fancyqlone::SolveMethod::None,
 
                 },
-            .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
+            .spin_count = std::numeric_limits<uint32_t>::
+                max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
             .strategy = qp::WarmStartingStrategy::Zeros,
         };
         qp::Settings settings{
-            .tolerance = 1e-8,
-            .dual_tolerance = 1e-8,
+            .tolerance           = 1e-8,
+            .dual_tolerance      = 1e-8,
             .eq_constr_tolerance = 1e-8,
-            .initial_penalty_y = 20,
-            .verbose           = verbose,
-            .detailed_stats       = verbose,
+            .initial_penalty_y   = 20,
+            .verbose             = verbose,
+            .detailed_stats      = verbose,
         };
 
         std::cout << "Running cold start solver with " << p << " processors" << std::endl;
@@ -552,7 +523,8 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
 std::generator<Solver> get_hpipm_solvers(const Options &opts) {
     if (opts.hpipm) {
 #if WITH_HPIPM
-        co_yield {"hpipm(zero)", [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
+        co_yield {"hpipm(zero)", [=](benchmark::State &state, const SpringMassParams &params,
+                                     index_t num_branches) {
                       run_benchmark_hpipm(state, params, num_branches, 0);
                   }};
 #else
@@ -560,36 +532,25 @@ std::generator<Solver> get_hpipm_solvers(const Options &opts) {
 #endif
     }
 }
-std::generator<Solver> get_treeqp_solvers(const Options &opts)
-{
+std::generator<Solver> get_treeqp_solvers(const Options &opts) {
     if (opts.treeqp) {
 #if WITH_TREEQP
-        co_yield {
-            "treeqp(clip)",
-            [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
-                run_benchmark_treeqp(state, params, num_branches);
-            }};
+        co_yield {"treeqp(clip)",
+                  [=](benchmark::State &state, const SpringMassParams &params,
+                      index_t num_branches) { run_benchmark_treeqp(state, params, num_branches); }};
 #else
-        throw std::invalid_argument(
-            "TREEQP support not enabled in this build");
+        throw std::invalid_argument("TREEQP support not enabled in this build");
 #endif
     }
 }
-std::generator<Solver> get_piqp_solvers(const Options &opts)
-{
+std::generator<Solver> get_piqp_solvers(const Options &opts) {
     if (opts.piqp) {
 #if WITH_PIQP
-        co_yield {
-            "piqp(multistage)",
-            [=](benchmark::State &state, const SpringMassParams &params, index_t num_branches) {
-                run_benchmark_piqp(
-                    state,
-                    params,
-                    num_branches);
-            }};
+        co_yield {"piqp(multistage)",
+                  [=](benchmark::State &state, const SpringMassParams &params,
+                      index_t num_branches) { run_benchmark_piqp(state, params, num_branches); }};
 #else
-        throw std::invalid_argument(
-            "PIQP support not enabled in this build");
+        throw std::invalid_argument("PIQP support not enabled in this build");
 #endif
     }
 }
@@ -623,7 +584,6 @@ std::generator<Solver> get_solvers(const Options &opts) {
     co_yield elements_of(get_treeqp_solvers(opts));
 #endif
     co_yield elements_of(get_cyqlone_solvers_vl<qp::StorageOrder::ColMajor>(opts));
-
 }
 
 auto register_benchmarks(const Options &opts) {
@@ -634,9 +594,12 @@ auto register_benchmarks(const Options &opts) {
         max_problem_name_len = std::max(max_problem_name_len, problem.name.size());
         for (auto solver : get_solvers(opts)) {
             max_solver_name_len = std::max(max_solver_name_len, solver.name.size());
-            benchmark::RegisterBenchmark(std::format("{}@{}", problem.name, solver.name),
-                                         [params = problem.params, run = std::move(solver.run), num_branches = problem.num_branches](
-                                             benchmark::State &state) { run(state, params, num_branches); })
+            benchmark::RegisterBenchmark(
+                std::format("{}@{}", problem.name, solver.name),
+                [params = problem.params, run = std::move(solver.run),
+                 num_branches = problem.num_branches](benchmark::State &state) {
+                    run(state, params, num_branches);
+                })
                 ->MeasureProcessCPUTime()
                 ->UseManualTime()
                 ->Unit(benchmark::kMillisecond)
@@ -670,7 +633,8 @@ void register_options(const char *program, CLI::App &app, Options &opts) {
                            program));
     app.allow_extras();
     app.add_option("--horizon,-N", opts.horizon, "Specify a horizon length to benchmark");
-    app.add_option("--num-branches,-J", opts.num_branches, "Specify the number of branches to benchmark");
+    app.add_option("--num-branches,-J", opts.num_branches,
+                   "Specify the number of branches to benchmark");
 
     app.add_option("--masses,-M", opts.masses, "Specify the number of masses to benchmark");
     app.add_option("--num-instances,-I", opts.num_instances,
@@ -693,7 +657,6 @@ void register_options(const char *program, CLI::App &app, Options &opts) {
                  "Print additional counters in the benchmark report");
     app.add_flag("--color,!--no-color", opts.use_color, "Enable/disable colored output");
     app.add_flag("--serial,!--no-serial", opts.serial, "Use serial implementation");
-
 }
 
 int initialize_google_benchmark(char *program, auto bm_args) {

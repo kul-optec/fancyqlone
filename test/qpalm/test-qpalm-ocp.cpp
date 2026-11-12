@@ -50,11 +50,11 @@ TEST(QPALM, cyqlone) {
         qp::problems::platooning({.N_horiz = 128, .masses{100, 150, 130, 70, 180, 170, 169, 130}});
     auto cocp          = fancyqlone::CyqloneStorage<>::build(ocp.ocp);
     const bool verbose = true;
-    auto &&backend     = qp::make_cyqpalm_backend<4>(cocp, {},
-                                                     {.processors      = cyq_get_num_proc(),
-                                                      .print_residuals = verbose,
-                                                      .print_precision = 17,
-                                                      .tricyqle_params = {.pcg_print_resid = verbose}});
+    auto &&backend = qp::make_cyqpalm_backend<4>(cocp, {},
+                                                 {.processors      = cyq_get_num_proc(),
+                                                  .print_residuals = verbose,
+                                                  .print_precision = 17,
+                                                  .tricyqle_params = {.pcg_print_resid = verbose}});
     qp::Solver<qp::CyQPALMBackend<4> *> qpalm{
         backend.get(),
         {.max_outer_iter                 = 400,
@@ -107,11 +107,11 @@ TEST(QPALM, cyqloneSpringsMasses) try {
     auto ocp  = qp::problems::load_from_csv("test/data/springs-masses", "masses=20-horiz=120");
     auto cocp = fancyqlone::CyqloneStorage<>::build(ocp);
     const bool verbose = false;
-    auto &&backend     = qp::make_cyqpalm_backend<4>(cocp, {},
-                                                     {.processors      = cyq_get_num_proc(),
-                                                      .print_residuals = verbose,
-                                                      .print_precision = 17,
-                                                      .tricyqle_params = {.pcg_print_resid = verbose}});
+    auto &&backend = qp::make_cyqpalm_backend<4>(cocp, {},
+                                                 {.processors      = cyq_get_num_proc(),
+                                                  .print_residuals = verbose,
+                                                  .print_precision = 17,
+                                                  .tricyqle_params = {.pcg_print_resid = verbose}});
     qp::Solver<qp::CyQPALMBackend<4> *> qpalm{
         backend.get(),
         {.max_outer_iter = 500, .max_total_inner_iter = 1000, .verbose = verbose},

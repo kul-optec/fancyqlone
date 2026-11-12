@@ -15,15 +15,13 @@
 using fancyqlone::index_t;
 using fancyqlone::real_t;
 
-using PIQPSparseMatrix =
-    Eigen::SparseMatrix<real_t, Eigen::ColMajor, int>;
+using PIQPSparseMatrix = Eigen::SparseMatrix<real_t, Eigen::ColMajor, int>;
 
-using PIQPVector =
-    Eigen::Matrix<real_t, Eigen::Dynamic, 1>;
+using PIQPVector = Eigen::Matrix<real_t, Eigen::Dynamic, 1>;
 
 struct PIQPStageOffset {
-    int x = -1;
-    int u = -1;
+    int x  = -1;
+    int u  = -1;
     int nx = 0;
     int nu = 0;
 };
@@ -39,12 +37,12 @@ struct PIQPBranchLayout {
 
 struct PIQPFanQPData {
     int num_branches = 0;
-    int horizon = 0;
-    int nx = 0;
-    int nu = 0;
+    int horizon      = 0;
+    int nx           = 0;
+    int nu           = 0;
 
-    int root_x_offset = -1; // -1 when x0 has been eliminated.
-    int root_u_offset = -1;
+    int root_x_offset  = -1; // -1 when x0 has been eliminated.
+    int root_u_offset  = -1;
     bool native_bounds = true;
     std::vector<real_t> initial_state;
     real_t objective_offset = 0;
@@ -74,32 +72,26 @@ struct PIQPFanSolverData {
 };
 
 struct PIQPStats {
-    piqp::Status status = piqp::Status::PIQP_UNSOLVED;
-    int iter = 0;
+    piqp::Status status     = piqp::Status::PIQP_UNSOLVED;
+    int iter                = 0;
     real_t primal_objective = 0;
-    real_t run_time = 0;
+    real_t run_time         = 0;
 };
 
 /// Eliminates fixed x0 by default; pass eliminate_x0=false to retain it for comparison.
-std::shared_ptr<PIQPFanQPData>
-build_piqp_fan_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds = true,
-                  bool eliminate_x0 = true);
+std::shared_ptr<PIQPFanQPData> build_piqp_fan_qp(const fancyqlone::FanOCPStorage &fan,
+                                                 bool native_bounds = true,
+                                                 bool eliminate_x0  = true);
 
-std::shared_ptr<PIQPFanSolverData>
-create_piqp_fan_solver(
-    std::shared_ptr<PIQPFanQPData> qp_data, real_t tol=1e-8);
+std::shared_ptr<PIQPFanSolverData> create_piqp_fan_solver(std::shared_ptr<PIQPFanQPData> qp_data,
+                                                          real_t tol = 1e-8);
 
-std::chrono::nanoseconds
-solve_piqp_fan(PIQPFanSolverData &solver_data);
+std::chrono::nanoseconds solve_piqp_fan(PIQPFanSolverData &solver_data);
 
-PIQPStats
-get_stats_piqp_fan(const PIQPFanSolverData &solver_data);
+PIQPStats get_stats_piqp_fan(const PIQPFanSolverData &solver_data);
 
-fancyqlone::FanOCPStorage::Solution
-get_solution_piqp_fan(const PIQPFanSolverData &solver_data);
+fancyqlone::FanOCPStorage::Solution get_solution_piqp_fan(const PIQPFanSolverData &solver_data);
 
-void update_x0_piqp_fan(
-    fancyqlone::FanOCPStorage &fan,
-    PIQPFanSolverData &solver_data,
-    const std::vector<fancyqlone::LinearOCPStorage::Solution> &solution,
-    index_t selected_branch);
+void update_x0_piqp_fan(fancyqlone::FanOCPStorage &fan, PIQPFanSolverData &solver_data,
+                        const std::vector<fancyqlone::LinearOCPStorage::Solution> &solution,
+                        index_t selected_branch);

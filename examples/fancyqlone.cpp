@@ -1,16 +1,15 @@
-#include <fancyqlone/cyqlone/cyqlone.hpp>
+#include "fancyqlone/fancyqlone/fancyqlone.hpp"
+#include "fancyqlone/cyqlone/cyqlone-storage.hpp"
 #include <fancyqlone/conversion.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
 #include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
 #include <fancyqlone/fancyqpalm/solver.hpp>
-#include <fancyqlone/tracing.hpp>
-#include "fancyqlone/cyqlone/cyqlone-storage.hpp"
-#include "fancyqlone/fancyqlone/fancyqlone.hpp"
 #include <fancyqlone/random-ocp.hpp>
+#include <fancyqlone/tracing.hpp>
 
 #include "fancyqlone/matio.hpp"
 #include "fancyqlone/ocp.hpp"
 #include <cyqlone-version.h>
-#include <fstream>
 #include <chrono>
 #include <cstdint>
 #include <filesystem>
@@ -21,14 +20,15 @@
 #include <span>
 #include <string>
 #include <vector>
-using fancyqlone::StorageOrder;
 using fancyqlone::index_t;
-   using fancyqlone::real_t;
+using fancyqlone::real_t;
+using fancyqlone::StorageOrder;
 // Include whatever header contains these helpers:
 //   combine_branches_0
 //   compare_combined_normal, if you still want comparison
 // #include "test-helpers.hpp"
-fancyqlone::LinearOCPStorage combine_branches_0(std::span<const fancyqlone::LinearOCPStorage> ocps) {
+fancyqlone::LinearOCPStorage
+combine_branches_0(std::span<const fancyqlone::LinearOCPStorage> ocps) {
     BATMAT_ASSERT(!ocps.empty());
     auto fld_max = [](index_t(fancyqlone::OCPDim::*m)) {
         return [m](index_t acc, const auto &ocp) { return std::max(acc, ocp.dim.*m); };
@@ -104,8 +104,10 @@ fancyqlone::LinearOCPStorage combine_branches_0(std::span<const fancyqlone::Line
         ny_N_offset += ocp.dim.ny_N;
     }
 
-    const index_t nx_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nx)),
-                  nu_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nu));
+    const index_t nx_max =
+                      std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nx)),
+                  nu_max =
+                      std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nu));
     for (index_t i = nx_max; i < combined_ocp.dim.nx; ++i)
         combined_ocp.Q(0)(i, i) = 1; // regularize unused state variables in the cost
     for (index_t i = nu_max; i < combined_ocp.dim.nu; ++i)
@@ -125,11 +127,11 @@ struct BenchConfig {
     fancyqlone::index_t num_branches = 2;
     fancyqlone::index_t processors   = 8;
     fancyqlone::index_t warmup       = 50;
-    double tolerance              = 1e-7;
-    std::uint32_t seed_base       = 1000;
-    std::string out_file          = "fan_qpalm_timings.csv";
-    bool verbose                  = false;
-    bool check_solution           = true;
+    double tolerance                 = 1e-7;
+    std::uint32_t seed_base          = 1000;
+    std::string out_file             = "fan_qpalm_timings.csv";
+    bool verbose                     = false;
+    bool check_solution              = true;
 };
 
 static bool get_arg(int argc, char **argv, const std::string &name, std::string &value) {
@@ -207,12 +209,9 @@ static std::string status_to_string(fancyqlone::qpalm::SolverStatus status) {
     using fancyqlone::qpalm::SolverStatus;
 
     switch (status) {
-    case SolverStatus::Converged:
-        return "Converged";
-    case SolverStatus::MaxIter:
-        return "MaxIter";
-    default:
-        return "Other";
+        case SolverStatus::Converged: return "Converged";
+        case SolverStatus::MaxIter: return "MaxIter";
+        default: return "Other";
     }
 }
 
@@ -235,13 +234,12 @@ static int run_benchmark(const BenchConfig &cfg) {
     std::vector<fancyqlone::LinearOCPStorage> ocps(cfg.num_branches);
 
     for (index_t i = 0; i < cfg.num_branches; ++i) {
-        ocps[i] = fancyqlone::generate_random_ocp_input_constr(
-            dim,
-            static_cast<std::uint32_t>(1000 + i)
-        );
+        ocps[i] =
+            fancyqlone::generate_random_ocp_input_constr(dim, static_cast<std::uint32_t>(1000 + i));
         std::cout << "Fan OCP" << i << " has N=" << ocps[i].dim.N_horiz << ", nx=" << ocps[i].dim.nx
                   << ", nu=" << ocps[i].dim.nu << ", ny=" << ocps[i].dim.ny
-                  << ", ny_N=" << ocps[i].dim.ny_N << "\n";;
+                  << ", ny_N=" << ocps[i].dim.ny_N << "\n";
+        ;
 
         if (i != 0) {
             ocps[i].b_max(0).set_constant(std::numeric_limits<real_t>::infinity());
@@ -253,15 +251,14 @@ static int run_benchmark(const BenchConfig &cfg) {
     // Fan solver
     // -------------------------------------------------------------------------
     fancyqlone::FanOCPStorage fan_ocp{
-        .ocps    = ocps,
+        .ocps = ocps,
     };
 
     auto fan_cocp = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, dim.ny);
 
     auto &&fan_backend =
         qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
-            fan_cocp,
-            {},
+            fan_cocp, {},
             {
                 .processors             = cfg.processors,
                 .print_residuals        = cfg.verbose,
@@ -291,24 +288,23 @@ static int run_benchmark(const BenchConfig &cfg) {
 
     auto fan_status = fan_qpalm();
 
-    auto x_fan = fan_qpalm.get_solution();
-    auto lambda_fan = fan_qpalm.get_equality_multipliers();
-    auto &&sfan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>>(
-            fan_cocp,
-            {},
-            {
-                .processors             = cfg.processors,
-                .print_residuals        = cfg.verbose,
-                .print_precision        = 17,
-                .changing_constr_factor = 0,
-                .max_update_count       = 0,
-                .tricyqle_params =
-                    {
-                        .solve_method = fancyqlone::SolveMethod::None,
-                    },
-                .spin_count = std::numeric_limits<std::uint32_t>::max(),
-            });
+    auto x_fan          = fan_qpalm.get_solution();
+    auto lambda_fan     = fan_qpalm.get_equality_multipliers();
+    auto &&sfan_backend = qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor,
+                                                   fancyqlone::SerialFanCyqloneSolver<VL>>(
+        fan_cocp, {},
+        {
+            .processors             = cfg.processors,
+            .print_residuals        = cfg.verbose,
+            .print_precision        = 17,
+            .changing_constr_factor = 0,
+            .max_update_count       = 0,
+            .tricyqle_params =
+                {
+                    .solve_method = fancyqlone::SolveMethod::None,
+                },
+            .spin_count = std::numeric_limits<std::uint32_t>::max(),
+        });
 
     qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::SerialFanCyqloneSolver<VL>> *> sfan_qpalm{
         sfan_backend.get(),
@@ -326,29 +322,27 @@ static int run_benchmark(const BenchConfig &cfg) {
 
     auto sfan_status = sfan_qpalm();
 
-    auto x_sfan = sfan_qpalm.get_solution();
-    auto lambda_sfan = sfan_qpalm.get_equality_multipliers();    
+    auto x_sfan      = sfan_qpalm.get_solution();
+    auto lambda_sfan = sfan_qpalm.get_equality_multipliers();
     // -------------------------------------------------------------------------
     // Combined solver
     // -------------------------------------------------------------------------
-    auto combined_ocp = combine_branches_0(ocps);
+    auto combined_ocp  = combine_branches_0(ocps);
     auto combined_cocp = fancyqlone::CyqloneStorage<>::build(combined_ocp);
 
-    auto &&combined_backend =
-        qp::make_cyqpalm_backend<VL, Order, fancyqlone::CyqloneSolver<VL>>(
-            combined_cocp,
-            {},
-            {
-                .processors             = cfg.processors,
-                .print_residuals        = cfg.verbose,
-                .print_precision        = 17,
-                .changing_constr_factor = 0,
-                .max_update_count       = 0,
-                .tricyqle_params =
-                    {
-                        .solve_method = fancyqlone::SolveMethod::PCR,
-                    },
-            });
+    auto &&combined_backend = qp::make_cyqpalm_backend<VL, Order, fancyqlone::CyqloneSolver<VL>>(
+        combined_cocp, {},
+        {
+            .processors             = cfg.processors,
+            .print_residuals        = cfg.verbose,
+            .print_precision        = 17,
+            .changing_constr_factor = 0,
+            .max_update_count       = 0,
+            .tricyqle_params =
+                {
+                    .solve_method = fancyqlone::SolveMethod::PCR,
+                },
+        });
 
     qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::CyqloneSolver<VL>> *> combined_qpalm{
         combined_backend.get(),
@@ -366,7 +360,7 @@ static int run_benchmark(const BenchConfig &cfg) {
 
     auto combined_status = combined_qpalm();
 
-    auto x_combined = combined_qpalm.get_solution();
+    auto x_combined      = combined_qpalm.get_solution();
     auto lambda_combined = combined_qpalm.get_equality_multipliers();
 
     // -------------------------------------------------------------------------
@@ -402,22 +396,17 @@ static int run_benchmark(const BenchConfig &cfg) {
     // -------------------------------------------------------------------------
     // Timings
     // -------------------------------------------------------------------------
-    const double fan_time_s =
-        seconds_from_duration(fan_qpalm.stats->timings.total.wall_time);
-    const double sfan_time_s =
-        seconds_from_duration(sfan_qpalm.stats->timings.total.wall_time);
+    const double fan_time_s  = seconds_from_duration(fan_qpalm.stats->timings.total.wall_time);
+    const double sfan_time_s = seconds_from_duration(sfan_qpalm.stats->timings.total.wall_time);
 
     const double combined_time_s =
         seconds_from_duration(combined_qpalm.stats->timings.total.wall_time);
 
-    const double speedup = combined_time_s / fan_time_s;
+    const double speedup        = combined_time_s / fan_time_s;
     const double speedup_serial = sfan_time_s / fan_time_s;
 
-    std::cout << "N=" << cfg.N
-              << ", nx=" << cfg.nx
-              << ", nu=" << cfg.nu
-              << ", branches=" << cfg.num_branches
-              << ", processors=" << cfg.processors << '\n';
+    std::cout << "N=" << cfg.N << ", nx=" << cfg.nx << ", nu=" << cfg.nu
+              << ", branches=" << cfg.num_branches << ", processors=" << cfg.processors << '\n';
 
     std::cout << "fan status:      " << status_to_string(fan_status) << '\n';
     std::cout << "combined status: " << status_to_string(combined_status) << '\n';
@@ -427,7 +416,7 @@ static int run_benchmark(const BenchConfig &cfg) {
     std::cout << "serial fan inner:       " << sfan_qpalm.stats->inner_iter << '\n';
     std::cout << "serial fan outer:       " << sfan_qpalm.stats->outer_iter << '\n';
     std::cout << "combined inner:  " << combined_qpalm.stats->inner_iter << '\n';
-    std::cout << "combined outer:  "<< combined_qpalm.stats->outer_iter << '\n';
+    std::cout << "combined outer:  " << combined_qpalm.stats->outer_iter << '\n';
     std::cout << "fan time:        " << fan_time_s << " s\n";
     std::cout << "serial fan time: " << sfan_time_s << " s\n";
     std::cout << "combined time:   " << combined_time_s << " s\n";
@@ -442,27 +431,14 @@ static int run_benchmark(const BenchConfig &cfg) {
 
     std::ofstream csv(out_path, std::ios::app);
 
-    csv << cfg.N << ','
-        << cfg.nx << ','
-        << cfg.nu << ','
-        << cfg.ny << ','
-        << cfg.ny_N << ','
-        << cfg.num_branches << ','
-        << cfg.processors << ','
-        << status_to_string(fan_status) << ','
-        << status_to_string(sfan_status) << ','
-        << status_to_string(combined_status) << ','
+    csv << cfg.N << ',' << cfg.nx << ',' << cfg.nu << ',' << cfg.ny << ',' << cfg.ny_N << ','
+        << cfg.num_branches << ',' << cfg.processors << ',' << status_to_string(fan_status) << ','
+        << status_to_string(sfan_status) << ',' << status_to_string(combined_status) << ','
 
-        << fan_qpalm.stats->inner_iter << ','
-        << fan_qpalm.stats->outer_iter << ','
-        << sfan_qpalm.stats->inner_iter << ','
-        << sfan_qpalm.stats->outer_iter << ','
-        << combined_qpalm.stats->inner_iter << ','
-        << combined_qpalm.stats->outer_iter << ','
-        << fan_time_s << ','
-        << sfan_time_s << ','
-        << combined_time_s << ','
-        << speedup << ','
+        << fan_qpalm.stats->inner_iter << ',' << fan_qpalm.stats->outer_iter << ','
+        << sfan_qpalm.stats->inner_iter << ',' << sfan_qpalm.stats->outer_iter << ','
+        << combined_qpalm.stats->inner_iter << ',' << combined_qpalm.stats->outer_iter << ','
+        << fan_time_s << ',' << sfan_time_s << ',' << combined_time_s << ',' << speedup << ','
         << speedup_serial << '\n';
 
     return 0;

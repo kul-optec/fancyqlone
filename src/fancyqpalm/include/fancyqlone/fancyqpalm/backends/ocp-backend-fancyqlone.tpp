@@ -1,16 +1,16 @@
 #pragma once
 
-#include <fancyqlone/config.hpp>
-#include <fancyqlone/linalg.hpp>
-#include <fancyqlone/neumaier.hpp>
-#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
-#include <fancyqlone/fancyqpalm/implementation/breakpoint.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/config.hpp>
 #include <batmat/linalg/copy.hpp>
 #include <batmat/linalg/norms.hpp>
 #include <batmat/openmp.h>
 #include <batmat/simd.hpp>
+#include <fancyqlone/config.hpp>
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
+#include <fancyqlone/fancyqpalm/implementation/breakpoint.hpp>
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/neumaier.hpp>
 #include <guanaqo/print.hpp>
 #include <guanaqo/timed-cpu.hpp>
 #include <guanaqo/trace.hpp>
@@ -37,8 +37,8 @@ namespace datapar = batmat::datapar;
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 struct CyQPALMBackend {
-    using OCP_t                 = LinearSolver;
-    using traits                = CycloneBackendTraits<OCP_t>;
+    using OCP_t  = LinearSolver;
+    using traits = CycloneBackendTraits<OCP_t>;
     // clang-format off
     using ineq_constr_vec_t = traits::template storage_t<struct ineq>;
     using eq_constr_vec_t = traits::template storage_t<struct eq>;
@@ -145,7 +145,6 @@ struct CyQPALMBackend {
     void warm_start(const var_vec_t &x, const ineq_constr_vec_t &y, const eq_constr_vec_t &λ) {
         if constexpr (std::is_same_v<typename traits::warm_start_t, WarmStartingStrategy>) {
 
-           
             // std::cout << "Warm starting with strategy: " << static_cast<int>(settings.strategy) << std::endl;
             switch (settings.strategy) {
                 case WarmStartingStrategy::Zeros:
@@ -199,7 +198,8 @@ struct CyQPALMBackend {
                     this->ocp.shift_solution(x, x0);
                     this->ocp.shift_dynamics(λ, λ0);
                     this->ocp.shift_constraints(y, y0);
-                    break;}
+                    break;
+                }
                 case WarmStartingStrategy::ShiftNoInequality: BATMAT_ASSERT(false); break;
                 default: BATMAT_ASSERT(false);
             }
@@ -368,22 +368,18 @@ struct CyQPALMBackend {
                                   const ineq_constr_vec_t &Σ, const ineq_constr_vec_t &y,
                                   const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
                                   const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
-    BreakpointsResult
-    compute_partition_breakpoints_cyq(Context &ctx, std::vector<Breakpoint> &breakpoints,
-                                  const ineq_constr_vec_t &Σ, const ineq_constr_vec_t &y,
-                                  const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
-                                  const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
-    BreakpointsResult
-    compute_partition_breakpoints_fan(Context &ctx, std::vector<Breakpoint> &breakpoints,
-                                  const ineq_constr_vec_t &Σ, const ineq_constr_vec_t &y,
-                                  const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
-                                  const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
-    BreakpointsResult
-    compute_partition_breakpoints_sfan(Context &ctx, std::vector<Breakpoint> &breakpoints,
-                                  const ineq_constr_vec_t &Σ, const ineq_constr_vec_t &y,
-                                  const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
-                                  const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
-
+    BreakpointsResult compute_partition_breakpoints_cyq(
+        Context &ctx, std::vector<Breakpoint> &breakpoints, const ineq_constr_vec_t &Σ,
+        const ineq_constr_vec_t &y, const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
+        const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
+    BreakpointsResult compute_partition_breakpoints_fan(
+        Context &ctx, std::vector<Breakpoint> &breakpoints, const ineq_constr_vec_t &Σ,
+        const ineq_constr_vec_t &y, const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
+        const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
+    BreakpointsResult compute_partition_breakpoints_sfan(
+        Context &ctx, std::vector<Breakpoint> &breakpoints, const ineq_constr_vec_t &Σ,
+        const ineq_constr_vec_t &y, const ineq_constr_vec_t &Ad, const ineq_constr_vec_t &Ax,
+        const ineq_constr_vec_t &b_min, const ineq_constr_vec_t &b_max);
 
     friend BreakpointsResult
     guanaqo_tag_invoke(guanaqo::tag_t<get_breakpoints>, CyQPALMBackend &backend, Context &ctx,
@@ -448,10 +444,10 @@ struct CyQPALMBackend {
         static constexpr auto norms_simd = batmat::linalg::norms<real_t, typename traits::simd>{};
         using simd_scal = batmat::datapar::simd<real_t, batmat::datapar::scalar_abi<real_t>>;
         static constexpr auto norms_smid_scal = batmat::linalg::norms<real_t, simd_scal>{};
-        static constexpr auto norms_scal = batmat::linalg::norms<real_t>{};
+        static constexpr auto norms_scal      = batmat::linalg::norms<real_t>{};
 
         auto nrm_simd             = norms_simd.zero_simd();
-        auto nrm_simd_scal       = norms_smid_scal.zero_simd();
+        auto nrm_simd_scal        = norms_smid_scal.zero_simd();
         const auto grad_norm_simd = [&](auto grad_fji, auto Mᵀλji, auto Aᵀŷji) {
             if constexpr (std::is_same_v<decltype(grad_fji), simd_scal>) {
                 nrm_simd_scal = norms_smid_scal(nrm_simd_scal, grad_fji + Mᵀλji + Aᵀŷji);
@@ -462,11 +458,10 @@ struct CyQPALMBackend {
         const auto grad_norm_batch = [&](auto grad_fj, auto Mᵀλj, auto Aᵀŷj) {
             linalg::for_each_elementwise(grad_norm_simd, grad_fj, Mᵀλj, Aᵀŷj);
             // guanaqo::print_python(std::cout << "unscaled_aug_lagr_norm: " << grad_fj(0) << std::endl);
-
         };
         ocp.foreach_batch(ctx, grad_norm_batch, grad_f, Mᵀλ, Aᵀŷ);
         auto nrm_scal = norms_smid_scal(nrm_simd_scal);
-        nrm_scal = norms_scal(nrm_scal, norms_simd(nrm_simd));
+        nrm_scal      = norms_scal(nrm_scal, norms_simd(nrm_simd));
         // std::cout << "nrm_simd: " << nrm_simd.norm_inf() << ", nrm_scal: " << nrm_scal.norm_inf() << std::endl;
         // auto nrms_scal = norms_scal.zeros();
         real_t nrm = ctx.reduce(nrm_scal, norms_scal).norm_inf();
@@ -517,8 +512,8 @@ struct CyQPALMBackend {
         // re-factorize anyway, we don't need to do anything.
         if (num_different == 0 || reset_factorization)
             return num_different;
-        bool do_reset_fac = !traits::supports_factorization_updates ||
-                            num_updates >= settings.max_update_count;
+        bool do_reset_fac =
+            !traits::supports_factorization_updates || num_updates >= settings.max_update_count;
         do_reset_fac |= static_cast<double>(num_different) >=
                         static_cast<double>(num_ineq_constr()) * settings.changing_constr_factor;
         bool prev_update_pending = update_pending;

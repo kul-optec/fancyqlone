@@ -1,7 +1,7 @@
 #pragma once
 
-#include <fancyqlone/linalg.hpp>
 #include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp>
+#include <fancyqlone/linalg.hpp>
 
 #include <array>
 #include <iostream>
@@ -11,7 +11,8 @@ namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 template <class T, class U>
-void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::xaxpy(Context &ctx, real_t a, const T &x, U &y) {
+void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::xaxpy(Context &ctx, real_t a, const T &x,
+                                                           U &y) {
     const auto xaxpy = [a](auto xi, auto yi) { linalg::axpy(a, xi, yi); };
     ocp.foreach_batch(ctx, xaxpy, x, y);
 }
@@ -25,7 +26,8 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::xcopy(Context &ctx, const T
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 template <class T, class U>
-void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::set_constant(Context &ctx, T &x, const U &y) const {
+void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::set_constant(Context &ctx, T &x,
+                                                                  const U &y) const {
     const auto set_constant = [y](auto xi) { batmat::linalg::fill(y, xi); };
     ocp.foreach_batch(ctx, set_constant, x);
 }
@@ -48,9 +50,9 @@ real_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::dot(Context &ctx, const v
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 template <class... Args>
-void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::local_dots(std::span<real_t, 1 + sizeof...(Args) / 2> out,
-                                                                  const auto &a, const auto &b,
-                                                                  const Args &...others) const {
+void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::local_dots(
+    std::span<real_t, 1 + sizeof...(Args) / 2> out, const auto &a, const auto &b,
+    const Args &...others) const {
     out[0] += linalg::dot(a, b);
     if constexpr (sizeof...(Args) > 0)
         local_dots(out.template subspan<1>(), others...);
@@ -74,14 +76,13 @@ CyQPALMBackend<VL, DefaultOrder, LinearSolver>::dots(Context &ctx, const Args &.
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 template <class T>
-auto CyQPALMBackend<VL, DefaultOrder, LinearSolver>::norm_inf_l1_sq(Context &ctx, const T &x) const {
+auto CyQPALMBackend<VL, DefaultOrder, LinearSolver>::norm_inf_l1_sq(Context &ctx,
+                                                                    const T &x) const {
     // GUANAQO_TRACE("norm_inf_l1_sq", 0, 4 * x.batch_size() * x.rows() * ocp.n);
     static constexpr auto norms_simd = batmat::linalg::norms<real_t, typename traits::simd>{};
 
     auto nrm                  = norms_simd.zero();
-    const auto norm_inf_l1_sq = [&](auto xi) {
-        nrm = norms_simd(nrm, linalg::norms_all(xi));
-    };
+    const auto norm_inf_l1_sq = [&](auto xi) { nrm = norms_simd(nrm, linalg::norms_all(xi)); };
     ocp.foreach_batch(ctx, norm_inf_l1_sq, x);
     return ctx.reduce(nrm, norms_simd);
 }
@@ -95,7 +96,8 @@ real_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::norm_inf(Context &ctx, co
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 template <class T>
-real_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::norm_squared(Context &ctx, const T &x) const {
+real_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::norm_squared(Context &ctx,
+                                                                    const T &x) const {
     real_t sumsq            = 0;
     const auto norm_squared = [&](auto xi) { sumsq += linalg::norm_2_squared(xi); };
     ocp.foreach_batch(ctx, norm_squared, x);

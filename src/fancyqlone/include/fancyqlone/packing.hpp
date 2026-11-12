@@ -1,6 +1,5 @@
 #pragma once
 
-#include <fancyqlone/config.hpp>
 #include <batmat/linalg/shift.hpp>
 #include <batmat/linalg/simdify.hpp>
 #include <batmat/linalg/structure.hpp>
@@ -10,6 +9,7 @@
 #include <batmat/lut.hpp>
 #include <batmat/ops/rotate.hpp>
 #include <batmat/ops/transpose.hpp>
+#include <fancyqlone/config.hpp>
 #include <guanaqo/mat-view.hpp>
 #include <guanaqo/perfetto/trace.hpp>
 #include <guanaqo/trace.hpp>

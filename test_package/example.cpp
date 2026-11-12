@@ -18,10 +18,11 @@ int main() {
     auto ocp           = qp::problems::platooning({.N_horiz = 32});
     auto cocp          = fancyqlone::CyqloneStorage<>::build(ocp.ocp);
     const bool verbose = true;
-    qp::CyQPALMBackendSettings params{.processors      = 4,
-                                      .print_residuals = verbose,
-                                      .print_precision = 17,
-                                      .tricyqle_params{.solve_method = fancyqlone::SolveMethod::PCR}};
+    qp::CyQPALMBackendSettings params{
+        .processors      = 4,
+        .print_residuals = verbose,
+        .print_precision = 17,
+        .tricyqle_params{.solve_method = fancyqlone::SolveMethod::PCR}};
     qp::Settings qpalm_params{.max_outer_iter       = 400,
                               .max_total_inner_iter = 400,
                               .tolerance            = 1e-8,

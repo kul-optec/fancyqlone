@@ -1,6 +1,6 @@
-#include <fancyqlone/sequential-fancyqlone/serial-fancyqlone.hpp>
-#include <fancyqlone/linalg.hpp>
 #include "fancyqlone/cyqlone/cyqlone.hpp"
+#include <fancyqlone/linalg.hpp>
+#include <fancyqlone/sequential-fancyqlone/serial-fancyqlone.hpp>
 
 #include <batmat/assume.hpp>
 #include <batmat/linalg/copy.hpp>
@@ -51,36 +51,34 @@ SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const FanCyqloneStorage<
                                                         CyqloneParams<value_type> params) {
     BATMAT_ASSERT(p > 0);
     BATMAT_ASSERT(v == 1 || is_pow_2(p));
-    
+
     std::vector<SolverStorage<VL, value_type, DefaultOrder>> solver_storages;
     solver_storages.reserve(ocp.num_branches);
 
     for (index_t c = 0; c < ocp.num_branches; ++c) {
         const auto &branch_ocp = ocp.branches[c];
         SolverLast tridiagonal_solver{.block_size = branch_ocp.nx, .num_blocks = v};
-        auto solver_storage    = SolverStorage<VL, value_type, DefaultOrder>{
-            .cyqlone_solver =
-                CyqloneSolver<VL, value_type, DefaultOrder>::build(branch_ocp, p,std::move(params)),
+        auto solver_storage = SolverStorage<VL, value_type, DefaultOrder>{
+            .cyqlone_solver = CyqloneSolver<VL, value_type, DefaultOrder>::build(branch_ocp, p,
+                                                                                 std::move(params)),
             .tridiagonal_solver = std::move(tridiagonal_solver),
-    
+
         };
         // la::copy(ocp.LBs[c], solver_storage.LB);
         solver_storages.emplace_back(std::move(solver_storage));
-        
-        /// @todo Check correctness
- 
-        // std::cout << "params"<< solver_storages[c].cyqlone_solver.get_params_string()<<std::endl;
 
+        /// @todo Check correctness
+
+        // std::cout << "params"<< solver_storages[c].cyqlone_solver.get_params_string()<<std::endl;
     }
 
-    
     SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx> res{
-        .num_branches = ocp.num_branches,
-        .nu           = ocp.nu,
-        .ny_0         = ocp.ny_0,
+        .num_branches    = ocp.num_branches,
+        .nu              = ocp.nu,
+        .ny_0            = ocp.ny_0,
         .solver_storages = std::move(solver_storages),
-        .params     = std::move(params),
-        .p          = std::move(p),
+        .params          = std::move(params),
+        .p               = std::move(p),
 
     };
     res.update_data(ocp);
@@ -101,25 +99,25 @@ void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_data(
             la::copy(ocp.R0(0), R0(0));
             la::negate(ocp.r0(0), r0(0));
             la::copy(ocp.D0(0), D0(0));
-        }}
-    
+        }
+    }
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_rhs(
     const FanCyqloneStorage<value_type> &ocp, FanStorage &rhs) const {
     BATMAT_ASSERT(static_cast<index_t>(rhs.branches.size()) == num_branches);
-    index_t nx_offset=0;
+    index_t nx_offset = 0;
     for (index_t c = 0; c < num_branches; ++c) {
         BATMAT_ASSERT(rhs.branches[c].depth() == solver_storages[c].cyqlone_solver.ceil_N());
         BATMAT_ASSERT(rhs.branches[c].rows() == solver_storages[c].cyqlone_solver.nx);
         BATMAT_ASSERT(rhs.branches[c].cols() == 1);
         solver_storages[c].cyqlone_solver.initialize_rhs(ocp.branches[c], rhs.branches[c]);
-        rhs.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx)(0) = rhs.branches[c].batch(0)(0);
+        rhs.first.batch(0).middle_rows(nx_offset, solver_storages[c].cyqlone_solver.nx)(0) =
+            rhs.branches[c].batch(0)(0);
         nx_offset += solver_storages[c].cyqlone_solver.nx;
     };
     // std::cout << "FANRHS initialized: " << std::endl;
     // print_grad(rhs,"fan_rhs");
-
 }
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_gradient(
@@ -143,17 +141,18 @@ void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_bounds(
     BATMAT_ASSERT(static_cast<index_t>(b_min.branches.size()) == num_branches);
     BATMAT_ASSERT(static_cast<index_t>(b_max.branches.size()) == num_branches);
     for (index_t c = 0; c < num_branches; ++c) {
-        const index_t nyM = std::max(solver_storages[c].cyqlone_solver.ny,
-                                      solver_storages[c].cyqlone_solver.ny_N);
+        const index_t nyM =
+            std::max(solver_storages[c].cyqlone_solver.ny, solver_storages[c].cyqlone_solver.ny_N);
         BATMAT_ASSERT(b_min.branches[c].depth() == solver_storages[c].cyqlone_solver.ceil_N());
         BATMAT_ASSERT(b_min.branches[c].rows() == nyM);
         BATMAT_ASSERT(b_min.branches[c].cols() == 1);
         BATMAT_ASSERT(b_max.branches[c].depth() == solver_storages[c].cyqlone_solver.ceil_N());
         BATMAT_ASSERT(b_max.branches[c].rows() == nyM);
         BATMAT_ASSERT(b_max.branches[c].cols() == 1);
-        solver_storages[c].cyqlone_solver.initialize_bounds(ocp.branches[c], b_min.branches[c], b_max.branches[c]);
+        solver_storages[c].cyqlone_solver.initialize_bounds(ocp.branches[c], b_min.branches[c],
+                                                            b_max.branches[c]);
     }
-    
+
     la::copy(ocp.b_min_0(0), b_min.first.batch(0));
     la::copy(ocp.b_max_0(0), b_max.first.batch(0));
     // std::cout << "Bounds initialized: " << std::endl;
@@ -162,8 +161,8 @@ void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_bounds(
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_variables(std::span<const value_type> ux_lin,
-                                                                FanStorage &ux) const {
+void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_variables(
+    std::span<const value_type> ux_lin, FanStorage &ux) const {
     BATMAT_ASSERT(static_cast<index_t>(ux_lin.size()) == num_variables());
     BATMAT_ASSERT(static_cast<index_t>(ux.branches.size()) == num_branches);
     index_t offset = 0;
@@ -191,39 +190,47 @@ void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_variables(
     index_t offset = static_cast<index_t>(ux_lin.size()); //put u0_sol at the end of ux_lin
 
     // Copy u0_sol into ux_lin
-    using rview                        = guanaqo::MatrixView<value_type, index_t>;
+    using rview = guanaqo::MatrixView<value_type, index_t>;
 
     // copy the rest of the variables from each branch into ux_lin but leave out the dummy u0
     for (index_t c = num_branches - 1; c >= 0; --c) {
-        index_t nux    = nu + solver_storages[c].cyqlone_solver.nx;
-        index_t ceil_N = solver_storages[c].cyqlone_solver.ceil_N();
+        index_t nux     = nu + solver_storages[c].cyqlone_solver.nx;
+        index_t ceil_N  = solver_storages[c].cyqlone_solver.ceil_N();
         index_t N_horiz = solver_storages[c].cyqlone_solver.N_horiz;
 
         BATMAT_ASSERT(ux.branches[c].depth() == ceil_N);
         BATMAT_ASSERT(ux.branches[c].rows() == nux);
         BATMAT_ASSERT(ux.branches[c].cols() == 1);
-        solver_storages[c].cyqlone_solver.unpack_variables(ux.branches[c], ux_lin.subspan(offset-nux * N_horiz, nux * N_horiz));
-        offset -= nux * N_horiz-nu;
+        solver_storages[c].cyqlone_solver.unpack_variables(
+            ux.branches[c], ux_lin.subspan(offset - nux * N_horiz, nux * N_horiz));
+        offset -= nux * N_horiz - nu;
     }
-    la::copy(ux.first.batch(0).top_rows(nu), rview::as_column(ux_lin.first(nu))); // copy u0_sol from the first element of ux into the first nu elements of ux_lin
+    la::copy(
+        ux.first.batch(0).top_rows(nu),
+        rview::as_column(ux_lin.first(
+            nu))); // copy u0_sol from the first element of ux into the first nu elements of ux_lin
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_dynamics(std::span<const value_type> λ_lin,
-                                                               FanStorage &λ) const {
+void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_dynamics(
+    std::span<const value_type> λ_lin, FanStorage &λ) const {
     BATMAT_ASSERT(static_cast<index_t>(λ.branches.size()) == num_branches);
     index_t offset = 0;
     for (index_t c = 0; c < num_branches; ++c) {
-        index_t nλ     = solver_storages[c].cyqlone_solver.nx;
-        index_t ceil_N = solver_storages[c].cyqlone_solver.ceil_N();
+        index_t nλ      = solver_storages[c].cyqlone_solver.nx;
+        index_t ceil_N  = solver_storages[c].cyqlone_solver.ceil_N();
         index_t N_horiz = solver_storages[c].cyqlone_solver.N_horiz;
 
         BATMAT_ASSERT(λ.branches[c].depth() == ceil_N);
         BATMAT_ASSERT(λ.branches[c].rows() == nλ);
         BATMAT_ASSERT(λ.branches[c].cols() == 1);
-        using crview                                 = guanaqo::MatrixView<const value_type, index_t>;
-        la::copy(crview::as_column(λ_lin.subspan(offset, nλ)), λ.first.batch(0).middle_rows(c * nλ,  nλ)); // copy the first nλ elements of λ_lin into the first element of λ
-        solver_storages[c].cyqlone_solver.pack_dynamics(λ_lin.subspan(offset, nλ * N_horiz), λ.branches[c]);
+        using crview = guanaqo::MatrixView<const value_type, index_t>;
+        la::copy(
+            crview::as_column(λ_lin.subspan(offset, nλ)),
+            λ.first.batch(0).middle_rows(
+                c * nλ, nλ)); // copy the first nλ elements of λ_lin into the first element of λ
+        solver_storages[c].cyqlone_solver.pack_dynamics(λ_lin.subspan(offset, nλ * N_horiz),
+                                                        λ.branches[c]);
         offset += nλ * N_horiz;
     }
 }
@@ -234,39 +241,41 @@ void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_dynamics(
     BATMAT_ASSERT(static_cast<index_t>(λ.branches.size()) == num_branches);
     index_t offset = 0;
     for (index_t c = 0; c < num_branches; ++c) {
-        index_t nλ     = solver_storages[c].cyqlone_solver.nx;
-        index_t ceil_N = solver_storages[c].cyqlone_solver.ceil_N();
+        index_t nλ      = solver_storages[c].cyqlone_solver.nx;
+        index_t ceil_N  = solver_storages[c].cyqlone_solver.ceil_N();
         index_t N_horiz = solver_storages[c].cyqlone_solver.N_horiz;
         BATMAT_ASSERT(λ.branches[c].depth() == ceil_N);
         BATMAT_ASSERT(λ.branches[c].rows() == nλ);
         BATMAT_ASSERT(λ.branches[c].cols() == 1);
-        solver_storages[c].cyqlone_solver.unpack_dynamics(λ.branches[c], λ_lin.subspan(offset, nλ * N_horiz));
-        using rview                                 = guanaqo::MatrixView< value_type, index_t>;
-        la::copy(λ.first.batch(0).middle_rows(c * nλ,  nλ), rview::as_column(λ_lin.subspan(offset, nλ)));
+        solver_storages[c].cyqlone_solver.unpack_dynamics(λ.branches[c],
+                                                          λ_lin.subspan(offset, nλ * N_horiz));
+        using rview = guanaqo::MatrixView<value_type, index_t>;
+        la::copy(λ.first.batch(0).middle_rows(c * nλ, nλ),
+                 rview::as_column(λ_lin.subspan(offset, nλ)));
         offset += nλ * N_horiz;
     }
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_constraints(std::span<const value_type> y_lin,
-                                                                  FanStorage &y,
-                                                                  value_type fill) const {
-   
+void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_constraints(
+    std::span<const value_type> y_lin, FanStorage &y, value_type fill) const {
+
     BATMAT_ASSERT(static_cast<index_t>(y.branches.size()) == num_branches);
     index_t offset = ny_0;
-    using crview    = guanaqo::MatrixView<const value_type, index_t>;
+    using crview   = guanaqo::MatrixView<const value_type, index_t>;
     la::copy(crview::as_column(y_lin.first(ny_0)), y.first.batch(0)(0).top_rows(nu));
     for (index_t c = 0; c < num_branches; ++c) {
-        index_t ny     = solver_storages[c].cyqlone_solver.ny;
-        index_t ny_N   = solver_storages[c].cyqlone_solver.ny_N;
-        index_t ceil_N = solver_storages[c].cyqlone_solver.ceil_N();
-        index_t nyM    = std::max(ny, ny_N);
+        index_t ny      = solver_storages[c].cyqlone_solver.ny;
+        index_t ny_N    = solver_storages[c].cyqlone_solver.ny_N;
+        index_t ceil_N  = solver_storages[c].cyqlone_solver.ceil_N();
+        index_t nyM     = std::max(ny, ny_N);
         index_t N_horiz = solver_storages[c].cyqlone_solver.N_horiz;
         BATMAT_ASSERT(y.branches[c].depth() == ceil_N);
         BATMAT_ASSERT(y.branches[c].rows() == nyM);
         BATMAT_ASSERT(y.branches[c].cols() == 1);
-        solver_storages[c].cyqlone_solver.pack_constraints(y_lin.subspan(offset, ny * (N_horiz-1) + ny_N), y.branches[c], fill);
-        offset += ny * (N_horiz-1) + ny_N;
+        solver_storages[c].cyqlone_solver.pack_constraints(
+            y_lin.subspan(offset, ny * (N_horiz - 1) + ny_N), y.branches[c], fill);
+        offset += ny * (N_horiz - 1) + ny_N;
     }
 }
 
@@ -278,16 +287,17 @@ void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_constraints(
     using rview    = guanaqo::MatrixView<value_type, index_t>;
     la::copy(y.first.batch(0)(0).top_rows(ny_0), rview::as_column(y_lin.first(ny_0)));
     for (index_t c = 0; c < num_branches; ++c) {
-        index_t ny     = solver_storages[c].cyqlone_solver.ny;
-        index_t ny_N   = solver_storages[c].cyqlone_solver.ny_N;
-        index_t ceil_N = solver_storages[c].cyqlone_solver.ceil_N();
-        index_t nyM    = std::max(ny, ny_N);
+        index_t ny      = solver_storages[c].cyqlone_solver.ny;
+        index_t ny_N    = solver_storages[c].cyqlone_solver.ny_N;
+        index_t ceil_N  = solver_storages[c].cyqlone_solver.ceil_N();
+        index_t nyM     = std::max(ny, ny_N);
         index_t N_horiz = solver_storages[c].cyqlone_solver.N_horiz;
         BATMAT_ASSERT(y.branches[c].depth() == ceil_N);
         BATMAT_ASSERT(y.branches[c].rows() == nyM);
         BATMAT_ASSERT(y.branches[c].cols() == 1);
-        solver_storages[c].cyqlone_solver.unpack_constraints(y.branches[c], y_lin.subspan(offset, ny * (N_horiz-1) + ny_N));
-        offset += ny * (N_horiz-1) + ny_N;
+        solver_storages[c].cyqlone_solver.unpack_constraints(
+            y.branches[c], y_lin.subspan(offset, ny * (N_horiz - 1) + ny_N));
+        offset += ny * (N_horiz - 1) + ny_N;
     }
 }
 
@@ -310,8 +320,9 @@ auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_gradient(
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_bounds(
     const FanCyqloneStorage<value_type> &ocp) const -> std::pair<FanStorage, FanStorage> {
-    
-    std::pair<FanStorage, FanStorage> b{initialize_general_constraints(), initialize_general_constraints()};
+
+    std::pair<FanStorage, FanStorage> b{initialize_general_constraints(),
+                                        initialize_general_constraints()};
     initialize_bounds(ocp, b.first, b.second);
 
     return b;
@@ -319,7 +330,7 @@ auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_bounds(
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_variables(
-    std::span< const value_type> ux_lin) const -> FanStorage {
+    std::span<const value_type> ux_lin) const -> FanStorage {
     FanStorage ux = initialize_variables();
     pack_variables(ux_lin, ux);
     return ux;
@@ -335,7 +346,7 @@ auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_variables(const Fa
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_dynamics(
-    std::span< const value_type> λ_lin) const -> FanStorage {
+    std::span<const value_type> λ_lin) const -> FanStorage {
     FanStorage λ = initialize_dynamics_constraints();
     pack_dynamics(λ_lin, λ);
     return λ;
@@ -350,9 +361,8 @@ auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::unpack_dynamics(const Fan
 }
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
-auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_constraints(std::span< const value_type> y_lin,
-                                                                  value_type fill) const
-    -> FanStorage {
+auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::pack_constraints(
+    std::span<const value_type> y_lin, value_type fill) const -> FanStorage {
     FanStorage y = initialize_general_constraints();
     pack_constraints(y_lin, y, fill);
     return y;
@@ -373,10 +383,12 @@ auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_variables() co
     index_t nx_tot = 0;
 
     for (index_t c = 0; c < num_branches; ++c) {
-        variables.branches[c]=solver_storages[c].cyqlone_solver.initialize_variables();
+        variables.branches[c] = solver_storages[c].cyqlone_solver.initialize_variables();
         nx_tot += solver_storages[c].cyqlone_solver.nx;
     }
-    typename SolverLast::matrix f{{.rows = nu+nx_tot, .cols = 1}}; // initialize the first element of variables to hold u0_sol
+    typename SolverLast::matrix f{
+        {.rows = nu + nx_tot,
+         .cols = 1}}; // initialize the first element of variables to hold u0_sol
     variables.first = f;
     return variables;
 }
@@ -388,10 +400,13 @@ auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_dynamics_const
     dynamics_constraints.branches.resize(num_branches);
     index_t nx_tot = 0;
     for (index_t c = 0; c < num_branches; ++c) {
-        dynamics_constraints.branches[c]=solver_storages[c].cyqlone_solver.initialize_dynamics_constraints();
+        dynamics_constraints.branches[c] =
+            solver_storages[c].cyqlone_solver.initialize_dynamics_constraints();
         nx_tot += solver_storages[c].cyqlone_solver.nx;
     }
-    typename SolverLast::matrix f{{.rows = nx_tot, .cols = 1}}; // initialize the first element of dynamics_constraints to hold r0
+    typename SolverLast::matrix f{
+        {.rows = nx_tot,
+         .cols = 1}}; // initialize the first element of dynamics_constraints to hold r0
     dynamics_constraints.first = f;
     return dynamics_constraints;
 }
@@ -402,10 +417,13 @@ auto SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_general_constr
     auto general_constraints = FanStorage();
     general_constraints.branches.resize(num_branches);
     for (index_t c = 0; c < num_branches; ++c) {
-        general_constraints.branches[c]=solver_storages[c].cyqlone_solver.initialize_general_constraints();
+        general_constraints.branches[c] =
+            solver_storages[c].cyqlone_solver.initialize_general_constraints();
     }
 
-    typename SolverLast::matrix f{{.rows = ny_0, .cols = 1}}; // initialize the first element of general_constraints to hold r0
+    typename SolverLast::matrix f{
+        {.rows = ny_0,
+         .cols = 1}}; // initialize the first element of general_constraints to hold r0
     general_constraints.first = f;
     return general_constraints;
 }

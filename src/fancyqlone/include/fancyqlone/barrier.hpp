@@ -4,8 +4,8 @@
 /// Barrier synchronization primitive.
 /// @ingroup topic-parallelization
 
-#include <fancyqlone/config.hpp>
 #include <batmat/assume.hpp>
+#include <fancyqlone/config.hpp>
 #include <array>
 #include <atomic>
 #include <cassert>
@@ -333,7 +333,7 @@ class TreeBarrier {
         return arrival_token{cur_phase};
     }
     template <class T>
-    [[nodiscard]] arrival_token_typed<T> get_typed_token() { 
+    [[nodiscard]] arrival_token_typed<T> get_typed_token() {
         return arrival_token_typed<T>{get_arrival_token()};
     }
 

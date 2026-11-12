@@ -10,9 +10,9 @@
 #include <cmath>
 #include <functional>
 #include <iostream>
-#include <syncstream>
 #include <limits>
 #include <optional>
+#include <syncstream>
 #include <utility>
 
 namespace FANCYQLONE_NS(fancyqlone::qpalm) {
@@ -387,7 +387,6 @@ SolverStatus SolverImplementation<Backend>::do_main_loop(Backend::Context &ctx,
                           << float_to_str(ls.τ) << "\x1b[0m (" << ls.index << ")\n";
             }
             ls.τ = std::clamp(ls.τ, τ_min, τ_max);
-
 
             { // Apply step
                 GUANAQO_TRACE("apply step", inner_total);

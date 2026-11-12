@@ -1,12 +1,11 @@
 #pragma once
 
-#include <fancyqlone/linalg.hpp>
 #include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp>
+#include <fancyqlone/linalg.hpp>
 
 #include <concepts>
 #include <iostream>
 #include <syncstream>
-
 
 /** 
  * @file
@@ -66,8 +65,6 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(
 
         auto t = get_timed(&Timings::solve_grad);
         ocp.cost_gradient(ctx, d, 1 / S, d, 0, ξ);
-
-
     }
     if (settings.print_residuals)
         print_solve_resid_norms(ctx, x, d, grad, ξ, Mᵀλ, Aᵀŷ, MᵀΔλ, Ad, J);
@@ -103,17 +100,17 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
     const var_vec_t &Mᵀλ, const var_vec_t &Aᵀŷ, const var_vec_t &MᵀΔλ, const ineq_constr_vec_t &Ad,
     const active_set_t &J) {
     // allocate workspaces
-    if (temp_var.size() == 0 || temp_eq.size() == 0 || temp_ineq.size() == 0){
+    if (temp_var.size() == 0 || temp_eq.size() == 0 || temp_ineq.size() == 0) {
         ctx.run_single_sync([this] {
             temp_var  = var_vec();
             temp_eq   = eq_constr_vec();
             temp_ineq = ineq_constr_vec();
-            
-            assert(temp_var.size()  != 0);
-            assert(temp_eq.size()   != 0);
-            assert(temp_ineq.size() != 0);
 
-        });}
+            assert(temp_var.size() != 0);
+            assert(temp_eq.size() != 0);
+            assert(temp_ineq.size() != 0);
+        });
+    }
     auto tm  = get_timed(&Timings::solve_resid);
     int prec = settings.print_precision;
     using batmat::datapar::hmax;
@@ -128,10 +125,9 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
     auto &res = temp_var;
 
     ctx.arrive_and_wait();
-    if (temp_ineq.size() != 0){
+    if (temp_ineq.size() != 0) {
         ocp.foreach_batch(ctx, ΣAd, J, Ad, temp_ineq);
         mat_vec_AT(ctx, temp_ineq, res);
-
     }
     // Compute the augmented Lagrangian gradient norms
     real_t r_norm_sq = 0, grad_norm_sq = 0, r_norm_inf = 0;
@@ -143,9 +139,7 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
         ri += gi + MᵀΔλi + ξi;
 
         r_norm_inf = max(r_norm_inf, hmax(abs(ri)));
-        if (r_norm_inf >= 1e-12){
-
-
+        if (r_norm_inf >= 1e-12) {
         }
         r_norm_sq += reduce(ri * ri);
         r_kkt_norm_inf = max(r_kkt_norm_inf, hmax(abs(r_kkt_i)));

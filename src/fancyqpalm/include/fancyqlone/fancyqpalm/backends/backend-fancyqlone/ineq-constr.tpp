@@ -1,8 +1,8 @@
 #pragma once
 
-#include <fancyqlone/linalg.hpp>
-#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp>
 #include <batmat/simd.hpp>
+#include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp>
+#include <fancyqlone/linalg.hpp>
 #include <iostream>
 
 namespace FANCYQLONE_NS(fancyqlone::qpalm) {
@@ -24,7 +24,8 @@ index_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::update_penalty_y(
             select(insufficient_progress, settings.Δy * abs(eji) / norm_inf_e, decltype(eji){1});
         update_factor *= settings.Δy_always;
         auto Σ_new = Σji * update_factor;
-        Σ_new      = fmax(Σji * settings.Δy_always, fmin(Σ_new, decltype(Σ_new){settings.max_penalty_y}));
+        Σ_new =
+            fmax(Σji * settings.Δy_always, fmin(Σ_new, decltype(Σ_new){settings.max_penalty_y}));
         num_changed += reduce_count(Σ_new != Σji);
         return Σ_new;
     };
@@ -103,10 +104,10 @@ real_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::ineq_constr_resid_al(
     static constexpr auto norms_simd_scal = batmat::linalg::norms<real_t, simd_scal>{};
     static constexpr auto norms_scal      = batmat::linalg::norms<real_t>{};
 
-    auto t                           = get_timed(&Timings::ineq_constr_resid_al);
-    auto nrm_simd                    = norms_simd.zero_simd();
-    auto nrm_simd_scal               = norms_simd_scal.zero_simd();
-    const auto resid_simd            = [&](auto yji, auto ŷji, auto Σji) {
+    auto t                = get_timed(&Timings::ineq_constr_resid_al);
+    auto nrm_simd         = norms_simd.zero_simd();
+    auto nrm_simd_scal    = norms_simd_scal.zero_simd();
+    const auto resid_simd = [&](auto yji, auto ŷji, auto Σji) {
         auto ei = (ŷji - yji) / Σji;
         if constexpr (std::is_same_v<decltype(yji), simd_scal>) {
             nrm_simd_scal = norms_simd_scal(nrm_simd_scal, ei);
@@ -160,7 +161,6 @@ index_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::calc_ŷ_Aᵀŷ(
     // ocp.print_grad(ctx, b_min_strided, "b_min");
     // ocp.print_grad(ctx, b_max_strided, "b_max");
     // ocp.print_grad(ctx, Σ, "Σ")
-
 
     mat_vec_AT(ctx, ŷ, Aᵀŷ);
     // ocp.print_grad(ctx, Aᵀŷ, "Aᵀŷ");

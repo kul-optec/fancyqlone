@@ -10,8 +10,8 @@ namespace fanqp {
 
 struct ConstraintRow {
     enum class Kind { General, State, Input, Inactive };
-    Kind kind = Kind::Inactive;
-    int index = -1;
+    Kind kind         = Kind::Inactive;
+    int index         = -1;
     double dual_scale = 1;
 };
 
@@ -33,12 +33,11 @@ inline int constraint_node(int branches, int branch, int stage) {
 /// Recognize exact +1 selectors. Identical bounds share a native bound; differing
 /// duplicates remain general rows. No scaling or bound-intersection machinery.
 /// Disabling boxes retains every original row (also used by existing warm starts).
-inline StageConstraints analyze_constraints(
-    std::span<const fancyqlone::LinearOCPStorage> sources, int stage,
-    bool boxes = true, bool state_boxes = true) {
+inline StageConstraints analyze_constraints(std::span<const fancyqlone::LinearOCPStorage> sources,
+                                            int stage, bool boxes = true, bool state_boxes = true) {
     const int nx = static_cast<int>(sources.front().dim.nx);
-    const int nu = stage < sources.front().dim.N_horiz
-                       ? static_cast<int>(sources.front().dim.nu) : 0;
+    const int nu =
+        stage < sources.front().dim.N_horiz ? static_cast<int>(sources.front().dim.nu) : 0;
     constexpr double inf = std::numeric_limits<double>::infinity();
     StageConstraints result;
     result.xmin.assign(nx, -inf);
@@ -46,13 +45,15 @@ inline StageConstraints analyze_constraints(
     result.umin.assign(nu, -inf);
     result.umax.assign(nu, inf);
     std::vector<int> x_count(nx), u_count(nu);
-    struct GeneralRow { int branch, row; };
+    struct GeneralRow {
+        int branch, row;
+    };
     std::vector<GeneralRow> general;
 
     using Kind = ConstraintRow::Kind;
     for (int branch = 0; branch < static_cast<int>(sources.size()); ++branch) {
         const auto &ocp = sources[branch];
-        const auto C = ocp.C(stage);
+        const auto C    = ocp.C(stage);
         result.row_offsets.push_back(static_cast<int>(result.rows.size()));
         for (int row = 0; row < C.rows; ++row) {
             const double lower = ocp.b_min(stage)(row, 0);
@@ -62,14 +63,14 @@ inline StageConstraints analyze_constraints(
                 result.rows.push_back(mapping);
                 continue;
             }
-            int nonzeros = 0;
+            int nonzeros  = 0;
             bool selector = boxes;
-            auto inspect = [&](double coefficient, Kind kind, int index) {
+            auto inspect  = [&](double coefficient, Kind kind, int index) {
                 if (coefficient == 0)
                     return;
                 ++nonzeros;
-                selector = selector && coefficient == 1;
-                mapping.kind = kind;
+                selector      = selector && coefficient == 1;
+                mapping.kind  = kind;
                 mapping.index = index;
             };
             if (boxes) {
@@ -79,14 +80,13 @@ inline StageConstraints analyze_constraints(
                     for (int col = 0; col < nu; ++col)
                         inspect(ocp.D(stage)(row, col), Kind::Input, col);
             }
-            selector = selector && nonzeros == 1 &&
-                       (state_boxes || mapping.kind != Kind::State);
+            selector = selector && nonzeros == 1 && (state_boxes || mapping.kind != Kind::State);
             if (selector) {
                 const bool state = mapping.kind == Kind::State;
-                auto &counts = state ? x_count : u_count;
-                auto &lb = state ? result.xmin : result.umin;
-                auto &ub = state ? result.xmax : result.umax;
-                const int i = mapping.index;
+                auto &counts     = state ? x_count : u_count;
+                auto &lb         = state ? result.xmin : result.umin;
+                auto &ub         = state ? result.xmax : result.umax;
+                const int i      = mapping.index;
                 if (counts[i] == 0 || (lb[i] == lower && ub[i] == upper)) {
                     lb[i] = lower;
                     ub[i] = upper;
@@ -124,7 +124,7 @@ inline StageConstraints analyze_constraints(
     result.D.resize(ng * nu);
     for (std::size_t i = 0; i < ng; ++i) {
         const auto [branch, row] = general[i];
-        const auto &ocp = sources[branch];
+        const auto &ocp          = sources[branch];
         for (int col = 0; col < nx; ++col)
             result.C[i + col * ng] = ocp.C(stage)(row, col);
         for (int col = 0; col < nu; ++col)
@@ -133,10 +133,8 @@ inline StageConstraints analyze_constraints(
     return result;
 }
 
-inline double constraint_multiplier(const ConstraintRow &row,
-                                    std::span<const double> x,
-                                    std::span<const double> u,
-                                    std::span<const double> general) {
+inline double constraint_multiplier(const ConstraintRow &row, std::span<const double> x,
+                                    std::span<const double> u, std::span<const double> general) {
     using Kind = ConstraintRow::Kind;
     switch (row.kind) {
         case Kind::State: return row.dual_scale * x[row.index];
