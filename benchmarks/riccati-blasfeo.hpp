@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cyqlone/config.hpp>
+#include <fancyqlone/config.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/config.hpp>
 #include <hyhound/ocp/riccati.hpp>

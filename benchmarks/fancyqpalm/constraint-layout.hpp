@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cyqlone/ocp.hpp>
+#include <fancyqlone/ocp.hpp>
 
 #include <limits>
 #include <span>

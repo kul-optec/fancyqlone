@@ -7,7 +7,7 @@
 #include <span>
 #include <vector>
 #include <cmath>
-#include <cyqlone/ocp.hpp>
+#include <fancyqlone/ocp.hpp>
 
 // Adjust this include path if your treeQP package exports it differently.
 #include <treeqp_cpp_interface/treeqp_cpp_interface.hpp>

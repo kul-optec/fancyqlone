@@ -1,4 +1,4 @@
-#include <cyqlone/cyqlone.hpp>
+#include <fancyqlone/cyqlone/cyqlone.hpp>
 #include <batmat/assume.hpp>
 #include <batmat/loop.hpp>
 #include <batmat/openmp.h>

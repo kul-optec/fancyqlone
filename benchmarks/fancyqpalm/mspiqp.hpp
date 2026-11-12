@@ -2,7 +2,7 @@
 
 #include "constraint-layout.hpp"
 
-#include <cyqlone/ocp.hpp>
+#include <fancyqlone/ocp.hpp>
 #include <piqp/piqp.hpp>
 
 #include <Eigen/Core>
