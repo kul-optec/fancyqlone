@@ -6,16 +6,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")"
 CYQLONE_ROOT="$(cd ../.. && pwd)"
 export CONAN_HOME="${CYQLONE_ROOT}/.conan2"
 # Keep upstream PIQP and the original fork in separate dependency/build trees.
-: "${PIQP_VARIANT:=upstream}"
-if [[ ${1:-} = --piqp-legacy ]]; then
-    PIQP_VARIANT=legacy
-    shift
-fi
-case "$PIQP_VARIANT" in
-    upstream) CONAN_JSON=conan-piqp-upstream.json; PRESET_DEFAULT=conan-piqp-upstream-release ;;
-    legacy) CONAN_JSON=conan-piqp-legacy.json; PRESET_DEFAULT=conan-piqp-legacy-release ;;
-    *) echo "Unknown PIQP_VARIANT '$PIQP_VARIANT' (expected upstream or legacy)" >&2; exit 1 ;;
-esac
+CONAN_JSON=conan.json
+PRESET_DEFAULT=conan-release
 # User-configurable variables with defaults
 : "${CONF_PRESET:=$PRESET_DEFAULT}"
 : "${BUILD_PRESET:=$PRESET_DEFAULT}"
@@ -57,7 +49,6 @@ deps() {
         esac
         shift
     done
-    profiles+=("-pr:h" "${PWD}/piqp-${PIQP_VARIANT}.profile")
     if ! which conan &> /dev/null; then
         echo "Conan not found in PATH. Please install Conan 2.x and try again. https://conan.io" >&2
         exit 1
@@ -193,7 +184,7 @@ benchmark_quadruped() {
 # Run the quick benchmark as a sanity check
 benchmark_quick() {
     benchmark \
-        --problem wang-boyd-2008 --cold --no-serial -I 1 -p "${OMP_NUM_THREADS}"  --cm \
+        --problem wang-boyd-2008 --no-serial -I 1 -p "${OMP_NUM_THREADS}" \
         -N 16 -M 12 -J 2\
         --benchmark_repetitions=1 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s "$@"
@@ -202,14 +193,14 @@ benchmark_quick() {
 # Run the horizon scaling benchmark
 benchmark_scaling() {
     benchmark \
-        --cold -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -I 10 -p "${OMP_NUM_THREADS}" -v4 \
         -M 12 -N 32 64 96 128 160 192 224 256 -J 4\
-        --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+        --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling.json "$@"
 }
 benchmark_scaling_J() {
     benchmark \
-        --cold -I 1 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -I 1 -p "${OMP_NUM_THREADS}" -v4 \
         -M 12 -J 1 2 4 8 -N 64\
         --benchmark_repetitions=30 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-J.json "$@" \
@@ -218,18 +209,18 @@ benchmark_scaling_J() {
 }
 benchmark_scaling_p() {
     benchmark \
-        --cold -I 1 -p8 -p4 -v4 -v1 --cm \
+        -I 1 -p8 -p4 -v4 -v1 \
         -M 12 -J 4 -N 32 64 96 128 160 192 224 256\
-        --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+        --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-p.json "$@" \
         --no-hpipm --no-treeqp --no-piqp --serial
 
 }
 benchmark_scaling_J() {
     benchmark \
-        --cold -I 1 -p8 --cm \
+        -I 1 -p8 \
         -M 12 -J 1 2 4 8 -N 64\
-        --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+        --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-J.json "$@" \
         --no-hpipm --no-treeqp --no-piqp --serial
 
@@ -238,25 +229,25 @@ benchmark_scaling_J() {
 # Run the states scaling benchmark
 benchmark_scaling_states() {
     benchmark \
-        --problem wang-boyd-2008 --cold -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        --problem wang-boyd-2008 -I 10 -p "${OMP_NUM_THREADS}" -v4 \
         -N 64 \
         -M6 -M10 -M14  -M18  -M22 \
          -M26 -M30 -J 4\
-        --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+        --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-scaling-states.json "$@"
 }
 benchmark_quad_scaling() {
     benchmark_quadruped \
-        --cold -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -I 10 -p "${OMP_NUM_THREADS}" -v4 \
         -N 32 64 96 128 160 192 224 256 -J 4\
-        --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+        --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-quad-scaling.json "$@"
 }
 benchmark_quad_scaling_J() {
     benchmark_quadruped \
-        --cold -I 100 -p "${OMP_NUM_THREADS}" -v4 --cm \
+        -I 10 -p "${OMP_NUM_THREADS}" -v4 \
         -N 64 -J 1 2 4 8\
-        --benchmark_repetitions=10 --benchmark_report_aggregates_only \
+        --benchmark_repetitions=3 --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s --benchmark_out=benchmark-quad-scaling-J.json "$@"
 }
 # Plot the results of the horizon scaling benchmark

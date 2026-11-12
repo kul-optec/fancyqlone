@@ -59,19 +59,6 @@ target_link_libraries(spring-mass PRIVATE
     cyqlone::example-problems
 )
 
-add_executable(spring-mass2
-    spring-mass2.cpp
-    benchmark-reporter.cpp
-)
-
-target_link_libraries(spring-mass2 PRIVATE
-    benchmark::benchmark
-    CLI11::CLI11
-    fmt::fmt
-    cyqlone::qpalm
-    cyqlone::example-problems
-)
-
 add_executable(centroidal-quadruped
     centroidal-quadruped.cpp
     benchmark-reporter.cpp
@@ -95,18 +82,6 @@ if(WITH_HPIPM)
     )
 
     target_compile_definitions(spring-mass PRIVATE
-        WITH_HPIPM=1
-    )
-
-    target_sources(spring-mass2 PRIVATE
-        treehpipm.cpp
-    )
-
-    target_link_libraries(spring-mass2 PRIVATE
-        hpipm
-    )
-
-    target_compile_definitions(spring-mass2 PRIVATE
         WITH_HPIPM=1
     )
 
@@ -136,17 +111,6 @@ if(WITH_PIQP)
         WITH_PIQP=1
     )
 
-    target_sources(spring-mass2 PRIVATE
-        mspiqp.cpp
-    )
-
-    target_link_libraries(spring-mass2 PRIVATE
-        piqp::piqp
-    )
-
-    target_compile_definitions(spring-mass2 PRIVATE
-        WITH_PIQP=1
-    )
 
     target_sources(centroidal-quadruped PRIVATE
         mspiqp.cpp
@@ -173,17 +137,6 @@ if(WITH_TREEQP)
         WITH_TREEQP=1
     )
 
-    target_sources(spring-mass2 PRIVATE
-        treeqp.cpp
-    )
-
-    target_link_libraries(spring-mass2 PRIVATE
-        treeqp::treeqp
-    )
-
-    target_compile_definitions(spring-mass2 PRIVATE
-        WITH_TREEQP=1
-    )
 
     target_sources(centroidal-quadruped PRIVATE treeqp.cpp)
     target_link_libraries(centroidal-quadruped PRIVATE treeqp::treeqp)
