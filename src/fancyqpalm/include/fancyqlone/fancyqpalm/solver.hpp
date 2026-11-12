@@ -13,7 +13,7 @@
 #include <optional>
 #include <string>
 
-namespace cyqlone::qpalm {
+namespace fancyqlone::qpalm {
 
 /// @ingroup topic-optimization-solvers
 struct CYQLONE_QPALM_EXPORT SolverTimings {
@@ -49,9 +49,9 @@ struct CYQLONE_QPALM_EXPORT SolverStats {
     std::optional<DetailedStats> detail = std::nullopt;
 };
 
-} // namespace cyqlone::qpalm
+} // namespace fancyqlone::qpalm
 
-namespace CYQLONE_NS(cyqlone::qpalm) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 namespace detail {
 
@@ -137,4 +137,4 @@ class Solver {
     ~Solver();
 };
 
-} // namespace CYQLONE_NS(cyqlone::qpalm)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm)

@@ -5,6 +5,6 @@
 #include <batmat/linalg/elementwise.hpp>
 #include <batmat/linalg/reduce.hpp>
 
-namespace cyqlone::linalg {
+namespace fancyqlone::linalg {
 using namespace batmat::linalg;
-} // namespace cyqlone::linalg
+} // namespace fancyqlone::linalg

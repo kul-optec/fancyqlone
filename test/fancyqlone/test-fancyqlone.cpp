@@ -27,27 +27,27 @@
 #include <iostream>
 #include <limits>
 
-using cyqlone::index_t;
-using cyqlone::real_t;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 
 index_t cyq_get_num_proc();
 
-cyqlone::LinearOCPStorage combine_branches(std::span<const cyqlone::LinearOCPStorage> ocps) {
+fancyqlone::LinearOCPStorage combine_branches(std::span<const fancyqlone::LinearOCPStorage> ocps) {
     BATMAT_ASSERT(!ocps.empty());
-    auto fld_max = [](index_t(cyqlone::OCPDim::*m)) {
+    auto fld_max = [](index_t(fancyqlone::OCPDim::*m)) {
         return [m](index_t acc, const auto &ocp) { return std::max(acc, ocp.dim.*m); };
     };
-    auto fld_sum = [](index_t(cyqlone::OCPDim::*m)) {
+    auto fld_sum = [](index_t(fancyqlone::OCPDim::*m)) {
         return [m](index_t acc, const auto &ocp) { return acc + ocp.dim.*m; };
     };
-    cyqlone::OCPDim dim{
-        .N_horiz = std::ranges::fold_left(ocps, index_t{0}, fld_max(&cyqlone::OCPDim::N_horiz)),
-        .nx      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::nx)),
-        .nu      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::nu)),
-        .ny      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::ny)),
-        .ny_N    = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::ny_N)),
+    fancyqlone::OCPDim dim{
+        .N_horiz = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::N_horiz)),
+        .nx      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::nx)),
+        .nu      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::nu)),
+        .ny      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::ny)),
+        .ny_N    = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::ny_N)),
     }; // TODO: this is a bit redundant, since x(0) and u(0) need to have consistent dimensions
-    cyqlone::LinearOCPStorage combined_ocp(dim);
+    fancyqlone::LinearOCPStorage combined_ocp(dim);
 
     index_t nx_offset = 0, nu_offset = 0, ny_offset = 0, ny_N_offset = 0;
     { // Take cost of the first stage from the first OCP (there is only one x(0) and one u(0))
@@ -106,8 +106,8 @@ cyqlone::LinearOCPStorage combine_branches(std::span<const cyqlone::LinearOCPSto
         ny_N_offset += ocp.dim.ny_N;
     }
 
-    const index_t nx_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&cyqlone::OCPDim::nx)),
-                  nu_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&cyqlone::OCPDim::nu));
+    const index_t nx_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nx)),
+                  nu_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nu));
     for (index_t i = nx_max; i < combined_ocp.dim.nx; ++i)
         combined_ocp.Q(0)(i, i) = 1; // regularize unused state variables in the cost
     for (index_t i = nu_max; i < combined_ocp.dim.nu; ++i)
@@ -120,16 +120,16 @@ cyqlone::LinearOCPStorage combine_branches(std::span<const cyqlone::LinearOCPSto
 
 // Tests the factorization, factorization updates, and solution of the Cyqlone linear solver.
 TEST(CyqloneFanFactorTest, factor) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
     using batmat::matrix::uninitialized;
-    namespace la = cyqlone::linalg;
+    namespace la = fancyqlone::linalg;
     using la::tril;
 
     const index_t p  = cyq_get_num_proc();
     using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
-    using SolverLast = cyqlone::TridiagonalSolver<real_t>;
+    using SolverLast = fancyqlone::TridiagonalSolver<real_t>;
 
-    cyqlone::OCPDim dim{.N_horiz = 32, .nx = 7, .nu = 5, .ny = 0, .ny_N = 0};
+    fancyqlone::OCPDim dim{.N_horiz = 32, .nx = 7, .nu = 5, .ny = 0, .ny_N = 0};
     const index_t nx = dim.nx, nu = dim.nu;
     const index_t nux = dim.nu + dim.nx;
     index_t fanout    = 2;
@@ -147,7 +147,7 @@ TEST(CyqloneFanFactorTest, factor) {
     // -r(0) - B(0)ᵀ L(0)⁻ᵀ λ(0) for the first one.
     SolverLast::matrix rs{{.depth = fanout, .rows = nu, .cols = 1}, uninitialized};
     // Synchronization between the fanout branches
-    cyqlone::TreeBarrier<> fan_barrier(static_cast<uint32_t>(fanout), {});
+    fancyqlone::TreeBarrier<> fan_barrier(static_cast<uint32_t>(fanout), {});
     fan_barrier.spin_count = std::numeric_limits<uint32_t>::max();
 
     // Random initial state
@@ -162,7 +162,7 @@ TEST(CyqloneFanFactorTest, factor) {
     auto solve_fan      = [&](index_t i, index_t) {
         auto &ocp = ocps[i] = generate_random_ocp(dim, static_cast<uint32_t>(i));
         ocp.b(0)            = x0(0); // same initial state for each branch
-        auto cocp           = cyqlone::CyqloneStorage<>::build(ocp);
+        auto cocp           = fancyqlone::CyqloneStorage<>::build(ocp);
         // Store B(0)ᵀ for each branch; R(0) and -r(0) for the first branch
         la::copy(cocp.data_F(0).left_cols(nu).transposed(), Bs(i));
         if (i == 0) {
@@ -177,7 +177,7 @@ TEST(CyqloneFanFactorTest, factor) {
         // Cyqlone solver
         auto solver                               = Solver::build(cocp, p_fan);
         auto tricyqle_params                      = solver.get_tricyqle_params();
-        tricyqle_params.solve_method              = cyqlone::SolveMethod::None;
+        tricyqle_params.solve_method              = fancyqlone::SolveMethod::None;
         tricyqle_params.cr_max_update_fraction_Y0 = 9999;
         tricyqle_params.pcr_max_update_fraction   = 9999;
         solver.update_tricyqle_params(tricyqle_params);
@@ -275,7 +275,7 @@ TEST(CyqloneFanFactorTest, factor) {
 
     // Solve the combined problem with a single Cyqlone solve, as a reference solution
     auto combined_ocp    = combine_branches(ocps);
-    auto combined_cocp   = cyqlone::CyqloneStorage<>::build(combined_ocp);
+    auto combined_cocp   = fancyqlone::CyqloneStorage<>::build(combined_ocp);
     auto combined_solver = Solver::build(combined_cocp, p);
     auto combined_rq     = combined_solver.initialize_gradient(combined_cocp);
     auto combined_b      = combined_solver.initialize_rhs(combined_cocp);

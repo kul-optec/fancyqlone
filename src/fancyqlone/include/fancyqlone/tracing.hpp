@@ -7,7 +7,7 @@
 #include <filesystem>
 #include <span>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 namespace fs = std::filesystem;
 
@@ -41,11 +41,11 @@ enum class TraceDataNames {
 
 inline uint32_t tracing_data_ids[static_cast<size_t>(TraceDataNames::Sentinel)][256][8]{};
 
-} // namespace cyqlone
+} // namespace fancyqlone
 #if 0
 #define CYQ_TRACE_WRITE(name, index, lr)                                                           \
     do {                                                                                           \
-        using ::cyqlone::TraceDataNames;                                                           \
+        using ::fancyqlone::TraceDataNames;                                                        \
         uint64_t id = ++tracing_data_ids[static_cast<size_t>(TraceDataNames::name)][index][lr];    \
         id += static_cast<uint64_t>(TraceDataNames::name) << 32;                                   \
         id += static_cast<uint64_t>(index) << 48;                                                  \
@@ -55,7 +55,7 @@ inline uint32_t tracing_data_ids[static_cast<size_t>(TraceDataNames::Sentinel)][
     } while (false)
 #define CYQ_TRACE_READ(name, index, lr)                                                            \
     do {                                                                                           \
-        using ::cyqlone::TraceDataNames;                                                           \
+        using ::fancyqlone::TraceDataNames;                                                        \
         uint64_t id = tracing_data_ids[static_cast<size_t>(TraceDataNames::name)][index][lr];      \
         id += static_cast<uint64_t>(TraceDataNames::name) << 32;                                   \
         id += static_cast<uint64_t>(index) << 48;                                                  \

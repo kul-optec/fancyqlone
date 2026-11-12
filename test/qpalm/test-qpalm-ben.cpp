@@ -9,9 +9,9 @@ using guanaqo::as_span;
 #include <fancyqlone/conversion.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/csv.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/platooning.hpp>
-using cyqlone::index_t;
-using cyqlone::real_t;
-namespace qp = cyqlone::qpalm;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
+namespace qp = fancyqlone::qpalm;
 
 #include <qpalm.hpp>
 
@@ -23,7 +23,7 @@ TEST(QPALMBen, ocp) {
     auto grad = qp::reference_to_gradient(ocp.ocp, ocp.ref);
 
     // Quadratic program
-    auto oqp          = cyqlone::LinearOCPSparseQP::build(ocp.ocp);
+    auto oqp          = fancyqlone::LinearOCPSparseQP::build(ocp.ocp);
     qpalm::Data data  = {oqp.n, oqp.m_eq + oqp.m_ineq};
     auto to_eigen_idx = [](const auto v) {
         using std::begin;

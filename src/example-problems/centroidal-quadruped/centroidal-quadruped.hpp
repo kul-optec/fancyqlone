@@ -22,7 +22,7 @@
 #include <vector>
 #include <stdexcept>
 
-namespace cyqlone::qpalm::problems {
+namespace fancyqlone::qpalm::problems {
 
 struct CentroidalQuadrupedGaitPhase {
     index_t duration;
@@ -107,9 +107,9 @@ struct FanCentroidalQuadrupedProblem {
     std::vector<real_t> friction_coefficients;
 };
 
-} // namespace cyqlone::qpalm::problems
+} // namespace fancyqlone::qpalm::problems
 
-namespace CYQLONE_NS(cyqlone::qpalm::problems) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm::problems) {
 
 CentroidalQuadrupedProblem CYQLONE_EXAMPLE_PROBLEMS_EXPORT
 centroidal_quadruped(CentroidalQuadrupedParams p = {});
@@ -118,4 +118,4 @@ FanCentroidalQuadrupedProblem CYQLONE_EXAMPLE_PROBLEMS_EXPORT
 fan_centroidal_quadruped(CentroidalQuadrupedParams p, index_t num_branches,
                          real_t mu_radius = 0.2);
 
-} // namespace CYQLONE_NS(cyqlone::qpalm::problems)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm::problems)

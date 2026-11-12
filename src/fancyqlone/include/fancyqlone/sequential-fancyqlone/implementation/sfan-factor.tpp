@@ -12,8 +12,8 @@
 #include <iostream>
 #include <syncstream>
 
-namespace CYQLONE_NS(cyqlone) {
-namespace la = cyqlone::linalg;
+namespace FANCYQLONE_NS(fancyqlone) {
+namespace la = fancyqlone::linalg;
 
 using la::tril;
 using la::unpack;
@@ -234,4 +234,4 @@ void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_reverse_mul(Context
 
 //![Cyqlone solve CR serial]
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

@@ -14,14 +14,14 @@ int main() {
               << cyqlone_commit_hash << ")\n"
               << std::endl;
 #if WITH_QPALM
-    namespace qp       = cyqlone::qpalm;
+    namespace qp       = fancyqlone::qpalm;
     auto ocp           = qp::problems::platooning({.N_horiz = 32});
-    auto cocp          = cyqlone::CyqloneStorage<>::build(ocp.ocp);
+    auto cocp          = fancyqlone::CyqloneStorage<>::build(ocp.ocp);
     const bool verbose = true;
     qp::CyQPALMBackendSettings params{.processors      = 4,
                                       .print_residuals = verbose,
                                       .print_precision = 17,
-                                      .tricyqle_params{.solve_method = cyqlone::SolveMethod::PCR}};
+                                      .tricyqle_params{.solve_method = fancyqlone::SolveMethod::PCR}};
     qp::Settings qpalm_params{.max_outer_iter       = 400,
                               .max_total_inner_iter = 400,
                               .tolerance            = 1e-8,
@@ -35,7 +35,7 @@ int main() {
     std::cout << "CyQPALM status: " << enum_name(status) << std::endl;
     return status == qp::SolverStatus::Converged ? 0 : 1;
 #else
-    cyqlone::TricyqleSolver<4> solver{.block_size = 42, .max_rank = 10, .p = 4};
+    fancyqlone::TricyqleSolver<4> solver{.block_size = 42, .max_rank = 10, .p = 4};
     solver.run([](auto &ctx) {
         std::osyncstream(std::cout) << "Hello from thread " << ctx.index << "!" << std::endl;
     });

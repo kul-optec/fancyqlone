@@ -14,7 +14,7 @@
 #include <guanaqo/linalg/sparsity.hpp>
 #include <vector>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 using guanaqo::linalg::sparsity::SparseCSC;
 
@@ -55,4 +55,4 @@ void reference_to_gradient(const LinearOCPStorage &ocp, std::span<const real_t> 
 /// @copydoc reference_to_gradient
 void reference_to_gradient(LinearOCPStorage &ocp, std::span<const real_t> ref);
 
-} // namespace cyqlone
+} // namespace fancyqlone

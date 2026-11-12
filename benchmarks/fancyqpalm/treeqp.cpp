@@ -20,7 +20,7 @@ extern "C" {
 #include <utility>
 #include <vector>
 
-using cyqlone::index_t;
+using fancyqlone::index_t;
 
 namespace {
 
@@ -81,7 +81,7 @@ bool is_zero(const MatrixView &matrix) {
     return true;
 }
 
-bool supports_clipping_objective(const cyqlone::LinearOCPStorage &ocp,
+bool supports_clipping_objective(const fancyqlone::LinearOCPStorage &ocp,
                                  int stage) {
     if (!is_diagonal(ocp.Q(stage)))
         return false;
@@ -91,7 +91,7 @@ bool supports_clipping_objective(const cyqlone::LinearOCPStorage &ocp,
 }
 
 
-void validate(const cyqlone::FanOCPStorage &fan) {
+void validate(const fancyqlone::FanOCPStorage &fan) {
     if (fan.ocps.empty())
         throw std::invalid_argument("FanOCPStorage must contain at least one branch");
 
@@ -176,7 +176,7 @@ void set_bound_vector(TreeQp &qp, const char *name, std::vector<double> values, 
 } // namespace
 
 std::shared_ptr<TreeQpData>
-build_tree_qp(const cyqlone::FanOCPStorage &fan,bool clipping)
+build_tree_qp(const fancyqlone::FanOCPStorage &fan,bool clipping)
 {
     validate(fan);
 
@@ -640,7 +640,7 @@ TreeQpStats get_stats_tree_qp(TreeQpSolverData &solver_data) {
     };
 }
 
-cyqlone::FanOCPStorage::Solution
+fancyqlone::FanOCPStorage::Solution
 get_solution_tree_qp(
     TreeQpSolverData &solver_data)
 {
@@ -650,7 +650,7 @@ get_solution_tree_qp(
             "treeQP solver has no associated QP");
     }
 
-    cyqlone::FanOCPStorage::Solution result;
+    fancyqlone::FanOCPStorage::Solution result;
 
     const auto &mapping =
         *solver_data.qp_data;
@@ -810,7 +810,7 @@ get_solution_tree_qp(
 }
 
 std::vector<double> make_dual_initialization_tree_qp(
-    const TreeQpSolverData &solver_data, const cyqlone::FanOCPStorage::Solution &guess) {
+    const TreeQpSolverData &solver_data, const fancyqlone::FanOCPStorage::Solution &guess) {
     const auto &data = *solver_data.qp_data;
     const auto &work = solver_data.solver->TdunesWork;
     if (guess.solutions.size() != static_cast<size_t>(data.num_branches))
@@ -843,7 +843,7 @@ void set_dual_initialization_tree_qp(TreeQpSolverData &solver_data, std::span<co
 }
 void shift_treeqp_solution(
     TreeQpSolverData &solver_data,
-    const cyqlone::FanOCPStorage::Solution &solution)
+    const fancyqlone::FanOCPStorage::Solution &solution)
 {
     const auto &data = *solver_data.qp_data;
     auto &work = solver_data.solver->TdunesWork;
@@ -972,9 +972,9 @@ void reset_treeqp_solution(TreeQpSolverData &solver_data) {
         &solver_data.solver->TdunesWork);
 }
 void update_x0_tree_qp(
-    cyqlone::FanOCPStorage &fan,
+    fancyqlone::FanOCPStorage &fan,
     TreeQpData &qp_data,
-    const std::vector<cyqlone::LinearOCPStorage::Solution> &solution,
+    const std::vector<fancyqlone::LinearOCPStorage::Solution> &solution,
     index_t branch) {
     TreeQp &qp = get_qp(qp_data);
     const auto branch_index = static_cast<std::size_t>(branch);

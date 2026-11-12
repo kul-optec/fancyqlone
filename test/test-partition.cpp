@@ -7,7 +7,7 @@
 
 #include <fancyqlone/fancyqpalm/implementation/algorithms.hpp>
 
-using cyqlone::qpalm::partition_min;
+using fancyqlone::qpalm::partition_min;
 
 // Reference implementation: partition, then min_element
 template <typename R, typename Pred, typename Cmp>

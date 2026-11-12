@@ -20,7 +20,7 @@
 #include <type_traits>
 #include <utility>
 
-namespace cyqlone::parallel {
+namespace fancyqlone::parallel {
 
 struct SharedContext;
 struct FanSharedContext;
@@ -56,7 +56,7 @@ struct SharedContext {
 
     void update_spin_count(uint32_t spin_count) {
         set_barrier_spin_count(spin_count);
-    } // namespace cyqlone::parallel
+    } // namespace fancyqlone::parallel
 
     uint32_t set_barrier_spin_count(uint32_t spin_count) {
         static_assert(std::is_same_v<decltype(barrier.spin_count), decltype(spin_count)>);

@@ -20,8 +20,8 @@
 #include <utility>
 #include <vector>
 
-using cyqlone::index_t;
-using cyqlone::real_t;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 
 
 
@@ -111,7 +111,7 @@ struct FanTreeIndex {
     }
 };
 
-void validate_fan(const cyqlone::FanOCPStorage &fan) {
+void validate_fan(const fancyqlone::FanOCPStorage &fan) {
     if (fan.ocps.empty())
         throw std::invalid_argument("FanOCPStorage must contain at least one branch");
 
@@ -153,7 +153,7 @@ std::size_t branch_offset(const HPIPMTreeQPData &data, int branch) {
 
 
 std::shared_ptr<HPIPMTreeQPData>
-build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan, bool native_bounds, bool eliminate_x0) {
+build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds, bool eliminate_x0) {
     validate_fan(fan);
 
     HPIPMTreeQPData d;
@@ -426,9 +426,9 @@ HPIPMStats get_stats_hpipm_tree(HPIPMTreeSolverData &solver_data) {
     return stats;
 }
 
-cyqlone::FanOCPStorage::Solution
+fancyqlone::FanOCPStorage::Solution
 get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data) {
-    cyqlone::FanOCPStorage::Solution fan_sol;
+    fancyqlone::FanOCPStorage::Solution fan_sol;
 
     const auto &data = *solver_data.qp_data;
     const auto &dim  = *data.dim;
@@ -1264,8 +1264,8 @@ void tree_ocp_qp_sol_set_t(
         0);
 }
 void set_initial_guess_hpipm_tree(HPIPMTreeSolverData &solver_data,
-                                  const cyqlone::FanOCPStorage &fan,
-                                  const cyqlone::FanOCPStorage::Solution &guess) {
+                                  const fancyqlone::FanOCPStorage &fan,
+                                  const fancyqlone::FanOCPStorage::Solution &guess) {
     const auto &data = *solver_data.qp_data;
     const auto &dim = *data.dim;
     auto &sol = *solver_data.qp_sol;
@@ -1624,9 +1624,9 @@ void shift_hpipm_tree_solution(
         }
     }
 }
-void update_x0_hpipm_tree(cyqlone::FanOCPStorage &fan,
+void update_x0_hpipm_tree(fancyqlone::FanOCPStorage &fan,
                           HPIPMTreeQPData &qp_data,
-                          std::vector<cyqlone::LinearOCPStorage::Solution> &solution,
+                          std::vector<fancyqlone::LinearOCPStorage::Solution> &solution,
                           index_t branch) {
     const int b = static_cast<int>(branch);
     const auto &dim = *qp_data.dim;

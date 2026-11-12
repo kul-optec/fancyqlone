@@ -12,13 +12,13 @@
 #include <fancyqlone/matio.hpp>
 #endif
 
-using cyqlone::index_t; // Integer type for indices
-using cyqlone::real_t;  // Floating-point type for scalars
+using fancyqlone::index_t; // Integer type for indices
+using fancyqlone::real_t;  // Floating-point type for scalars
 constexpr index_t v =   // Vector length to use
     batmat::types::vl_at_most<real_t, 4>;
 
 // Generate a random linear-quadratic OCP.
-cyqlone::LinearOCPStorage init_ocp(index_t N, index_t nx, index_t nu) {
+fancyqlone::LinearOCPStorage init_ocp(index_t N, index_t nx, index_t nu) {
     using batmat::linalg::tril;
     using batmat::linalg::triu;
 
@@ -26,7 +26,7 @@ cyqlone::LinearOCPStorage init_ocp(index_t N, index_t nx, index_t nu) {
     std::uniform_real_distribution<real_t> uni_dist{-1.2, 1.2};
     auto uni_gen = [&] { return uni_dist(rng); };
 
-    cyqlone::LinearOCPStorage ocp{.dim{.N_horiz = N, .nx = nx, .nu = nu, .ny = 0}};
+    fancyqlone::LinearOCPStorage ocp{.dim{.N_horiz = N, .nx = nx, .nu = nu, .ny = 0}};
     auto diag = 2 * static_cast<real_t>(nx + nu);
     ocp.b(0).generate(uni_gen); // initial state x(0)
     for (index_t j = 0; j < N; ++j) {
@@ -56,18 +56,18 @@ int main(int argc, char *argv[]) try {
     const index_t N  = argc > 2 ? std::stoi(argv[2]) : 128; // Horizon length
     const index_t nx = argc > 3 ? std::stoi(argv[3]) : 10;  // State dimension
     const index_t nu = argc > 4 ? std::stoi(argv[4]) : 5;   // Control dimension
-    BATMAT_ASSERT(v == 1 || cyqlone::is_pow_2(p));
+    BATMAT_ASSERT(v == 1 || fancyqlone::is_pow_2(p));
 
     // Initialize a random linear-quadratic OCP
     auto ocp = init_ocp(N, nx, nu);
     // Eliminate the initial state x0 and merge the first and last stages for Cyqlone
-    auto cocp = cyqlone::CyqloneStorage<real_t>::build(ocp);
+    auto cocp = fancyqlone::CyqloneStorage<real_t>::build(ocp);
 
     // Create a Cyqlone solver for the OCP
-    cyqlone::CyqloneSolver<v, real_t> solver = cyqlone::CyqloneSolver<v, real_t>::build(cocp, p);
+    fancyqlone::CyqloneSolver<v, real_t> solver = fancyqlone::CyqloneSolver<v, real_t>::build(cocp, p);
     // Optionally configure the solver parameters
     auto params         = solver.get_tricyqle_params();
-    params.solve_method = cyqlone::SolveMethod::PCR; // Use the PCR solver instead of PCG
+    params.solve_method = fancyqlone::SolveMethod::PCR; // Use the PCR solver instead of PCG
     solver.update_tricyqle_params(params);
     std::println("{}", solver.get_params_string());
 
@@ -76,14 +76,14 @@ int main(int argc, char *argv[]) try {
     const auto b  = solver.initialize_rhs(cocp); // right-hand side vector b of dynamics constraints
     // Initialize the right-hand side of the KKT system (will be overwritten by the solution)
     auto ux = solver.initialize_variables(), λ = solver.initialize_dynamics_constraints();
-    cyqlone::linalg::negate(rq, ux); // right-hand side of the KKT system is negative gradient
-    cyqlone::linalg::copy(b, λ);
+    fancyqlone::linalg::negate(rq, ux); // right-hand side of the KKT system is negative gradient
+    fancyqlone::linalg::copy(b, λ);
     const real_t γ = 1e99; // Primal regularization
 
     // Call the solver in parallel, passing a lambda that is executed by each thread
     auto pctx = solver.create_parallel_context();
     auto t0   = std::chrono::high_resolution_clock::now();
-    pctx->run([&](cyqlone::CyqloneSolver<v, real_t>::Context &ctx) {
+    pctx->run([&](fancyqlone::CyqloneSolver<v, real_t>::Context &ctx) {
         solver.factor_solve(ctx, γ, 0, {}, ux, λ); // Cholesky factorization & forward substitution
         solver.solve_reverse(ctx, ux, λ);          // Backward substitution
     });                                            // blocks until all threads have joined
@@ -93,14 +93,14 @@ int main(int argc, char *argv[]) try {
     // Compute the residuals (in compact storage and without x0, also in parallel)
     auto Mxb  = solver.initialize_dynamics_constraints(); // primal equality constraint residual
     auto grad = solver.initialize_variables();            // gradient of the Lagrangian
-    pctx->run([&](cyqlone::CyqloneSolver<v, real_t>::Context &ctx) {
+    pctx->run([&](fancyqlone::CyqloneSolver<v, real_t>::Context &ctx) {
         solver.residual_dynamics_constr(ctx, ux, b, Mxb); // Mx + b
         solver.transposed_dynamics_constr(ctx, λ, grad);  // Mᵀλ
         solver.cost_gradient(ctx, ux, 1, rq, 1, grad);    // + Qx + q
     });
 
     // Print the residuals
-    using cyqlone::linalg::norm_inf;
+    using fancyqlone::linalg::norm_inf;
     std::println("Eq. residual (compact):       {:.17e}", norm_inf(Mxb));
     std::println("Lagr. stationarity (compact): {:.17e}", norm_inf(grad));
 
@@ -117,10 +117,10 @@ int main(int argc, char *argv[]) try {
 #if CYQLONE_WITH_MATIO
     // Export the original OCP and the solution as a .mat file
     std::filesystem::path filename = "ocp_solution.mat";
-    auto matfile                   = cyqlone::create_mat(filename);
-    cyqlone::add_to_mat(matfile.get(), "ocp", ocp);
-    cyqlone::add_to_mat(matfile.get(), "sol_x", sol.solution);
-    cyqlone::add_to_mat(matfile.get(), "sol_λ", sol.equality_multipliers);
+    auto matfile                   = fancyqlone::create_mat(filename);
+    fancyqlone::add_to_mat(matfile.get(), "ocp", ocp);
+    fancyqlone::add_to_mat(matfile.get(), "sol_x", sol.solution);
+    fancyqlone::add_to_mat(matfile.get(), "sol_λ", sol.equality_multipliers);
     std::cout << "Saved OCP and solution to " << filename << "\n";
 #endif
 } catch (std::exception &e) {

@@ -8,7 +8,7 @@
 #include <batmat/linalg/copy.hpp>
 #include <batmat/linalg/trtri.hpp>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 using namespace batmat::linalg;
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
@@ -411,4 +411,4 @@ auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::build_sparse_reg(real_t γ, real_t
     return std::move(mat).build();
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

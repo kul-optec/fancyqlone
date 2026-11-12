@@ -14,9 +14,9 @@
 #include "common.py.hpp"
 #include "fancyqlone.py.hpp"
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
-namespace qp = cyqlone::qpalm;
+namespace qp = fancyqlone::qpalm;
 
 static FanOCPStorage copy_fan_ocp(const nb::list &branches) {
     if (branches.size() == 0)
@@ -211,4 +211,4 @@ void register_fancyqlone_solver(nb::module_ &m) {
     template void register_fancyqlone_solver<VL>(nb::module_ &);
 BATMAT_FOREACH_VL_DEFAULT(FANCYQLONE_INSTANTIATE_PYTHON)
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

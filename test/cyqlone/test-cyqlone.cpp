@@ -23,20 +23,20 @@
 #include <iostream>
 #include <limits>
 
-using cyqlone::index_t;
-using cyqlone::real_t;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 
 #define NO_PENALTY 0
 #define WITH_UPDATES 1
 
-class CyqloneFactorTest : public testing::TestWithParam<cyqlone::SolveMethod> {};
+class CyqloneFactorTest : public testing::TestWithParam<fancyqlone::SolveMethod> {};
 
 template <class M>
 auto unpacked(const M &m) {
     using Mat = batmat::matrix::Matrix<typename M::value_type, typename M::index_type>;
     Mat res{{.depth = m.depth(), .rows = m.rows(), .cols = m.cols()}};
     for (index_t b = 0; b < m.num_batches(); ++b)
-        cyqlone::linalg::unpack(m.batch(b), res.middle_batches(b * m.batch_size(), m.batch_size()));
+        fancyqlone::linalg::unpack(m.batch(b), res.middle_batches(b * m.batch_size(), m.batch_size()));
     return res;
 }
 
@@ -55,7 +55,7 @@ index_t cyq_get_num_proc() {
 
 // Tests the factorization, factorization updates, and solution of the Cyqlone linear solver.
 TEST_P(CyqloneFactorTest, factor) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
     using batmat::linalg::simdify;
 
     const index_t p  = cyq_get_num_proc();
@@ -116,15 +116,15 @@ TEST_P(CyqloneFactorTest, factor) {
     std::ranges::transform(Σ2, Σ, std::ranges::begin(ΔΣ), std::minus<>{});
 
     // Solver for the final block-tridiagonal system.
-    using SolverLast = cyqlone::TridiagonalSolver<real_t>;
+    using SolverLast = fancyqlone::TridiagonalSolver<real_t>;
     SolverLast solver_last{.block_size = solver.nx, .num_blocks = solver.v};
     SolverLast::matrix λ_last{{.depth = solver.v, .rows = solver.nx, .cols = 1}};
     const auto factor_last = [&](auto &ctx) {
         if (tricyqle_params.solve_method == SolveMethod::None) {
             ctx.run_single_sync([&] {
                 using batmat::linalg::tril;
-                cyqlone::linalg::unpack(tril(solver.tricyqle.cr_L.batch(0)), tril(solver_last.L));
-                cyqlone::linalg::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.U.transposed());
+                fancyqlone::linalg::unpack(tril(solver.tricyqle.cr_L.batch(0)), tril(solver_last.L));
+                fancyqlone::linalg::unpack(solver.tricyqle.cr_Y.batch(0), solver_last.U.transposed());
                 solver_last.factor();
             });
         }
@@ -132,10 +132,10 @@ TEST_P(CyqloneFactorTest, factor) {
     const auto solve_last = [&](auto &ctx) {
         if (tricyqle_params.solve_method == SolveMethod::None) {
             ctx.run_single_sync([&] {
-                cyqlone::linalg::unpack(λ.batch(0), λ_last);
+                fancyqlone::linalg::unpack(λ.batch(0), λ_last);
                 solver_last.solve_forward(λ_last);
                 solver_last.solve_reverse(λ_last);
-                cyqlone::linalg::pack(λ_last, λ.batch(0));
+                fancyqlone::linalg::pack(λ_last, λ.batch(0));
             });
         }
     };
@@ -157,20 +157,20 @@ TEST_P(CyqloneFactorTest, factor) {
         solver.transposed_dynamics_constr(ctx, λ, Mᵀλ);                    // Mᵀλ
         solver.cost_gradient(ctx, ux, 1, rq, 0, grad);                     // Qz + q
         solver.general_constr(ctx, ux, DCux);                              // Gz
-        ctx.run_single_sync([&] { cyqlone::linalg::hadamard(DCux, Σ2); }); // ΣGz
+        ctx.run_single_sync([&] { fancyqlone::linalg::hadamard(DCux, Σ2); }); // ΣGz
         solver.transposed_general_constr(ctx, DCux, DCᵀΣDCux);             // GᵀΣGz
     };
 
     // Repeatedly factor and solve the KKT system (as a warm-up run for the timing and to make sure
     // the workspaces are still okay after a couple of iterations)
     for (int i = 0; i < 50; ++i) {
-        cyqlone::linalg::negate(rq, ux);
+        fancyqlone::linalg::negate(rq, ux);
         λ = b;
         pctx->run(factor_update_solve_all);
     }
 
     // Now factor and solve the KKT system for real
-    cyqlone::linalg::negate(rq, ux);
+    fancyqlone::linalg::negate(rq, ux);
     λ = b;
 #if GUANAQO_WITH_TRACING
     guanaqo::for_each_trace_logger([](auto &logger) { logger.reset(); });
@@ -180,12 +180,12 @@ TEST_P(CyqloneFactorTest, factor) {
     // Check the residuals
     using std::pow;
     const auto ε = pow(std::numeric_limits<real_t>::epsilon(), 0.6);
-    cyqlone::linalg::axpy(grad, {1, 1}, DCᵀΣDCux, Mᵀλ); // gradient of the Lagrangian
-    std::cout << "dynamics constraints: " << guanaqo::float_to_str(cyqlone::linalg::norm_inf(Mxb))
+    fancyqlone::linalg::axpy(grad, {1, 1}, DCᵀΣDCux, Mᵀλ); // gradient of the Lagrangian
+    std::cout << "dynamics constraints: " << guanaqo::float_to_str(fancyqlone::linalg::norm_inf(Mxb))
               << "\nstationarity:         "
-              << guanaqo::float_to_str(cyqlone::linalg::norm_inf(grad)) << "\n";
-    EXPECT_LE(cyqlone::linalg::norm_inf(Mxb), ε);
-    EXPECT_LE(cyqlone::linalg::norm_inf(grad), ε);
+              << guanaqo::float_to_str(fancyqlone::linalg::norm_inf(grad)) << "\n";
+    EXPECT_LE(fancyqlone::linalg::norm_inf(Mxb), ε);
+    EXPECT_LE(fancyqlone::linalg::norm_inf(grad), ε);
 
 #if CYQLONE_WITH_MATIO
     auto K   = solver.build_sparse(cocp, Σ_lin2);
@@ -196,19 +196,19 @@ TEST_P(CyqloneFactorTest, factor) {
 
     // Export the problem, the Cholesky factor, and the solution as a .mat file
     std::filesystem::path filename = "test-cyqlone.mat";
-    auto matfile                   = cyqlone::create_mat(filename);
-    cyqlone::add_to_mat(matfile.get(), "ocp", ocp);
-    cyqlone::add_to_mat(matfile.get(), "K", K);
-    cyqlone::add_to_mat(matfile.get(), "L", L);
-    cyqlone::add_to_mat(matfile.get(), "D", D);
-    cyqlone::add_to_mat(matfile.get(), "rhs", std::span{rhs});
-    cyqlone::add_to_mat(matfile.get(), "sol", std::span{sol});
-    cyqlone::add_to_mat(matfile.get(), "sigma", unpacked(Σ2));
-    cyqlone::add_to_mat(matfile.get(), "LH", unpacked(solver.riccati_LH));
-    cyqlone::add_to_mat(matfile.get(), "LAB", unpacked(solver.riccati_LAB));
+    auto matfile                   = fancyqlone::create_mat(filename);
+    fancyqlone::add_to_mat(matfile.get(), "ocp", ocp);
+    fancyqlone::add_to_mat(matfile.get(), "K", K);
+    fancyqlone::add_to_mat(matfile.get(), "L", L);
+    fancyqlone::add_to_mat(matfile.get(), "D", D);
+    fancyqlone::add_to_mat(matfile.get(), "rhs", std::span{rhs});
+    fancyqlone::add_to_mat(matfile.get(), "sol", std::span{sol});
+    fancyqlone::add_to_mat(matfile.get(), "sigma", unpacked(Σ2));
+    fancyqlone::add_to_mat(matfile.get(), "LH", unpacked(solver.riccati_LH));
+    fancyqlone::add_to_mat(matfile.get(), "LAB", unpacked(solver.riccati_LAB));
     // Execute the factorization with Σ2 directly (instead of factorizing with Σ and updating)
     pctx->run([&](auto &ctx) { solver.factor(ctx, 1e100, 0, Σ2); });
-    cyqlone::add_to_mat(matfile.get(), "L_refactor", solver.build_sparse_factor());
+    fancyqlone::add_to_mat(matfile.get(), "L_refactor", solver.build_sparse_factor());
     std::cout << filename << "\n";
 #endif
 
@@ -283,7 +283,7 @@ TEST_P(CyqloneFactorTest, factor) {
 // 4  >>>>>>>>>>>>>>> <<<<<<<<<<<<<<<    // 4˃  [0, 4)    4˂  [4, 8)
 // 0  <<<<<<<<<<<<<<< >>>>>>>>>>>>>>>    // 0˃  [4, 8)    0˂  [0, 4)
 TEST(CyqloneTest, updateIndices8) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
 
     const index_t p  = 8;
     using Solver     = CyqloneSolver<1, real_t, StorageOrder::RowMajor>;
@@ -344,7 +344,7 @@ TEST(CyqloneTest, updateIndices8) {
 // 4  >>>>>>>>>>>>>>> <<<<<<<<<<<        // 4˃  [0, 4)    4˂  [4, 7)
 // 0  <<<<<<<<<<<<<<< >>>>>>>>>>>        // 0˃  [4, 7)    0˂  [0, 4)
 TEST(CyqloneTest, updateIndices7) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
 
     const index_t p  = 7;
     using Solver     = CyqloneSolver<1, real_t, StorageOrder::RowMajor>;
@@ -409,7 +409,7 @@ TEST(CyqloneTest, updateIndices7) {
 // 4  >>>>>>>>>>>>>>> <<<<<<<            // 4˃  [0, 4)    4˂  [4, 6)
 // 0  <<<<<<<<<<<<<<< >>>>>>>            // 0˃  [4, 6)    0˂  [0, 4)
 TEST(CyqloneTest, updateIndices6) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
 
     const index_t p  = 6;
     using Solver     = CyqloneSolver<1, real_t, StorageOrder::RowMajor>;
@@ -470,7 +470,7 @@ TEST(CyqloneTest, updateIndices6) {
 // 4  >>>>>>>>>>>>>>> <<<                // 4˃  [0, 4)    4˂  [4, 5)
 // 0  <<<<<<<<<<<<<<< >>>                // 0˃  [4, 5)    0˂  [0, 4)
 TEST(CyqloneTest, updateIndices5) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
 
     const index_t p  = 5;
     using Solver     = CyqloneSolver<1, real_t, StorageOrder::RowMajor>;
@@ -509,7 +509,7 @@ TEST(CyqloneTest, updateIndices5) {
 }
 
 TEST(CyqloneTest, stageIndices) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
 
     const index_t p  = 2;
     using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
@@ -555,7 +555,7 @@ TEST(CyqloneTest, stageIndices) {
 }
 
 TEST(CyqloneTest, stageIndicesU0Last) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
 
     const index_t p  = 2;
     using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
@@ -601,9 +601,9 @@ TEST(CyqloneTest, stageIndicesU0Last) {
 }
 
 INSTANTIATE_TEST_SUITE_P(CyqloneSolverConfigs, CyqloneFactorTest,
-                         ::testing::Values(cyqlone::SolveMethod::StairPCG,
-                                           cyqlone::SolveMethod::JacobiPCG,
-                                           cyqlone::SolveMethod::PCR, cyqlone::SolveMethod::None),
+                         ::testing::Values(fancyqlone::SolveMethod::StairPCG,
+                                           fancyqlone::SolveMethod::JacobiPCG,
+                                           fancyqlone::SolveMethod::PCR, fancyqlone::SolveMethod::None),
                          ([](const ::testing::TestParamInfo<CyqloneFactorTest::ParamType> &info) {
                              return enum_name(info.param);
                          }));

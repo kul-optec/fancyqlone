@@ -12,12 +12,12 @@
 #include <fancyqlone/matio.hpp>
 #endif
 
-using cyqlone::index_t;                                   // Integer type for indices
-using cyqlone::real_t;                                    // Floating-point type for scalars
+using fancyqlone::index_t;                                   // Integer type for indices
+using fancyqlone::real_t;                                    // Floating-point type for scalars
 using matrices = batmat::matrix::Matrix<real_t, index_t>; // Array of matrices
 
 constexpr index_t v  = 4;                                  // Vector length to use
-using TricyqleSolver = cyqlone::TricyqleSolver<v, real_t>; // Block tridiagonal solver to use
+using TricyqleSolver = fancyqlone::TricyqleSolver<v, real_t>; // Block tridiagonal solver to use
 
 struct TridiagSystem {
     matrices M, K, b; // Diagonal blocks M, subdiagonal blocks K and right-hand side b
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) try {
     // The number of blocks in the block tridiagonal system always equals p * v. If your system is
     // larger, first reduce it to this size (in parallel). If it is smaller, manually add padding,
     // or reduce p and/or v.
-    BATMAT_ASSERT(cyqlone::is_pow_2(p));
+    BATMAT_ASSERT(fancyqlone::is_pow_2(p));
     const index_t num_blocks = p * v;
 
     // Diagonal blocks M, subdiagonal blocks K and right-hand side b of a block tridiagonal system
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) try {
     // Create a solver for the block tridiagonal system
     TricyqleSolver solver{
         .block_size = block_size, .max_rank = p * rank, .circular = circular, .p = p};
-    solver.params.solve_method = cyqlone::SolveMethod::PCR; // Use the PCR solver instead of PCG.
+    solver.params.solve_method = fancyqlone::SolveMethod::PCR; // Use the PCR solver instead of PCG.
 
     // Create a compact copy of the right-hand side and allocate storage for the solution
     TricyqleSolver::matrix b_solve{{.depth = num_blocks, .rows = block_size, .cols = 1}};
@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) try {
     auto pctx = solver.create_parallel_context();
     pctx->run([&](TricyqleSolver::Context &ctx) {
         // Copy the data to the solver's internal data structures
-        using cyqlone::linalg::pack;
+        using fancyqlone::linalg::pack;
         auto pack_M = [&](index_t i, auto Ms) { return pack(M.middle_batches(i, v, p), Ms); };
         auto pack_K = [&](index_t i, auto Ks) { return pack(K.middle_batches(i, v, p), Ks); };
         auto pack_b = [&](index_t i, auto bs) { return pack(b.middle_batches(i, v, p), bs); };
@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) try {
         solver.factor_solve(ctx, b_solve);
         solver.solve_reverse(ctx, b_solve);
         // Copy the solution back to the original layout
-        using cyqlone::linalg::unpack;
+        using fancyqlone::linalg::unpack;
         auto unpack_x = [&](index_t i, auto xs) { return unpack(xs, x.middle_batches(i, v, p)); };
         solver.get_solution(ctx, b_solve, unpack_x);
     }); // blocks until all threads have joined
@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) try {
     auto [B, F, S] = init_random_update(block_size, num_blocks, rank, circular);
     matrices x2{{.depth = num_blocks, .rows = block_size, .cols = 1}};
     pctx->run([&](TricyqleSolver::Context &ctx) {
-        using cyqlone::linalg::pack;
+        using fancyqlone::linalg::pack;
         auto pack_b   = [&](index_t i, auto bs) { return pack(b.middle_batches(i, v, p), bs); };
         auto pack_upd = [&](auto iS, auto Ss, auto &sync_S, auto iB, auto Bs, auto iF, auto Fs) {
             pack(S.middle_batches(iS, v, p), Ss); // diagonal update matrix
@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) try {
         solver.init_rhs(ctx, b_solve, pack_b);
         solver.update_solve_cr(ctx, b_solve);
         solver.solve_reverse(ctx, b_solve);
-        using cyqlone::linalg::unpack;
+        using fancyqlone::linalg::unpack;
         auto unpack_x2 = [&](index_t i, auto xs) { return unpack(xs, x2.middle_batches(i, v, p)); };
         solver.get_solution(ctx, b_solve, unpack_x2);
     });
@@ -112,15 +112,15 @@ int main(int argc, char *argv[]) try {
 #if CYQLONE_WITH_MATIO
     // Export the original system and the solution as a .mat file
     std::filesystem::path filename = "block_tridiagonal_system.mat";
-    auto matfile                   = cyqlone::create_mat(filename);
-    cyqlone::add_to_mat(matfile.get(), "M", M);
-    cyqlone::add_to_mat(matfile.get(), "K", K);
-    cyqlone::add_to_mat(matfile.get(), "b", b);
-    cyqlone::add_to_mat(matfile.get(), "x", x);
-    cyqlone::add_to_mat(matfile.get(), "B", B);
-    cyqlone::add_to_mat(matfile.get(), "F", F);
-    cyqlone::add_to_mat(matfile.get(), "S", S);
-    cyqlone::add_to_mat(matfile.get(), "x2", x2);
+    auto matfile                   = fancyqlone::create_mat(filename);
+    fancyqlone::add_to_mat(matfile.get(), "M", M);
+    fancyqlone::add_to_mat(matfile.get(), "K", K);
+    fancyqlone::add_to_mat(matfile.get(), "b", b);
+    fancyqlone::add_to_mat(matfile.get(), "x", x);
+    fancyqlone::add_to_mat(matfile.get(), "B", B);
+    fancyqlone::add_to_mat(matfile.get(), "F", F);
+    fancyqlone::add_to_mat(matfile.get(), "S", S);
+    fancyqlone::add_to_mat(matfile.get(), "x2", x2);
     std::cout << "Saved system and solution to " << filename << "\n";
 #else
     // Print the original system and the solution in a format that's easy to check using Python

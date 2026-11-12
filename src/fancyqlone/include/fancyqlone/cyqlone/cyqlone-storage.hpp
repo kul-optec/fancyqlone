@@ -13,7 +13,7 @@
 #include <span>
 #include <vector>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 /// Storage for a linear-quadratic OCP with the initial states x₀ eliminated.
 /// ~~~
@@ -130,4 +130,4 @@ struct FanCyqloneStorage {
                                std::span<const value_type> y_compressed,
                                std::span<const value_type> λ_compressed) const;
 };
-} // namespace cyqlone
+} // namespace fancyqlone

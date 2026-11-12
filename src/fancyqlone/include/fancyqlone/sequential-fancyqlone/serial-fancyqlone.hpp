@@ -12,7 +12,7 @@
 #include <syncstream>
 #include <vector>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using batmat::matrix::StorageOrder;
 
@@ -282,8 +282,8 @@ struct SerialFanCyqloneSolver {
             
         }
         // x_shifted.first.batch(0).top_rows(nu)(0) *= 1/num_branches;
-        cyqlone::linalg::scale( 1.0 / num_branches, x_shifted.first.batch(0).top_rows(nu));
-        // cyqlone::linalg::scale(x_shifted.first.top_rows(nu), 1.0 / num_branches);
+        fancyqlone::linalg::scale( 1.0 / num_branches, x_shifted.first.batch(0).top_rows(nu));
+        // fancyqlone::linalg::scale(x_shifted.first.top_rows(nu), 1.0 / num_branches);
 
         // guanaqo::print_python(std::cout << "shift_solution: x(0)(0) = ", x.first.batch(0)(0), "\n");
         // guanaqo::print_python(std::cout << "shifted_solution: x(0)(0) = ", x_shifted.first.batch(0)(0), "\n");
@@ -294,7 +294,7 @@ struct SerialFanCyqloneSolver {
         index_t nx_offset = 0;
         for (index_t i = 0; i < num_branches; ++i) {
             solver_storages[i].cyqlone_solver.shift_dynamics(λ.branches[i], λ_shifted.branches[i]);
-            // cyqlone::linalg::unpack(λ.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1)), solver_storages[i].cyqlone_solver.λ_shift);
+            // fancyqlone::linalg::unpack(λ.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1)), solver_storages[i].cyqlone_solver.λ_shift);
             // λ_shifted.first.middle_rows(nx_offset, solver_storages[i].cyqlone_solver.nx) =
             //     λ.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1));
             λ_shifted.first.batch(0).middle_rows(nx_offset, solver_storages[i].cyqlone_solver.nx)(0) =
@@ -313,7 +313,7 @@ struct SerialFanCyqloneSolver {
             solver_storages[i].cyqlone_solver.shift_constraints(y.branches[i], y_shifted.branches[i]);
             y_shifted.first.batch(0).middle_rows(ny_offset, solver_storages[i].cyqlone_solver.ny)(0) =
                 y.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1));
-            // cyqlone::linalg::pack(y.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1)), solver_storages[i].cyqlone_solver.y_shift);
+            // fancyqlone::linalg::pack(y.branches[i](solver_storages[i].cyqlone_solver.k_to_l(1)), solver_storages[i].cyqlone_solver.y_shift);
             ny_offset += solver_storages[i].cyqlone_solver.ny;
         }
     }
@@ -527,4 +527,4 @@ struct SerialFanCyqloneSolver {
     // [[nodiscard]] SparseMatrix build_sparse_reg(real_t γ, real_t ρ_inv_internal,
     //                                             real_t ρ_inv_windows) const;
 };
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

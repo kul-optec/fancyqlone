@@ -11,8 +11,8 @@
 #include <batmat/linalg/symv.hpp>
 #include <batmat/linalg/uview.hpp>
 #include <batmat/loop.hpp>
-namespace CYQLONE_NS(cyqlone) {
-namespace la = cyqlone::linalg;
+namespace FANCYQLONE_NS(fancyqlone) {
+namespace la = fancyqlone::linalg;
 
 using la::tril;
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
@@ -24,4 +24,4 @@ void SerialFanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve(
 {
     throw std::runtime_error("update_solve not implemented yet");
 }
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

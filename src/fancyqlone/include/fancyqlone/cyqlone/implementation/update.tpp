@@ -12,7 +12,7 @@
 
 #include <numeric>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using namespace batmat::linalg;
 
@@ -711,4 +711,4 @@ template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
     return work_Σ_bwd_last().bottom_rows(m_update_u0);
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

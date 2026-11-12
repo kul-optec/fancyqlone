@@ -9,7 +9,7 @@
 #include <guanaqo/print.hpp>
 #include <iostream>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 // TODO: make member function to reuse Ju0 and ny_0?
 template <class T>
@@ -177,7 +177,7 @@ CyqloneStorage<T> CyqloneStorage<T>::build(const LinearOCPStorage &ocp, index_t 
     res.update_impl(ocp);
     return res;
 }
-namespace la = cyqlone::linalg;
+namespace la = fancyqlone::linalg;
 
 template <class T>
 void FanCyqloneStorage<T>::update_impl(const FanOCPStorage &focp) {
@@ -307,4 +307,4 @@ template struct CyqloneStorage<real_t>;
 template struct FanCyqloneStorage<real_t>;
 #endif
 
-} // namespace cyqlone
+} // namespace fancyqlone

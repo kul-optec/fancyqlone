@@ -15,7 +15,7 @@
 #include <guanaqo/trace.hpp>
 #include <type_traits>
 
-namespace cyqlone::linalg {
+namespace fancyqlone::linalg {
 
 using namespace batmat::linalg;
 
@@ -248,4 +248,4 @@ void pack_add(VA &&A, VB &&B, with_rotate_t<Rot> = {}) {
 
 /// @}
 
-} // namespace cyqlone::linalg
+} // namespace fancyqlone::linalg

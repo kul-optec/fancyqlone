@@ -1,6 +1,6 @@
 #include <fancyqlone/cyqlone/cyqlone.hpp>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 // Algorithm 2 “Cyqlone factorization”
 // §4 “Cyqlone: Parallel factorization and solution of KKT systems with optimal control structure”
@@ -312,4 +312,4 @@ index_t TricyqleSolver<VL, T, DefaultOrder, Ctx>::cr_thread_assignment(index_t l
     return c;
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

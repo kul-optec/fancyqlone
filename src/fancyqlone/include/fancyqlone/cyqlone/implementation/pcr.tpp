@@ -16,7 +16,7 @@
 #include <batmat/simd.hpp>
 #include <utility>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using namespace batmat::linalg;
 
@@ -205,4 +205,4 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::solve_pcr_level(mut_batch_view<> 
 }
 //! [Cyqlone solve PCR]
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

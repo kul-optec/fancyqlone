@@ -7,7 +7,7 @@
 #include "fancyqlone/parallel.hpp"
 #include <batmat/config.hpp>
 
-namespace CYQLONE_NS(cyqlone::qpalm) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 #define CYQLONE_INSTANTIATE_QPALM_Cyqlone(v, order)                                                \
                                                                                                    \
@@ -75,4 +75,4 @@ BATMAT_FOREACH_VL_DEFAULT(CYQLONE_INSTANTIATE_QPALM_FanCyqlone, StorageOrder::Ro
 
 // BATMAT_FOREACH_VL_DEFAULT(CYQLONE_INSTANTIATE_QPALM_FanCyqlone, StorageOrder::RowMajor, FanInnerSolver)
 // BATMAT_FOREACH_VL_DEFAULT(CYQLONE_INSTANTIATE_QPALM_FanCyqlone, StorageOrder::RowMajor)
-} // namespace CYQLONE_NS(cyqlone::qpalm)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm)

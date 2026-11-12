@@ -22,11 +22,11 @@
 #include <vector>
 
 #include <fancyqlone/conversion.hpp>
-using cyqlone::index_t;
-using cyqlone::real_t;
-using StorageOrder = cyqlone::StorageOrder;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
+using StorageOrder = fancyqlone::StorageOrder;
 
-namespace qp = cyqlone::qpalm;
+namespace qp = fancyqlone::qpalm;
 index_t cyq_get_num_proc();
 
 #include <fstream>
@@ -100,37 +100,37 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 // TEST(QPALM, cyqlonefan) {
 //     index_t num_branches = 2;
 //     index_t N            = 16;
-//     std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
+//     std::vector<fancyqlone::LinearOCPStorage> ocps(num_branches);
 //     for (index_t i = 0; i < num_branches; ++i) {
 //         auto filename = std::format("python/cmpc/ocp_data{}_{}.mat", N, i);
 
-//         cyqlone::LinearOCPStorage ocp_fan;
-//         auto matfp = cyqlone::open_mat(filename);
-//         cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
+//         fancyqlone::LinearOCPStorage ocp_fan;
+//         auto matfp = fancyqlone::open_mat(filename);
+//         fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
 
 //         ocps[i] = ocp_fan;
 //         std::cout << "Loaded OCP data from " << filename << " with N=" << ocp_fan.dim.N_horiz
 //                   << ", nu=" << ocp_fan.dim.nu << ", ny=" << ocp_fan.dim.ny << "\n";
 //     }
 //     std::cout << cyq_get_num_proc() << " processors detected\n";
-//     cyqlone::FanOCPStorage fan_ocp{.ocps    = ocps,
+//     fancyqlone::FanOCPStorage fan_ocp{.ocps    = ocps,
 //                                    .R0      = ocps[0].R(0),
 //                                    .r0      = ocps[0].r(0),
 //                                    .D0      = ocps[0].D(0),
 //                                    .b_min_0 = ocps[0].b_min(0),
 //                                    .b_max_0 = ocps[0].b_max(0)};
-//     auto cocp          = cyqlone::FanCyqloneStorage<>::build(fan_ocp, 0);
+//     auto cocp          = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, 0);
 //     const bool verbose = true;
 //     auto &&backend =
-//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>>(
+//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<4>>(
 //             cocp, {},
 //             {
 //                 .processors      = 2,
 //                 .print_residuals = verbose,
 //                 .print_precision = 17,
-//                 .tricyqle_params = {.solve_method = cyqlone::SolveMethod::None},
+//                 .tricyqle_params = {.solve_method = fancyqlone::SolveMethod::None},
 //             });
-//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>> *> qpalm{
+//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<4>> *> qpalm{
 //         backend.get(),
 //         {.max_outer_iter       = 1,
 //          .max_total_inner_iter = 1,
@@ -165,20 +165,20 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //     //// check with combined solution from all branches
 //     auto filename = std::format("python/cmpc/ocp_data{}_combined.mat", N);
 
-//     cyqlone::LinearOCPStorage ocp_combined;
-//     auto matfp = cyqlone::open_mat(filename);
-//     cyqlone::read_from_mat(matfp.get(), "ocp", ocp_combined);
-//     auto cocp_combined = cyqlone::CyqloneStorage<>::build(ocp_combined);
+//     fancyqlone::LinearOCPStorage ocp_combined;
+//     auto matfp = fancyqlone::open_mat(filename);
+//     fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_combined);
+//     auto cocp_combined = fancyqlone::CyqloneStorage<>::build(ocp_combined);
 //     auto &&backend_combined =
-//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::CyqloneSolver<4>>(
+//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<4>>(
 //             cocp_combined, {},
 //             {
 //                 .processors      = 1,
 //                 .print_residuals = verbose,
 //                 .print_precision = 17,
-//                 .tricyqle_params = {.solve_method = cyqlone::SolveMethod::PCR},
+//                 .tricyqle_params = {.solve_method = fancyqlone::SolveMethod::PCR},
 //             });
-//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::CyqloneSolver<4>> *>
+//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<4>> *>
 //         qpalm_combined{
 //             backend_combined.get(),
 //             {.max_outer_iter       = 1,
@@ -220,13 +220,13 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 // TEST(QPALM, with_inequality_1iter) {
 //     index_t num_branches = 2;
 //     index_t N            = 32;
-//     std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
+//     std::vector<fancyqlone::LinearOCPStorage> ocps(num_branches);
 //     for (index_t i = 0; i < num_branches; ++i) {
 //         auto filename = std::format("python/cmpc/ocp_data_constr{}_{}.mat", N, i);
 
-//         cyqlone::LinearOCPStorage ocp_fan;
-//         auto matfp = cyqlone::open_mat(filename);
-//         cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
+//         fancyqlone::LinearOCPStorage ocp_fan;
+//         auto matfp = fancyqlone::open_mat(filename);
+//         fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
 
 //         ocps[i] = ocp_fan;
 //         guanaqo::print_python(std::cout << "x(0) = ", ocp_fan.b(0), "\n");
@@ -234,16 +234,16 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //                   << ", nu=" << ocp_fan.dim.nu << ", ny=" << ocp_fan.dim.ny << "\n";
 //     }
 //     std::cout << cyq_get_num_proc() << " processors detected\n";
-//     cyqlone::FanOCPStorage fan_ocp{.ocps    = ocps,
+//     fancyqlone::FanOCPStorage fan_ocp{.ocps    = ocps,
 //                                    .R0      = ocps[0].R(0),
 //                                    .r0      = ocps[0].r(0),
 //                                    .D0      = ocps[0].D(0),
 //                                    .b_min_0 = ocps[0].b_min(0),
 //                                    .b_max_0 = ocps[0].b_max(0)};
-//     auto cocp          = cyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
+//     auto cocp          = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
 //     const bool verbose = true;
 //     auto &&backend =
-//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>>(
+//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<4>>(
 //             cocp, {},
 //             {
 //                 .processors             = cyq_get_num_proc(),
@@ -251,9 +251,9 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //                 .print_precision        = 17,
 //                 .changing_constr_factor = 0,
 //                 .max_update_count       = 0,
-//                 .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::None},
+//                 .tricyqle_params        = {.solve_method = fancyqlone::SolveMethod::None},
 //             });
-//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>> *> qpalm{
+//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<4>> *> qpalm{
 //         backend.get(),
 //         {.max_outer_iter = 1, .max_total_inner_iter = 1, .tolerance = 1e-6, .verbose = verbose},
 //     };
@@ -269,20 +269,20 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //     //// check with combined solution from all branches
 //     auto filename = std::format("python/cmpc/ocp_data{}_combined_constr.mat", N);
 
-//     cyqlone::LinearOCPStorage ocp_combined;
-//     auto matfp = cyqlone::open_mat(filename);
-//     cyqlone::read_from_mat(matfp.get(), "ocp", ocp_combined);
-//     auto cocp_combined = cyqlone::CyqloneStorage<>::build(ocp_combined);
+//     fancyqlone::LinearOCPStorage ocp_combined;
+//     auto matfp = fancyqlone::open_mat(filename);
+//     fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_combined);
+//     auto cocp_combined = fancyqlone::CyqloneStorage<>::build(ocp_combined);
 //     auto &&backend_combined =
-//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::CyqloneSolver<4>>(
+//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<4>>(
 //             cocp_combined, {},
 //             {
 //                 .processors      = cyq_get_num_proc(),
 //                 .print_residuals = verbose,
 //                 .print_precision = 17,
-//                 .tricyqle_params = {.solve_method = cyqlone::SolveMethod::PCR},
+//                 .tricyqle_params = {.solve_method = fancyqlone::SolveMethod::PCR},
 //             });
-//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::CyqloneSolver<4>> *>
+//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<4>> *>
 //         qpalm_combined{
 //             backend_combined.get(),
 //             {.max_outer_iter       = 1,
@@ -316,13 +316,13 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 // TEST(QPALM, with_inequality_2iter) {
 //     index_t num_branches = 2;
 //     index_t N            = 32;
-//     std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
+//     std::vector<fancyqlone::LinearOCPStorage> ocps(num_branches);
 //     for (index_t i = 0; i < num_branches; ++i) {
 //         auto filename = std::format("python/cmpc/ocp_data_constr{}_{}.mat", N, i);
 
-//         cyqlone::LinearOCPStorage ocp_fan;
-//         auto matfp = cyqlone::open_mat(filename);
-//         cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
+//         fancyqlone::LinearOCPStorage ocp_fan;
+//         auto matfp = fancyqlone::open_mat(filename);
+//         fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
 
 //         ocps[i] = ocp_fan;
 //         guanaqo::print_python(std::cout << "x(0) = ", ocp_fan.b(0), "\n");
@@ -330,16 +330,16 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //                   << ", nu=" << ocp_fan.dim.nu << ", ny=" << ocp_fan.dim.ny << "\n";
 //     }
 //     std::cout << cyq_get_num_proc() << " processors detected\n";
-//     cyqlone::FanOCPStorage fan_ocp{.ocps    = ocps,
+//     fancyqlone::FanOCPStorage fan_ocp{.ocps    = ocps,
 //                                    .R0      = ocps[0].R(0),
 //                                    .r0      = ocps[0].r(0),
 //                                    .D0      = ocps[0].D(0),
 //                                    .b_min_0 = ocps[0].b_min(0),
 //                                    .b_max_0 = ocps[0].b_max(0)};
-//     auto cocp          = cyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
+//     auto cocp          = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
 //     const bool verbose = true;
 //     auto &&backend =
-//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>>(
+//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<4>>(
 //             cocp, {},
 //             {
 //                 .processors             = 2,
@@ -347,9 +347,9 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //                 .print_precision        = 17,
 //                 .changing_constr_factor = 0,
 //                 .max_update_count       = 0,
-//                 .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::None},
+//                 .tricyqle_params        = {.solve_method = fancyqlone::SolveMethod::None},
 //             });
-//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>> *> qpalm{
+//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<4>> *> qpalm{
 //         backend.get(),
 //         {.max_outer_iter = 10, .max_total_inner_iter = 2, .tolerance = 1e-6, .verbose = verbose},
 //     };
@@ -365,20 +365,20 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //     //// check with combined solution from all branches
 //     auto filename = std::format("python/cmpc/ocp_data{}_combined_constr.mat", N);
 
-//     cyqlone::LinearOCPStorage ocp_combined;
-//     auto matfp = cyqlone::open_mat(filename);
-//     cyqlone::read_from_mat(matfp.get(), "ocp", ocp_combined);
-//     auto cocp_combined = cyqlone::CyqloneStorage<>::build(ocp_combined);
+//     fancyqlone::LinearOCPStorage ocp_combined;
+//     auto matfp = fancyqlone::open_mat(filename);
+//     fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_combined);
+//     auto cocp_combined = fancyqlone::CyqloneStorage<>::build(ocp_combined);
 //     auto &&backend_combined =
-//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::CyqloneSolver<4>>(
+//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<4>>(
 //             cocp_combined, {},
 //             {
 //                 .processors      = 1,
 //                 .print_residuals = verbose,
 //                 .print_precision = 17,
-//                 .tricyqle_params = {.solve_method = cyqlone::SolveMethod::PCR},
+//                 .tricyqle_params = {.solve_method = fancyqlone::SolveMethod::PCR},
 //             });
-//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::CyqloneSolver<4>> *>
+//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<4>> *>
 //         qpalm_combined{
 //             backend_combined.get(),
 //             {.max_outer_iter       = 10,
@@ -408,13 +408,13 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 // TEST(QPALM, with_inequality) {
 //     index_t num_branches = 2;
 //     index_t N            = 32;
-//     std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
+//     std::vector<fancyqlone::LinearOCPStorage> ocps(num_branches);
 //     for (index_t i = 0; i < num_branches; ++i) {
 //         auto filename = std::format("python/cmpc/ocp_data_constr{}_{}.mat", N, i);
 
-//         cyqlone::LinearOCPStorage ocp_fan;
-//         auto matfp = cyqlone::open_mat(filename);
-//         cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
+//         fancyqlone::LinearOCPStorage ocp_fan;
+//         auto matfp = fancyqlone::open_mat(filename);
+//         fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
 
 //         ocps[i] = ocp_fan;
 //         guanaqo::print_python(std::cout << "x(0) = ", ocp_fan.b(0), "\n");
@@ -422,16 +422,16 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //                   << ", nu=" << ocp_fan.dim.nu << ", ny=" << ocp_fan.dim.ny << "\n";
 //     }
 //     std::cout << cyq_get_num_proc() << " processors detected\n";
-//     cyqlone::FanOCPStorage fan_ocp{.ocps    = ocps,
+//     fancyqlone::FanOCPStorage fan_ocp{.ocps    = ocps,
 //                                    .R0      = ocps[0].R(0),
 //                                    .r0      = ocps[0].r(0),
 //                                    .D0      = ocps[0].D(0),
 //                                    .b_min_0 = ocps[0].b_min(0),
 //                                    .b_max_0 = ocps[0].b_max(0)};
-//     auto cocp          = cyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
+//     auto cocp          = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
 //     const bool verbose = false;
 //     auto &&backend =
-//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>>(
+//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<4>>(
 //             cocp, {},
 //             {
 //                 .processors             = cyq_get_num_proc(),
@@ -439,9 +439,9 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //                 .print_precision        = 17,
 //                 .changing_constr_factor = 0,
 //                 .max_update_count       = 0,
-//                 .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::None},
+//                 .tricyqle_params        = {.solve_method = fancyqlone::SolveMethod::None},
 //             });
-//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<4>> *> qpalm{
+//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<4>> *> qpalm{
 //         backend.get(),
 //         {.max_outer_iter       = 200,
 //          .max_total_inner_iter = 1000,
@@ -476,20 +476,20 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //     //// check with combined solution from all branches
 //     auto filename = std::format("python/cmpc/ocp_data{}_combined_constr.mat", N);
 
-//     cyqlone::LinearOCPStorage ocp_combined;
-//     auto matfp = cyqlone::open_mat(filename);
-//     cyqlone::read_from_mat(matfp.get(), "ocp", ocp_combined);
-//     auto cocp_combined = cyqlone::CyqloneStorage<>::build(ocp_combined);
+//     fancyqlone::LinearOCPStorage ocp_combined;
+//     auto matfp = fancyqlone::open_mat(filename);
+//     fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_combined);
+//     auto cocp_combined = fancyqlone::CyqloneStorage<>::build(ocp_combined);
 //     auto &&backend_combined =
-//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, cyqlone::CyqloneSolver<4>>(
+//         qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<4>>(
 //             cocp_combined, {},
 //             {
 //                 .processors      = cyq_get_num_proc(),
 //                 .print_residuals = verbose,
 //                 .print_precision = 17,
-//                 .tricyqle_params = {.solve_method = cyqlone::SolveMethod::PCR},
+//                 .tricyqle_params = {.solve_method = fancyqlone::SolveMethod::PCR},
 //             });
-//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, cyqlone::CyqloneSolver<4>> *>
+//     qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<4>> *>
 //         qpalm_combined{
 //             backend_combined.get(),
 //             {.max_outer_iter       = 200,
@@ -519,22 +519,22 @@ void compare_combined_normal(std::span<const double> combined, std::span<const d
 //     compare_combined_normal(λ_combined, λ, N, 0, nx, 1e-12);
 // }
 
-cyqlone::LinearOCPStorage combine_branches_0(std::span<const cyqlone::LinearOCPStorage> ocps) {
+fancyqlone::LinearOCPStorage combine_branches_0(std::span<const fancyqlone::LinearOCPStorage> ocps) {
     BATMAT_ASSERT(!ocps.empty());
-    auto fld_max = [](index_t(cyqlone::OCPDim::*m)) {
+    auto fld_max = [](index_t(fancyqlone::OCPDim::*m)) {
         return [m](index_t acc, const auto &ocp) { return std::max(acc, ocp.dim.*m); };
     };
-    auto fld_sum = [](index_t(cyqlone::OCPDim::*m)) {
+    auto fld_sum = [](index_t(fancyqlone::OCPDim::*m)) {
         return [m](index_t acc, const auto &ocp) { return acc + ocp.dim.*m; };
     };
-    cyqlone::OCPDim dim{
-        .N_horiz = std::ranges::fold_left(ocps, index_t{0}, fld_max(&cyqlone::OCPDim::N_horiz)),
-        .nx      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::nx)),
-        .nu      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::nu)),
-        .ny      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::ny)),
-        .ny_N    = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::ny_N)),
+    fancyqlone::OCPDim dim{
+        .N_horiz = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::N_horiz)),
+        .nx      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::nx)),
+        .nu      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::nu)),
+        .ny      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::ny)),
+        .ny_N    = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::ny_N)),
     }; // TODO: this is a bit redundant, since x(0) and u(0) need to have consistent dimensions
-    cyqlone::LinearOCPStorage combined_ocp(dim);
+    fancyqlone::LinearOCPStorage combined_ocp(dim);
 
     index_t nx_offset = 0, nu_offset = 0, ny_offset = 0, ny_N_offset = 0;
    
@@ -592,8 +592,8 @@ cyqlone::LinearOCPStorage combine_branches_0(std::span<const cyqlone::LinearOCPS
         ny_N_offset += ocp.dim.ny_N;
     }
 
-    const index_t nx_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&cyqlone::OCPDim::nx)),
-                  nu_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&cyqlone::OCPDim::nu));
+    const index_t nx_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nx)),
+                  nu_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nu));
     for (index_t i = nx_max; i < combined_ocp.dim.nx; ++i)
         combined_ocp.Q(0)(i, i) = 1; // regularize unused state variables in the cost
     for (index_t i = nu_max; i < combined_ocp.dim.nu; ++i)
@@ -607,10 +607,10 @@ cyqlone::LinearOCPStorage combine_branches_0(std::span<const cyqlone::LinearOCPS
 #include <fancyqlone/random-ocp.hpp>
 
 TEST(QPALM, random_fan) {
-    using cyqlone::index_t;
-    using cyqlone::real_t;
-    namespace qp = cyqlone::qpalm;
-    namespace la = cyqlone::linalg;
+    using fancyqlone::index_t;
+    using fancyqlone::real_t;
+    namespace qp = fancyqlone::qpalm;
+    namespace la = fancyqlone::linalg;
 
     constexpr index_t VL       = 4;
     const index_t num_branches = 2;
@@ -634,13 +634,13 @@ TEST(QPALM, random_fan) {
                 csv << log << '\n';
         });
         std::cout << fs::absolute(out_dir / name) << std::endl;
-        cyqlone::write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
+        fancyqlone::write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
         std::cout << fs::absolute((out_dir / name).replace_extension("json.gz")) << std::endl;
     };
 #else
     auto save_traces = [](const std::string &) {};
 #endif
-    cyqlone::OCPDim dim{
+    fancyqlone::OCPDim dim{
         .N_horiz = 128,
         .nx      = 8,
         .nu      = 5,
@@ -652,7 +652,7 @@ TEST(QPALM, random_fan) {
     const index_t nx = dim.nx;
     const index_t nu = dim.nu;
 
-    std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
+    std::vector<fancyqlone::LinearOCPStorage> ocps(num_branches);
 
     // Same initial condition for all branches.
     batmat::matrix::Matrix<real_t, index_t> x0{{.rows = nx, .cols = 1}};
@@ -664,7 +664,7 @@ TEST(QPALM, random_fan) {
     }
 
     for (index_t i = 0; i < num_branches; ++i) {
-        ocps[i] = cyqlone::generate_random_ocp(dim, static_cast<uint32_t>(1000 + i));
+        ocps[i] = fancyqlone::generate_random_ocp(dim, static_cast<uint32_t>(1000 + i));
         std::cout << "Fan OCP" << i << " has N=" << ocps[i].dim.N_horiz << ", nx=" << ocps[i].dim.nx
                   << ", nu=" << ocps[i].dim.nu << ", ny=" << ocps[i].dim.ny
                   << ", ny_N=" << ocps[i].dim.ny_N << "\n";
@@ -680,14 +680,14 @@ TEST(QPALM, random_fan) {
     // -------------------------------------------------------------------------
     // Fan solver
     // -------------------------------------------------------------------------
-    cyqlone::FanOCPStorage fan_ocp{
+    fancyqlone::FanOCPStorage fan_ocp{
         .ocps    = ocps,
     };
 
-    auto fan_cocp = cyqlone::FanCyqloneStorage<>::build(fan_ocp, dim.ny);
+    auto fan_cocp = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, dim.ny);
     std::cout << "Running on " << cyq_get_num_proc() << " processors\n";
     auto &&fan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
             fan_cocp, {},
             {
                 .processors             = 8,
@@ -699,11 +699,11 @@ TEST(QPALM, random_fan) {
                 // Fan solver handles the shared/root part itself.
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::None,
+                        .solve_method = fancyqlone::SolveMethod::None,
                     },
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>> *>
         fan_qpalm{
             fan_backend.get(),
             {
@@ -729,10 +729,10 @@ TEST(QPALM, random_fan) {
     // Combined solver
     // -------------------------------------------------------------------------
     auto combined_ocp  = combine_branches_0(ocps);
-    auto combined_cocp = cyqlone::CyqloneStorage<>::build(combined_ocp);
+    auto combined_cocp = fancyqlone::CyqloneStorage<>::build(combined_ocp);
 
     auto &&combined_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<VL>>(
             combined_cocp, {},
             {
                 .processors             = 8,
@@ -740,10 +740,10 @@ TEST(QPALM, random_fan) {
                 .print_precision        = 17,
                 .changing_constr_factor = 0,
                 .max_update_count       = 0,
-                .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::PCR},
+                .tricyqle_params        = {.solve_method = fancyqlone::SolveMethod::PCR},
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<VL>> *>
         combined_qpalm{
             combined_backend.get(),
             {
@@ -783,10 +783,10 @@ TEST(QPALM, random_fan) {
                             std::span<const std::size_t>(nx_per_branch), 1e-7);
 }
 TEST(QPALM, random_fan_input_constr) {
-    using cyqlone::index_t;
-    using cyqlone::real_t;
-    namespace qp = cyqlone::qpalm;
-    namespace la = cyqlone::linalg;
+    using fancyqlone::index_t;
+    using fancyqlone::real_t;
+    namespace qp = fancyqlone::qpalm;
+    namespace la = fancyqlone::linalg;
 
     constexpr index_t VL       = 4;
     const index_t num_branches = 4;
@@ -810,13 +810,13 @@ TEST(QPALM, random_fan_input_constr) {
                 csv << log << '\n';
         });
         std::cout << fs::absolute(out_dir / name) << std::endl;
-        cyqlone::write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
+        fancyqlone::write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
         std::cout << fs::absolute((out_dir / name).replace_extension("json.gz")) << std::endl;
     };
 #else
     auto save_traces = [](const std::string &) {};
 #endif
-    cyqlone::OCPDim dim{
+    fancyqlone::OCPDim dim{
         .N_horiz = 128,
         .nx      = 12,
         .nu      = 6,
@@ -829,7 +829,7 @@ TEST(QPALM, random_fan_input_constr) {
     const index_t nu = dim.nu;
     index_t num_warmups = 5;
 
-    std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
+    std::vector<fancyqlone::LinearOCPStorage> ocps(num_branches);
 
     // Same initial condition for all branches.
     batmat::matrix::Matrix<real_t, index_t> x0{{.rows = nx, .cols = 1}};
@@ -841,7 +841,7 @@ TEST(QPALM, random_fan_input_constr) {
     }
 
     for (index_t i = 0; i < num_branches; ++i) {
-        ocps[i] = cyqlone::generate_random_ocp_input_constr(dim, static_cast<uint32_t>(1000 + i));
+        ocps[i] = fancyqlone::generate_random_ocp_input_constr(dim, static_cast<uint32_t>(1000 + i));
         std::cout << "Fan OCP" << i << " has N=" << ocps[i].dim.N_horiz << ", nx=" << ocps[i].dim.nx
                   << ", nu=" << ocps[i].dim.nu << ", ny=" << ocps[i].dim.ny
                   << ", ny_N=" << ocps[i].dim.ny_N << "\n";
@@ -868,15 +868,15 @@ TEST(QPALM, random_fan_input_constr) {
     // -------------------------------------------------------------------------
     // Fan solver
     // -------------------------------------------------------------------------
-    cyqlone::FanOCPStorage fan_ocp{
+    fancyqlone::FanOCPStorage fan_ocp{
         .ocps    = ocps,
         };
 
-    auto fan_cocp    = cyqlone::FanCyqloneStorage<>::build(fan_ocp);
+    auto fan_cocp    = fancyqlone::FanCyqloneStorage<>::build(fan_ocp);
     index_t num_proc = 8;
     std::cout << "Running on " << num_proc << " processors\n";
     auto &&fan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
             fan_cocp, {},
             {
                 .processors             = num_proc,
@@ -888,13 +888,13 @@ TEST(QPALM, random_fan_input_constr) {
                 // Fan solver handles the shared/root part itself.
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::None,
+                        .solve_method = fancyqlone::SolveMethod::None,
                     },
                 .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>> *>
         fan_qpalm{
             fan_backend.get(),
             {
@@ -922,7 +922,7 @@ TEST(QPALM, random_fan_input_constr) {
     auto λ_fan = fan_qpalm.get_equality_multipliers();
     std::cout << "Running on " << num_proc << " processors\n";
     auto &&sfan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>>(
             fan_cocp, {},
             {
                 .processors             = num_proc,
@@ -934,13 +934,13 @@ TEST(QPALM, random_fan_input_constr) {
                 // Fan solver handles the shared/root part itself.
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::None,
+                        .solve_method = fancyqlone::SolveMethod::None,
                     },
                 .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>> *>
         sfan_qpalm{
             sfan_backend.get(),
             {
@@ -970,10 +970,10 @@ TEST(QPALM, random_fan_input_constr) {
     // Combined solver
     // -------------------------------------------------------------------------
     auto combined_ocp  = combine_branches_0(ocps);
-    auto combined_cocp = cyqlone::CyqloneStorage<>::build(combined_ocp);
+    auto combined_cocp = fancyqlone::CyqloneStorage<>::build(combined_ocp);
 
     auto &&combined_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<VL>>(
             combined_cocp, {},
             {
                 .processors             = num_proc,
@@ -981,10 +981,10 @@ TEST(QPALM, random_fan_input_constr) {
                 .print_precision        = 17,
                 .changing_constr_factor = 0,
                 .max_update_count       = 0,
-                .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::PCR},
+                .tricyqle_params        = {.solve_method = fancyqlone::SolveMethod::PCR},
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<VL>> *>
         combined_qpalm{
             combined_backend.get(),
             {
@@ -1037,10 +1037,10 @@ TEST(QPALM, random_fan_input_constr) {
 }
 
 TEST(QPALM, spring_mass_1_branch) {
-    using cyqlone::index_t;
-    using cyqlone::real_t;
-    namespace qp = cyqlone::qpalm;
-    namespace la = cyqlone::linalg;
+    using fancyqlone::index_t;
+    using fancyqlone::real_t;
+    namespace qp = fancyqlone::qpalm;
+    namespace la = fancyqlone::linalg;
 
     constexpr index_t VL       = 4;
     const index_t num_branches = 1;
@@ -1064,7 +1064,7 @@ TEST(QPALM, spring_mass_1_branch) {
                 csv << log << '\n';
         });
         std::cout << fs::absolute(out_dir / name) << std::endl;
-        cyqlone::write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
+        fancyqlone::write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
         std::cout << fs::absolute((out_dir / name).replace_extension("json.gz")) << std::endl;
     };
 #else
@@ -1106,11 +1106,11 @@ TEST(QPALM, spring_mass_1_branch) {
     // -------------------------------------------------------------------------
     auto ocps=problem.ocp.ocps;
 
-    auto fan_cocp    = cyqlone::FanCyqloneStorage<>::build(problem.ocp);
+    auto fan_cocp    = fancyqlone::FanCyqloneStorage<>::build(problem.ocp);
     index_t num_proc = 8;
     std::cout << "Running on " << num_proc << " processors\n";
     auto &&fan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
             fan_cocp, {},
             {
                 .processors             = num_proc,
@@ -1122,13 +1122,13 @@ TEST(QPALM, spring_mass_1_branch) {
                 // Fan solver handles the shared/root part itself.
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::None,
+                        .solve_method = fancyqlone::SolveMethod::None,
                     },
                 .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>> *>
         fan_qpalm{
             fan_backend.get(),
             {
@@ -1156,7 +1156,7 @@ TEST(QPALM, spring_mass_1_branch) {
     auto λ_fan = fan_qpalm.get_equality_multipliers();
     std::cout << "Running on " << num_proc << " processors\n";
     auto &&sfan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>>(
             fan_cocp, {},
             {
                 .processors             = num_proc,
@@ -1168,13 +1168,13 @@ TEST(QPALM, spring_mass_1_branch) {
                 // Fan solver handles the shared/root part itself.
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::None,
+                        .solve_method = fancyqlone::SolveMethod::None,
                     },
                 .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>> *>
         sfan_qpalm{
             sfan_backend.get(),
             {
@@ -1204,10 +1204,10 @@ TEST(QPALM, spring_mass_1_branch) {
     // Combined solver
     // -------------------------------------------------------------------------
     auto combined_ocp  = ocps[0];
-    auto combined_cocp = cyqlone::CyqloneStorage<>::build(combined_ocp);
+    auto combined_cocp = fancyqlone::CyqloneStorage<>::build(combined_ocp);
 
     auto &&combined_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<VL>>(
             combined_cocp, {},
             {
                 .processors             = num_proc,
@@ -1215,10 +1215,10 @@ TEST(QPALM, spring_mass_1_branch) {
                 .print_precision        = 17,
                 .changing_constr_factor = 0,
                 .max_update_count       = 0,
-                .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::PCR},
+                .tricyqle_params        = {.solve_method = fancyqlone::SolveMethod::PCR},
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<VL>> *>
         combined_qpalm{
             combined_backend.get(),
             {
@@ -1273,10 +1273,10 @@ TEST(QPALM, spring_mass_1_branch) {
     
 }
 TEST(QPALM, spring_mass) {
-    using cyqlone::index_t;
-    using cyqlone::real_t;
-    namespace qp = cyqlone::qpalm;
-    namespace la = cyqlone::linalg;
+    using fancyqlone::index_t;
+    using fancyqlone::real_t;
+    namespace qp = fancyqlone::qpalm;
+    namespace la = fancyqlone::linalg;
 
     constexpr index_t VL       = 4;
     const index_t num_branches = 8;
@@ -1300,7 +1300,7 @@ TEST(QPALM, spring_mass) {
                 csv << log << '\n';
         });
         std::cout << fs::absolute(out_dir / name) << std::endl;
-        cyqlone::write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
+        fancyqlone::write_chrome_trace((out_dir / name).replace_extension("json.gz"), all_logs);
         std::cout << fs::absolute((out_dir / name).replace_extension("json.gz")) << std::endl;
     };
 #else
@@ -1343,11 +1343,11 @@ TEST(QPALM, spring_mass) {
     // -------------------------------------------------------------------------
     auto ocps=problem.ocp.ocps;
 
-    auto fan_cocp    = cyqlone::FanCyqloneStorage<>::build(problem.ocp);
+    auto fan_cocp    = fancyqlone::FanCyqloneStorage<>::build(problem.ocp);
     index_t num_proc = 8;
     std::cout << "Running on " << num_proc << " processors\n";
     auto &&fan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
             fan_cocp, {},
             {
                 .processors             = num_proc,
@@ -1359,13 +1359,13 @@ TEST(QPALM, spring_mass) {
                 // Fan solver handles the shared/root part itself.
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::None,
+                        .solve_method = fancyqlone::SolveMethod::None,
                     },
                 .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>> *>
         fan_qpalm{
             fan_backend.get(),
             {
@@ -1393,7 +1393,7 @@ TEST(QPALM, spring_mass) {
               << "timings: " << fan_qpalm.stats->timings.total.wall_time << "\n"
               << "update_count: " << fan_qpalm.stats_backend->num_updates << "\n";
         auto &&fan_backend_no_update =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
             fan_cocp, {},
             {
                 .processors             = num_proc,
@@ -1405,13 +1405,13 @@ TEST(QPALM, spring_mass) {
                 // Fan solver handles the shared/root part itself.
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::None,
+                        .solve_method = fancyqlone::SolveMethod::None,
                     },
                 .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>> *>
         fan_qpalm_no_update{
             fan_backend_no_update.get(),
             {
@@ -1442,7 +1442,7 @@ TEST(QPALM, spring_mass) {
     auto y_fan = fan_qpalm_no_update.get_inequality_multipliers();
     std::cout << "Running on " << num_proc << " processors\n";
     auto &&sfan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>>(
             fan_cocp, {},
             {
                 .processors             = num_proc,
@@ -1454,13 +1454,13 @@ TEST(QPALM, spring_mass) {
                 // Fan solver handles the shared/root part itself.
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::None,
+                        .solve_method = fancyqlone::SolveMethod::None,
                     },
                 .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling
 
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>> *>
         sfan_qpalm{
             sfan_backend.get(),
             {
@@ -1493,10 +1493,10 @@ TEST(QPALM, spring_mass) {
     // Combined solver
     // -------------------------------------------------------------------------
     auto combined_ocp  = combine_branches_0(ocps);
-    auto combined_cocp = cyqlone::CyqloneStorage<>::build(combined_ocp);
+    auto combined_cocp = fancyqlone::CyqloneStorage<>::build(combined_ocp);
 
     auto &&combined_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<VL>>(
             combined_cocp, {},
             {
                 .processors             = num_proc,
@@ -1504,10 +1504,10 @@ TEST(QPALM, spring_mass) {
                 .print_precision        = 17,
                 .changing_constr_factor = 0.01,
                 .max_update_count       = 20,
-                .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::PCR},
+                .tricyqle_params        = {.solve_method = fancyqlone::SolveMethod::PCR},
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, cyqlone::CyqloneSolver<VL>> *>
+    qp::Solver<qp::CyQPALMBackend<VL, StorageOrder::ColMajor, fancyqlone::CyqloneSolver<VL>> *>
         combined_qpalm{
             combined_backend.get(),
             {

@@ -16,10 +16,10 @@
 #include <batmat/thread-pool.hpp>
 #endif
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using batmat::linalg::simdify;
-namespace la = cyqlone::linalg;
+namespace la = fancyqlone::linalg;
 namespace detail {
 /// Simple (inefficient) matrix copy that supports slices with non-unit strides.
 template <class T1, class I1, class S1, guanaqo::StorageOrder O1, class T2, class I2, class S2,
@@ -102,9 +102,9 @@ FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const FanCyqloneStorage<value_
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_data(
     const FanCyqloneStorage<value_type> &ocp) {
-    using cyqlone::detail::copy;
-    using cyqlone::detail::scale;
-    namespace la = cyqlone::linalg;
+    using fancyqlone::detail::copy;
+    using fancyqlone::detail::scale;
+    namespace la = fancyqlone::linalg;
     for (index_t c = 0; c < num_branches; ++c) {
         solver_storages[c].cyqlone_solver.update_data(ocp.branches[c]);
         la::copy(ocp.Bs[c], solver_storages[c].B0);
@@ -137,7 +137,7 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_rhs(
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_gradient(
     const FanCyqloneStorage<value_type> &ocp, FanStorage &grad) const {
-    namespace la = cyqlone::linalg;
+    namespace la = fancyqlone::linalg;
 
     BATMAT_ASSERT(static_cast<index_t>(grad.branches.size()) == num_branches);
     for (index_t c = 0; c < num_branches; ++c) {
@@ -425,4 +425,4 @@ auto FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_general_constraints(
     return general_constraints;
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

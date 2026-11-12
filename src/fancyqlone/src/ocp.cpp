@@ -6,7 +6,7 @@
 #include <limits>
 #include <numeric>
 #include <iostream>
-namespace cyqlone {
+namespace fancyqlone {
 
 auto LinearOCPStorage::compute_kkt_error(const Solution &sol) const -> KKTError {
     // std::cout << "Computing KKT error..." << std::endl;
@@ -368,4 +368,4 @@ auto FanOCPStorage::compute_kkt_error(const Solution &sol, bool hpipm) const -> 
 
     return kkt_error;
 }
-} // namespace cyqlone
+} // namespace fancyqlone

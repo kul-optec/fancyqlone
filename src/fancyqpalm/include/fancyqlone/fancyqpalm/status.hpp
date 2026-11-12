@@ -5,7 +5,7 @@
 #include <iosfwd>
 #include <stdexcept>
 
-namespace cyqlone::qpalm {
+namespace fancyqlone::qpalm {
 
 /// Exit status of a numerical solver.
 /// @ingroup topic-optimization-solvers
@@ -37,4 +37,4 @@ inline const char *enum_name(SolverStatus s) {
 
 CYQLONE_QPALM_EXPORT std::ostream &operator<<(std::ostream &os, SolverStatus s);
 
-} // namespace cyqlone::qpalm
+} // namespace fancyqlone::qpalm

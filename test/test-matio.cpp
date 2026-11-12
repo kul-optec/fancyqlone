@@ -5,15 +5,15 @@
 #include <fancyqlone/matio.hpp>
 #include <fancyqlone/ocp.hpp>
 
-using cyqlone::index_t;
-using cyqlone::real_t;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 namespace fs = std::filesystem;
 
 TEST(Matio, ocp) {
     fs::path pth = fs::temp_directory_path() / ::tmpnam(std::string(L_tmpnam, '\0').data());
     pth.replace_extension(".mat");
-    auto mat = cyqlone::create_mat(pth);
-    cyqlone::LinearOCPStorage ocp{.dim = {.N_horiz = 31, .nx = 5, .nu = 3, .ny = 7, .ny_N = 2}};
+    auto mat = fancyqlone::create_mat(pth);
+    fancyqlone::LinearOCPStorage ocp{.dim = {.N_horiz = 31, .nx = 5, .nu = 3, .ny = 7, .ny_N = 2}};
     const auto N = ocp.dim.N_horiz;
     for (index_t i = 0; i < N; ++i) {
         for (index_t r = 0; r < ocp.dim.nx; ++r)
@@ -39,12 +39,12 @@ TEST(Matio, ocp) {
         for (index_t c = 0; c < ocp.dim.nx; ++c)
             ocp.Q(N)(r, c) = static_cast<real_t>(95000 + N * 100 + r + 10 * c);
 
-    cyqlone::add_to_mat(mat.get(), "ocp", ocp);
+    fancyqlone::add_to_mat(mat.get(), "ocp", ocp);
     mat.reset();
 
-    auto mat_loaded = cyqlone::open_mat(pth);
-    cyqlone::LinearOCPStorage ocp_loaded;
-    cyqlone::read_from_mat(mat_loaded.get(), "ocp", ocp_loaded);
+    auto mat_loaded = fancyqlone::open_mat(pth);
+    fancyqlone::LinearOCPStorage ocp_loaded;
+    fancyqlone::read_from_mat(mat_loaded.get(), "ocp", ocp_loaded);
 
     ASSERT_EQ(ocp.dim.N_horiz, ocp_loaded.dim.N_horiz);
     ASSERT_EQ(ocp.dim.nx, ocp_loaded.dim.nx);

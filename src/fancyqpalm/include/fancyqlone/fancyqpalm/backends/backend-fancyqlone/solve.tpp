@@ -13,7 +13,7 @@
  * Functions for the factorization and solution of Newton system in QPALM for the Cyqlone backend.
  */
 
-namespace CYQLONE_NS(cyqlone::qpalm) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::solve(
@@ -194,4 +194,4 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
                   << guanaqo::float_to_str(inf_res, prec) << "\n";
 }
 
-} // namespace CYQLONE_NS(cyqlone::qpalm)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm)

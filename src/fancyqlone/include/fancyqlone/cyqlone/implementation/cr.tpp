@@ -9,7 +9,7 @@
 #include <batmat/linalg/shift.hpp>
 #include <batmat/linalg/trsm.hpp>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using namespace linalg;
 using namespace batmat::linalg;
@@ -310,4 +310,4 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::prefetch_Y(index_t l, index_t iY)
     prefetch(cr_Y.batch(iY));
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

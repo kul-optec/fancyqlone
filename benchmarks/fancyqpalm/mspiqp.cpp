@@ -18,7 +18,7 @@ using PIQPTriplet = Eigen::Triplet<real_t, int>;
 
 namespace {
 
-void validate_piqp_fan(const cyqlone::FanOCPStorage &fan)
+void validate_piqp_fan(const fancyqlone::FanOCPStorage &fan)
 {
     if (fan.ocps.empty())
         throw std::invalid_argument(
@@ -209,7 +209,7 @@ void set_constraints(PIQPFanQPData &data, int node, int x, int u,
 
 } // namespace
 std::shared_ptr<PIQPFanQPData>
-build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan, bool native_bounds, bool eliminate_x0)
+build_piqp_fan_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds, bool eliminate_x0)
 {
     validate_piqp_fan(fan);
 
@@ -609,11 +609,11 @@ get_stats_piqp_fan(
     std::cout << result.info.run_time << std::endl;
     return stats;
 }
-cyqlone::FanOCPStorage::Solution
+fancyqlone::FanOCPStorage::Solution
 get_solution_piqp_fan(
     const PIQPFanSolverData &solver_data)
 {
-    cyqlone::FanOCPStorage::Solution fan_solution;
+    fancyqlone::FanOCPStorage::Solution fan_solution;
 
     const auto &data =
         *solver_data.qp_data;
@@ -759,10 +759,10 @@ get_solution_piqp_fan(
     return fan_solution;
 }
 void update_x0_piqp_fan(
-    cyqlone::FanOCPStorage &fan,
+    fancyqlone::FanOCPStorage &fan,
     PIQPFanSolverData &solver_data,
     const std::vector<
-        cyqlone::LinearOCPStorage::Solution> &solution,
+        fancyqlone::LinearOCPStorage::Solution> &solution,
     index_t selected_branch)
 {
     auto &data =

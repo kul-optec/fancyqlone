@@ -3,6 +3,6 @@
 #include <fancyqlone/config.hpp>
 #include <batmat/timing.hpp>
 
-namespace cyqlone {
+namespace fancyqlone {
 using DefaultTimings = batmat::DefaultTimings;
-} // namespace cyqlone
+} // namespace fancyqlone

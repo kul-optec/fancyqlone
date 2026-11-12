@@ -7,7 +7,7 @@
 #include <iostream>
 #include <span>
 
-namespace CYQLONE_NS(cyqlone::qpalm) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 template <class T, class U>
@@ -102,4 +102,4 @@ real_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::norm_squared(Context &ctx
     return ctx.reduce(sumsq);
 }
 
-} // namespace CYQLONE_NS(cyqlone::qpalm)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm)

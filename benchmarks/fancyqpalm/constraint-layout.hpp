@@ -34,7 +34,7 @@ inline int constraint_node(int branches, int branch, int stage) {
 /// duplicates remain general rows. No scaling or bound-intersection machinery.
 /// Disabling boxes retains every original row (also used by existing warm starts).
 inline StageConstraints analyze_constraints(
-    std::span<const cyqlone::LinearOCPStorage> sources, int stage,
+    std::span<const fancyqlone::LinearOCPStorage> sources, int stage,
     bool boxes = true, bool state_boxes = true) {
     const int nx = static_cast<int>(sources.front().dim.nx);
     const int nu = stage < sources.front().dim.N_horiz

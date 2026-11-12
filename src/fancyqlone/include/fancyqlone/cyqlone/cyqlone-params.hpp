@@ -4,7 +4,7 @@
 #include <limits>
 #include <stdexcept>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 /// Defines how to solve the small linear system that remains after cyclic reduction.
 /// @ingroup topic-block-tridiag-solvers
@@ -29,7 +29,7 @@ inline const char *enum_name(SolveMethod s) {
         case SolveMethod::None: return "None";
         default:;
     }
-    throw std::out_of_range("invalid value for cyqlone::SolveMethod");
+    throw std::out_of_range("invalid value for fancyqlone::SolveMethod");
 }
 
 /// Parameters and settings for the Tricyqle block-tridiagonal solver.
@@ -85,4 +85,4 @@ struct CyqloneParams {
     bool eliminate_u0_first = true;
 };
 
-} // namespace cyqlone
+} // namespace fancyqlone

@@ -31,7 +31,7 @@
 #include <tuple>
 #include <utility>
 
-namespace CYQLONE_NS(cyqlone::qpalm) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 namespace datapar = batmat::datapar;
 
@@ -671,7 +671,7 @@ void update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder, LinearSolver> &back
     update_cyqpalm_backend(backend, cocp);
 }
 
-} // namespace CYQLONE_NS(cyqlone::qpalm)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm)
 
 #include <fancyqlone/fancyqpalm/backends/backend-fancyqlone/ineq-constr.tpp>
 #include <fancyqlone/fancyqpalm/backends/backend-fancyqlone/linalg.tpp>

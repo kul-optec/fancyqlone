@@ -3,7 +3,7 @@
 #include <fancyqlone/config.hpp>
 #include <vector>
 
-namespace cyqlone::qpalm {
+namespace fancyqlone::qpalm {
 
 /// @ingroup topic-optimization-solvers
 struct DetailedStats {
@@ -24,4 +24,4 @@ struct DetailedStats {
     std::vector<Entry> entries;
 };
 
-} // namespace cyqlone::qpalm
+} // namespace fancyqlone::qpalm

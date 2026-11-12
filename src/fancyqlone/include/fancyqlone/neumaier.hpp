@@ -9,7 +9,7 @@
 #include <cmath>
 #include <type_traits>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 /// Kahan-Babuška-Neumaier compensated summation.
 /// @ingroup topic-utilities
@@ -85,4 +85,4 @@ class NeumaierSum {
     }
 };
 
-} // namespace cyqlone
+} // namespace fancyqlone

@@ -14,7 +14,7 @@
 #include <format>
 #include <random>
 
-using cyqlone::index_t;
+using fancyqlone::index_t;
 
 namespace {
 
@@ -79,15 +79,15 @@ T compute_residual_norm(const TridiagSystem<T> &sys, const typename TridiagSyste
             guanaqo::blas::xgemv_N<real_t>(1, sys.K(i_prev), x(i_prev), 1, r(i));
         if (i < num_blocks - 1 || circular)
             guanaqo::blas::xgemv_T<real_t>(1, sys.K(i), x(i_next), 1, r(i));
-        norm_sq_r += cyqlone::linalg::norm_2_squared(r(i));
-        norm_sq_b += cyqlone::linalg::norm_2_squared(sys.b(i));
+        norm_sq_r += fancyqlone::linalg::norm_2_squared(r(i));
+        norm_sq_b += fancyqlone::linalg::norm_2_squared(sys.b(i));
     }
     return sqrt(norm_sq_r / norm_sq_b);
 }
 
 template <class Solver>
 [[gnu::noinline]] void test_tricyqle(index_t block_size, index_t num_threads, bool circular,
-                                     cyqlone::SolveMethod method) {
+                                     fancyqlone::SolveMethod method) {
     using real_t   = typename Solver::value_type;
     using matrices = batmat::matrix::Matrix<real_t, index_t>;
 
@@ -95,7 +95,7 @@ template <class Solver>
     const index_t p          = num_threads;
     const index_t num_blocks = v * p;
 
-    if (v == 1 && circular && method == cyqlone::SolveMethod::PCR) // TODO
+    if (v == 1 && circular && method == fancyqlone::SolveMethod::PCR) // TODO
         GTEST_SKIP() << "PCR does not yet support circular systems in the scalar case (v=1).";
 
     // Generate random block tridiagonal system
@@ -113,8 +113,8 @@ template <class Solver>
     // Solve the system
     auto pctx = solver.create_parallel_context();
     pctx->run([&](typename Solver::Context &ctx) {
-        using cyqlone::linalg::pack;
-        using cyqlone::linalg::unpack;
+        using fancyqlone::linalg::pack;
+        using fancyqlone::linalg::unpack;
 
         auto pack_M = [&](index_t i, auto Ms) { return pack(sys.M.middle_batches(i, v, p), Ms); };
         auto pack_K = [&](index_t i, auto Ks) { return pack(sys.K.middle_batches(i, v, p), Ks); };
@@ -141,23 +141,23 @@ template <class Solver>
 } // namespace
 
 // Test configuration
-template <class T, index_t VL, cyqlone::StorageOrder O, index_t BS, index_t P, bool Circ,
-          cyqlone::SolveMethod Method>
+template <class T, index_t VL, fancyqlone::StorageOrder O, index_t BS, index_t P, bool Circ,
+          fancyqlone::SolveMethod Method>
 struct TestConfig {
     using real_t                                       = T;
     static constexpr index_t v                         = VL;
-    static constexpr cyqlone::StorageOrder order       = O;
+    static constexpr fancyqlone::StorageOrder order       = O;
     static constexpr index_t block_size                = BS;
     static constexpr index_t num_threads               = P;
     static constexpr bool circular                     = Circ;
-    static constexpr cyqlone::SolveMethod solve_method = Method;
+    static constexpr fancyqlone::SolveMethod solve_method = Method;
 };
 
 // Parametrized test fixture
 template <class Config>
 class TricyqleTest : public ::testing::Test {
   protected:
-    using Solver = cyqlone::TricyqleSolver<Config::v, typename Config::real_t, Config::order>;
+    using Solver = fancyqlone::TricyqleSolver<Config::v, typename Config::real_t, Config::order>;
 };
 
 // Generate test type combinations using X-macro expansion
@@ -173,8 +173,8 @@ struct StripFirstType<::testing::Types<First, Rest...>> {
 
 // Define parameter ranges for each dimension
 #define TRICYQLE_TEST_STORAGE_ORDERS(X, ...)                                                       \
-    X(cyqlone::StorageOrder::RowMajor __VA_OPT__(, ) __VA_ARGS__)                                  \
-    X(cyqlone::StorageOrder::ColMajor __VA_OPT__(, ) __VA_ARGS__)
+    X(fancyqlone::StorageOrder::RowMajor __VA_OPT__(, ) __VA_ARGS__)                               \
+    X(fancyqlone::StorageOrder::ColMajor __VA_OPT__(, ) __VA_ARGS__)
 #define TRICYQLE_TEST_BLOCK_SIZES(X, ...)                                                          \
     X(1 __VA_OPT__(, ) __VA_ARGS__)                                                                \
     X(5 __VA_OPT__(, ) __VA_ARGS__)                                                                \
@@ -188,8 +188,8 @@ struct StripFirstType<::testing::Types<First, Rest...>> {
     X(false __VA_OPT__(, ) __VA_ARGS__)                                                            \
     X(true __VA_OPT__(, ) __VA_ARGS__)
 #define TRICYQLE_TEST_SOLVE_METHODS(X, ...)                                                        \
-    X(cyqlone::SolveMethod::PCR __VA_OPT__(, ) __VA_ARGS__)                                        \
-    X(cyqlone::SolveMethod::StairPCG __VA_OPT__(, ) __VA_ARGS__)
+    X(fancyqlone::SolveMethod::PCR __VA_OPT__(, ) __VA_ARGS__)                                     \
+    X(fancyqlone::SolveMethod::StairPCG __VA_OPT__(, ) __VA_ARGS__)
 
 // Nested macro expansion to generate cartesian product
 // Each level expands the next dimension, building up the parameter list
@@ -206,8 +206,8 @@ struct StripFirstType<::testing::Types<First, Rest...>> {
 #define TRICYQLE_TEST_WITH_DTYPE_VL(T, V)                                                          \
     TRICYQLE_TEST_STORAGE_ORDERS(TRICYQLE_TEST_WITH_ORDER, T, V)
 
-const char *enum_name(cyqlone::StorageOrder o) {
-    return o == cyqlone::StorageOrder::ColMajor ? "ColMajor" : "RowMajor";
+const char *enum_name(fancyqlone::StorageOrder o) {
+    return o == fancyqlone::StorageOrder::ColMajor ? "ColMajor" : "RowMajor";
 }
 
 } // namespace

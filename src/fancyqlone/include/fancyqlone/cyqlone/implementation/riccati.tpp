@@ -9,7 +9,7 @@
 #include <batmat/linalg/shift.hpp>
 #include <batmat/linalg/trsm.hpp>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using namespace linalg;
 using namespace batmat::linalg;
@@ -256,4 +256,4 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::solve_riccati_reverse_impl(
     }
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

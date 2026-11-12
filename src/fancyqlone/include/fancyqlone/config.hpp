@@ -3,14 +3,14 @@
 #include <batmat/config.hpp>
 
 #if defined(__AVX512F__)
-#define CYQLONE_NS(ns) ns::inline avx512
+#define FANCYQLONE_NS(ns) ns::inline avx512
 #elif defined(__AVX2__)
-#define CYQLONE_NS(ns) ns::inline avx2
+#define FANCYQLONE_NS(ns) ns::inline avx2
 #else
-#define CYQLONE_NS(ns) ns
+#define FANCYQLONE_NS(ns) ns
 #endif
 
-namespace cyqlone {
+namespace fancyqlone {
 using batmat::index_t;
 using batmat::real_t;
-} // namespace cyqlone
+} // namespace fancyqlone

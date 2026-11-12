@@ -13,7 +13,7 @@
 #include <utility>
 #include <vector>
 
-namespace CYQLONE_NS(cyqlone::qpalm) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 template <class T, size_t N>
@@ -344,4 +344,4 @@ BreakpointsResult CyQPALMBackend<VL, DefaultOrder, LinearSolver>::compute_partit
     else
        BATMAT_ASSERT(false);
 }
-} // namespace CYQLONE_NS(cyqlone::qpalm)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm)

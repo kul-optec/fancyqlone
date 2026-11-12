@@ -9,7 +9,7 @@
 #include <stdfloat>
 #endif
 
-namespace CYQLONE_NS(cyqlone::qpalm) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 /// @todo   store t and δ|δ| instead of t and δ.
 struct Breakpoint {
@@ -184,4 +184,4 @@ struct get_breakpoints_fn {
     }
 } inline constexpr get_breakpoints;
 
-} // namespace CYQLONE_NS(cyqlone::qpalm)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm)

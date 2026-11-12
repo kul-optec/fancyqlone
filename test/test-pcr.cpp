@@ -15,10 +15,10 @@
 #include <iostream>
 #include <random>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 using namespace batmat::linalg;
-using namespace cyqlone::linalg;
+using namespace fancyqlone::linalg;
 
 [[nodiscard]] constexpr index_t get_depth(index_t n) {
     return static_cast<index_t>(std::bit_width(static_cast<std::make_unsigned_t<index_t>>(n) - 1));
@@ -132,12 +132,12 @@ auto unpacked(const M &matrix) {
     return res;
 }
 
-} // namespace cyqlone
+} // namespace fancyqlone
 
 int main() {
     using std::abs;
     using std::sqrt;
-    using namespace cyqlone;
+    using namespace fancyqlone;
     using T             = batmat::real_t;
     constexpr index_t N = batmat::types::vl_or_largest<T, 8>; // number of blocks == vector length
     static_assert(N > 1, "No suitable vector length available");
@@ -169,10 +169,10 @@ int main() {
 
     // Residual M x - b
     Solver::matrix<> r{{.rows = n, .cols = 1}};
-    cyqlone::linalg::negate(b, r);
+    fancyqlone::linalg::negate(b, r);
     symv_add(tril(M), x, r);
     syomv(tril(K), x, r);
-    auto res_norm = cyqlone::linalg::norms_all(r);
+    auto res_norm = fancyqlone::linalg::norms_all(r);
     std::cout << "\nResidual norms: ℓ₂ = " << guanaqo::float_to_str(res_norm.norm_2())
               << ",\tmax = " << guanaqo::float_to_str(res_norm.norm_inf()) << "\n";
     constexpr auto ε = std::numeric_limits<T>::epsilon();
@@ -180,20 +180,20 @@ int main() {
     auto [normM, it] = λ_max_power(M, K, max_it, ε);
     std::cout << "Spectral norm M: " << guanaqo::float_to_str(normM) << " ("
               << (it <= max_it ? "" : "approx., ") << it << " iter.)\n";
-    using cyqlone::linalg::norm_2;
+    using fancyqlone::linalg::norm_2;
     const auto η = res_norm.norm_2() / (normM * norm_2(x) + norm_2(b));
     std::cout << "Backward error: " << guanaqo::float_to_str(η) << "\n\n";
 
 #if CYQLONE_WITH_MATIO
     // Export the original system and the solution as a .mat file
     std::filesystem::path filename = "test-pcr.mat";
-    auto matfile                   = cyqlone::create_mat(filename);
-    cyqlone::add_to_mat(matfile.get(), "A", unpacked(A));
-    cyqlone::add_to_mat(matfile.get(), "B", unpacked(B));
-    cyqlone::add_to_mat(matfile.get(), "M", unpacked(M));
-    cyqlone::add_to_mat(matfile.get(), "K", unpacked(K));
-    cyqlone::add_to_mat(matfile.get(), "b", unpacked(b));
-    cyqlone::add_to_mat(matfile.get(), "x", unpacked(x));
+    auto matfile                   = fancyqlone::create_mat(filename);
+    fancyqlone::add_to_mat(matfile.get(), "A", unpacked(A));
+    fancyqlone::add_to_mat(matfile.get(), "B", unpacked(B));
+    fancyqlone::add_to_mat(matfile.get(), "M", unpacked(M));
+    fancyqlone::add_to_mat(matfile.get(), "K", unpacked(K));
+    fancyqlone::add_to_mat(matfile.get(), "b", unpacked(b));
+    fancyqlone::add_to_mat(matfile.get(), "x", unpacked(x));
     std::cout << "Saved system and solution to " << filename << "\n";
 #endif
 

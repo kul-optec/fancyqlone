@@ -16,7 +16,7 @@
 #include <span>
 #include <vector>
 
-namespace cyqlone::qpalm {
+namespace fancyqlone::qpalm {
 
 /// @addtogroup topic-optimization-solvers-ocp
 /// @{
@@ -50,7 +50,7 @@ struct CyQPALMBackendSettings {
     /// Fan backends do not support updates and use an effective value of zero.
     index_t max_update_count      = 5;
     bool detailed_timings         = false;
-    cyqlone::TricyqleParams<real_t> tricyqle_params{};
+    fancyqlone::TricyqleParams<real_t> tricyqle_params{};
     uint32_t spin_count           = std::numeric_limits<uint32_t>::max();
     WarmStartingStrategy strategy = WarmStartingStrategy::Copy;
 };
@@ -63,22 +63,22 @@ struct CyQPALMBackendStats {
 
 /// @}
 
-} // namespace cyqlone::qpalm
+} // namespace fancyqlone::qpalm
 
-namespace CYQLONE_NS(cyqlone::qpalm) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 using guanaqo::StorageOrder;
 
-template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
+template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
 struct CyQPALMBackend;
 
 template <class LinearSolver>
 struct CycloneBackendTraits;
 // Traits for the CyqloneSolver
 template <index_t VL, StorageOrder DefaultOrder>
-struct CycloneBackendTraits<cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>> {
+struct CycloneBackendTraits<fancyqlone::CyqloneSolver<VL, real_t, DefaultOrder>> {
     static constexpr bool supports_factorization_updates = true;
-    using OCP_t    = cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>;
+    using OCP_t    = fancyqlone::CyqloneSolver<VL, real_t, DefaultOrder>;
     using simd     = typename OCP_t::simd;
     using CStorage = CyqloneStorage<>;
     using OCPStorage = LinearOCPStorage;
@@ -103,9 +103,9 @@ struct CycloneBackendTraits<cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>> {
 };
 // Traits for FanCyqloneSolver
 template <index_t VL, StorageOrder DefaultOrder>
-struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>> {
+struct CycloneBackendTraits<fancyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>> {
     static constexpr bool supports_factorization_updates = false;
-    using OCP_t    = cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>;
+    using OCP_t    = fancyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>;
     using simd     = typename OCP_t::simd;
     using CStorage = FanCyqloneStorage<>;
     using OCPStorage = FanOCPStorage;
@@ -151,9 +151,9 @@ struct CycloneBackendTraits<cyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>>
 };
 // Traits for SerialFanCyqloneSolver
 template <index_t VL, StorageOrder DefaultOrder>
-struct CycloneBackendTraits<cyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultOrder>> {
+struct CycloneBackendTraits<fancyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultOrder>> {
     static constexpr bool supports_factorization_updates = false;
-    using OCP_t    = cyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultOrder>;
+    using OCP_t    = fancyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultOrder>;
     using simd     = typename OCP_t::simd;
     using CStorage = FanCyqloneStorage<>;
     using OCPStorage = FanOCPStorage;
@@ -210,7 +210,7 @@ struct backend_stats_type<CyQPALMBackend<VL, DefaultOrder, LinearSolver>> {
 /// @addtogroup topic-optimization-solvers-ocp
 /// @{
 
-template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
+template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
 struct unique_CyQPALMBackend : std::unique_ptr<CyQPALMBackend<VL, DefaultOrder, LinearSolver>> {
     unique_CyQPALMBackend()                                             = default;
     unique_CyQPALMBackend(unique_CyQPALMBackend &&) noexcept            = default;
@@ -220,16 +220,16 @@ struct unique_CyQPALMBackend : std::unique_ptr<CyQPALMBackend<VL, DefaultOrder, 
         : std::unique_ptr<CyQPALMBackend<VL, DefaultOrder, LinearSolver>>{std::move(o)} {}
 };
 
-template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
+template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
 unique_CyQPALMBackend<VL, DefaultOrder, LinearSolver>
 make_cyqpalm_backend(const typename CycloneBackendTraits<LinearSolver>::CStorage &ocp, CyqloneData data,
                      const CyQPALMBackendSettings &settings);
 
-template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
+template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
 void update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder, LinearSolver> &backend,
                             const typename CycloneBackendTraits<LinearSolver>::CStorage &ocp);
 
-template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = cyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
+template <index_t VL, StorageOrder DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
 void update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder, LinearSolver> &backend, const typename CycloneBackendTraits<LinearSolver>::OCPStorage &ocp);
 
 /// @}
@@ -239,4 +239,4 @@ struct detail::backend_type<unique_CyQPALMBackend<VL, DefaultOrder, LinearSolver
     using type = CyQPALMBackend<VL, DefaultOrder, LinearSolver>;
 };
 
-} // namespace CYQLONE_NS(cyqlone::qpalm)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm)

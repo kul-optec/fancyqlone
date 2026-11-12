@@ -15,7 +15,7 @@
 // from <matio.h>
 struct _mat_t; // NOLINT(*-reserved-identifier)
 
-namespace cyqlone {
+namespace fancyqlone {
 
 /// @addtogroup topic-util-matio
 /// @{
@@ -121,4 +121,4 @@ void ocp_dump_mat(const std::filesystem::path &filename, const LinearOCPStorage 
 
 /// @}
 
-} // namespace cyqlone
+} // namespace fancyqlone

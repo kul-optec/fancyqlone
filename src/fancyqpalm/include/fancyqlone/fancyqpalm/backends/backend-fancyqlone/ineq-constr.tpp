@@ -5,7 +5,7 @@
 #include <batmat/simd.hpp>
 #include <iostream>
 
-namespace CYQLONE_NS(cyqlone::qpalm) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 template <index_t VL, StorageOrder DefaultOrder, class LinearSolver>
 index_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::update_penalty_y(
@@ -168,4 +168,4 @@ index_t CyQPALMBackend<VL, DefaultOrder, LinearSolver>::calc_ŷ_Aᵀŷ(
     return ctx.reduce(count_J);
 }
 
-} // namespace CYQLONE_NS(cyqlone::qpalm)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm)

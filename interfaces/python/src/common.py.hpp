@@ -7,8 +7,8 @@
 #include <batmat/assume.hpp>
 #include <batmat/matrix/matrix.hpp>
 
-using cyqlone::index_t;
-using cyqlone::real_t;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 
 #include <nanobind/nanobind.h>
 #include <nanobind/ndarray.h>
@@ -31,7 +31,7 @@ using np_vector = nb::ndarray<T, nb::ndim<1>, nb::any_contig, nb::device::cpu>;
 template <index_t VL, class T = const real_t>
 using np_batched_view = nb::ndarray<T, nb::shape<VL, -1, -1, -1>, nb::device::cpu>;
 
-namespace cyqlone {
+namespace fancyqlone {
 
 struct PythonOCP {
     LinearOCPStorage ocp;
@@ -102,12 +102,12 @@ struct PythonOCP {
     }
 
     void dump_mat(const std::filesystem::path &filename) const {
-        auto matfp = cyqlone::create_mat(filename);
+        auto matfp = fancyqlone::create_mat(filename);
         add_to_mat(matfp.get(), "ocp", ocp);
     }
 
     void load_mat(const std::filesystem::path &filename) {
-        auto matfp = cyqlone::open_mat(filename);
+        auto matfp = fancyqlone::open_mat(filename);
         read_from_mat(matfp.get(), "ocp", ocp);
     }
 };
@@ -244,15 +244,15 @@ auto as_span(const np_vector<T> &array) {
     return std::span{array.data(), array.size()};
 }
 
-} // namespace cyqlone
+} // namespace fancyqlone
 
 NAMESPACE_BEGIN(NB_NAMESPACE)
 NAMESPACE_BEGIN(detail)
 
 template <>
-struct type_caster<cyqlone::SparseMatrix> {
+struct type_caster<fancyqlone::SparseMatrix> {
   public:
-    using SparseMatrix = cyqlone::SparseMatrix;
+    using SparseMatrix = fancyqlone::SparseMatrix;
     NB_TYPE_CASTER(SparseMatrix, const_name("scipy.sparse.coo_array"));
 
     bool from_python(handle, uint8_t, cleanup_list *) noexcept { return false; }
@@ -267,9 +267,9 @@ struct type_caster<cyqlone::SparseMatrix> {
     template <class T>
     static handle from_cpp(T &&src, rv_policy, cleanup_list *) {
         object coo_array = module_::import_("scipy.sparse").attr("coo_array");
-        return coo_array(make_tuple(cyqlone::np_copy(std::forward<T>(src).values),
-                                    make_tuple(cyqlone::np_copy(std::forward<T>(src).row_indices),
-                                               cyqlone::np_copy(std::forward<T>(src).col_indices))),
+        return coo_array(make_tuple(fancyqlone::np_copy(std::forward<T>(src).values),
+                                    make_tuple(fancyqlone::np_copy(std::forward<T>(src).row_indices),
+                                               fancyqlone::np_copy(std::forward<T>(src).col_indices))),
                          "shape"_a = make_tuple(src.sparsity.rows, src.sparsity.cols))
             .release();
     }

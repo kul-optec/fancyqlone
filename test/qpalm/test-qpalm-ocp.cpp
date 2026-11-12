@@ -18,9 +18,9 @@
 #include <fancyqlone/matio.hpp>
 #endif
 
-using cyqlone::index_t;
-using cyqlone::real_t;
-namespace qp = cyqlone::qpalm;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
+namespace qp = fancyqlone::qpalm;
 
 #if GUANAQO_WITH_TRACING
 static void init_trace() {
@@ -48,7 +48,7 @@ index_t cyq_get_num_proc();
 TEST(QPALM, cyqlone) {
     auto ocp =
         qp::problems::platooning({.N_horiz = 128, .masses{100, 150, 130, 70, 180, 170, 169, 130}});
-    auto cocp          = cyqlone::CyqloneStorage<>::build(ocp.ocp);
+    auto cocp          = fancyqlone::CyqloneStorage<>::build(ocp.ocp);
     const bool verbose = true;
     auto &&backend     = qp::make_cyqpalm_backend<4>(cocp, {},
                                                      {.processors      = cyq_get_num_proc(),
@@ -92,7 +92,7 @@ TEST(QPALM, cyqlone) {
     guanaqo::print_csv(solution, std::span{y});
 
 #if CYQLONE_WITH_MATIO
-    cyqlone::ocp_dump_mat("cyqlone-platooning.mat", ocp.ocp);
+    fancyqlone::ocp_dump_mat("cyqlone-platooning.mat", ocp.ocp);
 #endif
 
     auto err = cocp.compute_kkt_error(ocp.ocp, x, y, λ);
@@ -105,7 +105,7 @@ TEST(QPALM, cyqlone) {
 
 TEST(QPALM, cyqloneSpringsMasses) try {
     auto ocp  = qp::problems::load_from_csv("test/data/springs-masses", "masses=20-horiz=120");
-    auto cocp = cyqlone::CyqloneStorage<>::build(ocp);
+    auto cocp = fancyqlone::CyqloneStorage<>::build(ocp);
     const bool verbose = false;
     auto &&backend     = qp::make_cyqpalm_backend<4>(cocp, {},
                                                      {.processors      = cyq_get_num_proc(),
@@ -142,7 +142,7 @@ TEST(QPALM, cyqloneSpringsMasses) try {
     guanaqo::print_csv(solution, std::span{y});
 
 #if CYQLONE_WITH_MATIO
-    cyqlone::ocp_dump_mat("cyqlone-spring-masses.mat", ocp);
+    fancyqlone::ocp_dump_mat("cyqlone-spring-masses.mat", ocp);
 #endif
 } catch (guanaqo::io::csv_read_error &e) {
     GTEST_SKIP() << e.what();
@@ -175,13 +175,13 @@ TEST(QPALM, ocpBackend) {
     // auto ocp = qp::problems::platooning({.Ts = 0.3 * 8, .N_horiz = 64});
     auto ocp       = qp::problems::platooning({.Ts = 0.3 * 32, .N_horiz = 16});
     auto q_grad    = qp::reference_to_gradient(ocp.ocp, ocp.ref);
-    auto cocp      = cyqlone::CyqloneStorage<>::build(ocp.ocp, q_grad, ocp.rhs_eq, ocp.rhs_ineq_lb,
+    auto cocp      = fancyqlone::CyqloneStorage<>::build(ocp.ocp, q_grad, ocp.rhs_eq, ocp.rhs_ineq_lb,
                                                       ocp.rhs_ineq_ub);
     auto &&backend = qp::make_cyqpalm_backend<4>(
         cocp, {}, {.processors = 4, .print_residuals = true, .pcg_print_resid = true});
 
     // Build quadratic program
-    auto qp = cyqlone::LinearOCPSparseQP::build(ocp.ocp);
+    auto qp = fancyqlone::LinearOCPSparseQP::build(ocp.ocp);
     // Convert to dense matrices to compare with Eigen
     sp::SparsityConverter<sp::Sparsity, sp::Dense> conv_Q{qp.Q_sparsity};
     auto qp_Q_values = conv_Q.convert_values_copy(std::span{qp.Q_values});

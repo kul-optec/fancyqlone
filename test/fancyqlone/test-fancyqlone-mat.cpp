@@ -29,29 +29,29 @@
 #include <iostream>
 #include <limits>
 
-using cyqlone::index_t;
-using cyqlone::real_t;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 
 index_t cyq_get_num_proc();
 
 // Tests the factorization, factorization updates, and solution of the Cyqlone linear solver.
 TEST(CyqloneFanFactorTestMat, factor) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
     using batmat::matrix::uninitialized;
-    namespace la = cyqlone::linalg;
+    namespace la = fancyqlone::linalg;
     using la::tril;
 
     const index_t p  = cyq_get_num_proc();
     using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
-    using SolverLast = cyqlone::TridiagonalSolver<real_t>;
+    using SolverLast = fancyqlone::TridiagonalSolver<real_t>;
 
     const int N = 32;
 
     auto filename = std::format("python/cmpc/ocp_data{}_0.mat", N);
 
-    cyqlone::LinearOCPStorage ocp_fan;
-    auto matfp = cyqlone::open_mat(filename);
-    cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
+    fancyqlone::LinearOCPStorage ocp_fan;
+    auto matfp = fancyqlone::open_mat(filename);
+    fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
 
     auto dim = ocp_fan.dim;
 
@@ -78,7 +78,7 @@ TEST(CyqloneFanFactorTestMat, factor) {
     SolverLast::matrix rs{{.depth = fanout, .rows = nu, .cols = 1}, uninitialized};
 
     // Synchronization between the fanout branches
-    cyqlone::TreeBarrier<> fan_barrier(static_cast<uint32_t>(fanout), {});
+    fancyqlone::TreeBarrier<> fan_barrier(static_cast<uint32_t>(fanout), {});
     fan_barrier.spin_count = std::numeric_limits<uint32_t>::max();
 
     // Initial state, same for each branch
@@ -93,14 +93,14 @@ TEST(CyqloneFanFactorTestMat, factor) {
     auto solve_fan = [&](index_t i, index_t) {
         auto filename = std::format("python/cmpc/ocp_data{}_{}.mat", N, i);
 
-        cyqlone::LinearOCPStorage ocp_fan;
-        auto matfp = cyqlone::open_mat(filename);
-        cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
+        fancyqlone::LinearOCPStorage ocp_fan;
+        auto matfp = fancyqlone::open_mat(filename);
+        fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
 
         auto &ocp = ocps[i] = ocp_fan;
         ocp.b(0)            = x0; // same initial state for each branch
 
-        auto cocp = cyqlone::CyqloneStorage<>::build(ocp);
+        auto cocp = fancyqlone::CyqloneStorage<>::build(ocp);
 
         // Store B(0)ᵀ for each branch; R(0) and -r(0) for the first branch
         la::copy(cocp.data_F(0).left_cols(nu).transposed(), Bs(i));
@@ -119,7 +119,7 @@ TEST(CyqloneFanFactorTestMat, factor) {
         auto solver = Solver::build(cocp, p_fan);
 
         auto tricyqle_params                      = solver.get_tricyqle_params();
-        tricyqle_params.solve_method              = cyqlone::SolveMethod::None;
+        tricyqle_params.solve_method              = fancyqlone::SolveMethod::None;
         tricyqle_params.cr_max_update_fraction_Y0 = 9999;
         tricyqle_params.pcr_max_update_fraction   = 9999;
         solver.update_tricyqle_params(tricyqle_params);
@@ -272,14 +272,14 @@ TEST(CyqloneFanFactorTestMat, factor) {
     // Solve the combined problem with a single Cyqlone solve, as a reference solution
     filename = std::format("python/cmpc/ocp_data{}_combined.mat", N);
 
-    cyqlone::LinearOCPStorage combined_ocp;
-    matfp = cyqlone::open_mat(filename);
-    cyqlone::read_from_mat(matfp.get(), "ocp", combined_ocp);
+    fancyqlone::LinearOCPStorage combined_ocp;
+    matfp = fancyqlone::open_mat(filename);
+    fancyqlone::read_from_mat(matfp.get(), "ocp", combined_ocp);
 
-    auto combined_cocp                    = cyqlone::CyqloneStorage<>::build(combined_ocp);
+    auto combined_cocp                    = fancyqlone::CyqloneStorage<>::build(combined_ocp);
     auto combined_solver                  = Solver::build(combined_cocp, p);
     auto combined_tricyqle_params         = combined_solver.get_tricyqle_params();
-    combined_tricyqle_params.solve_method = cyqlone::SolveMethod::PCR;
+    combined_tricyqle_params.solve_method = fancyqlone::SolveMethod::PCR;
     combined_tricyqle_params.cr_max_update_fraction_Y0 = 9999;
     combined_tricyqle_params.pcr_max_update_fraction   = 9999;
     combined_solver.update_tricyqle_params(combined_tricyqle_params);

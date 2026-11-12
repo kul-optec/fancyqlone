@@ -19,7 +19,7 @@
 #include <stdexcept>
 #include <utility>
 
-namespace CYQLONE_NS(cyqlone::qpalm::problems) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm::problems) {
 namespace {
 
 constexpr index_t nx = 12;
@@ -245,4 +245,4 @@ FanCentroidalQuadrupedProblem fan_centroidal_quadruped(CentroidalQuadrupedParams
     };
 }
 
-} // namespace CYQLONE_NS(cyqlone::qpalm::problems)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm::problems)

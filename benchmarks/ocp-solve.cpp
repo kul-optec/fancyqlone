@@ -83,7 +83,7 @@ auto generate_ocp(benchmark::State &state) {
 template <int VL>
 auto build_cyqlone_solver(const OCPDataRiccati &ocp_ric, index_t p) {
     using namespace ::batmat::linalg;
-    using namespace ::cyqlone;
+    using namespace ::fancyqlone;
     LinearOCPStorage ocp{.dim{.N_horiz = ocp_ric.N,
                               .nx      = ocp_ric.nx,
                               .nu      = ocp_ric.nu,
@@ -218,8 +218,8 @@ void bm_factor_cyqlone(benchmark::State &state) {
 
 void bm_factor_riccati_blasfeo(benchmark::State &state) {
     auto [ocp, Σ]    = generate_ocp(state);
-    auto ocp_blasfeo = cyqlone::blasfeo::OCPDataRiccati::from_riccati(ocp);
-    cyqlone::blasfeo::RiccatiFactor fac{.ocp = ocp_blasfeo};
+    auto ocp_blasfeo = fancyqlone::blasfeo::OCPDataRiccati::from_riccati(ocp);
+    fancyqlone::blasfeo::RiccatiFactor fac{.ocp = ocp_blasfeo};
     for (auto _ : state)
         factor(fac, Σ);
     auto params = std::format("nx={}-nu={}-ny={}-N={}-thr={}", ocp.nx, ocp.nu, ocp.ny, ocp.N, 1);

@@ -4,7 +4,7 @@
 #include <fancyqlone/ocp.hpp>
 #include <random>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 /// Generates a random linear OCP with the given dimensions and random seed.
 /// @ingroup topic-ocp-formulations
@@ -182,4 +182,4 @@ inline LinearOCPStorage generate_random_ocp_input_constr(OCPDim dim, uint_fast32
     return ocp;
 }
 
-} // namespace cyqlone
+} // namespace fancyqlone

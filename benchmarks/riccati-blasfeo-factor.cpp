@@ -1,7 +1,7 @@
 #include "riccati-blasfeo.hpp"
 #include <guanaqo/trace.hpp>
 
-namespace CYQLONE_NS(cyqlone::blasfeo) {
+namespace FANCYQLONE_NS(fancyqlone::blasfeo) {
 
 void blasfeo_xcolsc(int kmax, double alpha, blasfeo_dmat *sA, int ai, int aj) {
     ::blasfeo_dcolsc(kmax, alpha, sA, ai, aj);
@@ -89,4 +89,4 @@ void factor(RiccatiFactor &factor, Eigen::Ref<const Eigen::MatrixX<real_t>> Σ) 
     }
 }
 
-} // namespace cyqlone::blasfeo
+} // namespace fancyqlone::blasfeo

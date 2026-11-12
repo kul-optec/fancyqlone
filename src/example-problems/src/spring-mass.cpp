@@ -12,7 +12,7 @@
 #include <random>
 #include <stdexcept>
 
-namespace CYQLONE_NS(cyqlone::qpalm::problems) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm::problems) {
 
 SpringMassProblem spring_mass(SpringMassParams p) {
     using guanaqo::as_view;
@@ -160,7 +160,7 @@ SpringMassProblem spring_mass(SpringMassParams p) {
     };
 }
 FanSpringMassProblem fan_spring_mass(SpringMassParams p, index_t num_branches, real_t k_spring_diff) {
-    std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
+    std::vector<fancyqlone::LinearOCPStorage> ocps(num_branches);
     std::vector<real_t> ref;
     p.k_spring -= k_spring_diff; // perturb spring constants for each branch
     for (index_t b = 0; b < num_branches; ++b) {

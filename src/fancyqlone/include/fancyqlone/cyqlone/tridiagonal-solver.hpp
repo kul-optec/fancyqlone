@@ -9,7 +9,7 @@
 #include <batmat/linalg/trsm.hpp>
 #include <iostream>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 namespace bla = batmat::linalg;
 using bla::StorageOrder;
@@ -83,4 +83,4 @@ struct TridiagonalSolver {
     }
 };
 
-} // namespace cyqlone
+} // namespace fancyqlone

@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <limits>
 
-namespace CYQLONE_NS(cyqlone::qpalm::problems) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm::problems) {
 
 PlatooningProblem platooning(PlatooningParams p) {
     using guanaqo::as_view;
@@ -100,4 +100,4 @@ PlatooningProblem platooning(PlatooningParams p) {
     };
 }
 
-} // namespace CYQLONE_NS(cyqlone::qpalm::problems)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm::problems)

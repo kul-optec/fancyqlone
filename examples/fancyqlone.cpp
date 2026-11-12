@@ -21,29 +21,29 @@
 #include <span>
 #include <string>
 #include <vector>
-using cyqlone::StorageOrder;
-using cyqlone::index_t;
-   using cyqlone::real_t;
+using fancyqlone::StorageOrder;
+using fancyqlone::index_t;
+   using fancyqlone::real_t;
 // Include whatever header contains these helpers:
 //   combine_branches_0
 //   compare_combined_normal, if you still want comparison
 // #include "test-helpers.hpp"
-cyqlone::LinearOCPStorage combine_branches_0(std::span<const cyqlone::LinearOCPStorage> ocps) {
+fancyqlone::LinearOCPStorage combine_branches_0(std::span<const fancyqlone::LinearOCPStorage> ocps) {
     BATMAT_ASSERT(!ocps.empty());
-    auto fld_max = [](index_t(cyqlone::OCPDim::*m)) {
+    auto fld_max = [](index_t(fancyqlone::OCPDim::*m)) {
         return [m](index_t acc, const auto &ocp) { return std::max(acc, ocp.dim.*m); };
     };
-    auto fld_sum = [](index_t(cyqlone::OCPDim::*m)) {
+    auto fld_sum = [](index_t(fancyqlone::OCPDim::*m)) {
         return [m](index_t acc, const auto &ocp) { return acc + ocp.dim.*m; };
     };
-    cyqlone::OCPDim dim{
-        .N_horiz = std::ranges::fold_left(ocps, index_t{0}, fld_max(&cyqlone::OCPDim::N_horiz)),
-        .nx      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::nx)),
-        .nu      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::nu)),
-        .ny      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::ny)),
-        .ny_N    = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&cyqlone::OCPDim::ny_N)),
+    fancyqlone::OCPDim dim{
+        .N_horiz = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::N_horiz)),
+        .nx      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::nx)),
+        .nu      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::nu)),
+        .ny      = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::ny)),
+        .ny_N    = std::ranges::fold_left(ocps, index_t{0}, fld_sum(&fancyqlone::OCPDim::ny_N)),
     }; // TODO: this is a bit redundant, since x(0) and u(0) need to have consistent dimensions
-    cyqlone::LinearOCPStorage combined_ocp(dim);
+    fancyqlone::LinearOCPStorage combined_ocp(dim);
 
     index_t nx_offset = 0, nu_offset = 0, ny_offset = 0, ny_N_offset = 0;
     { // Take cost of the first stage from the first OCP (there is only one x(0) and one u(0))
@@ -104,8 +104,8 @@ cyqlone::LinearOCPStorage combine_branches_0(std::span<const cyqlone::LinearOCPS
         ny_N_offset += ocp.dim.ny_N;
     }
 
-    const index_t nx_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&cyqlone::OCPDim::nx)),
-                  nu_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&cyqlone::OCPDim::nu));
+    const index_t nx_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nx)),
+                  nu_max = std::ranges::fold_left(ocps, index_t{0}, fld_max(&fancyqlone::OCPDim::nu));
     for (index_t i = nx_max; i < combined_ocp.dim.nx; ++i)
         combined_ocp.Q(0)(i, i) = 1; // regularize unused state variables in the cost
     for (index_t i = nu_max; i < combined_ocp.dim.nu; ++i)
@@ -117,14 +117,14 @@ cyqlone::LinearOCPStorage combine_branches_0(std::span<const cyqlone::LinearOCPS
     return combined_ocp;
 }
 struct BenchConfig {
-    cyqlone::index_t N            = 256;
-    cyqlone::index_t nx           = 18;
-    cyqlone::index_t nu           = 9;
-    cyqlone::index_t ny           = 5;
-    cyqlone::index_t ny_N         = 0;
-    cyqlone::index_t num_branches = 2;
-    cyqlone::index_t processors   = 8;
-    cyqlone::index_t warmup       = 50;
+    fancyqlone::index_t N            = 256;
+    fancyqlone::index_t nx           = 18;
+    fancyqlone::index_t nu           = 9;
+    fancyqlone::index_t ny           = 5;
+    fancyqlone::index_t ny_N         = 0;
+    fancyqlone::index_t num_branches = 2;
+    fancyqlone::index_t processors   = 8;
+    fancyqlone::index_t warmup       = 50;
     double tolerance              = 1e-7;
     std::uint32_t seed_base       = 1000;
     std::string out_file          = "fan_qpalm_timings.csv";
@@ -203,8 +203,8 @@ static void write_csv_header_if_needed(const std::filesystem::path &file) {
         << "fan_time_s,combined_time_s,speedup, speedup_serial\n";
 }
 
-static std::string status_to_string(cyqlone::qpalm::SolverStatus status) {
-    using cyqlone::qpalm::SolverStatus;
+static std::string status_to_string(fancyqlone::qpalm::SolverStatus status) {
+    using fancyqlone::qpalm::SolverStatus;
 
     switch (status) {
     case SolverStatus::Converged:
@@ -216,15 +216,15 @@ static std::string status_to_string(cyqlone::qpalm::SolverStatus status) {
     }
 }
 
-template <cyqlone::index_t VL>
+template <fancyqlone::index_t VL>
 static int run_benchmark(const BenchConfig &cfg) {
-    using cyqlone::index_t;
-    using cyqlone::real_t;
-    namespace qp = cyqlone::qpalm;
+    using fancyqlone::index_t;
+    using fancyqlone::real_t;
+    namespace qp = fancyqlone::qpalm;
 
     constexpr auto Order = StorageOrder::ColMajor;
 
-    cyqlone::OCPDim dim{
+    fancyqlone::OCPDim dim{
         .N_horiz = cfg.N,
         .nx      = cfg.nx,
         .nu      = cfg.nu,
@@ -232,10 +232,10 @@ static int run_benchmark(const BenchConfig &cfg) {
         .ny_N    = cfg.ny_N,
     };
 
-    std::vector<cyqlone::LinearOCPStorage> ocps(cfg.num_branches);
+    std::vector<fancyqlone::LinearOCPStorage> ocps(cfg.num_branches);
 
     for (index_t i = 0; i < cfg.num_branches; ++i) {
-        ocps[i] = cyqlone::generate_random_ocp_input_constr(
+        ocps[i] = fancyqlone::generate_random_ocp_input_constr(
             dim,
             static_cast<std::uint32_t>(1000 + i)
         );
@@ -252,14 +252,14 @@ static int run_benchmark(const BenchConfig &cfg) {
     // -------------------------------------------------------------------------
     // Fan solver
     // -------------------------------------------------------------------------
-    cyqlone::FanOCPStorage fan_ocp{
+    fancyqlone::FanOCPStorage fan_ocp{
         .ocps    = ocps,
     };
 
-    auto fan_cocp = cyqlone::FanCyqloneStorage<>::build(fan_ocp, dim.ny);
+    auto fan_cocp = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, dim.ny);
 
     auto &&fan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::FanCyqloneSolver<VL>>(
             fan_cocp,
             {},
             {
@@ -270,12 +270,12 @@ static int run_benchmark(const BenchConfig &cfg) {
                 .max_update_count       = 0,
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::None,
+                        .solve_method = fancyqlone::SolveMethod::None,
                     },
                 .spin_count = std::numeric_limits<std::uint32_t>::max(),
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, Order, cyqlone::FanCyqloneSolver<VL>> *> fan_qpalm{
+    qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::FanCyqloneSolver<VL>> *> fan_qpalm{
         fan_backend.get(),
         {
             .max_outer_iter       = 100,
@@ -294,7 +294,7 @@ static int run_benchmark(const BenchConfig &cfg) {
     auto x_fan = fan_qpalm.get_solution();
     auto lambda_fan = fan_qpalm.get_equality_multipliers();
     auto &&sfan_backend =
-        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::SerialFanCyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, fancyqlone::SerialFanCyqloneSolver<VL>>(
             fan_cocp,
             {},
             {
@@ -305,12 +305,12 @@ static int run_benchmark(const BenchConfig &cfg) {
                 .max_update_count       = 0,
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::None,
+                        .solve_method = fancyqlone::SolveMethod::None,
                     },
                 .spin_count = std::numeric_limits<std::uint32_t>::max(),
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, Order, cyqlone::SerialFanCyqloneSolver<VL>> *> sfan_qpalm{
+    qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::SerialFanCyqloneSolver<VL>> *> sfan_qpalm{
         sfan_backend.get(),
         {
             .max_outer_iter       = 100,
@@ -332,10 +332,10 @@ static int run_benchmark(const BenchConfig &cfg) {
     // Combined solver
     // -------------------------------------------------------------------------
     auto combined_ocp = combine_branches_0(ocps);
-    auto combined_cocp = cyqlone::CyqloneStorage<>::build(combined_ocp);
+    auto combined_cocp = fancyqlone::CyqloneStorage<>::build(combined_ocp);
 
     auto &&combined_backend =
-        qp::make_cyqpalm_backend<VL, Order, cyqlone::CyqloneSolver<VL>>(
+        qp::make_cyqpalm_backend<VL, Order, fancyqlone::CyqloneSolver<VL>>(
             combined_cocp,
             {},
             {
@@ -346,11 +346,11 @@ static int run_benchmark(const BenchConfig &cfg) {
                 .max_update_count       = 0,
                 .tricyqle_params =
                     {
-                        .solve_method = cyqlone::SolveMethod::PCR,
+                        .solve_method = fancyqlone::SolveMethod::PCR,
                     },
             });
 
-    qp::Solver<qp::CyQPALMBackend<VL, Order, cyqlone::CyqloneSolver<VL>> *> combined_qpalm{
+    qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::CyqloneSolver<VL>> *> combined_qpalm{
         combined_backend.get(),
         {
             .max_outer_iter       = 100,
@@ -473,6 +473,6 @@ int main(int argc, char **argv) {
 
     std::cout << "Writing benchmark result to: " << cfg.out_file << '\n';
 
-    constexpr cyqlone::index_t VL = 4;
+    constexpr fancyqlone::index_t VL = 4;
     return run_benchmark<VL>(cfg);
 }

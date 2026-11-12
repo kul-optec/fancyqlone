@@ -105,9 +105,9 @@ struct Options {
     bool serial                       = false;
 };
 
-namespace qp = cyqlone::qpalm;
-using cyqlone::index_t;
-using cyqlone::real_t;
+namespace qp = fancyqlone::qpalm;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 using qp::problems::SpringMassParams;
 using seconds = std::chrono::duration<double>;
 
@@ -169,7 +169,7 @@ void trace_run(auto &&fun, const auto &name) {
             csv << log << '\n';
     });
 #if CYQLONE_WITH_ZLIB
-    cyqlone::write_chrome_trace(out_file.replace_extension(".json.gz"), all_logs);
+    fancyqlone::write_chrome_trace(out_file.replace_extension(".json.gz"), all_logs);
 #endif
 #endif
 }
@@ -192,9 +192,9 @@ void run_benchmark(benchmark::State &state, [[maybe_unused]] const std::string &
         return state.SkipWithMessage("Number of processors must be at least 1.");
     auto problem = create_problem(params,num_branches);
     // Build a QPALM Cyqlone solver
-    auto ocp     = cyqlone::FanCyqloneStorage<>::build(problem.ocp);
-    auto backend = qp::make_cyqpalm_backend<VL, Order, cyqlone::FanCyqloneSolver<VL>>(ocp, {}, backend_settings);
-    qp::Solver<qp::CyQPALMBackend<VL, Order, cyqlone::FanCyqloneSolver<VL>> *> qpalm{backend.get(), settings};
+    auto ocp     = fancyqlone::FanCyqloneStorage<>::build(problem.ocp);
+    auto backend = qp::make_cyqpalm_backend<VL, Order, fancyqlone::FanCyqloneSolver<VL>>(ocp, {}, backend_settings);
+    qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::FanCyqloneSolver<VL>> *> qpalm{backend.get(), settings};
     // Main benchmark
     qp::SolverStatus status;
     double time_solve = 0, time_active_set_change = 0, time_line_search = 0,
@@ -249,9 +249,9 @@ void run_benchmark_serial(benchmark::State &state, [[maybe_unused]] const std::s
         return state.SkipWithMessage("Number of processors must be at least 1.");
     auto problem = create_problem(params,num_branches);
     // Build a QPALM Cyqlone solver
-    auto ocp     = cyqlone::FanCyqloneStorage<>::build(problem.ocp);
-    auto backend = qp::make_cyqpalm_backend<VL, Order, cyqlone::SerialFanCyqloneSolver<VL>>(ocp, {}, backend_settings);
-    qp::Solver<qp::CyQPALMBackend<VL, Order, cyqlone::SerialFanCyqloneSolver<VL>> *> qpalm{backend.get(), settings};
+    auto ocp     = fancyqlone::FanCyqloneStorage<>::build(problem.ocp);
+    auto backend = qp::make_cyqpalm_backend<VL, Order, fancyqlone::SerialFanCyqloneSolver<VL>>(ocp, {}, backend_settings);
+    qp::Solver<qp::CyQPALMBackend<VL, Order, fancyqlone::SerialFanCyqloneSolver<VL>> *> qpalm{backend.get(), settings};
     // Main benchmark
     qp::SolverStatus status;
     double time_solve = 0, time_active_set_change = 0, time_line_search = 0,
@@ -527,7 +527,7 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
             .max_update_count       = 0,
             .tricyqle_params =
                 {
-                    .solve_method = cyqlone::SolveMethod::None,
+                    .solve_method = fancyqlone::SolveMethod::None,
 
                 },
             .spin_count = std::numeric_limits<uint32_t>::max(), // disable spin count limit, since the fan solver can have a long first iteration due to the coupling

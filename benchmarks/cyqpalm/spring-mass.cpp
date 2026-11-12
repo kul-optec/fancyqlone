@@ -100,9 +100,9 @@ struct Options {
     std::string export_problem{};
 };
 
-namespace qp = cyqlone::qpalm;
-using cyqlone::index_t;
-using cyqlone::real_t;
+namespace qp = fancyqlone::qpalm;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 using qp::problems::SpringMassParams;
 using seconds = std::chrono::duration<double>;
 
@@ -159,7 +159,7 @@ void trace_run(auto &&fun, const auto &name) {
             csv << log << '\n';
     });
 #if CYQLONE_WITH_ZLIB
-    cyqlone::write_chrome_trace(out_file.replace_extension(".json.gz"), all_logs);
+    fancyqlone::write_chrome_trace(out_file.replace_extension(".json.gz"), all_logs);
 #endif
 #endif
 }
@@ -182,7 +182,7 @@ void run_benchmark(benchmark::State &state, [[maybe_unused]] const std::string &
         return state.SkipWithMessage("Number of processors must be at least 1.");
     auto problem = create_problem(params);
     // Build a QPALM Cyqlone solver
-    auto ocp     = cyqlone::CyqloneStorage<>::build(problem.ocp);
+    auto ocp     = fancyqlone::CyqloneStorage<>::build(problem.ocp);
     auto backend = qp::make_cyqpalm_backend<VL, Order>(ocp, {}, backend_settings);
     qp::Solver<qp::CyQPALMBackend<VL, Order> *> qpalm{backend.get(), settings};
     // Main benchmark
@@ -255,7 +255,7 @@ void run_benchmark_hpipm(benchmark::State &state, const SpringMassParams &params
     auto solver_data = create_hpipm_solver(qp_data, warm != WarmStartHPIPM::NoWarmStart ? 2 : 0);
     // Main benchmark
     solve_hpipm(*qp_data, *solver_data); // Warm up
-    std::optional<cyqlone::LinearOCPStorage::Solution> prev_sol;
+    std::optional<fancyqlone::LinearOCPStorage::Solution> prev_sol;
     if (warm != WarmStartHPIPM::NoWarmStart) {
         prev_sol = get_solution_hpipm(*solver_data);
         update_x0_hpipm(problem.ocp, *qp_data, prev_sol->solution);
@@ -334,8 +334,8 @@ void export_problem(const Options &opts) {
         fs::path filename = opts.export_problem;
         if (fs::is_directory(filename))
             filename /= params.name + ".mat";
-        auto mat = cyqlone::create_mat(filename);
-        cyqlone::add_to_mat(mat.get(), "ocp", problem.ocp);
+        auto mat = fancyqlone::create_mat(filename);
+        fancyqlone::add_to_mat(mat.get(), "ocp", problem.ocp);
         std::cout << "Exported problem " << params.name << " to " << filename << std::endl;
         break;
     }
@@ -385,7 +385,7 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
         settings_warm.initial_penalty_y           = 1e4;
         settings_warm.initial_inner_tolerance     = 1e-4;
         if (opts.pcr)
-            backend.tricyqle_params.solve_method = cyqlone::SolveMethod::PCR;
+            backend.tricyqle_params.solve_method = fancyqlone::SolveMethod::PCR;
         if (opts.cold) {
             backend.strategy = backend_no_upd.strategy = qp::WarmStartingStrategy::Zeros;
             co_yield cyqlone_solver("zero", backend, settings);

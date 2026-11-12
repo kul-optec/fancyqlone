@@ -11,7 +11,7 @@
 
 class BarrierTest : public ::testing::TestWithParam<uint32_t> {};
 
-cyqlone::index_t cyq_get_num_proc();
+fancyqlone::index_t cyq_get_num_proc();
 
 static bool old_kernel() {
 #if defined(__linux__)
@@ -34,7 +34,7 @@ TEST_P(BarrierTest, stress) {
     const auto hw_workers      = static_cast<uint32_t>(cyq_get_num_proc());
     const uint32_t iterations  = num_workers <= hw_workers ? 100'000 : 100;
 
-    using Barrier = cyqlone::TreeBarrier<>;
+    using Barrier = fancyqlone::TreeBarrier<>;
     ASSERT_GE(Barrier::max(), num_workers + 1);
     Barrier barrier(num_workers + 1, {});
 
@@ -113,7 +113,7 @@ TEST_P(BarrierTest, reduce) {
     const auto hw_workers      = static_cast<uint32_t>(cyq_get_num_proc());
     const uint32_t iterations  = num_workers <= hw_workers ? 100'000 : 100;
 
-    using Barrier = cyqlone::TreeBarrier<>;
+    using Barrier = fancyqlone::TreeBarrier<>;
     ASSERT_GE(Barrier::max(), num_workers);
     Barrier barrier(num_workers, {});
 
@@ -139,7 +139,7 @@ TEST_P(BarrierTest, shuffle) {
     const auto hw_workers      = static_cast<uint32_t>(cyq_get_num_proc());
     const uint32_t iterations  = num_workers <= hw_workers ? 30'000 : 100;
 
-    using Barrier = cyqlone::TreeBarrier<>;
+    using Barrier = fancyqlone::TreeBarrier<>;
     ASSERT_GE(Barrier::max(), num_workers);
     Barrier barrier(num_workers, {});
 

@@ -19,11 +19,11 @@
 #include <vector>
 
 #include <fancyqlone/conversion.hpp>
-using cyqlone::index_t;
-using cyqlone::real_t;
-using StorageOrder = cyqlone::StorageOrder;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
+using StorageOrder = fancyqlone::StorageOrder;
 
-namespace qp = cyqlone::qpalm;
+namespace qp = fancyqlone::qpalm;
 index_t cyq_get_num_proc();
 #if GUANAQO_WITH_TRACING
 static void init_trace() {
@@ -62,13 +62,13 @@ static std::filesystem::path save_trace(const char *name) {
 TEST(QPALM, with_inequality_2iter) {
     index_t num_branches = 2;
     index_t N            = 32;
-    std::vector<cyqlone::LinearOCPStorage> ocps(num_branches);
+    std::vector<fancyqlone::LinearOCPStorage> ocps(num_branches);
     for (index_t i = 0; i < num_branches; ++i) {
         auto filename = std::format("python/cmpc/ocp_data_constr{}_{}.mat", N, i);
 
-        cyqlone::LinearOCPStorage ocp_fan;
-        auto matfp = cyqlone::open_mat(filename);
-        cyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
+        fancyqlone::LinearOCPStorage ocp_fan;
+        auto matfp = fancyqlone::open_mat(filename);
+        fancyqlone::read_from_mat(matfp.get(), "ocp", ocp_fan);
 
         ocps[i] = ocp_fan;
         guanaqo::print_python(std::cout << "x(0) = ", ocp_fan.b(0), "\n");
@@ -76,8 +76,8 @@ TEST(QPALM, with_inequality_2iter) {
                   << ", nu=" << ocp_fan.dim.nu << ", ny=" << ocp_fan.dim.ny << "\n";
     }
     std::cout << cyq_get_num_proc() << " processors detected\n";
-    cyqlone::FanOCPStorage fan_ocp{.ocps    = ocps
+    fancyqlone::FanOCPStorage fan_ocp{.ocps    = ocps
     };
-    auto cocp          = cyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
+    auto cocp          = fancyqlone::FanCyqloneStorage<>::build(fan_ocp, ocps[0].D(0).cols);
 
 };

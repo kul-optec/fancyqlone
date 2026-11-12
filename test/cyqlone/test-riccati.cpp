@@ -31,13 +31,13 @@
 
 #include <print>
 
-using cyqlone::index_t;
-using cyqlone::real_t;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 
 index_t cyq_get_num_proc();
 
-cyqlone::LinearOCPStorage combine_branches(std::span<const cyqlone::LinearOCPStorage> ocps);
-hyhound::ocp::OCPDataRiccati from_linear_ocp(cyqlone::LinearOCPStorage &ocp) {
+fancyqlone::LinearOCPStorage combine_branches(std::span<const fancyqlone::LinearOCPStorage> ocps);
+hyhound::ocp::OCPDataRiccati from_linear_ocp(fancyqlone::LinearOCPStorage &ocp) {
     hyhound::ocp::OCPDataRiccati ocp_riccati{};
     ocp_riccati.N  = ocp.dim.N_horiz-1;
     ocp_riccati.nx = ocp.dim.nx;
@@ -65,7 +65,7 @@ hyhound::ocp::OCPDataRiccati from_linear_ocp(cyqlone::LinearOCPStorage &ocp) {
     ocp_riccati.Q(ocp.dim.N_horiz-1) = as_eigen(ocp.Q(ocp.dim.N_horiz));
     return ocp_riccati;}
 // Tests the factorization, factorization updates, and solution of the Cyqlone linear solver.
-    using blasfeo_mat = cyqlone::blasfeo::blasfeo_owning_xmat<real_t>;
+    using blasfeo_mat = fancyqlone::blasfeo::blasfeo_owning_xmat<real_t>;
     static std::vector<blasfeo_mat> allocate(index_t n, index_t r, index_t c) {
         std::vector<blasfeo_mat> mat(n);
         std::ranges::generate(mat, [&] { return blasfeo_mat(r, c); });
@@ -74,16 +74,16 @@ hyhound::ocp::OCPDataRiccati from_linear_ocp(cyqlone::LinearOCPStorage &ocp) {
 TEST(CyqloneFanBlas, blas) {
 
 
-    using namespace cyqlone;
+    using namespace fancyqlone;
     using batmat::matrix::uninitialized;
-    namespace la = cyqlone::linalg;
+    namespace la = fancyqlone::linalg;
     using la::tril;
 
     const index_t p  = cyq_get_num_proc();
     using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
-    using SolverLast = cyqlone::TridiagonalSolver<real_t>;
+    using SolverLast = fancyqlone::TridiagonalSolver<real_t>;
 
-    cyqlone::OCPDim dim{.N_horiz = 160, .nx = 30, .nu = 10, .ny = 0, .ny_N = 0};
+    fancyqlone::OCPDim dim{.N_horiz = 160, .nx = 30, .nu = 10, .ny = 0, .ny_N = 0};
     const index_t N = dim.N_horiz, nx = dim.nx, nu = dim.nu;
     const index_t nux = dim.nu + dim.nx;
     index_t fanout    = 2;
@@ -104,7 +104,7 @@ TEST(CyqloneFanBlas, blas) {
     SolverLast::matrix rs{{.depth = fanout, .rows = nu, .cols = 1}, uninitialized};
 
     // Synchronization between the fanout branches
-    cyqlone::TreeBarrier<> fan_barrier(static_cast<uint32_t>(fanout), {});
+    fancyqlone::TreeBarrier<> fan_barrier(static_cast<uint32_t>(fanout), {});
     fan_barrier.spin_count = std::numeric_limits<uint32_t>::max();
 
     // Random initial state
@@ -167,7 +167,7 @@ TEST(CyqloneFanBlas, blas) {
     auto solve_fan      = [&](index_t i, index_t) {
         auto &ocp = ocps[i] = generate_random_ocp(dim, static_cast<uint32_t>(i));
         ocp.b(0)            = x0(0); // same initial state for each branch
-        auto cocp           = cyqlone::CyqloneStorage<>::build(ocp);
+        auto cocp           = fancyqlone::CyqloneStorage<>::build(ocp);
         // Store B(0)ᵀ for each branch; R(0) and -r(0) for the first branch
         la::copy(cocp.data_F(0).left_cols(nu).transposed(), Bs(i));
         if (i == 0) {
@@ -182,7 +182,7 @@ TEST(CyqloneFanBlas, blas) {
         // Cyqlone solver
         auto solver                  = Solver::build(cocp, p_fan);
         auto tricyqle_params         = solver.get_tricyqle_params();
-        tricyqle_params.solve_method = cyqlone::SolveMethod::None;
+        tricyqle_params.solve_method = fancyqlone::SolveMethod::None;
         solver.update_tricyqle_params(tricyqle_params);
         auto pctx = solver.create_parallel_context();
         pctx->set_barrier_spin_count(std::numeric_limits<uint32_t>::max());
@@ -307,8 +307,8 @@ TEST(CyqloneFanBlas, blas) {
     auto solve_fan_blas = [&](index_t i, index_t) {
         auto &ocp = ocps[i];
         hyhound::ocp::OCPDataRiccati ocp_riccati = from_linear_ocp(ocp);
-        auto ocp_blasfeo = cyqlone::blasfeo::OCPDataRiccati::from_riccati(ocp_riccati);
-        cyqlone::blasfeo::RiccatiFactor fac{.ocp = ocp_blasfeo};
+        auto ocp_blasfeo = fancyqlone::blasfeo::OCPDataRiccati::from_riccati(ocp_riccati);
+        fancyqlone::blasfeo::RiccatiFactor fac{.ocp = ocp_blasfeo};
         hyhound::ocp::mat Σ = hyhound::ocp::mat::Zero(0, ocp.dim.N_horiz + 1);
         clock::time_point t0, t1;
         auto params = std::format("nx={}-nu={}-ny={}-N={}-thr={}", ocp.dim.nx, ocp.dim.nu, ocp.dim.ny, ocp.dim.N_horiz, 1);
@@ -505,10 +505,10 @@ TEST(CyqloneFanBlas, blas) {
     save_traces("fanout-fan.csv");
     // Solve the combined problem with a single Cyqlone solve, as a reference solution
     auto combined_ocp                     = combine_branches(ocps);
-    auto combined_cocp                    = cyqlone::CyqloneStorage<>::build(combined_ocp);
+    auto combined_cocp                    = fancyqlone::CyqloneStorage<>::build(combined_ocp);
     auto combined_solver                  = Solver::build(combined_cocp, p);
     auto combined_tricyqle_params         = combined_solver.get_tricyqle_params();
-    combined_tricyqle_params.solve_method = cyqlone::SolveMethod::PCR;
+    combined_tricyqle_params.solve_method = fancyqlone::SolveMethod::PCR;
     combined_solver.update_tricyqle_params(combined_tricyqle_params);
     auto combined_rq = combined_solver.initialize_gradient(combined_cocp);
     auto combined_b  = combined_solver.initialize_rhs(combined_cocp);

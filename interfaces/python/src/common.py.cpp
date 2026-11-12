@@ -27,7 +27,7 @@
 
 #include "common.py.hpp"
 
-namespace cyqlone {
+namespace fancyqlone {
 
 void register_ocp(nb::module_ &m) {
     nb::class_<PythonOCP>(m, "OCP")
@@ -118,7 +118,7 @@ void register_ocp(nb::module_ &m) {
         .def_ro("equality_residual", &KKTError::equality_residual)
         .def_ro("complementarity", &KKTError::complementarity);
 
-    using cyqlone::LinearOCPSparseQP;
+    using fancyqlone::LinearOCPSparseQP;
     nb::class_<LinearOCPSparseQP>(m, "LinearOCPSparseQP")
         .def("__init__",
              [](LinearOCPSparseQP *sto, const PythonOCP &ocp) {
@@ -205,28 +205,28 @@ void register_ocp(nb::module_ &m) {
                                               as_span(y_compressed), as_span(λ_compressed));
             },
             "ocp"_a, "ux_compressed"_a, "y_compressed"_a, "λ_compressed"_a);
-    nb::class_<cyqlone::qpalm::problems::PlatooningParams>(m, "PlatooningParams")
+    nb::class_<fancyqlone::qpalm::problems::PlatooningParams>(m, "PlatooningParams")
         .def(nb::init<>())
-        .def_rw("friction", &cyqlone::qpalm::problems::PlatooningParams::friction)
-        .def_rw("F_max", &cyqlone::qpalm::problems::PlatooningParams::F_max)
-        .def_rw("v_max", &cyqlone::qpalm::problems::PlatooningParams::v_max)
-        .def_rw("dist_min", &cyqlone::qpalm::problems::PlatooningParams::dist_min)
-        .def_rw("dist_init", &cyqlone::qpalm::problems::PlatooningParams::dist_init)
-        .def_rw("p_target", &cyqlone::qpalm::problems::PlatooningParams::p_target)
-        .def_rw("N_horiz", &cyqlone::qpalm::problems::PlatooningParams::N_horiz)
-        .def_rw("T_horiz", &cyqlone::qpalm::problems::PlatooningParams::T_horiz)
-        .def_rw("scale_cost", &cyqlone::qpalm::problems::PlatooningParams::scale_cost)
-        .def_rw("masses", &cyqlone::qpalm::problems::PlatooningParams::masses);
+        .def_rw("friction", &fancyqlone::qpalm::problems::PlatooningParams::friction)
+        .def_rw("F_max", &fancyqlone::qpalm::problems::PlatooningParams::F_max)
+        .def_rw("v_max", &fancyqlone::qpalm::problems::PlatooningParams::v_max)
+        .def_rw("dist_min", &fancyqlone::qpalm::problems::PlatooningParams::dist_min)
+        .def_rw("dist_init", &fancyqlone::qpalm::problems::PlatooningParams::dist_init)
+        .def_rw("p_target", &fancyqlone::qpalm::problems::PlatooningParams::p_target)
+        .def_rw("N_horiz", &fancyqlone::qpalm::problems::PlatooningParams::N_horiz)
+        .def_rw("T_horiz", &fancyqlone::qpalm::problems::PlatooningParams::T_horiz)
+        .def_rw("scale_cost", &fancyqlone::qpalm::problems::PlatooningParams::scale_cost)
+        .def_rw("masses", &fancyqlone::qpalm::problems::PlatooningParams::masses);
     m.def(
         "create_platooning_problem",
-        [](const cyqlone::qpalm::problems::PlatooningParams &params) {
+        [](const fancyqlone::qpalm::problems::PlatooningParams &params) {
             auto p = platooning(params);
             return PythonOCP{std::move(p.ocp)};
         },
-        "params"_a.sig("PlatooningParams()") = cyqlone::qpalm::problems::PlatooningParams{});
-    nb::class_<cyqlone::qpalm::problems::SpringMassParams> spring_mass_params(m,
+        "params"_a.sig("PlatooningParams()") = fancyqlone::qpalm::problems::PlatooningParams{});
+    nb::class_<fancyqlone::qpalm::problems::SpringMassParams> spring_mass_params(m,
                                                                               "SpringMassParams");
-    using ActuatorPlacement = cyqlone::qpalm::problems::SpringMassParams::ActuatorPlacement;
+    using ActuatorPlacement = fancyqlone::qpalm::problems::SpringMassParams::ActuatorPlacement;
     nb::enum_<ActuatorPlacement>(spring_mass_params, "ActuatorPlacement")
         .value("IndividualActuators", ActuatorPlacement::IndividualActuators)
         .value("RandomActuators", ActuatorPlacement::RandomActuators)
@@ -234,76 +234,76 @@ void register_ocp(nb::module_ &m) {
         .value("WangBoydActuators", ActuatorPlacement::WangBoydActuators)
         .export_values();
     spring_mass_params.def(nb::init<>())
-        .def_rw("friction", &cyqlone::qpalm::problems::SpringMassParams::friction)
-        .def_rw("k_spring", &cyqlone::qpalm::problems::SpringMassParams::k_spring)
-        .def_rw("F_max", &cyqlone::qpalm::problems::SpringMassParams::F_max)
-        .def_rw("p_min", &cyqlone::qpalm::problems::SpringMassParams::p_min)
-        .def_rw("p_max", &cyqlone::qpalm::problems::SpringMassParams::p_max)
-        .def_rw("p_min_f", &cyqlone::qpalm::problems::SpringMassParams::p_min_f)
-        .def_rw("p_max_f", &cyqlone::qpalm::problems::SpringMassParams::p_max_f)
-        .def_rw("v_max", &cyqlone::qpalm::problems::SpringMassParams::v_max)
-        .def_rw("v_max_f", &cyqlone::qpalm::problems::SpringMassParams::v_max_f)
-        .def_rw("width", &cyqlone::qpalm::problems::SpringMassParams::width)
-        .def_rw("N_horiz", &cyqlone::qpalm::problems::SpringMassParams::N_horiz)
-        .def_rw("T_horiz", &cyqlone::qpalm::problems::SpringMassParams::T_horiz)
-        .def_rw("q_vel", &cyqlone::qpalm::problems::SpringMassParams::q_vel)
-        .def_rw("q_pos", &cyqlone::qpalm::problems::SpringMassParams::q_pos)
-        .def_rw("q_vel_f", &cyqlone::qpalm::problems::SpringMassParams::q_vel_f)
-        .def_rw("q_pos_f", &cyqlone::qpalm::problems::SpringMassParams::q_pos_f)
-        .def_rw("r_act", &cyqlone::qpalm::problems::SpringMassParams::r_act)
-        .def_rw("masses", &cyqlone::qpalm::problems::SpringMassParams::masses)
-        .def_rw("n_actuators", &cyqlone::qpalm::problems::SpringMassParams::n_actuators)
+        .def_rw("friction", &fancyqlone::qpalm::problems::SpringMassParams::friction)
+        .def_rw("k_spring", &fancyqlone::qpalm::problems::SpringMassParams::k_spring)
+        .def_rw("F_max", &fancyqlone::qpalm::problems::SpringMassParams::F_max)
+        .def_rw("p_min", &fancyqlone::qpalm::problems::SpringMassParams::p_min)
+        .def_rw("p_max", &fancyqlone::qpalm::problems::SpringMassParams::p_max)
+        .def_rw("p_min_f", &fancyqlone::qpalm::problems::SpringMassParams::p_min_f)
+        .def_rw("p_max_f", &fancyqlone::qpalm::problems::SpringMassParams::p_max_f)
+        .def_rw("v_max", &fancyqlone::qpalm::problems::SpringMassParams::v_max)
+        .def_rw("v_max_f", &fancyqlone::qpalm::problems::SpringMassParams::v_max_f)
+        .def_rw("width", &fancyqlone::qpalm::problems::SpringMassParams::width)
+        .def_rw("N_horiz", &fancyqlone::qpalm::problems::SpringMassParams::N_horiz)
+        .def_rw("T_horiz", &fancyqlone::qpalm::problems::SpringMassParams::T_horiz)
+        .def_rw("q_vel", &fancyqlone::qpalm::problems::SpringMassParams::q_vel)
+        .def_rw("q_pos", &fancyqlone::qpalm::problems::SpringMassParams::q_pos)
+        .def_rw("q_vel_f", &fancyqlone::qpalm::problems::SpringMassParams::q_vel_f)
+        .def_rw("q_pos_f", &fancyqlone::qpalm::problems::SpringMassParams::q_pos_f)
+        .def_rw("r_act", &fancyqlone::qpalm::problems::SpringMassParams::r_act)
+        .def_rw("masses", &fancyqlone::qpalm::problems::SpringMassParams::masses)
+        .def_rw("n_actuators", &fancyqlone::qpalm::problems::SpringMassParams::n_actuators)
         .def_rw("actuator_placement",
-                &cyqlone::qpalm::problems::SpringMassParams::actuator_placement)
-        .def_rw("seed", &cyqlone::qpalm::problems::SpringMassParams::seed)
-        .def_static("wang_boyd_2008", &cyqlone::qpalm::problems::SpringMassParams::wang_boyd_2008,
+                &fancyqlone::qpalm::problems::SpringMassParams::actuator_placement)
+        .def_rw("seed", &fancyqlone::qpalm::problems::SpringMassParams::seed)
+        .def_static("wang_boyd_2008", &fancyqlone::qpalm::problems::SpringMassParams::wang_boyd_2008,
                     "n_masses"_a, "N_horiz"_a = 30, "seed"_a = 0)
-        .def_static("domahidi_2012", &cyqlone::qpalm::problems::SpringMassParams::domahidi_2012,
+        .def_static("domahidi_2012", &fancyqlone::qpalm::problems::SpringMassParams::domahidi_2012,
                     "n_masses"_a, "N_horiz"_a, "seed"_a = 0);
     m.def(
         "create_spring_mass_problem",
-        [](const cyqlone::qpalm::problems::SpringMassParams &params) {
+        [](const fancyqlone::qpalm::problems::SpringMassParams &params) {
             auto p = spring_mass(params);
             return PythonOCP{std::move(p.ocp)};
         },
-        "params"_a.sig("SpringMassParams()") = cyqlone::qpalm::problems::SpringMassParams{});
+        "params"_a.sig("SpringMassParams()") = fancyqlone::qpalm::problems::SpringMassParams{});
 }
 
 void register_settings(nb::module_ &m) {
-    nb::class_<cyqlone::TricyqleParams<>>(m, "TricyqleParams")
+    nb::class_<fancyqlone::TricyqleParams<>>(m, "TricyqleParams")
         .def(nb::init<>())
-        .def_rw("enable_prefetching", &cyqlone::TricyqleParams<>::enable_prefetching)
-        .def_rw("pcg_max_iter", &cyqlone::TricyqleParams<>::pcg_max_iter)
-        .def_rw("pcg_tolerance", &cyqlone::TricyqleParams<>::pcg_tolerance)
-        .def_rw("pcg_print_resid", &cyqlone::TricyqleParams<>::pcg_print_resid)
-        .def_rw("solve_method", &cyqlone::TricyqleParams<>::solve_method)
-        .def_rw("pcr_max_update_fraction", &cyqlone::TricyqleParams<>::pcr_max_update_fraction)
-        .def_rw("cr_max_update_fraction_Y0", &cyqlone::TricyqleParams<>::cr_max_update_fraction_Y0)
+        .def_rw("enable_prefetching", &fancyqlone::TricyqleParams<>::enable_prefetching)
+        .def_rw("pcg_max_iter", &fancyqlone::TricyqleParams<>::pcg_max_iter)
+        .def_rw("pcg_tolerance", &fancyqlone::TricyqleParams<>::pcg_tolerance)
+        .def_rw("pcg_print_resid", &fancyqlone::TricyqleParams<>::pcg_print_resid)
+        .def_rw("solve_method", &fancyqlone::TricyqleParams<>::solve_method)
+        .def_rw("pcr_max_update_fraction", &fancyqlone::TricyqleParams<>::pcr_max_update_fraction)
+        .def_rw("cr_max_update_fraction_Y0", &fancyqlone::TricyqleParams<>::cr_max_update_fraction_Y0)
         .def_rw("parallel_solve_cr_threshold",
-                &cyqlone::TricyqleParams<>::parallel_solve_cr_threshold)
+                &fancyqlone::TricyqleParams<>::parallel_solve_cr_threshold)
         .def_rw("parallel_factor_pcr_threshold",
-                &cyqlone::TricyqleParams<>::parallel_factor_pcr_threshold);
-    nb::class_<cyqlone::CyqloneParams<>>(m, "CyqloneParams").def(nb::init<>());
-    nb::enum_<cyqlone::qpalm::SolverStatus>(m, "SolverStatus")
-        .value("Busy", cyqlone::qpalm::SolverStatus::Busy)
-        .value("Converged", cyqlone::qpalm::SolverStatus::Converged)
-        .value("MaxTime", cyqlone::qpalm::SolverStatus::MaxTime)
-        .value("MaxIter", cyqlone::qpalm::SolverStatus::MaxIter)
-        .value("NotFinite", cyqlone::qpalm::SolverStatus::NotFinite)
-        .value("NoProgress", cyqlone::qpalm::SolverStatus::NoProgress)
-        .value("Interrupted", cyqlone::qpalm::SolverStatus::Interrupted)
-        .value("Exception", cyqlone::qpalm::SolverStatus::Exception);
-    using DetailedStats = cyqlone::qpalm::DetailedStats;
+                &fancyqlone::TricyqleParams<>::parallel_factor_pcr_threshold);
+    nb::class_<fancyqlone::CyqloneParams<>>(m, "CyqloneParams").def(nb::init<>());
+    nb::enum_<fancyqlone::qpalm::SolverStatus>(m, "SolverStatus")
+        .value("Busy", fancyqlone::qpalm::SolverStatus::Busy)
+        .value("Converged", fancyqlone::qpalm::SolverStatus::Converged)
+        .value("MaxTime", fancyqlone::qpalm::SolverStatus::MaxTime)
+        .value("MaxIter", fancyqlone::qpalm::SolverStatus::MaxIter)
+        .value("NotFinite", fancyqlone::qpalm::SolverStatus::NotFinite)
+        .value("NoProgress", fancyqlone::qpalm::SolverStatus::NoProgress)
+        .value("Interrupted", fancyqlone::qpalm::SolverStatus::Interrupted)
+        .value("Exception", fancyqlone::qpalm::SolverStatus::Exception);
+    using DetailedStats = fancyqlone::qpalm::DetailedStats;
     nb::class_<DetailedStats> detailed_stats(m, "DetailedStats");
     nb::enum_<DetailedStats::ExitReason>(detailed_stats, "ExitReason")
         .value("Busy", DetailedStats::ExitReason::Busy)
         .value("Converged", DetailedStats::ExitReason::Converged)
         .value("NoActiveSetChange", DetailedStats::ExitReason::NoActiveSetChange)
         .value("Fail", DetailedStats::ExitReason::Fail);
-    nb::enum_<cyqlone::SolveMethod>(m, "SolveMethod")
-        .value("StairPCG", cyqlone::SolveMethod::StairPCG)
-        .value("JacobiPCG", cyqlone::SolveMethod::JacobiPCG)
-        .value("PCR", cyqlone::SolveMethod::PCR);
+    nb::enum_<fancyqlone::SolveMethod>(m, "SolveMethod")
+        .value("StairPCG", fancyqlone::SolveMethod::StairPCG)
+        .value("JacobiPCG", fancyqlone::SolveMethod::JacobiPCG)
+        .value("PCR", fancyqlone::SolveMethod::PCR);
     nb::class_<DetailedStats::Entry>(detailed_stats, "Entry")
         .def_rw("outer_iter", &DetailedStats::Entry::outer_iter)
         .def_rw("inner_iter", &DetailedStats::Entry::inner_iter)
@@ -395,11 +395,11 @@ void register_settings(nb::module_ &m) {
         });
     m.attr("DefaultTimings") = timings_cpu;
 #else
-    nb::class_<cyqlone::DefaultTimings>(m, "DefaultTimings")
+    nb::class_<fancyqlone::DefaultTimings>(m, "DefaultTimings")
         .def(nb::init())
-        .def("__copy__", [](const cyqlone::DefaultTimings &self) { return self; })
+        .def("__copy__", [](const fancyqlone::DefaultTimings &self) { return self; })
         .def("__getstate__",
-             [](const cyqlone::DefaultTimings &self) {
+             [](const fancyqlone::DefaultTimings &self) {
                  return nb::make_tuple(
                      // clang-format off
                     self.num_invocations,
@@ -408,10 +408,10 @@ void register_settings(nb::module_ &m) {
                      ;
              })
         .def("__setstate__",
-             [](cyqlone::DefaultTimings *self, nb::tuple t) {
+             [](fancyqlone::DefaultTimings *self, nb::tuple t) {
                  if (t.size() != 2)
                      throw std::runtime_error("Invalid state!");
-                 using T = cyqlone::DefaultTimings;
+                 using T = fancyqlone::DefaultTimings;
                  new (self) T{
                      // clang-format off
                     .num_invocations = nb::cast<decltype(T::num_invocations)>(t[0]),
@@ -419,19 +419,19 @@ void register_settings(nb::module_ &m) {
                      // clang-format on
                  };
              })
-        .def_rw("num_invocations", &cyqlone::DefaultTimings::num_invocations)
-        .def_rw("wall_time", &cyqlone::DefaultTimings::wall_time)
-        .def("__str__", [](const cyqlone::DefaultTimings &self) {
+        .def_rw("num_invocations", &fancyqlone::DefaultTimings::num_invocations)
+        .def_rw("wall_time", &fancyqlone::DefaultTimings::wall_time)
+        .def("__str__", [](const fancyqlone::DefaultTimings &self) {
             std::ostringstream ss;
             ss << self;
             return std::move(ss).str();
         });
 #endif
-    nb::class_<cyqlone::qpalm::SolverTimings>(m, "SolverTimings")
+    nb::class_<fancyqlone::qpalm::SolverTimings>(m, "SolverTimings")
         .def(nb::init())
-        .def("__copy__", [](const cyqlone::qpalm::SolverTimings &self) { return self; })
+        .def("__copy__", [](const fancyqlone::qpalm::SolverTimings &self) { return self; })
         .def("__getstate__",
-             [](const cyqlone::qpalm::SolverTimings &self) {
+             [](const fancyqlone::qpalm::SolverTimings &self) {
                  return nb::make_tuple(
                      // clang-format off
                     self.total,
@@ -454,10 +454,10 @@ void register_settings(nb::module_ &m) {
                      ;
              })
         .def("__setstate__",
-             [](cyqlone::qpalm::SolverTimings *self, nb::tuple t) {
+             [](fancyqlone::qpalm::SolverTimings *self, nb::tuple t) {
                  if (t.size() != 16)
                      throw std::runtime_error("Invalid state!");
-                 using T = cyqlone::qpalm::SolverTimings;
+                 using T = fancyqlone::qpalm::SolverTimings;
                  new (self) T{
                      // clang-format off
                     .total = nb::cast<decltype(T::total)>(t[0]),
@@ -479,90 +479,90 @@ void register_settings(nb::module_ &m) {
                      // clang-format on
                  };
              })
-        .def_rw("total", &cyqlone::qpalm::SolverTimings::total)
-        .def_rw("scaling", &cyqlone::qpalm::SolverTimings::scaling)
-        .def_rw("line_search", &cyqlone::qpalm::SolverTimings::line_search)
-        .def_rw("recompute_inner", &cyqlone::qpalm::SolverTimings::recompute_inner)
-        .def_rw("recompute_outer", &cyqlone::qpalm::SolverTimings::recompute_outer)
-        .def_rw("mat_vec_M", &cyqlone::qpalm::SolverTimings::mat_vec_M)
-        .def_rw("mat_vec_MT", &cyqlone::qpalm::SolverTimings::mat_vec_MT)
-        .def_rw("mat_vec_A", &cyqlone::qpalm::SolverTimings::mat_vec_A)
-        .def_rw("mat_vec_AT", &cyqlone::qpalm::SolverTimings::mat_vec_AT)
-        .def_rw("mat_vec_Q", &cyqlone::qpalm::SolverTimings::mat_vec_Q)
-        .def_rw("active_set_change", &cyqlone::qpalm::SolverTimings::active_set_change)
-        .def_rw("update_penalty", &cyqlone::qpalm::SolverTimings::update_penalty)
-        .def_rw("update_regularization", &cyqlone::qpalm::SolverTimings::update_regularization)
-        .def_rw("boost_regularization", &cyqlone::qpalm::SolverTimings::boost_regularization)
-        .def_rw("solve", &cyqlone::qpalm::SolverTimings::solve)
-        .def_rw("backend", &cyqlone::qpalm::SolverTimings::backend);
-    nb::class_<cyqlone::qpalm::SolverStats>(m, "SolverStats")
+        .def_rw("total", &fancyqlone::qpalm::SolverTimings::total)
+        .def_rw("scaling", &fancyqlone::qpalm::SolverTimings::scaling)
+        .def_rw("line_search", &fancyqlone::qpalm::SolverTimings::line_search)
+        .def_rw("recompute_inner", &fancyqlone::qpalm::SolverTimings::recompute_inner)
+        .def_rw("recompute_outer", &fancyqlone::qpalm::SolverTimings::recompute_outer)
+        .def_rw("mat_vec_M", &fancyqlone::qpalm::SolverTimings::mat_vec_M)
+        .def_rw("mat_vec_MT", &fancyqlone::qpalm::SolverTimings::mat_vec_MT)
+        .def_rw("mat_vec_A", &fancyqlone::qpalm::SolverTimings::mat_vec_A)
+        .def_rw("mat_vec_AT", &fancyqlone::qpalm::SolverTimings::mat_vec_AT)
+        .def_rw("mat_vec_Q", &fancyqlone::qpalm::SolverTimings::mat_vec_Q)
+        .def_rw("active_set_change", &fancyqlone::qpalm::SolverTimings::active_set_change)
+        .def_rw("update_penalty", &fancyqlone::qpalm::SolverTimings::update_penalty)
+        .def_rw("update_regularization", &fancyqlone::qpalm::SolverTimings::update_regularization)
+        .def_rw("boost_regularization", &fancyqlone::qpalm::SolverTimings::boost_regularization)
+        .def_rw("solve", &fancyqlone::qpalm::SolverTimings::solve)
+        .def_rw("backend", &fancyqlone::qpalm::SolverTimings::backend);
+    nb::class_<fancyqlone::qpalm::SolverStats>(m, "SolverStats")
         .def(nb::init())
-        .def("__copy__", [](const cyqlone::qpalm::SolverStats &self) { return self; })
-        .def_rw("inner_iter", &cyqlone::qpalm::SolverStats::inner_iter)
-        .def_rw("outer_iter", &cyqlone::qpalm::SolverStats::outer_iter)
-        .def_rw("stationarity", &cyqlone::qpalm::SolverStats::stationarity)
-        .def_rw("primal_residual_norm", &cyqlone::qpalm::SolverStats::primal_residual_norm)
-        .def_rw("max_penalty", &cyqlone::qpalm::SolverStats::max_penalty)
-        .def_rw("timings", &cyqlone::qpalm::SolverStats::timings)
-        .def_rw("detail", &cyqlone::qpalm::SolverStats::detail);
-    nb::enum_<cyqlone::qpalm::WarmStartingStrategy>(m, "WarmStartingStrategy")
-        .value("Zeros", cyqlone::qpalm::WarmStartingStrategy::Zeros)
-        .value("Copy", cyqlone::qpalm::WarmStartingStrategy::Copy)
-        .value("Shift", cyqlone::qpalm::WarmStartingStrategy::Shift)
-        .value("ShiftNoInequality", cyqlone::qpalm::WarmStartingStrategy::ShiftNoInequality);
-    nb::class_<cyqlone::qpalm::CyQPALMBackendSettings>(m, "CyQPALMBackendSettings")
-        .def("__copy__", [](const cyqlone::qpalm::CyQPALMBackendSettings &self) { return self; })
+        .def("__copy__", [](const fancyqlone::qpalm::SolverStats &self) { return self; })
+        .def_rw("inner_iter", &fancyqlone::qpalm::SolverStats::inner_iter)
+        .def_rw("outer_iter", &fancyqlone::qpalm::SolverStats::outer_iter)
+        .def_rw("stationarity", &fancyqlone::qpalm::SolverStats::stationarity)
+        .def_rw("primal_residual_norm", &fancyqlone::qpalm::SolverStats::primal_residual_norm)
+        .def_rw("max_penalty", &fancyqlone::qpalm::SolverStats::max_penalty)
+        .def_rw("timings", &fancyqlone::qpalm::SolverStats::timings)
+        .def_rw("detail", &fancyqlone::qpalm::SolverStats::detail);
+    nb::enum_<fancyqlone::qpalm::WarmStartingStrategy>(m, "WarmStartingStrategy")
+        .value("Zeros", fancyqlone::qpalm::WarmStartingStrategy::Zeros)
+        .value("Copy", fancyqlone::qpalm::WarmStartingStrategy::Copy)
+        .value("Shift", fancyqlone::qpalm::WarmStartingStrategy::Shift)
+        .value("ShiftNoInequality", fancyqlone::qpalm::WarmStartingStrategy::ShiftNoInequality);
+    nb::class_<fancyqlone::qpalm::CyQPALMBackendSettings>(m, "CyQPALMBackendSettings")
+        .def("__copy__", [](const fancyqlone::qpalm::CyQPALMBackendSettings &self) { return self; })
         .def(nb::init())
-        .def_rw("processors", &cyqlone::qpalm::CyQPALMBackendSettings::processors)
-        .def_rw("print_residuals", &cyqlone::qpalm::CyQPALMBackendSettings::print_residuals)
-        .def_rw("print_precision", &cyqlone::qpalm::CyQPALMBackendSettings::print_precision)
+        .def_rw("processors", &fancyqlone::qpalm::CyQPALMBackendSettings::processors)
+        .def_rw("print_residuals", &fancyqlone::qpalm::CyQPALMBackendSettings::print_residuals)
+        .def_rw("print_precision", &fancyqlone::qpalm::CyQPALMBackendSettings::print_precision)
         .def_rw("changing_constr_factor",
-                &cyqlone::qpalm::CyQPALMBackendSettings::changing_constr_factor)
-        .def_rw("max_update_count", &cyqlone::qpalm::CyQPALMBackendSettings::max_update_count)
-        .def_rw("detailed_timings", &cyqlone::qpalm::CyQPALMBackendSettings::detailed_timings)
-        .def_rw("tricyqle_params", &cyqlone::qpalm::CyQPALMBackendSettings::tricyqle_params)
-        .def_rw("spin_count", &cyqlone::qpalm::CyQPALMBackendSettings::spin_count)
-        .def_rw("strategy", &cyqlone::qpalm::CyQPALMBackendSettings::strategy);
-    nb::class_<cyqlone::qpalm::Settings>(m, "Settings")
+                &fancyqlone::qpalm::CyQPALMBackendSettings::changing_constr_factor)
+        .def_rw("max_update_count", &fancyqlone::qpalm::CyQPALMBackendSettings::max_update_count)
+        .def_rw("detailed_timings", &fancyqlone::qpalm::CyQPALMBackendSettings::detailed_timings)
+        .def_rw("tricyqle_params", &fancyqlone::qpalm::CyQPALMBackendSettings::tricyqle_params)
+        .def_rw("spin_count", &fancyqlone::qpalm::CyQPALMBackendSettings::spin_count)
+        .def_rw("strategy", &fancyqlone::qpalm::CyQPALMBackendSettings::strategy);
+    nb::class_<fancyqlone::qpalm::Settings>(m, "Settings")
         .def(nb::init())
-        .def("__copy__", [](const cyqlone::qpalm::Settings &self) { return self; })
-        .def_rw("max_outer_iter", &cyqlone::qpalm::Settings::max_outer_iter)
-        .def_rw("max_inner_iter", &cyqlone::qpalm::Settings::max_inner_iter)
-        .def_rw("max_total_inner_iter", &cyqlone::qpalm::Settings::max_total_inner_iter)
-        .def_rw("max_time", &cyqlone::qpalm::Settings::max_time)
-        .def_rw("tolerance", &cyqlone::qpalm::Settings::tolerance)
-        .def_rw("dual_tolerance", &cyqlone::qpalm::Settings::dual_tolerance)
-        .def_rw("eq_constr_tolerance", &cyqlone::qpalm::Settings::eq_constr_tolerance)
-        .def_rw("initial_inner_tolerance", &cyqlone::qpalm::Settings::initial_inner_tolerance)
-        .def_rw("ρ", &cyqlone::qpalm::Settings::ρ)
-        .def_rw("θ", &cyqlone::qpalm::Settings::θ)
-        .def_rw("Δy", &cyqlone::qpalm::Settings::Δy)
-        .def_rw("Δy_always", &cyqlone::qpalm::Settings::Δy_always)
-        .def_rw("max_penalty_y", &cyqlone::qpalm::Settings::max_penalty_y)
-        .def_rw("initial_penalty_y", &cyqlone::qpalm::Settings::initial_penalty_y)
-        .def_rw("Δx", &cyqlone::qpalm::Settings::Δx)
-        .def_rw("max_penalty_x", &cyqlone::qpalm::Settings::max_penalty_x)
-        .def_rw("boost_penalty_x", &cyqlone::qpalm::Settings::boost_penalty_x)
-        .def_rw("initial_penalty_x", &cyqlone::qpalm::Settings::initial_penalty_x)
-        .def_rw("proximal", &cyqlone::qpalm::Settings::proximal)
-        .def_rw("recompute_eq_res", &cyqlone::qpalm::Settings::recompute_eq_res)
-        .def_rw("recompute_inner", &cyqlone::qpalm::Settings::recompute_inner)
-        .def_rw("recompute", &cyqlone::qpalm::Settings::recompute)
-        .def_rw("verbose", &cyqlone::qpalm::Settings::verbose)
-        .def_rw("max_no_changes_active_set", &cyqlone::qpalm::Settings::max_no_changes_active_set)
+        .def("__copy__", [](const fancyqlone::qpalm::Settings &self) { return self; })
+        .def_rw("max_outer_iter", &fancyqlone::qpalm::Settings::max_outer_iter)
+        .def_rw("max_inner_iter", &fancyqlone::qpalm::Settings::max_inner_iter)
+        .def_rw("max_total_inner_iter", &fancyqlone::qpalm::Settings::max_total_inner_iter)
+        .def_rw("max_time", &fancyqlone::qpalm::Settings::max_time)
+        .def_rw("tolerance", &fancyqlone::qpalm::Settings::tolerance)
+        .def_rw("dual_tolerance", &fancyqlone::qpalm::Settings::dual_tolerance)
+        .def_rw("eq_constr_tolerance", &fancyqlone::qpalm::Settings::eq_constr_tolerance)
+        .def_rw("initial_inner_tolerance", &fancyqlone::qpalm::Settings::initial_inner_tolerance)
+        .def_rw("ρ", &fancyqlone::qpalm::Settings::ρ)
+        .def_rw("θ", &fancyqlone::qpalm::Settings::θ)
+        .def_rw("Δy", &fancyqlone::qpalm::Settings::Δy)
+        .def_rw("Δy_always", &fancyqlone::qpalm::Settings::Δy_always)
+        .def_rw("max_penalty_y", &fancyqlone::qpalm::Settings::max_penalty_y)
+        .def_rw("initial_penalty_y", &fancyqlone::qpalm::Settings::initial_penalty_y)
+        .def_rw("Δx", &fancyqlone::qpalm::Settings::Δx)
+        .def_rw("max_penalty_x", &fancyqlone::qpalm::Settings::max_penalty_x)
+        .def_rw("boost_penalty_x", &fancyqlone::qpalm::Settings::boost_penalty_x)
+        .def_rw("initial_penalty_x", &fancyqlone::qpalm::Settings::initial_penalty_x)
+        .def_rw("proximal", &fancyqlone::qpalm::Settings::proximal)
+        .def_rw("recompute_eq_res", &fancyqlone::qpalm::Settings::recompute_eq_res)
+        .def_rw("recompute_inner", &fancyqlone::qpalm::Settings::recompute_inner)
+        .def_rw("recompute", &fancyqlone::qpalm::Settings::recompute)
+        .def_rw("verbose", &fancyqlone::qpalm::Settings::verbose)
+        .def_rw("max_no_changes_active_set", &fancyqlone::qpalm::Settings::max_no_changes_active_set)
         .def_rw("linesearch_include_multipliers",
-                &cyqlone::qpalm::Settings::linesearch_include_multipliers)
+                &fancyqlone::qpalm::Settings::linesearch_include_multipliers)
         .def_rw("force_linesearch_if_no_set_change",
-                &cyqlone::qpalm::Settings::force_linesearch_if_no_set_change)
+                &fancyqlone::qpalm::Settings::force_linesearch_if_no_set_change)
         .def_rw("force_linesearch_if_dir_deriv_pos",
-                &cyqlone::qpalm::Settings::force_linesearch_if_dir_deriv_pos)
-        .def_rw("detailed_stats", &cyqlone::qpalm::Settings::detailed_stats)
-        .def_rw("scale_newton_step", &cyqlone::qpalm::Settings::scale_newton_step)
-        .def_rw("print_directional_deriv", &cyqlone::qpalm::Settings::print_directional_deriv)
-        .def_rw("print_linesearch_inputs", &cyqlone::qpalm::Settings::print_linesearch_inputs);
+                &fancyqlone::qpalm::Settings::force_linesearch_if_dir_deriv_pos)
+        .def_rw("detailed_stats", &fancyqlone::qpalm::Settings::detailed_stats)
+        .def_rw("scale_newton_step", &fancyqlone::qpalm::Settings::scale_newton_step)
+        .def_rw("print_directional_deriv", &fancyqlone::qpalm::Settings::print_directional_deriv)
+        .def_rw("print_linesearch_inputs", &fancyqlone::qpalm::Settings::print_linesearch_inputs);
 }
 
-} // namespace cyqlone
+} // namespace fancyqlone
 
 #ifdef CYQLONE_WITH_PYTHON_DISPATCH
 #include <cpu_features_macros.h>
@@ -584,7 +584,7 @@ static const char *get_dispatch_name() { return "generic"; }
 #endif
 
 NB_MODULE(MODULE_NAME, m) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
     m.doc()                      = "Python interface to cyqlone's C++ implementation.";
     m.attr("__version__")        = CYQLONE_VERSION_FULL;
     m.attr("build_time")         = CYQLONE_BUILD_TIME;
@@ -646,7 +646,7 @@ NB_MODULE(MODULE_NAME, m) {
         [](const std::filesystem::path &filename) {
             if (filename.has_parent_path())
                 std::filesystem::create_directories(filename.parent_path());
-            cyqlone::write_chrome_trace(filename, guanaqo::get_trace_logger().get_logs());
+            fancyqlone::write_chrome_trace(filename, guanaqo::get_trace_logger().get_logs());
         },
         "filename"_a);
 #endif

@@ -8,7 +8,7 @@
 #include <batmat/thread-pool.hpp>
 #endif
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using batmat::linalg::simdify;
 
@@ -94,8 +94,8 @@ CyqloneSolver<VL, T, DefaultOrder, Ctx>::build(const CyqloneStorage<value_type> 
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 void CyqloneSolver<VL, T, DefaultOrder, Ctx>::update_data(const CyqloneStorage<value_type> &ocp) {
-    using cyqlone::detail::copy;
-    using cyqlone::detail::scale;
+    using fancyqlone::detail::copy;
+    using fancyqlone::detail::scale;
     BATMAT_ASSERT(ocp.N_horiz == N_horiz);
     BATMAT_ASSERT(ocp.nx == nx);
     BATMAT_ASSERT(ocp.nu == nu);
@@ -185,14 +185,14 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_gradient(
                         grad.batch(di)(vi) = ocp.data_rq(0);
                     } else {
                         grad.batch(di)(vi).top_rows(nu) = ocp.data_rq(0).top_rows(nu);
-                        cyqlone::detail::scale(scale_qN, ocp.data_rq(0).bottom_rows(nx),
+                        fancyqlone::detail::scale(scale_qN, ocp.data_rq(0).bottom_rows(nx),
                                                grad.batch(di)(vi).bottom_rows(nx));
                     }
                 } else if (j < N_horiz) {
                     grad.batch(di)(vi) = ocp.data_rq(j);
                 } else {
                     grad.batch(di)(vi).top_rows(nu).set_constant(0);
-                    cyqlone::detail::scale(scale_qN, ocp.data_rq(0).bottom_rows(nx),
+                    fancyqlone::detail::scale(scale_qN, ocp.data_rq(0).bottom_rows(nx),
                                            grad.batch(di)(vi).bottom_rows(nx));
                 }
             }
@@ -506,4 +506,4 @@ auto CyqloneSolver<VL, T, DefaultOrder, Ctx>::initialize_general_constraints() c
     return matrix<>{{.depth = ceil_N(), .rows = std::max(ny, ny_0 + ny_N), .cols = 1}};
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

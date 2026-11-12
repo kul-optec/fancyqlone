@@ -67,7 +67,7 @@ struct TreeQpStats {
 };
 
 std::shared_ptr<TreeQpData>
-build_tree_qp(const cyqlone::FanOCPStorage &fan, bool clipping = true);
+build_tree_qp(const fancyqlone::FanOCPStorage &fan, bool clipping = true);
 
 std::shared_ptr<TreeQpSolverData>
 create_tree_qp_solver(
@@ -86,19 +86,19 @@ solve_tree_qp(
 TreeQpStats
 get_stats_tree_qp(TreeQpSolverData &solver_data);
 
-cyqlone::FanOCPStorage::Solution
+fancyqlone::FanOCPStorage::Solution
 get_solution_tree_qp(TreeQpSolverData &solver_data);
 
 std::vector<double> make_dual_initialization_tree_qp(
-    const TreeQpSolverData &solver_data, const cyqlone::FanOCPStorage::Solution &guess);
+    const TreeQpSolverData &solver_data, const fancyqlone::FanOCPStorage::Solution &guess);
 void set_dual_initialization_tree_qp(TreeQpSolverData &solver_data, std::span<const double> dual);
 void shift_treeqp_solution(
     TreeQpSolverData &solver_data,
-    const cyqlone::FanOCPStorage::Solution &solution);
+    const fancyqlone::FanOCPStorage::Solution &solution);
 void reset_treeqp_solution(TreeQpSolverData &solver_data);
 void update_x0_tree_qp(
-    cyqlone::FanOCPStorage &fan,
+    fancyqlone::FanOCPStorage &fan,
     TreeQpData &qp_data,
-    const std::vector<cyqlone::LinearOCPStorage::Solution> &solution,
-    cyqlone::index_t branch
+    const std::vector<fancyqlone::LinearOCPStorage::Solution> &solution,
+    fancyqlone::index_t branch
 );

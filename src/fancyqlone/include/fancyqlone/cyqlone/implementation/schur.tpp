@@ -11,7 +11,7 @@
 #include <batmat/linalg/trtri.hpp>
 #include <utility>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using namespace linalg;
 using namespace batmat::linalg;
@@ -154,4 +154,4 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::compute_schur(Context &ctx, real_t
 }
 //! [Cyqlone compute Schur]
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

@@ -29,7 +29,7 @@
 #include <format>
 #endif
 
-namespace cyqlone {
+namespace fancyqlone {
 
 /// No-op completion function for the @ref TreeBarrier.
 /// @ingroup topic-parallelization
@@ -586,4 +586,4 @@ class TreeBarrier {
     }
 };
 
-} // namespace cyqlone
+} // namespace fancyqlone

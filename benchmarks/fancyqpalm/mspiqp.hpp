@@ -12,8 +12,8 @@
 #include <memory>
 #include <vector>
 
-using cyqlone::index_t;
-using cyqlone::real_t;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 
 using PIQPSparseMatrix =
     Eigen::SparseMatrix<real_t, Eigen::ColMajor, int>;
@@ -82,7 +82,7 @@ struct PIQPStats {
 
 /// Eliminates fixed x0 by default; pass eliminate_x0=false to retain it for comparison.
 std::shared_ptr<PIQPFanQPData>
-build_piqp_fan_qp(const cyqlone::FanOCPStorage &fan, bool native_bounds = true,
+build_piqp_fan_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds = true,
                   bool eliminate_x0 = true);
 
 std::shared_ptr<PIQPFanSolverData>
@@ -95,11 +95,11 @@ solve_piqp_fan(PIQPFanSolverData &solver_data);
 PIQPStats
 get_stats_piqp_fan(const PIQPFanSolverData &solver_data);
 
-cyqlone::FanOCPStorage::Solution
+fancyqlone::FanOCPStorage::Solution
 get_solution_piqp_fan(const PIQPFanSolverData &solver_data);
 
 void update_x0_piqp_fan(
-    cyqlone::FanOCPStorage &fan,
+    fancyqlone::FanOCPStorage &fan,
     PIQPFanSolverData &solver_data,
-    const std::vector<cyqlone::LinearOCPStorage::Solution> &solution,
+    const std::vector<fancyqlone::LinearOCPStorage::Solution> &solution,
     index_t selected_branch);

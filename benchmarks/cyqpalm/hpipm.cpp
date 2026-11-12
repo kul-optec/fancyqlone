@@ -16,8 +16,8 @@
 #include <hpipm_d_ocp_qp_ipm.h>
 #include <hpipm_d_ocp_qp_sol.h>
 
-using cyqlone::index_t;
-using cyqlone::real_t;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 
 struct HPIPMQPData {
     std::unique_ptr<std::byte[]> dim_mem;
@@ -66,7 +66,7 @@ static auto prepare_hpipm_bounds(guanaqo::MatrixView<T, I, S, O> bounds) {
     return std::pair{std::move(values), std::move(mask)};
 }
 
-std::shared_ptr<HPIPMQPData> build_hpipm_qp(const cyqlone::LinearOCPStorage &ocp) {
+std::shared_ptr<HPIPMQPData> build_hpipm_qp(const fancyqlone::LinearOCPStorage &ocp) {
     HPIPMQPData d;
 
     // Dimensions
@@ -196,8 +196,8 @@ void warm_start_hpipm(HPIPMSolverData &solver_data, std::span<const real_t> solu
     d_ocp_qp_sol_set_x(dim->N, const_cast<real_t *>(xu), solver_data.qp_sol.get());
 }
 
-void update_x0_hpipm(cyqlone::LinearOCPStorage &ocp, HPIPMQPData &qp_data,
-                     std::span<const cyqlone::real_t> solution) {
+void update_x0_hpipm(fancyqlone::LinearOCPStorage &ocp, HPIPMQPData &qp_data,
+                     std::span<const fancyqlone::real_t> solution) {
     auto &dim      = qp_data.dim;
     const auto nx0 = dim->nx[0], nu0 = dim->nu[0], nx1 = dim->nx[1];
     BATMAT_ASSERT(solution.size() >= static_cast<size_t>(nx0 + nu0 + nx1));
@@ -207,7 +207,7 @@ void update_x0_hpipm(cyqlone::LinearOCPStorage &ocp, HPIPMQPData &qp_data,
     std::ranges::copy_n(x1, nx1, ocp.b(0).data);
 }
 
-void shift_solution_hpipm(HPIPMQPData &qp_data, std::span<cyqlone::real_t> solution) {
+void shift_solution_hpipm(HPIPMQPData &qp_data, std::span<fancyqlone::real_t> solution) {
     const std::ptrdiff_t nx = qp_data.dim->nx[0], nu = qp_data.dim->nu[0];
     for (int j = 1; j < qp_data.dim->N; ++j) {
         BATMAT_ASSERT(qp_data.dim->nx[j] == nx);
@@ -221,9 +221,9 @@ void shift_solution_hpipm(HPIPMQPData &qp_data, std::span<cyqlone::real_t> solut
                       solution.data() + (nx + nu) * (qp_data.dim->N - 1));
 }
 
-cyqlone::LinearOCPStorage::Solution get_solution_hpipm(HPIPMSolverData &solver_data) {
+fancyqlone::LinearOCPStorage::Solution get_solution_hpipm(HPIPMSolverData &solver_data) {
     using std::abs;
-    cyqlone::LinearOCPStorage::Solution sol;
+    fancyqlone::LinearOCPStorage::Solution sol;
     auto &dim     = solver_data.qp_data->dim;
     auto nx_total = std::accumulate(dim->nx, dim->nx + dim->N + 1, 0);
     auto nu_total = std::accumulate(dim->nu, dim->nu + dim->N, 0);

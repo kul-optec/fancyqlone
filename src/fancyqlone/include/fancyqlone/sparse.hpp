@@ -14,7 +14,7 @@
 #include <ranges>
 #include <vector>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 /// @addtogroup topic-utilities
 /// @{
@@ -116,4 +116,4 @@ struct SparseMatrixBuilder {
 
 /// @}
 
-} // namespace cyqlone
+} // namespace fancyqlone

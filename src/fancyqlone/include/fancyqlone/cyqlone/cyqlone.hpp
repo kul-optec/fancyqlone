@@ -29,7 +29,7 @@
 #include <optional>
 #include <utility>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using batmat::matrix::StorageOrder;
 
@@ -185,7 +185,7 @@ struct TricyqleSolver {
     /// function. The function is called with an index `i` in `[0, p)` and a mutable view to the
     /// compact workspace of depth `v` where the diagonal blocks `M(i+l*p)` for `l` in `[0, v)`
     /// should be stored. Copying non-compact data to this workspace can be achieved using the
-    /// @ref cyqlone::linalg::pack function.
+    /// @ref fancyqlone::linalg::pack function.
     decltype(auto) init_diag(Context &ctx, auto &&func) {
         return func(ctx.index, cr_L.batch(ctx.index));
     }
@@ -193,7 +193,7 @@ struct TricyqleSolver {
     /// function. The function is called with an index `i` in `[0, p)` and a mutable view to the
     /// compact workspace of depth `v` where the subdiagonal blocks `K(i+l*p)` for `l` in `[0, v)`
     /// should be stored. Copying non-compact data to this workspace can be achieved using the
-    /// @ref cyqlone::linalg::pack function.
+    /// @ref fancyqlone::linalg::pack function.
     decltype(auto) init_subdiag(Context &ctx, auto &&func) {
         return (p == 1 || ctx.index & 1) ? func(ctx.index, cr_Y.batch(ctx.index))
                                          : func(ctx.index, cr_U.batch(ctx.index + 1).transposed());
@@ -202,7 +202,7 @@ struct TricyqleSolver {
     /// function is called with an index `i` in `[0, p)` and a mutable view of the batch of @p b
     /// of depth `v` where the right-hand side blocks `b(i+l*p)` for `l` in `[0, v)` should be
     /// stored. Copying non-compact data to this batch can be achieved using the
-    /// @ref cyqlone::linalg::pack function.
+    /// @ref fancyqlone::linalg::pack function.
     decltype(auto) init_rhs(Context &ctx, mut_view<> b, auto &&func) const {
         return func(ctx.index, b.batch(ctx.index));
     }
@@ -234,7 +234,7 @@ struct TricyqleSolver {
      * `iS, iB, iF` in `[0, p)` and mutable views `S, B, F` of the batches of depth `v` where the
      * diagonal blocks `B(iB+l*p)` and the subdiagonal blocks `F(iB+l*p)` of the update matrix and
      * the diagonal elements `S(iS+l*p)` for `l` in `[0, v)` should be stored. Copying non-compact
-     * data to these batches can be achieved using the @ref cyqlone::linalg::pack function.
+     * data to these batches can be achieved using the @ref fancyqlone::linalg::pack function.
      * The argument @p sync_S is a callable that can be called to indicate that the diagonal batch
      * `S(iS+l*p)` has been fully initialized. It should be accepted by reference (`auto &`).
      * The @p rank argument specifies the rank of the update for column with index `ctx.index`.
@@ -266,7 +266,7 @@ struct TricyqleSolver {
     /// Get access to the solution computed by this thread using a user-provided function. The
     /// function is called with an index `i` in `[0, p)` and a view to the compact batch of @p λ
     /// of depth `v` where the solution blocks `λ(i+l*p)` for `l` in `[0, v)` are stored. Copying
-    /// this batch to a non-compact layout can be achieved using the @ref cyqlone::linalg::unpack
+    /// this batch to a non-compact layout can be achieved using the @ref fancyqlone::linalg::unpack
     /// function.
     decltype(auto) get_solution(Context &ctx, view<> λ, auto &&func) const {
         return func(ctx.index, λ.batch(ctx.index));
@@ -1204,4 +1204,4 @@ struct CyqloneSolver {
     /// @}
 };
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

@@ -5,10 +5,10 @@
 #include <fancyqlone/sequential-fancyqlone/implementation/sfan-update.tpp>
 
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 #define SerialFANCYQLONE_INSTANTIATE_CYQLONE(VL, O) template struct SerialFanCyqloneSolver<VL, real_t, O>;
 BATMAT_FOREACH_VL_DEFAULT(SerialFANCYQLONE_INSTANTIATE_CYQLONE, StorageOrder::ColMajor)
 BATMAT_FOREACH_VL_DEFAULT(SerialFANCYQLONE_INSTANTIATE_CYQLONE, StorageOrder::RowMajor)
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

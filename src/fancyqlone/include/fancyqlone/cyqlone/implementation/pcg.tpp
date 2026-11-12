@@ -9,7 +9,7 @@
 #include <batmat/linalg/syomv.hpp>
 #include <batmat/linalg/trsm.hpp>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using namespace linalg;
 using namespace batmat::linalg;
@@ -83,4 +83,4 @@ void TricyqleSolver<VL, T, DefaultOrder, Ctx>::solve_pcg(mut_batch_view<> λ,
     }
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

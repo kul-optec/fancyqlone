@@ -2,7 +2,7 @@
 
 #include <batmat/assume.hpp>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
 auto TricyqleSolver<VL, T, DefaultOrder, Ctx>::sub_wrap_ceil_p(index_t a, index_t b) const
@@ -193,4 +193,4 @@ CyqloneSolver<VL, T, DefaultOrder, Ctx>::inverse_stage_index(index_t stage) cons
     };
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

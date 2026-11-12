@@ -20,7 +20,7 @@
 #include <zlib.h>
 #endif
 
-namespace cyqlone {
+namespace fancyqlone {
 
 namespace fs = std::filesystem;
 
@@ -189,6 +189,6 @@ void write_chrome_trace(const fs::path &path,
     writer("\n]}"sv);
 }
 
-} // namespace cyqlone
+} // namespace fancyqlone
 
 #endif

@@ -8,7 +8,7 @@
 #include <batmat/linalg/uview.hpp>
 #include <batmat/loop.hpp>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 using namespace linalg;
 using namespace batmat::linalg;
@@ -163,4 +163,4 @@ void CyqloneSolver<VL, T, DefaultOrder, Ctx>::cost_gradient_remove_regularizatio
     foreach_stage(ctx, sub_reg, ux, ux0, grad_f);
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

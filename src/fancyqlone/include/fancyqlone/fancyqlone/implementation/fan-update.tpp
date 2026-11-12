@@ -15,8 +15,8 @@
 #include <batmat/loop.hpp>
 #include <fstream>
 #include <iostream>
-namespace CYQLONE_NS(cyqlone) {
-namespace la = cyqlone::linalg;
+namespace FANCYQLONE_NS(fancyqlone) {
+namespace la = fancyqlone::linalg;
 
 using la::tril;
 
@@ -29,4 +29,4 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::update_solve(
 {
     throw std::runtime_error("update_solve not implemented yet");
 }
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

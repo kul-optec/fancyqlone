@@ -6,7 +6,7 @@
 
 #include <vector>
 
-namespace cyqlone::qpalm::problems {
+namespace fancyqlone::qpalm::problems {
 
 struct SpringMassParams {
     real_t friction = 0;      ///< friction coefficient
@@ -136,13 +136,13 @@ struct FanSpringMassProblem {
     FanOCPStorage ocp;
     std::vector<real_t> ref;
 };
-} // namespace cyqlone::qpalm::problems
+} // namespace fancyqlone::qpalm::problems
 
-namespace CYQLONE_NS(cyqlone::qpalm::problems) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm::problems) {
 
 SpringMassProblem CYQLONE_EXAMPLE_PROBLEMS_EXPORT spring_mass(SpringMassParams p);
 FanSpringMassProblem CYQLONE_EXAMPLE_PROBLEMS_EXPORT fan_spring_mass(SpringMassParams p,
                                                                       index_t num_branches, real_t k_spring_diff = 0.1);
 
 
-} // namespace CYQLONE_NS(cyqlone::qpalm::problems)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm::problems)

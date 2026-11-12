@@ -11,7 +11,7 @@
 #include <vector>
 #include <iostream>
 
-namespace cyqlone {
+namespace fancyqlone {
 
 /// Dimensions of an optimal control problem.
 /// @ingroup topic-ocp-formulations
@@ -484,4 +484,4 @@ struct FanOCPStorage {
     };
     [[nodiscard]] KKTError compute_kkt_error(const Solution &sol, bool hpipm = false) const;
 };
-} // namespace cyqlone
+} // namespace fancyqlone

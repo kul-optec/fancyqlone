@@ -68,14 +68,14 @@ struct HPIPMTreeSolverData {
 ///             branch 1: x_1, u_1, ..., x_N, ...]
 /// Terminal nodes have no control entry.
 struct HPIPMTreeSolution {
-    std::vector<cyqlone::real_t> primal;
+    std::vector<fancyqlone::real_t> primal;
 
     // Signed general-constraint multipliers, lam_ug - lam_lg, in node order.
-    std::vector<cyqlone::real_t> inequality_multipliers;
+    std::vector<fancyqlone::real_t> inequality_multipliers;
 
     // Initial-state bound multiplier followed by edge dynamics multipliers.
     // Edge multipliers are stored in HPIPM edge order.
-    std::vector<cyqlone::real_t> equality_multipliers;
+    std::vector<fancyqlone::real_t> equality_multipliers;
 };
 
 struct HPIPMStats {
@@ -89,7 +89,7 @@ struct HPIPMStats {
 /// Native boxes and x0 elimination are supported for cold solves. Pass false
 /// for both options when using the existing warm-start import/shift helpers.
 std::shared_ptr<HPIPMTreeQPData>
-build_hpipm_tree_qp(const cyqlone::FanOCPStorage &fan, bool native_bounds = true,
+build_hpipm_tree_qp(const fancyqlone::FanOCPStorage &fan, bool native_bounds = true,
                     bool eliminate_x0 = true);
 
 std::shared_ptr<HPIPMTreeSolverData>
@@ -102,23 +102,23 @@ solve_hpipm_tree(const HPIPMTreeQPData &qp_data,
 
 HPIPMStats get_stats_hpipm_tree(HPIPMTreeSolverData &solver_data);
 
-cyqlone::FanOCPStorage::Solution get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data);
+fancyqlone::FanOCPStorage::Solution get_solution_hpipm_tree(HPIPMTreeSolverData &solver_data);
 
 /// Import a common fan primal/dual guess, rebuilding positive inequality slacks
 /// for the current QP. The root state is fixed to fan.b(0).
 void set_initial_guess_hpipm_tree(HPIPMTreeSolverData &solver_data,
-                                  const cyqlone::FanOCPStorage &fan,
-                                  const cyqlone::FanOCPStorage::Solution &guess);
+                                  const fancyqlone::FanOCPStorage &fan,
+                                  const fancyqlone::FanOCPStorage::Solution &guess);
 
 void warm_start_hpipm_tree(HPIPMTreeSolverData &solver_data,
-                           std::span<const cyqlone::real_t> primal);
+                           std::span<const fancyqlone::real_t> primal);
 
 /// Replace the common root state by the stage-one state of branch `branch`.
 /// This is useful for receding-horizon simulation when one fan outcome is chosen.
-void update_x0_hpipm_tree(cyqlone::FanOCPStorage &fan,
+void update_x0_hpipm_tree(fancyqlone::FanOCPStorage &fan,
                           HPIPMTreeQPData &qp_data,
-                          std::vector<cyqlone::LinearOCPStorage::Solution> &solution,
-                          cyqlone::index_t branch);
+                          std::vector<fancyqlone::LinearOCPStorage::Solution> &solution,
+                          fancyqlone::index_t branch);
 void tree_ocp_qp_sol_set_u(
     int node,
     std::span<const double> u,
@@ -253,4 +253,4 @@ void tree_ocp_qp_sol_set_t(
 
 void shift_hpipm_tree_solution(
     HPIPMTreeSolverData &solver_data,
-    cyqlone::real_t positive_floor = 1e-8);
+    fancyqlone::real_t positive_floor = 1e-8);

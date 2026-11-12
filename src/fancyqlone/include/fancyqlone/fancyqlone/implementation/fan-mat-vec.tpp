@@ -12,9 +12,9 @@
 #include <batmat/loop.hpp>
 #include <iostream>
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
-namespace la = cyqlone::linalg;
+namespace la = fancyqlone::linalg;
 using namespace batmat::linalg;
 
 template <index_t VL, class T, StorageOrder DefaultOrder, class Ctx>
@@ -199,4 +199,4 @@ void FanCyqloneSolver<VL, T, DefaultOrder, Ctx>::cost_gradient_remove_regulariza
     foreach_batch(ctx, sub_reg, ux, ux0, grad_f);
 }
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)

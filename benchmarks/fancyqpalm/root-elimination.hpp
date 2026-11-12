@@ -7,7 +7,7 @@
 
 namespace fanqp {
 
-inline std::vector<double> initial_state(const cyqlone::FanOCPStorage &fan) {
+inline std::vector<double> initial_state(const fancyqlone::FanOCPStorage &fan) {
     const auto reference = fan.ocps.front().b(0);
     std::vector<double> x0(reference.data, reference.data + reference.rows);
     for (const auto &ocp : fan.ocps)
@@ -26,7 +26,7 @@ struct ReducedRoot {
 
 /// Substitute fixed x0, preserving the original constraint-row mapping.
 /// The retained rows depend only on D0, so subsequent x0 updates preserve shape.
-inline ReducedRoot eliminate_root_state(const cyqlone::FanOCPStorage &fan,
+inline ReducedRoot eliminate_root_state(const fancyqlone::FanOCPStorage &fan,
                                         std::span<const double> x0, bool native_bounds) {
     const int nx = static_cast<int>(fan.ocps.front().dim.nx);
     const int nu = static_cast<int>(fan.ocps.front().dim.nu);

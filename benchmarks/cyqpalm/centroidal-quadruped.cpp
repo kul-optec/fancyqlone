@@ -28,9 +28,9 @@
 #include "hpipm.hpp"
 #endif
 
-namespace qp = cyqlone::qpalm;
-using cyqlone::index_t;
-using cyqlone::real_t;
+namespace qp = fancyqlone::qpalm;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 using qp::problems::CentroidalQuadrupedParams;
 using seconds = std::chrono::duration<double>;
 
@@ -66,13 +66,13 @@ void run_benchmark(benchmark::State &state, CentroidalQuadrupedParams params,
         return state.SkipWithMessage("Number of processors must be at least 1");
 
     auto problem = qp::problems::centroidal_quadruped(std::move(params));
-    auto ocp     = cyqlone::CyqloneStorage<>::build(problem.ocp);
+    auto ocp     = fancyqlone::CyqloneStorage<>::build(problem.ocp);
     qp::CyQPALMBackendSettings backend_settings{
         .processors             = processors,
         .print_residuals                = false,
         .changing_constr_factor = 0.01,
         .max_update_count       = 20,
-        .tricyqle_params        = {.solve_method = cyqlone::SolveMethod::PCR},
+        .tricyqle_params        = {.solve_method = fancyqlone::SolveMethod::PCR},
     };
     auto backend = qp::make_cyqpalm_backend<VL, qp::StorageOrder::ColMajor>(ocp, {},
                                                                             backend_settings);

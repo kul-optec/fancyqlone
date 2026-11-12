@@ -29,25 +29,25 @@
 #include <limits>
 #include <print>
 
-using cyqlone::index_t;
-using cyqlone::real_t;
+using fancyqlone::index_t;
+using fancyqlone::real_t;
 
 index_t cyq_get_num_proc();
 
-cyqlone::LinearOCPStorage combine_branches(std::span<const cyqlone::LinearOCPStorage> ocps);
+fancyqlone::LinearOCPStorage combine_branches(std::span<const fancyqlone::LinearOCPStorage> ocps);
 
 // Tests the factorization, factorization updates, and solution of the Cyqlone linear solver.
 TEST(CyqloneFanFactorTest, factorSPMD) {
-    using namespace cyqlone;
+    using namespace fancyqlone;
     using batmat::matrix::uninitialized;
-    namespace la = cyqlone::linalg;
+    namespace la = fancyqlone::linalg;
     using la::tril;
 
     const index_t p  = cyq_get_num_proc();
     using Solver     = CyqloneSolver<4, real_t, StorageOrder::RowMajor>;
-    using SolverLast = cyqlone::TridiagonalSolver<real_t>;
+    using SolverLast = fancyqlone::TridiagonalSolver<real_t>;
 
-    cyqlone::OCPDim dim{.N_horiz = 160, .nx = 30, .nu = 10, .ny = 0, .ny_N = 0};
+    fancyqlone::OCPDim dim{.N_horiz = 160, .nx = 30, .nu = 10, .ny = 0, .ny_N = 0};
     const index_t N = dim.N_horiz, nx = dim.nx, nu = dim.nu;
     const index_t nux = dim.nu + dim.nx;
     index_t fanout    = 2;
@@ -67,7 +67,7 @@ TEST(CyqloneFanFactorTest, factorSPMD) {
     SolverLast::matrix r0{{.depth = 1, .rows = nu, .cols = 1}, uninitialized};
     SolverLast::matrix rs{{.depth = fanout, .rows = nu, .cols = 1}, uninitialized};
     // Synchronization between the fanout branches
-    cyqlone::TreeBarrier<> fan_barrier(static_cast<uint32_t>(fanout), {});
+    fancyqlone::TreeBarrier<> fan_barrier(static_cast<uint32_t>(fanout), {});
     fan_barrier.spin_count = std::numeric_limits<uint32_t>::max();
 
     // Random initial state
@@ -112,7 +112,7 @@ TEST(CyqloneFanFactorTest, factorSPMD) {
     auto solve_fan      = [&](index_t i, index_t) {
         auto &ocp = ocps[i] = generate_random_ocp(dim, static_cast<uint32_t>(i));
         ocp.b(0)            = x0(0); // same initial state for each branch
-        auto cocp           = cyqlone::CyqloneStorage<>::build(ocp);
+        auto cocp           = fancyqlone::CyqloneStorage<>::build(ocp);
         // Store B(0)ᵀ for each branch; R(0) and -r(0) for the first branch
         la::copy(cocp.data_F(0).left_cols(nu).transposed(), Bs(i));
         if (i == 0) {
@@ -127,7 +127,7 @@ TEST(CyqloneFanFactorTest, factorSPMD) {
         // Cyqlone solver
         auto solver                  = Solver::build(cocp, p_fan);
         auto tricyqle_params         = solver.get_tricyqle_params();
-        tricyqle_params.solve_method = cyqlone::SolveMethod::None;
+        tricyqle_params.solve_method = fancyqlone::SolveMethod::None;
         solver.update_tricyqle_params(tricyqle_params);
         auto pctx = solver.create_parallel_context();
         pctx->set_barrier_spin_count(std::numeric_limits<uint32_t>::max());
@@ -266,10 +266,10 @@ TEST(CyqloneFanFactorTest, factorSPMD) {
 
     // Solve the combined problem with a single Cyqlone solve, as a reference solution
     auto combined_ocp                     = combine_branches(ocps);
-    auto combined_cocp                    = cyqlone::CyqloneStorage<>::build(combined_ocp);
+    auto combined_cocp                    = fancyqlone::CyqloneStorage<>::build(combined_ocp);
     auto combined_solver                  = Solver::build(combined_cocp, p);
     auto combined_tricyqle_params         = combined_solver.get_tricyqle_params();
-    combined_tricyqle_params.solve_method = cyqlone::SolveMethod::PCR;
+    combined_tricyqle_params.solve_method = fancyqlone::SolveMethod::PCR;
     combined_solver.update_tricyqle_params(combined_tricyqle_params);
     auto combined_rq = combined_solver.initialize_gradient(combined_cocp);
     auto combined_b  = combined_solver.initialize_rhs(combined_cocp);

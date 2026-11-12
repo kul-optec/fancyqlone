@@ -18,22 +18,22 @@
 #include "common.py.hpp"
 #include "fancyqlone.py.hpp"
 
-namespace CYQLONE_NS(cyqlone) {
+namespace FANCYQLONE_NS(fancyqlone) {
 
 template <index_t VL>
 struct PythonCyqloneSolver {
-    using Backend = cyqlone::qpalm::unique_CyQPALMBackend<VL>;
-    using Solver  = cyqlone::qpalm::Solver<Backend>;
+    using Backend = fancyqlone::qpalm::unique_CyQPALMBackend<VL>;
+    using Solver  = fancyqlone::qpalm::Solver<Backend>;
     Solver solver;
     PythonCyqloneSolver(const CyqloneStorage<> &ocp,
-                        cyqlone::qpalm::CyQPALMBackendSettings backend_settings,
-                        cyqlone::qpalm::Settings qpalm_settings)
-        : solver{cyqlone::qpalm::make_cyqpalm_backend<VL>(ocp, {}, backend_settings),
+                        fancyqlone::qpalm::CyQPALMBackendSettings backend_settings,
+                        fancyqlone::qpalm::Settings qpalm_settings)
+        : solver{fancyqlone::qpalm::make_cyqpalm_backend<VL>(ocp, {}, backend_settings),
                  qpalm_settings} {}
     PythonCyqloneSolver(const PythonOCP &ocp,
-                        cyqlone::qpalm::CyQPALMBackendSettings backend_settings,
-                        cyqlone::qpalm::Settings qpalm_settings)
-        : solver{cyqlone::qpalm::make_cyqpalm_backend<VL>(cyqlone::CyqloneStorage<>::build(ocp.ocp),
+                        fancyqlone::qpalm::CyQPALMBackendSettings backend_settings,
+                        fancyqlone::qpalm::Settings qpalm_settings)
+        : solver{fancyqlone::qpalm::make_cyqpalm_backend<VL>(fancyqlone::CyqloneStorage<>::build(ocp.ocp),
                                                           {}, backend_settings),
                  qpalm_settings} {}
 };
@@ -125,7 +125,7 @@ void register_cyqlone_solver(nb::module_ &m) {
         .def_prop_ro("num_general_constraints", &Solver::num_general_constraints)
         .def_prop_rw(
             "params", [](Solver &self) -> auto & { return self.tricyqle.params; },
-            [](Solver &self, const cyqlone::TricyqleParams<> &p) {
+            [](Solver &self, const fancyqlone::TricyqleParams<> &p) {
                 self.update_tricyqle_params(p);
             },
             nb::rv_policy::reference_internal)
@@ -261,7 +261,7 @@ void register_cyqlone_solver(nb::module_ &m) {
                const CyqloneStorage<> &ocp) {
                 auto Σ_vw = view_as_batched(Σ);
                 auto ux   = self.initialize_gradient(ocp);
-                cyqlone::linalg::negate(ux); // right-hand side is the negative gradient
+                fancyqlone::linalg::negate(ux); // right-hand side is the negative gradient
                 auto λ = self.initialize_rhs(ocp);
                 self.run([&](auto &ctx) { self.factor_solve(ctx, S, 0, Σ_vw, ux, λ); });
                 return std::make_tuple(np_copy(std::move(ux)), np_copy(std::move(λ)));
@@ -316,7 +316,7 @@ void register_cyqlone_solver(nb::module_ &m) {
             "solve_forward",
             [](Solver &self, const CyqloneStorage<> &ocp) {
                 auto ux = self.initialize_gradient(ocp);
-                cyqlone::linalg::negate(ux); // right-hand side is the negative gradient
+                fancyqlone::linalg::negate(ux); // right-hand side is the negative gradient
                 auto λ = self.initialize_rhs(ocp);
                 self.run([&](auto &ctx) { self.solve_forward(ctx, ux, λ); });
                 return std::make_tuple(np_copy(std::move(ux)), np_copy(std::move(λ)));
@@ -384,9 +384,9 @@ template <class Solver, class BackendSettings>
 void register_qpalm_solver(nb::module_ &m, const char *name) {
     nb::class_<Solver> solver(m, name);
     solver //
-        .def(nb::init<const CyqloneStorage<> &, BackendSettings, cyqlone::qpalm::Settings>(),
+        .def(nb::init<const CyqloneStorage<> &, BackendSettings, fancyqlone::qpalm::Settings>(),
              "ocp"_a, "backend_settings"_a, "qpalm_settings"_a)
-        .def(nb::init<const PythonOCP &, BackendSettings, cyqlone::qpalm::Settings>(), "ocp"_a,
+        .def(nb::init<const PythonOCP &, BackendSettings, fancyqlone::qpalm::Settings>(), "ocp"_a,
              "backend_settings"_a, "qpalm_settings"_a)
         .def("__call__", [](Solver &self) { return self.solver(); })
         .def_prop_ro("solution",
@@ -443,7 +443,7 @@ void register_qpalm_solver(nb::module_ &m, const char *name) {
 
 template <index_t VL>
 void register_qpalm_cyqlone(nb::module_ &m) {
-    register_qpalm_solver<PythonCyqloneSolver<VL>, cyqlone::qpalm::CyQPALMBackendSettings>(
+    register_qpalm_solver<PythonCyqloneSolver<VL>, fancyqlone::qpalm::CyQPALMBackendSettings>(
         m, "QPALM_Cyqlone");
 }
 
@@ -452,12 +452,12 @@ struct overloaded : Ts... {
     using Ts::operator()...;
 };
 
-} // namespace CYQLONE_NS(cyqlone)
+} // namespace FANCYQLONE_NS(fancyqlone)
 
 #define CYQLONE_INSTANTIATE_MODULE(VL)                                                             \
     auto m##VL = m.def_submodule(VL == 1 ? "scalar" : "simd" #VL);                                 \
-    cyqlone::register_qpalm_cyqlone<VL>(m##VL);                                                    \
-    cyqlone::register_cyqlone_solver<cyqlone::CyqloneSolver<VL>>(m##VL);                            \
-    cyqlone::register_fancyqlone_solver<VL>(m##VL);
+    fancyqlone::register_qpalm_cyqlone<VL>(m##VL);                                                 \
+    fancyqlone::register_cyqlone_solver<fancyqlone::CyqloneSolver<VL>>(m##VL);                      \
+    fancyqlone::register_fancyqlone_solver<VL>(m##VL);
 
 NB_MODULE(MODULE_NAME, m) { BATMAT_FOREACH_VL_DEFAULT(CYQLONE_INSTANTIATE_MODULE) }

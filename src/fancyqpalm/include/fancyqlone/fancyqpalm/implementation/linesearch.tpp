@@ -27,7 +27,7 @@
 #include <print>
 #endif
 
-namespace CYQLONE_NS(cyqlone::qpalm) {
+namespace FANCYQLONE_NS(fancyqlone::qpalm) {
 
 struct LineSearchSettings {
     bool find_smallest_breakpoint_first = false;
@@ -185,4 +185,4 @@ auto LineSearch<Vec>::operator()(
     });
 }
 
-} // namespace CYQLONE_NS(cyqlone::qpalm)
+} // namespace FANCYQLONE_NS(fancyqlone::qpalm)
