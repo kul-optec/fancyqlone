@@ -1,0 +1,18 @@
+--- a/test/linalg/test-small-potrf.cpp
++++ b/test/linalg/test-small-potrf.cpp
+@@ -184,6 +184,6 @@
+     using batmat::linalg::small_syrk_add_potrf_left;
+     using batmat::linalg::tril;
+     using EMat = Eigen::MatrixX<typename TypeParam::value_type>;
+-    for (index_t n : {0, 1, 2, 3, 4, 5, 6, 31})
++    for (batmat::index_t n : {0, 1, 2, 3, 4, 5, 6, 31})
+         for (auto m : batmat::tests::sizes)
+             for (auto k : batmat::tests::sizes) {
+@@ -227,6 +227,6 @@
+     using batmat::linalg::syrk_add;
+     using batmat::linalg::tril;
+     using EMat = Eigen::MatrixX<typename TypeParam::value_type>;
+-    for (index_t n : {0, 1, 2, 3, 4, 5, 6, 31})
++    for (batmat::index_t n : {0, 1, 2, 3, 4, 5, 6, 31})
+         for (auto m : batmat::tests::sizes)
+             for (auto k : batmat::tests::sizes) {

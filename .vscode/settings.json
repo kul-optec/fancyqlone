@@ -5,9 +5,4 @@
     "editor.rulers": [
         100,
     ],
-    "files.associations": {
-        "*.cpp.in": "cpp",
-        "*.hpp.in": "cpp",
-    },
-    "cmake.copyCompileCommands": "${workspaceFolder}/build/compile_commands.json",
 }
