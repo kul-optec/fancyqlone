@@ -1,3 +1,17 @@
+/*
+ * This file contains code derived from:
+ * https://gitlab.laas.fr/paleziart/quadruped-qp-problems
+ *
+ * Copyright 2023 Pierre-Alexandre Leziart
+ *
+ * Original code licensed under the Apache License, Version 2.0.
+ *
+ * C++ modifications:
+ * Copyright 2026 Matisse Teuwen
+ *
+ * This modified work is distributed as part of fancyqlone
+ * under the GNU Lesser General Public License, version 3.
+ */
 #pragma once
 
 #include <fancyqlone/config.hpp>

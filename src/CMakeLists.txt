@@ -115,15 +115,20 @@ if (CYQLONE_WITH_QPALM)
     # Example problems
     if (CYQLONE_WITH_EXAMPLE_PROBLEMS)
         find_package(Eigen3 REQUIRED)
+        # Publish the flat quadruped header under the public include hierarchy.
+        configure_file("example-problems/centroidal-quadruped/centroidal-quadruped.hpp"
+            "${CMAKE_CURRENT_BINARY_DIR}/include/fancyqlone/fancyqpalm/example-problems/centroidal-quadruped.hpp"
+            COPYONLY)
         add_library(example-problems
-            "example-problems/src/centroidal-quadruped.cpp"
+            "example-problems/centroidal-quadruped/centroidal-quadruped.cpp"
             "example-problems/src/csv.cpp"
             "example-problems/src/platooning.cpp"
             "example-problems/src/spring-mass.cpp"
         )
         target_sources(example-problems PUBLIC FILE_SET HEADERS
             BASE_DIRS "example-problems/include"
-            FILES     "example-problems/include/fancyqlone/fancyqpalm/example-problems/centroidal-quadruped.hpp"
+                      "${CMAKE_CURRENT_BINARY_DIR}/include"
+            FILES     "${CMAKE_CURRENT_BINARY_DIR}/include/fancyqlone/fancyqpalm/example-problems/centroidal-quadruped.hpp"
                       "example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp"
                       "example-problems/include/fancyqlone/fancyqpalm/example-problems/zoh.hpp"
                       "example-problems/include/fancyqlone/fancyqpalm/example-problems/csv.hpp"

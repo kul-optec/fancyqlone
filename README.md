@@ -34,7 +34,7 @@ The paper describing the algorithms in this repository can be found on arXiv: [*
 ## Reproduction of benchmark results from the paper
 
 A script to reproduce the benchmark results from the paper can be found in `benchmarks/fancyqlone`.
-See [`benchmarks/fancyqlone/README.md`](benchmarks/cyqpalm/README.md) for instructions.
+See [`benchmarks/fancyqlone/README.md`](benchmarks/fancyqlone/README.md) for instructions.
 
 ## Documentation Cyqlone
 

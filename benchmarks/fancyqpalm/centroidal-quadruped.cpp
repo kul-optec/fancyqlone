@@ -1,3 +1,6 @@
+"""This code is adapted from https://gitlab.laas.fr/paleziart/quadruped-qp-problems"""
+
+
 #include <benchmark/benchmark.h>
 #include <fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/centroidal-quadruped.hpp>

@@ -1,3 +1,12 @@
+/*
+ * This file contains code derived from:
+ * https://gitlab.laas.fr/paleziart/quadruped-qp-problems
+ *
+ * Copyright 2023 Pierre-Alexandre Leziart
+ *
+ * Original code licensed under the Apache License, Version 2.0.
+ * C++ modifications:
+ */
 #include <fancyqlone/conversion.hpp>
 #include <fancyqlone/fancyqpalm/example-problems/centroidal-quadruped.hpp>
 #include <guanaqo/eigen/view.hpp>
