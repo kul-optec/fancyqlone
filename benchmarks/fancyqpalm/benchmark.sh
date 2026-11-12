@@ -5,9 +5,20 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 CYQLONE_ROOT="$(cd ../.. && pwd)"
 export CONAN_HOME="${CYQLONE_ROOT}/.conan2"
+# Keep upstream PIQP and the original fork in separate dependency/build trees.
+: "${PIQP_VARIANT:=upstream}"
+if [[ ${1:-} = --piqp-legacy ]]; then
+    PIQP_VARIANT=legacy
+    shift
+fi
+case "$PIQP_VARIANT" in
+    upstream) CONAN_JSON=conan-piqp-upstream.json; PRESET_DEFAULT=conan-piqp-upstream-release ;;
+    legacy) CONAN_JSON=conan-piqp-legacy.json; PRESET_DEFAULT=conan-piqp-legacy-release ;;
+    *) echo "Unknown PIQP_VARIANT '$PIQP_VARIANT' (expected upstream or legacy)" >&2; exit 1 ;;
+esac
 # User-configurable variables with defaults
-: "${CONF_PRESET:=conan-release}"
-: "${BUILD_PRESET:=conan-release}"
+: "${CONF_PRESET:=$PRESET_DEFAULT}"
+: "${BUILD_PRESET:=$PRESET_DEFAULT}"
 : "${OMP_NUM_THREADS:=8}" # Use 8 processors (p parameter in the paper)
 : "${OMP_PLACES:=0:$OMP_NUM_THREADS}" # Bind to the first CPU cores (should be physical P-cores)
 
@@ -46,6 +57,7 @@ deps() {
         esac
         shift
     done
+    profiles+=("-pr:h" "${PWD}/piqp-${PIQP_VARIANT}.profile")
     if ! which conan &> /dev/null; then
         echo "Conan not found in PATH. Please install Conan 2.x and try again. https://conan.io" >&2
         exit 1
@@ -82,7 +94,7 @@ deps() {
         conan lock create . "${conan_args[@]}"
         conan lock remove --requires="cyqlone/*"
     fi
-    conan install . "${conan_args[@]}" --format=json > conan.json
+    conan install . "${conan_args[@]}" --format=json > "${CONAN_JSON}"
 }
 
 # Wrapper for jq that downloads a binary if not found
@@ -107,10 +119,10 @@ _jq() {
 
 # Build the benchmark project
 build() {
-    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f conan.json ]]; then
+    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f $CONAN_JSON ]]; then
         echo "Conan files not found, please run the deps step first." >&2; exit 1
     fi
-    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' conan.json)"
+    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' "$CONAN_JSON")"
     set +ux
     source "${generators_folder}/conanbuild.sh"
     set -ux
@@ -118,7 +130,7 @@ build() {
     cmake --build --preset ${BUILD_PRESET}
 }
 tests() {
-    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f conan.json ]]; then
+    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f $CONAN_JSON ]]; then
         echo "Conan files not found, please run the deps and build steps first." >&2
         exit 1
     fi
@@ -126,8 +138,8 @@ tests() {
     local build_folder
     local generators_folder
 
-    build_folder="$(_jq -r '.graph.nodes."0".build_folder' conan.json)"
-    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' conan.json)"
+    build_folder="$(_jq -r '.graph.nodes."0".build_folder' "$CONAN_JSON")"
+    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' "$CONAN_JSON")"
 
     set +ux
     source "${generators_folder}/conanrun.sh"
@@ -143,11 +155,11 @@ tests() {
 }
 # Run a benchmark command
 benchmark() {
-    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f conan.json ]]; then
+    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f $CONAN_JSON ]]; then
         echo "Conan files not found, please run the deps and build steps first." >&2; exit 1
     fi
-    build_folder="$(_jq -r '.graph.nodes."0".build_folder' conan.json)"
-    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' conan.json)"
+    build_folder="$(_jq -r '.graph.nodes."0".build_folder' "$CONAN_JSON")"
+    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' "$CONAN_JSON")"
     set +ux
     source "${generators_folder}/conanrun.sh"
     set -ux
@@ -160,29 +172,31 @@ benchmark() {
 }
 
 benchmark_quadruped() {
-    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f conan.json ]]; then
+    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f $CONAN_JSON ]]; then
         echo "Conan files not found, please run the deps and build steps first." >&2; exit 1
     fi
-    build_folder="$(_jq -r '.graph.nodes."0".build_folder' conan.json)"
-    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' conan.json)"
+    build_folder="$(_jq -r '.graph.nodes."0".build_folder' "$CONAN_JSON")"
+    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' "$CONAN_JSON")"
     set +ux
     source "${generators_folder}/conanrun.sh"
     set -ux
     if [[ ! -x "${build_folder}/centroidal-quadruped" ]]; then
         echo "Quadruped benchmark executable not found, please run the build step first." >&2; exit 1
     fi
+    # Default parallelism comes from OMP_NUM_THREADS; forward explicit -p values only once.
     OMP_NUM_THREADS="${OMP_NUM_THREADS}" OMP_PLACES="${OMP_PLACES}" \
         OMP_PROC_BIND=close OMP_WAIT_POLICY=ACTIVE OMP_DYNAMIC=FALSE \
-        "${build_folder}/centroidal-quadruped" -p "${OMP_NUM_THREADS}" \
-        --benchmark_repetitions=1 --benchmark_min_time=0.1s "$@" --benchmark_out=benchmark-quad.json
+        "${build_folder}/centroidal-quadruped" \
+        --benchmark_repetitions=1 --benchmark_min_time=0.1s \
+        --benchmark_out=benchmark-quad.json "$@"
 }
 # Run a benchmark command
 benchmark2() {
-    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f conan.json ]]; then
+    if [[ ! -f CMakeUserPresets.json ]] || [[ ! -f $CONAN_JSON ]]; then
         echo "Conan files not found, please run the deps and build steps first." >&2; exit 1
     fi
-    build_folder="$(_jq -r '.graph.nodes."0".build_folder' conan.json)"
-    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' conan.json)"
+    build_folder="$(_jq -r '.graph.nodes."0".build_folder' "$CONAN_JSON")"
+    generators_folder="$(_jq -r '.graph.nodes."0".generators_folder' "$CONAN_JSON")"
     set +ux
     source "${generators_folder}/conanrun.sh"
     set -ux
@@ -394,7 +408,7 @@ main() {
         clean)
             clean ;;
         help|*)
-            echo "Usage: $0 {deps|build|benchmark-quick|benchmark-scaling|benchmark-grid|all|...}"  >&2
+            echo "Usage: $0 [--piqp-legacy] {deps|build|benchmark-quick|benchmark-scaling|benchmark-grid|all|...}"  >&2
             echo ""                                                                                 >&2
             echo "Commands:"                                                                        >&2
             echo "  deps [...]                - Install the dependencies (using Conan)"             >&2
@@ -414,8 +428,9 @@ main() {
             echo "Use $0 benchmark --help for the available benchmark parameters."                  >&2
             echo ""                                                                                 >&2
             echo "Environment variables:"                                                           >&2
-            echo "  CONF_PRESET     - name of the CMake configure preset (default: conan-release)"  >&2
-            echo "  BUILD_PRESET    - name of the CMake build preset (default: conan-release)"      >&2
+            echo "  PIQP_VARIANT    - upstream (default) or legacy (same as --piqp-legacy)"        >&2
+            echo "  CONF_PRESET     - CMake configure preset (default: conan-piqp-<variant>-release)" >&2
+            echo "  BUILD_PRESET    - CMake build preset (default: conan-piqp-<variant>-release)"   >&2
             echo "  OMP_NUM_THREADS - number of processors to use for the benchmark (default: 8)"   >&2
             echo "  OMP_PLACES      - OpenMP places for binding (default: 0:\$OMP_NUM_THREADS)"     >&2
             exit $exit ;;

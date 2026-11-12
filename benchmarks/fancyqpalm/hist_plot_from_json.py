@@ -20,10 +20,13 @@ import re
 plt.rcParams.update(
     {
         "text.usetex": True,
+        "text.latex.preamble": r"\usepackage{amsmath}",
         "font.size": 11,
         "font.family": "serif",
     }
 )
+
+BOX_TEXT_SCALE = 1.5
 
 # List of colors for histograms (matching line_colors from perf_plot_pdf.py)
 hist_colors = [
@@ -328,7 +331,7 @@ def format_solver_name(solver_name: str, plot: Optional[str] = None) -> str:
     )
     if fancy_match:
         serial, processors, vector_width = fancy_match.groups()
-        parameters = f"p={processors},v={vector_width}"
+        parameters = fr"$n_\text{{p}}$={processors}, $n_\text{{v}}$={vector_width}"
         if serial:
             parameters += ",serial"
         return fr"\textsc{{FanCyQPALM}}{sep}({parameters})"
@@ -351,8 +354,8 @@ def format_solver_name(solver_name: str, plot: Optional[str] = None) -> str:
         "hpipm(zero)": fr"HPIPM",
         "hpipm(shift)": fr"HPIPM{sep}(warm)",
         "piqp(multistage)": fr"PIQP",
-        "treeqp(qpOasis)": fr"TreeQP",
-        "treeqp(clip)": fr"TreeQP",
+        "treeqp(qpOasis)": fr"treeQP",
+        "treeqp(clip)": fr"treeQP",
     }
     solver_name = names.get(solver_name, solver_name)
     solver_name = solver_name.replace("cyqlone._cyqlone_", "")
@@ -525,10 +528,11 @@ def create_scaling_plot(
     figsize: tuple[float, float] = (8, 6),
     reduce_metric: str = "min",
     show_legend: bool = True,
-    ylim: Optional[tuple[float, float]] = None,
+    ylim: Optional[tuple[Optional[float], Optional[float]]] = None,
     logy: bool = False,
     color_offset: int = 0,
     xvar: str = "N",
+    logx: bool = False,
 ):
     """
     Create a scaling plot showing speedup (or absolute metric) vs N, M, or J.
@@ -557,6 +561,8 @@ def create_scaling_plot(
         Whether to use logarithmic scale for y-axis (default: False)
     xvar : str
         Scaling variable: horizon length N, number of masses M, or branches J.
+    logx : bool
+        Whether to use logarithmic spacing for the x-axis (default: False).
     
     Returns
     -------
@@ -700,7 +706,7 @@ def create_scaling_plot(
     
     if reference_solver is None:  # Only for absolute metric plots
         max_y = max(all_y_values) if all_y_values else 0
-        if ylim is not None:
+        if ylim is not None and ylim[1] is not None:
             max_y = ylim[1]
         
         if max_y <= 1.0 and "[ms]" in ylabel:
@@ -790,10 +796,12 @@ def create_scaling_plot(
     ax.grid(True, alpha=0.3, which="major")
     ax.grid(True, alpha=0.15, which="minor")
 
+    if logx:
+        ax.set_xscale('log')
     if logy:
         ax.set_yscale('log')
     if show_legend:
-        ax.legend(loc="best", fontsize=9, framealpha=0.6)
+        ax.legend(loc="upper left", fontsize=9, framealpha=0, edgecolor="none")
 
     # Set ylim with scaling applied
     if ylim is not None:
@@ -802,7 +810,9 @@ def create_scaling_plot(
             ax.set_ylim(ylim)
         else:
             # Absolute metric plots - apply scale factor
-            ax.set_ylim(ylim[0] * scale_factor, ylim[1] * scale_factor)
+            ax.set_ylim(tuple(
+                value * scale_factor if value is not None else None for value in ylim
+            ))
     elif reference_solver is None:
         # For absolute metric plots without explicit ylim, set lower bound to 0
         if not logy:
@@ -815,6 +825,7 @@ def create_scaling_plot(
     return fig
 
 
+@plt.rc_context({"font.size": plt.rcParams["font.size"] * BOX_TEXT_SCALE})
 def create_box_plot(
     all_results: dict[str, pd.DataFrame],
     metric: str,
@@ -830,6 +841,9 @@ def create_box_plot(
     xlim: Optional[tuple[Optional[float], Optional[float]]] = None,
     logy: bool = False,
     xvar: Optional[str] = None,
+    ylim: Optional[tuple[Optional[float], Optional[float]]] = None,
+    logx: bool = False,
+    box_width: float = 0.5,
 ):
     """
     Create box plots for multiple solvers on a single subplot.
@@ -866,10 +880,15 @@ def create_box_plot(
     group_by : str
         How to group the box plots: "dataset" or "solver" (default: "dataset")
     xlim : tuple[float or None, float or None], optional
-        Metric-axis limits (min, max). For vertical box plots these are applied
-        to the y-axis. None bounds are auto-computed.
+        Legacy alias for ylim. Used only when ylim is not specified.
     xvar : str, optional
         Position dataset groups proportionally to N, M, or J when specified.
+    ylim : tuple[float or None, float or None], optional
+        Y-axis limits (min, max). None bounds are auto-computed.
+    logx : bool
+        Logarithmically space dataset groups and their boxes; requires xvar.
+    box_width : float
+        Box width as a fraction of the spacing between solvers (default: 0.5).
 
     Returns
     -------
@@ -881,6 +900,11 @@ def create_box_plot(
     
     if group_by not in ["dataset", "solver"]:
         raise ValueError(f"group_by must be 'dataset' or 'solver', got '{group_by}'")
+    if logx and (group_by != "dataset" or xvar is None):
+        raise ValueError("--logx for box plots requires --group-by=dataset and --xvar")
+
+    if ylim is None:
+        ylim = xlim
 
     # Validate reference_solver if provided
     if reference_solver is not None:
@@ -1008,6 +1032,10 @@ def create_box_plot(
         centers = sorted(set(dataset_centers.values()))
         if len(centers) != len(all_datasets_sorted):
             raise ValueError(f"Dataset groups must have distinct {xvar} values")
+        if logx:
+            if any(center <= 0 for center in centers):
+                raise ValueError(f"Logarithmic spacing requires positive {xvar} values")
+            centers = np.log10(centers)
         min_gap = min(np.diff(centers), default=1)
         box_step = min_gap / (len(selected_solvers) + gap_between_groups)
 
@@ -1024,11 +1052,12 @@ def create_box_plot(
                 if len(dataset_df) > 0:
                     values = dataset_df[plot_metric].dropna().values
                     box_data.append(values)
-                    box_positions.append(
-                        dataset_centers[dataset_id]
-                        + (solver_idx - (len(selected_solvers) - 1) / 2) * box_step
-                        if dataset_centers else position
-                    )
+                    box_position = position
+                    if dataset_centers:
+                        center = dataset_centers[dataset_id]
+                        offset = (solver_idx - (len(selected_solvers) - 1) / 2) * box_step
+                        box_position = center * 10**offset if logx else center + offset
+                    box_positions.append(box_position)
                     box_colors.append(color_map[solver_id])
                     
                     # Build label with reference solver if applicable
@@ -1094,12 +1123,19 @@ def create_box_plot(
             position += gap_between_groups
 
     # Create vertical box plots
+    box_widths = box_width * box_step
+    if logx:
+        ax.set_xscale('log')
+        ax.set_xticks([], minor=True)
+        # Keep boxes equally wide on screen by scaling widths with their positions.
+        half_width_factor = 10 ** (box_width * box_step / 2)
+        box_widths = np.asarray(box_positions) * (half_width_factor - 1 / half_width_factor)
     bp = ax.boxplot(
         box_data,
         positions=box_positions,
         notch=True,
         vert=True,
-        widths=0.5 * box_step,
+        widths=box_widths,
         patch_artist=True,
         showfliers=True,
         flierprops=dict(
@@ -1131,10 +1167,14 @@ def create_box_plot(
 
     # Set x-tick labels at the center of each group
     ax.set_xticks(group_tick_positions)
-    ax.set_xticklabels(group_tick_labels, fontsize=10)
+    ax.set_xticklabels(group_tick_labels, fontsize=10 * BOX_TEXT_SCALE)
     if dataset_centers:
         padding = (len(selected_solvers) / 2 + 1) * box_step
-        ax.set_xlim(min(group_tick_positions) - padding, max(group_tick_positions) + padding)
+        if logx:
+            ax.set_xlim(min(group_tick_positions) * 10**(-padding),
+                        max(group_tick_positions) * 10**padding)
+        else:
+            ax.set_xlim(min(group_tick_positions) - padding, max(group_tick_positions) + padding)
         ax.set_xlabel({
             "N": "Horizon length $N$",
             "M": "Number of masses $M$",
@@ -1155,22 +1195,21 @@ def create_box_plot(
         # Absolute metric plot
         ax.set_ylabel(METRIC_LABELS.get(metric, metric.replace("_", " ").capitalize()))
         title = METRIC_PRETTY.get(metric, metric.replace("_", " ")).capitalize()
+        ax.set_title(title, loc="left")
         if dataset_fixed is not None:
-            # title = f"{title}\\rlap{{\\quad\\normalsize{{({dataset_fixed})}}}}"
-            title = f"{title}\\hspace{{9em}}\\llap{{\\normalsize{{({dataset_fixed})}}}}"
-        ax.set_title(title, loc="right")
+            ax.set_title(f"({dataset_fixed})", loc="right", fontsize=plt.rcParams["font.size"])
     
     # Grid and metric-axis limits
-    if xlim is not None:
-        ax.set_ylim(xlim)
-        if xlim == (0, 52) or xlim == (0, 54):
+    if logy:
+        ax.set_yscale('log')
+    if ylim is not None:
+        ax.set_ylim(ylim)
+        if ylim == (0, 52) or ylim == (0, 54):
             ax.set_yticks([0, 10, 20, 30, 40, 50])
             ax.set_yticks([2, 4, 6, 8], minor=True)
     else:
         if not logy:
             ax.set_ylim(0, None)
-    if logy:
-        ax.set_yscale('log')
     if 175 <= ax.get_ylim()[1] <= 190:
         ax.set_yticks([5, 10, 15, 20], minor=True)
     ax.grid(True, alpha=0.3, axis="y")
@@ -1188,7 +1227,7 @@ def create_box_plot(
                 if label not in seen:
                     seen.add(label)
                     legend_elements.append(Patch(facecolor=color, alpha=1, label=label))
-            ax.legend(handles=legend_elements, loc="best", fontsize=9, framealpha=0.6)
+            ax.legend(handles=legend_elements, loc="upper left", fontsize=9 * BOX_TEXT_SCALE, framealpha=0, edgecolor="none")
         elif group_by == "dataset" and len(selected_solvers) > 1:
             # Legend shows solvers (no reference)
             legend_elements = [
@@ -1199,14 +1238,14 @@ def create_box_plot(
                 )
                 for solver_id in selected_solvers
             ]
-            ax.legend(handles=legend_elements, loc="best", fontsize=9, framealpha=0.6)
+            ax.legend(handles=legend_elements, loc="upper left", fontsize=9 * BOX_TEXT_SCALE, framealpha=0, edgecolor="none")
         elif group_by == "solver" and len(all_datasets_sorted) > 1:
             # Legend shows datasets (no reference)
             legend_elements = [
                 Patch(facecolor=color_map[dataset_id], alpha=1, label=format_dataset(dataset_id, all_datasets_sorted)[0])
                 for dataset_id in all_datasets_sorted
             ]
-            ax.legend(handles=legend_elements, loc="best", fontsize=9, framealpha=0.6)
+            ax.legend(handles=legend_elements, loc="upper left", fontsize=9 * BOX_TEXT_SCALE, framealpha=0, edgecolor="none")
     
     plt.tight_layout()
     
@@ -1403,7 +1442,7 @@ def create_timing_breakdown_plot(
     ax.grid(True, alpha=0.3, axis="y")
     
     if show_legend:
-        ax.legend(loc="lower right" if relative else "best", fontsize=9, framealpha=0.8)
+        ax.legend(loc="lower right" if relative else "best", fontsize=9, framealpha=0)
     
     plt.tight_layout()
     
@@ -1564,7 +1603,7 @@ def create_histogram_plot(
 
         # Add legend only to the first subplot
         if show_legend and ax == axes[0] and len(dataset_labels) > 1:
-            ax.legend(loc="best", fontsize=9, framealpha=0.6)
+            ax.legend(loc="best", fontsize=9, framealpha=0)
 
     # Set x-label only on bottom plot
     axes[-1].set_xlabel(
@@ -1786,7 +1825,7 @@ def create_speedup_plot(
 
         # Add legend only to the first subplot
         if show_legend and ax == axes[0] and len(dataset_labels) > 1:
-            ax.legend(loc="best", fontsize=9, framealpha=0.6)
+            ax.legend(loc="best", fontsize=9, framealpha=0)
 
     # Set x-label only on bottom plot
     axes[-1].set_xlabel("Speedup")
@@ -1869,6 +1908,9 @@ def create_speedup_plot(
     "--no-legend", is_flag=True, help="Hide the legend in the plots"
 )
 @click.option(
+    "--no-title", is_flag=True, help="Hide plot titles and fixed-parameter headings"
+)
+@click.option(
     "--scaling", is_flag=True, help="Create a scaling plot (absolute metric or speedup vs --xvar)"
 )
 @click.option(
@@ -1877,7 +1919,10 @@ def create_speedup_plot(
     default=None,
     help="X-axis variable (scaling default: N); proportionally space dataset box groups when set",
 )
-@click.option("--ylim", help="Y-axis limits for scaling plot as 'min,max' (default: auto)")
+@click.option("--ylim", help="Y-axis limits for scaling and box plots as 'min,max'; leave either bound empty for auto")
+@click.option(
+    "--logx", is_flag=True, help="Use logarithmic x-axis spacing for scaling or dataset-grouped box plots with --xvar"
+)
 @click.option(
     "--logy", is_flag=True, help="Use logarithmic scale for y-axis in scaling plot"
 )
@@ -1888,11 +1933,15 @@ def create_speedup_plot(
     "--box-plot", is_flag=True, help="Create box plots on a single subplot"
 )
 @click.option(
+    "--box-width", type=click.FloatRange(min=0, min_open=True), default=0.5,
+    show_default=True, help="Box width as a fraction of the spacing between solvers"
+)
+@click.option(
     "--group-by",
     default="solver",
     help="How to group box plots: 'dataset' or 'solver' (default: solver)",
 )
-@click.option("--xlim", help="Metric-axis limits for box plot as 'min,max'; leave either bound empty for auto")
+@click.option("--xlim", help="Legacy alias for --ylim for box plots; --ylim takes precedence")
 @click.option(
     "--timing-breakdown", is_flag=True, help="Create a stacked bar chart showing timing breakdown"
 )
@@ -1916,12 +1965,15 @@ def main(
     speedup: bool,
     reference_solvers: tuple[str, ...],
     no_legend: bool,
+    no_title: bool,
     scaling: bool,
     xvar: Optional[str],
     ylim: Optional[str],
+    logx: bool,
     logy: bool,
     color_offset: int,
     box_plot: bool,
+    box_width: float,
     group_by: str,
     xlim: Optional[str],
     timing_breakdown: bool,
@@ -1987,6 +2039,9 @@ def main(
     print(f"Loading data from: {file}")
     all_results = load_data(file)
 
+    if logx and not (scaling or box_plot):
+        raise click.UsageError("--logx requires --scaling or --box-plot")
+
     # Validate speedup option
     if speedup and not reference_solvers:
         raise click.UsageError(
@@ -2031,7 +2086,9 @@ def main(
     ylim_tuple = None
     if ylim:
         try:
-            min_val, max_val = map(float, ylim.split(","))
+            min_val, max_val = (
+                float(value) if value.strip() else None for value in ylim.split(",")
+            )
             ylim_tuple = (min_val, max_val)
         except:
             print(f"Warning: Invalid ylim '{ylim}', using auto range")
@@ -2085,6 +2142,7 @@ def main(
         metrics_to_plot = ("time",)
 
     # Generate plots
+    failed_metrics = []
     for current_metric in metrics_to_plot:
         try:
             print(f"\nGenerating histogram for metric: {current_metric}")
@@ -2123,6 +2181,7 @@ def main(
                     logy=logy,
                     color_offset=color_offset,
                     xvar=xvar or "N",
+                    logx=logx,
                 )
             elif speedup:
                 # Generate speedup plot
@@ -2158,6 +2217,9 @@ def main(
                     xlim=xlim_tuple,
                     logy=logy,
                     xvar=xvar,
+                    ylim=ylim_tuple,
+                    logx=logx,
+                    box_width=box_width,
                 )
             else:
                 # Generate regular histogram
@@ -2174,6 +2236,16 @@ def main(
                     reduce_metric=reduce_metric,
                     show_legend=not no_legend,
                 )
+
+            if no_title:
+                for ax in fig.axes:
+                    for location in ("left", "center", "right"):
+                        ax.set_title("", loc=location)
+                fig.suptitle("")
+                fig.tight_layout()
+                # Remove only the top padding, accounting for tick-label extents.
+                top_margin = 1 - fig.get_tightbbox().y1 / fig.get_figheight()
+                fig.subplots_adjust(top=fig.subplotpars.top + top_margin)
 
             # Determine output filename
             if output and not all_metrics:
@@ -2201,12 +2273,17 @@ def main(
             plt.close(fig)
 
         except Exception as e:
+            failed_metrics.append(current_metric)
             print(f"Error generating histogram for metric '{current_metric}': {e}")
             import traceback
 
             traceback.print_exc()
             continue
 
+    if failed_metrics:
+        raise click.ClickException(
+            "Failed to generate plots for: " + ", ".join(failed_metrics)
+        )
     print("\nDone!")
 
 

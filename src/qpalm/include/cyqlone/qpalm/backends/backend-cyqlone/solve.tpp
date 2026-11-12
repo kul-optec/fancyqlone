@@ -104,8 +104,6 @@ void CyQPALMBackend<VL, DefaultOrder, LinearSolver>::print_solve_resid_norms(
     const active_set_t &J) {
     // allocate workspaces
     if (temp_var.size() == 0 || temp_eq.size() == 0 || temp_ineq.size() == 0){
-        std::cout << "Needing to allocate workspaces\n";
-
         ctx.run_single_sync([this] {
             temp_var  = var_vec();
             temp_eq   = eq_constr_vec();

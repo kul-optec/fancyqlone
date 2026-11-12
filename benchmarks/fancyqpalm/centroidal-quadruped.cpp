@@ -95,8 +95,10 @@ struct Options {
     uint64_t num_instances            = 50;
     std::vector<int> num_branches{4};
     uint64_t seed                     = 0;
+    cyqlone::real_t initial_inner_tolerance = 1e-4;
     bool custom_reporter              = true;
     bool print_extra                  = false;
+    bool solver_verbose               = false;
     bool use_color                    = false;
     bool trace                        = false;
     bool serial                       = false;
@@ -609,7 +611,7 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
                                                trace);
                       }};
     };
-    bool verbose = false;
+    bool verbose = opts.solver_verbose;
     for (auto p : opts.parallelism) {
         qp::CyQPALMBackendSettings backend{
             .processors             = p,
@@ -629,9 +631,10 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
             .tolerance = 1e-8,
             .dual_tolerance = 1e-8,
             .eq_constr_tolerance = 1e-8,
-            .initial_inner_tolerance = 1e-4,
+            .initial_inner_tolerance = opts.initial_inner_tolerance,
             .initial_penalty_y = 20,
             .verbose           = verbose,
+            .print_precision   = 9,
             .detailed_stats       = verbose,
 
         };
@@ -639,7 +642,6 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
 
         qp::Settings settings_warm                = settings;
         settings_warm.initial_penalty_y           = 1e4;
-        settings_warm.initial_inner_tolerance     = 1e-4;
         if (opts.cold) {
             std::cout << "Running cold start solver with " << p << " processors" << std::endl;
             backend.strategy = backend_no_upd.strategy = qp::WarmStartingStrategy::Zeros;
@@ -855,6 +857,11 @@ void register_options(const char *program, CLI::App &app, Options &opts) {
     app.add_option("--num-instances,-I", opts.num_instances,
                    "Number of random problem instances to generate for each (M,N) pair");
     app.add_option("--seed,-s", opts.seed, "Random seed for problem instance generation");
+    app.add_option("--initial-inner-tolerance", opts.initial_inner_tolerance,
+                   "Initial inner tolerance (benchmark default: 1e-4; solver default: 1)")
+        ->check(CLI::PositiveNumber);
+    app.add_flag("--solver-verbose,!--no-solver-verbose", opts.solver_verbose,
+                 "Print solver progress, including the maximum penalty per outer iteration");
     app.add_flag("--no-updates", opts.no_updates, "Compare to the Cyqlone backend without updates");
     app.add_option("--parallelism,-p", opts.parallelism,
                    "The number of threads to use in the Cyqlone backend");

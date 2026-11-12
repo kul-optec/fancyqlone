@@ -6,7 +6,7 @@ benchmark/1.9.4
 cli11/2.6.0
 fmt/12.1.0
 gtest/1.17.0 
-piqp/fenglongsong
+piqp/0.7.0
 treeqp/0.3.1
 [generators]
 CMakeDeps
@@ -19,3 +19,4 @@ cmake_layout
 cyqlone/*:with_qpalm=True
 cyqlone/*:with_example_problems=True
 piqp/*:with_blasfeo=True
+piqp/*:with_openmp=True
