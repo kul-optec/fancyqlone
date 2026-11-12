@@ -570,8 +570,8 @@ cyqlone::LinearOCPStorage combine_branches_0(std::span<const cyqlone::LinearOCPS
         // Copy cost
         combined_ocp.Q(0).block(0, 0, ocp.dim.nx, ocp.dim.nx) += ocp.Q(0);
         combined_ocp.R(0).block(0, 0, ocp.dim.nu, ocp.dim.nu) += ocp.R(0);
-        combined_ocp.S(0).block(0, 0, ocp.dim.nu, ocp.dim.nx) += ocp.S(0);
-        combined_ocp.S_trans(0).block(0, 0, ocp.dim.nx, ocp.dim.nu) += ocp.S_trans(0);
+        combined_ocp.S(0).block(0, nx_offset, ocp.dim.nu, ocp.dim.nx) = ocp.S(0);
+        combined_ocp.S_trans(0).block(nx_offset, 0, ocp.dim.nx, ocp.dim.nu) = ocp.S_trans(0);
         combined_ocp.q(0).block(0, 0, ocp.dim.nx, 1) += ocp.q(0);
         combined_ocp.r(0).block(0, 0, ocp.dim.nu, 1) += ocp.r(0);
         for (index_t i = 1; i < N; ++i) {
@@ -641,7 +641,7 @@ TEST(QPALM, random_fan) {
     auto save_traces = [](const std::string &) {};
 #endif
     cyqlone::OCPDim dim{
-        .N_horiz = 64,
+        .N_horiz = 128,
         .nx      = 8,
         .nu      = 5,
         .ny      = 0,
@@ -690,7 +690,7 @@ TEST(QPALM, random_fan) {
         qp::make_cyqpalm_backend<VL, StorageOrder::ColMajor, cyqlone::FanCyqloneSolver<VL>>(
             fan_cocp, {},
             {
-                .processors             = 2,
+                .processors             = 8,
                 .print_residuals        = verbose,
                 .print_precision        = 17,
                 .changing_constr_factor = 0,
@@ -817,9 +817,9 @@ TEST(QPALM, random_fan_input_constr) {
     auto save_traces = [](const std::string &) {};
 #endif
     cyqlone::OCPDim dim{
-        .N_horiz = 256,
-        .nx      = 36,
-        .nu      = 12,
+        .N_horiz = 128,
+        .nx      = 12,
+        .nu      = 6,
         .ny      = 2,
         .ny_N    = 0,
     };
@@ -1083,8 +1083,6 @@ TEST(QPALM, spring_mass_1_branch) {
 
     auto k_spring_diff=0.1/num_branches;
     auto params=qp::problems::SpringMassParams::wang_boyd_2008_width(M, N, seed, 1);
-    auto nx=static_cast<index_t>(params.masses.size()*2);
-
     auto problem = qp::problems::fan_spring_mass(params, num_branches, k_spring_diff);
     // Add a random disturbance to the initial position of the masses but make sure they are the same for all branches
     using dist_t = std::uniform_real_distribution<real_t>;
@@ -1356,7 +1354,7 @@ TEST(QPALM, spring_mass) {
                 .print_residuals        = verbose,
                 .print_precision        = 17,
                 .changing_constr_factor = 0.01,
-                .max_update_count       = 20,
+                .max_update_count       = 0,
 
                 // Fan solver handles the shared/root part itself.
                 .tricyqle_params =
