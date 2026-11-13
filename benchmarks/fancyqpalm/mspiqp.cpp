@@ -411,7 +411,6 @@ PIQPStats get_stats_piqp_fan(const PIQPFanSolverData &solver_data) {
     stats.iter             = result.info.iter;
     stats.primal_objective = result.info.primal_obj + solver_data.qp_data->objective_offset;
     stats.run_time         = result.info.run_time;
-    std::cout << result.info.run_time << std::endl;
     return stats;
 }
 fancyqlone::FanOCPStorage::Solution get_solution_piqp_fan(const PIQPFanSolverData &solver_data) {
