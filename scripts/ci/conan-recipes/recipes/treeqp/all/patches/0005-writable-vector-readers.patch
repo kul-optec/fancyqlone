@@ -1,0 +1,36 @@
+diff --git a/treeqp/utils/utils.c b/treeqp/utils/utils.c
+--- a/treeqp/utils/utils.c
++++ b/treeqp/utils/utils.c
+@@ -47,7 +47,7 @@
+ 
+ 
+ 
+-return_t read_int_vector_from_txt(const int * const vec, const int n, const char *filename)
++return_t read_int_vector_from_txt(int * const vec, const int n, const char *filename)
+ {
+     int c;
+     FILE *myFile;
+@@ -71,7 +71,7 @@
+ 
+ 
+ 
+-return_t read_double_vector_from_txt(const double * const vec, const int n, const char *filename)
++return_t read_double_vector_from_txt(double * const vec, const int n, const char *filename)
+ {
+     int c;
+     FILE *myFile;
+diff --git a/treeqp/utils/utils.h b/treeqp/utils/utils.h
+--- a/treeqp/utils/utils.h
++++ b/treeqp/utils/utils.h
+@@ -44,9 +44,9 @@
+ 
+ // Reading from / writing to txt files
+ 
+-return_t read_int_vector_from_txt(const int * const vec, const int n, const char *filename);
++return_t read_int_vector_from_txt(int * const vec, const int n, const char *filename);
+ 
+-return_t read_double_vector_from_txt(const double * const vec, const int n, const char *filename);
++return_t read_double_vector_from_txt(double * const vec, const int n, const char *filename);
+ 
+ return_t write_double_vector_to_txt(const double * const vec, const int n, const char *filename);
+ 

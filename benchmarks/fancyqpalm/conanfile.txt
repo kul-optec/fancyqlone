@@ -20,3 +20,4 @@ cyqlone/*:with_qpalm=True
 cyqlone/*:with_example_problems=True
 piqp/*:with_blasfeo=True
 piqp/*:with_openmp=True
+treeqp/*:with_openmp=True

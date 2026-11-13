@@ -1,0 +1,103 @@
+diff --git a/treeqp/src/hpipm_tree.c b/treeqp/src/hpipm_tree.c
+--- a/treeqp/src/hpipm_tree.c
++++ b/treeqp/src/hpipm_tree.c
+@@ -189,7 +189,7 @@
+     hpipm_tree.kids = nkids;
+ 
+     // set up temporary hpipm dimensions
+-	struct d_tree_ocp_qp_dim dim;
++	struct d_tree_ocp_qp_dim dim = {0};
+ 
+     dim.Nn = Nn;
+     dim.ttree = &hpipm_tree;
+@@ -208,23 +208,24 @@
+ 
+     // set up dummy args (only stat_max matters in calculate size)
+     struct d_tree_ocp_qp_ipm_arg arg;
+-    arg.stat_max = opts->maxIter; // TODO(dimitris): IS THIS CORRECT???
++    d_tree_ocp_qp_ipm_arg_set_default(opts->mode, &arg);
++    cast_options(opts, &arg);
+ 
+     // calculate memory size
+ 
+     bytes += Nn*sizeof(int);  // hpipm_tree.nkids
+ 
+-	bytes += d_memsize_tree_ocp_qp_dim(Nn);  // hpipm_qp_dim
++	bytes += d_tree_ocp_qp_dim_memsize(Nn);  // hpipm_qp_dim
+ 
+-    bytes += d_memsize_tree_ocp_qp(&dim);  // hpipm_qp_in
++    bytes += d_tree_ocp_qp_memsize(&dim);  // hpipm_qp_in
+ 
+-    bytes += d_memsize_tree_ocp_qp_ipm_arg(NULL);  // hpipm_arg
++    bytes += d_tree_ocp_qp_ipm_arg_memsize(&dim);  // hpipm_arg
+ 
+-    bytes += d_memsize_tree_ocp_qp_sol(&dim);  //hpipm_qp_out
++    bytes += d_tree_ocp_qp_sol_memsize(&dim);  //hpipm_qp_out
+ 
+     // TODO(dimitris): pass dims insteam in HPIPM
+ 
+-	bytes += d_memsize_tree_ocp_qp_ipm(&dim, &arg);  // hpipm_memory
++	bytes += d_tree_ocp_qp_ipm_ws_memsize(&dim, &arg);  // hpipm_memory
+ 
+     bytes += 1*64;
+ 
+@@ -260,7 +261,7 @@
+     work->hpipm_tree.kids = work->nkids;
+ 
+     // set up dimensions
+-	d_create_tree_ocp_qp_dim(Nn, &work->hpipm_qp_dim, c_ptr);
++	d_tree_ocp_qp_dim_create(Nn, &work->hpipm_qp_dim, c_ptr);
+     c_ptr += work->hpipm_qp_dim.memsize;
+ 
+     work->hpipm_qp_dim.Nn = Nn;
+@@ -277,22 +278,22 @@
+     setup_ns(qp_in, work->hpipm_qp_dim.ns);
+ 
+     // set up qp
+-	d_create_tree_ocp_qp(&work->hpipm_qp_dim, &work->hpipm_qp_in, c_ptr);
++	d_tree_ocp_qp_create(&work->hpipm_qp_dim, &work->hpipm_qp_in, c_ptr);
+     c_ptr += work->hpipm_qp_in.memsize;
+     setup_nb_idxb(qp_in, work->hpipm_qp_dim.nb, work->hpipm_qp_in.idxb);
+ 
+     // set up args
+-    d_create_tree_ocp_qp_ipm_arg(NULL, &work->arg, c_ptr);
+-	d_set_default_tree_ocp_qp_ipm_arg(opts->mode, &work->arg);
++    d_tree_ocp_qp_ipm_arg_create(&work->hpipm_qp_dim, &work->arg, c_ptr);
++	d_tree_ocp_qp_ipm_arg_set_default(opts->mode, &work->arg);
+     cast_options(opts, &work->arg);
+     c_ptr += work->arg.memsize;
+ 
+     // set up qp sol
+-	d_create_tree_ocp_qp_sol(&work->hpipm_qp_dim, &work->hpipm_qp_out, c_ptr);
++	d_tree_ocp_qp_sol_create(&work->hpipm_qp_dim, &work->hpipm_qp_out, c_ptr);
+     c_ptr += work->hpipm_qp_out.memsize;
+ 
+     // set up hpipm memory
+-    d_create_tree_ocp_qp_ipm(&work->hpipm_qp_dim, &work->arg, &work->hpipm_memory, c_ptr);
++    d_tree_ocp_qp_ipm_ws_create(&work->hpipm_qp_dim, &work->arg, &work->hpipm_memory, c_ptr);
+     c_ptr += work->hpipm_memory.memsize;
+ 
+     assert((char *)ptr + treeqp_hpipm_calculate_size(qp_in, opts) >= c_ptr);
+@@ -485,7 +486,9 @@
+     // solve QP
+     // TODO(dimitris): rename arg to hpipm_arg
+     // work->hpipm_qp_in.dim->ttree->kids = NULL;  // TODO is this even needed?
+-    int status = d_solve_tree_ocp_qp_ipm(&work->hpipm_qp_in, &work->hpipm_qp_out, &work->arg, &work->hpipm_memory);
++    d_tree_ocp_qp_ipm_solve(&work->hpipm_qp_in, &work->hpipm_qp_out, &work->arg, &work->hpipm_memory);
++    int status;
++    d_tree_ocp_qp_ipm_get_status(&work->hpipm_memory, &status);
+ 
+ 
+ #if 0
+diff --git a/treeqp/src/hpipm_tree.h b/treeqp/src/hpipm_tree.h
+--- a/treeqp/src/hpipm_tree.h
++++ b/treeqp/src/hpipm_tree.h
+@@ -80,7 +80,7 @@
+ 	struct d_tree_ocp_qp hpipm_qp_in;
+ 	struct d_tree_ocp_qp_ipm_arg arg;
+ 	struct d_tree_ocp_qp_sol hpipm_qp_out;
+-    struct d_tree_ocp_qp_ipm_workspace hpipm_memory;
++    struct d_tree_ocp_qp_ipm_ws hpipm_memory;
+ 
+ } treeqp_hpipm_workspace;
+ 

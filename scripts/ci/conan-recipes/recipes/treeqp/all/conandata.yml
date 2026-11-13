@@ -1,0 +1,22 @@
+sources:
+  "0.3.1":
+    url: "https://github.com/dkouzoup/treeQP/archive/5bffe146e79bea41d219f5f5aff486fc7e9d3a45.tar.gz"
+    sha256: "a31c02339c474b7eb092a3bfc4fb95f6867e4d6305a4393c9f8bfeec0ee5bcb3"
+patches:
+  "0.3.1":
+    - patch_file: "patches/0001-fork-fixes.patch"
+      patch_description: "Port functional fixes and C++ option access from Matisse-Teuwen, without added diagnostics"
+      patch_type: backport
+      patch_source: "https://github.com/dkouzoup/treeQP/compare/5bffe146e79bea41d219f5f5aff486fc7e9d3a45...Matisse-Teuwen:treeQP:7ff2f79c1a2eec82e558c680779bb1611d279a58"
+    - patch_file: "patches/0002-external-dependencies.patch"
+      patch_description: "Use installed HPIPM headers and allow building without HPMPC"
+      patch_type: portability
+    - patch_file: "patches/0003-modern-hpipm.patch"
+      patch_description: "Adapt the tree QP interface to current HPIPM naming and workspace initialization"
+      patch_type: portability
+    - patch_file: "patches/0004-modern-blasfeo.patch"
+      patch_description: "Specify unit vector strides and use the current symmetric matrix-vector API"
+      patch_type: portability
+    - patch_file: "patches/0005-writable-vector-readers.patch"
+      patch_description: "Declare vector reader destinations as writable in headers and definitions"
+      patch_type: bugfix

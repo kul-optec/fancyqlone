@@ -1,0 +1,15 @@
+sources:
+  "tttapa.20250918":
+    url: "https://github.com/acados/qpOASES/archive/125e94fa638f00350608871fc165789b1d1762f1.tar.gz"
+    sha256: "9941bcffe248d159eff1cada7a9cd61b931208c0ed363d1e882b74bfe24d2696"
+patches:
+  "tttapa.20250918":
+    - patch_file: "patches/0001-copy-constraints.patch"
+      patch_description: "Pass Constraints pointers, not pointer-to-pointers, to ConstraintsCPY"
+      patch_type: bugfix
+    - patch_file: "patches/0002-single-variable-ramping.patch"
+      patch_description: "Avoid NaN bounds from division by zero when ramping a scalar QP"
+      patch_type: bugfix
+    - patch_file: "patches/0003-namespace-blas-replacements.patch"
+      patch_description: "Namespace internal BLAS replacements to coexist with external BLAS libraries"
+      patch_type: bugfix

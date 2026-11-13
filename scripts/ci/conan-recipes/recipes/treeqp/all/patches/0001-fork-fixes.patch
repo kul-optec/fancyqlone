@@ -1,0 +1,87 @@
+diff --git a/interfaces/treeqp_cpp/treeqp_cpp_interface.cpp b/interfaces/treeqp_cpp/treeqp_cpp_interface.cpp
+--- a/interfaces/treeqp_cpp/treeqp_cpp_interface.cpp
++++ b/interfaces/treeqp_cpp/treeqp_cpp_interface.cpp
+@@ -166,6 +166,10 @@
+     OptsMem = malloc(size);
+     treeqp_tdunes_opts_create(NumNodes, &TdunesOpts, OptsMem);
+     treeqp_tdunes_opts_set_default(NumNodes, &TdunesOpts);
++    for (int ii = 0; ii < NumNodes; ii++)
++    {
++        TdunesOpts.qp_solver[ii] = TREEQP_QPOASES_SOLVER;
++    }
+ }
+ 
+ 
+diff --git a/interfaces/treeqp_cpp/treeqp_cpp_interface.hpp b/interfaces/treeqp_cpp/treeqp_cpp_interface.hpp
+--- a/interfaces/treeqp_cpp/treeqp_cpp_interface.hpp
++++ b/interfaces/treeqp_cpp/treeqp_cpp_interface.hpp
+@@ -98,8 +98,6 @@
+ 
+     int Solve(struct TreeQp *Qp) override;
+ 
+-private:
+-
+     treeqp_tdunes_opts_t TdunesOpts;
+ 
+     treeqp_tdunes_workspace TdunesWork;
+@@ -163,7 +161,6 @@
+ 
+     void PrintOutput(int NumNodes);
+ 
+-private:
+ 
+     int NumNodes;
+ 
+diff --git a/treeqp/src/dual_Newton_tree_qpoases.c b/treeqp/src/dual_Newton_tree_qpoases.c
+--- a/treeqp/src/dual_Newton_tree_qpoases.c
++++ b/treeqp/src/dual_Newton_tree_qpoases.c
+@@ -140,11 +140,13 @@
+     {   // QProblem
+         QProblem_assignMemory(nvd, ngd, (QProblem **) &(qpoases_data->QP), *c_double_ptr);
+         *c_double_ptr += QProblem_calculateMemorySize(nvd, ngd);
++        qpoases_data->QPB = NULL;
+     }
+     else
+     {   // QProblemB
+         QProblemB_assignMemory(nvd, (QProblemB **) &(qpoases_data->QPB), *c_double_ptr);
+         *c_double_ptr += QProblemB_calculateMemorySize(nvd);
++        qpoases_data->QP = NULL;
+     }
+ }
+ 
+@@ -251,12 +253,11 @@
+     blasfeo_unpack_dvec(nx, &qp_in->xmax[idx], 0, &qpoases_data->ub[0]);
+     blasfeo_unpack_dvec(nu, &qp_in->umax[idx], 0, &qpoases_data->ub[nx]);
+ 
+-    struct blasfeo_dmat *sA = &qp_in->A[idx-1];
+-    struct blasfeo_dmat *sB = &qp_in->B[idx-1];
+-    struct blasfeo_dmat *sAB = &work->sAB[idx-1];
+-
+     if (idx > 0)
+     {
++        struct blasfeo_dmat *sA = &qp_in->A[idx-1];
++        struct blasfeo_dmat *sB = &qp_in->B[idx-1];
++        struct blasfeo_dmat *sAB = &work->sAB[idx-1];
+         blasfeo_dgecp(nx, sA->n, sA, 0, 0, sAB, 0, 0);
+         blasfeo_dgecp(nx, sB->n, sB, 0, 0, sAB, 0, sA->n);
+     }
+@@ -279,8 +280,7 @@
+         QP = NULL;
+ 
+         QProblemBCON(QPB, nx+nu, HST_POSDEF);
+-        QProblemB_setPrintLevel(QPB, PL_MEDIUM);  // TODO(dimitris): other options?
+-        QProblemB_printProperties(QPB);  // TODO(dimitris): what is this for?
++        QProblemB_setPrintLevel(QPB, PL_NONE);
+ 
+         status = QProblemB_init(QPB, qpoases_data->H, qpoases_data->g, qpoases_data->lb,
+             qpoases_data->ub, &nWSR, &cputime);
+@@ -290,8 +290,7 @@
+         QPB = NULL;
+ 
+         QProblemCON(QP, nx+nu, nc, HST_POSDEF);
+-        QProblem_setPrintLevel(QP, PL_MEDIUM);  // TODO(dimitris): other options?
+-        QProblem_printProperties(QP);  // TODO(dimitris): what is this for?
++        QProblem_setPrintLevel(QP, PL_NONE);
+ 
+         status = QProblem_init(QP, qpoases_data->H, qpoases_data->g, qpoases_data->C, qpoases_data->lb,
+             qpoases_data->ub,  qpoases_data->lc, qpoases_data->uc, &nWSR, &cputime);

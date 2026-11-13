@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.24)
+project(test_treeqp LANGUAGES C CXX)
+find_package(treeqp CONFIG REQUIRED)
+add_executable(test_treeqp test_treeqp.cpp)
+target_link_libraries(test_treeqp PRIVATE treeqp::cpp)

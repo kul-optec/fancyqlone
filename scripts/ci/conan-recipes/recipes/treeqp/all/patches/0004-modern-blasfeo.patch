@@ -1,0 +1,295 @@
+diff --git a/treeqp/src/tree_qp_common.c b/treeqp/src/tree_qp_common.c
+--- a/treeqp/src/tree_qp_common.c
++++ b/treeqp/src/tree_qp_common.c
+@@ -622 +622 @@
+-        blasfeo_unpack_dvec(nx[ii], &tmp_x, 0, &res[pos]);
++        blasfeo_unpack_dvec(nx[ii], &tmp_x, 0, &res[pos], 1);
+@@ -624 +624 @@
+-        blasfeo_unpack_dvec(nu[ii], &tmp_u, 0, &res[pos]);
++        blasfeo_unpack_dvec(nu[ii], &tmp_u, 0, &res[pos], 1);
+@@ -644 +644 @@
+-            blasfeo_unpack_dvec(nx[ii], &tmp_x, 0, &res[pos]);
++            blasfeo_unpack_dvec(nx[ii], &tmp_x, 0, &res[pos], 1);
+@@ -1034 +1034 @@
+-    blasfeo_pack_dvec(nx, (double *)b, sb, 0);
++    blasfeo_pack_dvec(nx, (double *)b, 1, sb, 0);
+@@ -1068 +1068 @@
+-    blasfeo_unpack_dvec(nx, sb, 0, b);
++    blasfeo_unpack_dvec(nx, sb, 0, b, 1);
+@@ -1284 +1284 @@
+-    blasfeo_pack_dvec(nx, (double *)q, sq, 0);
++    blasfeo_pack_dvec(nx, (double *)q, 1, sq, 0);
+@@ -1302 +1302 @@
+-    blasfeo_unpack_dvec(nx, sq, 0, q);
++    blasfeo_unpack_dvec(nx, sq, 0, q, 1);
+@@ -1319 +1319 @@
+-    blasfeo_pack_dvec(nu, (double *)r, sr, 0);
++    blasfeo_pack_dvec(nu, (double *)r, 1, sr, 0);
+@@ -1348 +1348 @@
+-    blasfeo_unpack_dvec(nu, sr, 0, r);
++    blasfeo_unpack_dvec(nu, sr, 0, r, 1);
+@@ -1406 +1406 @@
+-        blasfeo_pack_dvec(nx, (double *)Qd, sq, 0);
++        blasfeo_pack_dvec(nx, (double *)Qd, 1, sq, 0);
+@@ -1409 +1409 @@
+-        blasfeo_pack_dvec(nx, (double *)q, sq, 0);
++        blasfeo_pack_dvec(nx, (double *)q, 1, sq, 0);
+@@ -1420 +1420 @@
+-        blasfeo_pack_dvec(nu, (double *)Rd, sr, 0);
++        blasfeo_pack_dvec(nu, (double *)Rd, 1, sr, 0);
+@@ -1423 +1423 @@
+-        blasfeo_pack_dvec(nu, (double *)r, sr, 0);
++        blasfeo_pack_dvec(nu, (double *)r, 1, sr, 0);
+@@ -1445 +1445 @@
+-    blasfeo_pack_dvec(nx, (double *)xmin, sxmin, 0);
++    blasfeo_pack_dvec(nx, (double *)xmin, 1, sxmin, 0);
+@@ -1463 +1463 @@
+-    blasfeo_unpack_dvec(nx, sxmin, 0, xmin);
++    blasfeo_unpack_dvec(nx, sxmin, 0, xmin, 1);
+@@ -1479 +1479 @@
+-    blasfeo_pack_dvec(nx, (double *)xmax, sxmax, 0);
++    blasfeo_pack_dvec(nx, (double *)xmax, 1, sxmax, 0);
+@@ -1497 +1497 @@
+-    blasfeo_unpack_dvec(nx, sxmax, 0, xmax);
++    blasfeo_unpack_dvec(nx, sxmax, 0, xmax, 1);
+@@ -1513 +1513 @@
+-    blasfeo_pack_dvec(nu, (double *)umin, sumin, 0);
++    blasfeo_pack_dvec(nu, (double *)umin, 1, sumin, 0);
+@@ -1531 +1531 @@
+-    blasfeo_unpack_dvec(nu, sumin, 0, umin);
++    blasfeo_unpack_dvec(nu, sumin, 0, umin, 1);
+@@ -1547 +1547 @@
+-    blasfeo_pack_dvec(nu, (double *)umax, sumax, 0);
++    blasfeo_pack_dvec(nu, (double *)umax, 1, sumax, 0);
+@@ -1565 +1565 @@
+-    blasfeo_unpack_dvec(nu, sumax, 0, umax);
++    blasfeo_unpack_dvec(nu, sumax, 0, umax, 1);
+@@ -1732 +1732 @@
+-    blasfeo_pack_dvec(nc, (double *)dmin, sdmin, 0);
++    blasfeo_pack_dvec(nc, (double *)dmin, 1, sdmin, 0);
+@@ -1761 +1761 @@
+-    blasfeo_unpack_dvec(nc, sdmin, 0, dmin);
++    blasfeo_unpack_dvec(nc, sdmin, 0, dmin, 1);
+@@ -1778 +1778 @@
+-    blasfeo_pack_dvec(nc, (double *)dmax, sdmax, 0);
++    blasfeo_pack_dvec(nc, (double *)dmax, 1, sdmax, 0);
+@@ -1807 +1807 @@
+-    blasfeo_unpack_dvec(nc, sdmax, 0, dmax);
++    blasfeo_unpack_dvec(nc, sdmax, 0, dmax, 1);
+@@ -1979 +1979 @@
+-        blasfeo_pack_dvec(sb[ii].m, &b[idxb], &sb[ii], 0);
++        blasfeo_pack_dvec(sb[ii].m, &b[idxb], 1, &sb[ii], 0);
+@@ -2012 +2012 @@
+-        blasfeo_pack_dvec(sq[ii].m, &q[idxQ], &sq[ii], 0);
++        blasfeo_pack_dvec(sq[ii].m, &q[idxQ], 1, &sq[ii], 0);
+@@ -2021 +2021 @@
+-        blasfeo_pack_dvec(sr[ii].m, &r[idxR], &sr[ii], 0);
++        blasfeo_pack_dvec(sr[ii].m, &r[idxR], 1, &sr[ii], 0);
+@@ -2066 +2066 @@
+-        blasfeo_pack_dvec(sq[ii].m, &q[idxq], &sq[ii], 0);
++        blasfeo_pack_dvec(sq[ii].m, &q[idxq], 1, &sq[ii], 0);
+@@ -2069 +2069 @@
+-        blasfeo_pack_dvec(sr[ii].m, &r[idxr], &sr[ii], 0);
++        blasfeo_pack_dvec(sr[ii].m, &r[idxr], 1, &sr[ii], 0);
+@@ -2233 +2233 @@
+-    blasfeo_pack_dvec(sx0->m, x0, sx0, 0);
++    blasfeo_pack_dvec(sx0->m, x0, 1, sx0, 0);
+@@ -2250 +2250 @@
+-    blasfeo_pack_dvec(nx, (double*)x, sx, 0);
++    blasfeo_pack_dvec(nx, (double*)x, 1, sx, 0);
+@@ -2266 +2266 @@
+-    blasfeo_unpack_dvec(nx, sx, 0, x);
++    blasfeo_unpack_dvec(nx, sx, 0, x, 1);
+@@ -2282 +2282 @@
+-    blasfeo_pack_dvec(nu, (double*)u, su, 0);
++    blasfeo_pack_dvec(nu, (double*)u, 1, su, 0);
+@@ -2298 +2298 @@
+-    blasfeo_unpack_dvec(nu, su, 0, u);
++    blasfeo_unpack_dvec(nu, su, 0, u, 1);
+@@ -2314 +2314 @@
+-    blasfeo_pack_dvec(nx, (double*)lam, slam, 0);
++    blasfeo_pack_dvec(nx, (double*)lam, 1, slam, 0);
+@@ -2330 +2330 @@
+-    blasfeo_unpack_dvec(nx, slam, 0, lam);
++    blasfeo_unpack_dvec(nx, slam, 0, lam, 1);
+@@ -2346 +2346 @@
+-    blasfeo_pack_dvec(nu, (double*)mu_u, smu_u, 0);
++    blasfeo_pack_dvec(nu, (double*)mu_u, 1, smu_u, 0);
+@@ -2362 +2362 @@
+-    blasfeo_unpack_dvec(nu, smu_u, 0, mu_u);
++    blasfeo_unpack_dvec(nu, smu_u, 0, mu_u, 1);
+@@ -2378 +2378 @@
+-    blasfeo_pack_dvec(nx, (double*)mu_x, smu_x, 0);
++    blasfeo_pack_dvec(nx, (double*)mu_x, 1, smu_x, 0);
+@@ -2394 +2394 @@
+-    blasfeo_unpack_dvec(nx, smu_x, 0, mu_x);
++    blasfeo_unpack_dvec(nx, smu_x, 0, mu_x, 1);
+@@ -2410 +2410 @@
+-    blasfeo_pack_dvec(nc, (double *)mu_d, smu_d, 0);
++    blasfeo_pack_dvec(nc, (double *)mu_d, 1, smu_d, 0);
+@@ -2426 +2426 @@
+-    blasfeo_unpack_dvec(nc, smu_d, 0, mu_d);
++    blasfeo_unpack_dvec(nc, smu_d, 0, mu_d, 1);
+diff --git a/treeqp/src/dual_Newton_tree.c b/treeqp/src/dual_Newton_tree.c
+--- a/treeqp/src/dual_Newton_tree.c
++++ b/treeqp/src/dual_Newton_tree.c
+@@ -311,2 +311,2 @@
+-        blasfeo_unpack_dvec(sqmod[kk].m, &sqmod[kk], 0, &hmod[indh]);
+-        blasfeo_unpack_dvec(sx[kk].m, &sx[kk], 0, &xit[indx]);
++        blasfeo_unpack_dvec(sqmod[kk].m, &sqmod[kk], 0, &hmod[indh], 1);
++        blasfeo_unpack_dvec(sx[kk].m, &sx[kk], 0, &xit[indx], 1);
+@@ -315,2 +315,2 @@
+-        blasfeo_unpack_dvec(srmod[kk].m, &srmod[kk], 0, &hmod[indh]);
+-        blasfeo_unpack_dvec(su[kk].m, &su[kk], 0, &uit[indu]);
++        blasfeo_unpack_dvec(srmod[kk].m, &srmod[kk], 0, &hmod[indh], 1);
++        blasfeo_unpack_dvec(su[kk].m, &su[kk], 0, &uit[indu], 1);
+@@ -620 +620 @@
+-        blasfeo_unpack_dvec(sres[kk].m, &sres[kk], 0, &res[indres]);
++        blasfeo_unpack_dvec(sres[kk].m, &sres[kk], 0, &res[indres], 1);
+@@ -800 +800 @@
+-        blasfeo_unpack_dvec(sDeltalambda[kk].m, &sDeltalambda[kk], 0, &deltalambda[indlam]);
++        blasfeo_unpack_dvec(sDeltalambda[kk].m, &sDeltalambda[kk], 0, &deltalambda[indlam], 1);
+@@ -1004 +1004 @@
+-        blasfeo_unpack_dvec( slambda[kk].m, &slambda[kk], 0, &lambda[indlam]);
++        blasfeo_unpack_dvec( slambda[kk].m, &slambda[kk], 0, &lambda[indlam], 1);
+@@ -1046 +1046 @@
+-        blasfeo_unpack_dvec(sx[kk].m, &sx[kk], 0, &x[indx]);
++        blasfeo_unpack_dvec(sx[kk].m, &sx[kk], 0, &x[indx], 1);
+@@ -1048 +1048 @@
+-        blasfeo_unpack_dvec(su[kk].m, &su[kk], 0, &u[indu]);
++        blasfeo_unpack_dvec(su[kk].m, &su[kk], 0, &u[indu], 1);
+@@ -1054,2 +1054,2 @@
+-        blasfeo_unpack_dvec(sDeltalambda[kk].m, &sDeltalambda[kk], 0, &deltalambda[ind]);
+-        blasfeo_unpack_dvec(slambda[kk].m, &slambda[kk], 0, &lambda[ind]);
++        blasfeo_unpack_dvec(sDeltalambda[kk].m, &sDeltalambda[kk], 0, &deltalambda[ind], 1);
++        blasfeo_unpack_dvec(slambda[kk].m, &slambda[kk], 0, &lambda[ind], 1);
+@@ -1660 +1660 @@
+-        blasfeo_pack_dvec(work->slambda[ii].m, (double *)&lambda[indx], &work->slambda[ii], 0);
++        blasfeo_pack_dvec(work->slambda[ii].m, (double *)&lambda[indx], 1, &work->slambda[ii], 0);
+diff --git a/treeqp/src/dual_Newton_tree_qpoases.c b/treeqp/src/dual_Newton_tree_qpoases.c
+--- a/treeqp/src/dual_Newton_tree_qpoases.c
++++ b/treeqp/src/dual_Newton_tree_qpoases.c
+@@ -248,2 +248,2 @@
+-    blasfeo_unpack_dvec(nx, &qp_in->q[idx], 0, &qpoases_data->g[0]);
+-    blasfeo_unpack_dvec(nu, &qp_in->r[idx], 0, &qpoases_data->g[nx]);
++    blasfeo_unpack_dvec(nx, &qp_in->q[idx], 0, &qpoases_data->g[0], 1);
++    blasfeo_unpack_dvec(nu, &qp_in->r[idx], 0, &qpoases_data->g[nx], 1);
+@@ -251,4 +251,4 @@
+-    blasfeo_unpack_dvec(nx, &qp_in->xmin[idx], 0, &qpoases_data->lb[0]);
+-    blasfeo_unpack_dvec(nu, &qp_in->umin[idx], 0, &qpoases_data->lb[nx]);
+-    blasfeo_unpack_dvec(nx, &qp_in->xmax[idx], 0, &qpoases_data->ub[0]);
+-    blasfeo_unpack_dvec(nu, &qp_in->umax[idx], 0, &qpoases_data->ub[nx]);
++    blasfeo_unpack_dvec(nx, &qp_in->xmin[idx], 0, &qpoases_data->lb[0], 1);
++    blasfeo_unpack_dvec(nu, &qp_in->umin[idx], 0, &qpoases_data->lb[nx], 1);
++    blasfeo_unpack_dvec(nx, &qp_in->xmax[idx], 0, &qpoases_data->ub[0], 1);
++    blasfeo_unpack_dvec(nu, &qp_in->umax[idx], 0, &qpoases_data->ub[nx], 1);
+@@ -265,2 +265,2 @@
+-    blasfeo_unpack_dvec(nc, &qp_in->dmin[idx], 0, &qpoases_data->lc[0]);
+-    blasfeo_unpack_dvec(nc, &qp_in->dmax[idx], 0, &qpoases_data->uc[0]);
++    blasfeo_unpack_dvec(nc, &qp_in->dmin[idx], 0, &qpoases_data->lc[0], 1);
++    blasfeo_unpack_dvec(nc, &qp_in->dmax[idx], 0, &qpoases_data->uc[0], 1);
+@@ -328,2 +328,2 @@
+-    blasfeo_unpack_dvec(nx, &work->sqmod[idx], 0, &qpoases_data->g[0]);
+-    blasfeo_unpack_dvec(nu, &work->srmod[idx], 0, &qpoases_data->g[nx]);
++    blasfeo_unpack_dvec(nx, &work->sqmod[idx], 0, &qpoases_data->g[0], 1);
++    blasfeo_unpack_dvec(nu, &work->srmod[idx], 0, &qpoases_data->g[nx], 1);
+@@ -335,2 +335,2 @@
+-        blasfeo_pack_dvec(nx, &QPB->x[0], &work->sx[idx], 0);
+-        blasfeo_pack_dvec(nu, &QPB->x[nx], &work->su[idx], 0);
++        blasfeo_pack_dvec(nx, &QPB->x[0], 1, &work->sx[idx], 0);
++        blasfeo_pack_dvec(nu, &QPB->x[nx], 1, &work->su[idx], 0);
+@@ -342,2 +342,2 @@
+-        blasfeo_pack_dvec(nx, &QP->x[0], &work->sx[idx], 0);
+-        blasfeo_pack_dvec(nu, &QP->x[nx], &work->su[idx], 0);
++        blasfeo_pack_dvec(nx, &QP->x[0], 1, &work->sx[idx], 0);
++        blasfeo_pack_dvec(nu, &QP->x[nx], 1, &work->su[idx], 0);
+@@ -509 +509 @@
+-    blasfeo_dsymv_l(nx, nx, 1.0, &qp_in->Q[idx], 0, 0, &work->sx[idx], 0, 0.0,
++    blasfeo_dsymv_l(nx, 1.0, &qp_in->Q[idx], 0, 0, &work->sx[idx], 0, 0.0,
+@@ -515 +515 @@
+-    blasfeo_dsymv_l(nu, nu, 1.0, &qp_in->R[idx], 0, 0, &work->su[idx], 0, 0.0,
++    blasfeo_dsymv_l(nu, 1.0, &qp_in->R[idx], 0, 0, &work->su[idx], 0, 0.0,
+@@ -537,2 +537,2 @@
+-        blasfeo_pack_dvec(nx, &QPB->y[0], &qp_out->mu_x[idx], 0);
+-        blasfeo_pack_dvec(nu, &QPB->y[nx], &qp_out->mu_u[idx], 0);
++        blasfeo_pack_dvec(nx, &QPB->y[0], 1, &qp_out->mu_x[idx], 0);
++        blasfeo_pack_dvec(nu, &QPB->y[nx], 1, &qp_out->mu_u[idx], 0);
+@@ -543,3 +543,3 @@
+-        blasfeo_pack_dvec(nx, &QP->y[0], &qp_out->mu_x[idx], 0);
+-        blasfeo_pack_dvec(nu, &QP->y[nx], &qp_out->mu_u[idx], 0);
+-        blasfeo_pack_dvec(nc, &QP->y[nx+nu], &qp_out->mu_d[idx], 0);
++        blasfeo_pack_dvec(nx, &QP->y[0], 1, &qp_out->mu_x[idx], 0);
++        blasfeo_pack_dvec(nu, &QP->y[nx], 1, &qp_out->mu_u[idx], 0);
++        blasfeo_pack_dvec(nc, &QP->y[nx+nu], 1, &qp_out->mu_d[idx], 0);
+diff --git a/treeqp/src/dual_Newton_scenarios.c b/treeqp/src/dual_Newton_scenarios.c
+--- a/treeqp/src/dual_Newton_scenarios.c
++++ b/treeqp/src/dual_Newton_scenarios.c
+@@ -165,4 +165,4 @@
+     for (ii = 0; ii < Ns; ii++) {
+         for (kk = 0; kk < Nh; kk++) {
+             blasfeo_unpack_dvec(work->sresk[ii][kk].m, &work->sresk[ii][kk], 0,
+-                &residuals_k[indRes]);
++                &residuals_k[indRes], 1);
+@@ -169,4 +169,4 @@
+-            blasfeo_unpack_dvec(nx, &work->sx[ii][kk], 0, &xit[indX]);
+-            blasfeo_unpack_dvec(nu, &work->su[ii][kk], 0, &uit[indU]);
+-            blasfeo_unpack_dvec(nx, &work->sQinvCal[ii][kk], 0, &QinvCal_k[indX]);
+-            blasfeo_unpack_dvec(nu, &work->sRinvCal[ii][kk], 0, &RinvCal_k[indU]);
++            blasfeo_unpack_dvec(nx, &work->sx[ii][kk], 0, &xit[indX], 1);
++            blasfeo_unpack_dvec(nu, &work->su[ii][kk], 0, &uit[indU], 1);
++            blasfeo_unpack_dvec(nx, &work->sQinvCal[ii][kk], 0, &QinvCal_k[indX], 1);
++            blasfeo_unpack_dvec(nu, &work->sRinvCal[ii][kk], 0, &RinvCal_k[indU], 1);
+@@ -186 +186 @@
+-            blasfeo_unpack_dvec(sResNonAnticip[ii].m, &sResNonAnticip[ii], 0, &residual[indResNonAnt]);
++            blasfeo_unpack_dvec(sResNonAnticip[ii].m, &sResNonAnticip[ii], 0, &residual[indResNonAnt], 1);
+@@ -223 +223 @@
+-            blasfeo_unpack_dvec(nx, &work->smu[ii][kk], 0, &muIter[indMu]);
++            blasfeo_unpack_dvec(nx, &work->smu[ii][kk], 0, &muIter[indMu], 1);
+@@ -225 +225 @@
+-            blasfeo_unpack_dvec(nx, &work->sx[ii][kk], 0, &xIter[indx]);
++            blasfeo_unpack_dvec(nx, &work->sx[ii][kk], 0, &xIter[indx], 1);
+@@ -227 +227 @@
+-            blasfeo_unpack_dvec(nu, &work->su[ii][kk], 0, &uIter[indu]);
++            blasfeo_unpack_dvec(nu, &work->su[ii][kk], 0, &uIter[indu], 1);
+@@ -231 +231 @@
+-            blasfeo_unpack_dvec(slambda[ii].m, &slambda[ii], 0, &lambdaIter[indLambda]);
++            blasfeo_unpack_dvec(slambda[ii].m, &slambda[ii], 0, &lambdaIter[indLambda], 1);
+@@ -991 +991 @@
+-        blasfeo_unpack_dvec(sRhsNonAnticip[ii].m, &sRhsNonAnticip[ii], 0, &rhsNonAnticip[ind]);
++        blasfeo_unpack_dvec(sRhsNonAnticip[ii].m, &sRhsNonAnticip[ii], 0, &rhsNonAnticip[ind], 1);
+@@ -1069 +1069 @@
+-        blasfeo_unpack_dvec(sDeltalambda[ii].m, &sDeltalambda[ii], 0, &Deltalambda[ind]);
++        blasfeo_unpack_dvec(sDeltalambda[ii].m, &sDeltalambda[ii], 0, &Deltalambda[ind], 1);
+@@ -1122 +1122 @@
+-            blasfeo_unpack_dvec(nx, &work->sreskMod[ii][kk], 0, &rhsDynamics[indRes]);
++            blasfeo_unpack_dvec(nx, &work->sreskMod[ii][kk], 0, &rhsDynamics[indRes], 1);
+@@ -1198 +1198 @@
+-            blasfeo_unpack_dvec(nx, &work->sDeltamu[ii][kk], 0, &Deltamu[indMu]);
++            blasfeo_unpack_dvec(nx, &work->sDeltamu[ii][kk], 0, &Deltamu[indMu], 1);
+@@ -2104 +2104 @@
+-        blasfeo_pack_dvec(work->slambda[ii].m, &lam[indx], &work->slambda[ii], 0);
++        blasfeo_pack_dvec(work->slambda[ii].m, &lam[indx], 1, &work->slambda[ii], 0);
+@@ -2113 +2113 @@
+-            blasfeo_pack_dvec(nx, &mu[indx], &work->smu[ii][kk], 0);
++            blasfeo_pack_dvec(nx, &mu[indx], 1, &work->smu[ii][kk], 0);
+diff --git a/treeqp/utils/blasfeo.c b/treeqp/utils/blasfeo.c
+--- a/treeqp/utils/blasfeo.c
++++ b/treeqp/utils/blasfeo.c
+@@ -44 +44 @@
+-        blasfeo_unpack_dvec(sv[i].m, (struct blasfeo_dvec *)&sv[i], 0, &v[ind]);
++        blasfeo_unpack_dvec(sv[i].m, (struct blasfeo_dvec *)&sv[i], 0, &v[ind], 1);
+diff --git a/treeqp/utils/memory.c b/treeqp/utils/memory.c
+--- a/treeqp/utils/memory.c
++++ b/treeqp/utils/memory.c
+@@ -201 +201 @@
+-    blasfeo_pack_dvec(m, (double *)v, sv, 0);
++    blasfeo_pack_dvec(m, (double *)v, 1, sv, 0);
+diff --git a/treeqp/utils/print.c b/treeqp/utils/print.c
+--- a/treeqp/utils/print.c
++++ b/treeqp/utils/print.c
+@@ -263 +263 @@
+-        blasfeo_unpack_dvec(sx[kk].m, &sx[kk], 0, &x[indx]);
++        blasfeo_unpack_dvec(sx[kk].m, &sx[kk], 0, &x[indx], 1);
+@@ -265 +265 @@
+-        blasfeo_unpack_dvec(su[kk].m, &su[kk], 0, &u[indu]);
++        blasfeo_unpack_dvec(su[kk].m, &su[kk], 0, &u[indu], 1);

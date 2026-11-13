@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 4.1)
 
 set(CMAKE_CXX_SCAN_FOR_MODULES OFF)
 
-project(cyqlone-benchmarks LANGUAGES CXX)
+project(cyqlone-benchmarks LANGUAGES C CXX)
 
 option(WITH_HPIPM "Enable the HPIPM benchmarks and tests" ON)
 option(WITH_PIQP "Enable the PIQP benchmarks and tests" ON)
@@ -130,7 +130,7 @@ if(WITH_TREEQP)
     )
 
     target_link_libraries(spring-mass PRIVATE
-        treeqp::treeqp 
+        treeqp::cpp
     )
 
     target_compile_definitions(spring-mass PRIVATE
@@ -139,7 +139,7 @@ if(WITH_TREEQP)
 
 
     target_sources(centroidal-quadruped PRIVATE treeqp.cpp)
-    target_link_libraries(centroidal-quadruped PRIVATE treeqp::treeqp)
+    target_link_libraries(centroidal-quadruped PRIVATE treeqp::cpp)
     target_compile_definitions(centroidal-quadruped PRIVATE WITH_TREEQP=1)
 endif()
 # -----------------------------------------------------------------------------
@@ -181,7 +181,7 @@ if(BUILD_TESTING AND WITH_HPIPM)
     endif()
     if(WITH_TREEQP)
         target_sources(testing PRIVATE treeqp.cpp)
-        target_link_libraries(testing PRIVATE treeqp::treeqp)
+        target_link_libraries(testing PRIVATE treeqp::cpp)
         target_compile_definitions(testing PRIVATE WITH_TREEQP=1)
     endif()
 

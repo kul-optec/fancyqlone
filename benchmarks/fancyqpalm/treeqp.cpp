@@ -1,8 +1,4 @@
-extern "C" {
-#define blasfeo_unpack_dvec treeqp_blasfeo_unpack_dvec
-#include <blasfeo/blasfeo_d_aux.h>
-#undef blasfeo_unpack_dvec
-}
+#include <blasfeo_d_aux.h>
 
 #include "treeqp.hpp"
 
@@ -467,13 +463,13 @@ fancyqlone::FanOCPStorage::Solution get_solution_tree_qp(TreeQpSolverData &solve
             if (stage == 0) {
                 std::copy(mapping.initial_state.begin(), mapping.initial_state.end(), primal_out);
             } else {
-                treeqp_blasfeo_unpack_dvec(mapping.nx[node], &qp.QpOut.x[node], 0, primal_out);
+                blasfeo_unpack_dvec(mapping.nx[node], &qp.QpOut.x[node], 0, primal_out, 1);
             }
 
             primal_out += mapping.nx[node];
 
             if (mapping.nu[node] > 0) {
-                treeqp_blasfeo_unpack_dvec(mapping.nu[node], &qp.QpOut.u[node], 0, primal_out);
+                blasfeo_unpack_dvec(mapping.nu[node], &qp.QpOut.u[node], 0, primal_out, 1);
 
                 primal_out += mapping.nu[node];
             }
@@ -487,14 +483,14 @@ fancyqlone::FanOCPStorage::Solution get_solution_tree_qp(TreeQpSolverData &solve
             if (mapping.native_bounds) {
                 // x0 has been eliminated; its original bound multipliers may be zero.
                 if (stage > 0)
-                    treeqp_blasfeo_unpack_dvec(mapping.nx[node], &qp.QpOut.mu_x[node], 0,
-                                               x_duals.data());
+                    blasfeo_unpack_dvec(mapping.nx[node], &qp.QpOut.mu_x[node], 0, x_duals.data(),
+                                        1);
                 if (mapping.nu[node] > 0)
-                    treeqp_blasfeo_unpack_dvec(mapping.nu[node], &qp.QpOut.mu_u[node], 0,
-                                               u_duals.data());
+                    blasfeo_unpack_dvec(mapping.nu[node], &qp.QpOut.mu_u[node], 0, u_duals.data(),
+                                        1);
             } else if (mapping.nc[node] > 0) {
-                treeqp_blasfeo_unpack_dvec(mapping.nc[node], &qp.QpOut.mu_d[node], 0,
-                                           general_duals.data());
+                blasfeo_unpack_dvec(mapping.nc[node], &qp.QpOut.mu_d[node], 0, general_duals.data(),
+                                    1);
             }
             const int source = stage == 0 ? branch : 0;
             for (int row = constraints.row_offsets[source];
@@ -533,7 +529,7 @@ fancyqlone::FanOCPStorage::Solution get_solution_tree_qp(TreeQpSolverData &solve
                 throw std::logic_error("Invalid treeQP dynamics edge index");
             }
 
-            treeqp_blasfeo_unpack_dvec(mapping.nx[node], &qp.QpOut.lam[edge], 0, eq_out);
+            blasfeo_unpack_dvec(mapping.nx[node], &qp.QpOut.lam[edge], 0, eq_out, 1);
 
             eq_out += mapping.nx[node];
         }

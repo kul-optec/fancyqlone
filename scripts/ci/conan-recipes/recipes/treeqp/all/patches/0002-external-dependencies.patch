@@ -1,0 +1,136 @@
+diff --git a/interfaces/treeqp_cpp/treeqp_cpp_interface.cpp b/interfaces/treeqp_cpp/treeqp_cpp_interface.cpp
+--- a/interfaces/treeqp_cpp/treeqp_cpp_interface.cpp
++++ b/interfaces/treeqp_cpp/treeqp_cpp_interface.cpp
+@@ -295,6 +295,7 @@
+ 
+ // TODO: CheckDims fun that throws error if QP of solve has different dims
+ 
++#ifdef TREEQP_WITH_HPMPC
+ HpmpcSolver::HpmpcSolver(struct TreeQp *Qp)
+ {
+     tree_qp_in *QpIn = &Qp->QpIn;
+@@ -418,6 +419,8 @@
+ 
+ 
+ 
++#endif
++
+ // TODO(dimitris): throw error if vectors are not of the same size
+ TreeQp::TreeQp(std::vector<int> nx, std::vector<int> nu, std::vector<int> nc, std::vector<int> nk)
+ {
+diff --git a/interfaces/treeqp_cpp/treeqp_cpp_interface.hpp b/interfaces/treeqp_cpp/treeqp_cpp_interface.hpp
+--- a/interfaces/treeqp_cpp/treeqp_cpp_interface.hpp
++++ b/interfaces/treeqp_cpp/treeqp_cpp_interface.hpp
+@@ -28,9 +28,6 @@
+ #ifndef TREEQP_CPP_INTERFACE_HPP_
+ #define TREEQP_CPP_INTERFACE_HPP_
+ 
+-// TODO(dimitris): move to Makefile.rule
+-#define TREEQP_WITH_HPMPC
+-
+ #include <vector>
+ #include <string>
+ 
+@@ -105,6 +102,7 @@
+ 
+ 
+ 
++#ifdef TREEQP_WITH_HPMPC
+ class HpmpcSolver
+ :    public QpSolver
+ {
+@@ -132,6 +130,7 @@
+ 
+     treeqp_hpmpc_workspace HpmpcWork;
+ };
++#endif
+ 
+ 
+ 
+@@ -139,7 +138,9 @@
+ {
+     friend TdunesSolver;
+ 
++#ifdef TREEQP_WITH_HPMPC
+     friend HpmpcSolver;
++#endif
+ 
+ public:
+ 
+diff --git a/treeqp/src/hpipm_tree.c b/treeqp/src/hpipm_tree.c
+--- a/treeqp/src/hpipm_tree.c
++++ b/treeqp/src/hpipm_tree.c
+@@ -40,8 +40,7 @@
+ #include <blasfeo_d_aux.h>
+ #include <blasfeo_d_blas.h>
+ 
+-// #include "hpipm/include/hpipm_target.h" // TODO(dimitris): WHERE IS THIS????
+-#include "hpipm/include/hpipm_tree.h"
++#include <hpipm_tree.h>
+ 
+ 
+ 
+diff --git a/treeqp/src/hpipm_tree.h b/treeqp/src/hpipm_tree.h
+--- a/treeqp/src/hpipm_tree.h
++++ b/treeqp/src/hpipm_tree.h
+@@ -38,11 +38,11 @@
+ #include <blasfeo_target.h>
+ #include <blasfeo_common.h>
+ 
+-#include "hpipm/include/hpipm_tree.h"
+-#include "hpipm/include/hpipm_d_tree_ocp_qp_dim.h"
+-#include "hpipm/include/hpipm_d_tree_ocp_qp.h"
+-#include "hpipm/include/hpipm_d_tree_ocp_qp_sol.h"
+-#include "hpipm/include/hpipm_d_tree_ocp_qp_ipm.h"
++#include <hpipm_tree.h>
++#include <hpipm_d_tree_ocp_qp_dim.h>
++#include <hpipm_d_tree_ocp_qp.h>
++#include <hpipm_d_tree_ocp_qp_sol.h>
++#include <hpipm_d_tree_ocp_qp_ipm.h>
+ 
+ 
+ 
+diff --git a/treeqp/src/hpmpc_tree.c b/treeqp/src/hpmpc_tree.c
+--- a/treeqp/src/hpmpc_tree.c
++++ b/treeqp/src/hpmpc_tree.c
+@@ -39,6 +39,7 @@
+ #include <blasfeo_d_aux.h>
+ #include <blasfeo_d_blas.h>
+ 
++#ifdef TREEQP_WITH_HPMPC
+ #include "hpmpc/include/target.h"
+ #include "hpmpc/include/tree.h"
+ #include "hpmpc/include/mpc_solvers.h"
+@@ -78,6 +79,8 @@
+ 
+ 
+ 
++#endif
++
+ int number_of_bounds(const struct blasfeo_dvec *vmin, const struct blasfeo_dvec *vmax)
+ {
+     int nb = 0;
+@@ -162,6 +165,7 @@
+ 
+ 
+ 
++#ifdef TREEQP_WITH_HPMPC
+ int treeqp_hpmpc_calculate_size(tree_qp_in *qp_in, treeqp_hpmpc_opts_t *opts)
+ {
+     int bytes = 0;
+@@ -453,3 +457,4 @@
+ 
+     return status;
+ }
++#endif
+diff --git a/treeqp/utils/tree.h b/treeqp/utils/tree.h
+--- a/treeqp/utils/tree.h
++++ b/treeqp/utils/tree.h
+@@ -33,6 +33,7 @@
+ #endif
+ 
+ #include "treeqp/utils/types.h"
++#include <hpipm_tree.h>
+ 
+ // TODO(dimitris): make headers independent of order (now HPIPM header must come first)
+ #ifndef TREE_MPC

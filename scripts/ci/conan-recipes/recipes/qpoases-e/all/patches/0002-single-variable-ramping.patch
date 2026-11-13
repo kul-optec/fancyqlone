@@ -1,0 +1,42 @@
+diff --git a/src/QProblemB.c b/src/QProblemB.c
+--- a/src/QProblemB.c
++++ b/src/QProblemB.c
+@@ -2232,7 +2232,7 @@
+ 	{
+ 		for ( i=0; i<nV; ++i )
+ 		{
+-			t = (real_t)((i + _THIS->rampOffset) % nRamp) / (real_t)(nRamp-1);
++			t = nRamp > 1 ? (real_t)((i + _THIS->rampOffset) % nRamp) / (real_t)(nRamp-1) : 0.0;
+ 			rampVal = curFarBound * (1.0 + (1.0-t)*_THIS->ramp0 + t*_THIS->ramp1);
+ 
+ 			if ( lb_new == 0 )
+@@ -2286,7 +2286,7 @@
+ 			default: break;
+ 		}
+ 
+-		t = (real_t)((i + _THIS->rampOffset) % nV) / (real_t)(nV-1);
++		t = nV > 1 ? (real_t)((i + _THIS->rampOffset) % nV) / (real_t)(nV-1) : 0.0;
+ 		rampVal = (1.0-t) * _THIS->ramp0 + t * _THIS->ramp1;
+ 		bstat = Bounds_getStatus(_THIS->bounds,i);
+ 		if (bstat != ST_LOWER) { _THIS->lb[i] = _THIS->x[i] - rampVal; }
+diff --git a/src/QProblem.c b/src/QProblem.c
+--- a/src/QProblem.c
++++ b/src/QProblem.c
+@@ -6538,7 +6538,7 @@
+ 	{
+ 		for ( i=0; i<nC; ++i )
+ 		{
+-			t = (real_t)((nV+i + _THIS->rampOffset) % nRamp) / (real_t)(nRamp-1);
++			t = nRamp > 1 ? (real_t)((nV+i + _THIS->rampOffset) % nRamp) / (real_t)(nRamp-1) : 0.0;
+ 			rampVal = curFarBound * (1.0 + (1.0-t)*_THIS->ramp0 + t*_THIS->ramp1);
+ 
+ 			if ( lbA_new == 0 )
+@@ -6589,7 +6589,7 @@
+ 	{
+ 		for ( i=0; i<nV; ++i )
+ 		{
+-			t = (real_t)((i + _THIS->rampOffset) % nRamp) / (real_t)(nRamp-1);
++			t = nRamp > 1 ? (real_t)((i + _THIS->rampOffset) % nRamp) / (real_t)(nRamp-1) : 0.0;
+ 			rampVal = curFarBound * (1.0 + (1.0-t)*_THIS->ramp0 + t*_THIS->ramp1);
+ 
+ 			if ( lb_new == 0 )

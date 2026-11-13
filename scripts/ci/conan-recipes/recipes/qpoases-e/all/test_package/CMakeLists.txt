@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.24)
+project(test_qpoases LANGUAGES C)
+find_package(qpoases-e CONFIG REQUIRED)
+add_executable(test_qpoases test_qpoases.c)
+target_link_libraries(test_qpoases PRIVATE qpoases-e::qpoases-e)

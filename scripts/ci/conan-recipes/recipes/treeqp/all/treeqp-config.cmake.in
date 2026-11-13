@@ -1,0 +1,11 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+find_dependency(blasfeo CONFIG)
+find_dependency(hpipm CONFIG)
+find_dependency(qpoases-e CONFIG)
+if(@TREEQP_WITH_OPENMP@)
+    find_dependency(OpenMP COMPONENTS C)
+endif()
+include("${CMAKE_CURRENT_LIST_DIR}/treeqp-targets.cmake")
+check_required_components(treeqp)

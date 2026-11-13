@@ -9,8 +9,7 @@
 #include <span>
 #include <vector>
 
-// Adjust this include path if your treeQP package exports it differently.
-#include <treeqp_cpp_interface/treeqp_cpp_interface.hpp>
+#include <interfaces/treeqp_cpp/treeqp_cpp_interface.hpp>
 
 struct TreeQpData {
     int num_branches = 0;
