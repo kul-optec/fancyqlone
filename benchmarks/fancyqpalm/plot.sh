@@ -3,9 +3,10 @@
 set -euo pipefail
 
 cd "$(dirname "$0")"
-machine="${1:-nutella}"
-# Usage: all.sh [machine] [output-directory], relative to this script's directory.
-output_dir="${2:-../figures}"
+results_dir="${PWD}/results"
+machine="${1:-base}"
+# Usage: plot.sh [machine] [output-directory], relative to this script's directory.
+output_dir="${2:-./figures}"
 mkdir -p "$output_dir"
 export MPLBACKEND=Agg
 python="${PYTHON:-python3}"
@@ -19,38 +20,32 @@ run_plot() {
     fi
     failed_plots+=("$*")
 }
-scaling_p_input="benchmark-scaling-p.json"
+scaling_p_input="$results_dir/benchmark-scaling-p.json"
 if [[ ! -f "$scaling_p_input" ]]; then
-    scaling_p_input="benchmark-scaling-p-paper.json"
+    scaling_p_input="$results_dir/benchmark-scaling-p-paper.json"
 fi
-scaling_j_input="benchmark-scaling-J.json"
+scaling_j_input="$results_dir/benchmark-scaling-J.json"
 if [[ ! -f "$scaling_j_input" ]]; then
-    scaling_j_input="benchmark-scaling-J-paper.json"
+    scaling_j_input="$results_dir/benchmark-scaling-J-paper.json"
 fi
 printf 'Scaling inputs: %s, %s\nOutput directory: %s\n' \
     "$scaling_p_input" "$scaling_j_input" "$output_dir"
 case "$machine" in
-    blacksad*) p=8; v=4 ;;
-    nutella*) p=8; v=4 ;;
-    vsc-ice*) p=16; v=4 ;;
-    vsc-sapph) p=32; v=4 ;;
-    hpc) p=16; v=4 ;;
-    rpi5*) p=4; v=2 ;;
-    *) p=8; v=4 ;;
+    base*) p=8; v=4 ;;   
 esac
 
-run_plot hist_plot_from_json.py "benchmark-quad-scaling.json" \
+run_plot hist_plot_from_json.py "$results_dir/benchmark-quad-scaling.json" \
     --output "$output_dir/benchmark-$machine-quad-cold.pdf" \
     --metric=time --reduce-metric=median --box-plot --xvar=N --logy --box-width=0.65 --ylim=,2000 --no-title --group-by=dataset --figsize=5.75,4.0\
      --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero)" --solver "treeqp(qpOasis)" --solver "piqp(multistage)"
 # Quadruped total runtime versus J, with proportionally spaced branch counts.
 
-run_plot hist_plot_from_json.py "benchmark-quad-scaling-J.json" \
+run_plot hist_plot_from_json.py "$results_dir/benchmark-quad-scaling-J.json" \
     --output "$output_dir/benchmark-$machine-quad-cold-J-log.pdf" \
     --metric=time --aggregate=median --reduce-metric=median --box-plot --box-width=0.35 --xvar=J --logy --ylim=,700 --no-title --group-by=dataset --figsize=5.75,4.0 \
     --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero)" --solver "treeqp(qpOasis)" --solver "piqp(multistage)"
 # Alternative: logarithmically spaced branch counts, with the same runtime scale.
-run_plot hist_plot_from_json.py "benchmark-quad-scaling-J.json" \
+run_plot hist_plot_from_json.py "$results_dir/benchmark-quad-scaling-J.json" \
     --output "$output_dir/benchmark-$machine-quad-cold-J-loglog.pdf" \
     --metric=time --aggregate=median --reduce-metric=median --box-plot --box-width=0.35 --xvar=J --logx --logy --ylim=,700 --no-title --group-by=dataset --figsize=5.75,4.0 \
     --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero)" --solver "treeqp(qpOasis)" --solver "piqp(multistage)"
@@ -68,12 +63,12 @@ run_plot hist_plot_from_json.py "$scaling_j_input" \
     --metric=time_per_iter --aggregate=mean --scaling --xvar=J --ylim=0, --no-title --figsize=5.75,4.0\
     --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "serial-fancyqlone(p=$p,v=$v,cm,zero)"
 
-run_plot hist_plot_from_json.py "benchmark-scaling.json" \
+run_plot hist_plot_from_json.py "$results_dir/benchmark-scaling.json" \
     --output "$output_dir/benchmark-$machine-cold-log.pdf" \
     --metric=time --reduce-metric=median --box-plot --xvar=N --logy --ylim=0.7,200 --box-width=0.50 --no-title --group-by=dataset --figsize=5.75,4.0\
      --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero)" --solver "treeqp(clip)" --solver "piqp(multistage)"
 
-run_plot hist_plot_from_json.py "benchmark-scaling-states.json" \
+run_plot hist_plot_from_json.py "$results_dir/benchmark-scaling-states.json" \
     --output "$output_dir/benchmark-$machine-cold-M-log.pdf" \
     --metric=time --reduce-metric=median --box-plot --xvar=M --logy --box-width=0.50 --no-title --ylim=0.5,200 --group-by=dataset --figsize=5.75,4.0\
      --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "hpipm(zero)" --solver "treeqp(clip)" --solver "piqp(multistage)"

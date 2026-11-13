@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.24...4.1)
 set(CMAKE_CXX_SCAN_FOR_MODULES Off)
-project(cyqlone
+project(fancyqlone
     VERSION 0.0.1
-    DESCRIPTION "Fast, parallel and vectorized solver for linear systems with optimal control structure."
-    HOMEPAGE_URL "https://github.com/kul-optec/cyqlone"
+    DESCRIPTION "Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure."
+    HOMEPAGE_URL "https://github.com/kul-optec/fancyqlone"
     LANGUAGES CXX
 )
 include(CTest)

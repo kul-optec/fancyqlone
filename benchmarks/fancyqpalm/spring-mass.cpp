@@ -513,7 +513,6 @@ std::generator<Solver> get_cyqlone_solvers(const Options &opts) {
             .detailed_stats      = verbose,
         };
 
-        std::cout << "Running cold start solver with " << p << " processors" << std::endl;
         co_yield cyqlone_solver(backend, settings);
         if (opts.serial)
             co_yield serial_cyqlone_solver(backend, settings);

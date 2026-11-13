@@ -3,3 +3,4 @@ conan.json
 .*cache
 build
 benchmark*.json
+/results/
