@@ -4,7 +4,7 @@ QPALM
 Solver
 ------
 
-.. doxygenclass:: cyqlone::qpalm::Solver
+.. doxygenclass:: fancyqlone::qpalm::Solver
    :no-link:
    :members:
    :undoc-members:
@@ -12,7 +12,7 @@ Solver
 Settings
 --------
 
-.. doxygenstruct:: cyqlone::qpalm::Settings
+.. doxygenstruct:: fancyqlone::qpalm::Settings
    :no-link:
    :members:
    :undoc-members:
@@ -20,11 +20,11 @@ Settings
 Statistics
 ----------
 
-.. doxygenstruct:: cyqlone::qpalm::SolverStats
+.. doxygenstruct:: fancyqlone::qpalm::SolverStats
    :no-link:
    :members:
    :undoc-members:
-.. doxygenstruct:: cyqlone::qpalm::DetailedStats
+.. doxygenstruct:: fancyqlone::qpalm::DetailedStats
    :no-link:
    :members:
    :undoc-members:
@@ -32,13 +32,13 @@ Statistics
 Backends
 --------
 
-.. doxygenstruct:: cyqlone::qpalm::unique_CyQPALMBackend
+.. doxygenstruct:: fancyqlone::qpalm::unique_CyQPALMBackend
    :no-link:
    :members:
    :undoc-members:
-.. doxygenfunction:: cyqlone::qpalm::make_cyqpalm_backend
+.. doxygenfunction:: fancyqlone::qpalm::make_cyqpalm_backend
    :no-link:
-.. doxygenfunction:: cyqlone::qpalm::update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder> &backend, const CyqloneStorage<real_t> &ocp)
+.. doxygenfunction:: fancyqlone::qpalm::update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder> &backend, const CyqloneStorage<real_t> &ocp)
    :no-link:
-.. doxygenfunction:: cyqlone::qpalm::update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder> &backend, const LinearOCPStorage &ocp)
+.. doxygenfunction:: fancyqlone::qpalm::update_cyqpalm_backend(CyQPALMBackend<VL, DefaultOrder> &backend, const LinearOCPStorage &ocp)
    :no-link:

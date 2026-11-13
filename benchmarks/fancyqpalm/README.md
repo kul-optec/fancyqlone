@@ -1,8 +1,10 @@
 # FanCyqlone benchmarks
 
 Benchmarks used for the numerical experiments in the FanCyqlone paper.
+From the repository root:
 
 ```bash
+cd benchmarks/fancyqpalm
 ./benchmark.sh deps
 ./benchmark.sh build
 ```
@@ -16,3 +18,20 @@ Benchmarks used for the numerical experiments in the FanCyqlone paper.
 | Fig. 5 — quadruped, varying horizon | `./benchmark.sh benchmark-quad-scaling` |
 | Fig. 6 — quadruped, varying number of branches | `./benchmark.sh benchmark-quad-scaling-J` |
 
+## Results
+
+Benchmark commands save Google Benchmark JSON reports in `results/`.
+
+## Plotting
+
+After generating the results, run the standalone plotting script:
+
+```bash
+./plot.sh
+```
+
+To specify the machine label and output directory:
+
+```bash
+./plot.sh base ./figures
+```

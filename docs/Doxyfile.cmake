@@ -1,13 +1,13 @@
 set(DOXYGEN_DOXYFILE_ENCODING "UTF-8")
-set(DOXYGEN_PROJECT_LOGO "${PROJECT_SOURCE_DIR}/docs/source/images/cyqlone-logo-text.svg")
-set(DOXYGEN_PROJECT_ICON "${PROJECT_SOURCE_DIR}/docs/source/images/cyqlone-logo.svg")
+set(DOXYGEN_PROJECT_LOGO "${PROJECT_SOURCE_DIR}/docs/source/images/fancyqlone-logo.svg")
+set(DOXYGEN_PROJECT_ICON "${PROJECT_SOURCE_DIR}/docs/source/images/fancyqlone-logo.svg")
 set(DOXYGEN_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/docs/build" CACHE PATH "")
 set(DOXYGEN_ABBREVIATE_BRIEF "")
 set(DOXYGEN_INLINE_INHERITED_MEMB "YES")
 set(DOXYGEN_STRIP_FROM_PATH "${PROJECT_SOURCE_DIR}")
-set(DOXYGEN_STRIP_FROM_INC_PATH "${PROJECT_SOURCE_DIR}/src/cyqlone/include"
+set(DOXYGEN_STRIP_FROM_INC_PATH "${PROJECT_SOURCE_DIR}/src/fancyqlone/include"
                                 "${PROJECT_SOURCE_DIR}/src/example-problems/include"
-                                "${PROJECT_SOURCE_DIR}/src/qpalm/include")
+                                "${PROJECT_SOURCE_DIR}/src/fancyqpalm/include")
 set(DOXYGEN_JAVADOC_AUTOBRIEF "YES")
 set(DOXYGEN_ALIASES "default_impl=@par Default implementation:^^"
                     "implementation{1}=@par Implementation:^^@snippet this \\1")
@@ -81,8 +81,8 @@ set(DOXYGEN_GENERATE_XML "YES")
 set(DOXYGEN_XML_OUTPUT "xml")
 set(DOXYGEN_XML_PROGRAMLISTING "YES")
 set(DOXYGEN_MACRO_EXPANSION "YES")
-set(DOXYGEN_INCLUDE_PATH "${PROJECT_SOURCE_DIR}/src/cyqlone/include"
-                         "${PROJECT_SOURCE_DIR}/src/qpalm/include"
+set(DOXYGEN_INCLUDE_PATH "${PROJECT_SOURCE_DIR}/src/fancyqlone/include"
+                         "${PROJECT_SOURCE_DIR}/src/fancyqpalm/include"
                          "${PROJECT_SOURCE_DIR}/src/example-problems/include")
 set(DOXYGEN_INCLUDE_FILE_PATTERNS "*.h" "*.hpp" "*.tpp")
 set(DOXYGEN_PREDEFINED "DOXYGEN"
@@ -93,7 +93,7 @@ set(DOXYGEN_PREDEFINED "DOXYGEN"
                        "__cplusplus=202002L"
                        "__cpp_lib_ranges_zip=202110L")
 set(DOXYGEN_SKIP_FUNCTION_MACROS "NO")
-set(DOXYGEN_GENERATE_TAGFILE "${DOXYGEN_OUTPUT_DIRECTORY}/${DOXYGEN_HTML_OUTPUT}/cyqlone.tag")
+set(DOXYGEN_GENERATE_TAGFILE "${DOXYGEN_OUTPUT_DIRECTORY}/${DOXYGEN_HTML_OUTPUT}/fancyqlone.tag")
 set(DOXYGEN_EXTERNAL_GROUPS "NO")
 set(EXTERNAL_PAGES "NO")
 set(DOXYGEN_UML_LOOK "YES")

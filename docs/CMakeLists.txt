@@ -125,7 +125,7 @@ if (Doxygen_FOUND AND Python3_Interpreter_FOUND)
         COMMAND ${Python3_EXECUTABLE} -m sphinx
             "${CMAKE_CURRENT_SOURCE_DIR}/source"
             "${DOXYGEN_OUTPUT_DIRECTORY}/Sphinx"
-            -D "breathe_projects.cyqlone=${DOXYGEN_OUTPUT_DIRECTORY}/xml"
+            -D "breathe_projects.fancyqlone=${DOXYGEN_OUTPUT_DIRECTORY}/xml"
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
         COMMENT "Generating Sphinx documentation"
         USES_TERMINAL)

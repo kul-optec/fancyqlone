@@ -27,7 +27,7 @@ b^0 \\ b^1 \\ b^2 \\ b^3 \\ \vdots \\ b^{N-1}
 \end{pmatrix}
 @f]
 
-We use @ref cyqlone::TricyqleSolver to solve the system in parallel. Since this solver uses
+We use @ref fancyqlone::TricyqleSolver to solve the system in parallel. Since this solver uses
 vectorization using batched linear algebra operations and partitions the matrices and vectors
 across multiple threads, each thread needs to pack its local portion of the system into batches
 of matrices and vectors. In this example, we prepare the system in the batches of matrices

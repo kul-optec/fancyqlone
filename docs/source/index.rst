@@ -2,28 +2,28 @@
    :target: https://arxiv.org/abs/2512.09058
    :alt: arXiv Preprint
 
-.. image:: https://github.com/kul-optec/cyqlone/actions/workflows/linux.yml/badge.svg
-   :target: https://github.com/kul-optec/cyqlone/actions/workflows/linux.yml
+.. image:: https://github.com/kul-optec/fancyqlone/actions/workflows/linux.yml/badge.svg
+   :target: https://github.com/kul-optec/fancyqlone/actions/workflows/linux.yml
    :alt: CI: Linux
 
-.. image:: https://img.shields.io/pypi/dm/cyqlone?label=PyPI&logo=python
-   :target: https://pypi.org/project/cyqlone
+.. image:: https://img.shields.io/pypi/dm/fancyqlone?label=PyPI&logo=python
+   :target: https://pypi.org/project/fancyqlone
    :alt: PyPI Downloads
 
 
-cyqlone
-=======
+FanCyqlone
+==========
 
-Fast, **parallel and vectorized solver** for linear systems with **optimal control structure**.
+Fast, **parallel and vectorized solver** for linear systems with **multi-horizon optimal control structure**.
 
-Also includes an implementation of the **CyQPALM** solver that uses the Cyqlone linear solver as a
-backend, with parallel factorization update routines to handle active set changes and a parallel
+Also includes an implementation of the **FanCyQPALM** solver that uses the FanCyqlone linear solver as a
+backend, with a parallel
 exact line search.
 
 Preprint
 --------
 
-The paper describing the algorithms in this repository can be found on arXiv:  
+The original Cyqlone algorithms used in this repository are described on arXiv:
 `https://arxiv.org/abs/2512.09058 <https://arxiv.org/abs/2512.09058>`_
 
 .. code-block:: bibtex
@@ -50,7 +50,7 @@ Content
 Related projects
 ----------------
 
-* `<https://github.com/kul-optec/QPALM>`_: general-purpose quadratic programming solver on which CyQPALM is based
-* `<https://github.com/tttapa/batmat>`_: high-performance batched linear algebra routines (used by cyqlone)
+* `<https://github.com/kul-optec/QPALM>`_: general-purpose quadratic programming solver on which FanCyQPALM is based
+* `<https://github.com/tttapa/batmat>`_: high-performance batched linear algebra routines (used by FanCyqlone)
 * `<https://github.com/kul-optec/hyhound>`_: low-rank Cholesky factorization up- and downdate routines based on hyperbolic Householder transformations (with applications to e.g. Riccati recursion)
 * `<https://github.com/kul-optec/alpaqa>`_: matrix-free, nonlinear programming solver

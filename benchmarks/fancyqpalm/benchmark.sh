@@ -564,9 +564,7 @@ clean() {
         "${RESULTS_DIR}/benchmark-scaling-states.json" \
         "${RESULTS_DIR}/benchmark-quad.json" \
         "${RESULTS_DIR}/benchmark-quad-scaling.json" \
-        "${RESULTS_DIR}/benchmark-quad-scaling-J.json" \
-        benchmark-scaling.pdf \
-        benchmark-scaling-states.pdf
+        "${RESULTS_DIR}/benchmark-quad-scaling-J.json"
 }
 
 
@@ -631,14 +629,6 @@ main() {
             benchmark_quad_scaling_J "$@"
             ;;
 
-        plot-scaling)
-            plot_scaling "$@"
-            ;;
-
-        plot-scaling-states)
-            plot_scaling_states "$@"
-            ;;
-
         benchmark)
             benchmark "$@"
             ;;
@@ -691,8 +681,6 @@ main() {
             echo "  benchmark-quick            Run a quick sanity benchmark" >&2
             echo "  benchmark [...]            Run a custom spring-mass benchmark" >&2
             echo "  benchmark-quadruped [...]  Run a custom quadruped benchmark" >&2
-            echo "  plot-scaling               Plot spring-mass horizon results" >&2
-            echo "  plot-scaling-states        Plot spring-mass state-size results" >&2
             echo "  all                        Build and run all paper benchmarks" >&2
             echo "  clean                      Remove build and benchmark outputs" >&2
             echo "" >&2

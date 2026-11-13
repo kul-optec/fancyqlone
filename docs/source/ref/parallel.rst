@@ -4,12 +4,12 @@ Parallelization
 TreeBarrier
 -----------
 
-.. doxygenclass:: cyqlone::TreeBarrier
+.. doxygenclass:: fancyqlone::TreeBarrier
    :no-link:
    :members:
    :undoc-members:
 
-.. doxygenstruct:: cyqlone::EmptyCompletion
+.. doxygenstruct:: fancyqlone::EmptyCompletion
    :no-link:
    :members:
    :undoc-members:
@@ -17,7 +17,7 @@ TreeBarrier
 SharedContext
 -------------
 
-.. doxygenstruct:: cyqlone::parallel::SharedContext
+.. doxygenstruct:: fancyqlone::parallel::SharedContext
    :no-link:
    :members:
    :undoc-members:
@@ -25,7 +25,7 @@ SharedContext
 Context
 -------
 
-.. doxygenstruct:: cyqlone::parallel::Context
+.. doxygenstruct:: fancyqlone::parallel::Context
    :no-link:
    :members:
    :undoc-members:

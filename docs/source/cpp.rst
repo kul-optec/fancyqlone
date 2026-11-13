@@ -1,8 +1,8 @@
 C++ API Reference
 =================
 
-cyqlone
--------
+fancyqlone
+----------
 
 .. toctree::
    :maxdepth: 1

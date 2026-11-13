@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "cyqlone"
+project = "FanCyqlone"
 copyright = "2025, Pieter Pas"
 author = "Pieter Pas"
 release = "0.0.1"
@@ -34,8 +34,8 @@ autodoc_default_options = {
 }
 numpydoc_class_members_toctree = False
 
-breathe_projects = {"cyqlone": "../build/xml"}
-breathe_default_project = "cyqlone"
+breathe_projects = {"fancyqlone": "../build/xml"}
+breathe_default_project = "fancyqlone"
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -44,37 +44,37 @@ html_theme = "sphinx_book_theme"
 html_static_path = ["_static"]
 html_css_files = ["style.css"]
 html_js_files = ["pypi-icon.js"]
-html_title = "cyqlone"
-html_logo = "images/cyqlone-logo.svg"
-html_favicon = "images/cyqlone-logo.svg"
+html_title = "FanCyqlone"
+html_logo = "images/fancyqlone-logo.svg"
+html_favicon = "images/fancyqlone-logo.svg"
 html_context = {
     "github_user": "kul-optec",
-    "github_repo": "cyqlone",
+    "github_repo": "fancyqlone",
     "github_version": "develop",
-    "doc_path": "scripts/docs/source",
+    "doc_path": "docs/source",
 }
 html_show_sourcelink = False
 html_theme_options = {
     "use_edit_page_button": True,
     "logo": {
-        "text": "cyqlone",
-        # "link": "https://github.com/kul-optec/cyqlone",
+        "text": "FanCyqlone",
+        # "link": "https://github.com/kul-optec/fancyqlone",
     },
     "icon_links": [
         {
             "name": "Source code on GitHub",
-            "url": "https://github.com/kul-optec/cyqlone",
+            "url": "https://github.com/kul-optec/fancyqlone",
             "icon": "fa-brands fa-github",
             "type": "fontawesome",
         },
         {
             "name": "Python package on PyPI",
-            "url": "https://www.pypi.org/p/cyqlone",
+            "url": "https://www.pypi.org/p/fancyqlone",
             "icon": "fa-custom fa-pypi",
             "type": "fontawesome",
         },
         {
-            "name": "Paper on arXiv",
+            "name": "Cyqlone paper on arXiv",
             "url": "https://arxiv.org/abs/2512.09058",
             "icon": "fa-solid fa-graduation-cap",
             "type": "fontawesome",

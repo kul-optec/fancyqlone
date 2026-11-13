@@ -1,7 +1,7 @@
 Linear Algebra
 ==============
 
-.. doxygennamespace:: cyqlone::linalg
+.. doxygennamespace:: fancyqlone::linalg
    :no-link:
    :members:
    :undoc-members:

@@ -1,4 +1,4 @@
-Cyqlone
-=======
+FanCyqlone
+==========
 
-Parallel quadratic programming solver for optimal control.
+Parallel quadratic programming solver for multi-horizon optimal control.

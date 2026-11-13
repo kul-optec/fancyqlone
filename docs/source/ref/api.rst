@@ -1,7 +1,7 @@
 API reference
 =============
 
-.. doxygennamespace:: cyqlone
-   :project: cyqlone
+.. doxygennamespace:: fancyqlone
+   :project: fancyqlone
    :members:
    :undoc-members:

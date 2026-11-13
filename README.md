@@ -1,10 +1,10 @@
 [![arXiv Preprint](https://img.shields.io/badge/arXiv-Preprint-b31b1b)](https://arxiv.org/abs/)
-[![Documentation](https://img.shields.io/badge/Documentation-develop-blue)](https://kul-optec.github.io/fancyqlone/develop/Doxygen)
-[![CI: Linux](https://github.com/kul-optec/cyqlone/actions/workflows/linux.yml/badge.svg)](https://github.com/kul-optec/fancyqlone/actions/workflows/linux.yml)
+[![Documentation](https://img.shields.io/badge/Documentation-coming_soon-orange)](#documentation-fancyqlone)
+[![CI: Linux](https://github.com/kul-optec/fancyqlone/actions/workflows/linux.yml/badge.svg)](https://github.com/kul-optec/fancyqlone/actions/workflows/linux.yml)
 [![GitHub License](https://img.shields.io/github/license/kul-optec/alpaqa?label=License&logo=gnu)](https://github.com/kul-optec/alpaqa/blob/develop/LICENSE)
 
 <p align="center">
-<img src="docs/source/images/cyqlone-logo-text.svg" width=300>
+<img src="docs/source/images/fancyqlone-logo.svg" width=300>
 </p>
 
 # FanCyqlone
@@ -16,7 +16,7 @@ backend, with a parallel
 exact line search.
 
 ## Preprint
-The paper describing the FanCyqlone and FanCyQPALM algorithm can be found on arXiv: [**arxiv.org/abs/2512.09058**](https://arxiv.org/abs/2512.09058)
+The paper describing the FanCyqlone and FanCyQPALM algorithm can be found on arXiv: [**arxiv.org/abs/**](https://arxiv.org/abs/)
 
 ```bibtex
 @misc{teuwen_fancyqlone_2026,
@@ -44,7 +44,15 @@ The paper describing the Cyqlone and CyQPALM algorithm can be found on arXiv: [*
 ## Reproduction of benchmark results from the paper
 
 A script to reproduce the benchmark results from the paper can be found in `benchmarks/fancyqlone`.
-See [`benchmarks/fancyqlone/README.md`](benchmarks/fancyqlone/README.md) for instructions.
+See [`benchmarks/fancyqpalm/README.md`](benchmarks/fancyqpalm/README.md) for instructions.
+
+## Documentation FanCyqlone
+
+Coming soon.
+
+## Examples FanCyqlone
+
+Coming soon.
 
 ## Documentation Cyqlone
 
@@ -69,7 +77,7 @@ conan config install scripts/ci/conan-profiles/settings_user.yml
 
 ```s
 # Install dependencies (including GCC) and build from source
-conan build . --build=missing -pr:h scripts/dev/profiles/dev -o \&:with_benchmarks=True -c tools.build:jobs=4
+conan build . --build=missing -pr:h scripts/dev/profiles/dev -s:b compiler.cppstd=20 -o \&:with_benchmarks=True -c tools.build:jobs=4
 ```
 
 To build using Clang instead of GCC, add `-pr:h scripts/ci/conan-profiles/profiles/toolchain/clang-linux.profile` to the command above (in addition to the `dev` profile). To use the Intel compiler, add `-pr:h scripts/ci/conan-profiles/profiles/toolchain/icx-linux.profile` instead.
@@ -86,7 +94,7 @@ Manual installation using CMake (without the Conan package manager) is also supp
 To install the Python bindings for local development,
 use the `install-linux-dev.sh` script (without arguments).
 
-Requirements: Python 3.8+, uv, Conan 2 (as configured above).
+Requirements: Python 3.9+, uv, Conan 2 (as configured above).
 
 ```sh
 ./scripts/dev/install-linux-dev.sh
