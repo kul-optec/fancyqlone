@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         gcc: ["15"]
-        build_type: ["Debug"]
+        build_type: ["Release"]
         profile: ["ci"]
       fail-fast: false
     runs-on: ubuntu-24.04
