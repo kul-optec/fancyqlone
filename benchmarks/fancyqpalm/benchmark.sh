@@ -135,6 +135,7 @@ deps() {
 
         -c tools.build:skip_test=True
         -o "guanaqo/*:with_mkl=${with_mkl}"
+        -o "qpoases-e/*:with_mkl=${with_mkl}"
 
         # mold >= 2.41 requires C++20 in the build profile.
         -s:b compiler.cppstd=20

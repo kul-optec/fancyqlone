@@ -13,3 +13,6 @@ patches:
     - patch_file: "patches/0003-namespace-blas-replacements.patch"
       patch_description: "Namespace internal BLAS replacements to coexist with external BLAS libraries"
       patch_type: bugfix
+    - patch_file: "patches/0004-external-blas-indices.patch"
+      patch_description: "Use the selected BLAS integer ABI and correct GEMM prototypes"
+      patch_type: bugfix

@@ -1,0 +1,97 @@
+diff --git a/include/qpOASES_e/Matrices.h b/include/qpOASES_e/Matrices.h
+--- a/include/qpOASES_e/Matrices.h
++++ b/include/qpOASES_e/Matrices.h
+@@ -71,10 +71,14 @@
+ #ifdef EXTERNAL_BLAS
++	#ifndef QPOASES_BLAS_INDEX_TYPE
++	#define QPOASES_BLAS_INDEX_TYPE int
++	#endif
++	typedef QPOASES_BLAS_INDEX_TYPE qpOASES_blas_int;
+ 	// double precision
+-	void dgemm_(char *ta, char *tb, int *m, int *n, int *k, double *alpha, double *A, int *lda, double *B, int ldb, double *beta, double *C, int *ldc);
+-	void dgemv_(char *ta, int *m, int *n, double *alpha, double *A, int *lda, double *x, int *incx, double *beta, double *y, int *incy);
+-	void dpotrf_(char *uplo, int *m, double *A, int *lda, int *info);
++	void dgemm_(const char *ta, const char *tb, const qpOASES_blas_int *m, const qpOASES_blas_int *n, const qpOASES_blas_int *k, const double *alpha, const double *A, const qpOASES_blas_int *lda, const double *B, const qpOASES_blas_int *ldb, const double *beta, double *C, const qpOASES_blas_int *ldc);
++	void dgemv_(const char *ta, const qpOASES_blas_int *m, const qpOASES_blas_int *n, const double *alpha, const double *A, const qpOASES_blas_int *lda, const double *x, const qpOASES_blas_int *incx, const double *beta, double *y, const qpOASES_blas_int *incy);
++	void dpotrf_(const char *uplo, const qpOASES_blas_int *m, double *A, const qpOASES_blas_int *lda, qpOASES_blas_int *info);
+ 	// single precision
+-	void sgemm_(char *ta, char *tb, int *m, int *n, int *k, float *alpha, float *A, int *lda, float *B, int ldb, float *beta, float *C, int *ldc);
+-	void sgemv_(char *ta, int *m, int *n, float *alpha, float *A, int *lda, float *x, int *incx, float *beta, float *y, int *incy);
+-	void spotrf_(char *uplo, int *m, float *A, int *lda, int *info);
++	void sgemm_(const char *ta, const char *tb, const qpOASES_blas_int *m, const qpOASES_blas_int *n, const qpOASES_blas_int *k, const float *alpha, const float *A, const qpOASES_blas_int *lda, const float *B, const qpOASES_blas_int *ldb, const float *beta, float *C, const qpOASES_blas_int *ldc);
++	void sgemv_(const char *ta, const qpOASES_blas_int *m, const qpOASES_blas_int *n, const float *alpha, const float *A, const qpOASES_blas_int *lda, const float *x, const qpOASES_blas_int *incx, const float *beta, float *y, const qpOASES_blas_int *incy);
++	void spotrf_(const char *uplo, const qpOASES_blas_int *m, float *A, const qpOASES_blas_int *lda, qpOASES_blas_int *info);
+ #else
+diff --git a/src/Matrices.c b/src/Matrices.c
+--- a/src/Matrices.c
++++ b/src/Matrices.c
+@@ -247,12 +247,12 @@
+-	int _xN     = xN;
+-	int _nRows  = (_THIS->nRows);
+-	int _nCols  = (_THIS->nCols);
+-	int _leaDim = qpOASES_getMax(1,_THIS->nCols);
+-	int _xLD    = qpOASES_getMax(1,xLD);
+-	int _yLD    = qpOASES_getMax(1,yLD);
++	qpOASES_blas_int _xN     = xN;
++	qpOASES_blas_int _nRows  = (_THIS->nRows);
++	qpOASES_blas_int _nCols  = (_THIS->nCols);
++	qpOASES_blas_int _leaDim = qpOASES_getMax(1,_THIS->nCols);
++	qpOASES_blas_int _xLD    = qpOASES_getMax(1,xLD);
++	qpOASES_blas_int _yLD    = qpOASES_getMax(1,yLD);
+ 	char c_n = 'n';
+ 	char c_t = 't';
+-	int i_1 = 1;
++	qpOASES_blas_int i_1 = 1;
+ 
+ 	if(_xN==1)
+ 	{
+@@ -288,12 +288,12 @@
+-	int _xN     = xN;
+-	int _nRows  = (_THIS->nRows);
+-	int _nCols  = (_THIS->nCols);
+-	int _leaDim = qpOASES_getMax(1,_THIS->nCols);
+-	int _xLD    = qpOASES_getMax(1,xLD);
+-	int _yLD    = qpOASES_getMax(1,yLD);
++	qpOASES_blas_int _xN     = xN;
++	qpOASES_blas_int _nRows  = (_THIS->nRows);
++	qpOASES_blas_int _nCols  = (_THIS->nCols);
++	qpOASES_blas_int _leaDim = qpOASES_getMax(1,_THIS->nCols);
++	qpOASES_blas_int _xLD    = qpOASES_getMax(1,xLD);
++	qpOASES_blas_int _yLD    = qpOASES_getMax(1,yLD);
+ 	char c_n = 'n';
+ 	char c_t = 't';
+-	int i_1 = 1;
++	qpOASES_blas_int i_1 = 1;
+ 
+ 	if(_xN==1)
+ 	{
+diff --git a/src/QProblem.c b/src/QProblem.c
+--- a/src/QProblem.c
++++ b/src/QProblem.c
+@@ -1835,2 +1835,7 @@
++#ifdef EXTERNAL_BLAS
++	qpOASES_blas_int info = 0;
++	qpOASES_blas_int _nFR = nFR, _nV = nV;
++#else
+ 	long info = 0;
+ 	unsigned long _nFR = (unsigned long)nFR, _nV = nV;
++#endif
+@@ -3234,2 +3239,7 @@
++#ifdef EXTERNAL_BLAS
++	qpOASES_blas_int info = 0;
++	qpOASES_blas_int _nZ = nZ, _nV = nV;
++#else
+ 	long info = 0;
+ 	unsigned long _nZ = (unsigned long)nZ, _nV = nV;
++#endif
+diff --git a/src/QProblemB.c b/src/QProblemB.c
+--- a/src/QProblemB.c
++++ b/src/QProblemB.c
+@@ -1498,2 +1498,7 @@
++#ifdef EXTERNAL_BLAS
++	qpOASES_blas_int info = 0;
++	qpOASES_blas_int _nFR = nFR, _nV = nV;
++#else
+ 	long info = 0;
+ 	unsigned long _nFR = (unsigned long)nFR, _nV = nV;
++#endif
