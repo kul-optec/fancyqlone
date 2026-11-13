@@ -242,39 +242,6 @@ build() {
     cmake --build --preset "${BUILD_PRESET}"
 }
 
-
-tests() {
-    if [[ ! -f CMakeUserPresets.json || ! -f "${CONAN_JSON}" ]]; then
-        echo "Conan files not found. Run '$0 deps' and '$0 build' first." >&2
-        exit 1
-    fi
-
-    local build_folder
-    local generators_folder
-
-    build_folder="$(
-        _jq -r '.graph.nodes."0".build_folder' "${CONAN_JSON}"
-    )"
-
-    generators_folder="$(
-        _jq -r '.graph.nodes."0".generators_folder' "${CONAN_JSON}"
-    )"
-
-    set +ux
-    # shellcheck disable=SC1090
-    source "${generators_folder}/conanrun.sh"
-    set -ux
-
-    cmake --build \
-        --preset "${BUILD_PRESET}" \
-        --target testing
-
-    ctest \
-        --test-dir "${build_folder}" \
-        --output-on-failure
-}
-
-
 # -----------------------------------------------------------------------------
 # Benchmark wrappers
 # -----------------------------------------------------------------------------
@@ -465,13 +432,13 @@ benchmark_scaling_J() {
 # M = 12, J = 4, varying horizon N.
 benchmark_scaling() {
     benchmark \
-        -I 10 \
+        -I 100 \
         -p "${OMP_NUM_THREADS}" \
         -v4 \
         -M 12 \
         -N 32 64 96 128 160 192 224 256 \
         -J 4 \
-        --benchmark_repetitions=3 \
+        --benchmark_repetitions=10 \
         --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s \
         --benchmark_out=benchmark-scaling.json \
@@ -484,7 +451,7 @@ benchmark_scaling() {
 benchmark_scaling_states() {
     benchmark \
         --problem wang-boyd-2008 \
-        -I 10 \
+        -I 100 \
         -p "${OMP_NUM_THREADS}" \
         -v4 \
         -N 64 \
@@ -496,7 +463,7 @@ benchmark_scaling_states() {
         -M26 \
         -M30 \
         -J 4 \
-        --benchmark_repetitions=3 \
+        --benchmark_repetitions=10 \
         --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s \
         --benchmark_out=benchmark-scaling-states.json \
@@ -512,12 +479,12 @@ benchmark_scaling_states() {
 # J = 4, varying horizon N.
 benchmark_quad_scaling() {
     benchmark_quadruped \
-        -I 10 \
+        -I 100 \
         -p "${OMP_NUM_THREADS}" \
         -v4 \
         -N 32 64 96 128 160 192 224 256 \
         -J 4 \
-        --benchmark_repetitions=3 \
+        --benchmark_repetitions=10 \
         --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s \
         --benchmark_out=benchmark-quad-scaling.json \
@@ -529,12 +496,12 @@ benchmark_quad_scaling() {
 # N = 64, varying number of branches J.
 benchmark_quad_scaling_J() {
     benchmark_quadruped \
-        -I 10 \
+        -I 100 \
         -p "${OMP_NUM_THREADS}" \
         -v4 \
         -N 64 \
         -J 1 2 4 8 \
-        --benchmark_repetitions=3 \
+        --benchmark_repetitions=10 \
         --benchmark_report_aggregates_only \
         --benchmark_min_time=0.01s \
         --benchmark_out=benchmark-quad-scaling-J.json \
@@ -591,11 +558,6 @@ main() {
         build)
             build
             ;;
-
-        tests)
-            tests
-            ;;
-
         benchmark-quick)
             benchmark_quick "$@"
             ;;
@@ -668,7 +630,6 @@ main() {
             echo "Build commands:" >&2
             echo "  deps [...]                 Install dependencies using Conan" >&2
             echo "  build                      Build the benchmark project" >&2
-            echo "  tests                      Build and run tests" >&2
             echo "" >&2
             echo "Paper benchmarks:" >&2
             echo "  benchmark-scaling-p        Fig. 2a: horizon / processor scaling" >&2

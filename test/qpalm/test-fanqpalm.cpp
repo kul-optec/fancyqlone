@@ -609,6 +609,56 @@ combine_branches_0(std::span<const fancyqlone::LinearOCPStorage> ocps) {
 }
 #include <fancyqlone/random-ocp.hpp>
 
+namespace {
+template <class LinearSolver>
+void check_fan_backend_solve_methods() {
+    fancyqlone::FanOCPStorage problem;
+    constexpr fancyqlone::OCPDim dim{.N_horiz = 8, .nx = 2, .nu = 1, .ny = 0, .ny_N = 0};
+    for (uint32_t seed : {17, 23})
+        problem.ocps.push_back(fancyqlone::generate_random_ocp(dim, seed));
+    auto packed = fancyqlone::FanCyqloneStorage<>::build(problem);
+
+    for (auto method : {fancyqlone::SolveMethod::StairPCG, fancyqlone::SolveMethod::JacobiPCG,
+                        fancyqlone::SolveMethod::PCR, fancyqlone::SolveMethod::None}) {
+        SCOPED_TRACE(fancyqlone::enum_name(method));
+        qp::CyQPALMBackendSettings backend_settings;
+        backend_settings.processors                   = 2;
+        backend_settings.tricyqle_params.solve_method = method;
+        auto backend = qp::make_cyqpalm_backend<4, StorageOrder::ColMajor, LinearSolver>(
+            packed, {}, backend_settings);
+        qp::Solver<qp::CyQPALMBackend<4, StorageOrder::ColMajor, LinearSolver> *> solver{
+            backend.get(),
+            {.max_outer_iter       = 20,
+             .max_total_inner_iter = 100,
+             .tolerance            = 1e-8,
+             .dual_tolerance       = 1e-8,
+             .eq_constr_tolerance = 1e-8,
+             .verbose              = false}};
+
+        ASSERT_EQ(solver(), qp::SolverStatus::Converged);
+        const auto x = solver.get_solution();
+        const auto y = solver.get_inequality_multipliers();
+        const auto lambda = solver.get_equality_multipliers();
+        ASSERT_TRUE(std::ranges::all_of(x, [](auto value) { return std::isfinite(value); }));
+        ASSERT_TRUE(std::ranges::all_of(y, [](auto value) { return std::isfinite(value); }));
+        ASSERT_TRUE(std::ranges::all_of(lambda, [](auto value) { return std::isfinite(value); }));
+        const auto error = packed.compute_kkt_error(problem, x, y, lambda);
+        EXPECT_LT(error.stationarity, 1e-8);
+        EXPECT_LT(error.equality_residual, 1e-8);
+        EXPECT_LT(error.inequality_residual, 1e-8);
+        EXPECT_LT(error.complementarity, 1e-8);
+    }
+}
+} // namespace
+
+TEST(QPALM, fan_backend_solve_methods) {
+    check_fan_backend_solve_methods<fancyqlone::FanCyqloneSolver<4>>();
+}
+
+TEST(QPALM, serial_fan_backend_solve_methods) {
+    check_fan_backend_solve_methods<fancyqlone::SerialFanCyqloneSolver<4>>();
+}
+
 TEST(QPALM, random_fan) {
     using fancyqlone::index_t;
     using fancyqlone::real_t;

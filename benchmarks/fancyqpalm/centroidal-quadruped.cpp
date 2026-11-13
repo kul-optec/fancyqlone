@@ -611,6 +611,8 @@ void register_options(const char *program, CLI::App &app, Options &opts) {
     app.add_option("--vector-length,-v", opts.vector_length,
                    "The vector length to use in the Cyqlone backend");
     app.add_flag("--hpipm,!--no-hpipm", opts.hpipm, "Use HPIPM solver for comparison");
+    app.add_flag("--treeqp,!--no-treeqp", opts.treeqp, "Use TreeQP solver for comparison");
+    app.add_flag("--piqp,!--no-piqp", opts.piqp, "Use PIQP solver for comparison");
     app.add_flag("--trace,!--no-trace", opts.trace, "Enable tracing of CyQPALM solver runs");
     app.add_flag("--custom-reporter,!--no-custom-reporter", opts.custom_reporter,
                  "Use custom benchmark reporter");

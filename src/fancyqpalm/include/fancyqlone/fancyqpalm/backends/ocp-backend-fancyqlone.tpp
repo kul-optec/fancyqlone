@@ -100,8 +100,10 @@ struct CyQPALMBackend {
         : ocp{OCP_t::build(ocp, settings.processors)}, settings{settings} {
         if constexpr (!traits::supports_factorization_updates)
             this->settings.max_update_count = 0;
+        if constexpr (traits::requires_external_schur_solve)
+            this->settings.tricyqle_params.solve_method = SolveMethod::None;
         this->parallel_ctx->update_spin_count(settings.spin_count);
-        this->ocp.update_tricyqle_params(settings.tricyqle_params);
+        this->ocp.update_tricyqle_params(this->settings.tricyqle_params);
         b_min_strided = ineq_constr_vec();
         b_max_strided = ineq_constr_vec();
         ΔΣ            = ineq_constr_vec();

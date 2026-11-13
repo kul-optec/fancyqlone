@@ -52,7 +52,7 @@ run_plot hist_plot_from_json.py "$results_dir/benchmark-quad-scaling-J.json" \
 
 run_plot hist_plot_from_json.py "$scaling_p_input" \
     --output "$output_dir/benchmark-scaling-$machine-p.pdf" \
-    --metric=time_per_iter --aggregate=mean --scaling --ylim=0, --no-title --figsize=5.75,5.0\
+    --metric=time_per_iter --aggregate=mean --reduce-metric=mean --scaling --ylim=0, --no-title --figsize=5.75,5.0\
     --solver "fancyqlone(p=4,v=4,cm,zero)" --solver "serial-fancyqlone(p=4,v=4,cm,zero)"\
     --solver "fancyqlone(p=4,v=1,cm,zero)" --solver "serial-fancyqlone(p=4,v=1,cm,zero)"\
     --solver "fancyqlone(p=8,v=4,cm,zero)" --solver "serial-fancyqlone(p=8,v=4,cm,zero)"\
@@ -60,7 +60,7 @@ run_plot hist_plot_from_json.py "$scaling_p_input" \
 
 run_plot hist_plot_from_json.py "$scaling_j_input" \
     --output "$output_dir/benchmark-scaling-$machine-J.pdf" \
-    --metric=time_per_iter --aggregate=mean --scaling --xvar=J --ylim=0, --no-title --figsize=5.75,4.0\
+    --metric=time_per_iter --aggregate=mean --reduce-metric=mean --scaling --xvar=J --ylim=0, --no-title --figsize=5.75,4.0\
     --solver "fancyqlone(p=$p,v=$v,cm,zero)" --solver "serial-fancyqlone(p=$p,v=$v,cm,zero)"
 
 run_plot hist_plot_from_json.py "$results_dir/benchmark-scaling.json" \

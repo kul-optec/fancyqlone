@@ -1,4 +1,4 @@
-[![arXiv Preprint](https://img.shields.io/badge/arXiv-Preprint-b31b1b)](https://arxiv.org/abs/)
+[![arXiv Preprint](https://img.shields.io/badge/arXiv-Preprint-b31b1b)](https://arxiv.org/abs/2611.17221)
 [![Documentation](https://img.shields.io/badge/Documentation-coming_soon-orange)](#documentation-fancyqlone)
 [![CI: Linux](https://github.com/kul-optec/fancyqlone/actions/workflows/linux.yml/badge.svg)](https://github.com/kul-optec/fancyqlone/actions/workflows/linux.yml)
 [![GitHub License](https://img.shields.io/github/license/kul-optec/alpaqa?label=License&logo=gnu)](https://github.com/kul-optec/alpaqa/blob/develop/LICENSE)
@@ -16,16 +16,18 @@ backend, with a parallel
 exact line search.
 
 ## Preprint
-The paper describing the FanCyqlone and FanCyQPALM algorithm can be found on arXiv: [**arxiv.org/abs/**](https://arxiv.org/abs/)
+The paper describing the FanCyqlone and FanCyQPALM algorithm can be found on arXiv: [**arxiv.org/abs/2611.17221**](https://arxiv.org/abs/2611.17221)
 
 ```bibtex
 @misc{teuwen_fancyqlone_2026,
 	title = {{FanCyqlone}: A {Parallelized} {Solver} for {Multi-Horizon} {Optimal} {Control} },
-	url = {},
-	doi = {},
+	url = {https://arxiv.org/pdf/2611.17221},
+	doi = {10.48550/arXiv.2611.17221},
 	publisher = {arXiv},
 	author = {Teuwen, Matisse and Pas, Pieter and Schuurmans, Mathijs and Patrinos, Panagiotis},
-	month = Nov,}
+	month = Nov,
+	year = {2026},
+}
 ```
 The paper describing the Cyqlone and CyQPALM algorithm can be found on arXiv: [**arxiv.org/abs/2512.09058**](https://arxiv.org/abs/2512.09058)
 
@@ -43,7 +45,7 @@ The paper describing the Cyqlone and CyQPALM algorithm can be found on arXiv: [*
 ```
 ## Reproduction of benchmark results from the paper
 
-A script to reproduce the benchmark results from the paper can be found in `benchmarks/fancyqlone`.
+A script to reproduce the benchmark results from the paper can be found in `benchmarks/fancyqpalm`.
 See [`benchmarks/fancyqpalm/README.md`](benchmarks/fancyqpalm/README.md) for instructions.
 
 ## Documentation FanCyqlone

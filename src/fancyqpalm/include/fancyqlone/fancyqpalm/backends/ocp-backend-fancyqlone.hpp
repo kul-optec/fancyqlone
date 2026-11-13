@@ -50,6 +50,7 @@ struct CyQPALMBackendSettings {
     /// Fan backends do not support updates and use an effective value of zero.
     index_t max_update_count = 5;
     bool detailed_timings    = false;
+    /// Fan backends always use SolveMethod::None for the branch Schur complements.
     fancyqlone::TricyqleParams<real_t> tricyqle_params{};
     uint32_t spin_count           = std::numeric_limits<uint32_t>::max();
     WarmStartingStrategy strategy = WarmStartingStrategy::Copy;
@@ -79,6 +80,7 @@ struct CycloneBackendTraits;
 template <index_t VL, StorageOrder DefaultOrder>
 struct CycloneBackendTraits<fancyqlone::CyqloneSolver<VL, real_t, DefaultOrder>> {
     static constexpr bool supports_factorization_updates = true;
+    static constexpr bool requires_external_schur_solve  = false;
     using OCP_t      = fancyqlone::CyqloneSolver<VL, real_t, DefaultOrder>;
     using simd       = typename OCP_t::simd;
     using CStorage   = CyqloneStorage<>;
@@ -104,6 +106,7 @@ struct CycloneBackendTraits<fancyqlone::CyqloneSolver<VL, real_t, DefaultOrder>>
 template <index_t VL, StorageOrder DefaultOrder>
 struct CycloneBackendTraits<fancyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>> {
     static constexpr bool supports_factorization_updates = false;
+    static constexpr bool requires_external_schur_solve  = true;
     using OCP_t      = fancyqlone::FanCyqloneSolver<VL, real_t, DefaultOrder>;
     using simd       = typename OCP_t::simd;
     using CStorage   = FanCyqloneStorage<>;
@@ -149,6 +152,7 @@ struct CycloneBackendTraits<fancyqlone::FanCyqloneSolver<VL, real_t, DefaultOrde
 template <index_t VL, StorageOrder DefaultOrder>
 struct CycloneBackendTraits<fancyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultOrder>> {
     static constexpr bool supports_factorization_updates = false;
+    static constexpr bool requires_external_schur_solve  = true;
     using OCP_t      = fancyqlone::SerialFanCyqloneSolver<VL, real_t, DefaultOrder>;
     using simd       = typename OCP_t::simd;
     using CStorage   = FanCyqloneStorage<>;

@@ -17,6 +17,7 @@ __pycache__
 .venv*
 .cyqlone*
 .cyq*
+.cy*
 # Python distribution and building
 dist
 dist-debug
@@ -97,3 +98,4 @@ docs/source/fancyqlone.rst
 benchmarks/fancyqpalm/conan.json
 benchmarks/fancyqpalm/CXX-DetectStdlib.h.html
 remove.sh
+.cy/lib/python3.12/site-packages/charset_normalizer/legacy.py
