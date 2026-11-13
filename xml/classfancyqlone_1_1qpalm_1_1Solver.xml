@@ -1,0 +1,905 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classfancyqlone_1_1qpalm_1_1Solver" kind="class" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::Solver</compoundname>
+    <includes refid="solver_8hpp" local="no">fancyqlone/fancyqpalm/solver.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Backend</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classfancyqlone_1_1qpalm_1_1Solver_1ae4e7dbf2f441165985217b4c84211fbb" prot="private" static="no">
+        <type><ref refid="namespacefancyqlone_1_1qpalm_1_1detail_1a49f3a418b141bc5e8f6b556923568b6a" kindref="member">detail::backend_type_t</ref>&lt; Backend &gt;</type>
+        <definition>using fancyqlone::qpalm::Solver&lt; Backend &gt;::backend_type = detail::backend_type_t&lt;Backend&gt;</definition>
+        <argsstring></argsstring>
+        <name>backend_type</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::backend_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="86" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classfancyqlone_1_1qpalm_1_1Solver_1a542bb07db5aed8c5b8c0765abea2efa7" prot="public" static="no">
+        <type>typename <ref refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type" kindref="compound">detail::backend_stats_type</ref>&lt; <ref refid="classfancyqlone_1_1qpalm_1_1Solver_1ae4e7dbf2f441165985217b4c84211fbb" kindref="member">backend_type</ref> &gt;::type</type>
+        <definition>using fancyqlone::qpalm::Solver&lt; Backend &gt;::BackendStats = typename detail::backend_stats_type&lt;backend_type&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>BackendStats</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::BackendStats</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="91" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" prot="public" static="no" mutable="no">
+        <type>Backend</type>
+        <definition>Backend fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</definition>
+        <argsstring></argsstring>
+        <name>backend</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::backend</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="98" column="13" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="98" bodyend="-1"/>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" compoundref="solver_8tpp" startline="626" endline="627">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" compoundref="solver_8tpp" startline="102" endline="122">fancyqlone::qpalm::Solver&lt; Backend &gt;::do_solve</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1aaa6ce03c9fa6566942e784d0d7b04881" compoundref="solver_8tpp" startline="547" endline="551">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_constraints</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a6dc0e385224505aeb966c670a4a7e2d3" compoundref="solver_8tpp" startline="542" endline="545">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_constraints</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a8b96f0f22f26395472962929b9549c5f" compoundref="solver_8tpp" startline="536" endline="540">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_multipliers</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a4884fb12e75d2ca2667e9c6044201e5d" compoundref="solver_8tpp" startline="531" endline="534">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_multipliers</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1abc8b439ef78d256d68b9db2ed5541256" compoundref="solver_8tpp" startline="569" endline="573">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_constraints</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a40effc9d8e12effae34d392e68ee16a6" compoundref="solver_8tpp" startline="564" endline="567">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_constraints</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a0a41c7830f109e5c8a0594652bfd2410" compoundref="solver_8tpp" startline="558" endline="562">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_multipliers</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ac03face48fec747837c37f794b025de3" compoundref="solver_8tpp" startline="553" endline="556">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_multipliers</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a088f56e2c4b01879da588ff5e108ec9a" compoundref="solver_8tpp" startline="593" endline="601">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_initial_guess</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a3d34b4bf63cf4a64d75a28661b18ad3e" compoundref="solver_8tpp" startline="508" endline="510">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_num_equality_constraints</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a9087fec3b36d2e7795555e097b81ae56" compoundref="solver_8tpp" startline="512" endline="514">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_num_inequality_constraints</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ade67a39b7de8d754c6b34516913b94f4" compoundref="solver_8tpp" startline="504" endline="506">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_num_variables</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1aa641b1c16589f7957f78ac175eb5000b" compoundref="solver_8tpp" startline="525" endline="529">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_solution</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ae4d201b79ee15c1fb9a5be2128a04c68" compoundref="solver_8tpp" startline="520" endline="523">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_solution</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ad3663285ee0b100080181b4d5e5c05a6" compoundref="solver_8tpp" startline="603" endline="605">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_eq</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1af0fd34bfe915e89b65edb57a42481756" compoundref="solver_8tpp" startline="607" endline="609">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_lb</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a164292e938142aea28bd9dffa3663d64" compoundref="solver_8tpp" startline="611" endline="613">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_ub</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1add9ec6bd553362b1445da9234e3b7899" compoundref="solver_8tpp" startline="580" endline="591">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_initial_guess</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1abaef224fb463ba3a15bfce92eabc94ca" compoundref="solver_8tpp" startline="575" endline="578">fancyqlone::qpalm::Solver&lt; Backend &gt;::warm_start_solution</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1qpalm_1_1Solver_1a5c6eaebce9526ffbe806c147bdc09440" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1Settings" kindref="compound">Settings</ref></type>
+        <definition>Settings fancyqlone::qpalm::Solver&lt; Backend &gt;::settings</definition>
+        <argsstring></argsstring>
+        <name>settings</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::settings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="99" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="99" bodyend="-1"/>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" compoundref="solver_8tpp" startline="626" endline="627">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" compoundref="solver_8tpp" startline="102" endline="122">fancyqlone::qpalm::Solver&lt; Backend &gt;::do_solve</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1qpalm_1_1Solver_1adcccd917cf1f4d674cb17f7da4eac01c" prot="public" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation" kindref="compound">SolverImplementation</ref>&lt; <ref refid="classfancyqlone_1_1qpalm_1_1Solver_1ae4e7dbf2f441165985217b4c84211fbb" kindref="member">backend_type</ref> &gt; &gt;</type>
+        <definition>std::unique_ptr&lt;SolverImplementation&lt;backend_type&gt; &gt; fancyqlone::qpalm::Solver&lt; Backend &gt;::impl</definition>
+        <argsstring></argsstring>
+        <name>impl</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::impl</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="100" column="21" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="100" bodyend="100"/>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" compoundref="solver_8tpp" startline="102" endline="122">fancyqlone::qpalm::Solver&lt; Backend &gt;::do_solve</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a6dc0e385224505aeb966c670a4a7e2d3" compoundref="solver_8tpp" startline="542" endline="545">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_constraints</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a4884fb12e75d2ca2667e9c6044201e5d" compoundref="solver_8tpp" startline="531" endline="534">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_multipliers</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a40effc9d8e12effae34d392e68ee16a6" compoundref="solver_8tpp" startline="564" endline="567">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_constraints</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ac03face48fec747837c37f794b025de3" compoundref="solver_8tpp" startline="553" endline="556">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_multipliers</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ae4d201b79ee15c1fb9a5be2128a04c68" compoundref="solver_8tpp" startline="520" endline="523">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_solution</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1aaf903dfe0171e1f52b7b3be5a8ab5c3a" compoundref="solver_8tpp" startline="516" endline="518">fancyqlone::qpalm::Solver&lt; Backend &gt;::has_result</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1abaef224fb463ba3a15bfce92eabc94ca" compoundref="solver_8tpp" startline="575" endline="578">fancyqlone::qpalm::Solver&lt; Backend &gt;::warm_start_solution</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1qpalm_1_1Solver_1a1fe6faba7845403358c97550beb2d31d" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="structfancyqlone_1_1qpalm_1_1SolverStats" kindref="compound">SolverStats</ref> &gt;</type>
+        <definition>std::optional&lt;SolverStats&gt; fancyqlone::qpalm::Solver&lt; Backend &gt;::stats</definition>
+        <argsstring></argsstring>
+        <name>stats</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::stats</qualifiedname>
+        <initializer>= std::nullopt</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="101" column="19" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="101" bodyend="-1"/>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" compoundref="solver_8tpp" startline="102" endline="122">fancyqlone::qpalm::Solver&lt; Backend &gt;::do_solve</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a2aee1d8cf07c13e5d4a574f033de87ef" compoundref="solver_8hpp" startline="93" endline="96">fancyqlone::qpalm::Solver&lt; Backend &gt;::operator()</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1qpalm_1_1Solver_1af8953830ed7f7b541b0a64f24e55f202" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="classfancyqlone_1_1qpalm_1_1Solver_1a542bb07db5aed8c5b8c0765abea2efa7" kindref="member">BackendStats</ref> &gt;</type>
+        <definition>std::optional&lt;BackendStats&gt; fancyqlone::qpalm::Solver&lt; Backend &gt;::stats_backend</definition>
+        <argsstring></argsstring>
+        <name>stats_backend</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::stats_backend</qualifiedname>
+        <initializer>= std::nullopt</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="102" column="19" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="102" bodyend="-1"/>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" compoundref="solver_8tpp" startline="102" endline="122">fancyqlone::qpalm::Solver&lt; Backend &gt;::do_solve</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1qpalm_1_1Solver_1acbfb74f0082f9027638762d8a6004c48" prot="public" static="no" mutable="no">
+        <type><ref refid="classguanaqo_1_1AtomicStopSignal" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::AtomicStopSignal</ref></type>
+        <definition>guanaqo::AtomicStopSignal fancyqlone::qpalm::Solver&lt; Backend &gt;::stop_signal</definition>
+        <argsstring></argsstring>
+        <name>stop_signal</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::stop_signal</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="103" column="31" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="103" bodyend="103"/>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" compoundref="solver_8tpp" startline="102" endline="122">fancyqlone::qpalm::Solver&lt; Backend &gt;::do_solve</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1adb145dd3e5f7f8a94730d5b86195182b" compoundref="solver_8hpp" startline="130" endline="130">fancyqlone::qpalm::Solver&lt; Backend &gt;::stop</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" prot="private" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" kindref="member">SolverStatus</ref></type>
+        <definition>SolverStatus Solver::do_solve</definition>
+        <argsstring>()</argsstring>
+        <name>do_solve</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::do_solve</qualifiedname>
+        <briefdescription>
+<para>Run QPALM on the scaled problem. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="88" column="19" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="102" bodyend="122"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" compoundref="solver_8tpp" startline="102" endline="122">fancyqlone::qpalm::Solver&lt; Backend &gt;::do_solve</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1adcccd917cf1f4d674cb17f7da4eac01c" compoundref="solver_8hpp" startline="100" endline="100">fancyqlone::qpalm::Solver&lt; Backend &gt;::impl</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a5c6eaebce9526ffbe806c147bdc09440" compoundref="solver_8hpp" startline="99">fancyqlone::qpalm::Solver&lt; Backend &gt;::settings</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a1fe6faba7845403358c97550beb2d31d" compoundref="solver_8hpp" startline="101">fancyqlone::qpalm::Solver&lt; Backend &gt;::stats</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af8953830ed7f7b541b0a64f24e55f202" compoundref="solver_8hpp" startline="102">fancyqlone::qpalm::Solver&lt; Backend &gt;::stats_backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1acbfb74f0082f9027638762d8a6004c48" compoundref="solver_8hpp" startline="103" endline="103">fancyqlone::qpalm::Solver&lt; Backend &gt;::stop_signal</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" compoundref="solver_8tpp" startline="102" endline="122">fancyqlone::qpalm::Solver&lt; Backend &gt;::do_solve</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a2aee1d8cf07c13e5d4a574f033de87ef" compoundref="solver_8hpp" startline="93" endline="96">fancyqlone::qpalm::Solver&lt; Backend &gt;::operator()</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a2aee1d8cf07c13e5d4a574f033de87ef" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" kindref="member">SolverStatus</ref></type>
+        <definition>SolverStatus fancyqlone::qpalm::Solver&lt; Backend &gt;::operator()</definition>
+        <argsstring>()</argsstring>
+        <name>operator()</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::operator()</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="93" column="18" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="93" bodyend="96"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" compoundref="solver_8tpp" startline="102" endline="122">fancyqlone::qpalm::Solver&lt; Backend &gt;::do_solve</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a1fe6faba7845403358c97550beb2d31d" compoundref="solver_8hpp" startline="101">fancyqlone::qpalm::Solver&lt; Backend &gt;::stats</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1ade67a39b7de8d754c6b34516913b94f4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t Solver::get_num_variables</definition>
+        <argsstring>() const</argsstring>
+        <name>get_num_variables</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_num_variables</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="105" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="504" bodyend="506"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1ade67a39b7de8d754c6b34516913b94f4" compoundref="solver_8tpp" startline="504" endline="506">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_num_variables</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ade67a39b7de8d754c6b34516913b94f4" compoundref="solver_8tpp" startline="504" endline="506">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_num_variables</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a3d34b4bf63cf4a64d75a28661b18ad3e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t Solver::get_num_equality_constraints</definition>
+        <argsstring>() const</argsstring>
+        <name>get_num_equality_constraints</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_num_equality_constraints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="106" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="508" bodyend="510"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a3d34b4bf63cf4a64d75a28661b18ad3e" compoundref="solver_8tpp" startline="508" endline="510">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_num_equality_constraints</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a3d34b4bf63cf4a64d75a28661b18ad3e" compoundref="solver_8tpp" startline="508" endline="510">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_num_equality_constraints</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a9087fec3b36d2e7795555e097b81ae56" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t Solver::get_num_inequality_constraints</definition>
+        <argsstring>() const</argsstring>
+        <name>get_num_inequality_constraints</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_num_inequality_constraints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="107" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="512" bodyend="514"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a9087fec3b36d2e7795555e097b81ae56" compoundref="solver_8tpp" startline="512" endline="514">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_num_inequality_constraints</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a9087fec3b36d2e7795555e097b81ae56" compoundref="solver_8tpp" startline="512" endline="514">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_num_inequality_constraints</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1aaf903dfe0171e1f52b7b3be5a8ab5c3a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Solver::has_result</definition>
+        <argsstring>() const</argsstring>
+        <name>has_result</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::has_result</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="109" column="11" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="516" bodyend="518"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1aaf903dfe0171e1f52b7b3be5a8ab5c3a" compoundref="solver_8tpp" startline="516" endline="518">fancyqlone::qpalm::Solver&lt; Backend &gt;::has_result</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1adcccd917cf1f4d674cb17f7da4eac01c" compoundref="solver_8hpp" startline="100" endline="100">fancyqlone::qpalm::Solver&lt; Backend &gt;::impl</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1aaf903dfe0171e1f52b7b3be5a8ab5c3a" compoundref="solver_8tpp" startline="516" endline="518">fancyqlone::qpalm::Solver&lt; Backend &gt;::has_result</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1ae4d201b79ee15c1fb9a5be2128a04c68" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Solver::get_solution</definition>
+        <argsstring>(std::span&lt; real_t &gt;) const</argsstring>
+        <name>get_solution</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_solution</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <defname>x</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="110" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="520" bodyend="523"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1ae4d201b79ee15c1fb9a5be2128a04c68" compoundref="solver_8tpp" startline="520" endline="523">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_solution</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1adcccd917cf1f4d674cb17f7da4eac01c" compoundref="solver_8hpp" startline="100" endline="100">fancyqlone::qpalm::Solver&lt; Backend &gt;::impl</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1aa641b1c16589f7957f78ac175eb5000b" compoundref="solver_8tpp" startline="525" endline="529">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_solution</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ae4d201b79ee15c1fb9a5be2128a04c68" compoundref="solver_8tpp" startline="520" endline="523">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_solution</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1aa641b1c16589f7957f78ac175eb5000b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt; real_t &gt; Solver::get_solution</definition>
+        <argsstring>() const</argsstring>
+        <name>get_solution</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_solution</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="111" column="18" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="525" bodyend="529"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1ae4d201b79ee15c1fb9a5be2128a04c68" compoundref="solver_8tpp" startline="520" endline="523">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_solution</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a4884fb12e75d2ca2667e9c6044201e5d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Solver::get_equality_multipliers</definition>
+        <argsstring>(std::span&lt; real_t &gt;) const</argsstring>
+        <name>get_equality_multipliers</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_equality_multipliers</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <defname>λ</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="112" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="531" bodyend="534"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a4884fb12e75d2ca2667e9c6044201e5d" compoundref="solver_8tpp" startline="531" endline="534">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_multipliers</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1adcccd917cf1f4d674cb17f7da4eac01c" compoundref="solver_8hpp" startline="100" endline="100">fancyqlone::qpalm::Solver&lt; Backend &gt;::impl</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a8b96f0f22f26395472962929b9549c5f" compoundref="solver_8tpp" startline="536" endline="540">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_multipliers</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a4884fb12e75d2ca2667e9c6044201e5d" compoundref="solver_8tpp" startline="531" endline="534">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_multipliers</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a8b96f0f22f26395472962929b9549c5f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt; real_t &gt; Solver::get_equality_multipliers</definition>
+        <argsstring>() const</argsstring>
+        <name>get_equality_multipliers</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_equality_multipliers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="113" column="18" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="536" bodyend="540"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a4884fb12e75d2ca2667e9c6044201e5d" compoundref="solver_8tpp" startline="531" endline="534">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_multipliers</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a6dc0e385224505aeb966c670a4a7e2d3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Solver::get_equality_constraints</definition>
+        <argsstring>(std::span&lt; real_t &gt;) const</argsstring>
+        <name>get_equality_constraints</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_equality_constraints</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <defname>Mxb</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="114" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="542" bodyend="545"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a6dc0e385224505aeb966c670a4a7e2d3" compoundref="solver_8tpp" startline="542" endline="545">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_constraints</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1adcccd917cf1f4d674cb17f7da4eac01c" compoundref="solver_8hpp" startline="100" endline="100">fancyqlone::qpalm::Solver&lt; Backend &gt;::impl</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1aaa6ce03c9fa6566942e784d0d7b04881" compoundref="solver_8tpp" startline="547" endline="551">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_constraints</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a6dc0e385224505aeb966c670a4a7e2d3" compoundref="solver_8tpp" startline="542" endline="545">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_constraints</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1aaa6ce03c9fa6566942e784d0d7b04881" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt; real_t &gt; Solver::get_equality_constraints</definition>
+        <argsstring>() const</argsstring>
+        <name>get_equality_constraints</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_equality_constraints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="115" column="18" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="547" bodyend="551"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a6dc0e385224505aeb966c670a4a7e2d3" compoundref="solver_8tpp" startline="542" endline="545">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_equality_constraints</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1ac03face48fec747837c37f794b025de3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Solver::get_inequality_multipliers</definition>
+        <argsstring>(std::span&lt; real_t &gt;) const</argsstring>
+        <name>get_inequality_multipliers</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_inequality_multipliers</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <defname>y</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="116" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="553" bodyend="556"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1ac03face48fec747837c37f794b025de3" compoundref="solver_8tpp" startline="553" endline="556">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_multipliers</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1adcccd917cf1f4d674cb17f7da4eac01c" compoundref="solver_8hpp" startline="100" endline="100">fancyqlone::qpalm::Solver&lt; Backend &gt;::impl</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a0a41c7830f109e5c8a0594652bfd2410" compoundref="solver_8tpp" startline="558" endline="562">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_multipliers</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ac03face48fec747837c37f794b025de3" compoundref="solver_8tpp" startline="553" endline="556">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_multipliers</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a0a41c7830f109e5c8a0594652bfd2410" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt; real_t &gt; Solver::get_inequality_multipliers</definition>
+        <argsstring>() const</argsstring>
+        <name>get_inequality_multipliers</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_inequality_multipliers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="117" column="18" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="558" bodyend="562"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1ac03face48fec747837c37f794b025de3" compoundref="solver_8tpp" startline="553" endline="556">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_multipliers</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a40effc9d8e12effae34d392e68ee16a6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Solver::get_inequality_constraints</definition>
+        <argsstring>(std::span&lt; real_t &gt;) const</argsstring>
+        <name>get_inequality_constraints</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_inequality_constraints</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <defname>Ax</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="118" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="564" bodyend="567"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a40effc9d8e12effae34d392e68ee16a6" compoundref="solver_8tpp" startline="564" endline="567">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_constraints</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1adcccd917cf1f4d674cb17f7da4eac01c" compoundref="solver_8hpp" startline="100" endline="100">fancyqlone::qpalm::Solver&lt; Backend &gt;::impl</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1abc8b439ef78d256d68b9db2ed5541256" compoundref="solver_8tpp" startline="569" endline="573">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_constraints</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a40effc9d8e12effae34d392e68ee16a6" compoundref="solver_8tpp" startline="564" endline="567">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_constraints</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1abc8b439ef78d256d68b9db2ed5541256" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt; real_t &gt; Solver::get_inequality_constraints</definition>
+        <argsstring>() const</argsstring>
+        <name>get_inequality_constraints</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_inequality_constraints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="119" column="18" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="569" bodyend="573"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a40effc9d8e12effae34d392e68ee16a6" compoundref="solver_8tpp" startline="564" endline="567">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_inequality_constraints</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a5e04d45a336c4fb12c4021f3bbdf25d7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::qpalm::Solver&lt; Backend &gt;::get_penalty_factors</definition>
+        <argsstring>(std::span&lt; real_t &gt;) const</argsstring>
+        <name>get_penalty_factors</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_penalty_factors</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="120" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1ab31c33c657cdf3702528d02b51d6085a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt; real_t &gt; fancyqlone::qpalm::Solver&lt; Backend &gt;::get_penalty_factors</definition>
+        <argsstring>() const</argsstring>
+        <name>get_penalty_factors</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_penalty_factors</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="121" column="18"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a088f56e2c4b01879da588ff5e108ec9a" compoundref="solver_8tpp" startline="593" endline="601">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_initial_guess</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1ad3663285ee0b100080181b4d5e5c05a6" compoundref="solver_8tpp" startline="603" endline="605">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_eq</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af0fd34bfe915e89b65edb57a42481756" compoundref="solver_8tpp" startline="607" endline="609">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_lb</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a164292e938142aea28bd9dffa3663d64" compoundref="solver_8tpp" startline="611" endline="613">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_ub</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1add9ec6bd553362b1445da9234e3b7899" compoundref="solver_8tpp" startline="580" endline="591">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_initial_guess</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1abaef224fb463ba3a15bfce92eabc94ca" compoundref="solver_8tpp" startline="575" endline="578">fancyqlone::qpalm::Solver&lt; Backend &gt;::warm_start_solution</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1abaef224fb463ba3a15bfce92eabc94ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Solver::warm_start_solution</definition>
+        <argsstring>()</argsstring>
+        <name>warm_start_solution</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::warm_start_solution</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="122" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="575" bodyend="578"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1adcccd917cf1f4d674cb17f7da4eac01c" compoundref="solver_8hpp" startline="100" endline="100">fancyqlone::qpalm::Solver&lt; Backend &gt;::impl</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1abaef224fb463ba3a15bfce92eabc94ca" compoundref="solver_8tpp" startline="575" endline="578">fancyqlone::qpalm::Solver&lt; Backend &gt;::warm_start_solution</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ab31c33c657cdf3702528d02b51d6085a">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_penalty_factors</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1abaef224fb463ba3a15bfce92eabc94ca" compoundref="solver_8tpp" startline="575" endline="578">fancyqlone::qpalm::Solver&lt; Backend &gt;::warm_start_solution</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1add9ec6bd553362b1445da9234e3b7899" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Solver::set_initial_guess</definition>
+        <argsstring>(std::span&lt; const real_t &gt; x, std::span&lt; const real_t &gt; y, std::span&lt; const real_t &gt; λ)</argsstring>
+        <name>set_initial_guess</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::set_initial_guess</qualifiedname>
+        <param>
+          <type>std::span&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>λ</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="123" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="580" bodyend="591"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1add9ec6bd553362b1445da9234e3b7899" compoundref="solver_8tpp" startline="580" endline="591">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_initial_guess</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ab31c33c657cdf3702528d02b51d6085a">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_penalty_factors</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1add9ec6bd553362b1445da9234e3b7899" compoundref="solver_8tpp" startline="580" endline="591">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_initial_guess</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a088f56e2c4b01879da588ff5e108ec9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Solver::get_initial_guess</definition>
+        <argsstring>(std::span&lt; real_t &gt; x, std::span&lt; real_t &gt; y, std::span&lt; real_t &gt; λ)</argsstring>
+        <name>get_initial_guess</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::get_initial_guess</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>std::span&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>std::span&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>λ</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="125" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="593" bodyend="601"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a088f56e2c4b01879da588ff5e108ec9a" compoundref="solver_8tpp" startline="593" endline="601">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_initial_guess</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a088f56e2c4b01879da588ff5e108ec9a" compoundref="solver_8tpp" startline="593" endline="601">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_initial_guess</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ab31c33c657cdf3702528d02b51d6085a">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_penalty_factors</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1ad3663285ee0b100080181b4d5e5c05a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Solver::set_b_eq</definition>
+        <argsstring>(std::span&lt; const real_t &gt; b_eq)</argsstring>
+        <name>set_b_eq</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::set_b_eq</qualifiedname>
+        <param>
+          <type>std::span&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>b_eq</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="126" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="603" bodyend="605"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1ad3663285ee0b100080181b4d5e5c05a6" compoundref="solver_8tpp" startline="603" endline="605">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_eq</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ab31c33c657cdf3702528d02b51d6085a">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_penalty_factors</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ad3663285ee0b100080181b4d5e5c05a6" compoundref="solver_8tpp" startline="603" endline="605">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_eq</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1af0fd34bfe915e89b65edb57a42481756" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Solver::set_b_lb</definition>
+        <argsstring>(std::span&lt; const real_t &gt; b_lb)</argsstring>
+        <name>set_b_lb</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::set_b_lb</qualifiedname>
+        <param>
+          <type>std::span&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>b_lb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="127" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="607" bodyend="609"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af0fd34bfe915e89b65edb57a42481756" compoundref="solver_8tpp" startline="607" endline="609">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_lb</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ab31c33c657cdf3702528d02b51d6085a">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_penalty_factors</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1af0fd34bfe915e89b65edb57a42481756" compoundref="solver_8tpp" startline="607" endline="609">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_lb</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a164292e938142aea28bd9dffa3663d64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Solver::set_b_ub</definition>
+        <argsstring>(std::span&lt; const real_t &gt; b_ub)</argsstring>
+        <name>set_b_ub</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::set_b_ub</qualifiedname>
+        <param>
+          <type>std::span&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>b_ub</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="128" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="611" bodyend="613"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a164292e938142aea28bd9dffa3663d64" compoundref="solver_8tpp" startline="611" endline="613">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_ub</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ab31c33c657cdf3702528d02b51d6085a">fancyqlone::qpalm::Solver&lt; Backend &gt;::get_penalty_factors</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a164292e938142aea28bd9dffa3663d64" compoundref="solver_8tpp" startline="611" endline="613">fancyqlone::qpalm::Solver&lt; Backend &gt;::set_b_ub</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1adb145dd3e5f7f8a94730d5b86195182b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::qpalm::Solver&lt; Backend &gt;::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::stop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="130" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="130" bodyend="130"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1acbfb74f0082f9027638762d8a6004c48" compoundref="solver_8hpp" startline="103" endline="103">fancyqlone::qpalm::Solver&lt; Backend &gt;::stop_signal</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Solver::Solver</definition>
+        <argsstring>(Backend backend, Settings settings={})</argsstring>
+        <name>Solver</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::Solver</qualifiedname>
+        <param>
+          <type>Backend</type>
+          <declname>backend</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1Settings" kindref="compound">Settings</ref></type>
+          <declname>settings</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="132" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="626" bodyend="627"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" compoundref="solver_8tpp" startline="626" endline="627">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" compoundref="solver_8hpp" startline="98">fancyqlone::qpalm::Solver&lt; Backend &gt;::backend</references>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1a5c6eaebce9526ffbe806c147bdc09440" compoundref="solver_8hpp" startline="99">fancyqlone::qpalm::Solver&lt; Backend &gt;::settings</references>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" compoundref="solver_8tpp" startline="626" endline="627">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1aa35b651c330fec353069ca2cd96fd73e">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a2765ef900d1635c20eb7a9d3bdbf0082">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1aba52d3c92fafceb6fe39f937f2d73db3">fancyqlone::qpalm::Solver&lt; Backend &gt;::~Solver</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1a2f245c4ef5c44a77bc96c66dd936af45">fancyqlone::qpalm::Solver&lt; Backend &gt;::operator=</referencedby>
+        <referencedby refid="classfancyqlone_1_1qpalm_1_1Solver_1ae1c62e390d6ef043d3b82c9095c09b44">fancyqlone::qpalm::Solver&lt; Backend &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1aa35b651c330fec353069ca2cd96fd73e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</definition>
+        <argsstring>(const Solver &amp;)=delete</argsstring>
+        <name>Solver</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::Solver</qualifiedname>
+        <param>
+          <type>const <ref refid="structSolver" kindref="compound">Solver</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="133" column="5"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" compoundref="solver_8tpp" startline="626" endline="627">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a2f245c4ef5c44a77bc96c66dd936af45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structSolver" kindref="compound">Solver</ref> &amp;</type>
+        <definition>Solver &amp; fancyqlone::qpalm::Solver&lt; Backend &gt;::operator=</definition>
+        <argsstring>(const Solver &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structSolver" kindref="compound">Solver</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="134" column="12"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" compoundref="solver_8tpp" startline="626" endline="627">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1a2765ef900d1635c20eb7a9d3bdbf0082" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>Solver::Solver</definition>
+        <argsstring>(Solver &amp;&amp;) noexcept</argsstring>
+        <name>Solver</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::Solver</qualifiedname>
+        <param>
+          <type><ref refid="structSolver" kindref="compound">Solver</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="135" column="5"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" compoundref="solver_8tpp" startline="626" endline="627">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1ae1c62e390d6ef043d3b82c9095c09b44" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structSolver" kindref="compound">Solver</ref> &amp;</type>
+        <definition>Solver&lt; Backend &gt; &amp; Solver::operator=</definition>
+        <argsstring>(Solver &amp;&amp;) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structSolver" kindref="compound">Solver</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="136" column="12"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" compoundref="solver_8tpp" startline="626" endline="627">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1qpalm_1_1Solver_1aba52d3c92fafceb6fe39f937f2d73db3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Solver::~Solver</definition>
+        <argsstring>()</argsstring>
+        <name>~Solver</name>
+        <qualifiedname>fancyqlone::qpalm::Solver::~Solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="137" column="5"/>
+        <references refid="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" compoundref="solver_8tpp" startline="626" endline="627">fancyqlone::qpalm::Solver&lt; Backend &gt;::Solver</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="8">
+        <label>fancyqlone::qpalm::Breakpoint</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1Breakpoint"/>
+      </node>
+      <node id="5">
+        <label>fancyqlone::qpalm::LineSearch&lt; ineq_vec_t &gt;</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1LineSearch"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>+settings</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>+breakpoints</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>fancyqlone::qpalm::LineSearchSettings</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1LineSearchSettings"/>
+      </node>
+      <node id="2">
+        <label>fancyqlone::qpalm::Settings</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1Settings"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::qpalm::Solver&lt; Backend &gt;</label>
+        <link refid="classfancyqlone_1_1qpalm_1_1Solver"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+settings</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+impl</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>+stop_signal</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>fancyqlone::qpalm::SolverImplementation&lt; backend_type &gt;</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1SolverImplementation"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+linesearch</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>guanaqo::AtomicStopSignal</label>
+        <link refid="classguanaqo_1_1AtomicStopSignal" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag"/>
+        <childnode refid="10" relation="usage">
+          <edgelabel>-stop_flag</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>std::atomic&lt; bool &gt;</label>
+      </node>
+      <node id="3">
+        <label>std::unique_ptr&lt; fancyqlone::qpalm::SolverImplementation&lt; backend_type &gt; &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; fancyqlone::qpalm::Breakpoint &gt;</label>
+        <childnode refid="8" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="84" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="84" bodyend="138"/>
+    <listofallmembers>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1af182f08cd7a8d608a6a31f2fd90540d7" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>backend</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1ae4e7dbf2f441165985217b4c84211fbb" prot="private" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>backend_type</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a542bb07db5aed8c5b8c0765abea2efa7" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>BackendStats</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a86283f73247832e1c17ea3c639d99d6c" prot="private" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>do_solve</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a6dc0e385224505aeb966c670a4a7e2d3" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_equality_constraints</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1aaa6ce03c9fa6566942e784d0d7b04881" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_equality_constraints</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a4884fb12e75d2ca2667e9c6044201e5d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_equality_multipliers</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a8b96f0f22f26395472962929b9549c5f" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_equality_multipliers</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a40effc9d8e12effae34d392e68ee16a6" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_inequality_constraints</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1abc8b439ef78d256d68b9db2ed5541256" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_inequality_constraints</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1ac03face48fec747837c37f794b025de3" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_inequality_multipliers</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a0a41c7830f109e5c8a0594652bfd2410" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_inequality_multipliers</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a088f56e2c4b01879da588ff5e108ec9a" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_initial_guess</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a3d34b4bf63cf4a64d75a28661b18ad3e" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_num_equality_constraints</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a9087fec3b36d2e7795555e097b81ae56" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_num_inequality_constraints</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1ade67a39b7de8d754c6b34516913b94f4" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_num_variables</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a5e04d45a336c4fb12c4021f3bbdf25d7" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_penalty_factors</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1ab31c33c657cdf3702528d02b51d6085a" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_penalty_factors</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1ae4d201b79ee15c1fb9a5be2128a04c68" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_solution</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1aa641b1c16589f7957f78ac175eb5000b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>get_solution</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1aaf903dfe0171e1f52b7b3be5a8ab5c3a" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>has_result</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1adcccd917cf1f4d674cb17f7da4eac01c" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>impl</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a2aee1d8cf07c13e5d4a574f033de87ef" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>operator()</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a2f245c4ef5c44a77bc96c66dd936af45" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>operator=</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1ae1c62e390d6ef043d3b82c9095c09b44" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>operator=</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1ad3663285ee0b100080181b4d5e5c05a6" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>set_b_eq</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1af0fd34bfe915e89b65edb57a42481756" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>set_b_lb</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a164292e938142aea28bd9dffa3663d64" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>set_b_ub</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1add9ec6bd553362b1445da9234e3b7899" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>set_initial_guess</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a5c6eaebce9526ffbe806c147bdc09440" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>settings</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1abbec795f190d8aae0f4ccfa968bd7264" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>Solver</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1aa35b651c330fec353069ca2cd96fd73e" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>Solver</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a2765ef900d1635c20eb7a9d3bdbf0082" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>Solver</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1a1fe6faba7845403358c97550beb2d31d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>stats</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1af8953830ed7f7b541b0a64f24e55f202" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>stats_backend</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1adb145dd3e5f7f8a94730d5b86195182b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>stop</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1acbfb74f0082f9027638762d8a6004c48" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>stop_signal</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1abaef224fb463ba3a15bfce92eabc94ca" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>warm_start_solution</name></member>
+      <member refid="classfancyqlone_1_1qpalm_1_1Solver_1aba52d3c92fafceb6fe39f937f2d73db3" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Solver</scope><name>~Solver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

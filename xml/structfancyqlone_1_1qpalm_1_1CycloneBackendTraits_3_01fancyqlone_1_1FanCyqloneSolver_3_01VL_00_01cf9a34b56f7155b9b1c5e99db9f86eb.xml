@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</compoundname>
+    <includes refid="ocp-backend-fancyqlone_8hpp" local="no">fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</includes>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb" prot="public">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::storage_t</innerclass>
+    <templateparamlist>
+      <param>
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <declname>VL</declname>
+        <defname>VL</defname>
+      </param>
+      <param>
+        <type><ref refid="group__linalg__views_1gac0a39236f11af6725f2dc1d339c95bae" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">StorageOrder</ref></type>
+        <declname>DefaultOrder</declname>
+        <defname>DefaultOrder</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1ad02e72bc31e0f49dace1aafd2876a2a2" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1FanCyqloneSolver" kindref="compound">fancyqlone::FanCyqloneSolver</ref>&lt; VL, <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, DefaultOrder &gt;</type>
+        <definition>using fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::OCP_t = fancyqlone::FanCyqloneSolver&lt;VL, real_t, DefaultOrder&gt;</definition>
+        <argsstring></argsstring>
+        <name>OCP_t</name>
+        <qualifiedname>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::OCP_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="110" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a4e444c87dcbe6e8be7efd65c46f5e5e1" prot="public" static="no">
+        <type>typename <ref refid="structfancyqlone_1_1FanCyqloneSolver_1a6c3af33268fc5a13dec809c57550db75" kindref="member">OCP_t::simd</ref></type>
+        <definition>using fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::simd = typename OCP_t::simd</definition>
+        <argsstring></argsstring>
+        <name>simd</name>
+        <qualifiedname>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::simd</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="111" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1abc1b71927c79bd9817ba08b4764e7666" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1FanCyqloneStorage" kindref="compound">FanCyqloneStorage</ref>&lt;&gt;</type>
+        <definition>using fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::CStorage = FanCyqloneStorage&lt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>CStorage</name>
+        <qualifiedname>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::CStorage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="112" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a99188b308711fd07e305e8b4aa589f07" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref></type>
+        <definition>using fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::OCPStorage = FanOCPStorage</definition>
+        <argsstring></argsstring>
+        <name>OCPStorage</name>
+        <qualifiedname>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::OCPStorage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="113" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a83320b8c1f866583604e51f1a0f1ca70" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1FanStorage__t" kindref="compound">FanStorage_t</ref>&lt; typename OCP_t::template <ref refid="namespacebatmat_1_1linalg_1aa93224d87d900a2dacc032305840169b" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">matrix</ref>&lt;&gt; &gt;</type>
+        <definition>using fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::store_t = FanStorage_t&lt;typename OCP_t::template matrix&lt;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>store_t</name>
+        <qualifiedname>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::store_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="114" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a4539f7905e6826d72cbe0e3a84de9b4e" prot="public" static="no">
+        <type><ref refid="group__topic-optimization-solvers-ocp_1ga90c820ba89c66a51ee3e57a7ebf796d2" kindref="member">FanWarmStartingStrategy</ref></type>
+        <definition>using fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::warm_start_t = FanWarmStartingStrategy</definition>
+        <argsstring></argsstring>
+        <name>warm_start_t</name>
+        <qualifiedname>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::warm_start_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="149" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="149" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a20fd14b1fe5833bee51ce28f3d6d5a89" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::supports_factorization_updates</definition>
+        <argsstring></argsstring>
+        <name>supports_factorization_updates</name>
+        <qualifiedname>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::supports_factorization_updates</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="108" column="27" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="108" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a6619875c2d09d9ae4cb43b7d2a8781b9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::requires_external_schur_solve</definition>
+        <argsstring></argsstring>
+        <name>requires_external_schur_solve</name>
+        <qualifiedname>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::requires_external_schur_solve</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="109" column="27" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="107" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="107" bodyend="150"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1abc1b71927c79bd9817ba08b4764e7666" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</scope><name>CStorage</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1ad02e72bc31e0f49dace1aafd2876a2a2" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</scope><name>OCP_t</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a99188b308711fd07e305e8b4aa589f07" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</scope><name>OCPStorage</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a6619875c2d09d9ae4cb43b7d2a8781b9" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</scope><name>requires_external_schur_solve</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a4e444c87dcbe6e8be7efd65c46f5e5e1" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</scope><name>simd</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a83320b8c1f866583604e51f1a0f1ca70" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</scope><name>store_t</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a20fd14b1fe5833bee51ce28f3d6d5a89" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</scope><name>supports_factorization_updates</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a4539f7905e6826d72cbe0e3a84de9b4e" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</scope><name>warm_start_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

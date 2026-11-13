@@ -1,0 +1,420 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1LinearOCPStorage_1_1Solution" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::LinearOCPStorage::Solution</compoundname>
+    <includes refid="ocp_8hpp" local="no">fancyqlone/ocp.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1acedcefabe390351bd8f1e87ea445d5a5" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt;real_t&gt; fancyqlone::LinearOCPStorage::Solution::solution</definition>
+        <argsstring></argsstring>
+        <name>solution</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::solution</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="378" column="21" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="378" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1CyqloneStorage_1ad6a06de0becbfe7f701ab0f6cb1e5b3b" compoundref="cyqlone-storage_8cpp" startline="37" endline="64">fancyqlone::CyqloneStorage&lt; T &gt;::reconstruct_solution</referencedby>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a30a3ab8bb6b2828ba3340a91e796e959" compoundref="ocp_8hpp" startline="395" endline="398">u</referencedby>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aa92e0ba654ac2377dd01eba545a74a9f" compoundref="ocp_8hpp" startline="399" endline="402">u</referencedby>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a38fc48da9dae2a8ed2613d36ded5e64b" compoundref="ocp_8hpp" startline="380" endline="383">x</referencedby>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a002eca993d997a23decf68871fae5306" compoundref="ocp_8hpp" startline="384" endline="387">x</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ad75aed38816e87f9ba0439f68891d8e2" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt;real_t&gt; fancyqlone::LinearOCPStorage::Solution::inequality_multipliers</definition>
+        <argsstring></argsstring>
+        <name>inequality_multipliers</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::inequality_multipliers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="378" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="378" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1CyqloneStorage_1ad6a06de0becbfe7f701ab0f6cb1e5b3b" compoundref="cyqlone-storage_8cpp" startline="37" endline="64">fancyqlone::CyqloneStorage&lt; T &gt;::reconstruct_solution</referencedby>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ab279f7449e63b02bb491ee9d82eb0a18" compoundref="ocp_8hpp" startline="431" endline="436">y</referencedby>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a0e7e04d78e768f489240acb22b81ed15" compoundref="ocp_8hpp" startline="437" endline="442">y</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a57e5507ddbe2f6e051d258223092e21e" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt;real_t&gt; fancyqlone::LinearOCPStorage::Solution::equality_multipliers</definition>
+        <argsstring></argsstring>
+        <name>equality_multipliers</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::equality_multipliers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="378" column="53" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="378" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aff76f875493b2c24c38771d4ea685dac" compoundref="ocp_8hpp" startline="410" endline="416">λ</referencedby>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ae63280f81807ab174dc4d021c994247e" compoundref="ocp_8hpp" startline="417" endline="423">λ</referencedby>
+        <referencedby refid="structfancyqlone_1_1CyqloneStorage_1ad6a06de0becbfe7f701ab0f6cb1e5b3b" compoundref="cyqlone-storage_8cpp" startline="37" endline="64">fancyqlone::CyqloneStorage&lt; T &gt;::reconstruct_solution</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a38fc48da9dae2a8ed2613d36ded5e64b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::x</definition>
+        <argsstring>(OCPDim dim)</argsstring>
+        <name>x</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::x</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="380" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="380" bodyend="383"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1acedcefabe390351bd8f1e87ea445d5a5" compoundref="ocp_8hpp" startline="378">solution</references>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a96bce03cd9a0c89e6661da490f4f25d4" compoundref="ocp_8hpp" startline="388" endline="390">x</referencedby>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a483cf59d3ab18d25caa517332a204826" compoundref="ocp_8hpp" startline="391" endline="393">x</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a002eca993d997a23decf68871fae5306" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; const real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::x</definition>
+        <argsstring>(OCPDim dim) const</argsstring>
+        <name>x</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::x</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="384" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="384" bodyend="387"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1acedcefabe390351bd8f1e87ea445d5a5" compoundref="ocp_8hpp" startline="378">solution</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a96bce03cd9a0c89e6661da490f4f25d4" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::x</definition>
+        <argsstring>(OCPDim dim, index_t i)</argsstring>
+        <name>x</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::x</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="388" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="388" bodyend="390"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a38fc48da9dae2a8ed2613d36ded5e64b" compoundref="ocp_8hpp" startline="380" endline="383">x</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a483cf59d3ab18d25caa517332a204826" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; const real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::x</definition>
+        <argsstring>(OCPDim dim, index_t i) const</argsstring>
+        <name>x</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::x</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="391" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="391" bodyend="393"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a38fc48da9dae2a8ed2613d36ded5e64b" compoundref="ocp_8hpp" startline="380" endline="383">x</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a30a3ab8bb6b2828ba3340a91e796e959" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::u</definition>
+        <argsstring>(OCPDim dim)</argsstring>
+        <name>u</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::u</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="395" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="395" bodyend="398"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1acedcefabe390351bd8f1e87ea445d5a5" compoundref="ocp_8hpp" startline="378">solution</references>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aadc39288d4b51c61beaf7b3011f38995" compoundref="ocp_8hpp" startline="403" endline="405">u</referencedby>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a28030c52985fc5c12fe49c982f19acc1" compoundref="ocp_8hpp" startline="406" endline="408">u</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aa92e0ba654ac2377dd01eba545a74a9f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; const real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::u</definition>
+        <argsstring>(OCPDim dim) const</argsstring>
+        <name>u</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::u</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="399" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="399" bodyend="402"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1acedcefabe390351bd8f1e87ea445d5a5" compoundref="ocp_8hpp" startline="378">solution</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aadc39288d4b51c61beaf7b3011f38995" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::u</definition>
+        <argsstring>(OCPDim dim, index_t i)</argsstring>
+        <name>u</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::u</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="403" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="403" bodyend="405"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a30a3ab8bb6b2828ba3340a91e796e959" compoundref="ocp_8hpp" startline="395" endline="398">u</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a28030c52985fc5c12fe49c982f19acc1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; const real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::u</definition>
+        <argsstring>(OCPDim dim, index_t i) const</argsstring>
+        <name>u</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::u</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="406" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="406" bodyend="408"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a30a3ab8bb6b2828ba3340a91e796e959" compoundref="ocp_8hpp" startline="395" endline="398">u</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aff76f875493b2c24c38771d4ea685dac" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::λ</definition>
+        <argsstring>(OCPDim dim)</argsstring>
+        <name>λ</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::λ</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="410" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="410" bodyend="416"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a57e5507ddbe2f6e051d258223092e21e" compoundref="ocp_8hpp" startline="378">equality_multipliers</references>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aaff7a10be2d2faf11b836952cf01285c" compoundref="ocp_8hpp" startline="424" endline="426">λ</referencedby>
+        <referencedby refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ae33291efa470120636922391653d713d" compoundref="ocp_8hpp" startline="427" endline="429">λ</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ae63280f81807ab174dc4d021c994247e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; const real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::λ</definition>
+        <argsstring>(OCPDim dim) const</argsstring>
+        <name>λ</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::λ</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="417" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="417" bodyend="423"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a57e5507ddbe2f6e051d258223092e21e" compoundref="ocp_8hpp" startline="378">equality_multipliers</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aaff7a10be2d2faf11b836952cf01285c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::λ</definition>
+        <argsstring>(OCPDim dim, index_t i)</argsstring>
+        <name>λ</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::λ</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="424" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="424" bodyend="426"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aff76f875493b2c24c38771d4ea685dac" compoundref="ocp_8hpp" startline="410" endline="416">λ</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ae33291efa470120636922391653d713d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; const real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::λ</definition>
+        <argsstring>(OCPDim dim, index_t i) const</argsstring>
+        <name>λ</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::λ</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="427" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="427" bodyend="429"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aff76f875493b2c24c38771d4ea685dac" compoundref="ocp_8hpp" startline="410" endline="416">λ</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ab279f7449e63b02bb491ee9d82eb0a18" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::y</definition>
+        <argsstring>(OCPDim dim, index_t i)</argsstring>
+        <name>y</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::y</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="431" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="431" bodyend="436"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ad75aed38816e87f9ba0439f68891d8e2" compoundref="ocp_8hpp" startline="378">inequality_multipliers</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a0e7e04d78e768f489240acb22b81ed15" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structguanaqo_1_1MatrixView" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::MatrixView</ref>&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>guanaqo::MatrixView&lt; const real_t, index_t &gt; fancyqlone::LinearOCPStorage::Solution::y</definition>
+        <argsstring>(OCPDim dim, index_t i) const</argsstring>
+        <name>y</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::Solution::y</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="437" column="30" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="437" bodyend="442"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ad75aed38816e87f9ba0439f68891d8e2" compoundref="ocp_8hpp" startline="378">inequality_multipliers</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::LinearOCPStorage::Solution</label>
+        <link refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+equality_multipliers</edgelabel>
+          <edgelabel>+inequality_multipliers</edgelabel>
+          <edgelabel>+solution</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; real_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="377" column="5" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="377" bodyend="443"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aff76f875493b2c24c38771d4ea685dac" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>λ</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ae63280f81807ab174dc4d021c994247e" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>λ</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aaff7a10be2d2faf11b836952cf01285c" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>λ</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ae33291efa470120636922391653d713d" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>λ</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a57e5507ddbe2f6e051d258223092e21e" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>equality_multipliers</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ad75aed38816e87f9ba0439f68891d8e2" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>inequality_multipliers</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1acedcefabe390351bd8f1e87ea445d5a5" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>solution</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a30a3ab8bb6b2828ba3340a91e796e959" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>u</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aa92e0ba654ac2377dd01eba545a74a9f" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>u</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1aadc39288d4b51c61beaf7b3011f38995" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>u</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a28030c52985fc5c12fe49c982f19acc1" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>u</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a38fc48da9dae2a8ed2613d36ded5e64b" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>x</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a002eca993d997a23decf68871fae5306" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>x</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a96bce03cd9a0c89e6661da490f4f25d4" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>x</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a483cf59d3ab18d25caa517332a204826" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>x</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1ab279f7449e63b02bb491ee9d82eb0a18" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>y</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution_1a0e7e04d78e768f489240acb22b81ed15" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::Solution</scope><name>y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

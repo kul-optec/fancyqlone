@@ -1,0 +1,560 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="schur_8tpp" kind="file" language="C++">
+    <compoundname>schur.tpp</compoundname>
+    <includes refid="cyqlone_8hpp" local="no">fancyqlone/cyqlone/cyqlone.hpp</includes>
+    <includes refid="linalg_8hpp" local="no">fancyqlone/linalg.hpp</includes>
+    <includes refid="tracing_8hpp" local="no">fancyqlone/tracing.hpp</includes>
+    <includes local="no">batmat/assume.hpp</includes>
+    <includes local="no">batmat/linalg/gemm.hpp</includes>
+    <includes local="no">batmat/linalg/gemv.hpp</includes>
+    <includes local="no">batmat/linalg/potrf.hpp</includes>
+    <includes local="no">batmat/linalg/shift.hpp</includes>
+    <includes local="no">batmat/linalg/trsm.hpp</includes>
+    <includes local="no">batmat/linalg/trtri.hpp</includes>
+    <includes local="no">utility</includes>
+    <includedby refid="cyqlone_8cpp" local="no">src/fancyqlone/src/cyqlone/cyqlone.cpp</includedby>
+    <incdepgraph>
+      <node id="28">
+        <label>fancyqlone/barrier.hpp</label>
+        <link refid="barrier_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>fancyqlone/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>fancyqlone/cyqlone/cyqlone-params.hpp</label>
+        <link refid="cyqlone-params_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>fancyqlone/cyqlone/cyqlone-storage.hpp</label>
+        <link refid="cyqlone-storage_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fancyqlone/cyqlone/cyqlone.hpp</label>
+        <link refid="cyqlone_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/schur.tpp</label>
+        <link refid="schur_8tpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>fancyqlone/linalg.hpp</label>
+        <link refid="linalg_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>fancyqlone/ocp.hpp</label>
+        <link refid="ocp_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>fancyqlone/parallel.hpp</label>
+        <link refid="parallel_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>fancyqlone/sparse.hpp</label>
+        <link refid="sparse_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>fancyqlone/timing.hpp</label>
+        <link refid="timing_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>fancyqlone/tracing.hpp</label>
+        <link refid="tracing_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>algorithm</label>
+      </node>
+      <node id="29">
+        <label>array</label>
+      </node>
+      <node id="30">
+        <label>atomic</label>
+      </node>
+      <node id="3">
+        <label>batmat/assume.hpp</label>
+      </node>
+      <node id="4">
+        <label>batmat/config.hpp</label>
+      </node>
+      <node id="17">
+        <label>batmat/linalg/copy.hpp</label>
+      </node>
+      <node id="18">
+        <label>batmat/linalg/elementwise.hpp</label>
+      </node>
+      <node id="52">
+        <label>batmat/linalg/gemm.hpp</label>
+      </node>
+      <node id="53">
+        <label>batmat/linalg/gemv.hpp</label>
+      </node>
+      <node id="5">
+        <label>batmat/linalg/hyhound.hpp</label>
+      </node>
+      <node id="54">
+        <label>batmat/linalg/potrf.hpp</label>
+      </node>
+      <node id="19">
+        <label>batmat/linalg/reduce.hpp</label>
+      </node>
+      <node id="55">
+        <label>batmat/linalg/shift.hpp</label>
+      </node>
+      <node id="25">
+        <label>batmat/linalg/simdify.hpp</label>
+      </node>
+      <node id="43">
+        <label>batmat/linalg/structure.hpp</label>
+      </node>
+      <node id="56">
+        <label>batmat/linalg/trsm.hpp</label>
+      </node>
+      <node id="57">
+        <label>batmat/linalg/trtri.hpp</label>
+      </node>
+      <node id="6">
+        <label>batmat/matrix/layout.hpp</label>
+      </node>
+      <node id="7">
+        <label>batmat/matrix/matrix.hpp</label>
+      </node>
+      <node id="8">
+        <label>batmat/openmp.h</label>
+      </node>
+      <node id="9">
+        <label>batmat/simd.hpp</label>
+      </node>
+      <node id="48">
+        <label>batmat/timing.hpp</label>
+      </node>
+      <node id="10">
+        <label>batmat/unroll.h</label>
+      </node>
+      <node id="50">
+        <label>bit</label>
+      </node>
+      <node id="31">
+        <label>cassert</label>
+      </node>
+      <node id="45">
+        <label>concepts</label>
+      </node>
+      <node id="32">
+        <label>cstdint</label>
+      </node>
+      <node id="33">
+        <label>cstring</label>
+      </node>
+      <node id="39">
+        <label>format</label>
+      </node>
+      <node id="34">
+        <label>functional</label>
+      </node>
+      <node id="44">
+        <label>guanaqo/linalg/sparsity.hpp</label>
+      </node>
+      <node id="21">
+        <label>guanaqo/mat-view.hpp</label>
+      </node>
+      <node id="22">
+        <label>guanaqo/print.hpp</label>
+      </node>
+      <node id="41">
+        <label>guanaqo/trace.hpp</label>
+      </node>
+      <node id="23">
+        <label>iostream</label>
+      </node>
+      <node id="13">
+        <label>limits</label>
+      </node>
+      <node id="35">
+        <label>memory</label>
+      </node>
+      <node id="36">
+        <label>optional</label>
+      </node>
+      <node id="46">
+        <label>ranges</label>
+      </node>
+      <node id="26">
+        <label>span</label>
+      </node>
+      <node id="14">
+        <label>stdexcept</label>
+      </node>
+      <node id="40">
+        <label>syncstream</label>
+      </node>
+      <node id="37">
+        <label>type_traits</label>
+      </node>
+      <node id="38">
+        <label>utility</label>
+      </node>
+      <node id="24">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/schur.tpp</label>
+        <link refid="schur_8tpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/fancyqlone/src/cyqlone/cyqlone.cpp</label>
+        <link refid="cyqlone_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacefancyqlone">fancyqlone</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;<ref refid="cyqlone_8hpp" kindref="compound">fancyqlone/cyqlone/cyqlone.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="linalg_8hpp" kindref="compound">fancyqlone/linalg.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="tracing_8hpp" kindref="compound">fancyqlone/tracing.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/assume.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/linalg/gemm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/linalg/gemv.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/linalg/potrf.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/linalg/shift.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/linalg/trsm.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/linalg/trtri.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;utility&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">FANCYQLONE_NS(fancyqlone)<sp/>{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">linalg;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">batmat::linalg;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Algorithm<sp/>2<sp/>“Cyqlone<sp/>factorization”</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>§4.3<sp/>“Computation<sp/>of<sp/>the<sp/>Schur<sp/>complement<sp/>(step<sp/>3)”</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Build<sp/>the<sp/>Schur<sp/>complement<sp/>after<sp/>factorizing<sp/>the<sp/>Riccati<sp/>blocks,<sp/>and/or<sp/>update<sp/>the<sp/>right-hand</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">//<sp/>side<sp/>of<sp/>the<sp/>Schur<sp/>complement<sp/>after<sp/>performing<sp/>a<sp/>forward<sp/>solve<sp/>of<sp/>the<sp/>Riccati<sp/>blocks.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//<sp/>See<sp/>also:<sp/>factor.tpp</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="27"><highlight class="comment">//!<sp/>[Cyqlone<sp/>compute<sp/>Schur]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;index_t<sp/>VL,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T,<sp/>StorageOrder<sp/>DefaultOrder,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Ctx&gt;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Factor,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>Solve&gt;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NOLINTNEXTLINE(*-cognitive-complexity)<sp/>//<sp/>Needs<sp/>to<sp/>match<sp/>pseudocode<sp/>structure</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="structfancyqlone_1_1CyqloneSolver_1a59173499b495733d16c7e50fd8a3376d" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a59173499b495733d16c7e50fd8a3376d" kindref="member">CyqloneSolver&lt;VL, T, DefaultOrder, Ctx&gt;::compute_schur</ref>(<ref refid="structfancyqlone_1_1CyqloneSolver_1a5ac1d7aa42f70939fb48b9759cf70b62" kindref="member">Context</ref><sp/>&amp;ctx,<sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/>ρ_inv,</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1ae5cc2373850d4be28614d6cd8866059b" kindref="member">mut_view&lt;&gt;</ref><sp/>ux,<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1ae5cc2373850d4be28614d6cd8866059b" kindref="member">mut_view&lt;&gt;</ref><sp/>λ)<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>c<sp/><sp/><sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a876877d03142bf6c9d6c41142fba1482" kindref="member">riccati_thread_assignment</ref>(ctx);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>c_next<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a06bbd73088791f887a8c6d51fbc655ec" kindref="member">add_wrap_p</ref>(c,<sp/>1);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>7|<sp/><sp/>j₁<sp/>=<sp/>n(c-1)+1,<sp/><sp/>jₙ<sp/>=<sp/>nc</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dn<sp/>=<sp/>c<sp/>*<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a4e417264cad1c6c9563893fb44649b30" kindref="member">n</ref>,<sp/>dn_next<sp/>=<sp/>c_next<sp/>*<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a4e417264cad1c6c9563893fb44649b30" kindref="member">n</ref>,<sp/>d1_next<sp/>=<sp/>dn_next<sp/>+<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a4e417264cad1c6c9563893fb44649b30" kindref="member">n</ref><sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>8|<sp/><sp/>i˃<sp/>=<sp/>c,<sp/><sp/>i˂<sp/>=<sp/>c-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>i_fwd<sp/>=<sp/>c,<sp/>i_bwd<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1accf29af58410bc54ae4e4a525c2aba78" kindref="member">sub_wrap_ceil_p</ref>(c,<sp/>1);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>M<sp/>=<sp/><ref refid="group__topic-linalg_1gafc9f5555ed4639e0e5ad0e552f9717e4" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">tril</ref>(<ref refid="structfancyqlone_1_1CyqloneSolver_1a19e86256c34a947c67777c4e1221a6e5" kindref="member">tricyqle</ref>.cr_L.batch(c));</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>13|<sp/><sp/>W<sp/>=<sp/>[<sp/>LB(jₙ)<sp/>...<sp/>LB(j₁)<sp/>LA(j₁)<sp/>]<sp/><sp/><sp/><sp/>--<sp/>The<sp/>order<sp/>here<sp/>is<sp/>[<sp/>LA(j₁)<sp/>LB(jₙ)<sp/>...<sp/>LB(j₁)<sp/>]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>W<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1ace9d460f30adfcd5c15f99de2286fe27" kindref="member">riccati_LAB</ref>.batch(c).right_cols(<ref refid="structfancyqlone_1_1CyqloneSolver_1a3066fd842071154d70d319459cd10efe" kindref="member">nx</ref><sp/>+<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1af66738d92f1f87d2a5f558cd055c7d4d" kindref="member">nu</ref><sp/>*<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a4e417264cad1c6c9563893fb44649b30" kindref="member">n</ref>);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Factor)<sp/>{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>LH<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1aa9497f6c3903eda0f0461905cafd81be" kindref="member">riccati_LH</ref>.batch(c);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>LQ<sp/>=<sp/><ref refid="group__topic-linalg_1gafc9f5555ed4639e0e5ad0e552f9717e4" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">tril</ref>(LH.bottom_right(<ref refid="structfancyqlone_1_1CyqloneSolver_1a3066fd842071154d70d319459cd10efe" kindref="member">nx</ref>,<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a3066fd842071154d70d319459cd10efe" kindref="member">nx</ref>));</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>9|<sp/><sp/>T(c)<sp/>=<sp/>LQ(j₁)⁻ᵀ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(<ref refid="structfancyqlone_1_1CyqloneSolver_1af66738d92f1f87d2a5f558cd055c7d4d" kindref="member">nu</ref><sp/>&gt;=<sp/>1);<sp/></highlight><highlight class="comment">//<sp/>T<sp/>=<sp/>LQ⁻ᵀ<sp/>is<sp/>upper<sp/>triangular,<sp/>stored<sp/>one<sp/>row<sp/>up<sp/>from<sp/>LQ<sp/>itself</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>Tc<sp/>=<sp/><ref refid="group__topic-linalg_1gaf6d9519ee15d51a0ba7243e640d8be71" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">triu</ref>(LH.right_cols(<ref refid="structfancyqlone_1_1CyqloneSolver_1a3066fd842071154d70d319459cd10efe" kindref="member">nx</ref>).middle_rows(<ref refid="structfancyqlone_1_1CyqloneSolver_1af66738d92f1f87d2a5f558cd055c7d4d" kindref="member">nu</ref><sp/>-<sp/>1,<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a3066fd842071154d70d319459cd10efe" kindref="member">nx</ref>));</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>GUANAQO_WITH_TRACING</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__trace__perfetto_1gaa65968f611678506ddcc15135aeb0cc1" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">GUANAQO_TRACE</ref>(</highlight><highlight class="stringliteral">&quot;Invert<sp/>Q&quot;</highlight><highlight class="normal">,<sp/>c);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="tracing_8hpp_1aa73a42b98ae9dc83b1ba49bbaa8b9f78" kindref="member">CYQ_TRACE_WRITE</ref>(T,<sp/>c,<sp/>0);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1ga5a6901e33f6891995b0c147814b06230" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">trtri</ref>(LQ,<sp/>Tc.transposed());</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>T_ready<sp/>=<sp/>ctx.arrive();</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>LA1<sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1ace9d460f30adfcd5c15f99de2286fe27" kindref="member">riccati_LAB</ref>.batch(c).middle_cols(<ref refid="structfancyqlone_1_1CyqloneSolver_1a3066fd842071154d70d319459cd10efe" kindref="member">nx</ref><sp/>*<sp/>(<ref refid="structfancyqlone_1_1CyqloneSolver_1a4e417264cad1c6c9563893fb44649b30" kindref="member">n</ref><sp/>-<sp/>1),<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a3066fd842071154d70d319459cd10efe" kindref="member">nx</ref>);<sp/></highlight><highlight class="comment">//<sp/>LA(j₁)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>10|<sp/><sp/>if<sp/>ν2(i˂)<sp/>&gt;<sp/>ν2(i˃)<sp/><sp/><sp/><sp/>K˂(i˃)<sp/>=<sp/>-T(c)<sp/>LA(j₁)ᵀ<sp/><sp/><sp/><sp/>else<sp/><sp/><sp/><sp/>K˃(i˂)<sp/>=<sp/>-LA(j₁)<sp/>T(c)ᵀ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="structfancyqlone_1_1CyqloneSolver_1a80f118c4015c6a54b677d999e10d7ee7" kindref="member">ν2p</ref>(i_bwd)<sp/>&gt;<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a80f118c4015c6a54b677d999e10d7ee7" kindref="member">ν2p</ref>(i_fwd))<sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__trace__perfetto_1gaa65968f611678506ddcc15135aeb0cc1" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">GUANAQO_TRACE</ref>(</highlight><highlight class="stringliteral">&quot;Compute<sp/>first<sp/>U&quot;</highlight><highlight class="normal">,<sp/>i_fwd);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="tracing_8hpp_1aa73a42b98ae9dc83b1ba49bbaa8b9f78" kindref="member">CYQ_TRACE_WRITE</ref>(Kb,<sp/>i_fwd,<sp/>0);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1ga1474b560ee985d29dad901fec92a6e09" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">trmm_neg</ref>(Tc,<sp/>LA1.transposed(),<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a19e86256c34a947c67777c4e1221a6e5" kindref="member">tricyqle</ref>.cr_U.batch(i_fwd));</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>i_bwd_wrap<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1aff9b008a34fdabb1d3d266b9c177a2eb" kindref="member">sub_wrap_p</ref>(c,<sp/>1);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>GUANAQO_WITH_TRACING</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__trace__perfetto_1gaa65968f611678506ddcc15135aeb0cc1" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">GUANAQO_TRACE</ref>(</highlight><highlight class="stringliteral">&quot;Compute<sp/>first<sp/>Y&quot;</highlight><highlight class="normal">,<sp/>i_bwd_wrap);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="tracing_8hpp_1aa73a42b98ae9dc83b1ba49bbaa8b9f78" kindref="member">CYQ_TRACE_WRITE</ref>(Kf,<sp/>i_bwd_wrap,<sp/>0);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i_fwd<sp/>&gt;<sp/>0<sp/>||<sp/>(<ref refid="structfancyqlone_1_1CyqloneSolver_1a0bf262b9d83b893040864975549a0e8c" kindref="member">v</ref><sp/>==<sp/>1<sp/>&amp;&amp;<sp/>!<ref refid="structfancyqlone_1_1CyqloneSolver_1aa7892fe3072fd3ba8c730ab1aafb187a" kindref="member">params</ref>.eliminate_u0_first))</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1ga1474b560ee985d29dad901fec92a6e09" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">trmm_neg</ref>(LA1,<sp/>Tc.transposed(),<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a19e86256c34a947c67777c4e1221a6e5" kindref="member">tricyqle</ref>.cr_Y.batch(i_bwd_wrap));</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(<ref refid="structfancyqlone_1_1CyqloneSolver_1a0bf262b9d83b893040864975549a0e8c" kindref="member">v</ref><sp/>&gt;<sp/>1)</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1ga1474b560ee985d29dad901fec92a6e09" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">trmm_neg</ref>(LA1,<sp/>Tc.transposed(),<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a19e86256c34a947c67777c4e1221a6e5" kindref="member">tricyqle</ref>.cr_Y.batch(i_bwd_wrap),<sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1_1linalg_1acb94b9e005e461541acb9ed52f87e8b5" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">with_rotate_C&lt;-1&gt;</ref>,<sp/><ref refid="namespacebatmat_1_1linalg_1a13b33813baa12b55f7746c6987d5f42e" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">with_rotate_D&lt;-1&gt;</ref>,<sp/><ref refid="namespacebatmat_1_1linalg_1a4b867a52c6cf0fb12da276e972f1fc14" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">with_mask_D&lt;-1&gt;</ref>);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>11|<sp/><sp/>--<sp/>sync<sp/>--</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>Wait<sp/>for<sp/>the<sp/>inversion<sp/>in<sp/>the<sp/>next<sp/>interval</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ctx.wait(std::move(T_ready));</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>Each<sp/>column<sp/>of<sp/>the<sp/>cyclic<sp/>part<sp/>with<sp/>coupling<sp/>equations<sp/>is<sp/>updated<sp/>by<sp/>two<sp/>threads:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>one<sp/>for<sp/>the<sp/>forward,<sp/>and<sp/>one<sp/>for<sp/>the<sp/>backward<sp/>coupling.<sp/>Update<sp/>the<sp/>diagonal<sp/>blocks</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>of<sp/>the<sp/>coupling<sp/>equations,<sp/>first<sp/>forward<sp/>in<sp/>time<sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>R̂ŜQ̂_next<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1aa9497f6c3903eda0f0461905cafd81be" kindref="member">riccati_LH</ref>.batch(c_next);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>12|<sp/><sp/>M(c)˂<sp/>=<sp/>T(c+1)<sp/>T(c+1)ᵀ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>Tc_next<sp/>=<sp/><ref refid="group__topic-linalg_1gaf6d9519ee15d51a0ba7243e640d8be71" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">triu</ref>(R̂ŜQ̂_next.right_cols(<ref refid="structfancyqlone_1_1CyqloneSolver_1a3066fd842071154d70d319459cd10efe" kindref="member">nx</ref>).middle_rows(<ref refid="structfancyqlone_1_1CyqloneSolver_1af66738d92f1f87d2a5f558cd055c7d4d" kindref="member">nu</ref><sp/>-<sp/>1,<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a3066fd842071154d70d319459cd10efe" kindref="member">nx</ref>));</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>GUANAQO_WITH_TRACING</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="tracing_8hpp_1af06e8f0353c7efc7707c5d97747c4673" kindref="member">CYQ_TRACE_READ</ref>(T,<sp/>c_next,<sp/>0);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__trace__perfetto_1gaa65968f611678506ddcc15135aeb0cc1" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">GUANAQO_TRACE</ref>(</highlight><highlight class="stringliteral">&quot;Compute<sp/>TTᵀ&quot;</highlight><highlight class="normal">,<sp/>c_next);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(c_next<sp/>&gt;<sp/>0<sp/>||<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a0bf262b9d83b893040864975549a0e8c" kindref="member">v</ref><sp/>==<sp/>1)</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1ga677da05414c67192ed400e3a0b0a2c51" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">trmm</ref>(Tc_next,<sp/>Tc_next.transposed(),<sp/>M);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1ga677da05414c67192ed400e3a0b0a2c51" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">trmm</ref>(Tc_next,<sp/>Tc_next.transposed(),<sp/>M,<sp/><ref refid="namespacebatmat_1_1linalg_1acb94b9e005e461541acb9ed52f87e8b5" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">with_rotate_C&lt;-1&gt;</ref>,<sp/><ref refid="namespacebatmat_1_1linalg_1a13b33813baa12b55f7746c6987d5f42e" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">with_rotate_D&lt;-1&gt;</ref>);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>And<sp/>finally<sp/>backward<sp/>in<sp/>time,<sp/>optionally<sp/>fused<sp/>with<sp/>the<sp/>factorization.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="structfancyqlone_1_1CyqloneSolver_1ade06ec58030126785b36408056694db6" kindref="member">p</ref><sp/>==<sp/>1)<sp/>{<sp/></highlight><highlight class="comment">//<sp/>no<sp/>multi-threading</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>GUANAQO_WITH_TRACING</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__trace__perfetto_1gaa65968f611678506ddcc15135aeb0cc1" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">GUANAQO_TRACE</ref>(</highlight><highlight class="stringliteral">&quot;Factor<sp/>M<sp/>last&quot;</highlight><highlight class="normal">,<sp/>c);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="tracing_8hpp_1aa73a42b98ae9dc83b1ba49bbaa8b9f78" kindref="member">CYQ_TRACE_WRITE</ref>(L,<sp/>c,<sp/>0);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>L0<sp/>=<sp/><ref refid="group__topic-linalg_1gafc9f5555ed4639e0e5ad0e552f9717e4" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">tril</ref>(<ref refid="structfancyqlone_1_1CyqloneSolver_1a19e86256c34a947c67777c4e1221a6e5" kindref="member">tricyqle</ref>.pcr_L.batch(0));</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>13|<sp/><sp/>M(c)˃<sp/>=<sp/>WWᵀ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>14|<sp/><sp/>M(c)<sp/>=<sp/>M(c)˂<sp/>+<sp/>M(c)˃</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1ga94668e960bcf7b6a7ffe8902d799079a" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">syrk_add</ref>(W,<sp/>M);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ρ_inv<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>M.value.add_to_diagonal(ρ_inv);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>16|<sp/><sp/>L(c)<sp/>=<sp/>chol(M(c))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1gaa5a48352d831fa72f651dfb4a53bba9e" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">potrf</ref>(M,<sp/>L0);<sp/></highlight><highlight class="comment">//<sp/>Final<sp/>block<sp/>is<sp/>stored<sp/>separately<sp/>(for<sp/>PCR/PCG<sp/>later)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="structfancyqlone_1_1CyqloneSolver_1a80f118c4015c6a54b677d999e10d7ee7" kindref="member">ν2p</ref>(i_fwd)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>GUANAQO_WITH_TRACING</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__trace__perfetto_1gaa65968f611678506ddcc15135aeb0cc1" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">GUANAQO_TRACE</ref>(</highlight><highlight class="stringliteral">&quot;Factor<sp/>M&quot;</highlight><highlight class="normal">,<sp/>c);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="tracing_8hpp_1aa73a42b98ae9dc83b1ba49bbaa8b9f78" kindref="member">CYQ_TRACE_WRITE</ref>(L,<sp/>c,<sp/>0);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="tracing_8hpp_1aa73a42b98ae9dc83b1ba49bbaa8b9f78" kindref="member">CYQ_TRACE_WRITE</ref>(L,<sp/>c,<sp/>1);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>13|<sp/><sp/>M(c)˃<sp/>=<sp/>WWᵀ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>14|<sp/><sp/>M(c)<sp/>=<sp/>M(c)˂<sp/>+<sp/>M(c)˃</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>16|<sp/><sp/>L(c)<sp/>=<sp/>chol(M(c))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1ga12c3f866950fd1c70288d50280b7fb6b" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">syrk_add_potrf</ref>(W,<sp/>M,<sp/>M,<sp/>ρ_inv);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>GUANAQO_WITH_TRACING</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__trace__perfetto_1gaa65968f611678506ddcc15135aeb0cc1" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">GUANAQO_TRACE</ref>(</highlight><highlight class="stringliteral">&quot;Compute<sp/>WWᵀ&quot;</highlight><highlight class="normal">,<sp/>c);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="tracing_8hpp_1aa73a42b98ae9dc83b1ba49bbaa8b9f78" kindref="member">CYQ_TRACE_WRITE</ref>(M,<sp/>c,<sp/>0);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>13|<sp/><sp/>M(c)˃<sp/>=<sp/>WWᵀ</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>14|<sp/><sp/>M(c)<sp/>=<sp/>M(c)˂<sp/>+<sp/>M(c)˃</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1ga94668e960bcf7b6a7ffe8902d799079a" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">syrk_add</ref>(W,<sp/>M);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ρ_inv<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>M.value.add_to_diagonal(ρ_inv);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Solve)<sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!Factor)</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ctx.arrive_and_wait();<sp/></highlight><highlight class="comment">//<sp/>Wait<sp/>for<sp/>x_next</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__trace__perfetto_1gaa65968f611678506ddcc15135aeb0cc1" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">GUANAQO_TRACE</ref>(</highlight><highlight class="stringliteral">&quot;Update<sp/>λ&quot;</highlight><highlight class="normal">,<sp/>dn);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>x_next<sp/>=<sp/>ux.batch(d1_next).bottom_rows(<ref refid="structfancyqlone_1_1CyqloneSolver_1a3066fd842071154d70d319459cd10efe" kindref="member">nx</ref>);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(c_next<sp/>&gt;<sp/>0<sp/>||<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a0bf262b9d83b893040864975549a0e8c" kindref="member">v</ref><sp/>==<sp/>1)</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1gaf060cf329ce2b8296bba524b745cfc27" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">sub</ref>(λ.batch(dn),<sp/>x_next);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1gaf060cf329ce2b8296bba524b745cfc27" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">sub</ref>(λ.batch(dn),<sp/>x_next,<sp/><ref refid="namespacebatmat_1_1linalg_1a18f5c2df0c1ec2ea5038ad05d81946d1" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">with_rotate&lt;1&gt;</ref>);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>λ(dn)<sp/>here<sp/>has<sp/>a<sp/>different<sp/>thread<sp/>assignment<sp/>than<sp/>in<sp/>TricyqleSolver</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__trace__perfetto_1gaa65968f611678506ddcc15135aeb0cc1" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">GUANAQO_TRACE</ref>(</highlight><highlight class="stringliteral">&quot;Solve<sp/>λ&quot;</highlight><highlight class="normal">,<sp/>dn);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="structfancyqlone_1_1CyqloneSolver_1a80f118c4015c6a54b677d999e10d7ee7" kindref="member">ν2p</ref>(i_fwd)<sp/>==<sp/>0<sp/>&amp;&amp;<sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1ade06ec58030126785b36408056694db6" kindref="member">p</ref><sp/>!=<sp/>1)</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__topic-linalg_1ga21c503ca31b0d06b1a0e93ccf0b754c7" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">trsm</ref>(M,<sp/>λ.batch(dn));</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal">}</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="155"><highlight class="comment">//!<sp/>[Cyqlone<sp/>compute<sp/>Schur]</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>FANCYQLONE_NS(fancyqlone)</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/fancyqlone/include/fancyqlone/cyqlone/implementation/schur.tpp"/>
+  </compounddef>
+</doxygen>

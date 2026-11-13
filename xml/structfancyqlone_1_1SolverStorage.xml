@@ -1,0 +1,424 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1SolverStorage" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::SolverStorage</compoundname>
+    <includes refid="fancyqlone_8hpp" local="no">fancyqlone/fancyqlone/fancyqlone.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <declname>VL</declname>
+        <defname>VL</defname>
+        <defval>4</defval>
+      </param>
+      <param>
+        <type>class T</type>
+        <defval><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></defval>
+      </param>
+      <param>
+        <type><ref refid="namespacebatmat_1_1linalg_1a12561d95ffd5ca9cc074d7b3edceb429" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">StorageOrder</ref></type>
+        <declname>DefaultOrder</declname>
+        <defname>DefaultOrder</defname>
+        <defval>StorageOrder::ColMajor</defval>
+      </param>
+      <param>
+        <type>class Ctx</type>
+        <defval><ref refid="structfancyqlone_1_1parallel_1_1Context" kindref="compound">parallel::Context</ref>&lt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1SolverStorage_1a2ad87c1c01e16af4fafc076667f5099f" prot="public" static="no">
+        <type>T</type>
+        <definition>using fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>fancyqlone::SolverStorage::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="29" column="5" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1SolverStorage_1ac371da26b007b56e2b79c62afc3fca5b" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1TricyqleSolver" kindref="compound">TricyqleSolver</ref>&lt; VL, T, DefaultOrder, Ctx &gt;</type>
+        <definition>using fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::tricyqle_t = TricyqleSolver&lt;VL, T, DefaultOrder, Ctx&gt;</definition>
+        <argsstring></argsstring>
+        <name>tricyqle_t</name>
+        <qualifiedname>fancyqlone::SolverStorage::tricyqle_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="30" column="5" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1SolverStorage_1a5c55c6c666e2459751ece438c3a3a178" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1TridiagonalSolver" kindref="compound">TridiagonalSolver</ref>&lt; <ref refid="structfancyqlone_1_1SolverStorage_1a2ad87c1c01e16af4fafc076667f5099f" kindref="member">value_type</ref> &gt;</type>
+        <definition>using fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::SolverLast = TridiagonalSolver&lt;value_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>SolverLast</name>
+        <qualifiedname>fancyqlone::SolverStorage::SolverLast</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="31" column="5" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1SolverStorage_1ace66283bd419dc252ac56aefa9242b24" prot="public" static="no">
+        <type>std::integral_constant&lt; <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, 1 &gt;</type>
+        <definition>using fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::one_t = std::integral_constant&lt;index_t, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>one_t</name>
+        <qualifiedname>fancyqlone::SolverStorage::one_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="32" column="5" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1SolverStorage_1aa9270d846f5137d927b7ca1f59db250b" prot="public" static="no">
+        <type><ref refid="structbatmat_1_1matrix_1_1Matrix" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::Matrix</ref>&lt; <ref refid="structfancyqlone_1_1SolverStorage_1a2ad87c1c01e16af4fafc076667f5099f" kindref="member">value_type</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, <ref refid="structfancyqlone_1_1SolverStorage_1ace66283bd419dc252ac56aefa9242b24" kindref="member">one_t</ref>, <ref refid="structfancyqlone_1_1SolverStorage_1ace66283bd419dc252ac56aefa9242b24" kindref="member">one_t</ref>, DefaultOrder &gt;</type>
+        <definition>using fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::matrix = batmat::matrix::Matrix&lt;value_type, index_t, one_t, one_t, DefaultOrder&gt;</definition>
+        <argsstring></argsstring>
+        <name>matrix</name>
+        <qualifiedname>fancyqlone::SolverStorage::matrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="33" column="5" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1SolverStorage_1ad1d863c887b146bb50e8642b4b0fddfc" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1TridiagonalSolver_1ab772a45a1d86245c589c91ddbd2405b3" kindref="member">SolverLast::matrix</ref></type>
+        <definition>using fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::matrix_s = SolverLast::matrix</definition>
+        <argsstring></argsstring>
+        <name>matrix_s</name>
+        <qualifiedname>fancyqlone::SolverStorage::matrix_s</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="34" column="5" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1SolverStorage_1af9c01fa429f349425abf44a2e3f3bbe5" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1TricyqleSolver_1a4d348e07dbb61f1610d86f17e9b2bb6a" kindref="member">tricyqle_t::SharedContext</ref></type>
+        <definition>using fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::SharedContext = tricyqle_t::SharedContext</definition>
+        <argsstring></argsstring>
+        <name>SharedContext</name>
+        <qualifiedname>fancyqlone::SolverStorage::SharedContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="36" column="5" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1SolverStorage_1a0244b672083e3ac9a2f0ff67a581e193" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">CyqloneSolver</ref>&lt; VL, <ref refid="structfancyqlone_1_1SolverStorage_1a2ad87c1c01e16af4fafc076667f5099f" kindref="member">value_type</ref>, DefaultOrder, Ctx &gt;</type>
+        <definition>CyqloneSolver&lt;VL, value_type, DefaultOrder, Ctx&gt; fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::cyqlone_solver</definition>
+        <argsstring></argsstring>
+        <name>cyqlone_solver</name>
+        <qualifiedname>fancyqlone::SolverStorage::cyqlone_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="38" column="19" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SolverStorage_1ad3e83f92c133443897f7d9f4df94ff55" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1SolverStorage_1a5c55c6c666e2459751ece438c3a3a178" kindref="member">SolverLast</ref></type>
+        <definition>SolverLast fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::tridiagonal_solver</definition>
+        <argsstring></argsstring>
+        <name>tridiagonal_solver</name>
+        <qualifiedname>fancyqlone::SolverStorage::tridiagonal_solver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="39" column="16" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SolverStorage_1ada7ef528389e327b8f8f1612196f4934" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1SolverStorage_1aa9270d846f5137d927b7ca1f59db250b" kindref="member">matrix</ref></type>
+        <definition>matrix fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::B0</definition>
+        <argsstring></argsstring>
+        <name>B0</name>
+        <qualifiedname>fancyqlone::SolverStorage::B0</qualifiedname>
+        <initializer>          = [this] {
+    return <ref refid="structfancyqlone_1_1SolverStorage_1aa9270d846f5137d927b7ca1f59db250b" kindref="member">matrix</ref>{{.rows = cyqlone_solver.nx, .cols = cyqlone_solver.nu},
+                  <ref refid="group__topic-matrix-utils_1gae1611b15c38c77550ccbe46aff4bdcea" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::uninitialized</ref>};
+}()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="40" column="12" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="40" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SolverStorage_1a543101f37ca53a2981b99f132c289ac8" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1SolverStorage_1aa9270d846f5137d927b7ca1f59db250b" kindref="member">matrix</ref></type>
+        <definition>matrix fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::L_old</definition>
+        <argsstring></argsstring>
+        <name>L_old</name>
+        <qualifiedname>fancyqlone::SolverStorage::L_old</qualifiedname>
+        <initializer>             = [this] {
+    return <ref refid="structfancyqlone_1_1SolverStorage_1aa9270d846f5137d927b7ca1f59db250b" kindref="member">matrix</ref>{{.rows = cyqlone_solver.nx, .cols = cyqlone_solver.nx},
+                  <ref refid="group__topic-matrix-utils_1gae1611b15c38c77550ccbe46aff4bdcea" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::uninitialized</ref>};
+}()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="44" column="12" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="44" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SolverStorage_1afa833106ac87644c98f275cea242851c" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1SolverStorage_1aa9270d846f5137d927b7ca1f59db250b" kindref="member">matrix</ref></type>
+        <definition>matrix fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::LB</definition>
+        <argsstring></argsstring>
+        <name>LB</name>
+        <qualifiedname>fancyqlone::SolverStorage::LB</qualifiedname>
+        <initializer>          = [this] {
+    return <ref refid="structfancyqlone_1_1SolverStorage_1aa9270d846f5137d927b7ca1f59db250b" kindref="member">matrix</ref>{{.rows = cyqlone_solver.nu, .cols = cyqlone_solver.nx},
+                  <ref refid="group__topic-matrix-utils_1gae1611b15c38c77550ccbe46aff4bdcea" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::uninitialized</ref>};
+}()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="48" column="12" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="48" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SolverStorage_1abe6ff1a9a9d18febb18f12bda3149af0" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1SolverStorage_1ad1d863c887b146bb50e8642b4b0fddfc" kindref="member">matrix_s</ref></type>
+        <definition>matrix_s fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::Mxb_row</definition>
+        <argsstring></argsstring>
+        <name>Mxb_row</name>
+        <qualifiedname>fancyqlone::SolverStorage::Mxb_row</qualifiedname>
+        <initializer>                 = [this] {
+    return <ref refid="structfancyqlone_1_1SolverStorage_1ad1d863c887b146bb50e8642b4b0fddfc" kindref="member">matrix_s</ref>{{.rows = cyqlone_solver.nx, .cols = 1}, <ref refid="group__topic-matrix-utils_1gae1611b15c38c77550ccbe46aff4bdcea" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::uninitialized</ref>};
+}()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="52" column="14" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="52" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SolverStorage_1a20eb68474ac24c638bcb523178cf91f2" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1SolverStorage_1ad1d863c887b146bb50e8642b4b0fddfc" kindref="member">matrix_s</ref></type>
+        <definition>matrix_s fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::Mᵀλ_row</definition>
+        <argsstring></argsstring>
+        <name>Mᵀλ_row</name>
+        <qualifiedname>fancyqlone::SolverStorage::Mᵀλ_row</qualifiedname>
+        <initializer>                    = [this] {
+    return <ref refid="structfancyqlone_1_1SolverStorage_1ad1d863c887b146bb50e8642b4b0fddfc" kindref="member">matrix_s</ref>{{.rows = cyqlone_solver.nu, .cols = 1}, <ref refid="group__topic-matrix-utils_1gae1611b15c38c77550ccbe46aff4bdcea" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::uninitialized</ref>};
+}()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="55" column="14" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="55" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SolverStorage_1a16fa023de04383125bb29f2b1626f6a9" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1SolverStorage_1ad1d863c887b146bb50e8642b4b0fddfc" kindref="member">matrix_s</ref></type>
+        <definition>matrix_s fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::λ_last</definition>
+        <argsstring></argsstring>
+        <name>λ_last</name>
+        <qualifiedname>fancyqlone::SolverStorage::λ_last</qualifiedname>
+        <initializer>                 = [this] {
+    return <ref refid="structfancyqlone_1_1SolverStorage_1ad1d863c887b146bb50e8642b4b0fddfc" kindref="member">matrix_s</ref>{{.depth = cyqlone_solver.v, .rows = cyqlone_solver.nx, .cols = 1},
+                    <ref refid="group__topic-matrix-utils_1gae1611b15c38c77550ccbe46aff4bdcea" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::uninitialized</ref>};
+}()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="58" column="14" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="58" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SolverStorage_1adbb652b9eb2b94a6497f4d0f060be4c7" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1SolverStorage_1ad1d863c887b146bb50e8642b4b0fddfc" kindref="member">matrix_s</ref></type>
+        <definition>matrix_s fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;::temp</definition>
+        <argsstring></argsstring>
+        <name>temp</name>
+        <qualifiedname>fancyqlone::SolverStorage::temp</qualifiedname>
+        <initializer>              = [this] {
+    return <ref refid="structfancyqlone_1_1SolverStorage_1ad1d863c887b146bb50e8642b4b0fddfc" kindref="member">matrix_s</ref>{{.rows = cyqlone_solver.nu, .cols = cyqlone_solver.nu},
+                    <ref refid="group__topic-matrix-utils_1gae1611b15c38c77550ccbe46aff4bdcea" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::uninitialized</ref>};
+}()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="75" column="14" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="75" bodyend="78"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Linear solver for systems with optimal control structure with multiple horizons. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>VL</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector length. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Scalar type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DefaultOrder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Storage order for the matrix workspaces (row/column major). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Parallel execution context type, see <ref refid="structfancyqlone_1_1parallel_1_1Context" kindref="compound">parallel::Context</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="10">
+        <label>batmat::matrix::Matrix&lt; value_type, index_t, one_t, one_t, StorageOrder::ColMajor &gt;</label>
+        <link refid="structbatmat_1_1matrix_1_1Matrix" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+      </node>
+      <node id="7">
+        <label>batmat::matrix::Matrix&lt; value_type, index_t, vl_t, index_t, O, align_t &gt;&lt; column_major &gt;</label>
+        <link refid="structbatmat_1_1matrix_1_1Matrix" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+      </node>
+      <node id="6">
+        <label>batmat::matrix::Matrix&lt; value_type, index_t, vl_t, index_t, O, align_t &gt;&lt; default_order &gt;</label>
+        <link refid="structbatmat_1_1matrix_1_1Matrix" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+      </node>
+      <node id="3">
+        <label>fancyqlone::CyqloneParams&lt; value_type &gt;</label>
+        <link refid="structfancyqlone_1_1CyqloneParams"/>
+      </node>
+      <node id="2">
+        <label>fancyqlone::CyqloneSolver&lt; 4, value_type, StorageOrder::ColMajor, parallel::Context&lt;&gt; &gt;</label>
+        <link refid="structfancyqlone_1_1CyqloneSolver"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+params</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+tricyqle</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;</label>
+        <link refid="structfancyqlone_1_1SolverStorage"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+cyqlone_solver</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>+tridiagonal_solver</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>+B0</edgelabel>
+          <edgelabel>+LB</edgelabel>
+          <edgelabel>+L_old</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>fancyqlone::TricyqleParams&lt; value_type &gt;</label>
+        <link refid="structfancyqlone_1_1TricyqleParams"/>
+      </node>
+      <node id="4">
+        <label>fancyqlone::TricyqleSolver&lt; VL, value_type, DefaultOrder, parallel::Context&lt;&gt; &gt;</label>
+        <link refid="structfancyqlone_1_1TricyqleSolver"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+params</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>+cr_L</edgelabel>
+          <edgelabel>+cr_U</edgelabel>
+          <edgelabel>+cr_Y</edgelabel>
+          <edgelabel>+pcr_L</edgelabel>
+          <edgelabel>+pcr_M</edgelabel>
+          <edgelabel>+pcr_U</edgelabel>
+          <edgelabel>+pcr_Y</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>+work_cr</edgelabel>
+          <edgelabel>+work_hyh</edgelabel>
+          <edgelabel>+work_pcg</edgelabel>
+          <edgelabel>+work_update</edgelabel>
+          <edgelabel>+work_update_pcr_L</edgelabel>
+          <edgelabel>+work_update_pcr_UY</edgelabel>
+          <edgelabel>+work_update_pcr_Σ</edgelabel>
+          <edgelabel>+work_update_Σ</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>+m_update</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>fancyqlone::TridiagonalSolver&lt; value_type &gt;</label>
+        <link refid="structfancyqlone_1_1TridiagonalSolver"/>
+      </node>
+      <node id="8">
+        <label>std::vector&lt; index_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="28" column="1" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="28" bodyend="79"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1SolverStorage_1a16fa023de04383125bb29f2b1626f6a9" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>λ_last</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1ada7ef528389e327b8f8f1612196f4934" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>B0</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1a0244b672083e3ac9a2f0ff67a581e193" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>cyqlone_solver</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1a543101f37ca53a2981b99f132c289ac8" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>L_old</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1afa833106ac87644c98f275cea242851c" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>LB</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1a20eb68474ac24c638bcb523178cf91f2" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>Mᵀλ_row</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1aa9270d846f5137d927b7ca1f59db250b" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>matrix</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1ad1d863c887b146bb50e8642b4b0fddfc" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>matrix_s</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1abe6ff1a9a9d18febb18f12bda3149af0" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>Mxb_row</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1ace66283bd419dc252ac56aefa9242b24" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>one_t</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1af9c01fa429f349425abf44a2e3f3bbe5" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>SharedContext</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1a5c55c6c666e2459751ece438c3a3a178" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>SolverLast</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1adbb652b9eb2b94a6497f4d0f060be4c7" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>temp</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1ac371da26b007b56e2b79c62afc3fca5b" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>tricyqle_t</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1ad3e83f92c133443897f7d9f4df94ff55" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>tridiagonal_solver</name></member>
+      <member refid="structfancyqlone_1_1SolverStorage_1a2ad87c1c01e16af4fafc076667f5099f" prot="public" virt="non-virtual"><scope>fancyqlone::SolverStorage</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="platooning_8hpp" kind="file" language="C++">
+    <compoundname>platooning.hpp</compoundname>
+    <includes refid="config_8hpp" local="no">fancyqlone/config.hpp</includes>
+    <includes local="no">fancyqlone/example-problems/export.h</includes>
+    <includes refid="ocp_8hpp" local="no">fancyqlone/ocp.hpp</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="platooning_8cpp" local="no">src/example-problems/src/platooning.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp</label>
+        <link refid="platooning_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fancyqlone/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>fancyqlone/ocp.hpp</label>
+        <link refid="ocp_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>batmat/config.hpp</label>
+      </node>
+      <node id="4">
+        <label>fancyqlone/example-problems/export.h</label>
+      </node>
+      <node id="6">
+        <label>guanaqo/mat-view.hpp</label>
+      </node>
+      <node id="7">
+        <label>guanaqo/print.hpp</label>
+      </node>
+      <node id="8">
+        <label>iostream</label>
+      </node>
+      <node id="9">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp</label>
+        <link refid="platooning_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/example-problems/src/platooning.cpp</label>
+        <link refid="platooning_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams" prot="public">fancyqlone::qpalm::problems::PlatooningParams</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem" prot="public">fancyqlone::qpalm::problems::PlatooningProblem</innerclass>
+    <innernamespace refid="namespacefancyqlone">fancyqlone</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm">fancyqlone::qpalm</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm_1_1problems">fancyqlone::qpalm::problems</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="config_8hpp" kindref="compound">fancyqlone/config.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fancyqlone/example-problems/export.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ocp_8hpp" kindref="compound">fancyqlone/ocp.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacefancyqlone_1_1qpalm_1_1problems" kindref="compound">fancyqlone::qpalm::problems</ref><sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams" kindref="compound">PlatooningParams</ref><sp/>{</highlight></codeline>
+<codeline lineno="12" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a88f78df37958bdf3f976a993fb8fa07f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a88f78df37958bdf3f976a993fb8fa07f" kindref="member">friction</ref><sp/><sp/><sp/>=<sp/>0.1;</highlight></codeline>
+<codeline lineno="13" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a273aeeeba1ae769ba508ea1e04ab2e78" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a273aeeeba1ae769ba508ea1e04ab2e78" kindref="member">F_max</ref><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>20;</highlight></codeline>
+<codeline lineno="14" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a928de9d8c7468ce98e7efb47df7c00f3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a928de9d8c7468ce98e7efb47df7c00f3" kindref="member">v_max</ref><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1.6;</highlight></codeline>
+<codeline lineno="15" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a4d13a8d404917263c4d289a1f9074833" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a4d13a8d404917263c4d289a1f9074833" kindref="member">dist_min</ref><sp/><sp/><sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="16" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1ae574bb1582aa67d783009f0c29908f51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1ae574bb1582aa67d783009f0c29908f51" kindref="member">dist_init</ref><sp/><sp/>=<sp/>2<sp/>*<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a4d13a8d404917263c4d289a1f9074833" kindref="member">dist_min</ref>;</highlight></codeline>
+<codeline lineno="17" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a8eacc3e256b2b7df6961338524c4e098" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a8eacc3e256b2b7df6961338524c4e098" kindref="member">p_target</ref><sp/><sp/><sp/>=<sp/>100;</highlight></codeline>
+<codeline lineno="18" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a66621b59aafde7792093f827861762e5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a66621b59aafde7792093f827861762e5" kindref="member">N_horiz</ref><sp/><sp/><sp/>=<sp/>512;</highlight></codeline>
+<codeline lineno="19" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a78a5576a2f94d735900650259cee975d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a78a5576a2f94d735900650259cee975d" kindref="member">T_horiz</ref><sp/><sp/><sp/><sp/>=<sp/>30;</highlight></codeline>
+<codeline lineno="20" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a92338826956b02eff6eb831c63d0ec02" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a92338826956b02eff6eb831c63d0ec02" kindref="member">scale_cost</ref><sp/>=<sp/>1e-3;</highlight></codeline>
+<codeline lineno="21" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a5b9fa5ebf0093fd6fc14888bfe94c06d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;real_t&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a5b9fa5ebf0093fd6fc14888bfe94c06d" kindref="member">masses</ref>{100,<sp/>150,<sp/>130,<sp/>70,<sp/>180};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem" kindref="compound">PlatooningProblem</ref><sp/>{</highlight></codeline>
+<codeline lineno="25" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem_1a348aea758db4d3c18613ab5e361c29cc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1LinearOCPStorage" kindref="compound">LinearOCPStorage</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem_1a348aea758db4d3c18613ab5e361c29cc" kindref="member">ocp</ref>;</highlight></codeline>
+<codeline lineno="26" refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem_1a83901de8ad08d00e7e90b4a81670fbce" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;real_t&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem_1a83901de8ad08d00e7e90b4a81670fbce" kindref="member">ref</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fancyqlone::qpalm::problems</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="config_8hpp_1aa4b496c143fba922704a143c4411beb1" kindref="member">FANCYQLONE_NS</ref>(<ref refid="namespacefancyqlone" kindref="compound">fancyqlone</ref>::<ref refid="namespacefancyqlone_1_1qpalm_1_1problems" kindref="compound">qpalm::problems</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal">PlatooningProblem<sp/>CYQLONE_EXAMPLE_PROBLEMS_EXPORT<sp/>platooning(PlatooningParams<sp/>p);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>FANCYQLONE_NS(fancyqlone::qpalm::problems)</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_578a611d3bcd387cca728ec8cb674af4" kind="dir">
+    <compoundname>src/fancyqlone/include/fancyqlone/cyqlone</compoundname>
+    <innerdir refid="dir_f9ffb315ae35022c7af17647d85926cd">src/fancyqlone/include/fancyqlone/cyqlone/implementation</innerdir>
+    <innerfile refid="cyqlone-params_8hpp">cyqlone-params.hpp</innerfile>
+    <innerfile refid="cyqlone-storage_8hpp">cyqlone-storage.hpp</innerfile>
+    <innerfile refid="cyqlone_8hpp">cyqlone.hpp</innerfile>
+    <innerfile refid="tridiagonal-solver_8hpp">tridiagonal-solver.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqlone/include/fancyqlone/cyqlone/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="csv_8cpp" kind="file" language="C++">
+    <compoundname>csv.cpp</compoundname>
+    <includes refid="csv_8hpp" local="no">fancyqlone/fancyqpalm/example-problems/csv.hpp</includes>
+    <includes local="no">guanaqo/eigen/view.hpp</includes>
+    <includes local="no">guanaqo/io/csv.hpp</includes>
+    <includes local="no">filesystem</includes>
+    <includes local="no">fstream</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>fancyqlone/fancyqpalm/example-problems/csv.hpp</label>
+        <link refid="csv_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/example-problems/src/csv.cpp</label>
+        <link refid="csv_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fancyqlone/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>fancyqlone/ocp.hpp</label>
+        <link refid="ocp_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>batmat/config.hpp</label>
+      </node>
+      <node id="5">
+        <label>fancyqlone/example-problems/export.h</label>
+      </node>
+      <node id="11">
+        <label>filesystem</label>
+      </node>
+      <node id="14">
+        <label>fstream</label>
+      </node>
+      <node id="12">
+        <label>guanaqo/eigen/view.hpp</label>
+      </node>
+      <node id="13">
+        <label>guanaqo/io/csv.hpp</label>
+      </node>
+      <node id="7">
+        <label>guanaqo/mat-view.hpp</label>
+      </node>
+      <node id="8">
+        <label>guanaqo/print.hpp</label>
+      </node>
+      <node id="9">
+        <label>iostream</label>
+      </node>
+      <node id="10">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacefancyqlone">fancyqlone</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm">fancyqlone::qpalm</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm_1_1problems">fancyqlone::qpalm::problems</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;<ref refid="csv_8hpp" kindref="compound">fancyqlone/fancyqpalm/example-problems/csv.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;guanaqo/eigen/view.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;guanaqo/io/csv.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;filesystem&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fstream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="config_8hpp_1aa4b496c143fba922704a143c4411beb1" kindref="member">FANCYQLONE_NS</ref>(<ref refid="namespacefancyqlone" kindref="compound">fancyqlone</ref>::qpalm::problems)<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref><sp/>=<sp/>Eigen::MatrixX&lt;real_t&gt;;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="namespacefancyqlone_1_1qpalm_1_1problems_1a5dcb9459cf8edbf58534c782b419cbf3" refkind="member"><highlight class="normal"><ref refid="structfancyqlone_1_1LinearOCPStorage" kindref="compound">LinearOCPStorage</ref><sp/><ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a5dcb9459cf8edbf58534c782b419cbf3" kindref="member">load_from_csv</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>fs::path<sp/>&amp;folder,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;name)<sp/>{</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group__linalg__views_1ga2ccef3dcd53320ccda2be9948781c65b" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::as_view</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>std::array&lt;index_t,<sp/>5&gt;<sp/>dims_array;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>dims_file<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;dim-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga087c9290a0520b3f1b02b6787c921604" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read_row</ref>(dims_file,<sp/>std::span{dims_array});</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[N,<sp/>nx,<sp/>nu,<sp/>ny,<sp/>ny_N]<sp/>=<sp/>dims_array;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1LinearOCPStorage" kindref="compound">LinearOCPStorage</ref><sp/>ocp{.dim{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.N_horiz<sp/>=<sp/>N,</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.nx<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>nx,</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.nu<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>nu,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ny<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ny,</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ny_N<sp/><sp/><sp/><sp/>=<sp/>ny_N,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>}};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Continuous-time<sp/>dynamics</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref><sp/>A<sp/>=<sp/>eigen_mat::Zero(nx,<sp/>nx),<sp/>B<sp/>=<sp/>eigen_mat::Zero(nx,<sp/>nu),<sp/>C<sp/>=<sp/>eigen_mat::Zero(ny,<sp/>nx),</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>D<sp/>=<sp/>eigen_mat::Zero(ny,<sp/>nu),<sp/>CN<sp/>=<sp/>eigen_mat::Zero(ny_N,<sp/>nx),</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>QN<sp/>=<sp/>eigen_mat::Zero(nx,<sp/>nx),<sp/>Q<sp/>=<sp/>eigen_mat::Zero(nx,<sp/>nx),</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>R<sp/>=<sp/>eigen_mat::Zero(nu,<sp/>nu);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;A-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga7b55c259788953b68dc075f6c3f3859a" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read</ref>(f,<sp/>as_view(A));</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;B-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga7b55c259788953b68dc075f6c3f3859a" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read</ref>(f,<sp/>as_view(B));</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;C-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga7b55c259788953b68dc075f6c3f3859a" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read</ref>(f,<sp/>as_view(C));</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;D-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga7b55c259788953b68dc075f6c3f3859a" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read</ref>(f,<sp/>as_view(D));</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;CN-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga7b55c259788953b68dc075f6c3f3859a" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read</ref>(f,<sp/>as_view(CN));</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;QN-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga7b55c259788953b68dc075f6c3f3859a" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read</ref>(f,<sp/>as_view(QN));</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;Q-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga7b55c259788953b68dc075f6c3f3859a" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read</ref>(f,<sp/>as_view(Q));</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;R-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga7b55c259788953b68dc075f6c3f3859a" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read</ref>(f,<sp/>as_view(R));</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Reference<sp/>states<sp/>and<sp/>inputs</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;real_t&gt;<sp/>qr(N<sp/>*<sp/>(nx<sp/>+<sp/>nu)<sp/>+<sp/>nx);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;q-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga087c9290a0520b3f1b02b6787c921604" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read_row</ref>(f,<sp/>std::span{qr});</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Constraints<sp/>rhs</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;real_t&gt;<sp/>eq((N<sp/>+<sp/>1)<sp/>*<sp/>nx),<sp/>lb(N<sp/>*<sp/>ny<sp/>+<sp/>ny_N),<sp/>ub(N<sp/>*<sp/>ny<sp/>+<sp/>ny_N);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;eq-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga087c9290a0520b3f1b02b6787c921604" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read_row</ref>(f,<sp/>std::span{eq});</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;lb-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga087c9290a0520b3f1b02b6787c921604" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read_row</ref>(f,<sp/>std::span{lb});</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ifstream<sp/>f<sp/>=<sp/>folder<sp/>/<sp/>(</highlight><highlight class="stringliteral">&quot;ub-&quot;</highlight><highlight class="normal"><sp/>+<sp/>name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.csv&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group__io_1ga087c9290a0520b3f1b02b6787c921604" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::io::csv_read_row</ref>(f,<sp/>std::span{ub});</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Dynamics<sp/>and<sp/>constraint<sp/>matrices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>N;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>Ai<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1aaea931c3de39b21c1adc2adda6927391" kindref="member">A</ref>(i),<sp/>Bi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a069e76a6c76bd62ab2eb0c5546f74897" kindref="member">B</ref>(i),<sp/>Ci<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1ad991b26c207c150cf4117e3dea673b6d" kindref="member">C</ref>(i),<sp/>Di<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a755b42ad7574b683175254de50793aa0" kindref="member">D</ref>(i);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>Qi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" kindref="member">Q</ref>(i),<sp/>Ri<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1ab0b91b1dac835a47452d45c0d2d9f1ee" kindref="member">R</ref>(i);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Ai<sp/>=<sp/>as_view(A);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Bi<sp/>=<sp/>as_view(B);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Ci<sp/>=<sp/>as_view(C);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Di<sp/>=<sp/>as_view(D);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Qi<sp/>=<sp/>as_view(Q);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Ri<sp/>=<sp/>as_view(R);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>Ci<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1ad991b26c207c150cf4117e3dea673b6d" kindref="member">C</ref>(N),<sp/>Qi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" kindref="member">Q</ref>(N);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>Ci<sp/>=<sp/>as_view(CN);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>Qi<sp/>=<sp/>as_view(QN);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>unnecessary<sp/>copy</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a087bd89a45d03b02126021b5fec8d1df" kindref="member">qr</ref>()<sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a087bd89a45d03b02126021b5fec8d1df" kindref="member">qr</ref>())::as_column(std::span{qr});</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" kindref="member">b</ref>()<sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" kindref="member">b</ref>())::as_column(std::span{eq});</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" kindref="member">b_min</ref>()<sp/>=<sp/></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" kindref="member">b_min</ref>())::as_column(std::span{lb});</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" kindref="member">b_max</ref>()<sp/>=<sp/></highlight><highlight class="keyword">decltype</highlight><highlight class="normal">(ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" kindref="member">b_max</ref>())::as_column(std::span{ub});</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ocp;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>FANCYQLONE_NS(fancyqlone::qpalm::problems)</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/example-problems/src/csv.cpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,822 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: SpringMassParams Struct Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structSpringMassParams.html','','structSpringMassParams-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">SpringMassParams Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="spring-mass_8hpp_source.html">fancyqlone/fancyqpalm/example-problems/spring-mass.hpp</a>&gt;</code></p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#_a44">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00011">11</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a3870c15ac408fa3157f56ae43e175ac5" id="r_a3870c15ac408fa3157f56ae43e175ac5"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a3870c15ac408fa3157f56ae43e175ac5">ActuatorPlacement</a> { <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a3870c15ac408fa3157f56ae43e175ac5ac28debccf0ec03098e0d622441b97501">IndividualActuators</a>
+, <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a3870c15ac408fa3157f56ae43e175ac5ace4c2af40b98dbf0cb5a6c221a89b735">RandomActuators</a>
+, <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a3870c15ac408fa3157f56ae43e175ac5aa1d1d5f166ac34202eda32af48eeefbc">RandomPairsOfActuators</a>
+, <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a3870c15ac408fa3157f56ae43e175ac5ab7136f7e85d24b484e2dc94d4ba33d5a">WangBoydActuators</a>
+ }</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a65b5c9d486cbadc47c682e04dd3174d2" id="r_a65b5c9d486cbadc47c682e04dd3174d2"><td class="memItemLeft">static <a class="el" href="structSpringMassParams.html">SpringMassParams</a>&#160;</td><td class="memItemRight"><a class="el" href="#a65b5c9d486cbadc47c682e04dd3174d2">wang_boyd_2008</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> n_masses, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> <a class="el" href="#a7a8d1e0374f87744590361e0716fbb7c">N_horiz</a>=30, uint64_t <a class="el" href="#ab574c84dacb8d6f6ec661cb14b0a3743">seed</a>=0)</td></tr>
+<tr class="memitem:a35e0b8bbcef5d37c4f6d7b1d296d9702" id="r_a35e0b8bbcef5d37c4f6d7b1d296d9702"><td class="memItemLeft">static <a class="el" href="structSpringMassParams.html">SpringMassParams</a>&#160;</td><td class="memItemRight"><a class="el" href="#a35e0b8bbcef5d37c4f6d7b1d296d9702">wang_boyd_2008_width</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> n_masses, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> <a class="el" href="#a7a8d1e0374f87744590361e0716fbb7c">N_horiz</a>=30, uint64_t <a class="el" href="#ab574c84dacb8d6f6ec661cb14b0a3743">seed</a>=0, double steady_state_spring_length=0.1)</td></tr>
+<tr class="memitem:a9983a23525833f95bc7955ea6c719a13" id="r_a9983a23525833f95bc7955ea6c719a13"><td class="memItemLeft">static <a class="el" href="structSpringMassParams.html">SpringMassParams</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9983a23525833f95bc7955ea6c719a13">domahidi_2012</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> n_masses, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> <a class="el" href="#a7a8d1e0374f87744590361e0716fbb7c">N_horiz</a>, uint64_t <a class="el" href="#ab574c84dacb8d6f6ec661cb14b0a3743">seed</a>=0)</td></tr>
+<tr class="memitem:a2b3c6215d1f45bcf7b522b952b98cac9" id="r_a2b3c6215d1f45bcf7b522b952b98cac9"><td class="memItemLeft">static <a class="el" href="structSpringMassParams.html">SpringMassParams</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2b3c6215d1f45bcf7b522b952b98cac9">active_state_constr</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> n_masses=18, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> <a class="el" href="#a7a8d1e0374f87744590361e0716fbb7c">N_horiz</a>=256, uint64_t <a class="el" href="#ab574c84dacb8d6f6ec661cb14b0a3743">seed</a>=0)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aa3bb54a4ca88ab2b1cf5a181eef31ce8" id="r_aa3bb54a4ca88ab2b1cf5a181eef31ce8"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa3bb54a4ca88ab2b1cf5a181eef31ce8">friction</a> = 0</td></tr>
+<tr class="memdesc:aa3bb54a4ca88ab2b1cf5a181eef31ce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">friction coefficient  <br /></td></tr>
+<tr class="memitem:aed0f60da86572d85c4bc99f156216eb9" id="r_aed0f60da86572d85c4bc99f156216eb9"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aed0f60da86572d85c4bc99f156216eb9">k_spring</a> = 1</td></tr>
+<tr class="memdesc:aed0f60da86572d85c4bc99f156216eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">spring constant between masses  <br /></td></tr>
+<tr class="memitem:a76e7d91c9e87d37d0955f9afad53f846" id="r_a76e7d91c9e87d37d0955f9afad53f846"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a76e7d91c9e87d37d0955f9afad53f846">F_max</a> = 0.5</td></tr>
+<tr class="memdesc:a76e7d91c9e87d37d0955f9afad53f846"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum actuator force  <br /></td></tr>
+<tr class="memitem:a258e8b49d16185b306f31dec843c8a70" id="r_a258e8b49d16185b306f31dec843c8a70"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a258e8b49d16185b306f31dec843c8a70">p_max</a> = 4</td></tr>
+<tr class="memdesc:a258e8b49d16185b306f31dec843c8a70"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum displacement of each mass  <br /></td></tr>
+<tr class="memitem:ae8f483bc01bb19969aba0b83054e53a5" id="r_ae8f483bc01bb19969aba0b83054e53a5"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae8f483bc01bb19969aba0b83054e53a5">p_min</a> = -<a class="el" href="#a258e8b49d16185b306f31dec843c8a70">p_max</a></td></tr>
+<tr class="memdesc:ae8f483bc01bb19969aba0b83054e53a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">minimum displacement of each mass  <br /></td></tr>
+<tr class="memitem:acba02f1a5a83c23dfe9a5484fb716c2b" id="r_acba02f1a5a83c23dfe9a5484fb716c2b"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#acba02f1a5a83c23dfe9a5484fb716c2b">p_min_f</a> = <a class="el" href="#ae8f483bc01bb19969aba0b83054e53a5">p_min</a></td></tr>
+<tr class="memdesc:acba02f1a5a83c23dfe9a5484fb716c2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">minimum displacement of each mass for the final stage  <br /></td></tr>
+<tr class="memitem:a192d6833a5f25b5f12530fe336c9e66e" id="r_a192d6833a5f25b5f12530fe336c9e66e"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a192d6833a5f25b5f12530fe336c9e66e">p_max_f</a> = <a class="el" href="#a258e8b49d16185b306f31dec843c8a70">p_max</a></td></tr>
+<tr class="memdesc:a192d6833a5f25b5f12530fe336c9e66e"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum displacement of each mass for the final stage  <br /></td></tr>
+<tr class="memitem:a5f4c951467b3f93bce635b623802a704" id="r_a5f4c951467b3f93bce635b623802a704"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5f4c951467b3f93bce635b623802a704">v_max</a> = 0</td></tr>
+<tr class="memdesc:a5f4c951467b3f93bce635b623802a704"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum velocity of each mass (zero = no limit)  <br /></td></tr>
+<tr class="memitem:a6d633bc3b4eb7231f6e85b0c9aa2c833" id="r_a6d633bc3b4eb7231f6e85b0c9aa2c833"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6d633bc3b4eb7231f6e85b0c9aa2c833">v_max_f</a> = <a class="el" href="#a5f4c951467b3f93bce635b623802a704">v_max</a></td></tr>
+<tr class="memdesc:a6d633bc3b4eb7231f6e85b0c9aa2c833"><td class="mdescLeft">&#160;</td><td class="mdescRight">maximum velocity of each mass for the final stage  <br /></td></tr>
+<tr class="memitem:a357b32c5456d16dccde256b6399cdbe3" id="r_a357b32c5456d16dccde256b6399cdbe3"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a357b32c5456d16dccde256b6399cdbe3">width</a> = 1</td></tr>
+<tr class="memdesc:a357b32c5456d16dccde256b6399cdbe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">width of the setup (distance between the walls)  <br /></td></tr>
+<tr class="memitem:a7a8d1e0374f87744590361e0716fbb7c" id="r_a7a8d1e0374f87744590361e0716fbb7c"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7a8d1e0374f87744590361e0716fbb7c">N_horiz</a> = 32</td></tr>
+<tr class="memdesc:a7a8d1e0374f87744590361e0716fbb7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of discretization steps  <br /></td></tr>
+<tr class="memitem:a89a70c9b03f36c55f702bc2e272d87ea" id="r_a89a70c9b03f36c55f702bc2e272d87ea"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a89a70c9b03f36c55f702bc2e272d87ea">T_horiz</a> = 15</td></tr>
+<tr class="memdesc:a89a70c9b03f36c55f702bc2e272d87ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">time horizon  <br /></td></tr>
+<tr class="memitem:a0381978841501bc74680613c211f2b63" id="r_a0381978841501bc74680613c211f2b63"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0381978841501bc74680613c211f2b63">q_vel</a> = 1</td></tr>
+<tr class="memdesc:a0381978841501bc74680613c211f2b63"><td class="mdescLeft">&#160;</td><td class="mdescRight">scaling factor for cost terms for the velocity  <br /></td></tr>
+<tr class="memitem:afa903242f8e5f4270a156a84c3d87702" id="r_afa903242f8e5f4270a156a84c3d87702"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#afa903242f8e5f4270a156a84c3d87702">q_pos</a> = 1</td></tr>
+<tr class="memdesc:afa903242f8e5f4270a156a84c3d87702"><td class="mdescLeft">&#160;</td><td class="mdescRight">scaling factor for cost terms for the position  <br /></td></tr>
+<tr class="memitem:a866961b0395fad85fa519113069a5bdd" id="r_a866961b0395fad85fa519113069a5bdd"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a866961b0395fad85fa519113069a5bdd">q_vel_f</a> = <a class="el" href="#a0381978841501bc74680613c211f2b63">q_vel</a></td></tr>
+<tr class="memdesc:a866961b0395fad85fa519113069a5bdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">scaling factor for terminal cost term for the velocity  <br /></td></tr>
+<tr class="memitem:a089bcd6d646a0341ef8590ca816e0b18" id="r_a089bcd6d646a0341ef8590ca816e0b18"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a089bcd6d646a0341ef8590ca816e0b18">q_pos_f</a> = <a class="el" href="#afa903242f8e5f4270a156a84c3d87702">q_pos</a></td></tr>
+<tr class="memdesc:a089bcd6d646a0341ef8590ca816e0b18"><td class="mdescLeft">&#160;</td><td class="mdescRight">scaling factor for terminal cost term for the position  <br /></td></tr>
+<tr class="memitem:a65eb165b4cff46cd6c59d9df05997cfa" id="r_a65eb165b4cff46cd6c59d9df05997cfa"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a65eb165b4cff46cd6c59d9df05997cfa">r_act</a> = 1</td></tr>
+<tr class="memdesc:a65eb165b4cff46cd6c59d9df05997cfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">scaling factor for cost terms for the actuators  <br /></td></tr>
+<tr class="memitem:a66c4b295339d39d8a623b68cbd687fb2" id="r_a66c4b295339d39d8a623b68cbd687fb2"><td class="memItemLeft">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a66c4b295339d39d8a623b68cbd687fb2">masses</a> {1, 1, 1, 1, 1, 1}</td></tr>
+<tr class="memitem:a43d1d5ad7ca31fcb4242f20b642f2b22" id="r_a43d1d5ad7ca31fcb4242f20b642f2b22"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a43d1d5ad7ca31fcb4242f20b642f2b22">n_actuators</a> = static_cast&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&gt;(masses.size()) - 1</td></tr>
+<tr class="memdesc:a43d1d5ad7ca31fcb4242f20b642f2b22"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of actuators  <br /></td></tr>
+<tr class="memitem:a9dc0a5da6779fd9a342b32ee7344ee25" id="r_a9dc0a5da6779fd9a342b32ee7344ee25"><td class="memItemLeft">enum <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a3870c15ac408fa3157f56ae43e175ac5">fancyqlone::qpalm::problems::SpringMassParams::ActuatorPlacement</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9dc0a5da6779fd9a342b32ee7344ee25">actuator_placement</a> = <a class="el" href="#a3870c15ac408fa3157f56ae43e175ac5ac28debccf0ec03098e0d622441b97501">IndividualActuators</a></td></tr>
+<tr class="memitem:ab574c84dacb8d6f6ec661cb14b0a3743" id="r_ab574c84dacb8d6f6ec661cb14b0a3743"><td class="memItemLeft">uint64_t&#160;</td><td class="memItemRight"><a class="el" href="#ab574c84dacb8d6f6ec661cb14b0a3743">seed</a> = 0</td></tr>
+<tr class="memdesc:ab574c84dacb8d6f6ec661cb14b0a3743"><td class="mdescLeft">&#160;</td><td class="mdescRight">random seed for actuator placement  <br /></td></tr>
+</table>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
+<a id="a3870c15ac408fa3157f56ae43e175ac5" name="a3870c15ac408fa3157f56ae43e175ac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3870c15ac408fa3157f56ae43e175ac5">&#9670;&#160;</a></span>ActuatorPlacement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a3870c15ac408fa3157f56ae43e175ac5">fancyqlone::qpalm::problems::SpringMassParams::ActuatorPlacement</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a3870c15ac408fa3157f56ae43e175ac5ac28debccf0ec03098e0d622441b97501" name="a3870c15ac408fa3157f56ae43e175ac5ac28debccf0ec03098e0d622441b97501"></a>IndividualActuators&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3870c15ac408fa3157f56ae43e175ac5ace4c2af40b98dbf0cb5a6c221a89b735" name="a3870c15ac408fa3157f56ae43e175ac5ace4c2af40b98dbf0cb5a6c221a89b735"></a>RandomActuators&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3870c15ac408fa3157f56ae43e175ac5aa1d1d5f166ac34202eda32af48eeefbc" name="a3870c15ac408fa3157f56ae43e175ac5aa1d1d5f166ac34202eda32af48eeefbc"></a>RandomPairsOfActuators&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a3870c15ac408fa3157f56ae43e175ac5ab7136f7e85d24b484e2dc94d4ba33d5a" name="a3870c15ac408fa3157f56ae43e175ac5ab7136f7e85d24b484e2dc94d4ba33d5a"></a>WangBoydActuators&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00031">31</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a65b5c9d486cbadc47c682e04dd3174d2" name="a65b5c9d486cbadc47c682e04dd3174d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65b5c9d486cbadc47c682e04dd3174d2">&#9670;&#160;</a></span>wang_boyd_2008()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structSpringMassParams.html">SpringMassParams</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a65b5c9d486cbadc47c682e04dd3174d2">fancyqlone::qpalm::problems::SpringMassParams::wang_boyd_2008</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>n_masses</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>N_horiz</em></span><span class="paramdefsep"> = </span><span class="paramdefval">30</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>seed</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a79">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00039">39</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a35e0b8bbcef5d37c4f6d7b1d296d9702" name="a35e0b8bbcef5d37c4f6d7b1d296d9702"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35e0b8bbcef5d37c4f6d7b1d296d9702">&#9670;&#160;</a></span>wang_boyd_2008_width()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structSpringMassParams.html">SpringMassParams</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a35e0b8bbcef5d37c4f6d7b1d296d9702">fancyqlone::qpalm::problems::SpringMassParams::wang_boyd_2008_width</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>n_masses</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>N_horiz</em></span><span class="paramdefsep"> = </span><span class="paramdefval">30</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>seed</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>steady_state_spring_length</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.1</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a80">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00065">65</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9983a23525833f95bc7955ea6c719a13" name="a9983a23525833f95bc7955ea6c719a13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9983a23525833f95bc7955ea6c719a13">&#9670;&#160;</a></span>domahidi_2012()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structSpringMassParams.html">SpringMassParams</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a9983a23525833f95bc7955ea6c719a13">fancyqlone::qpalm::problems::SpringMassParams::domahidi_2012</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>n_masses</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>N_horiz</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>seed</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a81">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00073">73</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2b3c6215d1f45bcf7b522b952b98cac9" name="a2b3c6215d1f45bcf7b522b952b98cac9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3c6215d1f45bcf7b522b952b98cac9">&#9670;&#160;</a></span>active_state_constr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structSpringMassParams.html">SpringMassParams</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a2b3c6215d1f45bcf7b522b952b98cac9">fancyqlone::qpalm::problems::SpringMassParams::active_state_constr</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>n_masses</em></span><span class="paramdefsep"> = </span><span class="paramdefval">18</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>N_horiz</em></span><span class="paramdefsep"> = </span><span class="paramdefval">256</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>seed</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a82">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00096">96</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="aa3bb54a4ca88ab2b1cf5a181eef31ce8" name="aa3bb54a4ca88ab2b1cf5a181eef31ce8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3bb54a4ca88ab2b1cf5a181eef31ce8">&#9670;&#160;</a></span>friction</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#aa3bb54a4ca88ab2b1cf5a181eef31ce8">fancyqlone::qpalm::problems::SpringMassParams::friction</a> = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>friction coefficient </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00012">12</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aed0f60da86572d85c4bc99f156216eb9" name="aed0f60da86572d85c4bc99f156216eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed0f60da86572d85c4bc99f156216eb9">&#9670;&#160;</a></span>k_spring</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#aed0f60da86572d85c4bc99f156216eb9">fancyqlone::qpalm::problems::SpringMassParams::k_spring</a> = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>spring constant between masses </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00013">13</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a76e7d91c9e87d37d0955f9afad53f846" name="a76e7d91c9e87d37d0955f9afad53f846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76e7d91c9e87d37d0955f9afad53f846">&#9670;&#160;</a></span>F_max</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a76e7d91c9e87d37d0955f9afad53f846">fancyqlone::qpalm::problems::SpringMassParams::F_max</a> = 0.5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>maximum actuator force </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00014">14</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a258e8b49d16185b306f31dec843c8a70" name="a258e8b49d16185b306f31dec843c8a70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a258e8b49d16185b306f31dec843c8a70">&#9670;&#160;</a></span>p_max</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a258e8b49d16185b306f31dec843c8a70">fancyqlone::qpalm::problems::SpringMassParams::p_max</a> = 4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>maximum displacement of each mass </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a47">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00015">15</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae8f483bc01bb19969aba0b83054e53a5" name="ae8f483bc01bb19969aba0b83054e53a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8f483bc01bb19969aba0b83054e53a5">&#9670;&#160;</a></span>p_min</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#ae8f483bc01bb19969aba0b83054e53a5">fancyqlone::qpalm::problems::SpringMassParams::p_min</a> = -<a class="el" href="#a258e8b49d16185b306f31dec843c8a70">p_max</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>minimum displacement of each mass </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00016">16</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acba02f1a5a83c23dfe9a5484fb716c2b" name="acba02f1a5a83c23dfe9a5484fb716c2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba02f1a5a83c23dfe9a5484fb716c2b">&#9670;&#160;</a></span>p_min_f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#acba02f1a5a83c23dfe9a5484fb716c2b">fancyqlone::qpalm::problems::SpringMassParams::p_min_f</a> = <a class="el" href="#ae8f483bc01bb19969aba0b83054e53a5">p_min</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>minimum displacement of each mass for the final stage </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00017">17</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a192d6833a5f25b5f12530fe336c9e66e" name="a192d6833a5f25b5f12530fe336c9e66e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a192d6833a5f25b5f12530fe336c9e66e">&#9670;&#160;</a></span>p_max_f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a192d6833a5f25b5f12530fe336c9e66e">fancyqlone::qpalm::problems::SpringMassParams::p_max_f</a> = <a class="el" href="#a258e8b49d16185b306f31dec843c8a70">p_max</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>maximum displacement of each mass for the final stage </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00018">18</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5f4c951467b3f93bce635b623802a704" name="a5f4c951467b3f93bce635b623802a704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f4c951467b3f93bce635b623802a704">&#9670;&#160;</a></span>v_max</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a5f4c951467b3f93bce635b623802a704">fancyqlone::qpalm::problems::SpringMassParams::v_max</a> = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>maximum velocity of each mass (zero = no limit) </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00019">19</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6d633bc3b4eb7231f6e85b0c9aa2c833" name="a6d633bc3b4eb7231f6e85b0c9aa2c833"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d633bc3b4eb7231f6e85b0c9aa2c833">&#9670;&#160;</a></span>v_max_f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a6d633bc3b4eb7231f6e85b0c9aa2c833">fancyqlone::qpalm::problems::SpringMassParams::v_max_f</a> = <a class="el" href="#a5f4c951467b3f93bce635b623802a704">v_max</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>maximum velocity of each mass for the final stage </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00020">20</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a357b32c5456d16dccde256b6399cdbe3" name="a357b32c5456d16dccde256b6399cdbe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a357b32c5456d16dccde256b6399cdbe3">&#9670;&#160;</a></span>width</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a357b32c5456d16dccde256b6399cdbe3">fancyqlone::qpalm::problems::SpringMassParams::width</a> = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>width of the setup (distance between the walls) </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00021">21</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7a8d1e0374f87744590361e0716fbb7c" name="a7a8d1e0374f87744590361e0716fbb7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a8d1e0374f87744590361e0716fbb7c">&#9670;&#160;</a></span>N_horiz</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a7a8d1e0374f87744590361e0716fbb7c">fancyqlone::qpalm::problems::SpringMassParams::N_horiz</a> = 32</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>number of discretization steps </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00022">22</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a89a70c9b03f36c55f702bc2e272d87ea" name="a89a70c9b03f36c55f702bc2e272d87ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89a70c9b03f36c55f702bc2e272d87ea">&#9670;&#160;</a></span>T_horiz</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a89a70c9b03f36c55f702bc2e272d87ea">fancyqlone::qpalm::problems::SpringMassParams::T_horiz</a> = 15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>time horizon </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00023">23</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0381978841501bc74680613c211f2b63" name="a0381978841501bc74680613c211f2b63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0381978841501bc74680613c211f2b63">&#9670;&#160;</a></span>q_vel</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a0381978841501bc74680613c211f2b63">fancyqlone::qpalm::problems::SpringMassParams::q_vel</a> = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>scaling factor for cost terms for the velocity </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00024">24</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afa903242f8e5f4270a156a84c3d87702" name="afa903242f8e5f4270a156a84c3d87702"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa903242f8e5f4270a156a84c3d87702">&#9670;&#160;</a></span>q_pos</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#afa903242f8e5f4270a156a84c3d87702">fancyqlone::qpalm::problems::SpringMassParams::q_pos</a> = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>scaling factor for cost terms for the position </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00025">25</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a866961b0395fad85fa519113069a5bdd" name="a866961b0395fad85fa519113069a5bdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a866961b0395fad85fa519113069a5bdd">&#9670;&#160;</a></span>q_vel_f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a866961b0395fad85fa519113069a5bdd">fancyqlone::qpalm::problems::SpringMassParams::q_vel_f</a> = <a class="el" href="#a0381978841501bc74680613c211f2b63">q_vel</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>scaling factor for terminal cost term for the velocity </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00026">26</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a089bcd6d646a0341ef8590ca816e0b18" name="a089bcd6d646a0341ef8590ca816e0b18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a089bcd6d646a0341ef8590ca816e0b18">&#9670;&#160;</a></span>q_pos_f</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a089bcd6d646a0341ef8590ca816e0b18">fancyqlone::qpalm::problems::SpringMassParams::q_pos_f</a> = <a class="el" href="#afa903242f8e5f4270a156a84c3d87702">q_pos</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>scaling factor for terminal cost term for the position </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00027">27</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a65eb165b4cff46cd6c59d9df05997cfa" name="a65eb165b4cff46cd6c59d9df05997cfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65eb165b4cff46cd6c59d9df05997cfa">&#9670;&#160;</a></span>r_act</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a65eb165b4cff46cd6c59d9df05997cfa">fancyqlone::qpalm::problems::SpringMassParams::r_act</a> = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>scaling factor for cost terms for the actuators </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00028">28</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a66c4b295339d39d8a623b68cbd687fb2" name="a66c4b295339d39d8a623b68cbd687fb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66c4b295339d39d8a623b68cbd687fb2">&#9670;&#160;</a></span>masses</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&gt; <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a66c4b295339d39d8a623b68cbd687fb2">fancyqlone::qpalm::problems::SpringMassParams::masses</a> {1, 1, 1, 1, 1, 1}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a49">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00029">29</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a43d1d5ad7ca31fcb4242f20b642f2b22" name="a43d1d5ad7ca31fcb4242f20b642f2b22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43d1d5ad7ca31fcb4242f20b642f2b22">&#9670;&#160;</a></span>n_actuators</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a43d1d5ad7ca31fcb4242f20b642f2b22">fancyqlone::qpalm::problems::SpringMassParams::n_actuators</a> = static_cast&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&gt;(masses.size()) - 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>number of actuators </p>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00030">30</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9dc0a5da6779fd9a342b32ee7344ee25" name="a9dc0a5da6779fd9a342b32ee7344ee25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dc0a5da6779fd9a342b32ee7344ee25">&#9670;&#160;</a></span>actuator_placement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a3870c15ac408fa3157f56ae43e175ac5">fancyqlone::qpalm::problems::SpringMassParams::ActuatorPlacement</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#a9dc0a5da6779fd9a342b32ee7344ee25">fancyqlone::qpalm::problems::SpringMassParams::actuator_placement</a> = <a class="el" href="#a3870c15ac408fa3157f56ae43e175ac5ac28debccf0ec03098e0d622441b97501">IndividualActuators</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab574c84dacb8d6f6ec661cb14b0a3743" name="ab574c84dacb8d6f6ec661cb14b0a3743"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab574c84dacb8d6f6ec661cb14b0a3743">&#9670;&#160;</a></span>seed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t <a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html#ab574c84dacb8d6f6ec661cb14b0a3743">fancyqlone::qpalm::problems::SpringMassParams::seed</a> = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>random seed for actuator placement </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a46">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="spring-mass_8hpp_source.html#l00037">37</a> of file <a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/example-problems/include/fancyqlone/fancyqpalm/example-problems/<a class="el" href="spring-mass_8hpp_source.html">spring-mass.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="structSpringMassParams.html">SpringMassParams</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+var structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908 =
+[
+    [ "storage_t", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97.html", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97" ],
+    [ "OCP_t", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908.html#aacfdf274421c7a07b6860bd232b1f997", null ],
+    [ "simd", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908.html#ae4d9b0e2a5ba17afaccd5d59095eea85", null ],
+    [ "CStorage", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908.html#aab16680783d32417ea3dbcdf897793b4", null ],
+    [ "OCPStorage", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908.html#ac5d22a9b47bce1fd1470ea3e7d547bc9", null ],
+    [ "store_t", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908.html#a2d18d3f6f540cd90dc7b20c62e37c3e9", null ],
+    [ "warm_start_t", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908.html#a9910164b52784efac2582dd8a616f322", null ],
+    [ "supports_factorization_updates", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908.html#ae70a5dfb434dcb5decf80a44de14dc21", null ],
+    [ "requires_external_schur_solve", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908.html#a32e8821a40f675aace01594552f4b44a", null ]
+];

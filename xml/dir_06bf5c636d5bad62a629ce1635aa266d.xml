@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_06bf5c636d5bad62a629ce1635aa266d" kind="dir">
+    <compoundname>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone</compoundname>
+    <innerfile refid="ineq-constr_8tpp">ineq-constr.tpp</innerfile>
+    <innerfile refid="linalg_8tpp">linalg.tpp</innerfile>
+    <innerfile refid="backends_2backend-fancyqlone_2linesearch_8tpp">linesearch.tpp</innerfile>
+    <innerfile refid="solve_8tpp">solve.tpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/"/>
+  </compounddef>
+</doxygen>

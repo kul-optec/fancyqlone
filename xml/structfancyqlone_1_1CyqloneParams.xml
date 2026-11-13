@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1CyqloneParams" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::CyqloneParams</compoundname>
+    <includes refid="cyqlone-params_8hpp" local="no">fancyqlone/cyqlone/cyqlone-params.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+        <defval><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1CyqloneParams_1a0ce2efee9d162d00f9c6f37f9b81d1ab" prot="public" static="no">
+        <type>T</type>
+        <definition>using fancyqlone::CyqloneParams&lt; T &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>fancyqlone::CyqloneParams::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="70" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1CyqloneParams_1aa428f2cd679adc2da644ab4ededa53de" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::CyqloneParams&lt; T &gt;::eliminate_u0_first</definition>
+        <argsstring></argsstring>
+        <name>eliminate_u0_first</name>
+        <qualifiedname>fancyqlone::CyqloneParams::eliminate_u0_first</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Whether to eliminate the first control input u(0) in the very first iteration of the modified Riccati recursion. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>When set to true, this matches the derivation in the Cyqlone paper <ref refid="citelist_1CITEREF_pas_cyqlone_2025" kindref="member">[1]</ref>. When set to false, all stage indices are shifted by n-1, and u(0) is elimenated in the last iteration of the modified Riccati recursion instead of the first. This means that the remaining Schur complement also corresponds to different equations, but this is useful in the case of nonlinear dynamics, where during the simulation, it is beneficial to have the u(0) at the beginning of the first window instead of at the end. Setting this setting to false leads to more fill-in in the first interval, but the structure is otherwise the same. It can be seen as a simple relabeling of all variables (shifted by n-1). This additional fill-in in the first interval does not actually affect the run time, since it is present in all other intervals anyway.  </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="85" column="10" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Parameters and settings for the Cyqlone solver. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::CyqloneParams&lt; T &gt;</label>
+        <link refid="structfancyqlone_1_1CyqloneParams"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="69" column="1" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="69" bodyend="86"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1CyqloneParams_1aa428f2cd679adc2da644ab4ededa53de" prot="public" virt="non-virtual"><scope>fancyqlone::CyqloneParams</scope><name>eliminate_u0_first</name></member>
+      <member refid="structfancyqlone_1_1CyqloneParams_1a0ce2efee9d162d00f9c6f37f9b81d1ab" prot="public" virt="non-virtual"><scope>fancyqlone::CyqloneParams</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

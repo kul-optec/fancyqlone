@@ -1,0 +1,295 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: src/fancyqlone/include/fancyqlone/matio.hpp File Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('matio_8hpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">matio.hpp File Reference<div class="ingroups"><a class="el" href="group__topic-utilities.html">Utilities</a> &raquo; <a class="el" href="group__topic-util-matio.html">Exporting and loading .mat files</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Functions for exporting and loading matrices and OCP data to and from .mat files. </p>
+
+<p class="definition">Definition in file <a class="el" href="matio_8hpp_source.html">matio.hpp</a>.</p>
+</div><div class="textblock"><code>#include &lt;batmat/matrix/view.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="config_8hpp_source.html">fancyqlone/config.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="ocp_8hpp_source.html">fancyqlone/ocp.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="sparse_8hpp_source.html">fancyqlone/sparse.hpp</a>&gt;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+</div>
+<p><a href="matio_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:fancyqlone" id="r_fancyqlone"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone.html">fancyqlone</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga60963e57104b35af5ebf325817e3fe48" id="r_ga60963e57104b35af5ebf325817e3fe48"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">fancyqlone::mat_t</a> = ::_mat_t</td></tr>
+<tr class="memdesc:ga60963e57104b35af5ebf325817e3fe48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Incomplete matio struct type.  <br /></td></tr>
+<tr class="memitem:ga77aa9d5b4d523080df8ff52209ca89db" id="r_ga77aa9d5b4d523080df8ff52209ca89db"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga77aa9d5b4d523080df8ff52209ca89db">fancyqlone::MatFilePtr</a> = std::unique_ptr&lt;<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a>, int (*)(<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *)&gt;</td></tr>
+<tr class="memdesc:ga77aa9d5b4d523080df8ff52209ca89db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Owning handle to a matio file. The file will be closed when the handle goes out of scope.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga78e7543166e64d103643d53a0fa09e33" id="r_ga78e7543166e64d103643d53a0fa09e33"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga78e7543166e64d103643d53a0fa09e33">fancyqlone::MatioOpenMode</a> { <a class="el" href="group__topic-util-matio.html#gga78e7543166e64d103643d53a0fa09e33a7a1a5f3e79fdc91edf2f5ead9d66abb4">fancyqlone::MatioOpenMode::Read</a>
+, <a class="el" href="group__topic-util-matio.html#gga78e7543166e64d103643d53a0fa09e33a1129c0e4d43f2d121652a7302712cff6">fancyqlone::MatioOpenMode::Write</a>
+ }</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga67fec1938cb44d6909f91584bcfbef9f" id="r_ga67fec1938cb44d6909f91584bcfbef9f"><td class="memItemLeft"><a class="el" href="group__topic-util-matio.html#ga77aa9d5b4d523080df8ff52209ca89db">MatFilePtr</a>&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga67fec1938cb44d6909f91584bcfbef9f">fancyqlone::open_mat</a> (const std::filesystem::path &amp;filename, <a class="el" href="group__topic-util-matio.html#ga78e7543166e64d103643d53a0fa09e33">MatioOpenMode</a> mode=<a class="el" href="group__topic-util-matio.html#gga78e7543166e64d103643d53a0fa09e33a7a1a5f3e79fdc91edf2f5ead9d66abb4">MatioOpenMode::Read</a>)</td></tr>
+<tr class="memdesc:ga67fec1938cb44d6909f91584bcfbef9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a .mat file for reading or writing.  <br /></td></tr>
+<tr class="memitem:ga1e524da3db4f81ddb5dd6c2856c88502" id="r_ga1e524da3db4f81ddb5dd6c2856c88502"><td class="memItemLeft"><a class="el" href="group__topic-util-matio.html#ga77aa9d5b4d523080df8ff52209ca89db">MatFilePtr</a>&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga1e524da3db4f81ddb5dd6c2856c88502">fancyqlone::create_mat</a> (const std::filesystem::path &amp;filename)</td></tr>
+<tr class="memdesc:ga1e524da3db4f81ddb5dd6c2856c88502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and open a new .mat file for writing.  <br /></td></tr>
+<tr class="memitem:ga235db8e974db22f3e8d4999cc1241290" id="r_ga235db8e974db22f3e8d4999cc1241290"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga235db8e974db22f3e8d4999cc1241290">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, float value)</td></tr>
+<tr class="memdesc:ga235db8e974db22f3e8d4999cc1241290"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga1bce8c813758dc0ee0c51123eefd6d4c" id="r_ga1bce8c813758dc0ee0c51123eefd6d4c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga1bce8c813758dc0ee0c51123eefd6d4c">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, double value)</td></tr>
+<tr class="memdesc:ga1bce8c813758dc0ee0c51123eefd6d4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga542f7cc9199e691651d57a174aa33594" id="r_ga542f7cc9199e691651d57a174aa33594"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga542f7cc9199e691651d57a174aa33594">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, short value)</td></tr>
+<tr class="memdesc:ga542f7cc9199e691651d57a174aa33594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga2ac9bf168fcccac6824f7b8778763245" id="r_ga2ac9bf168fcccac6824f7b8778763245"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga2ac9bf168fcccac6824f7b8778763245">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, int value)</td></tr>
+<tr class="memdesc:ga2ac9bf168fcccac6824f7b8778763245"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga48939416d19f9dd327178bbd804acd3c" id="r_ga48939416d19f9dd327178bbd804acd3c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga48939416d19f9dd327178bbd804acd3c">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, long value)</td></tr>
+<tr class="memdesc:ga48939416d19f9dd327178bbd804acd3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga5881d75c5a03b3164aeed167d97f76bb" id="r_ga5881d75c5a03b3164aeed167d97f76bb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga5881d75c5a03b3164aeed167d97f76bb">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, long long value)</td></tr>
+<tr class="memdesc:ga5881d75c5a03b3164aeed167d97f76bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga69f73a0e5992ecc2f75e5d51ed123b5a" id="r_ga69f73a0e5992ecc2f75e5d51ed123b5a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga69f73a0e5992ecc2f75e5d51ed123b5a">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, unsigned short value)</td></tr>
+<tr class="memdesc:ga69f73a0e5992ecc2f75e5d51ed123b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:gaae777ef5dd88755256300f62a2b13b87" id="r_gaae777ef5dd88755256300f62a2b13b87"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#gaae777ef5dd88755256300f62a2b13b87">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, unsigned int value)</td></tr>
+<tr class="memdesc:gaae777ef5dd88755256300f62a2b13b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga0e78abb707d5bb79ff4372518e5dbb0e" id="r_ga0e78abb707d5bb79ff4372518e5dbb0e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga0e78abb707d5bb79ff4372518e5dbb0e">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, unsigned long value)</td></tr>
+<tr class="memdesc:ga0e78abb707d5bb79ff4372518e5dbb0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga521a1cd6aa32db7307ab2012dbe7630e" id="r_ga521a1cd6aa32db7307ab2012dbe7630e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga521a1cd6aa32db7307ab2012dbe7630e">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, unsigned long long value)</td></tr>
+<tr class="memdesc:ga521a1cd6aa32db7307ab2012dbe7630e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga9a8038d19161c792385831550f51d930" id="r_ga9a8038d19161c792385831550f51d930"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga9a8038d19161c792385831550f51d930">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const double, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; data)</td></tr>
+<tr class="memdesc:ga9a8038d19161c792385831550f51d930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a matrix to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga62f5dd78db8722e1f0e6d30ef89bda67" id="r_ga62f5dd78db8722e1f0e6d30ef89bda67"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga62f5dd78db8722e1f0e6d30ef89bda67">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const float, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; data)</td></tr>
+<tr class="memdesc:ga62f5dd78db8722e1f0e6d30ef89bda67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a matrix to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga519092628d6a98809f002bb92eea8a4b" id="r_ga519092628d6a98809f002bb92eea8a4b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga519092628d6a98809f002bb92eea8a4b">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1View.html">batmat::matrix::View</a>&lt; const double, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; data)</td></tr>
+<tr class="memdesc:ga519092628d6a98809f002bb92eea8a4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a batch of matrices to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga240cf9568cd4aea51407b96896d9b62d" id="r_ga240cf9568cd4aea51407b96896d9b62d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga240cf9568cd4aea51407b96896d9b62d">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1View.html">batmat::matrix::View</a>&lt; const float, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; data)</td></tr>
+<tr class="memdesc:ga240cf9568cd4aea51407b96896d9b62d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a batch of matrices to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga011e2eba58eb8dc91e5f5ec6caed2479" id="r_ga011e2eba58eb8dc91e5f5ec6caed2479"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga011e2eba58eb8dc91e5f5ec6caed2479">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const float &gt; data)</td></tr>
+<tr class="memdesc:ga011e2eba58eb8dc91e5f5ec6caed2479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga45b17062fb35011a96f441288627e51e" id="r_ga45b17062fb35011a96f441288627e51e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga45b17062fb35011a96f441288627e51e">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const double &gt; data)</td></tr>
+<tr class="memdesc:ga45b17062fb35011a96f441288627e51e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga6c8ac2c7fcd37fa428cedc3ddae1c4e2" id="r_ga6c8ac2c7fcd37fa428cedc3ddae1c4e2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga6c8ac2c7fcd37fa428cedc3ddae1c4e2">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const unsigned short &gt; data)</td></tr>
+<tr class="memdesc:ga6c8ac2c7fcd37fa428cedc3ddae1c4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga12bdb39a1589821c798ac8a32f8f0e0a" id="r_ga12bdb39a1589821c798ac8a32f8f0e0a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga12bdb39a1589821c798ac8a32f8f0e0a">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const unsigned int &gt; data)</td></tr>
+<tr class="memdesc:ga12bdb39a1589821c798ac8a32f8f0e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga8d7930ee44dba2ef0e087c40ab8fb923" id="r_ga8d7930ee44dba2ef0e087c40ab8fb923"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga8d7930ee44dba2ef0e087c40ab8fb923">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const unsigned long &gt; data)</td></tr>
+<tr class="memdesc:ga8d7930ee44dba2ef0e087c40ab8fb923"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga7f3f30db797283a4ee51ffafe255b21a" id="r_ga7f3f30db797283a4ee51ffafe255b21a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga7f3f30db797283a4ee51ffafe255b21a">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const unsigned long long &gt; data)</td></tr>
+<tr class="memdesc:ga7f3f30db797283a4ee51ffafe255b21a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga96ceb4c9787593db18b0d6aab5ff7287" id="r_ga96ceb4c9787593db18b0d6aab5ff7287"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga96ceb4c9787593db18b0d6aab5ff7287">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const short &gt; data)</td></tr>
+<tr class="memdesc:ga96ceb4c9787593db18b0d6aab5ff7287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga8b7b93f4fe4cab45686b30ece43f783a" id="r_ga8b7b93f4fe4cab45686b30ece43f783a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga8b7b93f4fe4cab45686b30ece43f783a">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const int &gt; data)</td></tr>
+<tr class="memdesc:ga8b7b93f4fe4cab45686b30ece43f783a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:gaf4b2434852e3878c5f5861dd6de10848" id="r_gaf4b2434852e3878c5f5861dd6de10848"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#gaf4b2434852e3878c5f5861dd6de10848">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const long &gt; data)</td></tr>
+<tr class="memdesc:gaf4b2434852e3878c5f5861dd6de10848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:gadece8c937832409489f87c43e51b6834" id="r_gadece8c937832409489f87c43e51b6834"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#gadece8c937832409489f87c43e51b6834">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const long long &gt; data)</td></tr>
+<tr class="memdesc:gadece8c937832409489f87c43e51b6834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga173c33213fca9d73dd78980979535903" id="r_ga173c33213fca9d73dd78980979535903"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga173c33213fca9d73dd78980979535903">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, const <a class="el" href="structfancyqlone_1_1SparseMatrix.html">SparseMatrix</a> &amp;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#aa93224d87d900a2dacc032305840169b">matrix</a>)</td></tr>
+<tr class="memdesc:ga173c33213fca9d73dd78980979535903"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a sparse matrix to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga3a92335133126b546a25f3f379f8dfe1" id="r_ga3a92335133126b546a25f3f379f8dfe1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga3a92335133126b546a25f3f379f8dfe1">fancyqlone::add_to_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, const <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a> &amp;ocp)</td></tr>
+<tr class="memdesc:ga3a92335133126b546a25f3f379f8dfe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the data from a <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html" title="Storage for a linear-quadratic OCP of the form.">LinearOCPStorage</a> to an open .mat file.  <br /></td></tr>
+<tr class="memitem:gad32c54affae4cfeb7fc996ab3deab14a" id="r_gad32c54affae4cfeb7fc996ab3deab14a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#gad32c54affae4cfeb7fc996ab3deab14a">fancyqlone::read_from_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a> &amp;ocp)</td></tr>
+<tr class="memdesc:gad32c54affae4cfeb7fc996ab3deab14a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html" title="Storage for a linear-quadratic OCP of the form.">LinearOCPStorage</a> from a .mat file.  <br /></td></tr>
+<tr class="memitem:ga1a6f1d1a9acd5ebcdbb8763378b87c73" id="r_ga1a6f1d1a9acd5ebcdbb8763378b87c73"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga1a6f1d1a9acd5ebcdbb8763378b87c73">fancyqlone::read_from_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::vector&lt; float &gt; &amp;data)</td></tr>
+<tr class="memdesc:ga1a6f1d1a9acd5ebcdbb8763378b87c73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a vector from an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga46d71bd550f05e2b2db2f47041f7e978" id="r_ga46d71bd550f05e2b2db2f47041f7e978"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga46d71bd550f05e2b2db2f47041f7e978">fancyqlone::read_from_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::vector&lt; double &gt; &amp;data)</td></tr>
+<tr class="memdesc:ga46d71bd550f05e2b2db2f47041f7e978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a vector from an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga55a7f52b546528d22f6ac869a61776ed" id="r_ga55a7f52b546528d22f6ac869a61776ed"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga55a7f52b546528d22f6ac869a61776ed">fancyqlone::read_from_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; float &gt; data)</td></tr>
+<tr class="memdesc:ga55a7f52b546528d22f6ac869a61776ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a vector from an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga2f614289bce89916b1d82d64abdc11cd" id="r_ga2f614289bce89916b1d82d64abdc11cd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga2f614289bce89916b1d82d64abdc11cd">fancyqlone::read_from_mat</a> (<a class="el" href="group__topic-util-matio.html#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; double &gt; data)</td></tr>
+<tr class="memdesc:ga2f614289bce89916b1d82d64abdc11cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a vector from an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga24ad7736c10109c98fe49ab658f5c12a" id="r_ga24ad7736c10109c98fe49ab658f5c12a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-util-matio.html#ga24ad7736c10109c98fe49ab658f5c12a">fancyqlone::ocp_dump_mat</a> (const std::filesystem::path &amp;filename, const <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a> &amp;ocp)</td></tr>
+<tr class="memdesc:ga24ad7736c10109c98fe49ab658f5c12a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dump the data from a <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html" title="Storage for a linear-quadratic OCP of the form.">LinearOCPStorage</a> to a new .mat file.  <br /></td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_26072f99ed12771b3d14c916219456d2.html">fancyqlone</a></li><li class="navelem"><a href="dir_ca4a4af1f17dfe7661916ac70bf0c58e.html">include</a></li><li class="navelem"><a href="dir_69c93eca2ce73f8839aab0c78a691b58.html">fancyqlone</a></li><li class="navelem"><a href="matio_8hpp.html">matio.hpp</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

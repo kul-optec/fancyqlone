@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="group__topic-ocp-formulations" kind="group">
+    <compoundname>topic-ocp-formulations</compoundname>
+    <title>Optimal control problem formulations</title>
+    <innerfile refid="conversion_8hpp">conversion.hpp</innerfile>
+    <innerfile refid="cyqlone-storage_8hpp">cyqlone-storage.hpp</innerfile>
+    <innerfile refid="ocp_8hpp">ocp.hpp</innerfile>
+    <innerclass refid="structfancyqlone_1_1LinearOCPSparseQP" prot="public">fancyqlone::LinearOCPSparseQP</innerclass>
+    <innerclass refid="structfancyqlone_1_1CyqloneStorage" prot="public">fancyqlone::CyqloneStorage</innerclass>
+    <innerclass refid="structfancyqlone_1_1OCPDim" prot="public">fancyqlone::OCPDim</innerclass>
+    <innerclass refid="structfancyqlone_1_1LinearOCPStorage" prot="public">fancyqlone::LinearOCPStorage</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__topic-ocp-formulations_1gaec2ffbb855f9e5dcfc01dcf321ce51cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::reference_to_gradient</definition>
+        <argsstring>(const LinearOCPStorage &amp;ocp, std::span&lt; const real_t &gt; ref, std::span&lt; real_t &gt; qr)</argsstring>
+        <name>reference_to_gradient</name>
+        <qualifiedname>fancyqlone::reference_to_gradient</qualifiedname>
+        <param>
+          <type>const LinearOCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="example_8cpp_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>ref</declname>
+        </param>
+        <param>
+          <type>std::span&lt; <ref refid="example_8cpp_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+          <declname>qr</declname>
+        </param>
+        <briefdescription>
+<para>Simply computes the gradient of the quadratic cost <formula id="0">$ J(x, u) = \sum_{j=1}^{N-1} \ell_j(x^j, u^j) + \ell_N(x^N) $</formula>, with  <formula id="1">$ \ell_j(x, u) = \tfrac12 \left\| \begin{pmatrix} x - x^j_\text{ref}
+\\ u - u^j_\text{ref} \end{pmatrix} \right\|_{H_j}^2 $</formula>, with the Hessian <formula id="2">$ H_j = \begin{pmatrix} Q_j &amp; S_j^\top \\ S_j &amp; R_j \end{pmatrix} $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores <formula id="3">$ \nabla J(0, 0) $</formula> to <computeroutput>qr</computeroutput>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/src/conversion.cpp" line="9" column="6" bodyfile="src/fancyqlone/src/conversion.cpp" bodystart="9" bodyend="35" declfile="src/fancyqlone/include/fancyqlone/conversion.hpp" declline="53" declcolumn="6"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ac9ffaec3d88ad5fe53e953c4a97fcc29" compoundref="ocp_8hpp" startline="66" endline="76">fancyqlone::LinearOCPStorage::H</references>
+        <references refid="group__linalg__blas__ll_1gae4c5b1838ba9f871ca10eb61593522af">guanaqo::blas::xgemv</references>
+        <references refid="group__linalg__blas__ll_1ga7f4ee2a98766873c31729ff571896337">guanaqo::blas::xgemv_batch_strided</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a55df8252720b2ca53506533388b9c4ed" compoundref="centroidal-quadruped_8cpp" startline="118" endline="220">fancyqlone::qpalm::problems::centroidal_quadruped</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+        <referencedby refid="namespacefancyqlone_1a5de3a2c9e52311f5f204ab358fe7e9d0" compoundref="conversion_8cpp" startline="37" endline="42">fancyqlone::reference_to_gradient</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a28c6f6b2da0b1720ba707c5351e1f5f7" compoundref="src_2example-problems_2src_2spring-mass_8cpp" startline="17" endline="161">fancyqlone::qpalm::problems::spring_mass</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__topic-ocp-formulations_1ga1c6c52a34e6c237829484a749903a430" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>LinearOCPStorage</type>
+        <definition>LinearOCPStorage fancyqlone::generate_random_ocp</definition>
+        <argsstring>(OCPDim dim, uint_fast32_t seed=0)</argsstring>
+        <name>generate_random_ocp</name>
+        <qualifiedname>fancyqlone::generate_random_ocp</qualifiedname>
+        <param>
+          <type>OCPDim</type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type>uint_fast32_t</type>
+          <declname>seed</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Generates a random linear OCP with the given dimensions and random seed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/random-ocp.hpp" line="11" column="25" bodyfile="src/fancyqlone/include/fancyqlone/random-ocp.hpp" bodystart="11" bodyend="95"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaea931c3de39b21c1adc2adda6927391" compoundref="ocp_8hpp" startline="129" endline="133">fancyqlone::LinearOCPStorage::A</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a069e76a6c76bd62ab2eb0c5546f74897" compoundref="ocp_8hpp" startline="134" endline="138">fancyqlone::LinearOCPStorage::B</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" compoundref="ocp_8hpp" startline="253" endline="261">fancyqlone::LinearOCPStorage::b</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" compoundref="ocp_8hpp" startline="285" endline="294">fancyqlone::LinearOCPStorage::b_max</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" compoundref="ocp_8hpp" startline="269" endline="277">fancyqlone::LinearOCPStorage::b_min</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ad991b26c207c150cf4117e3dea673b6d" compoundref="ocp_8hpp" startline="108" endline="112">fancyqlone::LinearOCPStorage::C</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a755b42ad7574b683175254de50793aa0" compoundref="ocp_8hpp" startline="113" endline="117">fancyqlone::LinearOCPStorage::D</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structguanaqo_1_1MatrixView_1a9b5427306b0f3aee2976d1269db427ec">guanaqo::MatrixView&lt; class T, class I, class S, StorageOrder O &gt;::generate</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ac9ffaec3d88ad5fe53e953c4a97fcc29" compoundref="ocp_8hpp" startline="66" endline="76">fancyqlone::LinearOCPStorage::H</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" compoundref="ocp_8hpp" startline="77" endline="81">fancyqlone::LinearOCPStorage::Q</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ab03b4cc3577893f2c19db9fd2901ebab" compoundref="ocp_8hpp" startline="242" endline="246">fancyqlone::LinearOCPStorage::q</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ab0b91b1dac835a47452d45c0d2d9f1ee" compoundref="ocp_8hpp" startline="82" endline="86">fancyqlone::LinearOCPStorage::R</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ae137ef05e092ee1a8b81e155c520c429" compoundref="ocp_8hpp" startline="247" endline="251">fancyqlone::LinearOCPStorage::r</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a46055cc9e375ddd69ea173667928d52a" compoundref="ocp_8hpp" startline="87" endline="91">fancyqlone::LinearOCPStorage::S</references>
+      </memberdef>
+      <memberdef kind="function" id="group__topic-ocp-formulations_1ga2541b94a0d444d5651c330a53343a7df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>LinearOCPStorage</type>
+        <definition>LinearOCPStorage fancyqlone::generate_random_ocp_input_constr</definition>
+        <argsstring>(OCPDim dim, uint_fast32_t seed=0)</argsstring>
+        <name>generate_random_ocp_input_constr</name>
+        <qualifiedname>fancyqlone::generate_random_ocp_input_constr</qualifiedname>
+        <param>
+          <type>OCPDim</type>
+          <declname>dim</declname>
+        </param>
+        <param>
+          <type>uint_fast32_t</type>
+          <declname>seed</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Generates a random linear OCP with the given dimensions and random seed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/random-ocp.hpp" line="98" column="25" bodyfile="src/fancyqlone/include/fancyqlone/random-ocp.hpp" bodystart="98" bodyend="183"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaea931c3de39b21c1adc2adda6927391" compoundref="ocp_8hpp" startline="129" endline="133">fancyqlone::LinearOCPStorage::A</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a069e76a6c76bd62ab2eb0c5546f74897" compoundref="ocp_8hpp" startline="134" endline="138">fancyqlone::LinearOCPStorage::B</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" compoundref="ocp_8hpp" startline="253" endline="261">fancyqlone::LinearOCPStorage::b</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" compoundref="ocp_8hpp" startline="285" endline="294">fancyqlone::LinearOCPStorage::b_max</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" compoundref="ocp_8hpp" startline="269" endline="277">fancyqlone::LinearOCPStorage::b_min</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ad991b26c207c150cf4117e3dea673b6d" compoundref="ocp_8hpp" startline="108" endline="112">fancyqlone::LinearOCPStorage::C</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a755b42ad7574b683175254de50793aa0" compoundref="ocp_8hpp" startline="113" endline="117">fancyqlone::LinearOCPStorage::D</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="structguanaqo_1_1MatrixView_1a9b5427306b0f3aee2976d1269db427ec">guanaqo::MatrixView&lt; class T, class I, class S, StorageOrder O &gt;::generate</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ac9ffaec3d88ad5fe53e953c4a97fcc29" compoundref="ocp_8hpp" startline="66" endline="76">fancyqlone::LinearOCPStorage::H</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" compoundref="ocp_8hpp" startline="77" endline="81">fancyqlone::LinearOCPStorage::Q</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ab03b4cc3577893f2c19db9fd2901ebab" compoundref="ocp_8hpp" startline="242" endline="246">fancyqlone::LinearOCPStorage::q</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ab0b91b1dac835a47452d45c0d2d9f1ee" compoundref="ocp_8hpp" startline="82" endline="86">fancyqlone::LinearOCPStorage::R</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ae137ef05e092ee1a8b81e155c520c429" compoundref="ocp_8hpp" startline="247" endline="251">fancyqlone::LinearOCPStorage::r</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a46055cc9e375ddd69ea173667928d52a" compoundref="ocp_8hpp" startline="87" endline="91">fancyqlone::LinearOCPStorage::S</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Data structures for different formulations of optimal control problems. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

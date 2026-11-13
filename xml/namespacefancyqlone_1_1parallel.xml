@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacefancyqlone_1_1parallel" kind="namespace" language="C++">
+    <compoundname>fancyqlone::parallel</compoundname>
+    <innerclass refid="structfancyqlone_1_1parallel_1_1Context" prot="public">fancyqlone::parallel::Context</innerclass>
+    <innerclass refid="structfancyqlone_1_1parallel_1_1FanContext" prot="public">fancyqlone::parallel::FanContext</innerclass>
+    <innerclass refid="structfancyqlone_1_1parallel_1_1SharedContext" prot="public">fancyqlone::parallel::SharedContext</innerclass>
+    <innerclass refid="structfancyqlone_1_1parallel_1_1FanSharedContext" prot="public">fancyqlone::parallel::FanSharedContext</innerclass>
+    <innerclass refid="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan" prot="public">fancyqlone::parallel::arrival_token_typed_fan</innerclass>
+    <innerclass refid="structfancyqlone_1_1parallel_1_1arrival__token__fan" prot="public">fancyqlone::parallel::arrival_token_fan</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="23" column="1"/>
+  </compounddef>
+</doxygen>

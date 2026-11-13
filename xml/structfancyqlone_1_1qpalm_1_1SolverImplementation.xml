@@ -1,0 +1,785 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1SolverImplementation" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::SolverImplementation</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class Backend</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a34b5e2426ebd0d71d21f16887df4bf1d" prot="public" static="no">
+        <type>Backend</type>
+        <definition>using fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::backend_type = Backend</definition>
+        <argsstring></argsstring>
+        <name>backend_type</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::backend_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="22" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4a95f2b09837056ef83acdd140fd6df7" prot="public" static="no">
+        <type>typename backend_type::active_set_t</type>
+        <definition>using fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::active_set_t = typename backend_type::active_set_t</definition>
+        <argsstring></argsstring>
+        <name>active_set_t</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::active_set_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="25" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" prot="public" static="no">
+        <type>typename backend_type::ineq_constr_vec_t</type>
+        <definition>using fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ineq_vec_t = typename backend_type::ineq_constr_vec_t</definition>
+        <argsstring></argsstring>
+        <name>ineq_vec_t</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::ineq_vec_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="26" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae88f822b56c365593c1d19fe2d90021d" prot="public" static="no">
+        <type>typename backend_type::eq_constr_vec_t</type>
+        <definition>using fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::eq_vec_t = typename backend_type::eq_constr_vec_t</definition>
+        <argsstring></argsstring>
+        <name>eq_vec_t</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::eq_vec_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="27" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" prot="public" static="no">
+        <type>typename backend_type::var_vec_t</type>
+        <definition>using fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::var_vec_t = typename backend_type::var_vec_t</definition>
+        <argsstring></argsstring>
+        <name>var_vec_t</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::var_vec_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="28" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a711e127d98e93c34393d3759e1e533ad" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1LineSearch" kindref="compound">LineSearch</ref>&lt; <ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref> &gt;</type>
+        <definition>LineSearch&lt;ineq_vec_t&gt; fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::linesearch</definition>
+        <argsstring></argsstring>
+        <name>linesearch</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::linesearch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="29" column="16" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a0aca234b285d2762519a5edda3d13fa5" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4a95f2b09837056ef83acdd140fd6df7" kindref="member">active_set_t</ref></type>
+        <definition>active_set_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::active_set</definition>
+        <argsstring></argsstring>
+        <name>active_set</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::active_set</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="94" column="18" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="94" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a575132310c956596c9ae99e466845d63" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4a95f2b09837056ef83acdd140fd6df7" kindref="member">active_set_t</ref></type>
+        <definition>active_set_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::active_set_old</definition>
+        <argsstring></argsstring>
+        <name>active_set_old</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::active_set_old</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="94" column="29" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="94" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8aef1639357eac6aba3aa914bf65e08e" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref></type>
+        <definition>ineq_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Σ</definition>
+        <argsstring></argsstring>
+        <name>Σ</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::Σ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="95" column="16" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="95" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4bc47a06e0eba099513ff65f253b80ee" compoundref="solver_8tpp" startline="31" endline="43">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::initialize_penalty_y</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9b80dc8ea42a8aae326ba3492f3cf05d" compoundref="solver_8tpp" startline="45" endline="75">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_y</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a61f0e5f027ccfb2c1796b123cd24a9e8" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref></type>
+        <definition>ineq_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="95" column="19" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="95" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1abc178d84bafcd83d93bab9b92860a0b0" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref></type>
+        <definition>ineq_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ŷ</definition>
+        <argsstring></argsstring>
+        <name>ŷ</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::ŷ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="95" column="21" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="95" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1aad045f72af7be16f4da2f5177cd732a8" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref></type>
+        <definition>ineq_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::e</definition>
+        <argsstring></argsstring>
+        <name>e</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::e</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="95" column="24" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="95" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4bc47a06e0eba099513ff65f253b80ee" compoundref="solver_8tpp" startline="31" endline="43">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::initialize_penalty_y</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9b80dc8ea42a8aae326ba3492f3cf05d" compoundref="solver_8tpp" startline="45" endline="75">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_y</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9ac432d4e2e37428629d27dc76e1f70d" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref></type>
+        <definition>ineq_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::e_old</definition>
+        <argsstring></argsstring>
+        <name>e_old</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::e_old</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="95" column="26" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="95" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9b80dc8ea42a8aae326ba3492f3cf05d" compoundref="solver_8tpp" startline="45" endline="75">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_y</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1abd7e00c824e4c9876004aa9dd767989d" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref></type>
+        <definition>ineq_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Ax</definition>
+        <argsstring></argsstring>
+        <name>Ax</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::Ax</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="95" column="32" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="95" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1aa7f5dfb7d99259e4a1b366f054b876fc" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref></type>
+        <definition>ineq_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Ad</definition>
+        <argsstring></argsstring>
+        <name>Ad</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::Ad</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="95" column="35" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="95" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6280ab655c0cdc0fd6d8ab578e8c8688" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae88f822b56c365593c1d19fe2d90021d" kindref="member">eq_vec_t</ref></type>
+        <definition>eq_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Mxb</definition>
+        <argsstring></argsstring>
+        <name>Mxb</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::Mxb</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="96" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="96" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a66fc134949ddfb8f36d8274be3408c12" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae88f822b56c365593c1d19fe2d90021d" kindref="member">eq_vec_t</ref></type>
+        <definition>eq_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Δλ</definition>
+        <argsstring></argsstring>
+        <name>Δλ</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::Δλ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="96" column="18" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="96" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a594285677e62ced0ac264fabfe29db2b" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae88f822b56c365593c1d19fe2d90021d" kindref="member">eq_vec_t</ref></type>
+        <definition>eq_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::λ</definition>
+        <argsstring></argsstring>
+        <name>λ</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::λ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="96" column="23" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="96" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a3b1c84a9ac0a619fbdbe16df9a411bb0" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" kindref="member">var_vec_t</ref></type>
+        <definition>var_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::x</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="97" column="15" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="97" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6d885f039b39b7b3c3da97286b1d273b" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" kindref="member">var_vec_t</ref></type>
+        <definition>var_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::grad</definition>
+        <argsstring></argsstring>
+        <name>grad</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::grad</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="97" column="17" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="97" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae473a1ab441ad36ec754e8905b1148c2" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" kindref="member">var_vec_t</ref></type>
+        <definition>var_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Mᵀλ</definition>
+        <argsstring></argsstring>
+        <name>Mᵀλ</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::Mᵀλ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="97" column="22" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="97" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ab152359c8dbce7fb78a69cc13f6c4be7" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" kindref="member">var_vec_t</ref></type>
+        <definition>var_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Aᵀŷ</definition>
+        <argsstring></argsstring>
+        <name>Aᵀŷ</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::Aᵀŷ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="97" column="29" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="97" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a5a60a140d77dd97dea362f731057a0ab" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" kindref="member">var_vec_t</ref></type>
+        <definition>var_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::x_outer</definition>
+        <argsstring></argsstring>
+        <name>x_outer</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::x_outer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="97" column="36" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="97" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1af2d3c35e6e135c484d812706acc8c326" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" kindref="member">var_vec_t</ref></type>
+        <definition>var_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::MᵀΔλ</definition>
+        <argsstring></argsstring>
+        <name>MᵀΔλ</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::MᵀΔλ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="97" column="44" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="97" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a94afb10137a463487173349dd55abba9" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" kindref="member">var_vec_t</ref></type>
+        <definition>var_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::d</definition>
+        <argsstring></argsstring>
+        <name>d</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::d</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="97" column="53" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="97" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ad791339bebfe31e3939943a04c07ec99" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" kindref="member">var_vec_t</ref></type>
+        <definition>var_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ξ</definition>
+        <argsstring></argsstring>
+        <name>ξ</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::ξ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="97" column="55" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="97" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6d47028932e9559b54719f919cf77fa8" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" kindref="member">var_vec_t</ref></type>
+        <definition>var_vec_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::grad_add</definition>
+        <argsstring></argsstring>
+        <name>grad_add</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::grad_add</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="97" column="58" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="97" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" compoundref="solver_8tpp" startline="82" endline="88">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4bc47a06e0eba099513ff65f253b80ee" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::initialize_penalty_y</definition>
+        <argsstring>(Backend::Context &amp;ctx, backend_type &amp;backend, real_t f0, const ineq_vec_t &amp;e0, ineq_vec_t &amp;Σ, const Settings &amp;settings)</argsstring>
+        <name>initialize_penalty_y</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::initialize_penalty_y</qualifiedname>
+        <param>
+          <type>Backend::Context &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a34b5e2426ebd0d71d21f16887df4bf1d" kindref="member">backend_type</ref> &amp;</type>
+          <declname>backend</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+          <declname>f0</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref> &amp;</type>
+          <declname>e0</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref> &amp;</type>
+          <declname>Σ</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1Settings" kindref="compound">Settings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="31" column="17" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="31" bodyend="43"/>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8aef1639357eac6aba3aa914bf65e08e" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Σ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1aad045f72af7be16f4da2f5177cd732a8" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::e</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a08b494958c16a3abc0562cdbb19dd8a4" compoundref="settings_8hpp" startline="28">fancyqlone::qpalm::Settings::initial_penalty_y</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a7f22bff5c25b35e7a5213158a2dc889a" compoundref="settings_8hpp" startline="29">fancyqlone::qpalm::Settings::scale_initial_penalty_y</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9b80dc8ea42a8aae326ba3492f3cf05d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>static index_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_y</definition>
+        <argsstring>(Backend::Context &amp;ctx, backend_type &amp;backend, ineq_vec_t &amp;Σ, const ineq_vec_t &amp;e, const ineq_vec_t &amp;e_old, const Settings &amp;settings)</argsstring>
+        <name>update_penalty_y</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::update_penalty_y</qualifiedname>
+        <param>
+          <type>Backend::Context &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a34b5e2426ebd0d71d21f16887df4bf1d" kindref="member">backend_type</ref> &amp;</type>
+          <declname>backend</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref> &amp;</type>
+          <declname>Σ</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" kindref="member">ineq_vec_t</ref> &amp;</type>
+          <declname>e_old</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1Settings" kindref="compound">Settings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="45" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="45" bodyend="75"/>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a975bea37b9700d3183e6f83d4a17ec13" compoundref="settings_8hpp" startline="25">fancyqlone::qpalm::Settings::Δy</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a87adae90d0babbb1ee900563b5ecbd6b" compoundref="settings_8hpp" startline="26">fancyqlone::qpalm::Settings::Δy_always</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8aef1639357eac6aba3aa914bf65e08e" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Σ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a98b8cf1c8cb47fb1b9c5cafe937bb394" compoundref="settings_8hpp" startline="24">fancyqlone::qpalm::Settings::θ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1aad045f72af7be16f4da2f5177cd732a8" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::e</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9ac432d4e2e37428629d27dc76e1f70d" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::e_old</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a5f0f4bf881558472117ec74ed299d564" compoundref="settings_8hpp" startline="27">fancyqlone::qpalm::Settings::max_penalty_y</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a30681bb7f9314cb69eb0cf0e70c7614b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>static real_t fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_x</definition>
+        <argsstring>(real_t S, const Settings &amp;settings)</argsstring>
+        <name>update_penalty_x</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::update_penalty_x</qualifiedname>
+        <param>
+          <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+          <declname>S</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1Settings" kindref="compound">Settings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="77" column="19" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="77" bodyend="80"/>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1aa45e62c9fb500f2cd4ef9acf30164f8b" compoundref="settings_8hpp" startline="30">fancyqlone::qpalm::Settings::Δx</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1ac3bd70c98c96d5b9ea4b011bc5f8505b" compoundref="settings_8hpp" startline="31">fancyqlone::qpalm::Settings::max_penalty_x</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ensure_storage</definition>
+        <argsstring>(backend_type &amp;backend)</argsstring>
+        <name>ensure_storage</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::ensure_storage</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a34b5e2426ebd0d71d21f16887df4bf1d" kindref="member">backend_type</ref> &amp;</type>
+          <declname>backend</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="82" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="82" bodyend="88"/>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1abc178d84bafcd83d93bab9b92860a0b0" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ŷ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a66fc134949ddfb8f36d8274be3408c12" compoundref="solver_8tpp" startline="96">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Δλ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8aef1639357eac6aba3aa914bf65e08e" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Σ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a594285677e62ced0ac264fabfe29db2b" compoundref="solver_8tpp" startline="96">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::λ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ad791339bebfe31e3939943a04c07ec99" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ξ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ab152359c8dbce7fb78a69cc13f6c4be7" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Aᵀŷ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a0aca234b285d2762519a5edda3d13fa5" compoundref="solver_8tpp" startline="94">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::active_set</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a575132310c956596c9ae99e466845d63" compoundref="solver_8tpp" startline="94">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::active_set_old</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1aa7f5dfb7d99259e4a1b366f054b876fc" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Ad</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1abd7e00c824e4c9876004aa9dd767989d" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Ax</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a94afb10137a463487173349dd55abba9" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::d</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1aad045f72af7be16f4da2f5177cd732a8" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::e</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9ac432d4e2e37428629d27dc76e1f70d" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::e_old</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6d885f039b39b7b3c3da97286b1d273b" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::grad</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6d47028932e9559b54719f919cf77fa8" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::grad_add</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1af2d3c35e6e135c484d812706acc8c326" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::MᵀΔλ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae473a1ab441ad36ec754e8905b1148c2" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Mᵀλ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6280ab655c0cdc0fd6d8ab578e8c8688" compoundref="solver_8tpp" startline="96">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Mxb</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a3b1c84a9ac0a619fbdbe16df9a411bb0" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::x</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a5a60a140d77dd97dea362f731057a0ab" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::x_outer</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a61f0e5f027ccfb2c1796b123cd24a9e8" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::y</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" kindref="member">SolverStatus</ref></type>
+        <definition>SolverStatus fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</definition>
+        <argsstring>(Backend::Context &amp;ctx, backend_type &amp;backend, const Settings &amp;settings, guanaqo::AtomicStopSignal &amp;stop_signal, SolverStats &amp;stats)</argsstring>
+        <name>do_main_loop</name>
+        <qualifiedname>fancyqlone::qpalm::SolverImplementation::do_main_loop</qualifiedname>
+        <param>
+          <type>Backend::Context &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a34b5e2426ebd0d71d21f16887df4bf1d" kindref="member">backend_type</ref> &amp;</type>
+          <declname>backend</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1Settings" kindref="compound">Settings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <param>
+          <type><ref refid="classguanaqo_1_1AtomicStopSignal" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::AtomicStopSignal</ref> &amp;</type>
+          <declname>stop_signal</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1SolverStats" kindref="compound">SolverStats</ref> &amp;</type>
+          <declname>stats</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="90" column="18" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="125" bodyend="501"/>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1abc178d84bafcd83d93bab9b92860a0b0" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ŷ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a66fc134949ddfb8f36d8274be3408c12" compoundref="solver_8tpp" startline="96">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Δλ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8aef1639357eac6aba3aa914bf65e08e" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Σ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a594285677e62ced0ac264fabfe29db2b" compoundref="solver_8tpp" startline="96">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::λ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ad791339bebfe31e3939943a04c07ec99" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::ξ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a2069f08884d20a78d8b66bf95b3561af" compoundref="settings_8hpp" startline="23">fancyqlone::qpalm::Settings::ρ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ab152359c8dbce7fb78a69cc13f6c4be7" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Aᵀŷ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a0aca234b285d2762519a5edda3d13fa5" compoundref="solver_8tpp" startline="94">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::active_set</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a570f329f65f40d8462c3d46cb0a7f1b6" compoundref="solver_8hpp" startline="30">fancyqlone::qpalm::SolverTimings::active_set_change</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a575132310c956596c9ae99e466845d63" compoundref="solver_8tpp" startline="94">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::active_set_old</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1aa7f5dfb7d99259e4a1b366f054b876fc" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Ad</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1abd7e00c824e4c9876004aa9dd767989d" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Ax</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1aee79e3c791cc4f3ebb3ccda8372dc274" compoundref="solver_8hpp" startline="35">fancyqlone::qpalm::SolverTimings::backend</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a1653b97c4af6f88fd517bae229222d5c" compoundref="solver_8hpp" startline="33">fancyqlone::qpalm::SolverTimings::boost_regularization</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a1e09cea3694db6fc5d651b9bda0cc725" compoundref="detailed-stats_8hpp" startline="11">fancyqlone::qpalm::DetailedStats::Busy</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ad8a942ef2b04672adfafef0ad817a407" compoundref="status_8hpp" startline="13">fancyqlone::qpalm::Busy</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a2a2d0f9274e02f2638d78d1c8d7090ba" compoundref="detailed-stats_8hpp" startline="12">fancyqlone::qpalm::DetailedStats::Converged</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ada5418b1eb4e80d05f2c1c7c4fa1b6ec" compoundref="status_8hpp" startline="14">fancyqlone::qpalm::Converged</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a94afb10137a463487173349dd55abba9" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::d</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverStats_1a32640faecbf9e9a79360fa093a39f297" compoundref="solver_8hpp" startline="49">fancyqlone::qpalm::SolverStats::detail</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a474a969a9138f946e09efebc74cdbd7d" compoundref="settings_8hpp" startline="44">fancyqlone::qpalm::Settings::detailed_stats</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a4a9761232818f40aa28a3a6390bce311" compoundref="settings_8hpp" startline="20">fancyqlone::qpalm::Settings::dual_tolerance</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1aad045f72af7be16f4da2f5177cd732a8" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::e</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9ac432d4e2e37428629d27dc76e1f70d" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::e_old</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a8cac2f86a77e08ccf9823453941e3f92" compoundref="settings_8hpp" startline="21">fancyqlone::qpalm::Settings::eq_constr_tolerance</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a0ff02ea9e82a89d4b223bb9d03d1772a" compoundref="detailed-stats_8hpp" startline="14">fancyqlone::qpalm::DetailedStats::Fail</references>
+        <references refid="group__io_1gaad039ddbace5b0948cececedd1a7973c">guanaqo::float_to_str</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a02fdf7d1873feb740ee970ae58691d0e" compoundref="settings_8hpp" startline="43">fancyqlone::qpalm::Settings::force_linesearch_if_dir_deriv_pos</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a8f7dc2a7cedb7bf71e2b006d8ff12e69" compoundref="settings_8hpp" startline="42">fancyqlone::qpalm::Settings::force_linesearch_if_no_set_change</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6d885f039b39b7b3c3da97286b1d273b" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::grad</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6d47028932e9559b54719f919cf77fa8" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::grad_add</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1af1ae9b0797c33283c94e38ecf0eb3f27" compoundref="settings_8hpp" startline="22">fancyqlone::qpalm::Settings::initial_inner_tolerance</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1abb6756b9a51cba37b191a2424399c1b4" compoundref="settings_8hpp" startline="33">fancyqlone::qpalm::Settings::initial_penalty_x</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4bc47a06e0eba099513ff65f253b80ee" compoundref="solver_8tpp" startline="31" endline="43">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::initialize_penalty_y</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverStats_1acd1ab548ef92540155f745884a95b56e" compoundref="solver_8hpp" startline="43">fancyqlone::qpalm::SolverStats::inner_iter</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a12c37c4278b8c0db6c2f65052569cd80" compoundref="status_8hpp" startline="19">fancyqlone::qpalm::Interrupted</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1adef8f9e4303820edf1a9ea9f9bcbd242" compoundref="solver_8hpp" startline="22">fancyqlone::qpalm::SolverTimings::line_search</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a711e127d98e93c34393d3759e1e533ad" compoundref="solver_8tpp" startline="29">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::linesearch</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1af2d3c35e6e135c484d812706acc8c326" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::MᵀΔλ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae473a1ab441ad36ec754e8905b1148c2" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Mᵀλ</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1ad095aa1ab8c1698bdc197be1c6935d3c" compoundref="solver_8hpp" startline="27">fancyqlone::qpalm::SolverTimings::mat_vec_A</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1afa360ccb3f64be02feb26afc7d707e2f" compoundref="solver_8hpp" startline="28">fancyqlone::qpalm::SolverTimings::mat_vec_AT</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a6a837b0ff15ecc6da5554c08edd5826b" compoundref="solver_8hpp" startline="25">fancyqlone::qpalm::SolverTimings::mat_vec_M</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a67dd079c50a37b031655d13fc0c02e9f" compoundref="solver_8hpp" startline="26">fancyqlone::qpalm::SolverTimings::mat_vec_MT</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a0288d608b2f61578facd60cbd66293d4" compoundref="solver_8hpp" startline="29">fancyqlone::qpalm::SolverTimings::mat_vec_Q</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a1a5f9c090e0240ca0f99990463c713c8" compoundref="settings_8hpp" startline="15">fancyqlone::qpalm::Settings::max_inner_iter</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1aecf5f7c747dac641b564e7faf42edd71" compoundref="settings_8hpp" startline="40">fancyqlone::qpalm::Settings::max_no_changes_active_set</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a503e9eb8d840a68f37b16dc206ffd440" compoundref="settings_8hpp" startline="14">fancyqlone::qpalm::Settings::max_outer_iter</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverStats_1af6d72c672f946c8ec4b0f57ee2f0331d" compoundref="solver_8hpp" startline="47">fancyqlone::qpalm::SolverStats::max_penalty</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a088439178e1c50a29e96411c25dfb2b0" compoundref="settings_8hpp" startline="17">fancyqlone::qpalm::Settings::max_time</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a8f7c17c4374dcc0a845b9ecb657774cf" compoundref="settings_8hpp" startline="16">fancyqlone::qpalm::Settings::max_total_inner_iter</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78abbf52264f7a6e91c48a242f95aeed3db" compoundref="status_8hpp" startline="16">fancyqlone::qpalm::MaxIter</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a9e8b9350c8f1716701ec1f9bbe76432e" compoundref="status_8hpp" startline="15">fancyqlone::qpalm::MaxTime</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6280ab655c0cdc0fd6d8ab578e8c8688" compoundref="solver_8tpp" startline="96">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::Mxb</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a43232261d9812be7067f2526855cae80" compoundref="detailed-stats_8hpp" startline="13">fancyqlone::qpalm::DetailedStats::NoActiveSetChange</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78aff6e97b110349dae9c6e8be0ff7a85c3" compoundref="status_8hpp" startline="17">fancyqlone::qpalm::NotFinite</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverStats_1adf5b9006dcc4a02cc42cb2784ece81f1" compoundref="solver_8hpp" startline="44">fancyqlone::qpalm::SolverStats::outer_iter</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverStats_1a2ee3cfb0bba38bcad06b7aa1b8414d84" compoundref="solver_8hpp" startline="46">fancyqlone::qpalm::SolverStats::primal_residual_norm</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a5d42bfef9864390b62f86454469c7b5a" compoundref="settings_8hpp" startline="46">fancyqlone::qpalm::Settings::print_directional_deriv</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a684148b27f4c004d8c4082789b062a2d" compoundref="settings_8hpp" startline="39">fancyqlone::qpalm::Settings::print_precision</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1ad7581fda29453336114d05ff3174e415" compoundref="settings_8hpp" startline="37">fancyqlone::qpalm::Settings::recompute</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a11c25746e5571e9b00908dc924e08e37" compoundref="settings_8hpp" startline="35">fancyqlone::qpalm::Settings::recompute_eq_res</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a9ce3eb8e2b278b5ae9e4e5d574902c48" compoundref="settings_8hpp" startline="36">fancyqlone::qpalm::Settings::recompute_inner</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a120087a1bc52b1502b2785113309e3a8" compoundref="solver_8hpp" startline="23">fancyqlone::qpalm::SolverTimings::recompute_inner</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a4d3db5ec8ef938d1beb2c803543485dd" compoundref="solver_8hpp" startline="24">fancyqlone::qpalm::SolverTimings::recompute_outer</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a38b33955fc2b29e0de6e6e58437bb9cf" compoundref="settings_8hpp" startline="45">fancyqlone::qpalm::Settings::scale_newton_step</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1ad820174663a5e1b6e1d97c165a96c218" compoundref="solver_8hpp" startline="34">fancyqlone::qpalm::SolverTimings::solve</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverStats_1aab074658df1ad9f4deeb2df5ff0ce564" compoundref="solver_8hpp" startline="45">fancyqlone::qpalm::SolverStats::stationarity</references>
+        <references refid="classguanaqo_1_1AtomicStopSignal_1a6303d5d72c5f7b9a6bf9c26fafdcfb6b">guanaqo::AtomicStopSignal::stop_requested</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverStats_1ae97315a1c4a830aca627fb698ec010d6" compoundref="solver_8hpp" startline="48" endline="48">fancyqlone::qpalm::SolverStats::timings</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a7e19ef7da04fe7b497f455806b4fac07" compoundref="settings_8hpp" startline="19">fancyqlone::qpalm::Settings::tolerance</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a03a9a4399a51882b2ca13f9a2a81cb11" compoundref="solver_8hpp" startline="31">fancyqlone::qpalm::SolverTimings::update_penalty</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a30681bb7f9314cb69eb0cf0e70c7614b" compoundref="solver_8tpp" startline="77" endline="80">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_x</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9b80dc8ea42a8aae326ba3492f3cf05d" compoundref="solver_8tpp" startline="45" endline="75">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_y</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a8775e3cc7d961157cc55db4dec49d58e" compoundref="solver_8hpp" startline="32">fancyqlone::qpalm::SolverTimings::update_regularization</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1Settings_1a82f0d6f07b0aa0c3489f741b87764bef" compoundref="settings_8hpp" startline="38">fancyqlone::qpalm::Settings::verbose</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a3b1c84a9ac0a619fbdbe16df9a411bb0" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::x</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a5a60a140d77dd97dea362f731057a0ab" compoundref="solver_8tpp" startline="97">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::x_outer</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a61f0e5f027ccfb2c1796b123cd24a9e8" compoundref="solver_8tpp" startline="95">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::y</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>fancyqlone::qpalm::Breakpoint</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1Breakpoint"/>
+      </node>
+      <node id="2">
+        <label>fancyqlone::qpalm::LineSearch&lt; ineq_vec_t &gt;</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1LineSearch"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+settings</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+breakpoints</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fancyqlone::qpalm::LineSearchSettings</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1LineSearchSettings"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1SolverImplementation"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+linesearch</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; fancyqlone::qpalm::Breakpoint &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" line="21" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp" bodystart="21" bodyend="99"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1abc178d84bafcd83d93bab9b92860a0b0" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>ŷ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a66fc134949ddfb8f36d8274be3408c12" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>Δλ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8aef1639357eac6aba3aa914bf65e08e" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>Σ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a594285677e62ced0ac264fabfe29db2b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>λ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ad791339bebfe31e3939943a04c07ec99" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>ξ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ab152359c8dbce7fb78a69cc13f6c4be7" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>Aᵀŷ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a0aca234b285d2762519a5edda3d13fa5" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>active_set</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a575132310c956596c9ae99e466845d63" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>active_set_old</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4a95f2b09837056ef83acdd140fd6df7" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>active_set_t</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1aa7f5dfb7d99259e4a1b366f054b876fc" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>Ad</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1abd7e00c824e4c9876004aa9dd767989d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>Ax</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a34b5e2426ebd0d71d21f16887df4bf1d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>backend_type</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a94afb10137a463487173349dd55abba9" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>d</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>do_main_loop</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1aad045f72af7be16f4da2f5177cd732a8" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>e</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9ac432d4e2e37428629d27dc76e1f70d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>e_old</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a081f98c54da1e61a3cd4aff2c455b640" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>ensure_storage</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae88f822b56c365593c1d19fe2d90021d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>eq_vec_t</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6d885f039b39b7b3c3da97286b1d273b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>grad</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6d47028932e9559b54719f919cf77fa8" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>grad_add</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a8a02734652268c4b851b414b6e1577b4" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>ineq_vec_t</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4bc47a06e0eba099513ff65f253b80ee" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>initialize_penalty_y</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a711e127d98e93c34393d3759e1e533ad" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>linesearch</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1af2d3c35e6e135c484d812706acc8c326" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>MᵀΔλ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae473a1ab441ad36ec754e8905b1148c2" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>Mᵀλ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a6280ab655c0cdc0fd6d8ab578e8c8688" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>Mxb</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a30681bb7f9314cb69eb0cf0e70c7614b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>update_penalty_x</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9b80dc8ea42a8aae326ba3492f3cf05d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>update_penalty_y</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1ae732b02c810a2d89cdd42ab321f97454" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>var_vec_t</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a3b1c84a9ac0a619fbdbe16df9a411bb0" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>x</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a5a60a140d77dd97dea362f731057a0ab" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>x_outer</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a61f0e5f027ccfb2c1796b123cd24a9e8" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverImplementation</scope><name>y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

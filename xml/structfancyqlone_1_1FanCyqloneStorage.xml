@@ -1,0 +1,545 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1FanCyqloneStorage" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::FanCyqloneStorage</compoundname>
+    <includes refid="cyqlone-storage_8hpp" local="no">fancyqlone/cyqlone/cyqlone-storage.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+        <defval><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" prot="public" static="no">
+        <type>T</type>
+        <definition>using fancyqlone::FanCyqloneStorage&lt; T &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="92" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1FanCyqloneStorage_1acd83bc1d714328f4ddae3033ed05f93a" prot="public" static="no">
+        <type>std::integral_constant&lt; <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, 1 &gt;</type>
+        <definition>using fancyqlone::FanCyqloneStorage&lt; T &gt;::one_t = std::integral_constant&lt;index_t, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>one_t</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::one_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="93" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1FanCyqloneStorage_1a85b226aaa8ffb7ff4318ab74ab58eae7" prot="public" static="no">
+        <type><ref refid="structbatmat_1_1matrix_1_1Matrix" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::Matrix</ref>&lt; <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" kindref="member">value_type</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, <ref refid="structfancyqlone_1_1FanCyqloneStorage_1acd83bc1d714328f4ddae3033ed05f93a" kindref="member">one_t</ref>, <ref refid="structfancyqlone_1_1FanCyqloneStorage_1acd83bc1d714328f4ddae3033ed05f93a" kindref="member">one_t</ref>, StorageOrder::ColMajor &gt;</type>
+        <definition>using fancyqlone::FanCyqloneStorage&lt; T &gt;::matrix = 
+batmat::matrix::Matrix&lt;value_type, index_t, one_t, one_t, StorageOrder::ColMajor&gt;</definition>
+        <argsstring></argsstring>
+        <name>matrix</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::matrix</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="95" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1FanCyqloneStorage_1ab35b6607f45ff814ab2e55478075d69d" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1FanOCPStorage_1_1Solution" kindref="compound">FanOCPStorage::Solution</ref></type>
+        <definition>using fancyqlone::FanCyqloneStorage&lt; T &gt;::Solution = FanOCPStorage::Solution</definition>
+        <argsstring></argsstring>
+        <name>Solution</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::Solution</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="120" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1FanCyqloneStorage_1a23824654897f2a1a0279ff95478b1acc" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError" kindref="compound">FanOCPStorage::KKTError</ref></type>
+        <definition>using fancyqlone::FanCyqloneStorage&lt; T &gt;::KKTError = FanOCPStorage::KKTError</definition>
+        <argsstring></argsstring>
+        <name>KKTError</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::KKTError</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="121" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1FanCyqloneStorage_1a2edb5de01f94b6e50b71467f7151ac06" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::FanCyqloneStorage&lt; T &gt;::num_branches</definition>
+        <argsstring></argsstring>
+        <name>num_branches</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::num_branches</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="100" column="13" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="100" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1aed07ec8ce9584d520a76f1fdd5e46d0f" compoundref="fan-data_8tpp" startline="92" endline="98">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a3c9ee9b4d5883935fb8f9e880b408a50" compoundref="fan-data_8tpp" startline="49" endline="88">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a29b01676729b5c489ec1624f6a89a3d0" compoundref="sfan-data_8tpp" startline="49" endline="87">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1ae4c0e73f39640b170695a8af7e3f49c6" compoundref="cyqlone-storage_8cpp" startline="240" endline="301">fancyqlone::FanCyqloneStorage&lt; T &gt;::reconstruct_solution</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanCyqloneStorage_1a6cddf4f6ec1f966952db0b75df952851" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::FanCyqloneStorage&lt; T &gt;::nu</definition>
+        <argsstring></argsstring>
+        <name>nu</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::nu</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="101" column="13" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="101" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a3c9ee9b4d5883935fb8f9e880b408a50" compoundref="fan-data_8tpp" startline="49" endline="88">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a29b01676729b5c489ec1624f6a89a3d0" compoundref="sfan-data_8tpp" startline="49" endline="87">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanCyqloneStorage_1a36821ae6d0eef1ebc044e8e2be1bf5ec" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::FanCyqloneStorage&lt; T &gt;::ny_0</definition>
+        <argsstring></argsstring>
+        <name>ny_0</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::ny_0</qualifiedname>
+        <briefdescription>
+<para>Number of general constraints at stage 0, D(0) u(0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="102" column="13" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="102" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a3c9ee9b4d5883935fb8f9e880b408a50" compoundref="fan-data_8tpp" startline="49" endline="88">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a35b7ff7479d884e4f2a37e6a1ef49381" compoundref="cyqlone-storage_8cpp" startline="231" endline="238">fancyqlone::FanCyqloneStorage&lt; T &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a29b01676729b5c489ec1624f6a89a3d0" compoundref="sfan-data_8tpp" startline="49" endline="87">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1ae4c0e73f39640b170695a8af7e3f49c6" compoundref="cyqlone-storage_8cpp" startline="240" endline="301">fancyqlone::FanCyqloneStorage&lt; T &gt;::reconstruct_solution</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanCyqloneStorage_1ae4b8f968e3a02dee613d1eaeb80845b7" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfancyqlone_1_1CyqloneStorage" kindref="compound">CyqloneStorage</ref>&lt; <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" kindref="member">value_type</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;CyqloneStorage&lt;value_type&gt; &gt; fancyqlone::FanCyqloneStorage&lt; T &gt;::branches</definition>
+        <argsstring></argsstring>
+        <name>branches</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::branches</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="103" column="17" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="103" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a3c9ee9b4d5883935fb8f9e880b408a50" compoundref="fan-data_8tpp" startline="49" endline="88">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a29b01676729b5c489ec1624f6a89a3d0" compoundref="sfan-data_8tpp" startline="49" endline="87">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ab68b9f9797573b17ce9f6f5acffa41cd" compoundref="fan-data_8tpp" startline="151" endline="173">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_bounds</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a0b9192a0de183751bd197144244fdc64" compoundref="sfan-data_8tpp" startline="139" endline="161">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_bounds</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1aa754c745583370652c5d421d959c9056" compoundref="fan-data_8tpp" startline="135" endline="147">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a1309bd53b335ab1a012d448e521a39fc" compoundref="sfan-data_8tpp" startline="123" endline="135">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a7a5877c54cf4d21e7090e382cea72b97" compoundref="fan-data_8tpp" startline="117" endline="132">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_rhs</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1ac2a2175b5f1633c315877ce5abd1f99d" compoundref="sfan-data_8tpp" startline="106" endline="121">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_rhs</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1ae4c0e73f39640b170695a8af7e3f49c6" compoundref="cyqlone-storage_8cpp" startline="240" endline="301">fancyqlone::FanCyqloneStorage&lt; T &gt;::reconstruct_solution</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ada53c2d5a7a5e4defde5b8d87603b965" compoundref="fan-data_8tpp" startline="100" endline="114">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::update_data</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a755ae5d8bc223565f7e94d06210e0220" compoundref="sfan-data_8tpp" startline="90" endline="104">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::update_data</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanCyqloneStorage_1a60ad64d070be10f1728f186b099c142c" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a85b226aaa8ffb7ff4318ab74ab58eae7" kindref="member">matrix</ref> &gt;</type>
+        <definition>std::vector&lt;matrix&gt; fancyqlone::FanCyqloneStorage&lt; T &gt;::Bs</definition>
+        <argsstring></argsstring>
+        <name>Bs</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::Bs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="106" column="17" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="106" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ada53c2d5a7a5e4defde5b8d87603b965" compoundref="fan-data_8tpp" startline="100" endline="114">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::update_data</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a755ae5d8bc223565f7e94d06210e0220" compoundref="sfan-data_8tpp" startline="90" endline="104">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::update_data</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanCyqloneStorage_1a73a67848f81c2c61332d0f46585cfa32" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1FanCyqloneStorage_1a85b226aaa8ffb7ff4318ab74ab58eae7" kindref="member">matrix</ref></type>
+        <definition>matrix fancyqlone::FanCyqloneStorage&lt; T &gt;::r0</definition>
+        <argsstring></argsstring>
+        <name>r0</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::r0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="108" column="12" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="108" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1aa754c745583370652c5d421d959c9056" compoundref="fan-data_8tpp" startline="135" endline="147">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a1309bd53b335ab1a012d448e521a39fc" compoundref="sfan-data_8tpp" startline="123" endline="135">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ada53c2d5a7a5e4defde5b8d87603b965" compoundref="fan-data_8tpp" startline="100" endline="114">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::update_data</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a755ae5d8bc223565f7e94d06210e0220" compoundref="sfan-data_8tpp" startline="90" endline="104">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::update_data</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanCyqloneStorage_1a1b0e6ca2aad21bf14f9e883b0b0d5dea" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1FanCyqloneStorage_1a85b226aaa8ffb7ff4318ab74ab58eae7" kindref="member">matrix</ref></type>
+        <definition>matrix fancyqlone::FanCyqloneStorage&lt; T &gt;::R0</definition>
+        <argsstring></argsstring>
+        <name>R0</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::R0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="110" column="12" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="110" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ada53c2d5a7a5e4defde5b8d87603b965" compoundref="fan-data_8tpp" startline="100" endline="114">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::update_data</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a755ae5d8bc223565f7e94d06210e0220" compoundref="sfan-data_8tpp" startline="90" endline="104">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::update_data</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanCyqloneStorage_1a1876dc6cde65353fe8454f60d2d0e7d2" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1FanCyqloneStorage_1a85b226aaa8ffb7ff4318ab74ab58eae7" kindref="member">matrix</ref></type>
+        <definition>matrix fancyqlone::FanCyqloneStorage&lt; T &gt;::D0</definition>
+        <argsstring></argsstring>
+        <name>D0</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::D0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="111" column="12" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="111" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ada53c2d5a7a5e4defde5b8d87603b965" compoundref="fan-data_8tpp" startline="100" endline="114">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::update_data</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a755ae5d8bc223565f7e94d06210e0220" compoundref="sfan-data_8tpp" startline="90" endline="104">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::update_data</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanCyqloneStorage_1a9b12f953ff5e5d7e3327232668ee17a6" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1FanCyqloneStorage_1a85b226aaa8ffb7ff4318ab74ab58eae7" kindref="member">matrix</ref></type>
+        <definition>matrix fancyqlone::FanCyqloneStorage&lt; T &gt;::b_min_0</definition>
+        <argsstring></argsstring>
+        <name>b_min_0</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::b_min_0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="112" column="12" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="112" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ab68b9f9797573b17ce9f6f5acffa41cd" compoundref="fan-data_8tpp" startline="151" endline="173">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_bounds</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a0b9192a0de183751bd197144244fdc64" compoundref="sfan-data_8tpp" startline="139" endline="161">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_bounds</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanCyqloneStorage_1ac416935a5c84944b3969779454e90246" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1FanCyqloneStorage_1a85b226aaa8ffb7ff4318ab74ab58eae7" kindref="member">matrix</ref></type>
+        <definition>matrix fancyqlone::FanCyqloneStorage&lt; T &gt;::b_max_0</definition>
+        <argsstring></argsstring>
+        <name>b_max_0</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::b_max_0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="113" column="12" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="113" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ab68b9f9797573b17ce9f6f5acffa41cd" compoundref="fan-data_8tpp" startline="151" endline="173">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_bounds</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a0b9192a0de183751bd197144244fdc64" compoundref="sfan-data_8tpp" startline="139" endline="161">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_bounds</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</definition>
+        <argsstring>(const FanOCPStorage &amp;focp)</argsstring>
+        <name>update_impl</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::update_impl</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref> &amp;</type>
+          <declname>focp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="115" column="10" bodyfile="src/fancyqlone/src/cyqlone/cyqlone-storage.cpp" bodystart="182" bodyend="224"/>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1ac416935a5c84944b3969779454e90246" compoundref="cyqlone-storage_8hpp" startline="113">fancyqlone::FanCyqloneStorage&lt; T &gt;::b_max_0</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a9b12f953ff5e5d7e3327232668ee17a6" compoundref="cyqlone-storage_8hpp" startline="112">fancyqlone::FanCyqloneStorage&lt; T &gt;::b_min_0</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1ae4b8f968e3a02dee613d1eaeb80845b7" compoundref="cyqlone-storage_8hpp" startline="103">fancyqlone::FanCyqloneStorage&lt; T &gt;::branches</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a60ad64d070be10f1728f186b099c142c" compoundref="cyqlone-storage_8hpp" startline="106">fancyqlone::FanCyqloneStorage&lt; T &gt;::Bs</references>
+        <references refid="structfancyqlone_1_1CyqloneStorage_1a3070b42b5e205a963afe189d05362a71" compoundref="cyqlone-storage_8cpp" startline="157" endline="178">fancyqlone::CyqloneStorage&lt; T &gt;::build</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a1876dc6cde65353fe8454f60d2d0e7d2" compoundref="cyqlone-storage_8hpp" startline="111">fancyqlone::FanCyqloneStorage&lt; T &gt;::D0</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a6cddf4f6ec1f966952db0b75df952851" compoundref="cyqlone-storage_8hpp" startline="101">fancyqlone::FanCyqloneStorage&lt; T &gt;::nu</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a2edb5de01f94b6e50b71467f7151ac06" compoundref="cyqlone-storage_8hpp" startline="100">fancyqlone::FanCyqloneStorage&lt; T &gt;::num_branches</references>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1a4c3dd985a1d707518b514703c4346932" compoundref="ocp_8hpp" startline="466" endline="466">fancyqlone::FanOCPStorage::num_branches</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a36821ae6d0eef1ebc044e8e2be1bf5ec" compoundref="cyqlone-storage_8hpp" startline="102">fancyqlone::FanCyqloneStorage&lt; T &gt;::ny_0</references>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1af4a8d99749d3c45c066a3b0a7afed335" compoundref="ocp_8hpp" startline="463">fancyqlone::FanOCPStorage::ocps</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a1b0e6ca2aad21bf14f9e883b0b0d5dea" compoundref="cyqlone-storage_8hpp" startline="110">fancyqlone::FanCyqloneStorage&lt; T &gt;::R0</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a73a67848f81c2c61332d0f46585cfa32" compoundref="cyqlone-storage_8hpp" startline="108">fancyqlone::FanCyqloneStorage&lt; T &gt;::r0</references>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a35b7ff7479d884e4f2a37e6a1ef49381" compoundref="cyqlone-storage_8cpp" startline="231" endline="238">fancyqlone::FanCyqloneStorage&lt; T &gt;::build</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a339ecb75ea4ed5a35645c620ae84b6fe" compoundref="cyqlone-storage_8cpp" startline="226" endline="229">fancyqlone::FanCyqloneStorage&lt; T &gt;::update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1FanCyqloneStorage_1a339ecb75ea4ed5a35645c620ae84b6fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::FanCyqloneStorage&lt; T &gt;::update</definition>
+        <argsstring>(const FanOCPStorage &amp;focp)</argsstring>
+        <name>update</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::update</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref> &amp;</type>
+          <declname>focp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="116" column="10" bodyfile="src/fancyqlone/src/cyqlone/cyqlone-storage.cpp" bodystart="226" bodyend="229"/>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1FanCyqloneStorage_1a5d580c0a5bea7fb7aafc0d644c0bc500" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" kindref="member">value_type</ref> &gt;</type>
+        <definition>std::vector&lt; value_type &gt; fancyqlone::FanCyqloneStorage&lt; T &gt;::reconstruct_ineq_multipliers</definition>
+        <argsstring>(std::span&lt; const value_type &gt; y_compressed) const</argsstring>
+        <name>reconstruct_ineq_multipliers</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::reconstruct_ineq_multipliers</qualifiedname>
+        <param>
+          <type>std::span&lt; const <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" kindref="member">value_type</ref> &gt;</type>
+          <declname>y_compressed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="123" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1FanCyqloneStorage_1ae4c0e73f39640b170695a8af7e3f49c6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1FanCyqloneStorage_1ab35b6607f45ff814ab2e55478075d69d" kindref="member">Solution</ref></type>
+        <definition>auto fancyqlone::FanCyqloneStorage&lt; T &gt;::reconstruct_solution</definition>
+        <argsstring>(const FanOCPStorage &amp;ocp, std::span&lt; const value_type &gt; ux_compressed, std::span&lt; const value_type &gt; y_compressed, std::span&lt; const value_type &gt; λ_compressed) const</argsstring>
+        <name>reconstruct_solution</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::reconstruct_solution</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref> &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" kindref="member">value_type</ref> &gt;</type>
+          <declname>ux_compressed</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" kindref="member">value_type</ref> &gt;</type>
+          <declname>y_compressed</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" kindref="member">value_type</ref> &gt;</type>
+          <declname>λ_compressed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="124" column="14" bodyfile="src/fancyqlone/src/cyqlone/cyqlone-storage.cpp" bodystart="240" bodyend="301"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaea931c3de39b21c1adc2adda6927391" compoundref="ocp_8hpp" startline="129" endline="133">fancyqlone::LinearOCPStorage::A</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" compoundref="ocp_8hpp" startline="253" endline="261">fancyqlone::LinearOCPStorage::b</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1ae4b8f968e3a02dee613d1eaeb80845b7" compoundref="cyqlone-storage_8hpp" startline="103">fancyqlone::FanCyqloneStorage&lt; T &gt;::branches</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ad991b26c207c150cf4117e3dea673b6d" compoundref="ocp_8hpp" startline="108" endline="112">fancyqlone::LinearOCPStorage::C</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a755b42ad7574b683175254de50793aa0" compoundref="ocp_8hpp" startline="113" endline="117">fancyqlone::LinearOCPStorage::D</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a2edb5de01f94b6e50b71467f7151ac06" compoundref="cyqlone-storage_8hpp" startline="100">fancyqlone::FanCyqloneStorage&lt; T &gt;::num_branches</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a36821ae6d0eef1ebc044e8e2be1bf5ec" compoundref="cyqlone-storage_8hpp" startline="102">fancyqlone::FanCyqloneStorage&lt; T &gt;::ny_0</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" compoundref="ocp_8hpp" startline="77" endline="81">fancyqlone::LinearOCPStorage::Q</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ab03b4cc3577893f2c19db9fd2901ebab" compoundref="ocp_8hpp" startline="242" endline="246">fancyqlone::LinearOCPStorage::q</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a46055cc9e375ddd69ea173667928d52a" compoundref="ocp_8hpp" startline="87" endline="91">fancyqlone::LinearOCPStorage::S</references>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1_1Solution_1a28b6e9d1e700f519aa90712eb5084bcd" compoundref="ocp_8hpp" startline="468">fancyqlone::FanOCPStorage::Solution::solutions</references>
+        <references refid="group__linalg__blas__hl_1gaed74d5df153a525f319dd183aee84622">guanaqo::blas::xgemv_T</references>
+        <references refid="group__linalg__blas__hl_1gac9091441d928e985a0bdcd8170bf3d86">guanaqo::blas::xsymv_L</references>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a989852630be997957bb37f59a0ffe52a" compoundref="cyqlone-storage_8cpp" startline="304" endline="311">fancyqlone::FanCyqloneStorage&lt; T &gt;::compute_kkt_error</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1FanCyqloneStorage_1a989852630be997957bb37f59a0ffe52a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1FanCyqloneStorage_1a23824654897f2a1a0279ff95478b1acc" kindref="member">KKTError</ref></type>
+        <definition>auto fancyqlone::FanCyqloneStorage&lt; T &gt;::compute_kkt_error</definition>
+        <argsstring>(const FanOCPStorage &amp;ocp, std::span&lt; const value_type &gt; ux_compressed, std::span&lt; const value_type &gt; y_compressed, std::span&lt; const value_type &gt; λ_compressed) const</argsstring>
+        <name>compute_kkt_error</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::compute_kkt_error</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref> &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" kindref="member">value_type</ref> &gt;</type>
+          <declname>ux_compressed</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" kindref="member">value_type</ref> &gt;</type>
+          <declname>y_compressed</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" kindref="member">value_type</ref> &gt;</type>
+          <declname>λ_compressed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="129" column="14" bodyfile="src/fancyqlone/src/cyqlone/cyqlone-storage.cpp" bodystart="304" bodyend="311"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a12952b0941c12e01365138e4638a182f" compoundref="ocp_8cpp" startline="11" endline="107">fancyqlone::LinearOCPStorage::compute_kkt_error</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1ae4c0e73f39640b170695a8af7e3f49c6" compoundref="cyqlone-storage_8cpp" startline="240" endline="301">fancyqlone::FanCyqloneStorage&lt; T &gt;::reconstruct_solution</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structfancyqlone_1_1FanCyqloneStorage_1a35b7ff7479d884e4f2a37e6a1ef49381" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1FanCyqloneStorage" kindref="compound">FanCyqloneStorage</ref></type>
+        <definition>FanCyqloneStorage&lt; T &gt; fancyqlone::FanCyqloneStorage&lt; T &gt;::build</definition>
+        <argsstring>(const FanOCPStorage &amp;focp, index_t ny_0=-1)</argsstring>
+        <name>build</name>
+        <qualifiedname>fancyqlone::FanCyqloneStorage::build</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref> &amp;</type>
+          <declname>focp</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>ny_0</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="118" column="30" bodyfile="src/fancyqlone/src/cyqlone/cyqlone-storage.cpp" bodystart="231" bodyend="238"/>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a36821ae6d0eef1ebc044e8e2be1bf5ec" compoundref="cyqlone-storage_8hpp" startline="102">fancyqlone::FanCyqloneStorage&lt; T &gt;::ny_0</references>
+        <references refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>batmat::matrix::Matrix&lt; value_type, index_t &gt;</label>
+        <link refid="structbatmat_1_1matrix_1_1Matrix" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+      </node>
+      <node id="8">
+        <label>batmat::matrix::Matrix&lt; value_type, index_t, one_t, one_t, StorageOrder::ColMajor &gt;</label>
+        <link refid="structbatmat_1_1matrix_1_1Matrix" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+      </node>
+      <node id="3">
+        <label>fancyqlone::CyqloneStorage&lt; value_type &gt;</label>
+        <link refid="structfancyqlone_1_1CyqloneStorage"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+Ju0</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+data_F</edgelabel>
+          <edgelabel>+data_G</edgelabel>
+          <edgelabel>+data_G0N</edgelabel>
+          <edgelabel>+data_H</edgelabel>
+          <edgelabel>+data_c</edgelabel>
+          <edgelabel>+data_lb</edgelabel>
+          <edgelabel>+data_lb0N</edgelabel>
+          <edgelabel>+data_rq</edgelabel>
+          <edgelabel>+data_ub</edgelabel>
+          <edgelabel>+data_ub0N</edgelabel>
+          <edgelabel>  ...</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>+indices_G0</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fancyqlone::FanCyqloneStorage&lt; T &gt;</label>
+        <link refid="structfancyqlone_1_1FanCyqloneStorage"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+branches</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>+Bs</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>+D0</edgelabel>
+          <edgelabel>+R0</edgelabel>
+          <edgelabel>+b_max_0</edgelabel>
+          <edgelabel>+b_min_0</edgelabel>
+          <edgelabel>+r0</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; batmat::matrix::Matrix&lt; value_type, index_t, one_t, one_t, StorageOrder::ColMajor &gt; &gt;</label>
+        <childnode refid="8" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; bool &gt;</label>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; fancyqlone::CyqloneStorage&lt; value_type &gt; &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::vector&lt; index_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" line="91" column="1" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp" bodystart="91" bodyend="132"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1ac416935a5c84944b3969779454e90246" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>b_max_0</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a9b12f953ff5e5d7e3327232668ee17a6" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>b_min_0</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1ae4b8f968e3a02dee613d1eaeb80845b7" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>branches</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a60ad64d070be10f1728f186b099c142c" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>Bs</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a35b7ff7479d884e4f2a37e6a1ef49381" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>build</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a989852630be997957bb37f59a0ffe52a" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>compute_kkt_error</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a1876dc6cde65353fe8454f60d2d0e7d2" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>D0</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a23824654897f2a1a0279ff95478b1acc" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>KKTError</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a85b226aaa8ffb7ff4318ab74ab58eae7" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>matrix</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a6cddf4f6ec1f966952db0b75df952851" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>nu</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a2edb5de01f94b6e50b71467f7151ac06" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>num_branches</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a36821ae6d0eef1ebc044e8e2be1bf5ec" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>ny_0</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1acd83bc1d714328f4ddae3033ed05f93a" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>one_t</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a1b0e6ca2aad21bf14f9e883b0b0d5dea" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>R0</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a73a67848f81c2c61332d0f46585cfa32" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>r0</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a5d580c0a5bea7fb7aafc0d644c0bc500" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>reconstruct_ineq_multipliers</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1ae4c0e73f39640b170695a8af7e3f49c6" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>reconstruct_solution</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1ab35b6607f45ff814ab2e55478075d69d" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>Solution</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a339ecb75ea4ed5a35645c620ae84b6fe" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>update</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>update_impl</name></member>
+      <member refid="structfancyqlone_1_1FanCyqloneStorage_1a6ec98c6f163bb531bada151c008a236d" prot="public" virt="non-virtual"><scope>fancyqlone::FanCyqloneStorage</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

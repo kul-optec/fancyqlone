@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="status_8hpp" kind="file" language="C++">
+    <compoundname>status.hpp</compoundname>
+    <includes refid="config_8hpp" local="no">fancyqlone/config.hpp</includes>
+    <includes local="no">fancyqlone/fancyqpalm/export.h</includes>
+    <includes local="no">iosfwd</includes>
+    <includes local="no">stdexcept</includes>
+    <includedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp" local="no">benchmarks/cyqpalm/spring-mass.cpp</includedby>
+    <includedby refid="solver_8hpp" local="no">src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp</includedby>
+    <includedby refid="status_8cpp" local="no">src/fancyqpalm/src/status.cpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>fancyqlone/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/status.hpp</label>
+        <link refid="status_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>batmat/config.hpp</label>
+      </node>
+      <node id="4">
+        <label>fancyqlone/fancyqpalm/export.h</label>
+      </node>
+      <node id="5">
+        <label>iosfwd</label>
+      </node>
+      <node id="6">
+        <label>stdexcept</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>benchmarks/cyqpalm/spring-mass.cpp</label>
+        <link refid="benchmarks_2cyqpalm_2spring-mass_8cpp"/>
+      </node>
+      <node id="6">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/ineq-constr.tpp</label>
+        <link refid="ineq-constr_8tpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linalg.tpp</label>
+        <link refid="linalg_8tpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linesearch.tpp</label>
+        <link refid="backends_2backend-fancyqlone_2linesearch_8tpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/solve.tpp</label>
+        <link refid="solve_8tpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</label>
+        <link refid="ocp-backend-fancyqlone_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp</label>
+        <link refid="ocp-backend-fancyqlone_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp</label>
+        <link refid="solver_8tpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp</label>
+        <link refid="solver_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/status.hpp</label>
+        <link refid="status_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>src/fancyqpalm/src/ocp-backend-cyqlone.cpp</label>
+        <link refid="ocp-backend-cyqlone_8cpp"/>
+      </node>
+      <node id="12">
+        <label>src/fancyqpalm/src/status.cpp</label>
+        <link refid="status_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacefancyqlone">fancyqlone</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm">fancyqlone::qpalm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="config_8hpp" kindref="compound">fancyqlone/config.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fancyqlone/fancyqpalm/export.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iosfwd&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacefancyqlone_1_1qpalm" kindref="compound">fancyqlone::qpalm</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="10"><highlight class="comment">///<sp/>Exit<sp/>status<sp/>of<sp/>a<sp/>numerical<sp/>solver.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment">///<sp/>@ingroup<sp/>topic-optimization-solvers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" kindref="member">SolverStatus</ref><sp/>{</highlight></codeline>
+<codeline lineno="13" refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ad8a942ef2b04672adfafef0ad817a407" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ad8a942ef2b04672adfafef0ad817a407" kindref="member">Busy</ref><sp/>=<sp/>0,<sp/><sp/><sp/><sp/></highlight><highlight class="comment">///&lt;<sp/>In<sp/>progress.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ada5418b1eb4e80d05f2c1c7c4fa1b6ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ada5418b1eb4e80d05f2c1c7c4fa1b6ec" kindref="member">Converged</ref>,<sp/><sp/><sp/></highlight><highlight class="comment">///&lt;<sp/>Converged<sp/>and<sp/>reached<sp/>given<sp/>tolerance.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a9e8b9350c8f1716701ec1f9bbe76432e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a9e8b9350c8f1716701ec1f9bbe76432e" kindref="member">MaxTime</ref>,<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">///&lt;<sp/>Maximum<sp/>allowed<sp/>execution<sp/>time<sp/>exceeded.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78abbf52264f7a6e91c48a242f95aeed3db" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78abbf52264f7a6e91c48a242f95aeed3db" kindref="member">MaxIter</ref>,<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">///&lt;<sp/>Maximum<sp/>number<sp/>of<sp/>iterations<sp/>exceeded.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78aff6e97b110349dae9c6e8be0ff7a85c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78aff6e97b110349dae9c6e8be0ff7a85c3" kindref="member">NotFinite</ref>,<sp/><sp/><sp/></highlight><highlight class="comment">///&lt;<sp/>Intermediate<sp/>results<sp/>were<sp/>infinite<sp/>or<sp/>not-a-number.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ab644b4f0de4cf0c46acb4583602e168c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ab644b4f0de4cf0c46acb4583602e168c" kindref="member">NoProgress</ref>,<sp/><sp/></highlight><highlight class="comment">///&lt;<sp/>No<sp/>progress<sp/>was<sp/>made<sp/>in<sp/>the<sp/>last<sp/>iteration.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a12c37c4278b8c0db6c2f65052569cd80" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a12c37c4278b8c0db6c2f65052569cd80" kindref="member">Interrupted</ref>,<sp/></highlight><highlight class="comment">///&lt;<sp/>Solver<sp/>was<sp/>interrupted<sp/>by<sp/>the<sp/>user.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ab0d4998a26f5b5742ad38c4af8817e32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ab0d4998a26f5b5742ad38c4af8817e32" kindref="member">Exception</ref>,<sp/><sp/><sp/></highlight><highlight class="comment">///&lt;<sp/>An<sp/>unexpected<sp/>exception<sp/>was<sp/>thrown.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="namespacefancyqlone_1_1qpalm_1a26d4973d280fd9cde97918d0b0b1fe78" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="namespacefancyqlone_1_1qpalm_1a26d4973d280fd9cde97918d0b0b1fe78" kindref="member">enum_name</ref>(<ref refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" kindref="member">SolverStatus</ref><sp/>s)<sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(s)<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ad8a942ef2b04672adfafef0ad817a407" kindref="member">SolverStatus::Busy</ref>:<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;Busy&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ada5418b1eb4e80d05f2c1c7c4fa1b6ec" kindref="member">SolverStatus::Converged</ref>:<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;Converged&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a9e8b9350c8f1716701ec1f9bbe76432e" kindref="member">SolverStatus::MaxTime</ref>:<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;MaxTime&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78abbf52264f7a6e91c48a242f95aeed3db" kindref="member">SolverStatus::MaxIter</ref>:<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;MaxIter&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78aff6e97b110349dae9c6e8be0ff7a85c3" kindref="member">SolverStatus::NotFinite</ref>:<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;NotFinite&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ab644b4f0de4cf0c46acb4583602e168c" kindref="member">SolverStatus::NoProgress</ref>:<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;NoProgress&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a12c37c4278b8c0db6c2f65052569cd80" kindref="member">SolverStatus::Interrupted</ref>:<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;Interrupted&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ab0d4998a26f5b5742ad38c4af8817e32" kindref="member">SolverStatus::Exception</ref>:<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;Exception&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::out_of_range(</highlight><highlight class="stringliteral">&quot;invalid<sp/>value<sp/>for<sp/>qpalm::SolverStatus&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal">CYQLONE_QPALM_EXPORT<sp/>std::ostream<sp/>&amp;<ref refid="namespacefancyqlone_1_1qpalm_1ac78668c7efb8aa549ac3d3e7ce13810c" kindref="member">operator&lt;&lt;</ref>(std::ostream<sp/>&amp;os,<sp/><ref refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" kindref="member">SolverStatus</ref><sp/>s);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fancyqlone::qpalm</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/status.hpp"/>
+  </compounddef>
+</doxygen>

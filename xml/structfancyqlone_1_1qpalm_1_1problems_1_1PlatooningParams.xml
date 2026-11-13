@@ -1,0 +1,198 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::problems::PlatooningParams</compoundname>
+    <includes refid="platooning_8hpp" local="no">fancyqlone/fancyqpalm/example-problems/platooning.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a88f78df37958bdf3f976a993fb8fa07f" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::problems::PlatooningParams::friction</definition>
+        <argsstring></argsstring>
+        <name>friction</name>
+        <qualifiedname>fancyqlone::qpalm::problems::PlatooningParams::friction</qualifiedname>
+        <initializer>= 0.1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="12" column="12" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="12" bodyend="-1"/>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a273aeeeba1ae769ba508ea1e04ab2e78" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::problems::PlatooningParams::F_max</definition>
+        <argsstring></argsstring>
+        <name>F_max</name>
+        <qualifiedname>fancyqlone::qpalm::problems::PlatooningParams::F_max</qualifiedname>
+        <initializer>= 20</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="13" column="12" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="13" bodyend="-1"/>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a928de9d8c7468ce98e7efb47df7c00f3" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::problems::PlatooningParams::v_max</definition>
+        <argsstring></argsstring>
+        <name>v_max</name>
+        <qualifiedname>fancyqlone::qpalm::problems::PlatooningParams::v_max</qualifiedname>
+        <initializer>= 1.6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="14" column="12" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="14" bodyend="-1"/>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a4d13a8d404917263c4d289a1f9074833" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::problems::PlatooningParams::dist_min</definition>
+        <argsstring></argsstring>
+        <name>dist_min</name>
+        <qualifiedname>fancyqlone::qpalm::problems::PlatooningParams::dist_min</qualifiedname>
+        <initializer>= 5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="15" column="12" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="15" bodyend="-1"/>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1ae574bb1582aa67d783009f0c29908f51" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::problems::PlatooningParams::dist_init</definition>
+        <argsstring></argsstring>
+        <name>dist_init</name>
+        <qualifiedname>fancyqlone::qpalm::problems::PlatooningParams::dist_init</qualifiedname>
+        <initializer>= 2 * <ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a4d13a8d404917263c4d289a1f9074833" kindref="member">dist_min</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="16" column="12" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="16" bodyend="-1"/>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a8eacc3e256b2b7df6961338524c4e098" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::problems::PlatooningParams::p_target</definition>
+        <argsstring></argsstring>
+        <name>p_target</name>
+        <qualifiedname>fancyqlone::qpalm::problems::PlatooningParams::p_target</qualifiedname>
+        <initializer>= 100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="17" column="12" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="17" bodyend="-1"/>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a66621b59aafde7792093f827861762e5" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::qpalm::problems::PlatooningParams::N_horiz</definition>
+        <argsstring></argsstring>
+        <name>N_horiz</name>
+        <qualifiedname>fancyqlone::qpalm::problems::PlatooningParams::N_horiz</qualifiedname>
+        <initializer>= 512</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="18" column="13" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="18" bodyend="-1"/>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a78a5576a2f94d735900650259cee975d" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::problems::PlatooningParams::T_horiz</definition>
+        <argsstring></argsstring>
+        <name>T_horiz</name>
+        <qualifiedname>fancyqlone::qpalm::problems::PlatooningParams::T_horiz</qualifiedname>
+        <initializer>= 30</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="19" column="12" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="19" bodyend="-1"/>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a92338826956b02eff6eb831c63d0ec02" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::problems::PlatooningParams::scale_cost</definition>
+        <argsstring></argsstring>
+        <name>scale_cost</name>
+        <qualifiedname>fancyqlone::qpalm::problems::PlatooningParams::scale_cost</qualifiedname>
+        <initializer>= 1e-3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="20" column="12" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="20" bodyend="-1"/>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a5b9fa5ebf0093fd6fc14888bfe94c06d" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt;real_t&gt; fancyqlone::qpalm::problems::PlatooningParams::masses</definition>
+        <argsstring></argsstring>
+        <name>masses</name>
+        <qualifiedname>fancyqlone::qpalm::problems::PlatooningParams::masses</qualifiedname>
+        <initializer>{100, 150, 130, 70, 180}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="21" column="17" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="21" bodyend="21"/>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">fancyqlone::qpalm::problems::platooning</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::problems::PlatooningParams</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+masses</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; real_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" line="11" column="1" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" bodystart="11" bodyend="22"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1ae574bb1582aa67d783009f0c29908f51" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::PlatooningParams</scope><name>dist_init</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a4d13a8d404917263c4d289a1f9074833" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::PlatooningParams</scope><name>dist_min</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a273aeeeba1ae769ba508ea1e04ab2e78" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::PlatooningParams</scope><name>F_max</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a88f78df37958bdf3f976a993fb8fa07f" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::PlatooningParams</scope><name>friction</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a5b9fa5ebf0093fd6fc14888bfe94c06d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::PlatooningParams</scope><name>masses</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a66621b59aafde7792093f827861762e5" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::PlatooningParams</scope><name>N_horiz</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a8eacc3e256b2b7df6961338524c4e098" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::PlatooningParams</scope><name>p_target</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a92338826956b02eff6eb831c63d0ec02" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::PlatooningParams</scope><name>scale_cost</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a78a5576a2f94d735900650259cee975d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::PlatooningParams</scope><name>T_horiz</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a928de9d8c7468ce98e7efb47df7c00f3" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::PlatooningParams</scope><name>v_max</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

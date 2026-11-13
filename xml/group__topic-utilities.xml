@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="group__topic-utilities" kind="group">
+    <compoundname>topic-utilities</compoundname>
+    <title>Utilities</title>
+    <innerfile refid="neumaier_8hpp">neumaier.hpp</innerfile>
+    <innerfile refid="sparse_8hpp">sparse.hpp</innerfile>
+    <innerclass refid="classfancyqlone_1_1NeumaierSum" prot="public">fancyqlone::NeumaierSum</innerclass>
+    <innerclass refid="structfancyqlone_1_1SparseMatrix" prot="public">fancyqlone::SparseMatrix</innerclass>
+    <innerclass refid="structfancyqlone_1_1SparseMatrixBuilder" prot="public">fancyqlone::SparseMatrixBuilder</innerclass>
+    <innergroup refid="group__topic-util-matio">Exporting and loading .mat files</innergroup>
+    <briefdescription>
+<para>Various utility functions and classes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1FanOCPStorage_1_1KKTError" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::FanOCPStorage::KKTError</compoundname>
+    <includes refid="ocp_8hpp" local="no">fancyqlone/ocp.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1a65ceb483567e22193113b0d2e63c287e" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::FanOCPStorage::KKTError::stationarity</definition>
+        <argsstring></argsstring>
+        <name>stationarity</name>
+        <qualifiedname>fancyqlone::FanOCPStorage::KKTError::stationarity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="486" column="16" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="486" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanOCPStorage_1a15304a09f8cf9810fd209b73714678b9" compoundref="ocp_8cpp" startline="321" endline="377">fancyqlone::FanOCPStorage::compute_kkt_error</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1abf54de362a996127b86c8ae3c277c686" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::FanOCPStorage::KKTError::inequality_residual</definition>
+        <argsstring></argsstring>
+        <name>inequality_residual</name>
+        <qualifiedname>fancyqlone::FanOCPStorage::KKTError::inequality_residual</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="486" column="29" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="486" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanOCPStorage_1a15304a09f8cf9810fd209b73714678b9" compoundref="ocp_8cpp" startline="321" endline="377">fancyqlone::FanOCPStorage::compute_kkt_error</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1a41f367640676291ff83b2af6cb2e848f" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::FanOCPStorage::KKTError::equality_residual</definition>
+        <argsstring></argsstring>
+        <name>equality_residual</name>
+        <qualifiedname>fancyqlone::FanOCPStorage::KKTError::equality_residual</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="486" column="49" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="486" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanOCPStorage_1a15304a09f8cf9810fd209b73714678b9" compoundref="ocp_8cpp" startline="321" endline="377">fancyqlone::FanOCPStorage::compute_kkt_error</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1a2f48cdf3b418a23f7960ee7ab3f3552b" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::FanOCPStorage::KKTError::complementarity</definition>
+        <argsstring></argsstring>
+        <name>complementarity</name>
+        <qualifiedname>fancyqlone::FanOCPStorage::KKTError::complementarity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="486" column="67" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="486" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanOCPStorage_1a15304a09f8cf9810fd209b73714678b9" compoundref="ocp_8cpp" startline="321" endline="377">fancyqlone::FanOCPStorage::compute_kkt_error</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::FanOCPStorage::KKTError</label>
+        <link refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="485" column="5" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="485" bodyend="487"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1a2f48cdf3b418a23f7960ee7ab3f3552b" prot="public" virt="non-virtual"><scope>fancyqlone::FanOCPStorage::KKTError</scope><name>complementarity</name></member>
+      <member refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1a41f367640676291ff83b2af6cb2e848f" prot="public" virt="non-virtual"><scope>fancyqlone::FanOCPStorage::KKTError</scope><name>equality_residual</name></member>
+      <member refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1abf54de362a996127b86c8ae3c277c686" prot="public" virt="non-virtual"><scope>fancyqlone::FanOCPStorage::KKTError</scope><name>inequality_residual</name></member>
+      <member refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1a65ceb483567e22193113b0d2e63c287e" prot="public" virt="non-virtual"><scope>fancyqlone::FanOCPStorage::KKTError</scope><name>stationarity</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

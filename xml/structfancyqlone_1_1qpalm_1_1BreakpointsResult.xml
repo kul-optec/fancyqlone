@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1BreakpointsResult" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::BreakpointsResult</compoundname>
+    <includes refid="breakpoint_8hpp" local="no">fancyqlone/fancyqpalm/implementation/breakpoint.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1BreakpointsResult_1aafb2edecbcd95f35aa65b5555e94a4bb" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints" kindref="compound">PartitionedBreakpoints</ref></type>
+        <definition>PartitionedBreakpoints fancyqlone::qpalm::BreakpointsResult::bp</definition>
+        <argsstring></argsstring>
+        <name>bp</name>
+        <qualifiedname>fancyqlone::qpalm::BreakpointsResult::bp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="43" column="28" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" bodystart="43" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1LineSearch_1a1909ab2d87fa89fb19898d0c76be770a" compoundref="implementation_2linesearch_8tpp" startline="125" endline="185">fancyqlone::qpalm::LineSearch&lt; Vec &gt;::operator()</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1BreakpointsResult_1ae46b6c81e68f9b46777d44cb84fe3731" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1ABSums" kindref="compound">ABSums</ref></type>
+        <definition>ABSums fancyqlone::qpalm::BreakpointsResult::ab_neg</definition>
+        <argsstring></argsstring>
+        <name>ab_neg</name>
+        <qualifiedname>fancyqlone::qpalm::BreakpointsResult::ab_neg</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="44" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" bodystart="44" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1LineSearch_1a1909ab2d87fa89fb19898d0c76be770a" compoundref="implementation_2linesearch_8tpp" startline="125" endline="185">fancyqlone::qpalm::LineSearch&lt; Vec &gt;::operator()</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>fancyqlone::qpalm::ABSums</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1ABSums"/>
+      </node>
+      <node id="4">
+        <label>fancyqlone::qpalm::Breakpoint</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1Breakpoint"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::qpalm::BreakpointsResult</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1BreakpointsResult"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+bp</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+ab_neg</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fancyqlone::qpalm::PartitionedBreakpoints</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+neg_bp</edgelabel>
+          <edgelabel>+pos_bp</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::span&lt; fancyqlone::qpalm::Breakpoint &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="42" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" bodystart="42" bodyend="45"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1BreakpointsResult_1ae46b6c81e68f9b46777d44cb84fe3731" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::BreakpointsResult</scope><name>ab_neg</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1BreakpointsResult_1aafb2edecbcd95f35aa65b5555e94a4bb" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::BreakpointsResult</scope><name>bp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

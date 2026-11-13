@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['gait_0',['gait',['../structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams.html#a1ca193cb823d00c1de45aedbed9c5642',1,'fancyqlone::qpalm::problems::CentroidalQuadrupedParams']]],
+  ['gemm_5fcopy_5flut_1',['gemm_copy_lut',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg_1_1micro__kernels_1_1gemm.html#a52b5c17207713303e30db6c43dec6de4',1,'batmat::linalg::micro_kernels::gemm::gemm_copy_lut'],['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg_1_1micro__kernels_1_1gemm_1_1detail.html#ad6f9bfa93eaed1655bfd343dcadf25dc',1,'batmat::linalg::micro_kernels::gemm::detail::gemm_copy_lut']]],
+  ['gemm_5fdiag_5fcopy_5flut_2',['gemm_diag_copy_lut',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg_1_1micro__kernels_1_1gemm__diag.html#a9605630dbb1bcb3b812451fb6bba0b19',1,'batmat::linalg::micro_kernels::gemm_diag']]],
+  ['gemv_5fcopy_5flut_3',['gemv_copy_lut',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg_1_1micro__kernels_1_1gemv.html#a097ffde945ec83c5c99f009b1255159a',1,'batmat::linalg::micro_kernels::gemv']]],
+  ['get_5fbreakpoints_4',['get_breakpoints',['../namespacefancyqlone_1_1qpalm.html#a39b3b7bd65a62c6ecc606506542ca966',1,'fancyqlone::qpalm']]],
+  ['get_5fmask_5',['get_mask',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a94c3eba4eaabc3dcb64cf1fa7727f802',1,'batmat::linalg']]],
+  ['get_5fmask_3c_20t_2c_20ts_2e_2e_2e_20_3e_6',['get_mask&lt; T, Ts... &gt;',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a6a6d52eeb2f4d133e251391d3fb5acb7',1,'batmat::linalg']]],
+  ['get_5fmask_3c_20with_5fmask_5ft_3c_20i_20_3e_2c_20ts_2e_2e_2e_20_3e_7',['get_mask&lt; with_mask_t&lt; I &gt;, Ts... &gt;',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a2a3eadfc27bc5ba985c93f77ec030dc9',1,'batmat::linalg']]],
+  ['get_5fpartitioned_5fbreakpoints_8',['get_partitioned_breakpoints',['../namespacefancyqlone_1_1qpalm.html#a007773760e14275aa0e91d97ce19f7fb',1,'fancyqlone::qpalm']]],
+  ['get_5frotate_9',['get_rotate',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a8c727e255c0df5a8041151fd6889b4fc',1,'batmat::linalg']]],
+  ['get_5frotate_3c_20t_2c_20ts_2e_2e_2e_20_3e_10',['get_rotate&lt; T, Ts... &gt;',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#abd28ef0011ceef42ba470ded4ec5035e',1,'batmat::linalg']]],
+  ['get_5frotate_3c_20with_5frotate_5ft_3c_20i_20_3e_2c_20ts_2e_2e_2e_20_3e_11',['get_rotate&lt; with_rotate_t&lt; I &gt;, Ts... &gt;',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a859255c62148ba0dbde3c1d7a01a3ceb',1,'batmat::linalg']]],
+  ['get_5ftrack_5fzeros_12',['get_track_zeros',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg_1_1detail_1_1gemm__diag.html#adc7e1eda16e2bcde71f87b6047a38dd2',1,'batmat::linalg::detail::gemm_diag']]],
+  ['get_5ftrack_5fzeros_3c_20t_2c_20ts_2e_2e_2e_20_3e_13',['get_track_zeros&lt; T, Ts... &gt;',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg_1_1detail_1_1gemm__diag.html#aa65143d0c39ae6fe326f01fdfe502ff2',1,'batmat::linalg::detail::gemm_diag']]],
+  ['get_5ftrack_5fzeros_3c_20track_5fzeros_5ft_3c_20z_20_3e_2c_20ts_2e_2e_2e_20_3e_14',['get_track_zeros&lt; track_zeros_t&lt; Z &gt;, Ts... &gt;',['https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg_1_1detail_1_1gemm__diag.html#ad3431c2cd24670081224da5c3ed2043a',1,'batmat::linalg::detail::gemm_diag']]],
+  ['global_15',['global',['https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1DynamicLoadFlags.html#a478ca75014206954b3ce3535bb0e8f6e',1,'guanaqo::DynamicLoadFlags']]],
+  ['grad_16',['grad',['../structfancyqlone_1_1qpalm_1_1SolverImplementation.html#a6d885f039b39b7b3c3da97286b1d273b',1,'fancyqlone::qpalm::SolverImplementation']]],
+  ['grad_5fadd_17',['grad_add',['../structfancyqlone_1_1qpalm_1_1SolverImplementation.html#a6d47028932e9559b54719f919cf77fa8',1,'fancyqlone::qpalm::SolverImplementation']]],
+  ['grad_5fstrided_18',['grad_strided',['../structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html#ae9fdeda1e957407dfb36a8b20448dfd3',1,'fancyqlone::qpalm::CyQPALMBackend']]],
+  ['gravity_19',['gravity',['../structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams.html#ab879e0814053d773e96f2e3ec19520c5',1,'fancyqlone::qpalm::problems::CentroidalQuadrupedParams']]],
+  ['guanaqo_5ftag_5finvoke_20',['guanaqo_tag_invoke',['https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__customization.html#ga6c5b18fd648bda579ceaf8eea82fd472',1,'guanaqo::tag_invoke_ns::guanaqo_tag_invoke'],['https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__customization.html#ga6c5b18fd648bda579ceaf8eea82fd472',1,'guanaqo::tag_invoke_ns::guanaqo_tag_invoke']]]
+];

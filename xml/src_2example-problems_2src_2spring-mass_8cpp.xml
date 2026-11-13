@@ -1,0 +1,346 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="src_2example-problems_2src_2spring-mass_8cpp" kind="file" language="C++">
+    <compoundname>spring-mass.cpp</compoundname>
+    <includes refid="ocp_8hpp" local="yes">fancyqlone/ocp.hpp</includes>
+    <includes local="no">batmat/config.hpp</includes>
+    <includes refid="conversion_8hpp" local="no">fancyqlone/conversion.hpp</includes>
+    <includes refid="spring-mass_8hpp" local="no">fancyqlone/fancyqpalm/example-problems/spring-mass.hpp</includes>
+    <includes refid="zoh_8hpp" local="no">fancyqlone/fancyqpalm/example-problems/zoh.hpp</includes>
+    <includes local="no">guanaqo/eigen/view.hpp</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">limits</includes>
+    <includes local="no">numeric</includes>
+    <includes local="no">random</includes>
+    <includes local="no">stdexcept</includes>
+    <incdepgraph>
+      <node id="11">
+        <label>fancyqlone/fancyqpalm/example-problems/spring-mass.hpp</label>
+        <link refid="spring-mass_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>fancyqlone/fancyqpalm/example-problems/zoh.hpp</label>
+        <link refid="zoh_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/example-problems/src/spring-mass.cpp</label>
+        <link refid="src_2example-problems_2src_2spring-mass_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>fancyqlone/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>fancyqlone/conversion.hpp</label>
+        <link refid="conversion_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fancyqlone/ocp.hpp</label>
+        <link refid="ocp_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>Eigen/Core</label>
+      </node>
+      <node id="18">
+        <label>algorithm</label>
+      </node>
+      <node id="3">
+        <label>batmat/config.hpp</label>
+      </node>
+      <node id="16">
+        <label>cassert</label>
+      </node>
+      <node id="12">
+        <label>fancyqlone/example-problems/export.h</label>
+      </node>
+      <node id="17">
+        <label>guanaqo/eigen/view.hpp</label>
+      </node>
+      <node id="10">
+        <label>guanaqo/linalg/sparsity.hpp</label>
+      </node>
+      <node id="5">
+        <label>guanaqo/mat-view.hpp</label>
+      </node>
+      <node id="6">
+        <label>guanaqo/print.hpp</label>
+      </node>
+      <node id="7">
+        <label>iostream</label>
+      </node>
+      <node id="19">
+        <label>limits</label>
+      </node>
+      <node id="20">
+        <label>numeric</label>
+      </node>
+      <node id="21">
+        <label>random</label>
+      </node>
+      <node id="22">
+        <label>stdexcept</label>
+      </node>
+      <node id="15">
+        <label>unsupported/Eigen/MatrixFunctions</label>
+      </node>
+      <node id="8">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacefancyqlone">fancyqlone</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm">fancyqlone::qpalm</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm_1_1problems">fancyqlone::qpalm::problems</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ocp_8hpp" kindref="compound">fancyqlone/ocp.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/config.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="conversion_8hpp" kindref="compound">fancyqlone/conversion.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="spring-mass_8hpp" kindref="compound">fancyqlone/fancyqpalm/example-problems/spring-mass.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="zoh_8hpp" kindref="compound">fancyqlone/fancyqpalm/example-problems/zoh.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;guanaqo/eigen/view.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;algorithm&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;limits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;numeric&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;random&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="config_8hpp_1aa4b496c143fba922704a143c4411beb1" kindref="member">FANCYQLONE_NS</ref>(<ref refid="namespacefancyqlone" kindref="compound">fancyqlone</ref>::qpalm::problems)<sp/>{</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="namespacefancyqlone_1_1qpalm_1_1problems_1a28c6f6b2da0b1720ba707c5351e1f5f7" refkind="member"><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem" kindref="compound">SpringMassProblem</ref><sp/><ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a28c6f6b2da0b1720ba707c5351e1f5f7" kindref="member">spring_mass</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams" kindref="compound">SpringMassParams</ref><sp/>p)<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group__linalg__views_1ga2ccef3dcd53320ccda2be9948781c65b" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::as_view</ref>;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>inf<sp/>=<sp/>std::numeric_limits&lt;real_t&gt;::infinity();</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>n_masses<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>.size());</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>ny_x<sp/><sp/><sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a5f4c951467b3f93bce635b623802a704" kindref="member">v_max</ref><sp/>&gt;<sp/>0<sp/>?<sp/>2<sp/>*<sp/>n_masses<sp/>:<sp/>n_masses,</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ny_x_N<sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a6d633bc3b4eb7231f6e85b0c9aa2c833" kindref="member">v_max_f</ref><sp/>&gt;<sp/>0<sp/>?<sp/>2<sp/>*<sp/>n_masses<sp/>:<sp/>n_masses;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1LinearOCPStorage" kindref="compound">LinearOCPStorage</ref><sp/>ocp{.dim{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.N_horiz<sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a7a8d1e0374f87744590361e0716fbb7c" kindref="member">N_horiz</ref>,</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.nx<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>2<sp/>*<sp/>n_masses,<sp/></highlight><highlight class="comment">//<sp/>position<sp/>+<sp/>velocity<sp/>for<sp/>each<sp/>mass</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.nu<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a43d1d5ad7ca31fcb4242f20b642f2b22" kindref="member">n_actuators</ref>,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ny<sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ny_x<sp/>+<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a43d1d5ad7ca31fcb4242f20b642f2b22" kindref="member">n_actuators</ref>,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ny_N<sp/><sp/><sp/><sp/>=<sp/>ny_x_N,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>}};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[N,<sp/>nx,<sp/>nu,<sp/>ny,<sp/>ny_N]<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" kindref="member">dim</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Continuous-time<sp/>dynamics</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref><sp/>A<sp/>=<sp/>eigen_mat::Zero(nx,<sp/>nx),<sp/>B<sp/>=<sp/>eigen_mat::Zero(nx,<sp/>nu),<sp/>b<sp/>=<sp/>eigen_mat::Zero(nx,<sp/>1);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(Eigen::Index<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>=<sp/>0;<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>&lt;<sp/>n_masses;<sp/>++<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>km<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1aed0f60da86572d85c4bc99f156216eb9" kindref="member">k_spring</ref><sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>];</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>A(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>ṗ(t)<sp/>=<sp/>v(t)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>A(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/>=<sp/>-p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1aa3bb54a4ca88ab2b1cf5a181eef31ce8" kindref="member">friction</ref>;<sp/></highlight><highlight class="comment">//<sp/>v̇(t)<sp/>=<sp/>-ρ<sp/>v(t)<sp/>+<sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>A(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>-2<sp/>*<sp/>km;<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>...<sp/>-<sp/>(2k/m)<sp/>p(t)<sp/>+<sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>A(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>-<sp/>1)<sp/>=<sp/>km;<sp/></highlight><highlight class="comment">//<sp/>...<sp/>+<sp/>(k/m)<sp/>p_{v-1}(t)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>&lt;<sp/>n_masses<sp/>-<sp/>1)</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>A(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>+<sp/>1)<sp/>=<sp/>km;<sp/></highlight><highlight class="comment">//<sp/>...<sp/>+<sp/>(k/m)<sp/>p_{v+1}(t)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/>=<sp/>km<sp/>*<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a357b32c5456d16dccde256b6399cdbe3" kindref="member">width</ref>;<sp/></highlight><highlight class="comment">//<sp/>Right<sp/>wall<sp/>force</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a9dc0a5da6779fd9a342b32ee7344ee25" kindref="member">actuator_placement</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a3870c15ac408fa3157f56ae43e175ac5ac28debccf0ec03098e0d622441b97501" kindref="member">SpringMassParams::IndividualActuators</ref>:</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(Eigen::Index<sp/>a<sp/>=<sp/>0;<sp/>a<sp/>&lt;<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a43d1d5ad7ca31fcb4242f20b642f2b22" kindref="member">n_actuators</ref>;<sp/>++a)</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B(n_masses<sp/>+<sp/>a,<sp/>a)<sp/>=<sp/>1<sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[a];</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a3870c15ac408fa3157f56ae43e175ac5ace4c2af40b98dbf0cb5a6c221a89b735" kindref="member">SpringMassParams::RandomActuators</ref>:<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::mt19937<sp/>rng(p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1ab574c84dacb8d6f6ec661cb14b0a3743" kindref="member">seed</ref>);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;index_t&gt;<sp/>actuator_indices(n_masses);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ranges::iota(actuator_indices,<sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>{});</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shuffle(actuator_indices.begin(),<sp/>actuator_indices.end(),<sp/>rng);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(Eigen::Index<sp/>a<sp/>=<sp/>0;<sp/>a<sp/>&lt;<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a43d1d5ad7ca31fcb4242f20b642f2b22" kindref="member">n_actuators</ref>;<sp/>++a)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B(n_masses<sp/>+<sp/>actuator_indices[a],<sp/>a)<sp/>=<sp/>1<sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[actuator_indices[a]];</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a3870c15ac408fa3157f56ae43e175ac5aa1d1d5f166ac34202eda32af48eeefbc" kindref="member">SpringMassParams::RandomPairsOfActuators</ref>:<sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::mt19937<sp/>rng(p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1ab574c84dacb8d6f6ec661cb14b0a3743" kindref="member">seed</ref>);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;index_t&gt;<sp/>actuator_indices_l(n_masses),<sp/>actuator_indices_r(n_masses);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ranges::iota(actuator_indices_l,<sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>{});</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::ranges::iota(actuator_indices_r,<sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>{});</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shuffle(actuator_indices_l.begin(),<sp/>actuator_indices_l.end(),<sp/>rng);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::shuffle(actuator_indices_r.begin(),<sp/>actuator_indices_r.end(),<sp/>rng);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(Eigen::Index<sp/>a<sp/>=<sp/>0;<sp/>a<sp/>&lt;<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a43d1d5ad7ca31fcb4242f20b642f2b22" kindref="member">n_actuators</ref>;<sp/>++a)<sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B(n_masses<sp/>+<sp/>actuator_indices_l[a],<sp/>a)<sp/>=<sp/>+1<sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[actuator_indices_l[a]];</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B(n_masses<sp/>+<sp/>actuator_indices_r[a],<sp/>a)<sp/>=<sp/>-1<sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[actuator_indices_r[a]];</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a3870c15ac408fa3157f56ae43e175ac5ab7136f7e85d24b484e2dc94d4ba33d5a" kindref="member">SpringMassParams::WangBoydActuators</ref>:</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(Eigen::Index<sp/>a<sp/>=<sp/>0;<sp/>a<sp/>&lt;<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a43d1d5ad7ca31fcb4242f20b642f2b22" kindref="member">n_actuators</ref>;<sp/>++a)<sp/>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(a<sp/>%<sp/>3<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>v_l<sp/>=<sp/>2<sp/>*<sp/>a,<sp/>v_r<sp/>=<sp/>2<sp/>*<sp/>a<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(v_l<sp/>&lt;<sp/>n_masses)</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B(n_masses<sp/>+<sp/>v_l,<sp/>a)<sp/>=<sp/>+1<sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[v_l];</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(v_r<sp/>&lt;<sp/>n_masses)</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B(n_masses<sp/>+<sp/>v_r,<sp/>a)<sp/>=<sp/>-1<sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[v_r];</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(a<sp/>%<sp/>3<sp/>==<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>v_l<sp/>=<sp/>2<sp/>*<sp/>a,<sp/>v_r<sp/>=<sp/>2<sp/>*<sp/>a<sp/>+<sp/>2;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(v_l<sp/>&lt;<sp/>n_masses)</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B(n_masses<sp/>+<sp/>v_l,<sp/>a)<sp/>=<sp/>+1<sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[v_l];</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(v_r<sp/>&lt;<sp/>n_masses)</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B(n_masses<sp/>+<sp/>v_r,<sp/>a)<sp/>=<sp/>-1<sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[v_r];</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>v_l<sp/>=<sp/>2<sp/>*<sp/>a<sp/>-<sp/>1,<sp/>v_r<sp/>=<sp/>2<sp/>*<sp/>a<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(v_l<sp/>&lt;<sp/>n_masses)</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B(n_masses<sp/>+<sp/>v_l,<sp/>a)<sp/>=<sp/>+1<sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[v_l];</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(v_r<sp/>&lt;<sp/>n_masses)</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>B(n_masses<sp/>+<sp/>v_r,<sp/>a)<sp/>=<sp/>-1<sp/>/<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" kindref="member">masses</ref>[v_r];</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:<sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight><highlight class="stringliteral">&quot;Invalid<sp/>actuator<sp/>placement&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>Ts<sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a89a70c9b03f36c55f702bc2e272d87ea" kindref="member">T_horiz</ref><sp/>/<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a7a8d1e0374f87744590361e0716fbb7c" kindref="member">N_horiz</ref>);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>ẋ<sp/>=<sp/>Ax<sp/>+<sp/>Bu<sp/>+<sp/>b<sp/><sp/>→<sp/><sp/>x[k+1]<sp/>=<sp/>Ad<sp/>x[k]<sp/>+<sp/>Bd<sp/>u[k]<sp/>+<sp/>bd</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>[Ad,<sp/>Bd,<sp/>bd]<sp/>=<sp/><ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0cf7ee6db68a2209fb95a6f343461591" kindref="member">discretize_zoh</ref>(A,<sp/>B,<sp/>b,<sp/>Ts);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Constraints<sp/>rhs</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" kindref="member">b</ref>().set_constant(0);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" kindref="member">b_min</ref>().set_constant(-inf);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" kindref="member">b_max</ref>().set_constant(+inf);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>x0<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" kindref="member">b</ref>(0);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>=<sp/>0;<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>&lt;<sp/>n_masses;<sp/>++<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/></highlight><highlight class="comment">//<sp/>Initial<sp/>positions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>x0(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>+<sp/>1)<sp/>*<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a357b32c5456d16dccde256b6399cdbe3" kindref="member">width</ref><sp/>/<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(n_masses<sp/>+<sp/>1);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Dynamics<sp/>and<sp/>constraint<sp/>matrices</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>N;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>Ai<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1aaea931c3de39b21c1adc2adda6927391" kindref="member">A</ref>(i),<sp/>Bi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a069e76a6c76bd62ab2eb0c5546f74897" kindref="member">B</ref>(i),<sp/>bi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" kindref="member">b</ref>(i<sp/>+<sp/>1),<sp/>Ci<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1ad991b26c207c150cf4117e3dea673b6d" kindref="member">C</ref>(i),<sp/>Di<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a755b42ad7574b683175254de50793aa0" kindref="member">D</ref>(i);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>Qi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" kindref="member">Q</ref>(i),<sp/>Ri<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1ab0b91b1dac835a47452d45c0d2d9f1ee" kindref="member">R</ref>(i);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>lbi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" kindref="member">b_min</ref>(i),<sp/>ubi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" kindref="member">b_max</ref>(i);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>=<sp/>0;<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>&lt;<sp/>n_masses;<sp/>++<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Ai<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>as_view(Ad);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Bi<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>as_view(Bd);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bi<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>as_view(bd);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Ci(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/><sp/>=<sp/>1;<sp/></highlight><highlight class="comment">//<sp/>Measure<sp/>displacement</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lbi(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/>=<sp/>x0(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/>+<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1ae8f483bc01bb19969aba0b83054e53a5" kindref="member">p_min</ref>;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ubi(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/>=<sp/>x0(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/>+<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a258e8b49d16185b306f31dec843c8a70" kindref="member">p_max</ref>;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a5f4c951467b3f93bce635b623802a704" kindref="member">v_max</ref><sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Ci(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/>=<sp/>1;<sp/></highlight><highlight class="comment">//<sp/>Measure<sp/>velocity</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lbi(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>-p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a5f4c951467b3f93bce635b623802a704" kindref="member">v_max</ref>;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ubi(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>+p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a5f4c951467b3f93bce635b623802a704" kindref="member">v_max</ref>;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Qi(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1afa903242f8e5f4270a156a84c3d87702" kindref="member">q_pos</ref>;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Qi(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a0381978841501bc74680613c211f2b63" kindref="member">q_vel</ref>;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>a<sp/>=<sp/>0;<sp/>a<sp/>&lt;<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a43d1d5ad7ca31fcb4242f20b642f2b22" kindref="member">n_actuators</ref>;<sp/>++a)<sp/>{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Di(ny_x<sp/>+<sp/>a,<sp/>a)<sp/><sp/>=<sp/>1;<sp/></highlight><highlight class="comment">//<sp/>Measure<sp/>input</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lbi(ny_x<sp/>+<sp/>a,<sp/>0)<sp/>=<sp/>-p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a76e7d91c9e87d37d0955f9afad53f846" kindref="member">F_max</ref>;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ubi(ny_x<sp/>+<sp/>a,<sp/>0)<sp/>=<sp/>+p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a76e7d91c9e87d37d0955f9afad53f846" kindref="member">F_max</ref>;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Ri(a,<sp/>a)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a65eb165b4cff46cd6c59d9df05997cfa" kindref="member">r_act</ref>;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>Ci<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1ad991b26c207c150cf4117e3dea673b6d" kindref="member">C</ref>(N),<sp/>Qi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" kindref="member">Q</ref>(N);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>lbi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" kindref="member">b_min</ref>(N),<sp/>ubi<sp/>=<sp/>ocp.<ref refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" kindref="member">b_max</ref>(N);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>=<sp/>0;<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>&lt;<sp/>n_masses;<sp/>++<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Ci(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/><sp/>=<sp/>1;<sp/></highlight><highlight class="comment">//<sp/>Measure<sp/>displacement</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lbi(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/>=<sp/>x0(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/>+<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1acba02f1a5a83c23dfe9a5484fb716c2b" kindref="member">p_min_f</ref>;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ubi(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/>=<sp/>x0(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/>+<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a192d6833a5f25b5f12530fe336c9e66e" kindref="member">p_max_f</ref>;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a6d633bc3b4eb7231f6e85b0c9aa2c833" kindref="member">v_max_f</ref><sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Ci(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/>=<sp/>1;<sp/></highlight><highlight class="comment">//<sp/>Measure<sp/>velocity</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lbi(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>-p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a6d633bc3b4eb7231f6e85b0c9aa2c833" kindref="member">v_max_f</ref>;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ubi(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>+p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a6d633bc3b4eb7231f6e85b0c9aa2c833" kindref="member">v_max_f</ref>;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Qi(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a089bcd6d646a0341ef8590ca816e0b18" kindref="member">q_pos_f</ref>;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Qi(n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>n_masses<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/>=<sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a866961b0395fad85fa519113069a5bdd" kindref="member">q_vel_f</ref>;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;real_t&gt;<sp/>ref(nx<sp/>+<sp/>nu<sp/>+<sp/>nx);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>=<sp/>0;<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref><sp/>&lt;<sp/>n_masses;<sp/>++<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ref[<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>]<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>x0(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0);<sp/></highlight><highlight class="comment">//<sp/>position</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ref[nx<sp/>+<sp/>nu<sp/>+<sp/><ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>]<sp/>=<sp/>x0(<ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>,<sp/>0);<sp/></highlight><highlight class="comment">//<sp/>final<sp/>position</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-ocp-formulations_1gaec2ffbb855f9e5dcfc01dcf321ce51cb" kindref="member">reference_to_gradient</ref>(ocp,<sp/>ref);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ocp<sp/>=<sp/>std::move(ocp),</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.ref<sp/>=<sp/>std::move(ref),</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="161"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="162" refid="namespacefancyqlone_1_1qpalm_1_1problems_1ad6df35818fd1a905713ce59651c93018" refkind="member"><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanSpringMassProblem" kindref="compound">FanSpringMassProblem</ref><sp/><ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1ad6df35818fd1a905713ce59651c93018" kindref="member">fan_spring_mass</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams" kindref="compound">SpringMassParams</ref><sp/>p,<sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>num_branches,</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/>k_spring_diff)<sp/>{</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;fancyqlone::LinearOCPStorage&gt;<sp/>ocps(num_branches);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;real_t&gt;<sp/>ref;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1aed0f60da86572d85c4bc99f156216eb9" kindref="member">k_spring</ref><sp/>-=<sp/>k_spring_diff;<sp/></highlight><highlight class="comment">//<sp/>perturb<sp/>spring<sp/>constants<sp/>for<sp/>each<sp/>branch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>b<sp/>=<sp/>0;<sp/>b<sp/>&lt;<sp/>num_branches;<sp/>++b)<sp/>{</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>std::cout<sp/>&lt;&lt;<sp/>&quot;Branch<sp/>&quot;<sp/>&lt;&lt;<sp/>b<sp/>&lt;&lt;<sp/>&quot;:<sp/>k_spring<sp/>=<sp/>&quot;<sp/>&lt;&lt;<sp/>p.k_spring<sp/>&lt;&lt;<sp/>std::endl;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>ocp<sp/>=<sp/>ocps[b]<sp/>=<sp/><ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a28c6f6b2da0b1720ba707c5351e1f5f7" kindref="member">spring_mass</ref>(p).ocp;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ref<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a28c6f6b2da0b1720ba707c5351e1f5f7" kindref="member">spring_mass</ref>(p).ref;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(num_branches<sp/>&gt;<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Perturb<sp/>spring<sp/>constants<sp/>for<sp/>each<sp/>branch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>p.<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1aed0f60da86572d85c4bc99f156216eb9" kindref="member">k_spring</ref><sp/>+=</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>2<sp/>*<sp/>k_spring_diff<sp/>/<sp/>(num_branches<sp/>-<sp/>1);<sp/></highlight><highlight class="comment">//<sp/>perturb<sp/>spring<sp/>constants<sp/>for<sp/>each<sp/>branch</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref><sp/>focp{.ocps<sp/>=<sp/>std::move(ocps)};</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{.ocp<sp/>=<sp/>std::move(focp),<sp/>.ref<sp/>=<sp/>std::move(ref)};</highlight></codeline>
+<codeline lineno="181"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="182"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>FANCYQLONE_NS(fancyqlone::qpalm::problems)</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/example-problems/src/spring-mass.cpp"/>
+  </compounddef>
+</doxygen>

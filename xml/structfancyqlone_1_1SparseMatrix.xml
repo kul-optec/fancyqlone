@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1SparseMatrix" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::SparseMatrix</compoundname>
+    <includes refid="sparse_8hpp" local="no">fancyqlone/sparse.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1SparseMatrix_1a0a8d68ccf8fffff9a607026429f2e6ca" prot="public" static="no" mutable="no">
+        <type>const std::vector&lt; <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>const std::vector&lt;index_t&gt; fancyqlone::SparseMatrix::row_indices</definition>
+        <argsstring></argsstring>
+        <name>row_indices</name>
+        <qualifiedname>fancyqlone::SparseMatrix::row_indices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/sparse.hpp" line="27" column="23" bodyfile="src/fancyqlone/include/fancyqlone/sparse.hpp" bodystart="27" bodyend="-1"/>
+        <referencedby refid="group__topic-util-matio_1ga173c33213fca9d73dd78980979535903" compoundref="matio_8cpp" startline="244" endline="280">fancyqlone::add_to_mat</referencedby>
+        <referencedby refid="structfancyqlone_1_1SparseMatrix_1ae547a63ff9b3f900d0f7fc88fb0aaf52" compoundref="sparse_8hpp" startline="31" endline="33">iter_coo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SparseMatrix_1af7c4e47b5be9c19fb9dc8c0bff7d130c" prot="public" static="no" mutable="no">
+        <type>const std::vector&lt; <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>const std::vector&lt;index_t&gt; fancyqlone::SparseMatrix::col_indices</definition>
+        <argsstring></argsstring>
+        <name>col_indices</name>
+        <qualifiedname>fancyqlone::SparseMatrix::col_indices</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/sparse.hpp" line="27" column="35" bodyfile="src/fancyqlone/include/fancyqlone/sparse.hpp" bodystart="27" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1SparseMatrix_1ae547a63ff9b3f900d0f7fc88fb0aaf52" compoundref="sparse_8hpp" startline="31" endline="33">iter_coo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SparseMatrix_1a8365ad6a99e81d7f647411bc2fcbe403" prot="public" static="no" mutable="no">
+        <type>const std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>const std::vector&lt;real_t&gt; fancyqlone::SparseMatrix::values</definition>
+        <argsstring></argsstring>
+        <name>values</name>
+        <qualifiedname>fancyqlone::SparseMatrix::values</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/sparse.hpp" line="28" column="23" bodyfile="src/fancyqlone/include/fancyqlone/sparse.hpp" bodystart="28" bodyend="-1"/>
+        <referencedby refid="group__topic-util-matio_1ga173c33213fca9d73dd78980979535903" compoundref="matio_8cpp" startline="244" endline="280">fancyqlone::add_to_mat</referencedby>
+        <referencedby refid="structfancyqlone_1_1SparseMatrix_1ae547a63ff9b3f900d0f7fc88fb0aaf52" compoundref="sparse_8hpp" startline="31" endline="33">iter_coo</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1SparseMatrix_1ae38d2bccab556db5fe8df4eb011150cd" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structguanaqo_1_1linalg_1_1sparsity_1_1SparseCOO" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">SparseCOO</ref>&lt; <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>const SparseCOO&lt;index_t&gt; fancyqlone::SparseMatrix::sparsity</definition>
+        <argsstring></argsstring>
+        <name>sparsity</name>
+        <qualifiedname>fancyqlone::SparseMatrix::sparsity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/sparse.hpp" line="29" column="21" bodyfile="src/fancyqlone/include/fancyqlone/sparse.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1SparseMatrix_1ae547a63ff9b3f900d0f7fc88fb0aaf52" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto fancyqlone::SparseMatrix::iter_coo</definition>
+        <argsstring>() const</argsstring>
+        <name>iter_coo</name>
+        <qualifiedname>fancyqlone::SparseMatrix::iter_coo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/sparse.hpp" line="31" column="11" bodyfile="src/fancyqlone/include/fancyqlone/sparse.hpp" bodystart="31" bodyend="33"/>
+        <references refid="structfancyqlone_1_1SparseMatrix_1af7c4e47b5be9c19fb9dc8c0bff7d130c" compoundref="sparse_8hpp" startline="27">col_indices</references>
+        <references refid="structfancyqlone_1_1SparseMatrix_1a0a8d68ccf8fffff9a607026429f2e6ca" compoundref="sparse_8hpp" startline="27">row_indices</references>
+        <references refid="structfancyqlone_1_1SparseMatrix_1a8365ad6a99e81d7f647411bc2fcbe403" compoundref="sparse_8hpp" startline="28">values</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A sparse matrix in COO format. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::SparseMatrix</label>
+        <link refid="structfancyqlone_1_1SparseMatrix"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+col_indices</edgelabel>
+          <edgelabel>+row_indices</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+values</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+sparsity</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>guanaqo::linalg::sparsity::SparseCOO&lt; index_t &gt;</label>
+        <link refid="structguanaqo_1_1linalg_1_1sparsity_1_1SparseCOO" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+col_indices</edgelabel>
+          <edgelabel>+row_indices</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::span&lt; const index_t &gt;</label>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; index_t &gt;</label>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; real_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/sparse.hpp" line="26" column="1" bodyfile="src/fancyqlone/include/fancyqlone/sparse.hpp" bodystart="26" bodyend="34"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1SparseMatrix_1af7c4e47b5be9c19fb9dc8c0bff7d130c" prot="public" virt="non-virtual"><scope>fancyqlone::SparseMatrix</scope><name>col_indices</name></member>
+      <member refid="structfancyqlone_1_1SparseMatrix_1ae547a63ff9b3f900d0f7fc88fb0aaf52" prot="public" virt="non-virtual"><scope>fancyqlone::SparseMatrix</scope><name>iter_coo</name></member>
+      <member refid="structfancyqlone_1_1SparseMatrix_1a0a8d68ccf8fffff9a607026429f2e6ca" prot="public" virt="non-virtual"><scope>fancyqlone::SparseMatrix</scope><name>row_indices</name></member>
+      <member refid="structfancyqlone_1_1SparseMatrix_1ae38d2bccab556db5fe8df4eb011150cd" prot="public" virt="non-virtual"><scope>fancyqlone::SparseMatrix</scope><name>sparsity</name></member>
+      <member refid="structfancyqlone_1_1SparseMatrix_1a8365ad6a99e81d7f647411bc2fcbe403" prot="public" virt="non-virtual"><scope>fancyqlone::SparseMatrix</scope><name>values</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

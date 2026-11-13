@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1FanOCPStorage_1_1Solution" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::FanOCPStorage::Solution</compoundname>
+    <includes refid="ocp_8hpp" local="no">fancyqlone/ocp.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1FanOCPStorage_1_1Solution_1a28b6e9d1e700f519aa90712eb5084bcd" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution" kindref="compound">LinearOCPStorage::Solution</ref> &gt;</type>
+        <definition>std::vector&lt;LinearOCPStorage::Solution&gt; fancyqlone::FanOCPStorage::Solution::solutions</definition>
+        <argsstring></argsstring>
+        <name>solutions</name>
+        <qualifiedname>fancyqlone::FanOCPStorage::Solution::solutions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="468" column="21" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="468" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanOCPStorage_1_1Solution_1a663b8ebeeabc4986f9b470b54dff84e9" compoundref="ocp_8hpp" startline="469" endline="483">print</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1ae4c0e73f39640b170695a8af7e3f49c6" compoundref="cyqlone-storage_8cpp" startline="240" endline="301">fancyqlone::FanCyqloneStorage&lt; T &gt;::reconstruct_solution</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1FanOCPStorage_1_1Solution_1a663b8ebeeabc4986f9b470b54dff84e9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::FanOCPStorage::Solution::print</definition>
+        <argsstring>(std::vector&lt; OCPDim &gt; OCPdims) const</argsstring>
+        <name>print</name>
+        <qualifiedname>fancyqlone::FanOCPStorage::Solution::print</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref> &gt;</type>
+          <declname>OCPdims</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="469" column="14" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="469" bodyend="483"/>
+        <references refid="group__io_1ga756d1c6bfac4b93da66e64e5f9c2b463">guanaqo::print_python</references>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1_1Solution_1a28b6e9d1e700f519aa90712eb5084bcd" compoundref="ocp_8hpp" startline="468">solutions</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::FanOCPStorage::Solution</label>
+        <link refid="structfancyqlone_1_1FanOCPStorage_1_1Solution"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+solutions</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fancyqlone::LinearOCPStorage::Solution</label>
+        <link refid="structfancyqlone_1_1LinearOCPStorage_1_1Solution"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+equality_multipliers</edgelabel>
+          <edgelabel>+inequality_multipliers</edgelabel>
+          <edgelabel>+solution</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; fancyqlone::LinearOCPStorage::Solution &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; real_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="467" column="5" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="467" bodyend="484"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1FanOCPStorage_1_1Solution_1a663b8ebeeabc4986f9b470b54dff84e9" prot="public" virt="non-virtual"><scope>fancyqlone::FanOCPStorage::Solution</scope><name>print</name></member>
+      <member refid="structfancyqlone_1_1FanOCPStorage_1_1Solution_1a28b6e9d1e700f519aa90712eb5084bcd" prot="public" virt="non-virtual"><scope>fancyqlone::FanOCPStorage::Solution</scope><name>solutions</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

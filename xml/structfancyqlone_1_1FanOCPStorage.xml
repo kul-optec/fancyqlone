@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1FanOCPStorage" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::FanOCPStorage</compoundname>
+    <includes refid="ocp_8hpp" local="no">fancyqlone/ocp.hpp</includes>
+    <innerclass refid="structfancyqlone_1_1FanOCPStorage_1_1Solution" prot="public">fancyqlone::FanOCPStorage::Solution</innerclass>
+    <innerclass refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError" prot="public">fancyqlone::FanOCPStorage::KKTError</innerclass>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1FanOCPStorage_1af4a8d99749d3c45c066a3b0a7afed335" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfancyqlone_1_1LinearOCPStorage" kindref="compound">LinearOCPStorage</ref> &gt;</type>
+        <definition>std::vector&lt;LinearOCPStorage&gt; fancyqlone::FanOCPStorage::ocps</definition>
+        <argsstring></argsstring>
+        <name>ocps</name>
+        <qualifiedname>fancyqlone::FanOCPStorage::ocps</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="463" column="17" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="463" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1FanOCPStorage_1a15304a09f8cf9810fd209b73714678b9" compoundref="ocp_8cpp" startline="321" endline="377">compute_kkt_error</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanOCPStorage_1a4c3dd985a1d707518b514703c4346932" compoundref="ocp_8hpp" startline="466" endline="466">num_branches</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1FanOCPStorage_1a4c3dd985a1d707518b514703c4346932" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::FanOCPStorage::num_branches</definition>
+        <argsstring>() const</argsstring>
+        <name>num_branches</name>
+        <qualifiedname>fancyqlone::FanOCPStorage::num_branches</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="466" column="13" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="466" bodyend="466"/>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1af4a8d99749d3c45c066a3b0a7afed335" compoundref="ocp_8hpp" startline="463">ocps</references>
+        <referencedby refid="structfancyqlone_1_1FanOCPStorage_1a15304a09f8cf9810fd209b73714678b9" compoundref="ocp_8cpp" startline="321" endline="377">compute_kkt_error</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneStorage_1a8c52c7b2663ff80de9ceac0dabf903d6" compoundref="cyqlone-storage_8cpp" startline="182" endline="224">fancyqlone::FanCyqloneStorage&lt; T &gt;::update_impl</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1FanOCPStorage_1a15304a09f8cf9810fd209b73714678b9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError" kindref="compound">KKTError</ref></type>
+        <definition>auto fancyqlone::FanOCPStorage::compute_kkt_error</definition>
+        <argsstring>(const Solution &amp;sol, bool hpipm=false) const</argsstring>
+        <name>compute_kkt_error</name>
+        <qualifiedname>fancyqlone::FanOCPStorage::compute_kkt_error</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1FanOCPStorage_1_1Solution" kindref="compound">Solution</ref> &amp;</type>
+          <declname>sol</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>hpipm</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="488" column="15" bodyfile="src/fancyqlone/src/ocp.cpp" bodystart="321" bodyend="377"/>
+        <references refid="structguanaqo_1_1MatrixView_1aca1731674c012b0c6a295703172f189b">guanaqo::MatrixView&lt; class T, class I, class S, StorageOrder O &gt;::as_column</references>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1a2f48cdf3b418a23f7960ee7ab3f3552b" compoundref="ocp_8hpp" startline="486">fancyqlone::FanOCPStorage::KKTError::complementarity</references>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1a41f367640676291ff83b2af6cb2e848f" compoundref="ocp_8hpp" startline="486">fancyqlone::FanOCPStorage::KKTError::equality_residual</references>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1abf54de362a996127b86c8ae3c277c686" compoundref="ocp_8hpp" startline="486">fancyqlone::FanOCPStorage::KKTError::inequality_residual</references>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1a4c3dd985a1d707518b514703c4346932" compoundref="ocp_8hpp" startline="466" endline="466">num_branches</references>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1af4a8d99749d3c45c066a3b0a7afed335" compoundref="ocp_8hpp" startline="463">ocps</references>
+        <references refid="structfancyqlone_1_1FanOCPStorage_1_1KKTError_1a65ceb483567e22193113b0d2e63c287e" compoundref="ocp_8hpp" startline="486">fancyqlone::FanOCPStorage::KKTError::stationarity</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::FanOCPStorage</label>
+        <link refid="structfancyqlone_1_1FanOCPStorage"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+ocps</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fancyqlone::LinearOCPStorage</label>
+        <link refid="structfancyqlone_1_1LinearOCPStorage"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+dim</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+storage</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>fancyqlone::OCPDim</label>
+        <link refid="structfancyqlone_1_1OCPDim"/>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; fancyqlone::LinearOCPStorage &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::vector&lt; real_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="462" column="1" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="462" bodyend="489"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1FanOCPStorage_1a15304a09f8cf9810fd209b73714678b9" prot="public" virt="non-virtual"><scope>fancyqlone::FanOCPStorage</scope><name>compute_kkt_error</name></member>
+      <member refid="structfancyqlone_1_1FanOCPStorage_1a4c3dd985a1d707518b514703c4346932" prot="public" virt="non-virtual"><scope>fancyqlone::FanOCPStorage</scope><name>num_branches</name></member>
+      <member refid="structfancyqlone_1_1FanOCPStorage_1af4a8d99749d3c45c066a3b0a7afed335" prot="public" virt="non-virtual"><scope>fancyqlone::FanOCPStorage</scope><name>ocps</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1EmptyCompletion" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::EmptyCompletion</compoundname>
+    <includes refid="barrier_8hpp" local="no">fancyqlone/barrier.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1EmptyCompletion_1aa52081e36f7e15fbb1f55c2a49d96c22" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::EmptyCompletion::operator()</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>fancyqlone::EmptyCompletion::operator()</qualifiedname>
+        <briefdescription>
+<para>Does nothing. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="44" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>No-op completion function for the <ref refid="classfancyqlone_1_1TreeBarrier" kindref="compound">TreeBarrier</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::EmptyCompletion</label>
+        <link refid="structfancyqlone_1_1EmptyCompletion"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="43" column="1" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="43" bodyend="45"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1EmptyCompletion_1aa52081e36f7e15fbb1f55c2a49d96c22" prot="public" virt="non-virtual"><scope>fancyqlone::EmptyCompletion</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

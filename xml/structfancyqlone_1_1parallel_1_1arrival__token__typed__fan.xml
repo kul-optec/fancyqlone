@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::parallel::arrival_token_typed_fan</compoundname>
+    <includes refid="parallel_8hpp" local="no">fancyqlone/parallel.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan_1a3a9cf4feb89276441339e4a432bd0278" prot="public" static="no">
+        <type>typename FanSharedContext::barrier_type::template arrival_token_typed&lt; T &gt;</type>
+        <definition>using fancyqlone::parallel::arrival_token_typed_fan&lt; T &gt;::total_token_t = typename FanSharedContext::barrier_type::template arrival_token_typed&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>total_token_t</name>
+        <qualifiedname>fancyqlone::parallel::arrival_token_typed_fan::total_token_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="293" column="5" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="293" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan_1a926f1b76ff6313b14d2a6affc127a3af" prot="public" static="no">
+        <type>typename SharedContext::barrier_type::template arrival_token_typed&lt; T &gt;</type>
+        <definition>using fancyqlone::parallel::arrival_token_typed_fan&lt; T &gt;::branch_token_t = typename SharedContext::barrier_type::template arrival_token_typed&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>branch_token_t</name>
+        <qualifiedname>fancyqlone::parallel::arrival_token_typed_fan::branch_token_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="294" column="5" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="294" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan_1a82e933c3174b55edcdb19eb4820a1da5" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan_1a3a9cf4feb89276441339e4a432bd0278" kindref="member">total_token_t</ref></type>
+        <definition>total_token_t fancyqlone::parallel::arrival_token_typed_fan&lt; T &gt;::total_token</definition>
+        <argsstring></argsstring>
+        <name>total_token</name>
+        <qualifiedname>fancyqlone::parallel::arrival_token_typed_fan::total_token</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="295" column="19" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="295" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan_1afa581b036dfa9ea99c1d7e3ed3a9f3df" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan_1a926f1b76ff6313b14d2a6affc127a3af" kindref="member">branch_token_t</ref></type>
+        <definition>branch_token_t fancyqlone::parallel::arrival_token_typed_fan&lt; T &gt;::branch_token</definition>
+        <argsstring></argsstring>
+        <name>branch_token</name>
+        <qualifiedname>fancyqlone::parallel::arrival_token_typed_fan::branch_token</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="296" column="20" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="296" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::parallel::arrival_token_typed_fan&lt; T &gt;</label>
+        <link refid="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="292" column="1" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="292" bodyend="297"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan_1afa581b036dfa9ea99c1d7e3ed3a9f3df" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::arrival_token_typed_fan</scope><name>branch_token</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan_1a926f1b76ff6313b14d2a6affc127a3af" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::arrival_token_typed_fan</scope><name>branch_token_t</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan_1a82e933c3174b55edcdb19eb4820a1da5" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::arrival_token_typed_fan</scope><name>total_token</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1arrival__token__typed__fan_1a3a9cf4feb89276441339e4a432bd0278" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::arrival_token_typed_fan</scope><name>total_token_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

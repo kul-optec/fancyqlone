@@ -1,0 +1,10 @@
+var namespacefancyqlone_1_1qpalm_1_1detail =
+[
+    [ "backend_stats_type&lt; CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; &gt;", "namespacefancyqlone_1_1qpalm_1_1detail.html#structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type_3_01CyQPALMBackend_3_01VL_00_01Defaubd648f5f0e10a35ee91edfe54afecd28", "namespacefancyqlone_1_1qpalm_1_1detail_structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type_3_01CyQPALMBackend_3_01VL_00_01Defaubd648f5f0e10a35ee91edfe54afecd28_dup" ],
+    [ "backend_type&lt; unique_CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; &gt;", "namespacefancyqlone_1_1qpalm_1_1detail.html#structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01unique__CyQPALMBackend_3_01VL_00_01Defa306830a29b74570e9069a8a538af8ff0", "namespacefancyqlone_1_1qpalm_1_1detail_structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01unique__CyQPALMBackend_3_01VL_00_01Defa306830a29b74570e9069a8a538af8ff0_dup" ],
+    [ "backend_type", "namespacefancyqlone_1_1qpalm_1_1detail.html#structfancyqlone_1_1qpalm_1_1detail_1_1backend__type", null ],
+    [ "backend_type&lt; std::unique_ptr&lt; T, D &gt; &gt;", "namespacefancyqlone_1_1qpalm_1_1detail.html#structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01std_1_1unique__ptr_3_01T_00_01D_01_4_01_4", "namespacefancyqlone_1_1qpalm_1_1detail_structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01std_1_1unique__ptr_3_01T_00_01D_01_4_01_4_dup" ],
+    [ "backend_type&lt; T * &gt;", "namespacefancyqlone_1_1qpalm_1_1detail.html#structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01T_01_5_01_4", "namespacefancyqlone_1_1qpalm_1_1detail_structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01T_01_5_01_4_dup" ],
+    [ "backend_stats_type", "namespacefancyqlone_1_1qpalm_1_1detail.html#structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type", null ],
+    [ "backend_type_t", "namespacefancyqlone_1_1qpalm_1_1detail.html#a49f3a418b141bc5e8f6b556923568b6a", null ]
+];

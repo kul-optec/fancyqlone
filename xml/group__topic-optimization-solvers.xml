@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="group__topic-optimization-solvers" kind="group">
+    <compoundname>topic-optimization-solvers</compoundname>
+    <title>Optimization solvers</title>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1DetailedStats" prot="public">fancyqlone::qpalm::DetailedStats</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1Settings" prot="public">fancyqlone::qpalm::Settings</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1SolverTimings" prot="public">fancyqlone::qpalm::SolverTimings</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1SolverStats" prot="public">fancyqlone::qpalm::SolverStats</innerclass>
+    <innerclass refid="classfancyqlone_1_1qpalm_1_1Solver" prot="public">fancyqlone::qpalm::Solver</innerclass>
+    <innergroup refid="group__topic-optimization-solvers-ocp">Optimal control solvers</innergroup>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>SolverStatus</name>
+        <qualifiedname>fancyqlone::qpalm::SolverStatus</qualifiedname>
+        <enumvalue id="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ad8a942ef2b04672adfafef0ad817a407" prot="public">
+          <name>Busy</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>In progress. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ada5418b1eb4e80d05f2c1c7c4fa1b6ec" prot="public">
+          <name>Converged</name>
+          <briefdescription>
+<para>Converged and reached given tolerance. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a9e8b9350c8f1716701ec1f9bbe76432e" prot="public">
+          <name>MaxTime</name>
+          <briefdescription>
+<para>Maximum allowed execution time exceeded. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78abbf52264f7a6e91c48a242f95aeed3db" prot="public">
+          <name>MaxIter</name>
+          <briefdescription>
+<para>Maximum number of iterations exceeded. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78aff6e97b110349dae9c6e8be0ff7a85c3" prot="public">
+          <name>NotFinite</name>
+          <briefdescription>
+<para>Intermediate results were infinite or not-a-number. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ab644b4f0de4cf0c46acb4583602e168c" prot="public">
+          <name>NoProgress</name>
+          <briefdescription>
+<para>No progress was made in the last iteration. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a12c37c4278b8c0db6c2f65052569cd80" prot="public">
+          <name>Interrupted</name>
+          <briefdescription>
+<para><ref refid="classfancyqlone_1_1qpalm_1_1Solver" kindref="compound">Solver</ref> was interrupted by the user. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ab0d4998a26f5b5742ad38c4af8817e32" prot="public">
+          <name>Exception</name>
+          <briefdescription>
+<para>An unexpected exception was thrown. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Exit status of a numerical solver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/status.hpp" line="12" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/status.hpp" bodystart="12" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Solvers for structured optimization problems (QP and linear-quadratic optimal control). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

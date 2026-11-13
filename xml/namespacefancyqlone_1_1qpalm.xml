@@ -1,0 +1,1488 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacefancyqlone_1_1qpalm" kind="namespace" language="C++">
+    <compoundname>fancyqlone::qpalm</compoundname>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CyqloneData" prot="public">fancyqlone::qpalm::CyqloneData</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" prot="public">fancyqlone::qpalm::CyQPALMBackendSettings</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats" prot="public">fancyqlone::qpalm::CyQPALMBackendStats</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" prot="public">fancyqlone::qpalm::CyQPALMBackend</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits" prot="public">fancyqlone::qpalm::CycloneBackendTraits</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411" prot="public">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::CyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb" prot="public">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908" prot="public">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" prot="public">fancyqlone::qpalm::unique_CyQPALMBackend</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1DetailedStats" prot="public">fancyqlone::qpalm::DetailedStats</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1Breakpoint" prot="public">fancyqlone::qpalm::Breakpoint</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1ABSums" prot="public">fancyqlone::qpalm::ABSums</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints" prot="public">fancyqlone::qpalm::PartitionedBreakpoints</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1BreakpointsResult" prot="public">fancyqlone::qpalm::BreakpointsResult</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1compute__breakpoints__fn" prot="public">fancyqlone::qpalm::compute_breakpoints_fn</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1get__partitioned__breakpoints__fn" prot="public">fancyqlone::qpalm::get_partitioned_breakpoints_fn</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1get__breakpoints__fn" prot="public">fancyqlone::qpalm::get_breakpoints_fn</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1LineSearchSettings" prot="public">fancyqlone::qpalm::LineSearchSettings</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1LineSearch" prot="public">fancyqlone::qpalm::LineSearch</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1SolverImplementation" prot="public">fancyqlone::qpalm::SolverImplementation</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1Settings" prot="public">fancyqlone::qpalm::Settings</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1SolverTimings" prot="public">fancyqlone::qpalm::SolverTimings</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1SolverStats" prot="public">fancyqlone::qpalm::SolverStats</innerclass>
+    <innerclass refid="classfancyqlone_1_1qpalm_1_1Solver" prot="public">fancyqlone::qpalm::Solver</innerclass>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm_1_1problems">fancyqlone::qpalm::problems</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm_1_1detail">fancyqlone::qpalm::detail</innernamespace>
+    <sectiondef kind="enum">
+      <member refid="group__topic-optimization-solvers-ocp_1gac67dc98973eb37748e986ba97732b38c" kind="enum"><name>WarmStartingStrategy</name></member>
+      <member refid="group__topic-optimization-solvers-ocp_1ga90c820ba89c66a51ee3e57a7ebf796d2" kind="enum"><name>FanWarmStartingStrategy</name></member>
+      <member refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" kind="enum"><name>SolverStatus</name></member>
+      <memberdef kind="enum" id="namespacefancyqlone_1_1qpalm_1a12561d95ffd5ca9cc074d7b3edceb429" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>StorageOrder</name>
+        <qualifiedname>fancyqlone::qpalm::StorageOrder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="71" column="1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacefancyqlone_1_1qpalm_1a49bd3110c376daeaa8abb3fc29b761cd" prot="public" static="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>using fancyqlone::qpalm::ABSum_t = real_t</definition>
+        <argsstring></argsstring>
+        <name>ABSum_t</name>
+        <qualifiedname>fancyqlone::qpalm::ABSum_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="26" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="example_8cpp_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+            <declname>v</declname>
+            <defname>v</defname>
+          </param>
+          <param>
+            <type>StorageOrder</type>
+            <declname>order</declname>
+            <defname>order</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">CyqloneSolver</ref>&lt; <ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>, <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1af61fff0ad381f171d5c3d5fdbb5835d5" kindref="member">order</ref>, <ref refid="structfancyqlone_1_1parallel_1_1Context" kindref="compound">parallel::Context</ref>&lt; <ref refid="structfancyqlone_1_1parallel_1_1SharedContext" kindref="compound">parallel::SharedContext</ref> &gt; &gt;</type>
+        <definition>using fancyqlone::qpalm::DefaultInnerSolver = 
+CyqloneSolver&lt;v, real_t, order, parallel::Context&lt;parallel::SharedContext&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>DefaultInnerSolver</name>
+        <qualifiedname>fancyqlone::qpalm::DefaultInnerSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="30" column="1" bodyfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="example_8cpp_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+            <declname>v</declname>
+            <defname>v</defname>
+          </param>
+          <param>
+            <type>StorageOrder</type>
+            <declname>order</declname>
+            <defname>order</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structfancyqlone_1_1FanCyqloneSolver" kindref="compound">FanCyqloneSolver</ref>&lt; <ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>, <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1af61fff0ad381f171d5c3d5fdbb5835d5" kindref="member">order</ref>, <ref refid="structfancyqlone_1_1parallel_1_1FanContext" kindref="compound">parallel::FanContext</ref>&lt; <ref refid="structfancyqlone_1_1parallel_1_1FanSharedContext" kindref="compound">parallel::FanSharedContext</ref> &gt; &gt;</type>
+        <definition>using fancyqlone::qpalm::FanInnerSolver = 
+FanCyqloneSolver&lt;v, real_t, order, parallel::FanContext&lt;parallel::FanSharedContext&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>FanInnerSolver</name>
+        <qualifiedname>fancyqlone::qpalm::FanInnerSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="34" column="1" bodyfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type><ref refid="example_8cpp_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+            <declname>v</declname>
+            <defname>v</defname>
+          </param>
+          <param>
+            <type>StorageOrder</type>
+            <declname>order</declname>
+            <defname>order</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structfancyqlone_1_1SerialFanCyqloneSolver" kindref="compound">SerialFanCyqloneSolver</ref>&lt; <ref refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" kindref="member">v</ref>, <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, <ref refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1af61fff0ad381f171d5c3d5fdbb5835d5" kindref="member">order</ref>, <ref refid="structfancyqlone_1_1parallel_1_1Context" kindref="compound">parallel::Context</ref>&lt; <ref refid="structfancyqlone_1_1parallel_1_1SharedContext" kindref="compound">parallel::SharedContext</ref> &gt; &gt;</type>
+        <definition>using fancyqlone::qpalm::SerialFanInnerSolver = 
+SerialFanCyqloneSolver&lt;v, real_t, order, parallel::Context&lt;parallel::SharedContext&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>SerialFanInnerSolver</name>
+        <qualifiedname>fancyqlone::qpalm::SerialFanInnerSolver</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="37" column="1" bodyfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacefancyqlone_1_1qpalm_1a188d0d7d6c6ee33d437bc4fa5ae155f6" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structfancyqlone_1_1qpalm_1_1compute__breakpoints__fn" kindref="compound">fancyqlone::qpalm::compute_breakpoints_fn</ref></type>
+        <definition>struct fancyqlone::qpalm::compute_breakpoints_fn fancyqlone::qpalm::compute_breakpoints</definition>
+        <argsstring></argsstring>
+        <name>compute_breakpoints</name>
+        <qualifiedname>fancyqlone::qpalm::compute_breakpoints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="98" column="38"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1get__partitioned__breakpoints__fn_1a90135a1b8fab05a615f03b2271fc1404" compoundref="breakpoint_8hpp" startline="133" endline="141">fancyqlone::qpalm::get_partitioned_breakpoints_fn::operator()</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefancyqlone_1_1qpalm_1a007773760e14275aa0e91d97ce19f7fb" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structfancyqlone_1_1qpalm_1_1get__partitioned__breakpoints__fn" kindref="compound">fancyqlone::qpalm::get_partitioned_breakpoints_fn</ref></type>
+        <definition>struct fancyqlone::qpalm::get_partitioned_breakpoints_fn fancyqlone::qpalm::get_partitioned_breakpoints</definition>
+        <argsstring></argsstring>
+        <name>get_partitioned_breakpoints</name>
+        <qualifiedname>fancyqlone::qpalm::get_partitioned_breakpoints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="142" column="46"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1get__breakpoints__fn_1ab18c580285f140a1f5eff6f05fef1cac" compoundref="breakpoint_8hpp" startline="176" endline="184">fancyqlone::qpalm::get_breakpoints_fn::operator()</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefancyqlone_1_1qpalm_1a39b3b7bd65a62c6ecc606506542ca966" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structfancyqlone_1_1qpalm_1_1get__breakpoints__fn" kindref="compound">fancyqlone::qpalm::get_breakpoints_fn</ref></type>
+        <definition>struct fancyqlone::qpalm::get_breakpoints_fn fancyqlone::qpalm::get_breakpoints</definition>
+        <argsstring></argsstring>
+        <name>get_breakpoints</name>
+        <qualifiedname>fancyqlone::qpalm::get_breakpoints</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="185" column="34"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1LineSearch_1a1909ab2d87fa89fb19898d0c76be770a" compoundref="implementation_2linesearch_8tpp" startline="125" endline="185">fancyqlone::qpalm::LineSearch&lt; Vec &gt;::operator()</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <member refid="group__topic-optimization-solvers-ocp_1ga04ffaf134708a2b3476e949e6dfa426e" kind="function"><name>make_cyqpalm_backend</name></member>
+      <member refid="group__topic-optimization-solvers-ocp_1ga923329c8239f305d13cb14a91d838483" kind="function"><name>update_cyqpalm_backend</name></member>
+      <member refid="group__topic-optimization-solvers-ocp_1ga9b8823b057fe6a59e9d65db005d8c3ff" kind="function"><name>update_cyqpalm_backend</name></member>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a0e5621455d223744bb4cb2ff621cdf21" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class R</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void fancyqlone::qpalm::sort</definition>
+        <argsstring>(R &amp;&amp;range, F key)</argsstring>
+        <name>sort</name>
+        <qualifiedname>fancyqlone::qpalm::sort</qualifiedname>
+        <param>
+          <type>R &amp;&amp;</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" line="17" column="13" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" bodystart="17" bodyend="25"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1a0e5621455d223744bb4cb2ff621cdf21" compoundref="algorithms_8hpp" startline="17" endline="25">sort</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1LineSearch_1ab3b33f5bc89f66f6a1d31d24050f9fb7" compoundref="implementation_2linesearch_8tpp" startline="56" endline="76">fancyqlone::qpalm::LineSearch&lt; Vec &gt;::find_stepsize_base</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a0e5621455d223744bb4cb2ff621cdf21" compoundref="algorithms_8hpp" startline="17" endline="25">sort</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a4416f34ca15a7ca342298669a346af77" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class R</type>
+          </param>
+          <param>
+            <type>class I</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void fancyqlone::qpalm::nth_element</definition>
+        <argsstring>(R &amp;&amp;range, I mid, F key)</argsstring>
+        <name>nth_element</name>
+        <qualifiedname>fancyqlone::qpalm::nth_element</qualifiedname>
+        <param>
+          <type>R &amp;&amp;</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>I</type>
+          <declname>mid</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" line="28" column="13" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" bodystart="28" bodyend="32"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1a4416f34ca15a7ca342298669a346af77" compoundref="algorithms_8hpp" startline="28" endline="32">nth_element</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1LineSearch_1a9da35dd777d095759adba69a264b87b5" compoundref="implementation_2linesearch_8tpp" startline="79" endline="118">fancyqlone::qpalm::LineSearch&lt; Vec &gt;::find_stepsize</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a4416f34ca15a7ca342298669a346af77" compoundref="algorithms_8hpp" startline="28" endline="32">nth_element</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a71954dbb7921433116705e923e036306" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::ranges::bidirectional_range</type>
+            <declname>R</declname>
+            <defname>R</defname>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+          <param>
+            <type>class C</type>
+          </param>
+        </templateparamlist>
+        <type>std::ranges::subrange&lt; std::ranges::iterator_t&lt; R &gt; &gt;</type>
+        <definition>static std::ranges::subrange&lt; std::ranges::iterator_t&lt; R &gt; &gt; fancyqlone::qpalm::partition_min</definition>
+        <argsstring>(R &amp;&amp;range, F pred, C cmp)</argsstring>
+        <name>partition_min</name>
+        <qualifiedname>fancyqlone::qpalm::partition_min</qualifiedname>
+        <param>
+          <type>R &amp;&amp;</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>pred</declname>
+        </param>
+        <param>
+          <type>C</type>
+          <declname>cmp</declname>
+        </param>
+        <briefdescription>
+<para>A variant of std::ranges::partition where the first element of the return value is the smallest element of the &quot;false&quot; partition. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" line="37" column="30" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" bodystart="37" bodyend="90"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1a71954dbb7921433116705e923e036306" compoundref="algorithms_8hpp" startline="37" endline="90">partition_min</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1LineSearch_1a9da35dd777d095759adba69a264b87b5" compoundref="implementation_2linesearch_8tpp" startline="79" endline="118">fancyqlone::qpalm::LineSearch&lt; Vec &gt;::find_stepsize</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a71954dbb7921433116705e923e036306" compoundref="algorithms_8hpp" startline="37" endline="90">partition_min</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a817e4099fa7003745265f06fa0e8f552" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::ranges::forward_range</type>
+            <declname>R</declname>
+            <defname>R</defname>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>static decltype(auto) fancyqlone::qpalm::partition</definition>
+        <argsstring>(R &amp;&amp;range, F key)</argsstring>
+        <name>partition</name>
+        <qualifiedname>fancyqlone::qpalm::partition</qualifiedname>
+        <param>
+          <type>R &amp;&amp;</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" line="93" column="17" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" bodystart="93" bodyend="96"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1a817e4099fa7003745265f06fa0e8f552" compoundref="algorithms_8hpp" startline="93" endline="96">partition</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a6293a02fd5eef14dc6e3a55f3336009f" compoundref="backends_2backend-fancyqlone_2linesearch_8tpp" startline="40" endline="116">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::compute_partition_breakpoints_cyq</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1ab8ae67297a7c7838dcabccdf9ab22c35" compoundref="backends_2backend-fancyqlone_2linesearch_8tpp" startline="119" endline="226">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::compute_partition_breakpoints_fan</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1aa76923d7538180e9b0668be2c7c41134" compoundref="backends_2backend-fancyqlone_2linesearch_8tpp" startline="229" endline="324">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::compute_partition_breakpoints_sfan</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a253d1e03560fadd7156b05f405f30622" compoundref="algorithms_8hpp" startline="98" endline="101">partition</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a817e4099fa7003745265f06fa0e8f552" compoundref="algorithms_8hpp" startline="93" endline="96">partition</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a284200507c01e1f1c9823d99c318cf1b" compoundref="breakpoint_8cpp" startline="7" endline="23">partition_breakpoints_default</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a253d1e03560fadd7156b05f405f30622" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::permutable</type>
+            <declname>I</declname>
+            <defname>I</defname>
+          </param>
+          <param>
+            <type>std::sentinel_for&lt; I &gt;</type>
+            <declname>S</declname>
+            <defname>S</defname>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>static decltype(auto) fancyqlone::qpalm::partition</definition>
+        <argsstring>(I first, S last, F key)</argsstring>
+        <name>partition</name>
+        <qualifiedname>fancyqlone::qpalm::partition</qualifiedname>
+        <param>
+          <type>I</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>S</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" line="98" column="17" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" bodystart="98" bodyend="101"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1a817e4099fa7003745265f06fa0e8f552" compoundref="algorithms_8hpp" startline="93" endline="96">partition</references>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1aa056c09b3502ed82684674fbcc8281e1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class R</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>static decltype(auto) fancyqlone::qpalm::min_element</definition>
+        <argsstring>(R &amp;&amp;range, F key)</argsstring>
+        <name>min_element</name>
+        <qualifiedname>fancyqlone::qpalm::min_element</qualifiedname>
+        <param>
+          <type>R &amp;&amp;</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" line="104" column="17" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" bodystart="104" bodyend="107"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1aa056c09b3502ed82684674fbcc8281e1" compoundref="algorithms_8hpp" startline="104" endline="107">min_element</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1aa056c09b3502ed82684674fbcc8281e1" compoundref="algorithms_8hpp" startline="104" endline="107">min_element</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1LineSearch_1a1909ab2d87fa89fb19898d0c76be770a" compoundref="implementation_2linesearch_8tpp" startline="125" endline="185">fancyqlone::qpalm::LineSearch&lt; Vec &gt;::operator()</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a1e5cde98e9bb08c358e0dbde2e26f24f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class I</type>
+          </param>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class BinOp</type>
+          </param>
+          <param>
+            <type>class UnOp</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T fancyqlone::qpalm::transform_reduce</definition>
+        <argsstring>(I first, I last, T init, BinOp binary_op, UnOp unary_op)</argsstring>
+        <name>transform_reduce</name>
+        <qualifiedname>fancyqlone::qpalm::transform_reduce</qualifiedname>
+        <param>
+          <type>I</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>I</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>init</declname>
+        </param>
+        <param>
+          <type>BinOp</type>
+          <declname>binary_op</declname>
+        </param>
+        <param>
+          <type>UnOp</type>
+          <declname>unary_op</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" line="110" column="3" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/algorithms.hpp" bodystart="110" bodyend="113"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1a1e5cde98e9bb08c358e0dbde2e26f24f" compoundref="algorithms_8hpp" startline="110" endline="113">transform_reduce</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a6f138c5f7d15cc41c0cecc4c2321e5e7" compoundref="breakpoint_8cpp" startline="25" endline="41">partial_sum_negative</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a1e5cde98e9bb08c358e0dbde2e26f24f" compoundref="algorithms_8hpp" startline="110" endline="113">transform_reduce</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a6f138c5f7d15cc41c0cecc4c2321e5e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1ABSums" kindref="compound">ABSums</ref></type>
+        <definition>ABSums fancyqlone::qpalm::partial_sum_negative</definition>
+        <argsstring>(PartitionedBreakpoints breakpoints, real_t η=0, real_t β=0)</argsstring>
+        <name>partial_sum_negative</name>
+        <qualifiedname>fancyqlone::qpalm::partial_sum_negative</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints" kindref="compound">PartitionedBreakpoints</ref></type>
+          <declname>breakpoints</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+          <declname>η</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+          <declname>β</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/breakpoint.cpp" line="25" column="8" bodyfile="src/fancyqpalm/src/breakpoint.cpp" bodystart="25" bodyend="41" declfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" declline="40" declcolumn="8"/>
+        <references refid="structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints_1a3c0530a084bfe68e91682261f97b6e38" compoundref="breakpoint_8hpp" startline="37">fancyqlone::qpalm::PartitionedBreakpoints::neg_bp</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1a6f138c5f7d15cc41c0cecc4c2321e5e7" compoundref="breakpoint_8cpp" startline="25" endline="41">partial_sum_negative</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints_1aa716efd59a006b2088a65c399dc2f990" compoundref="breakpoint_8hpp" startline="37">fancyqlone::qpalm::PartitionedBreakpoints::pos_bp</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1a1e5cde98e9bb08c358e0dbde2e26f24f" compoundref="algorithms_8hpp" startline="110" endline="113">transform_reduce</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a6293a02fd5eef14dc6e3a55f3336009f" compoundref="backends_2backend-fancyqlone_2linesearch_8tpp" startline="40" endline="116">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::compute_partition_breakpoints_cyq</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1ab8ae67297a7c7838dcabccdf9ab22c35" compoundref="backends_2backend-fancyqlone_2linesearch_8tpp" startline="119" endline="226">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::compute_partition_breakpoints_fan</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1aa76923d7538180e9b0668be2c7c41134" compoundref="backends_2backend-fancyqlone_2linesearch_8tpp" startline="229" endline="324">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::compute_partition_breakpoints_sfan</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1get__breakpoints__fn_1ab18c580285f140a1f5eff6f05fef1cac" compoundref="breakpoint_8hpp" startline="176" endline="184">fancyqlone::qpalm::get_breakpoints_fn::operator()</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a6f138c5f7d15cc41c0cecc4c2321e5e7" compoundref="breakpoint_8cpp" startline="25" endline="41">partial_sum_negative</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a31712886c80efac2ce71a559731db2c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Vec</type>
+          </param>
+        </templateparamlist>
+        <type>std::span&lt; <ref refid="structfancyqlone_1_1qpalm_1_1Breakpoint" kindref="compound">Breakpoint</ref> &gt;</type>
+        <definition>std::span&lt; Breakpoint &gt; fancyqlone::qpalm::compute_breakpoints_default</definition>
+        <argsstring>(std::vector&lt; Breakpoint &gt; &amp;breakpoints, const Vec &amp;Σ, const Vec &amp;y, const Vec &amp;Ad, const Vec &amp;Ax, const Vec &amp;b_min, const Vec &amp;b_max)</argsstring>
+        <name>compute_breakpoints_default</name>
+        <qualifiedname>fancyqlone::qpalm::compute_breakpoints_default</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="structfancyqlone_1_1qpalm_1_1Breakpoint" kindref="compound">Breakpoint</ref> &gt; &amp;</type>
+          <declname>breakpoints</declname>
+        </param>
+        <param>
+          <type>const Vec &amp;</type>
+          <declname>Σ</declname>
+        </param>
+        <param>
+          <type>const Vec &amp;</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const Vec &amp;</type>
+          <declname>Ad</declname>
+        </param>
+        <param>
+          <type>const Vec &amp;</type>
+          <declname>Ax</declname>
+        </param>
+        <param>
+          <type>const Vec &amp;</type>
+          <declname>b_min</declname>
+        </param>
+        <param>
+          <type>const Vec &amp;</type>
+          <declname>b_max</declname>
+        </param>
+        <briefdescription>
+<para>Compute the break points t[i] using formula (3.6) in the QPALM paper. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>t, α, δ </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.tpp" line="11" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.tpp" bodystart="11" bodyend="29" declfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" declline="51" declcolumn="1"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1a31712886c80efac2ce71a559731db2c3" compoundref="breakpoint_8tpp" startline="11" endline="29">compute_breakpoints_default</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a31712886c80efac2ce71a559731db2c3" compoundref="breakpoint_8tpp" startline="11" endline="29">compute_breakpoints_default</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1compute__breakpoints__fn_1ab5299666a22397a875d2ee27a57fb038" compoundref="breakpoint_8hpp" startline="90" endline="97">fancyqlone::qpalm::compute_breakpoints_fn::operator()</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a284200507c01e1f1c9823d99c318cf1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints" kindref="compound">PartitionedBreakpoints</ref></type>
+        <definition>PartitionedBreakpoints fancyqlone::qpalm::partition_breakpoints_default</definition>
+        <argsstring>(std::span&lt; Breakpoint &gt; breakpoints)</argsstring>
+        <name>partition_breakpoints_default</name>
+        <qualifiedname>fancyqlone::qpalm::partition_breakpoints_default</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="structfancyqlone_1_1qpalm_1_1Breakpoint" kindref="compound">Breakpoint</ref> &gt;</type>
+          <declname>breakpoints</declname>
+        </param>
+        <briefdescription>
+<para>Moves any non-finite elements in t to the end of the range, and all negative elements to the front. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the negative and positive partitions. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/breakpoint.cpp" line="7" column="24" bodyfile="src/fancyqpalm/src/breakpoint.cpp" bodystart="7" bodyend="23" declfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" declline="56" declcolumn="24"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1a817e4099fa7003745265f06fa0e8f552" compoundref="algorithms_8hpp" startline="93" endline="96">partition</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1a284200507c01e1f1c9823d99c318cf1b" compoundref="breakpoint_8cpp" startline="7" endline="23">partition_breakpoints_default</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1get__partitioned__breakpoints__fn_1a90135a1b8fab05a615f03b2271fc1404" compoundref="breakpoint_8hpp" startline="133" endline="141">fancyqlone::qpalm::get_partitioned_breakpoints_fn::operator()</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1a284200507c01e1f1c9823d99c318cf1b" compoundref="breakpoint_8cpp" startline="7" endline="23">partition_breakpoints_default</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a26d4973d280fd9cde97918d0b0b1fe78" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * fancyqlone::qpalm::enum_name</definition>
+        <argsstring>(SolverStatus s)</argsstring>
+        <name>enum_name</name>
+        <qualifiedname>fancyqlone::qpalm::enum_name</qualifiedname>
+        <param>
+          <type><ref refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" kindref="member">SolverStatus</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/status.hpp" line="23" column="19" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/status.hpp" bodystart="23" bodyend="36"/>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ad8a942ef2b04672adfafef0ad817a407" compoundref="status_8hpp" startline="13">Busy</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ada5418b1eb4e80d05f2c1c7c4fa1b6ec" compoundref="status_8hpp" startline="14">Converged</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ab0d4998a26f5b5742ad38c4af8817e32" compoundref="status_8hpp" startline="20">Exception</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a12c37c4278b8c0db6c2f65052569cd80" compoundref="status_8hpp" startline="19">Interrupted</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78abbf52264f7a6e91c48a242f95aeed3db" compoundref="status_8hpp" startline="16">MaxIter</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78a9e8b9350c8f1716701ec1f9bbe76432e" compoundref="status_8hpp" startline="15">MaxTime</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78ab644b4f0de4cf0c46acb4583602e168c" compoundref="status_8hpp" startline="18">NoProgress</references>
+        <references refid="group__topic-optimization-solvers_1gga24477fe148453ccedf7d5ad6d0ba0f78aff6e97b110349dae9c6e8be0ff7a85c3" compoundref="status_8hpp" startline="17">NotFinite</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1ac78668c7efb8aa549ac3d3e7ce13810c" compoundref="status_8cpp" startline="6" endline="6">operator&lt;&lt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1ac78668c7efb8aa549ac3d3e7ce13810c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::ostream &amp;</type>
+        <definition>std::ostream &amp; fancyqlone::qpalm::operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;os, SolverStatus s)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <qualifiedname>fancyqlone::qpalm::operator&lt;&lt;</qualifiedname>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>os</declname>
+        </param>
+        <param>
+          <type><ref refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" kindref="member">SolverStatus</ref></type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/status.cpp" line="6" column="1" bodyfile="src/fancyqpalm/src/status.cpp" bodystart="6" bodyend="6" declfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/status.hpp" declline="38" declcolumn="2"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1a26d4973d280fd9cde97918d0b0b1fe78" compoundref="status_8hpp" startline="23" endline="36">enum_name</references>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1ae8c565fbca93f5e40e0c426c7975ad5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 1, StorageOrder::ColMajor, DefaultInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 1, StorageOrder::ColMajor, DefaultInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="57" column="100" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="57" declcolumn="100"/>
+        <references refid="ocp-backend-cyqlone_8cpp_1a8aad14e3f787ae45b664db30a093af39" compoundref="ocp-backend-cyqlone_8cpp" startline="39" endline="54">CYQLONE_INSTANTIATE_QPALM_FanCyqlone</references>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1ac6f465fad8dd8f57357f5d897f7978d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 1, StorageOrder::ColMajor, DefaultInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 1, StorageOrder::ColMajor, DefaultInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="57" column="182" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="57" declcolumn="182"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a66aece703a8d869eed4fde92f3bc09e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 1, StorageOrder::ColMajor, DefaultInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 1, StorageOrder::ColMajor, DefaultInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="57" column="238" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="57" declcolumn="238"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a55a4e67def5e01beaea2271c4f55fbcc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 4, StorageOrder::ColMajor, DefaultInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 4, StorageOrder::ColMajor, DefaultInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="57" column="381" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="57" declcolumn="381"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1ad8dac8123ef4d4c18e0cb67b9a5e6bd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 4, StorageOrder::ColMajor, DefaultInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 4, StorageOrder::ColMajor, DefaultInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="57" column="463" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="57" declcolumn="463"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1ab44d5bd8534ec63b05acd10977dc0928" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 4, StorageOrder::ColMajor, DefaultInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 4, StorageOrder::ColMajor, DefaultInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="57" column="519" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="57" declcolumn="519"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a981c1441f46473d19aed87f81689fc02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 8, StorageOrder::ColMajor, DefaultInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 8, StorageOrder::ColMajor, DefaultInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="57" column="662" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="57" declcolumn="662"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1abe6927ae4965c8b6c24f3f699788cdcd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 8, StorageOrder::ColMajor, DefaultInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 8, StorageOrder::ColMajor, DefaultInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="57" column="744" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="57" declcolumn="744"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a08a0f11654165b7c9801676518571ef9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 8, StorageOrder::ColMajor, DefaultInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 8, StorageOrder::ColMajor, DefaultInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="57" column="800" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="57" declcolumn="800"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1ab9112086e72eca21453b423ae8c2a66b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 1, StorageOrder::ColMajor, FanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 1, StorageOrder::ColMajor, FanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="59" column="100" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="59" declcolumn="100"/>
+        <references refid="ocp-backend-cyqlone_8cpp_1a8aad14e3f787ae45b664db30a093af39" compoundref="ocp-backend-cyqlone_8cpp" startline="39" endline="54">CYQLONE_INSTANTIATE_QPALM_FanCyqlone</references>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a11ab78a582975ea70b503e6e9349d907" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 1, StorageOrder::ColMajor, FanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 1, StorageOrder::ColMajor, FanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="59" column="182" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="59" declcolumn="182"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1ad654bc906af1db1fb3a6d0b0e25945e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 1, StorageOrder::ColMajor, FanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 1, StorageOrder::ColMajor, FanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="59" column="238" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="59" declcolumn="238"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a0306349b78a982abb009e045d0012cf5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 4, StorageOrder::ColMajor, FanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 4, StorageOrder::ColMajor, FanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="59" column="381" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="59" declcolumn="381"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a6f6fbb0b0e38f611b69051ad818c8f02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 4, StorageOrder::ColMajor, FanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 4, StorageOrder::ColMajor, FanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="59" column="463" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="59" declcolumn="463"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1afcf80c489204cebc1cd09a6c3827624f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 4, StorageOrder::ColMajor, FanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 4, StorageOrder::ColMajor, FanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="59" column="519" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="59" declcolumn="519"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a9844fac65cfbf75551d6dc262741d9b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 8, StorageOrder::ColMajor, FanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 8, StorageOrder::ColMajor, FanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="59" column="662" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="59" declcolumn="662"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a933156eda2a07a6f5475c7d309bc5d11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 8, StorageOrder::ColMajor, FanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 8, StorageOrder::ColMajor, FanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="59" column="744" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="59" declcolumn="744"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1ad10e9c442eb06442f8dc8dfa64893a76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 8, StorageOrder::ColMajor, FanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 8, StorageOrder::ColMajor, FanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a27779a7c1b02137d9aed6561bc79232a" kindref="member">FanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="59" column="800" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="59" declcolumn="800"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a98408f45e677c32bcad07999c05ed8bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 1, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 1, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="61" column="100" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="61" declcolumn="100"/>
+        <references refid="ocp-backend-cyqlone_8cpp_1a8aad14e3f787ae45b664db30a093af39" compoundref="ocp-backend-cyqlone_8cpp" startline="39" endline="54">CYQLONE_INSTANTIATE_QPALM_FanCyqlone</references>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1ac2a4fff46354cd00910bb2b5feeb41c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 1, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 1, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="61" column="182" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="61" declcolumn="182"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a0f32f33e20fbb13f2273c8a5653c50c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 1, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 1, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="61" column="238" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="61" declcolumn="238"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a99fa8edac0425cb26c86803d043b9035" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 4, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 4, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="61" column="381" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="61" declcolumn="381"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a6997955ebe0ed55bcdcaf83537ebc0e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 4, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 4, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="61" column="463" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="61" declcolumn="463"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a448e54f6554b5e65572426f0d29e6771" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 4, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 4, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="61" column="519" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="61" declcolumn="519"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a239e9713e387d7d43c863e2517ef0deb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 8, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 8, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="61" column="662" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="61" declcolumn="662"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a7f011c4b0f2d346cc8ed6ec6a9e4f4ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 8, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 8, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="61" column="744" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="61" declcolumn="744"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a5969103fd508334f653401b25511875b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 8, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 8, StorageOrder::ColMajor, SerialFanInnerSolver&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::ColMajor, <ref refid="namespacefancyqlone_1_1qpalm_1a9428e937fd2cf61f1d9e1c1053e79e7e" kindref="member">SerialFanInnerSolver</ref>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="61" column="800" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="61" declcolumn="800"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a0a62631675a6269f207247760f65b2fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 1, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::RowMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 1, StorageOrder::RowMajor, DefaultInnerSolver&lt; 1, StorageOrder::RowMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 1, StorageOrder::RowMajor, DefaultInnerSolver&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="63" column="100" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="63" declcolumn="100"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1af748664021387ba684ecf88351f20007" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 1, StorageOrder::RowMajor, DefaultInnerSolver&lt; 1, StorageOrder::RowMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 1, StorageOrder::RowMajor, DefaultInnerSolver&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::RowMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="63" column="182" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="63" declcolumn="182"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1aaa1c07be76b6df0935034afbe5f734f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 1, StorageOrder::RowMajor, DefaultInnerSolver&lt; 1, StorageOrder::RowMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 1, StorageOrder::RowMajor, DefaultInnerSolver&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::RowMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 1, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="63" column="238" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="63" declcolumn="238"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a533b35626fdd48fb12e7348286b1b93c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 4, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::RowMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 4, StorageOrder::RowMajor, DefaultInnerSolver&lt; 4, StorageOrder::RowMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 4, StorageOrder::RowMajor, DefaultInnerSolver&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="63" column="381" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="63" declcolumn="381"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1aa0dd7f7e0b1892c5f9d408fcb58fa7ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 4, StorageOrder::RowMajor, DefaultInnerSolver&lt; 4, StorageOrder::RowMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 4, StorageOrder::RowMajor, DefaultInnerSolver&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::RowMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="63" column="463" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="63" declcolumn="463"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1ae350ab1a31a11d04711d6a2bf8e5e345" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 4, StorageOrder::RowMajor, DefaultInnerSolver&lt; 4, StorageOrder::RowMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 4, StorageOrder::RowMajor, DefaultInnerSolver&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::RowMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 4, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="63" column="519" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="63" declcolumn="519"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1aa8dc8a8cdd00d671de1d420c55c85299" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template <ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt; 8, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::RowMajor &gt; &gt;</type>
+        <definition>template unique_CyQPALMBackend&lt; 8, StorageOrder::RowMajor, DefaultInnerSolver&lt; 8, StorageOrder::RowMajor &gt; &gt; fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</definition>
+        <argsstring>(const CyQPALMBackend&lt; 8, StorageOrder::RowMajor, DefaultInnerSolver&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref> &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="63" column="662" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="63" declcolumn="662"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1aec89b4fdbe5bf6db4ea9a91f8befe8e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 8, StorageOrder::RowMajor, DefaultInnerSolver&lt; 8, StorageOrder::RowMajor &gt; &gt; &amp;, const CyQPALMBackend&lt; 8, StorageOrder::RowMajor, DefaultInnerSolver&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::RowMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="63" column="744" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="63" declcolumn="744"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1a4b8166ca2e5cfa40320e2c5526e44050" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>template void</type>
+        <definition>template void fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</definition>
+        <argsstring>(CyQPALMBackend&lt; 8, StorageOrder::RowMajor, DefaultInnerSolver&lt; 8, StorageOrder::RowMajor &gt; &gt; &amp;, const typename CyQPALMBackend&lt; 8, StorageOrder::RowMajor, DefaultInnerSolver&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::RowMajor &gt; &gt; &amp;</type>
+        </param>
+        <param>
+          <type>const typename <ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt; 8, StorageOrder::RowMajor, <ref refid="namespacefancyqlone_1_1qpalm_1aa1ebbe5feb2e66562ad44d9002bab7ef" kindref="member">DefaultInnerSolver</ref>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" line="63" column="800" declfile="src/fancyqpalm/src/ocp-backend-cyqlone.cpp" declline="63" declcolumn="800"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a3177822c4e8bd78867cb8736f643e562" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::ostream &amp;</type>
+        <definition>std::ostream &amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;, const SolverTimings &amp;)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::operator&lt;&lt;</qualifiedname>
+        <param>
+          <type>std::ostream &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1SolverTimings" kindref="compound">SolverTimings</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="39" column="2" declfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" declline="39" declcolumn="2"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.cpp" line="22" column="1"/>
+  </compounddef>
+</doxygen>

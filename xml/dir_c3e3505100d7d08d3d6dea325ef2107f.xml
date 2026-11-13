@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_c3e3505100d7d08d3d6dea325ef2107f" kind="dir">
+    <compoundname>src/fancyqpalm/include/fancyqlone/fancyqpalm</compoundname>
+    <innerdir refid="dir_3daa426161d1662b718b724b36506c48">src/fancyqpalm/include/fancyqlone/fancyqpalm/backends</innerdir>
+    <innerdir refid="dir_de42a1381fa3e72a4caa5d47ecf60f7d">src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation</innerdir>
+    <innerfile refid="detailed-stats_8hpp">detailed-stats.hpp</innerfile>
+    <innerfile refid="qpalm_8hpp">qpalm.hpp</innerfile>
+    <innerfile refid="settings_8hpp">settings.hpp</innerfile>
+    <innerfile refid="solver_8hpp">solver.hpp</innerfile>
+    <innerfile refid="status_8hpp">status.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/"/>
+  </compounddef>
+</doxygen>

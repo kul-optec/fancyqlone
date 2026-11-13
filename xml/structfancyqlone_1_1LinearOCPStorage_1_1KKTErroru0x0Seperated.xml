@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated</compoundname>
+    <includes refid="ocp_8hpp" local="no">fancyqlone/ocp.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated_1aeaabb155425751a02ea3bf31595ce111" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTError" kindref="compound">KKTError</ref></type>
+        <definition>KKTError fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated::kkt</definition>
+        <argsstring></argsstring>
+        <name>kkt</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated::kkt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="453" column="18" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="453" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated_1a0b177a3f92d447c2e097079f62154523" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt;real_t&gt; fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated::stationarity_u0</definition>
+        <argsstring></argsstring>
+        <name>stationarity_u0</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated::stationarity_u0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="454" column="21" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="454" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated_1aa00959d7ee2168e5be7550829a98e003" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt;real_t&gt; fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated::stationarity_x0</definition>
+        <argsstring></argsstring>
+        <name>stationarity_x0</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated::stationarity_x0</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="455" column="21" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="455" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>fancyqlone::LinearOCPStorage::KKTError</label>
+        <link refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTError"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated</label>
+        <link refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+kkt</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+stationarity_u0</edgelabel>
+          <edgelabel>+stationarity_x0</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; real_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="452" column="5" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="452" bodyend="456"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated_1aeaabb155425751a02ea3bf31595ce111" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated</scope><name>kkt</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated_1a0b177a3f92d447c2e097079f62154523" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated</scope><name>stationarity_u0</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated_1aa00959d7ee2168e5be7550829a98e003" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated</scope><name>stationarity_x0</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

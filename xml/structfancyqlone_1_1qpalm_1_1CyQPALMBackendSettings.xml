@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::CyQPALMBackendSettings</compoundname>
+    <includes refid="ocp-backend-fancyqlone_8hpp" local="no">fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a18f9794881668ebfca3e5184c5d73ac4" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::qpalm::CyQPALMBackendSettings::processors</definition>
+        <argsstring></argsstring>
+        <name>processors</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackendSettings::processors</qualifiedname>
+        <initializer>= 8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="44" column="13" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="44" bodyend="-1"/>
+        <referencedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1a9a50c58845ad3929bc28241ad1ef0991" compoundref="benchmarks_2cyqpalm_2spring-mass_8cpp" startline="177" endline="241">run_benchmark</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1ac19d3e9a8a8ffe0e2358a75c5d72e617" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::CyQPALMBackendSettings::print_residuals</definition>
+        <argsstring></argsstring>
+        <name>print_residuals</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackendSettings::print_residuals</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="45" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a8fc5a6d972faff0bb450a45b1d5b5de6" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int fancyqlone::qpalm::CyQPALMBackendSettings::print_precision</definition>
+        <argsstring></argsstring>
+        <name>print_precision</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackendSettings::print_precision</qualifiedname>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="46" column="9" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a3b1b95630e5123b6c7acb315c4e67293" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double fancyqlone::qpalm::CyQPALMBackendSettings::changing_constr_factor</definition>
+        <argsstring></argsstring>
+        <name>changing_constr_factor</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackendSettings::changing_constr_factor</qualifiedname>
+        <initializer>= 0.05</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="48" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1ae59a1ddb7e2589acdefb7fe7966b0c76" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::qpalm::CyQPALMBackendSettings::max_update_count</definition>
+        <argsstring></argsstring>
+        <name>max_update_count</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackendSettings::max_update_count</qualifiedname>
+        <initializer>= 5</initializer>
+        <briefdescription>
+<para>Maximum number of factorization updates before refactorization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Fan backends do not support updates and use an effective value of zero. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="51" column="13" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="51" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1ac648c68f03d94009d36e86036f058de0" compoundref="ocp-backend-fancyqlone_8tpp" startline="98" endline="131">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::CyQPALMBackend</referencedby>
+        <referencedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1ac3104388361a980a90810067441fdad2" compoundref="benchmarks_2cyqpalm_2spring-mass_8cpp" startline="352" endline="408">get_cyqlone_solvers</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aa418e27c51a14390ab0eb4b68cc26041" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::CyQPALMBackendSettings::detailed_timings</definition>
+        <argsstring></argsstring>
+        <name>detailed_timings</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackendSettings::detailed_timings</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="52" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a3aeec64cba09d6847e23d7f9decbe09f" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1TricyqleParams" kindref="compound">fancyqlone::TricyqleParams</ref>&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>fancyqlone::TricyqleParams&lt;real_t&gt; fancyqlone::qpalm::CyQPALMBackendSettings::tricyqle_params</definition>
+        <argsstring></argsstring>
+        <name>tricyqle_params</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackendSettings::tricyqle_params</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>Fan backends always use <ref refid="group__topic-block-tridiag-solvers_1gga02b7bc5e6f2bb033f2f89b03d51d6436a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">SolveMethod::None</ref> for the branch Schur complements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="54" column="32" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="54" bodyend="54"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1ac648c68f03d94009d36e86036f058de0" compoundref="ocp-backend-fancyqlone_8tpp" startline="98" endline="131">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::CyQPALMBackend</referencedby>
+        <referencedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1ac3104388361a980a90810067441fdad2" compoundref="benchmarks_2cyqpalm_2spring-mass_8cpp" startline="352" endline="408">get_cyqlone_solvers</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aadba1d46308e13bf564d75afec16b4bc" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t fancyqlone::qpalm::CyQPALMBackendSettings::spin_count</definition>
+        <argsstring></argsstring>
+        <name>spin_count</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackendSettings::spin_count</qualifiedname>
+        <initializer>= std::numeric_limits&lt;uint32_t&gt;::max()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="55" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aa373f519bbc753135e481d4188c77c91" prot="public" static="no" mutable="no">
+        <type><ref refid="group__topic-optimization-solvers-ocp_1gac67dc98973eb37748e986ba97732b38c" kindref="member">WarmStartingStrategy</ref></type>
+        <definition>WarmStartingStrategy fancyqlone::qpalm::CyQPALMBackendSettings::strategy</definition>
+        <argsstring></argsstring>
+        <name>strategy</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackendSettings::strategy</qualifiedname>
+        <initializer>= <ref refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea" kindref="member">WarmStartingStrategy::Copy</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="56" column="26" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="56" bodyend="-1"/>
+        <referencedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1ac3104388361a980a90810067441fdad2" compoundref="benchmarks_2cyqpalm_2spring-mass_8cpp" startline="352" endline="408">get_cyqlone_solvers</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>fancyqlone::TricyqleParams&lt; real_t &gt;</label>
+        <link refid="structfancyqlone_1_1TricyqleParams"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::qpalm::CyQPALMBackendSettings</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+tricyqle_params</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="43" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="43" bodyend="57"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a3b1b95630e5123b6c7acb315c4e67293" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackendSettings</scope><name>changing_constr_factor</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aa418e27c51a14390ab0eb4b68cc26041" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackendSettings</scope><name>detailed_timings</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1ae59a1ddb7e2589acdefb7fe7966b0c76" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackendSettings</scope><name>max_update_count</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a8fc5a6d972faff0bb450a45b1d5b5de6" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackendSettings</scope><name>print_precision</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1ac19d3e9a8a8ffe0e2358a75c5d72e617" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackendSettings</scope><name>print_residuals</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a18f9794881668ebfca3e5184c5d73ac4" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackendSettings</scope><name>processors</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aadba1d46308e13bf564d75afec16b4bc" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackendSettings</scope><name>spin_count</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aa373f519bbc753135e481d4188c77c91" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackendSettings</scope><name>strategy</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a3aeec64cba09d6847e23d7f9decbe09f" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackendSettings</scope><name>tricyqle_params</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

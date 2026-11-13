@@ -1,0 +1,334 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1FanStorage__t" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::FanStorage_t</compoundname>
+    <includes refid="fancyqlone_8hpp" local="no">fancyqlone/fancyqlone/fancyqlone.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="namespacebatmat_1_1linalg_1aa93224d87d900a2dacc032305840169b" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">matrix</ref></type>
+      </param>
+      <param>
+        <type>class T</type>
+        <defval><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></defval>
+      </param>
+      <param>
+        <type><ref refid="namespacebatmat_1_1linalg_1a12561d95ffd5ca9cc074d7b3edceb429" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">StorageOrder</ref></type>
+        <declname>DefaultOrder</declname>
+        <defname>DefaultOrder</defname>
+        <defval>StorageOrder::ColMajor</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1FanStorage__t_1a46cdde81757188ec5dcd43a52c74b68d" prot="public" static="no">
+        <type>T</type>
+        <definition>using fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>fancyqlone::FanStorage_t::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="87" column="5" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1FanStorage__t_1a057eda69b87b707e8d837e55b52f5660" prot="public" static="no">
+        <type>std::integral_constant&lt; <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, 1 &gt;</type>
+        <definition>using fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::one_t = std::integral_constant&lt;index_t, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>one_t</name>
+        <qualifiedname>fancyqlone::FanStorage_t::one_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="88" column="5" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1FanStorage__t_1a013f31d8806b6c48cb2318fb12f86547" prot="public" static="no">
+        <type><ref refid="structfancyqlone_1_1TridiagonalSolver" kindref="compound">TridiagonalSolver</ref>&lt; <ref refid="structfancyqlone_1_1FanStorage__t_1a46cdde81757188ec5dcd43a52c74b68d" kindref="member">value_type</ref> &gt;<ref refid="namespacebatmat_1_1linalg_1aa93224d87d900a2dacc032305840169b" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">::matrix</ref></type>
+        <definition>using fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::matrix_f = TridiagonalSolver&lt;value_type&gt;::matrix</definition>
+        <argsstring></argsstring>
+        <name>matrix_f</name>
+        <qualifiedname>fancyqlone::FanStorage_t::matrix_f</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="89" column="5" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1_1linalg_1aa93224d87d900a2dacc032305840169b" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">matrix</ref> &gt;</type>
+        <definition>std::vector&lt;matrix&gt; fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::branches</definition>
+        <argsstring></argsstring>
+        <name>branches</name>
+        <qualifiedname>fancyqlone::FanStorage_t::branches</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="92" column="17" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="92" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1af0a3fb126bdec7d25ddd648e3f14f0b4" compoundref="ocp-backend-fancyqlone_8hpp" startline="128" endline="139">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::storage_t&lt; Tag &gt;::check_dimensions_col</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a6c95b4526aab5adab3b6c575e11d0fb9" compoundref="ocp-backend-fancyqlone_8hpp" startline="174" endline="185">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::storage_t&lt; Tag &gt;::check_dimensions_col</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a647efc6dd644a58d7cfbcaea0e769d19" compoundref="fan-mat-vec_8tpp" startline="149" endline="166">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::cost_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a111b961f5c2e423f10bcca07f4b49135" compoundref="sfan-mat-vec_8tpp" startline="112" endline="128">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::cost_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a5bf58642defe3ca9cea359df832de603" compoundref="fan-mat-vec_8tpp" startline="169" endline="186">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::cost_gradient_regularized</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a5e1f8e8171b4c1d047536ebd417244da" compoundref="sfan-mat-vec_8tpp" startline="131" endline="149">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::cost_gradient_regularized</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a9f8327fd19588b5c8febbbecc16d22b9" compoundref="fan-factor_8tpp" startline="27" endline="89">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::factor_solve_λ0</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1afd5c7a540dbc2dec7ac948833bfee755" compoundref="sfan-factor_8tpp" startline="27" endline="77">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::factor_solve_λ0</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a781e0d5f8fe54bff428c708a4855b860" compoundref="fan-factor_8tpp" startline="138" endline="159">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::factor_solve_impl</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a6819abd3787a181ca5006efd121a40af" compoundref="sfan-factor_8tpp" startline="128" endline="156">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::factor_solve_impl</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ae61deb015c2d66a86597a5868994f504" compoundref="fan-mat-vec_8tpp" startline="126" endline="134">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::general_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a27dd39467a8d20d8493cee83b9fbb17c" compoundref="sfan-mat-vec_8tpp" startline="88" endline="97">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::general_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ab68b9f9797573b17ce9f6f5acffa41cd" compoundref="fan-data_8tpp" startline="151" endline="173">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_bounds</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a0b9192a0de183751bd197144244fdc64" compoundref="sfan-data_8tpp" startline="139" endline="161">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_bounds</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1aa754c745583370652c5d421d959c9056" compoundref="fan-data_8tpp" startline="135" endline="147">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a1309bd53b335ab1a012d448e521a39fc" compoundref="sfan-data_8tpp" startline="123" endline="135">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a7a5877c54cf4d21e7090e382cea72b97" compoundref="fan-data_8tpp" startline="117" endline="132">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_rhs</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1ac2a2175b5f1633c315877ce5abd1f99d" compoundref="sfan-data_8tpp" startline="106" endline="121">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_rhs</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a2406eced1fc38d727049f506d4082e2c" compoundref="fan-data_8tpp" startline="274" endline="295">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a5c93cc10d883db2c1e8b999cd7bc78d9" compoundref="sfan-data_8tpp" startline="260" endline="280">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a2dc0232118335c33081deb9265ecee4f" compoundref="fan-data_8tpp" startline="229" endline="250">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a3407f299eb2c9f2136e13676369b0040" compoundref="sfan-data_8tpp" startline="215" endline="236">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a1fcdb1ed60d00f63be2cf1b9a6579bb7" compoundref="fan-data_8tpp" startline="176" endline="198">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_variables</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1ac6fd15c5f1fdd34245be5ca3ff4cf140" compoundref="sfan-data_8tpp" startline="164" endline="184">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_variables</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ae0533000a2a113802888e204ad272160" compoundref="fan-mat-vec_8tpp" startline="21" endline="71">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::residual_dynamics_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a74a433c7a5aaaadfb57fc41b8dccdb24" compoundref="sfan-mat-vec_8tpp" startline="21" endline="57">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::residual_dynamics_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ac44a36a039a10e0330cfe86697336795" compoundref="fancyqlone_8hpp" startline="338" endline="348">fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a6bba7f6ddbf862af958118015a49d31a" compoundref="serial-fancyqlone_8hpp" startline="305" endline="315">fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a42c55b09bf059f3625607da867f44fce" compoundref="fancyqlone_8hpp" startline="324" endline="337">fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a50214f617e07e308bca9888812a6a31b" compoundref="serial-fancyqlone_8hpp" startline="291" endline="304">fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a2fd7af5b8cddd0e03c9c54882fd8bbb9" compoundref="fancyqlone_8hpp" startline="310" endline="323">fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_solution</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1aa29adedf46776b925d2737e5b2fdc78b" compoundref="serial-fancyqlone_8hpp" startline="277" endline="290">fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_solution</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1af82023cc29193e1f1c576585232ccc21" compoundref="fan-factor_8tpp" startline="191" endline="204">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a20147ef2e1e970dfc6a39b72ebeeabfe" compoundref="sfan-factor_8tpp" startline="189" endline="203">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a5d6c91083fb69ddca9f391b176853b86" compoundref="fan-factor_8tpp" startline="121" endline="134">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse_λ0</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a9a741fc9c85a3d02e1e07dc75da57665" compoundref="sfan-factor_8tpp" startline="110" endline="124">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse_λ0</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a11d61d6f9d201f5d1031454a277b8ba9" compoundref="fan-factor_8tpp" startline="206" endline="249">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse_mul</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a7e87b88cdc0ca3d40fba1fb44d775bae" compoundref="sfan-factor_8tpp" startline="205" endline="237">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse_mul</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a474871c96782fcb21afbc3b795ece705" compoundref="fan-mat-vec_8tpp" startline="74" endline="124">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::transposed_dynamics_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a354d1450272913aee547ee4afca2de5a" compoundref="sfan-mat-vec_8tpp" startline="60" endline="86">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::transposed_dynamics_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a114ff9f71ae38deccfee48ea483ef253" compoundref="fan-mat-vec_8tpp" startline="137" endline="146">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::transposed_general_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1aeceda7016366b409d0dbbb095388ca5b" compoundref="sfan-mat-vec_8tpp" startline="100" endline="109">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::transposed_general_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a35b5784fd596b3b66c7699f95bb0a2d7" compoundref="fan-data_8tpp" startline="298" endline="317">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1aa329b72d7b5be23c6affc37c44968646" compoundref="sfan-data_8tpp" startline="283" endline="302">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a7313a63c3babf92aae81999b832d713a" compoundref="fan-data_8tpp" startline="253" endline="271">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1aefa7d7b05f878ea6a8f21cd26dcd74eb" compoundref="sfan-data_8tpp" startline="239" endline="257">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a8e0248569a0308578050a6b5c6e48b20" compoundref="fan-data_8tpp" startline="200" endline="226">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_variables</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a828934ff5648f8555268411e0cd698ea" compoundref="sfan-data_8tpp" startline="186" endline="212">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_variables</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1FanStorage__t_1a013f31d8806b6c48cb2318fb12f86547" kindref="member">matrix_f</ref></type>
+        <definition>matrix_f fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::first</definition>
+        <argsstring></argsstring>
+        <name>first</name>
+        <qualifiedname>fancyqlone::FanStorage_t::first</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="93" column="14" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="93" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1af0a3fb126bdec7d25ddd648e3f14f0b4" compoundref="ocp-backend-fancyqlone_8hpp" startline="128" endline="139">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::storage_t&lt; Tag &gt;::check_dimensions_col</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a6c95b4526aab5adab3b6c575e11d0fb9" compoundref="ocp-backend-fancyqlone_8hpp" startline="174" endline="185">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::storage_t&lt; Tag &gt;::check_dimensions_col</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a647efc6dd644a58d7cfbcaea0e769d19" compoundref="fan-mat-vec_8tpp" startline="149" endline="166">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::cost_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a111b961f5c2e423f10bcca07f4b49135" compoundref="sfan-mat-vec_8tpp" startline="112" endline="128">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::cost_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a5bf58642defe3ca9cea359df832de603" compoundref="fan-mat-vec_8tpp" startline="169" endline="186">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::cost_gradient_regularized</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a5e1f8e8171b4c1d047536ebd417244da" compoundref="sfan-mat-vec_8tpp" startline="131" endline="149">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::cost_gradient_regularized</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a9f8327fd19588b5c8febbbecc16d22b9" compoundref="fan-factor_8tpp" startline="27" endline="89">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::factor_solve_λ0</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1afd5c7a540dbc2dec7ac948833bfee755" compoundref="sfan-factor_8tpp" startline="27" endline="77">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::factor_solve_λ0</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a5db94e3a5d6e223a889f5049f104d981" compoundref="fan-factor_8tpp" startline="92" endline="111">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::factor_solve_u0</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1aaceac564ea5d6ec707dec44e90f66b4c" compoundref="sfan-factor_8tpp" startline="80" endline="100">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::factor_solve_u0</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ae61deb015c2d66a86597a5868994f504" compoundref="fan-mat-vec_8tpp" startline="126" endline="134">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::general_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a27dd39467a8d20d8493cee83b9fbb17c" compoundref="sfan-mat-vec_8tpp" startline="88" endline="97">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::general_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ab68b9f9797573b17ce9f6f5acffa41cd" compoundref="fan-data_8tpp" startline="151" endline="173">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_bounds</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a0b9192a0de183751bd197144244fdc64" compoundref="sfan-data_8tpp" startline="139" endline="161">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_bounds</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1aa754c745583370652c5d421d959c9056" compoundref="fan-data_8tpp" startline="135" endline="147">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a1309bd53b335ab1a012d448e521a39fc" compoundref="sfan-data_8tpp" startline="123" endline="135">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_gradient</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a7a5877c54cf4d21e7090e382cea72b97" compoundref="fan-data_8tpp" startline="117" endline="132">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_rhs</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1ac2a2175b5f1633c315877ce5abd1f99d" compoundref="sfan-data_8tpp" startline="106" endline="121">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::initialize_rhs</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a2406eced1fc38d727049f506d4082e2c" compoundref="fan-data_8tpp" startline="274" endline="295">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a5c93cc10d883db2c1e8b999cd7bc78d9" compoundref="sfan-data_8tpp" startline="260" endline="280">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a2dc0232118335c33081deb9265ecee4f" compoundref="fan-data_8tpp" startline="229" endline="250">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a3407f299eb2c9f2136e13676369b0040" compoundref="sfan-data_8tpp" startline="215" endline="236">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a1fcdb1ed60d00f63be2cf1b9a6579bb7" compoundref="fan-data_8tpp" startline="176" endline="198">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_variables</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1ac6fd15c5f1fdd34245be5ca3ff4cf140" compoundref="sfan-data_8tpp" startline="164" endline="184">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::pack_variables</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ae0533000a2a113802888e204ad272160" compoundref="fan-mat-vec_8tpp" startline="21" endline="71">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::residual_dynamics_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a74a433c7a5aaaadfb57fc41b8dccdb24" compoundref="sfan-mat-vec_8tpp" startline="21" endline="57">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::residual_dynamics_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1ac44a36a039a10e0330cfe86697336795" compoundref="fancyqlone_8hpp" startline="338" endline="348">fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a6bba7f6ddbf862af958118015a49d31a" compoundref="serial-fancyqlone_8hpp" startline="305" endline="315">fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a42c55b09bf059f3625607da867f44fce" compoundref="fancyqlone_8hpp" startline="324" endline="337">fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a50214f617e07e308bca9888812a6a31b" compoundref="serial-fancyqlone_8hpp" startline="291" endline="304">fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a2fd7af5b8cddd0e03c9c54882fd8bbb9" compoundref="fancyqlone_8hpp" startline="310" endline="323">fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_solution</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1aa29adedf46776b925d2737e5b2fdc78b" compoundref="serial-fancyqlone_8hpp" startline="277" endline="290">fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::shift_solution</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a5d6c91083fb69ddca9f391b176853b86" compoundref="fan-factor_8tpp" startline="121" endline="134">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse_λ0</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a9a741fc9c85a3d02e1e07dc75da57665" compoundref="sfan-factor_8tpp" startline="110" endline="124">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse_λ0</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a11d61d6f9d201f5d1031454a277b8ba9" compoundref="fan-factor_8tpp" startline="206" endline="249">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse_mul</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a7e87b88cdc0ca3d40fba1fb44d775bae" compoundref="sfan-factor_8tpp" startline="205" endline="237">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse_mul</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a66fb1f9ad989ac0f0f0b340456e0d128" compoundref="fan-factor_8tpp" startline="113" endline="118">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse_u0</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a75162b4eba2f8e7621e777281907db07" compoundref="sfan-factor_8tpp" startline="102" endline="107">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::solve_reverse_u0</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a474871c96782fcb21afbc3b795ece705" compoundref="fan-mat-vec_8tpp" startline="74" endline="124">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::transposed_dynamics_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a354d1450272913aee547ee4afca2de5a" compoundref="sfan-mat-vec_8tpp" startline="60" endline="86">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::transposed_dynamics_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a114ff9f71ae38deccfee48ea483ef253" compoundref="fan-mat-vec_8tpp" startline="137" endline="146">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::transposed_general_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1aeceda7016366b409d0dbbb095388ca5b" compoundref="sfan-mat-vec_8tpp" startline="100" endline="109">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::transposed_general_constr</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a35b5784fd596b3b66c7699f95bb0a2d7" compoundref="fan-data_8tpp" startline="298" endline="317">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1aa329b72d7b5be23c6affc37c44968646" compoundref="sfan-data_8tpp" startline="283" endline="302">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_constraints</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a7313a63c3babf92aae81999b832d713a" compoundref="fan-data_8tpp" startline="253" endline="271">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1aefa7d7b05f878ea6a8f21cd26dcd74eb" compoundref="sfan-data_8tpp" startline="239" endline="257">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_dynamics</referencedby>
+        <referencedby refid="structfancyqlone_1_1FanCyqloneSolver_1a8e0248569a0308578050a6b5c6e48b20" compoundref="fan-data_8tpp" startline="200" endline="226">fancyqlone::FanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_variables</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a828934ff5648f8555268411e0cd698ea" compoundref="sfan-data_8tpp" startline="186" endline="212">fancyqlone::SerialFanCyqloneSolver&lt; VL, T, DefaultOrder, Ctx &gt;::unpack_variables</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1FanStorage__t_1a357b8eeb32d2baaf7d38038b308b5a4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::FanStorage_t</definition>
+        <argsstring>()=default</argsstring>
+        <name>FanStorage_t</name>
+        <qualifiedname>fancyqlone::FanStorage_t::FanStorage_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="82" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1FanStorage__t_1aefce42a2f55e98fe85da66d0211bbd03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::FanStorage_t</definition>
+        <argsstring>(const FanStorage_t &amp;)=delete</argsstring>
+        <name>FanStorage_t</name>
+        <qualifiedname>fancyqlone::FanStorage_t::FanStorage_t</qualifiedname>
+        <param>
+          <type>const FanStorage_t &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="83" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1FanStorage__t_1a5ec2dada337caab1ef06ad3afa2f7687" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1FanStorage__t_1a357b8eeb32d2baaf7d38038b308b5a4a" kindref="member">FanStorage_t</ref> &amp;</type>
+        <definition>FanStorage_t &amp; fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::operator=</definition>
+        <argsstring>(const FanStorage_t &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::FanStorage_t::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1FanStorage__t_1a357b8eeb32d2baaf7d38038b308b5a4a" kindref="member">FanStorage_t</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="84" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1FanStorage__t_1a3885704111079335dc4deca9b6f37937" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1FanStorage__t_1a357b8eeb32d2baaf7d38038b308b5a4a" kindref="member">FanStorage_t</ref> &amp;</type>
+        <definition>FanStorage_t &amp; fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::operator=</definition>
+        <argsstring>(FanStorage_t &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::FanStorage_t::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1FanStorage__t_1a357b8eeb32d2baaf7d38038b308b5a4a" kindref="member">FanStorage_t</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="85" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1FanStorage__t_1ad017d6173872183615c70cedb5f8f71a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::FanStorage_t</definition>
+        <argsstring>(FanStorage_t &amp;&amp;)=default</argsstring>
+        <name>FanStorage_t</name>
+        <qualifiedname>fancyqlone::FanStorage_t::FanStorage_t</qualifiedname>
+        <param>
+          <type>FanStorage_t &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="86" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1FanStorage__t_1ae3f41fdfa5a4f6d746077d04dbca5f04" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1FanStorage__t_1a357b8eeb32d2baaf7d38038b308b5a4a" kindref="member">FanStorage_t</ref>&lt; <ref refid="namespacebatmat_1_1linalg_1aa93224d87d900a2dacc032305840169b" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">matrix</ref>, <ref refid="structfancyqlone_1_1FanStorage__t_1a46cdde81757188ec5dcd43a52c74b68d" kindref="member">value_type</ref>, DefaultOrder &gt;</type>
+        <definition>FanStorage_t&lt; matrix, value_type, DefaultOrder &gt; fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <qualifiedname>fancyqlone::FanStorage_t::clone</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="94" column="18" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="94" bodyend="108"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>batmat::linalg::simd_view_types&lt; std::remove_const_t&lt; real_t &gt;, Abi &gt;</label>
+        <link refid="structbatmat_1_1linalg_1_1simd__view__types" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::FanStorage_t&lt; matrix, T, DefaultOrder &gt;</label>
+        <link refid="structfancyqlone_1_1FanStorage__t"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+branches</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+first</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>fancyqlone::TridiagonalSolver&lt; value_type &gt;</label>
+        <link refid="structfancyqlone_1_1TridiagonalSolver"/>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; batmat::linalg::simd_view_types&lt; std::remove_const_t&lt; real_t &gt;, Abi &gt;::template matrix&lt; real_t, Order &gt; &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" line="81" column="1" bodyfile="src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp" bodystart="81" bodyend="109"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>branches</name></member>
+      <member refid="structfancyqlone_1_1FanStorage__t_1ae3f41fdfa5a4f6d746077d04dbca5f04" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>clone</name></member>
+      <member refid="structfancyqlone_1_1FanStorage__t_1a357b8eeb32d2baaf7d38038b308b5a4a" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>FanStorage_t</name></member>
+      <member refid="structfancyqlone_1_1FanStorage__t_1aefce42a2f55e98fe85da66d0211bbd03" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>FanStorage_t</name></member>
+      <member refid="structfancyqlone_1_1FanStorage__t_1ad017d6173872183615c70cedb5f8f71a" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>FanStorage_t</name></member>
+      <member refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>first</name></member>
+      <member refid="structfancyqlone_1_1FanStorage__t_1a013f31d8806b6c48cb2318fb12f86547" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>matrix_f</name></member>
+      <member refid="structfancyqlone_1_1FanStorage__t_1a057eda69b87b707e8d837e55b52f5660" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>one_t</name></member>
+      <member refid="structfancyqlone_1_1FanStorage__t_1a5ec2dada337caab1ef06ad3afa2f7687" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>operator=</name></member>
+      <member refid="structfancyqlone_1_1FanStorage__t_1a3885704111079335dc4deca9b6f37937" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>operator=</name></member>
+      <member refid="structfancyqlone_1_1FanStorage__t_1a46cdde81757188ec5dcd43a52c74b68d" prot="public" virt="non-virtual"><scope>fancyqlone::FanStorage_t</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

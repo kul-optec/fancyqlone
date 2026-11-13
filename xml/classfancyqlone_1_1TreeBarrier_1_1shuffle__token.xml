@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classfancyqlone_1_1TreeBarrier_1_1shuffle__token" kind="class" language="C++" prot="public">
+    <compoundname>fancyqlone::TreeBarrier::shuffle_token</compoundname>
+    <includes refid="barrier_8hpp" local="no">fancyqlone/barrier.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ae1d9501f71b2ac3f82dbb6a178abda69" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::src</definition>
+        <argsstring></argsstring>
+        <name>src</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_token::src</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="504" column="18" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="504" bodyend="-1"/>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" compoundref="barrier_8hpp" startline="506" endline="506">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a88950cc15e2cb000f235c5471c6bf93a" prot="private" static="no" mutable="no">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1a922552c50e0d877bd73725bc755622f0" kindref="member">ticket_value_type</ref></type>
+        <definition>ticket_value_type fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::ticket</definition>
+        <argsstring></argsstring>
+        <name>ticket</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_token::ticket</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="505" column="27" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="505" bodyend="-1"/>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" compoundref="barrier_8hpp" startline="506" endline="506">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a00eec5737b46bb2744baf1dfb64d09f2" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::TreeBarrier</definition>
+        <argsstring></argsstring>
+        <name>TreeBarrier</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_token::TreeBarrier</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="507" column="16" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="507" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</definition>
+        <argsstring>(uint32_t src, ticket_value_type ticket)</argsstring>
+        <name>shuffle_token</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_token::shuffle_token</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1a922552c50e0d877bd73725bc755622f0" kindref="member">ticket_value_type</ref></type>
+          <declname>ticket</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="506" column="9" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="506" bodyend="506"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ae1d9501f71b2ac3f82dbb6a178abda69" compoundref="barrier_8hpp" startline="504">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::src</references>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a88950cc15e2cb000f235c5471c6bf93a" compoundref="barrier_8hpp" startline="505">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::ticket</references>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ad4dedb1b60a5bfb099f5a82dc6dab8e2">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ab9bc091835cb692c5fcc2ef879c1a8a9">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ad9e0f26cd39de3d0af3342755abc6132">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5a54af715488a76e0cdafd94fd8b8423">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::operator=</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ad4dedb1b60a5bfb099f5a82dc6dab8e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</definition>
+        <argsstring>(const shuffle_token &amp;phase)=delete</argsstring>
+        <name>shuffle_token</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_token::shuffle_token</qualifiedname>
+        <param>
+          <type>const shuffle_token &amp;</type>
+          <declname>phase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="510" column="9"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" compoundref="barrier_8hpp" startline="506" endline="506">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</references>
+        <references refid="classfancyqlone_1_1TreeBarrier_1a2ceeebe2f2f399f6691f7d0517d9fa24" compoundref="barrier_8hpp" startline="157" endline="157">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::phase</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ab9bc091835cb692c5fcc2ef879c1a8a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</definition>
+        <argsstring>(shuffle_token &amp;&amp;phase)=default</argsstring>
+        <name>shuffle_token</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_token::shuffle_token</qualifiedname>
+        <param>
+          <type>shuffle_token &amp;&amp;</type>
+          <declname>phase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="511" column="9"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" compoundref="barrier_8hpp" startline="506" endline="506">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</references>
+        <references refid="classfancyqlone_1_1TreeBarrier_1a2ceeebe2f2f399f6691f7d0517d9fa24" compoundref="barrier_8hpp" startline="157" endline="157">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::phase</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ad9e0f26cd39de3d0af3342755abc6132" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" kindref="member">shuffle_token</ref> &amp;</type>
+        <definition>shuffle_token &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::operator=</definition>
+        <argsstring>(const shuffle_token &amp;phase)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_token::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" kindref="member">shuffle_token</ref> &amp;</type>
+          <declname>phase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="512" column="23"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" compoundref="barrier_8hpp" startline="506" endline="506">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</references>
+        <references refid="classfancyqlone_1_1TreeBarrier_1a2ceeebe2f2f399f6691f7d0517d9fa24" compoundref="barrier_8hpp" startline="157" endline="157">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::phase</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5a54af715488a76e0cdafd94fd8b8423" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" kindref="member">shuffle_token</ref> &amp;</type>
+        <definition>shuffle_token &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::operator=</definition>
+        <argsstring>(shuffle_token &amp;&amp;phase)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_token::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" kindref="member">shuffle_token</ref> &amp;&amp;</type>
+          <declname>phase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="513" column="23"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" compoundref="barrier_8hpp" startline="506" endline="506">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</references>
+        <references refid="classfancyqlone_1_1TreeBarrier_1a2ceeebe2f2f399f6691f7d0517d9fa24" compoundref="barrier_8hpp" startline="157" endline="157">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::phase</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;</label>
+        <link refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="503" column="5" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="503" bodyend="514"/>
+    <listofallmembers>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ad9e0f26cd39de3d0af3342755abc6132" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::shuffle_token</scope><name>operator=</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5a54af715488a76e0cdafd94fd8b8423" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::shuffle_token</scope><name>operator=</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5d042eb6e379c431c06de91c2e75d102" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier::shuffle_token</scope><name>shuffle_token</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ad4dedb1b60a5bfb099f5a82dc6dab8e2" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::shuffle_token</scope><name>shuffle_token</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ab9bc091835cb692c5fcc2ef879c1a8a9" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::shuffle_token</scope><name>shuffle_token</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ae1d9501f71b2ac3f82dbb6a178abda69" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier::shuffle_token</scope><name>src</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a88950cc15e2cb000f235c5471c6bf93a" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier::shuffle_token</scope><name>ticket</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a00eec5737b46bb2744baf1dfb64d09f2" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier::shuffle_token</scope><name>TreeBarrier</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

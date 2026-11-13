@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1TridiagonalSolver" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::TridiagonalSolver</compoundname>
+    <includes refid="tridiagonal-solver_8hpp" local="no">fancyqlone/cyqlone/tridiagonal-solver.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+        <defval><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></defval>
+      </param>
+      <param>
+        <type><ref refid="namespacebatmat_1_1linalg_1a12561d95ffd5ca9cc074d7b3edceb429" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">StorageOrder</ref></type>
+        <declname>Order</declname>
+        <defname>Order</defname>
+        <defval>StorageOrder::ColMajor</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1TridiagonalSolver_1ad9d5d9ea55f6a43967e30e518d280d9b" prot="public" static="no">
+        <type>T</type>
+        <definition>using fancyqlone::TridiagonalSolver&lt; T, Order &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="20" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1TridiagonalSolver_1a8153f4198cd60e6dd5bd039f9e554c58" prot="public" static="no">
+        <type>std::integral_constant&lt; <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, 1 &gt;</type>
+        <definition>using fancyqlone::TridiagonalSolver&lt; T, Order &gt;::vl_t = std::integral_constant&lt;index_t, 1&gt;</definition>
+        <argsstring></argsstring>
+        <name>vl_t</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::vl_t</qualifiedname>
+        <briefdescription>
+<para>No batched vectorization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="26" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1TridiagonalSolver_1ab772a45a1d86245c589c91ddbd2405b3" prot="public" static="no">
+        <type><ref refid="structbatmat_1_1matrix_1_1Matrix" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::Matrix</ref>&lt; <ref refid="structfancyqlone_1_1TridiagonalSolver_1ad9d5d9ea55f6a43967e30e518d280d9b" kindref="member">value_type</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, <ref refid="structfancyqlone_1_1TridiagonalSolver_1a8153f4198cd60e6dd5bd039f9e554c58" kindref="member">vl_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, Order &gt;</type>
+        <definition>using fancyqlone::TridiagonalSolver&lt; T, Order &gt;::matrix = batmat::matrix::Matrix&lt;value_type, index_t, vl_t, index_t, Order&gt;</definition>
+        <argsstring></argsstring>
+        <name>matrix</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::matrix</qualifiedname>
+        <briefdescription>
+<para>Owning type for a batch of matrices (with batch size v). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="28" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1TridiagonalSolver_1ab1ebcf03780d907b83d027167f2c6ef5" prot="public" static="no">
+        <type><ref refid="structbatmat_1_1matrix_1_1View" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::View</ref>&lt; const <ref refid="structfancyqlone_1_1TridiagonalSolver_1ad9d5d9ea55f6a43967e30e518d280d9b" kindref="member">value_type</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, <ref refid="structfancyqlone_1_1TridiagonalSolver_1a8153f4198cd60e6dd5bd039f9e554c58" kindref="member">vl_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, Order &gt;</type>
+        <definition>using fancyqlone::TridiagonalSolver&lt; T, Order &gt;::view = batmat::matrix::View&lt;const value_type, index_t, vl_t, index_t, index_t, Order&gt;</definition>
+        <argsstring></argsstring>
+        <name>view</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::view</qualifiedname>
+        <briefdescription>
+<para>Non-owning immutable view type for <ref refid="structfancyqlone_1_1TridiagonalSolver_1ab772a45a1d86245c589c91ddbd2405b3" kindref="member">matrix</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="30" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1TridiagonalSolver_1aacbf3653b51f6a5fe25715c1eb395e2e" prot="public" static="no">
+        <type><ref refid="structbatmat_1_1matrix_1_1View" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::matrix::View</ref>&lt; <ref refid="structfancyqlone_1_1TridiagonalSolver_1ad9d5d9ea55f6a43967e30e518d280d9b" kindref="member">value_type</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, <ref refid="structfancyqlone_1_1TridiagonalSolver_1a8153f4198cd60e6dd5bd039f9e554c58" kindref="member">vl_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, Order &gt;</type>
+        <definition>using fancyqlone::TridiagonalSolver&lt; T, Order &gt;::mut_view = batmat::matrix::View&lt;value_type, index_t, vl_t, index_t, index_t, Order&gt;</definition>
+        <argsstring></argsstring>
+        <name>mut_view</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::mut_view</qualifiedname>
+        <briefdescription>
+<para>Non-owning mutable view type for <ref refid="structfancyqlone_1_1TridiagonalSolver_1ab772a45a1d86245c589c91ddbd2405b3" kindref="member">matrix</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="32" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1TridiagonalSolver_1ac04c8a316e8876d36c9d0800c24c825a" prot="public" static="no" mutable="no">
+        <type>const <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>const index_t fancyqlone::TridiagonalSolver&lt; T, Order &gt;::block_size</definition>
+        <argsstring></argsstring>
+        <name>block_size</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::block_size</qualifiedname>
+        <briefdescription>
+<para>Block size of the block-tridiagonal system. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="22" column="19" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TridiagonalSolver_1a31ecb44158d7660566bda249a42b212c" prot="public" static="no" mutable="no">
+        <type>const <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>const index_t fancyqlone::TridiagonalSolver&lt; T, Order &gt;::num_blocks</definition>
+        <argsstring></argsstring>
+        <name>num_blocks</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::num_blocks</qualifiedname>
+        <briefdescription>
+<para>Number of blocks. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="23" column="19" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TridiagonalSolver_1a28ec8b7e572877a314583ae37701f2a6" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1TridiagonalSolver_1ab772a45a1d86245c589c91ddbd2405b3" kindref="member">matrix</ref></type>
+        <definition>matrix fancyqlone::TridiagonalSolver&lt; T, Order &gt;::L</definition>
+        <argsstring></argsstring>
+        <name>L</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::L</qualifiedname>
+        <initializer>         = [this] {
+    return <ref refid="structfancyqlone_1_1TridiagonalSolver_1ab772a45a1d86245c589c91ddbd2405b3" kindref="member">matrix</ref>{{.depth = <ref refid="structfancyqlone_1_1TridiagonalSolver_1a31ecb44158d7660566bda249a42b212c" kindref="member">num_blocks</ref>, .rows = <ref refid="structfancyqlone_1_1TridiagonalSolver_1ac04c8a316e8876d36c9d0800c24c825a" kindref="member">block_size</ref>, .cols = <ref refid="structfancyqlone_1_1TridiagonalSolver_1ac04c8a316e8876d36c9d0800c24c825a" kindref="member">block_size</ref>}};
+}()</initializer>
+        <briefdescription>
+<para>Diagonal blocks of the Cholesky factor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="35" column="12" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="35" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TridiagonalSolver_1a30634bee9a29e386545dda3402596a52" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1TridiagonalSolver_1ab772a45a1d86245c589c91ddbd2405b3" kindref="member">matrix</ref></type>
+        <definition>matrix fancyqlone::TridiagonalSolver&lt; T, Order &gt;::U</definition>
+        <argsstring></argsstring>
+        <name>U</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::U</qualifiedname>
+        <initializer>         = [this] {
+    return <ref refid="structfancyqlone_1_1TridiagonalSolver_1ab772a45a1d86245c589c91ddbd2405b3" kindref="member">matrix</ref>{{.depth = <ref refid="structfancyqlone_1_1TridiagonalSolver_1a31ecb44158d7660566bda249a42b212c" kindref="member">num_blocks</ref>, .rows = <ref refid="structfancyqlone_1_1TridiagonalSolver_1ac04c8a316e8876d36c9d0800c24c825a" kindref="member">block_size</ref>, .cols = <ref refid="structfancyqlone_1_1TridiagonalSolver_1ac04c8a316e8876d36c9d0800c24c825a" kindref="member">block_size</ref>}};
+}()</initializer>
+        <briefdescription>
+<para>Superdiagonal blocks of the Cholesky factor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Actually only contains num_blocks - 1 blocks, but we allocate num_blocks to simplify packing and unpacking to/from batched matrices. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="41" column="12" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="41" bodyend="43"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1TridiagonalSolver_1a05b29f2742b39cfaaf3a72ba1356268d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::TridiagonalSolver&lt; T, Order &gt;::factor</definition>
+        <argsstring>()</argsstring>
+        <name>factor</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::factor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="45" column="10" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="45" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TridiagonalSolver_1afe71065b798ee5defe25ec7cc2427ba7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::TridiagonalSolver&lt; T, Order &gt;::solve_forward</definition>
+        <argsstring>(mut_view λ) const</argsstring>
+        <name>solve_forward</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::solve_forward</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1TridiagonalSolver_1aacbf3653b51f6a5fe25715c1eb395e2e" kindref="member">mut_view</ref></type>
+          <declname>λ</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="62" column="10" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="62" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TridiagonalSolver_1ad710038906936b871c26a01e9669f3d7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::TridiagonalSolver&lt; T, Order &gt;::solve_reverse</definition>
+        <argsstring>(mut_view λ) const</argsstring>
+        <name>solve_reverse</name>
+        <qualifiedname>fancyqlone::TridiagonalSolver::solve_reverse</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1TridiagonalSolver_1aacbf3653b51f6a5fe25715c1eb395e2e" kindref="member">mut_view</ref></type>
+          <declname>λ</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="74" column="10" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="74" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Simple serial solver for block-tridiagonal systems, for testing purposes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>batmat::matrix::Matrix&lt; value_type, index_t, vl_t, index_t, StorageOrder::ColMajor &gt;</label>
+        <link refid="structbatmat_1_1matrix_1_1Matrix" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>-view_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>batmat::matrix::View&lt; T, I, S, D, DefaultStride, O &gt;</label>
+        <link refid="structbatmat_1_1matrix_1_1View" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::TridiagonalSolver&lt; T, Order &gt;</label>
+        <link refid="structfancyqlone_1_1TridiagonalSolver"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+L</edgelabel>
+          <edgelabel>+U</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" line="19" column="1" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp" bodystart="19" bodyend="83"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1ac04c8a316e8876d36c9d0800c24c825a" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>block_size</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1a05b29f2742b39cfaaf3a72ba1356268d" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>factor</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1a28ec8b7e572877a314583ae37701f2a6" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>L</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1ab772a45a1d86245c589c91ddbd2405b3" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>matrix</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1aacbf3653b51f6a5fe25715c1eb395e2e" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>mut_view</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1a31ecb44158d7660566bda249a42b212c" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>num_blocks</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1afe71065b798ee5defe25ec7cc2427ba7" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>solve_forward</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1ad710038906936b871c26a01e9669f3d7" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>solve_reverse</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1a30634bee9a29e386545dda3402596a52" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>U</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1ad9d5d9ea55f6a43967e30e518d280d9b" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>value_type</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1ab1ebcf03780d907b83d027167f2c6ef5" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>view</name></member>
+      <member refid="structfancyqlone_1_1TridiagonalSolver_1a8153f4198cd60e6dd5bd039f9e554c58" prot="public" virt="non-virtual"><scope>fancyqlone::TridiagonalSolver</scope><name>vl_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

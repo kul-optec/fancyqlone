@@ -1,0 +1,942 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: fancyqlone::qpalm::SolverImplementation&lt; Backend &gt; Struct Template Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structfancyqlone_1_1qpalm_1_1SolverImplementation.html','','structfancyqlone_1_1qpalm_1_1SolverImplementation-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class Backend&gt;<br />
+struct fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;</div>
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00021">21</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a34b5e2426ebd0d71d21f16887df4bf1d" id="r_a34b5e2426ebd0d71d21f16887df4bf1d"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a34b5e2426ebd0d71d21f16887df4bf1d">backend_type</a> = Backend</td></tr>
+<tr class="memitem:a4a95f2b09837056ef83acdd140fd6df7" id="r_a4a95f2b09837056ef83acdd140fd6df7"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a4a95f2b09837056ef83acdd140fd6df7">active_set_t</a> = typename backend_type::active_set_t</td></tr>
+<tr class="memitem:a8a02734652268c4b851b414b6e1577b4" id="r_a8a02734652268c4b851b414b6e1577b4"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> = typename backend_type::ineq_constr_vec_t</td></tr>
+<tr class="memitem:ae88f822b56c365593c1d19fe2d90021d" id="r_ae88f822b56c365593c1d19fe2d90021d"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae88f822b56c365593c1d19fe2d90021d">eq_vec_t</a> = typename backend_type::eq_constr_vec_t</td></tr>
+<tr class="memitem:ae732b02c810a2d89cdd42ab321f97454" id="r_ae732b02c810a2d89cdd42ab321f97454"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a> = typename backend_type::var_vec_t</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a081f98c54da1e61a3cd4aff2c455b640" id="r_a081f98c54da1e61a3cd4aff2c455b640"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a081f98c54da1e61a3cd4aff2c455b640">ensure_storage</a> (<a class="el" href="#a34b5e2426ebd0d71d21f16887df4bf1d">backend_type</a> &amp;backend)</td></tr>
+<tr class="memitem:a68a8d399599111330d5048b81a67f2ef" id="r_a68a8d399599111330d5048b81a67f2ef"><td class="memItemLeft"><a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a>&#160;</td><td class="memItemRight"><a class="el" href="#a68a8d399599111330d5048b81a67f2ef">do_main_loop</a> (Backend::Context &amp;ctx, <a class="el" href="#a34b5e2426ebd0d71d21f16887df4bf1d">backend_type</a> &amp;backend, const <a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a> &amp;settings, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/classguanaqo_1_1AtomicStopSignal.html">guanaqo::AtomicStopSignal</a> &amp;stop_signal, <a class="el" href="group__topic-optimization-solvers.html#structfancyqlone_1_1qpalm_1_1SolverStats">SolverStats</a> &amp;stats)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a4bc47a06e0eba099513ff65f253b80ee" id="r_a4bc47a06e0eba099513ff65f253b80ee"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a4bc47a06e0eba099513ff65f253b80ee">initialize_penalty_y</a> (Backend::Context &amp;ctx, <a class="el" href="#a34b5e2426ebd0d71d21f16887df4bf1d">backend_type</a> &amp;backend, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> f0, const <a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &amp;e0, <a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &amp;<a class="el" href="#a8aef1639357eac6aba3aa914bf65e08e">Σ</a>, const <a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a> &amp;settings)</td></tr>
+<tr class="memitem:a9b80dc8ea42a8aae326ba3492f3cf05d" id="r_a9b80dc8ea42a8aae326ba3492f3cf05d"><td class="memItemLeft">static <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9b80dc8ea42a8aae326ba3492f3cf05d">update_penalty_y</a> (Backend::Context &amp;ctx, <a class="el" href="#a34b5e2426ebd0d71d21f16887df4bf1d">backend_type</a> &amp;backend, <a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &amp;<a class="el" href="#a8aef1639357eac6aba3aa914bf65e08e">Σ</a>, const <a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &amp;<a class="el" href="#aad045f72af7be16f4da2f5177cd732a8">e</a>, const <a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &amp;<a class="el" href="#a9ac432d4e2e37428629d27dc76e1f70d">e_old</a>, const <a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a> &amp;settings)</td></tr>
+<tr class="memitem:a30681bb7f9314cb69eb0cf0e70c7614b" id="r_a30681bb7f9314cb69eb0cf0e70c7614b"><td class="memItemLeft">static <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a30681bb7f9314cb69eb0cf0e70c7614b">update_penalty_x</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> S, const <a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a> &amp;settings)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a711e127d98e93c34393d3759e1e533ad" id="r_a711e127d98e93c34393d3759e1e533ad"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1qpalm_1_1LineSearch.html">LineSearch</a>&lt; <a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a711e127d98e93c34393d3759e1e533ad">linesearch</a></td></tr>
+<tr class="memitem:a0aca234b285d2762519a5edda3d13fa5" id="r_a0aca234b285d2762519a5edda3d13fa5"><td class="memItemLeft"><a class="el" href="#a4a95f2b09837056ef83acdd140fd6df7">active_set_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0aca234b285d2762519a5edda3d13fa5">active_set</a></td></tr>
+<tr class="memitem:a575132310c956596c9ae99e466845d63" id="r_a575132310c956596c9ae99e466845d63"><td class="memItemLeft"><a class="el" href="#a4a95f2b09837056ef83acdd140fd6df7">active_set_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a575132310c956596c9ae99e466845d63">active_set_old</a></td></tr>
+<tr class="memitem:a8aef1639357eac6aba3aa914bf65e08e" id="r_a8aef1639357eac6aba3aa914bf65e08e"><td class="memItemLeft"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8aef1639357eac6aba3aa914bf65e08e">Σ</a></td></tr>
+<tr class="memitem:a61f0e5f027ccfb2c1796b123cd24a9e8" id="r_a61f0e5f027ccfb2c1796b123cd24a9e8"><td class="memItemLeft"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a61f0e5f027ccfb2c1796b123cd24a9e8">y</a></td></tr>
+<tr class="memitem:abc178d84bafcd83d93bab9b92860a0b0" id="r_abc178d84bafcd83d93bab9b92860a0b0"><td class="memItemLeft"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#abc178d84bafcd83d93bab9b92860a0b0">ŷ</a></td></tr>
+<tr class="memitem:aad045f72af7be16f4da2f5177cd732a8" id="r_aad045f72af7be16f4da2f5177cd732a8"><td class="memItemLeft"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aad045f72af7be16f4da2f5177cd732a8">e</a></td></tr>
+<tr class="memitem:a9ac432d4e2e37428629d27dc76e1f70d" id="r_a9ac432d4e2e37428629d27dc76e1f70d"><td class="memItemLeft"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9ac432d4e2e37428629d27dc76e1f70d">e_old</a></td></tr>
+<tr class="memitem:abd7e00c824e4c9876004aa9dd767989d" id="r_abd7e00c824e4c9876004aa9dd767989d"><td class="memItemLeft"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#abd7e00c824e4c9876004aa9dd767989d">Ax</a></td></tr>
+<tr class="memitem:aa7f5dfb7d99259e4a1b366f054b876fc" id="r_aa7f5dfb7d99259e4a1b366f054b876fc"><td class="memItemLeft"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa7f5dfb7d99259e4a1b366f054b876fc">Ad</a></td></tr>
+<tr class="memitem:a6280ab655c0cdc0fd6d8ab578e8c8688" id="r_a6280ab655c0cdc0fd6d8ab578e8c8688"><td class="memItemLeft"><a class="el" href="#ae88f822b56c365593c1d19fe2d90021d">eq_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6280ab655c0cdc0fd6d8ab578e8c8688">Mxb</a></td></tr>
+<tr class="memitem:a66fc134949ddfb8f36d8274be3408c12" id="r_a66fc134949ddfb8f36d8274be3408c12"><td class="memItemLeft"><a class="el" href="#ae88f822b56c365593c1d19fe2d90021d">eq_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a66fc134949ddfb8f36d8274be3408c12">Δλ</a></td></tr>
+<tr class="memitem:a594285677e62ced0ac264fabfe29db2b" id="r_a594285677e62ced0ac264fabfe29db2b"><td class="memItemLeft"><a class="el" href="#ae88f822b56c365593c1d19fe2d90021d">eq_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a594285677e62ced0ac264fabfe29db2b">λ</a></td></tr>
+<tr class="memitem:a3b1c84a9ac0a619fbdbe16df9a411bb0" id="r_a3b1c84a9ac0a619fbdbe16df9a411bb0"><td class="memItemLeft"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3b1c84a9ac0a619fbdbe16df9a411bb0">x</a></td></tr>
+<tr class="memitem:a6d885f039b39b7b3c3da97286b1d273b" id="r_a6d885f039b39b7b3c3da97286b1d273b"><td class="memItemLeft"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6d885f039b39b7b3c3da97286b1d273b">grad</a></td></tr>
+<tr class="memitem:ae473a1ab441ad36ec754e8905b1148c2" id="r_ae473a1ab441ad36ec754e8905b1148c2"><td class="memItemLeft"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae473a1ab441ad36ec754e8905b1148c2">Mᵀλ</a></td></tr>
+<tr class="memitem:ab152359c8dbce7fb78a69cc13f6c4be7" id="r_ab152359c8dbce7fb78a69cc13f6c4be7"><td class="memItemLeft"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab152359c8dbce7fb78a69cc13f6c4be7">Aᵀŷ</a></td></tr>
+<tr class="memitem:a5a60a140d77dd97dea362f731057a0ab" id="r_a5a60a140d77dd97dea362f731057a0ab"><td class="memItemLeft"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5a60a140d77dd97dea362f731057a0ab">x_outer</a></td></tr>
+<tr class="memitem:af2d3c35e6e135c484d812706acc8c326" id="r_af2d3c35e6e135c484d812706acc8c326"><td class="memItemLeft"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#af2d3c35e6e135c484d812706acc8c326">MᵀΔλ</a></td></tr>
+<tr class="memitem:a94afb10137a463487173349dd55abba9" id="r_a94afb10137a463487173349dd55abba9"><td class="memItemLeft"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a94afb10137a463487173349dd55abba9">d</a></td></tr>
+<tr class="memitem:ad791339bebfe31e3939943a04c07ec99" id="r_ad791339bebfe31e3939943a04c07ec99"><td class="memItemLeft"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad791339bebfe31e3939943a04c07ec99">ξ</a></td></tr>
+<tr class="memitem:a6d47028932e9559b54719f919cf77fa8" id="r_a6d47028932e9559b54719f919cf77fa8"><td class="memItemLeft"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6d47028932e9559b54719f919cf77fa8">grad_add</a></td></tr>
+</table>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
+<a id="a34b5e2426ebd0d71d21f16887df4bf1d" name="a34b5e2426ebd0d71d21f16887df4bf1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34b5e2426ebd0d71d21f16887df4bf1d">&#9670;&#160;</a></span>backend_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::backend_type = Backend</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00022">22</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a4a95f2b09837056ef83acdd140fd6df7" name="a4a95f2b09837056ef83acdd140fd6df7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a95f2b09837056ef83acdd140fd6df7">&#9670;&#160;</a></span>active_set_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::active_set_t = typename backend_type::active_set_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00025">25</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a8a02734652268c4b851b414b6e1577b4" name="a8a02734652268c4b851b414b6e1577b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a02734652268c4b851b414b6e1577b4">&#9670;&#160;</a></span>ineq_vec_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::ineq_vec_t = typename backend_type::ineq_constr_vec_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00026">26</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="ae88f822b56c365593c1d19fe2d90021d" name="ae88f822b56c365593c1d19fe2d90021d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae88f822b56c365593c1d19fe2d90021d">&#9670;&#160;</a></span>eq_vec_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::eq_vec_t = typename backend_type::eq_constr_vec_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00027">27</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="ae732b02c810a2d89cdd42ab321f97454" name="ae732b02c810a2d89cdd42ab321f97454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae732b02c810a2d89cdd42ab321f97454">&#9670;&#160;</a></span>var_vec_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::var_vec_t = typename backend_type::var_vec_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00028">28</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a4bc47a06e0eba099513ff65f253b80ee" name="a4bc47a06e0eba099513ff65f253b80ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bc47a06e0eba099513ff65f253b80ee">&#9670;&#160;</a></span>initialize_penalty_y()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::initialize_penalty_y </td>
+          <td>(</td>
+          <td class="paramtype">Backend::Context &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a34b5e2426ebd0d71d21f16887df4bf1d">backend_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>backend</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>          <td class="paramname"><span class="paramname"><em>f0</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>e0</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>Σ</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00031">31</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a9b80dc8ea42a8aae326ba3492f3cf05d" name="a9b80dc8ea42a8aae326ba3492f3cf05d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b80dc8ea42a8aae326ba3492f3cf05d">&#9670;&#160;</a></span>update_penalty_y()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::update_penalty_y </td>
+          <td>(</td>
+          <td class="paramtype">Backend::Context &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a34b5e2426ebd0d71d21f16887df4bf1d">backend_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>backend</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>Σ</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>e</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>e_old</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00045">45</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a30681bb7f9314cb69eb0cf0e70c7614b" name="a30681bb7f9314cb69eb0cf0e70c7614b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30681bb7f9314cb69eb0cf0e70c7614b">&#9670;&#160;</a></span>update_penalty_x()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::update_penalty_x </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>          <td class="paramname"><span class="paramname"><em>S</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00077">77</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a081f98c54da1e61a3cd4aff2c455b640" name="a081f98c54da1e61a3cd4aff2c455b640"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a081f98c54da1e61a3cd4aff2c455b640">&#9670;&#160;</a></span>ensure_storage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::ensure_storage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a34b5e2426ebd0d71d21f16887df4bf1d">backend_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>backend</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00082">82</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a68a8d399599111330d5048b81a67f2ef" name="a68a8d399599111330d5048b81a67f2ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68a8d399599111330d5048b81a67f2ef">&#9670;&#160;</a></span>do_main_loop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::do_main_loop </td>
+          <td>(</td>
+          <td class="paramtype">Backend::Context &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a34b5e2426ebd0d71d21f16887df4bf1d">backend_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>backend</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/classguanaqo_1_1AtomicStopSignal.html">guanaqo::AtomicStopSignal</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>stop_signal</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers.html#structfancyqlone_1_1qpalm_1_1SolverStats">SolverStats</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>stats</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00125">125</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a711e127d98e93c34393d3759e1e533ad" name="a711e127d98e93c34393d3759e1e533ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a711e127d98e93c34393d3759e1e533ad">&#9670;&#160;</a></span>linesearch</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1qpalm_1_1LineSearch.html">LineSearch</a>&lt;<a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a>&gt; <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::linesearch</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00029">29</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a0aca234b285d2762519a5edda3d13fa5" name="a0aca234b285d2762519a5edda3d13fa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aca234b285d2762519a5edda3d13fa5">&#9670;&#160;</a></span>active_set</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4a95f2b09837056ef83acdd140fd6df7">active_set_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::active_set</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00094">94</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a575132310c956596c9ae99e466845d63" name="a575132310c956596c9ae99e466845d63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a575132310c956596c9ae99e466845d63">&#9670;&#160;</a></span>active_set_old</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a4a95f2b09837056ef83acdd140fd6df7">active_set_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::active_set_old</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00094">94</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a8aef1639357eac6aba3aa914bf65e08e" name="a8aef1639357eac6aba3aa914bf65e08e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aef1639357eac6aba3aa914bf65e08e">&#9670;&#160;</a></span>Σ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::Σ</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00095">95</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a61f0e5f027ccfb2c1796b123cd24a9e8" name="a61f0e5f027ccfb2c1796b123cd24a9e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61f0e5f027ccfb2c1796b123cd24a9e8">&#9670;&#160;</a></span>y</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00095">95</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="abc178d84bafcd83d93bab9b92860a0b0" name="abc178d84bafcd83d93bab9b92860a0b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc178d84bafcd83d93bab9b92860a0b0">&#9670;&#160;</a></span>ŷ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::ŷ</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00095">95</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="aad045f72af7be16f4da2f5177cd732a8" name="aad045f72af7be16f4da2f5177cd732a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad045f72af7be16f4da2f5177cd732a8">&#9670;&#160;</a></span>e</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::e</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00095">95</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a9ac432d4e2e37428629d27dc76e1f70d" name="a9ac432d4e2e37428629d27dc76e1f70d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ac432d4e2e37428629d27dc76e1f70d">&#9670;&#160;</a></span>e_old</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::e_old</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00095">95</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="abd7e00c824e4c9876004aa9dd767989d" name="abd7e00c824e4c9876004aa9dd767989d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd7e00c824e4c9876004aa9dd767989d">&#9670;&#160;</a></span>Ax</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::Ax</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00095">95</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="aa7f5dfb7d99259e4a1b366f054b876fc" name="aa7f5dfb7d99259e4a1b366f054b876fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7f5dfb7d99259e4a1b366f054b876fc">&#9670;&#160;</a></span>Ad</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8a02734652268c4b851b414b6e1577b4">ineq_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::Ad</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00095">95</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a6280ab655c0cdc0fd6d8ab578e8c8688" name="a6280ab655c0cdc0fd6d8ab578e8c8688"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6280ab655c0cdc0fd6d8ab578e8c8688">&#9670;&#160;</a></span>Mxb</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae88f822b56c365593c1d19fe2d90021d">eq_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::Mxb</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00096">96</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a66fc134949ddfb8f36d8274be3408c12" name="a66fc134949ddfb8f36d8274be3408c12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66fc134949ddfb8f36d8274be3408c12">&#9670;&#160;</a></span>Δλ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae88f822b56c365593c1d19fe2d90021d">eq_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::Δλ</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00096">96</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a594285677e62ced0ac264fabfe29db2b" name="a594285677e62ced0ac264fabfe29db2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a594285677e62ced0ac264fabfe29db2b">&#9670;&#160;</a></span>λ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae88f822b56c365593c1d19fe2d90021d">eq_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::λ</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00096">96</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a3b1c84a9ac0a619fbdbe16df9a411bb0" name="a3b1c84a9ac0a619fbdbe16df9a411bb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b1c84a9ac0a619fbdbe16df9a411bb0">&#9670;&#160;</a></span>x</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00097">97</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a6d885f039b39b7b3c3da97286b1d273b" name="a6d885f039b39b7b3c3da97286b1d273b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d885f039b39b7b3c3da97286b1d273b">&#9670;&#160;</a></span>grad</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::grad</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00097">97</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="ae473a1ab441ad36ec754e8905b1148c2" name="ae473a1ab441ad36ec754e8905b1148c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae473a1ab441ad36ec754e8905b1148c2">&#9670;&#160;</a></span>Mᵀλ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::Mᵀλ</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00097">97</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="ab152359c8dbce7fb78a69cc13f6c4be7" name="ab152359c8dbce7fb78a69cc13f6c4be7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab152359c8dbce7fb78a69cc13f6c4be7">&#9670;&#160;</a></span>Aᵀŷ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::Aᵀŷ</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00097">97</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a5a60a140d77dd97dea362f731057a0ab" name="a5a60a140d77dd97dea362f731057a0ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a60a140d77dd97dea362f731057a0ab">&#9670;&#160;</a></span>x_outer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::x_outer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00097">97</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="af2d3c35e6e135c484d812706acc8c326" name="af2d3c35e6e135c484d812706acc8c326"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2d3c35e6e135c484d812706acc8c326">&#9670;&#160;</a></span>MᵀΔλ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::MᵀΔλ</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00097">97</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a94afb10137a463487173349dd55abba9" name="a94afb10137a463487173349dd55abba9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94afb10137a463487173349dd55abba9">&#9670;&#160;</a></span>d</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::d</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00097">97</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="ad791339bebfe31e3939943a04c07ec99" name="ad791339bebfe31e3939943a04c07ec99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad791339bebfe31e3939943a04c07ec99">&#9670;&#160;</a></span>ξ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::ξ</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00097">97</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a6d47028932e9559b54719f919cf77fa8" name="a6d47028932e9559b54719f919cf77fa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d47028932e9559b54719f919cf77fa8">&#9670;&#160;</a></span>grad_add</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae732b02c810a2d89cdd42ab321f97454">var_vec_t</a> <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">fancyqlone::qpalm::SolverImplementation</a>&lt; Backend &gt;::grad_add</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00097">97</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/<a class="el" href="solver_8tpp_source.html">solver.tpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacefancyqlone.html">fancyqlone</a></li><li class="navelem"><a href="namespacefancyqlone_1_1qpalm.html">qpalm</a></li><li class="navelem"><a href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">SolverImplementation</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

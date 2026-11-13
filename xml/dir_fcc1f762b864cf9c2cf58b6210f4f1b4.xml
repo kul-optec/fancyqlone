@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_fcc1f762b864cf9c2cf58b6210f4f1b4" kind="dir">
+    <compoundname>src/fancyqlone/include/fancyqlone/sequential-fancyqlone</compoundname>
+    <innerdir refid="dir_5245091977c81dde984ed67937983437">src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation</innerdir>
+    <innerfile refid="serial-fancyqlone_8hpp">serial-fancyqlone.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqlone/include/fancyqlone/sequential-fancyqlone/"/>
+  </compounddef>
+</doxygen>

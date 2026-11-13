@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="group__topic-optimization-solvers-ocp" kind="group">
+    <compoundname>topic-optimization-solvers-ocp</compoundname>
+    <title>Optimal control solvers</title>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CyqloneData" prot="public">fancyqlone::qpalm::CyqloneData</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" prot="public">fancyqlone::qpalm::CyQPALMBackendSettings</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats" prot="public">fancyqlone::qpalm::CyQPALMBackendStats</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" prot="public">fancyqlone::qpalm::unique_CyQPALMBackend</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group__topic-optimization-solvers-ocp_1gac67dc98973eb37748e986ba97732b38c" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>WarmStartingStrategy</name>
+        <qualifiedname>fancyqlone::qpalm::WarmStartingStrategy</qualifiedname>
+        <enumvalue id="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca8b7a61a6e9bd5b8977b7b3f02a425adc" prot="public">
+          <name>Zeros</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea" prot="public">
+          <name>Copy</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca825a3d98017bab11815ad2817201324c" prot="public">
+          <name>Shift</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38cab882fa82c60e5b9a229e5ed6e52ad31a" prot="public">
+          <name>ShiftNoInequality</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="29" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="29" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="enum" id="group__topic-optimization-solvers-ocp_1ga90c820ba89c66a51ee3e57a7ebf796d2" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>FanWarmStartingStrategy</name>
+        <qualifiedname>fancyqlone::qpalm::FanWarmStartingStrategy</qualifiedname>
+        <enumvalue id="group__topic-optimization-solvers-ocp_1gga90c820ba89c66a51ee3e57a7ebf796d2a8b7a61a6e9bd5b8977b7b3f02a425adc" prot="public">
+          <name>Zeros</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers-ocp_1gga90c820ba89c66a51ee3e57a7ebf796d2a5fb63579fc981698f97d55bfecb213ea" prot="public">
+          <name>Copy</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers-ocp_1gga90c820ba89c66a51ee3e57a7ebf796d2a825a3d98017bab11815ad2817201324c" prot="public">
+          <name>Shift</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__topic-optimization-solvers-ocp_1gga90c820ba89c66a51ee3e57a7ebf796d2ab882fa82c60e5b9a229e5ed6e52ad31a" prot="public">
+          <name>ShiftNoInequality</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="36" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="36" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group__topic-optimization-solvers-ocp_1ga04ffaf134708a2b3476e949e6dfa426e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="example_8cpp_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+            <declname>VL</declname>
+            <defname>VL</defname>
+          </param>
+          <param>
+            <type>StorageOrder</type>
+            <declname>DefaultOrder</declname>
+            <defname>DefaultOrder</defname>
+            <defval>StorageOrder::ColMajor</defval>
+          </param>
+          <param>
+            <type>class LinearSolver</type>
+            <defval><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">fancyqlone::CyqloneSolver</ref>&lt;VL, <ref refid="example_8cpp_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, DefaultOrder&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>unique_CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;</type>
+        <definition>unique_CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; fancyqlone::qpalm::make_cyqpalm_backend</definition>
+        <argsstring>(const typename CycloneBackendTraits&lt; LinearSolver &gt;::CStorage &amp;ocp, CyqloneData data, const CyQPALMBackendSettings &amp;settings)</argsstring>
+        <name>make_cyqpalm_backend</name>
+        <qualifiedname>fancyqlone::qpalm::make_cyqpalm_backend</qualifiedname>
+        <param>
+          <type>const typename CycloneBackendTraits&lt; LinearSolver &gt;::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <param>
+          <type>CyqloneData</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const CyQPALMBackendSettings &amp;</type>
+          <declname>settings</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="653" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="653" bodyend="656" declfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" declline="224" declcolumn="1"/>
+        <references refid="group__topic-optimization-solvers-ocp_1ga04ffaf134708a2b3476e949e6dfa426e" compoundref="ocp-backend-fancyqlone_8tpp" startline="653" endline="656">fancyqlone::qpalm::make_cyqpalm_backend</references>
+        <referencedby refid="group__topic-optimization-solvers-ocp_1ga04ffaf134708a2b3476e949e6dfa426e" compoundref="ocp-backend-fancyqlone_8tpp" startline="653" endline="656">fancyqlone::qpalm::make_cyqpalm_backend</referencedby>
+        <referencedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1a9a50c58845ad3929bc28241ad1ef0991" compoundref="benchmarks_2cyqpalm_2spring-mass_8cpp" startline="177" endline="241">run_benchmark</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__topic-optimization-solvers-ocp_1ga923329c8239f305d13cb14a91d838483" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="example_8cpp_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+            <declname>VL</declname>
+            <defname>VL</defname>
+          </param>
+          <param>
+            <type>StorageOrder</type>
+            <declname>DefaultOrder</declname>
+            <defname>DefaultOrder</defname>
+            <defval>StorageOrder::ColMajor</defval>
+          </param>
+          <param>
+            <type>class LinearSolver</type>
+            <defval><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">fancyqlone::CyqloneSolver</ref>&lt;VL, <ref refid="example_8cpp_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, DefaultOrder&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fancyqlone::qpalm::update_cyqpalm_backend</definition>
+        <argsstring>(CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; &amp;backend, const typename CycloneBackendTraits&lt; LinearSolver &gt;::CStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend</qualifiedname>
+        <param>
+          <type>CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; &amp;</type>
+          <declname>backend</declname>
+        </param>
+        <param>
+          <type>const typename CycloneBackendTraits&lt; LinearSolver &gt;::CStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="659" column="6" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="659" bodyend="662" declfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" declline="229" declcolumn="6"/>
+        <references refid="group__topic-optimization-solvers-ocp_1ga923329c8239f305d13cb14a91d838483" compoundref="ocp-backend-fancyqlone_8tpp" startline="659" endline="662">fancyqlone::qpalm::update_cyqpalm_backend</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a523a926325a987322f4954b5829289bd" compoundref="ocp-backend-fancyqlone_8tpp" startline="136" endline="141">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::update_data</references>
+        <referencedby refid="group__topic-optimization-solvers-ocp_1ga923329c8239f305d13cb14a91d838483" compoundref="ocp-backend-fancyqlone_8tpp" startline="659" endline="662">fancyqlone::qpalm::update_cyqpalm_backend</referencedby>
+        <referencedby refid="group__topic-optimization-solvers-ocp_1ga9b8823b057fe6a59e9d65db005d8c3ff" compoundref="ocp-backend-fancyqlone_8tpp" startline="665" endline="669">fancyqlone::qpalm::update_cyqpalm_backend</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group__topic-optimization-solvers-ocp_1ga9b8823b057fe6a59e9d65db005d8c3ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="example_8cpp_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+            <declname>VL</declname>
+            <defname>VL</defname>
+          </param>
+          <param>
+            <type>StorageOrder</type>
+            <declname>DefaultOrder</declname>
+            <defname>DefaultOrder</defname>
+            <defval>StorageOrder::ColMajor</defval>
+          </param>
+          <param>
+            <type>class LinearSolver</type>
+            <defval><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">fancyqlone::CyqloneSolver</ref>&lt;VL, <ref refid="example_8cpp_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>, DefaultOrder&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fancyqlone::qpalm::update_cyqpalm_backend</definition>
+        <argsstring>(CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; &amp;backend, const typename CycloneBackendTraits&lt; LinearSolver &gt;::OCPStorage &amp;ocp)</argsstring>
+        <name>update_cyqpalm_backend</name>
+        <qualifiedname>fancyqlone::qpalm::update_cyqpalm_backend</qualifiedname>
+        <param>
+          <type>CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; &amp;</type>
+          <declname>backend</declname>
+        </param>
+        <param>
+          <type>const typename CycloneBackendTraits&lt; LinearSolver &gt;::OCPStorage &amp;</type>
+          <declname>ocp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="665" column="6" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="665" bodyend="669" declfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" declline="234" declcolumn="6"/>
+        <references refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1aa384fd30cfd154523e098ad60e2e05af" compoundref="ocp-backend-fancyqlone_8tpp" startline="80">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::ocp</references>
+        <references refid="group__topic-optimization-solvers-ocp_1ga923329c8239f305d13cb14a91d838483" compoundref="ocp-backend-fancyqlone_8tpp" startline="659" endline="662">fancyqlone::qpalm::update_cyqpalm_backend</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Solvers for optimal control problems. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

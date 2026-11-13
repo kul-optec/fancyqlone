@@ -1,0 +1,1996 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt; Class Template Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classfancyqlone_1_1TreeBarrier.html','','classfancyqlone_1_1TreeBarrier-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__topic-parallelization.html">Parallelization</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="barrier_8hpp_source.html">fancyqlone/barrier.hpp</a>&gt;</code></p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt;<br />
+class fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;</div><p>Fairly vanilla combining tree barrier. </p>
+<p>It is inspired by GCC 15.2's __tree_barrier, with some important API differences:</p><ul>
+<li>Every thread has a unique thread ID in [0, expected-1]. This eliminates the need for hashing the pthread thread IDs and for the inner search loop to find free slots in the tree.</li>
+<li>Wait tries to spin for a given number of iterations before falling back to a futex-based atomic wait.</li>
+<li>The barrier phase is exposed to the user.</li>
+<li>Custom completion functions can be provided at arrival time.</li>
+<li>Reductions and broadcasts on small values are supported. </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00060">60</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:arrival_5Ftoken" id="r_arrival_5Ftoken"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a></td></tr>
+<tr class="memitem:arrival_5Ftoken_5Ftyped" id="r_arrival_5Ftoken_5Ftyped"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed.html">arrival_token_typed</a></td></tr>
+<tr class="memitem:Storage" id="r_Storage"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1Storage.html">Storage</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1Storage.html" title="Storage for small values used in reductions and broadcasts.">Storage</a> for small values used in reductions and broadcasts.  <a href="structfancyqlone_1_1TreeBarrier_1_1Storage.html#details">More...</a><br /></td></tr>
+<tr class="memitem:State" id="r_State"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1State.html">State</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomic counters for each level of the combining tree.  <a href="structfancyqlone_1_1TreeBarrier_1_1State.html#details">More...</a><br /></td></tr>
+<tr class="memitem:shuffle_5Ftoken" id="r_shuffle_5Ftoken"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a8aa0a8c6ade3525e99efb950bd72139e" id="r_a8aa0a8c6ade3525e99efb950bd72139e"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a> : PhaseType </td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6d54e9ab947af6bf5f2c444145a2dc24" id="r_a6d54e9ab947af6bf5f2c444145a2dc24"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a> (uint32_t <a class="el" href="#aaac2c23d5ea2791a4cf0043b2b09d77a">expected</a>, CompletionFn <a class="el" href="#a7e283536548d011a6ef15eac342259b2">completion</a>)</td></tr>
+<tr class="memdesc:a6d54e9ab947af6bf5f2c444145a2dc24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a barrier with <code class="param">expected</code> participating threads and a completion function that is called by the last thread that arrives at each phase.  <br /></td></tr>
+<tr class="memitem:a6608037e06d9c8a288459cd0c45de243" id="r_a6608037e06d9c8a288459cd0c45de243"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6608037e06d9c8a288459cd0c45de243">TreeBarrier</a> (const TreeBarrier &amp;)=delete</td></tr>
+<tr class="memitem:ae33ad5af5efb88ceac23e61ea906b9de" id="r_ae33ad5af5efb88ceac23e61ea906b9de"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae33ad5af5efb88ceac23e61ea906b9de">TreeBarrier</a> (TreeBarrier &amp;&amp;other) noexcept</td></tr>
+<tr class="memitem:a7b30e650ac3640c7fd0cdaaf79d2ed82" id="r_a7b30e650ac3640c7fd0cdaaf79d2ed82"><td class="memItemLeft"><a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7b30e650ac3640c7fd0cdaaf79d2ed82">operator=</a> (const <a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a> &amp;)=delete</td></tr>
+<tr class="memitem:a13cabba1f7b1f7edcc8615c0c13ab7ac" id="r_a13cabba1f7b1f7edcc8615c0c13ab7ac"><td class="memItemLeft"><a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a13cabba1f7b1f7edcc8615c0c13ab7ac">operator=</a> (<a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a> &amp;&amp;)=delete</td></tr>
+<tr class="memitem:aec0a639e83e2d56df18631d9778c84c1" id="r_aec0a639e83e2d56df18631d9778c84c1"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
+<tr class="memitem:aec0a639e83e2d56df18631d9778c84c1 template"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a>&#160;</td><td class="memItemRight"><a class="el" href="#aec0a639e83e2d56df18631d9778c84c1">arrive_with_completion</a> (uint32_t thread_id, C &amp;&amp;custom_completion)</td></tr>
+<tr class="memdesc:aec0a639e83e2d56df18631d9778c84c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arrive at the barrier with a custom completion function that is called by the last thread that arrives, before advancing the barrier phase and notifying all waiting threads.  <br /></td></tr>
+<tr class="memitem:aa172bc3219792bce916f5c05b279beda" id="r_aa172bc3219792bce916f5c05b279beda"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa172bc3219792bce916f5c05b279beda">get_arrival_token</a> ()</td></tr>
+<tr class="memitem:a1a1da88ed85fbefc5a8717dcd8553a0f" id="r_a1a1da88ed85fbefc5a8717dcd8553a0f"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:a1a1da88ed85fbefc5a8717dcd8553a0f template"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed.html">arrival_token_typed</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a1a1da88ed85fbefc5a8717dcd8553a0f">get_typed_token</a> ()</td></tr>
+<tr class="memitem:a1e16a4fa48eb471928ca51afd2bd648e" id="r_a1e16a4fa48eb471928ca51afd2bd648e"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1e16a4fa48eb471928ca51afd2bd648e">arrive</a> (uint32_t thread_id)</td></tr>
+<tr class="memdesc:a1e16a4fa48eb471928ca51afd2bd648e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arrive at the barrier.  <br /></td></tr>
+<tr class="memitem:aab6053813cdf32978918bdd13018b1c7" id="r_aab6053813cdf32978918bdd13018b1c7"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a>&#160;</td><td class="memItemRight"><a class="el" href="#aab6053813cdf32978918bdd13018b1c7">arrive</a> (uint32_t thread_id, int line)</td></tr>
+<tr class="memdesc:aab6053813cdf32978918bdd13018b1c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arrive at the barrier, recording the given line number for sanity checking to make sure that all threads arrive from the same line or statement in the source code.  <br /></td></tr>
+<tr class="memitem:a6b970c685efe9c5ae0bb76392aecfbeb" id="r_a6b970c685efe9c5ae0bb76392aecfbeb"><td class="memItemLeft"><a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6b970c685efe9c5ae0bb76392aecfbeb">current_phase</a> () const</td></tr>
+<tr class="memdesc:a6b970c685efe9c5ae0bb76392aecfbeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Query the current barrier phase.  <br /></td></tr>
+<tr class="memitem:aab8bb93bd21232e0af39f0b4b758e853" id="r_aab8bb93bd21232e0af39f0b4b758e853"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aab8bb93bd21232e0af39f0b4b758e853">wait_may_block</a> (const <a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a> &amp;token) const noexcept</td></tr>
+<tr class="memdesc:aab8bb93bd21232e0af39f0b4b758e853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if <a class="el" href="#a07d3dc32c955801e3ebd0dcaf361bcb3" title="wait()">wait()</a> may block.  <br /></td></tr>
+<tr class="memitem:a07d3dc32c955801e3ebd0dcaf361bcb3" id="r_a07d3dc32c955801e3ebd0dcaf361bcb3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a07d3dc32c955801e3ebd0dcaf361bcb3">wait</a> (<a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a> &amp;&amp;token) const</td></tr>
+<tr class="memdesc:a07d3dc32c955801e3ebd0dcaf361bcb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for the barrier to complete after an arrival, using the given token.  <br /></td></tr>
+<tr class="memitem:a45aca0b295dbb8317c2c5e7909a2cbca" id="r_a45aca0b295dbb8317c2c5e7909a2cbca"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a45aca0b295dbb8317c2c5e7909a2cbca">arrive_and_wait</a> (uint32_t thread_id)</td></tr>
+<tr class="memdesc:a45aca0b295dbb8317c2c5e7909a2cbca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to arrive and wait in a single call.  <br /></td></tr>
+<tr class="memitem:a740776cd985d606597c39a5c6f275f1f" id="r_a740776cd985d606597c39a5c6f275f1f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a740776cd985d606597c39a5c6f275f1f">arrive_and_wait</a> (uint32_t thread_id, int line)</td></tr>
+<tr class="memdesc:a740776cd985d606597c39a5c6f275f1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to arrive and wait in a single call (with optional sanity check).  <br /></td></tr>
+<tr class="memitem:a80287f7d7d312f5a48dff068229d3efc" id="r_a80287f7d7d312f5a48dff068229d3efc"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
+<tr class="memitem:a80287f7d7d312f5a48dff068229d3efc template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a80287f7d7d312f5a48dff068229d3efc">arrive_and_wait_with_completion</a> (uint32_t thread_id, C &amp;&amp;custom_completion)</td></tr>
+<tr class="memdesc:a80287f7d7d312f5a48dff068229d3efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to arrive and wait in a single call (with custom completion).  <br /></td></tr>
+<tr class="memitem:a0aa0a4974334842f7ae5203edf48d3fd" id="r_a0aa0a4974334842f7ae5203edf48d3fd"><td class="memTemplParams" colspan="2">template&lt;class C&gt; </td></tr>
+<tr class="memitem:a0aa0a4974334842f7ae5203edf48d3fd template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a0aa0a4974334842f7ae5203edf48d3fd">arrive_and_wait_with_completion</a> (uint32_t thread_id, C &amp;&amp;custom_completion)</td></tr>
+<tr class="memdesc:a0aa0a4974334842f7ae5203edf48d3fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to arrive and wait in a single call (with custom completion).  <br /></td></tr>
+<tr class="memitem:aa08a6fe4b247e0399389c762c5afd458" id="r_aa08a6fe4b247e0399389c762c5afd458"><td class="memTemplParams" colspan="2">template&lt;class T, class F, class CF&gt; </td></tr>
+<tr class="memitem:aa08a6fe4b247e0399389c762c5afd458 template"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed.html">arrival_token_typed</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa08a6fe4b247e0399389c762c5afd458">arrive_reduce</a> (uint32_t thread_id, T x, F <a class="el" href="#aae574e8188bea8b623e0eb0f4fa00630">reduce</a>, CF custom_completion)</td></tr>
+<tr class="memdesc:aa08a6fe4b247e0399389c762c5afd458"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combining tree reduction across all threads.  <br /></td></tr>
+<tr class="memitem:a644416667659efc3406896e32f61227a" id="r_a644416667659efc3406896e32f61227a"><td class="memTemplParams" colspan="2">template&lt;class T, class F&gt; </td></tr>
+<tr class="memitem:a644416667659efc3406896e32f61227a template"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed.html">arrival_token_typed</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a644416667659efc3406896e32f61227a">arrive_reduce</a> (uint32_t thread_id, T x, F <a class="el" href="#aae574e8188bea8b623e0eb0f4fa00630">reduce</a>)</td></tr>
+<tr class="memitem:a80c39456c87a2a707e0bd783c341d0e2" id="r_a80c39456c87a2a707e0bd783c341d0e2"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:a80c39456c87a2a707e0bd783c341d0e2 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#a80c39456c87a2a707e0bd783c341d0e2">wait_reduce</a> (<a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed.html">arrival_token_typed</a>&lt; T &gt; &amp;&amp;token)</td></tr>
+<tr class="memdesc:a80c39456c87a2a707e0bd783c341d0e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for the result of an <a class="el" href="#aa08a6fe4b247e0399389c762c5afd458" title="arrive_reduce">arrive_reduce</a> call and obtain the reduced value.  <br /></td></tr>
+<tr class="memitem:aae574e8188bea8b623e0eb0f4fa00630" id="r_aae574e8188bea8b623e0eb0f4fa00630"><td class="memTemplParams" colspan="2">template&lt;class T, class F&gt; </td></tr>
+<tr class="memitem:aae574e8188bea8b623e0eb0f4fa00630 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#aae574e8188bea8b623e0eb0f4fa00630">reduce</a> (uint32_t thread_id, T x, F reduce)</td></tr>
+<tr class="memdesc:aae574e8188bea8b623e0eb0f4fa00630"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combining tree reduction across all threads.  <br /></td></tr>
+<tr class="memitem:ab8bbc42b942cce94a31cb2d86420e70f" id="r_ab8bbc42b942cce94a31cb2d86420e70f"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:ab8bbc42b942cce94a31cb2d86420e70f template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#ab8bbc42b942cce94a31cb2d86420e70f">broadcast</a> (uint32_t thread_id, T &amp;&amp;x, uint32_t src=0)</td></tr>
+<tr class="memdesc:ab8bbc42b942cce94a31cb2d86420e70f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a value from the source thread to all other threads.  <br /></td></tr>
+<tr class="memitem:ab708281682ba8e26a1974cf712309cf3" id="r_ab708281682ba8e26a1974cf712309cf3"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:ab708281682ba8e26a1974cf712309cf3 template"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab708281682ba8e26a1974cf712309cf3">shuffle_start</a> (uint32_t thread_id, T x, uint32_t src)</td></tr>
+<tr class="memdesc:ab708281682ba8e26a1974cf712309cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publish the value <code class="param">x</code> to another thread, and prepare to receive the value from thread <code class="param">src</code>.  <br /></td></tr>
+<tr class="memitem:acbcd7d942260998f2cb4925327809382" id="r_acbcd7d942260998f2cb4925327809382"><td class="memTemplParams" colspan="2">template&lt;class T, class F&gt; </td></tr>
+<tr class="memitem:acbcd7d942260998f2cb4925327809382 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acbcd7d942260998f2cb4925327809382">shuffle_wait</a> (uint32_t thread_id, <a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt; &amp;&amp;token, F &amp;&amp;func)</td></tr>
+<tr class="memdesc:acbcd7d942260998f2cb4925327809382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait from the value sent by <a class="el" href="#ab708281682ba8e26a1974cf712309cf3" title="shuffle_start">shuffle_start</a>, applying a function to it.  <br /></td></tr>
+<tr class="memitem:ac18c471eb1d4c3d8d00bd9bc648e30a8" id="r_ac18c471eb1d4c3d8d00bd9bc648e30a8"><td class="memTemplParams" colspan="2">template&lt;class T, class F&gt; </td></tr>
+<tr class="memitem:ac18c471eb1d4c3d8d00bd9bc648e30a8 template"><td class="memItemLeft">std::invoke_result_t&lt; F &amp;&amp;, T &amp;&amp; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac18c471eb1d4c3d8d00bd9bc648e30a8">shuffle_wait</a> (uint32_t thread_id, <a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt; &amp;&amp;token, F &amp;&amp;func)</td></tr>
+<tr class="memitem:acfaf6fb359f9bb4423f1253f35ec95f8" id="r_acfaf6fb359f9bb4423f1253f35ec95f8"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:acfaf6fb359f9bb4423f1253f35ec95f8 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#acfaf6fb359f9bb4423f1253f35ec95f8">shuffle_wait</a> (uint32_t thread_id, <a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt; &amp;&amp;token)</td></tr>
+<tr class="memitem:abf08463e0b6dbcfae3cdd49dbf3b6df2" id="r_abf08463e0b6dbcfae3cdd49dbf3b6df2"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:abf08463e0b6dbcfae3cdd49dbf3b6df2 template"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abf08463e0b6dbcfae3cdd49dbf3b6df2">shuffle_rotr_start</a> (uint32_t thread_id, T x, uint32_t n)</td></tr>
+<tr class="memdesc:abf08463e0b6dbcfae3cdd49dbf3b6df2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread <span class="tt">thread_id</span> receives the value from thread <span class="tt">thread_id - n</span>.  <br /></td></tr>
+<tr class="memitem:a9e0f2d7062ddc026cbd2f97f85568cd5" id="r_a9e0f2d7062ddc026cbd2f97f85568cd5"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:a9e0f2d7062ddc026cbd2f97f85568cd5 template"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9e0f2d7062ddc026cbd2f97f85568cd5">shuffle_rotl_start</a> (uint32_t thread_id, T x, uint32_t n)</td></tr>
+<tr class="memdesc:a9e0f2d7062ddc026cbd2f97f85568cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thread <span class="tt">thread_id</span> receives the value from thread <span class="tt">thread_id + n</span>.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a17c8bd883172d66c2d463abd34a2f556" id="r_a17c8bd883172d66c2d463abd34a2f556"><td class="memItemLeft">static constexpr uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a17c8bd883172d66c2d463abd34a2f556">max</a> ()</td></tr>
+<tr class="memdesc:a17c8bd883172d66c2d463abd34a2f556"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of threads supported by this barrier implementation.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a0f24581b62ac628bee1a56f1247f1f0a" id="r_a0f24581b62ac628bee1a56f1247f1f0a"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a0f24581b62ac628bee1a56f1247f1f0a">spin_count</a> = 1000</td></tr>
+<tr class="memdesc:a0f24581b62ac628bee1a56f1247f1f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of spin iterations before falling back to futex-based wait.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-types" class="groupheader"><a id="pri-types" name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:a922552c50e0d877bd73725bc755622f0" id="r_a922552c50e0d877bd73725bc755622f0"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a922552c50e0d877bd73725bc755622f0">ticket_value_type</a> = typename State::ticket_t::value_type</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:afaa905ac36eba180a87aaec6df5a63ae" id="r_afaa905ac36eba180a87aaec6df5a63ae"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1State.html#a701cec8604e6ee7e412d2a5fbd423431">State::ticket_t</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#afaa905ac36eba180a87aaec6df5a63ae">get_shuffle_ticket</a> (uint32_t thread_id) noexcept</td></tr>
+<tr class="memitem:abf515ba22e9c5c057b5ed1e1f79c64df" id="r_abf515ba22e9c5c057b5ed1e1f79c64df"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1State.html#a701cec8604e6ee7e412d2a5fbd423431">State::ticket_t</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abf515ba22e9c5c057b5ed1e1f79c64df">get_local_phase</a> (uint32_t thread_id) noexcept</td></tr>
+<tr class="memitem:a2b89f8cfda4ad371c864476ba89b71cd" id="r_a2b89f8cfda4ad371c864476ba89b71cd"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1State.html#a701cec8604e6ee7e412d2a5fbd423431">State::ticket_t</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2b89f8cfda4ad371c864476ba89b71cd">get_local_line</a> (uint32_t thread_id) noexcept</td></tr>
+<tr class="memitem:a6f83be86fc2df5f89c7b8b371a6c37fd" id="r_a6f83be86fc2df5f89c7b8b371a6c37fd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6f83be86fc2df5f89c7b8b371a6c37fd">sanity_check_arrival</a> (uint32_t thread_id, <a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a> cur_phase) noexcept</td></tr>
+<tr class="memitem:a918ff6cce9cb715ca8c82d7123243eac" id="r_a918ff6cce9cb715ca8c82d7123243eac"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a918ff6cce9cb715ca8c82d7123243eac">arrive_impl</a> (<a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a> old_phase, uint32_t thread_id)</td></tr>
+<tr class="memdesc:a918ff6cce9cb715ca8c82d7123243eac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combining tree arrival.  <br /></td></tr>
+<tr class="memitem:acc9ffd50c6126efdc8a11073ac4a12a2" id="r_acc9ffd50c6126efdc8a11073ac4a12a2"><td class="memTemplParams" colspan="2">template&lt;class T, class F&gt; </td></tr>
+<tr class="memitem:acc9ffd50c6126efdc8a11073ac4a12a2 template"><td class="memItemLeft">std::optional&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#acc9ffd50c6126efdc8a11073ac4a12a2">arrive_impl</a> (<a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a> old_phase, uint32_t thread_id, T value, F <a class="el" href="#aae574e8188bea8b623e0eb0f4fa00630">reduce</a>)</td></tr>
+<tr class="memdesc:acc9ffd50c6126efdc8a11073ac4a12a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fused implementation of the combining tree arrival and a reduction operation.  <br /></td></tr>
+<tr class="memitem:a5f8c5f2ae69564be38abc63991d205ff" id="r_a5f8c5f2ae69564be38abc63991d205ff"><td class="memTemplParams" colspan="2">template&lt;class A, class C&gt; </td></tr>
+<tr class="memitem:a5f8c5f2ae69564be38abc63991d205ff template"><td class="memItemLeft"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5f8c5f2ae69564be38abc63991d205ff">arrive_with_completion</a> (uint32_t thread_id, A arrival, C &amp;&amp;custom_completion)</td></tr>
+<tr class="memdesc:a5f8c5f2ae69564be38abc63991d205ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic implementation of arrive with custom completion function.  <br /></td></tr>
+<tr class="memitem:a5b0490321386fa0317ee77a29e8e8f1c" id="r_a5b0490321386fa0317ee77a29e8e8f1c"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:a5b0490321386fa0317ee77a29e8e8f1c template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5b0490321386fa0317ee77a29e8e8f1c">atomic_wait_ne_acq</a> (const std::atomic&lt; T &gt; &amp;a, T old) const</td></tr>
+<tr class="memitem:aac0cdb386b168a93ed6927b0118003e5" id="r_aac0cdb386b168a93ed6927b0118003e5"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:aac0cdb386b168a93ed6927b0118003e5 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aac0cdb386b168a93ed6927b0118003e5">atomic_wait_eq_acq</a> (const std::atomic&lt; T &gt; &amp;a, T target) const</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aaac2c23d5ea2791a4cf0043b2b09d77a" id="r_aaac2c23d5ea2791a4cf0043b2b09d77a"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#aaac2c23d5ea2791a4cf0043b2b09d77a">expected</a></td></tr>
+<tr class="memdesc:aaac2c23d5ea2791a4cf0043b2b09d77a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of participating threads.  <br /></td></tr>
+<tr class="memitem:a429ac76d59e59e172a330c184717bf45" id="r_a429ac76d59e59e172a330c184717bf45"><td class="memItemLeft">std::unique_ptr&lt; <a class="el" href="structfancyqlone_1_1TreeBarrier_1_1State.html">State</a>[]&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a429ac76d59e59e172a330c184717bf45">state</a></td></tr>
+<tr class="memdesc:a429ac76d59e59e172a330c184717bf45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combining tree state.  <br /></td></tr>
+<tr class="memitem:a3b7b57ec186357bbc28e5d410f00b079" id="r_a3b7b57ec186357bbc28e5d410f00b079"><td class="memItemLeft">std::unique_ptr&lt; <a class="el" href="structfancyqlone_1_1TreeBarrier_1_1Storage.html">Storage</a>[]&gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3b7b57ec186357bbc28e5d410f00b079">storage</a></td></tr>
+<tr class="memdesc:a3b7b57ec186357bbc28e5d410f00b079"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for reductions and shuffles.  <br /></td></tr>
+<tr class="memitem:a154be37a328ecb1148a5a779eae69486" id="r_a154be37a328ecb1148a5a779eae69486"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1Storage.html">Storage</a>&#160;</td><td class="memItemRight"><a class="el" href="#a154be37a328ecb1148a5a779eae69486">broadcast_storage</a></td></tr>
+<tr class="memdesc:a154be37a328ecb1148a5a779eae69486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used for broadcasts (including after reductions).  <br /></td></tr>
+<tr class="memitem:a7e283536548d011a6ef15eac342259b2" id="r_a7e283536548d011a6ef15eac342259b2"><td class="memItemLeft">CompletionFn&#160;</td><td class="memItemRight"><a class="el" href="#a7e283536548d011a6ef15eac342259b2">completion</a></td></tr>
+<tr class="memdesc:a7e283536548d011a6ef15eac342259b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when last thread arrives.  <br /></td></tr>
+<tr class="memitem:a2ceeebe2f2f399f6691f7d0517d9fa24" id="r_a2ceeebe2f2f399f6691f7d0517d9fa24"><td class="memItemLeft">std::atomic&lt; <a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2ceeebe2f2f399f6691f7d0517d9fa24">phase</a> {}</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-static-attribs" class="groupheader"><a id="pri-static-attribs" name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a04980b9b0ad0dd719a156368e88c6014" id="r_a04980b9b0ad0dd719a156368e88c6014"><td class="memItemLeft">static constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a04980b9b0ad0dd719a156368e88c6014">cache_line_size</a> = 64</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:ad4d9646827a64100cd5328fd937d336a" id="r_ad4d9646827a64100cd5328fd937d336a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad4d9646827a64100cd5328fd937d336a">swap</a> (<a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a> &amp;a, <a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a> &amp;b) noexcept=delete</td></tr>
+</table>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
+<a id="a922552c50e0d877bd73725bc755622f0" name="a922552c50e0d877bd73725bc755622f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a922552c50e0d877bd73725bc755622f0">&#9670;&#160;</a></span>ticket_value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::ticket_value_type = typename State::ticket_t::value_type</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00143">143</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Member Enumeration Documentation</h2>
+<a id="a8aa0a8c6ade3525e99efb950bd72139e" name="a8aa0a8c6ade3525e99efb950bd72139e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aa0a8c6ade3525e99efb950bd72139e">&#9670;&#160;</a></span>BarrierPhase</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">fancyqlone::TreeBarrier::BarrierPhase</a> : PhaseType</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00062">62</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6d54e9ab947af6bf5f2c444145a2dc24" name="a6d54e9ab947af6bf5f2c444145a2dc24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d54e9ab947af6bf5f2c444145a2dc24">&#9670;&#160;</a></span>TreeBarrier() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::TreeBarrier </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>expected</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CompletionFn</td>          <td class="paramname"><span class="paramname"><em>completion</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a barrier with <code class="param">expected</code> participating threads and a completion function that is called by the last thread that arrives at each phase. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00311">311</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6608037e06d9c8a288459cd0c45de243" name="a6608037e06d9c8a288459cd0c45de243"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6608037e06d9c8a288459cd0c45de243">&#9670;&#160;</a></span>TreeBarrier() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::TreeBarrier </td>
+          <td>(</td>
+          <td class="paramtype">const TreeBarrier&lt; CompletionFn, PhaseType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae33ad5af5efb88ceac23e61ea906b9de" name="ae33ad5af5efb88ceac23e61ea906b9de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae33ad5af5efb88ceac23e61ea906b9de">&#9670;&#160;</a></span>TreeBarrier() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::TreeBarrier </td>
+          <td>(</td>
+          <td class="paramtype">TreeBarrier&lt; CompletionFn, PhaseType &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00320">320</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="afaa905ac36eba180a87aaec6df5a63ae" name="afaa905ac36eba180a87aaec6df5a63ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaa905ac36eba180a87aaec6df5a63ae">&#9670;&#160;</a></span>get_shuffle_ticket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1State.html#a701cec8604e6ee7e412d2a5fbd423431">State::ticket_t</a> &amp; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::get_shuffle_ticket </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel private">private</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00159">159</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abf515ba22e9c5c057b5ed1e1f79c64df" name="abf515ba22e9c5c057b5ed1e1f79c64df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf515ba22e9c5c057b5ed1e1f79c64df">&#9670;&#160;</a></span>get_local_phase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1State.html#a701cec8604e6ee7e412d2a5fbd423431">State::ticket_t</a> &amp; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::get_local_phase </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel private">private</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00163">163</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2b89f8cfda4ad371c864476ba89b71cd" name="a2b89f8cfda4ad371c864476ba89b71cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b89f8cfda4ad371c864476ba89b71cd">&#9670;&#160;</a></span>get_local_line()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1State.html#a701cec8604e6ee7e412d2a5fbd423431">State::ticket_t</a> &amp; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::get_local_line </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel private">private</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00166">166</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6f83be86fc2df5f89c7b8b371a6c37fd" name="a6f83be86fc2df5f89c7b8b371a6c37fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f83be86fc2df5f89c7b8b371a6c37fd">&#9670;&#160;</a></span>sanity_check_arrival()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::sanity_check_arrival </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a></td>          <td class="paramname"><span class="paramname"><em>cur_phase</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel private">private</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00169">169</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a918ff6cce9cb715ca8c82d7123243eac" name="a918ff6cce9cb715ca8c82d7123243eac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a918ff6cce9cb715ca8c82d7123243eac">&#9670;&#160;</a></span>arrive_impl() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive_impl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a></td>          <td class="paramname"><span class="paramname"><em>old_phase</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Combining tree arrival. </p>
+<p>The last thread arriving at a certain ticket (counter) moves on to the next level of the tree. When reaching the root, it returns true. The number of tickets halves at each level, with at most two threads per ticket. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00179">179</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acc9ffd50c6126efdc8a11073ac4a12a2" name="acc9ffd50c6126efdc8a11073ac4a12a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc9ffd50c6126efdc8a11073ac4a12a2">&#9670;&#160;</a></span>arrive_impl() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; T &gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive_impl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a></td>          <td class="paramname"><span class="paramname"><em>old_phase</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>reduce</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fused implementation of the combining tree arrival and a reduction operation. </p>
+<p>The last thread arriving at a certain ticket (counter) moves on to the next level of the tree. When it does so, it reads the value written by the other thread that arrived at the same ticket, applies the reduction function, and writes the result to be used in the next level. When reaching the root, it stores the final value and returns true. Note that the left and right arguments to the reduction function are determined by the thread IDs, regardless of the order in which threads arrive. In other words, for a given number of threads, the order of the reduction operations is fully deterministic. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00210">210</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5f8c5f2ae69564be38abc63991d205ff" name="a5f8c5f2ae69564be38abc63991d205ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f8c5f2ae69564be38abc63991d205ff">&#9670;&#160;</a></span>arrive_with_completion() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class A, class C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a> <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive_with_completion </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">A</td>          <td class="paramname"><span class="paramname"><em>arrival</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>custom_completion</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generic implementation of arrive with custom completion function. </p>
+<p>The arrival function should return true when the thread is the last to arrive at the root of the tree. Returns a token that can be used to wait for the barrier to complete. The custom completion function is called by the last thread arriving at the root, before advancing the barrier phase and notifying all waiting threads. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00252">252</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5b0490321386fa0317ee77a29e8e8f1c" name="a5b0490321386fa0317ee77a29e8e8f1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b0490321386fa0317ee77a29e8e8f1c">&#9670;&#160;</a></span>atomic_wait_ne_acq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::atomic_wait_ne_acq </td>
+          <td>(</td>
+          <td class="paramtype">const std::atomic&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>old</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00273">273</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aac0cdb386b168a93ed6927b0118003e5" name="aac0cdb386b168a93ed6927b0118003e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac0cdb386b168a93ed6927b0118003e5">&#9670;&#160;</a></span>atomic_wait_eq_acq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::atomic_wait_eq_acq </td>
+          <td>(</td>
+          <td class="paramtype">const std::atomic&lt; T &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>target</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00284">284</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a17c8bd883172d66c2d463abd34a2f556" name="a17c8bd883172d66c2d463abd34a2f556"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17c8bd883172d66c2d463abd34a2f556">&#9670;&#160;</a></span>max()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint32_t <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::max </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum number of threads supported by this barrier implementation. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00300">300</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7b30e650ac3640c7fd0cdaaf79d2ed82" name="a7b30e650ac3640c7fd0cdaaf79d2ed82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b30e650ac3640c7fd0cdaaf79d2ed82">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a> &amp; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a>&lt; CompletionFn, PhaseType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a13cabba1f7b1f7edcc8615c0c13ab7ac" name="a13cabba1f7b1f7edcc8615c0c13ab7ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13cabba1f7b1f7edcc8615c0c13ab7ac">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a> &amp; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a>&lt; CompletionFn, PhaseType &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec0a639e83e2d56df18631d9778c84c1" name="aec0a639e83e2d56df18631d9778c84c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec0a639e83e2d56df18631d9778c84c1">&#9670;&#160;</a></span>arrive_with_completion() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a> <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive_with_completion </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>custom_completion</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Arrive at the barrier with a custom completion function that is called by the last thread that arrives, before advancing the barrier phase and notifying all waiting threads. </p>
+<p>The completion function of the barrier is not called in this case. Each thread should use a unique thread ID in [0, expected-1]. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00333">333</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa172bc3219792bce916f5c05b279beda" name="aa172bc3219792bce916f5c05b279beda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa172bc3219792bce916f5c05b279beda">&#9670;&#160;</a></span>get_arrival_token()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a> <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::get_arrival_token </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00339">339</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1a1da88ed85fbefc5a8717dcd8553a0f" name="a1a1da88ed85fbefc5a8717dcd8553a0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a1da88ed85fbefc5a8717dcd8553a0f">&#9670;&#160;</a></span>get_typed_token()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed.html">arrival_token_typed</a>&lt; T &gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::get_typed_token </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00344">344</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1e16a4fa48eb471928ca51afd2bd648e" name="a1e16a4fa48eb471928ca51afd2bd648e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e16a4fa48eb471928ca51afd2bd648e">&#9670;&#160;</a></span>arrive() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a> <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Arrive at the barrier. </p>
+<p>The barrier's completion function is called by the last thread that arrives, before advancing the barrier phase and notifying all waiting threads. Each thread should use a unique thread ID in [0, expected-1]. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00351">351</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aab6053813cdf32978918bdd13018b1c7" name="aab6053813cdf32978918bdd13018b1c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab6053813cdf32978918bdd13018b1c7">&#9670;&#160;</a></span>arrive() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a> <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Arrive at the barrier, recording the given line number for sanity checking to make sure that all threads arrive from the same line or statement in the source code. </p>
+<p>This is useful for debugging purposes to detect mismatched barrier calls, but should not really be used otherwise. If <a class="el" href="barrier_8hpp.html#a4d1e252dc13b658ff525ba615f94ae8b" title="CYQLONE_SANITY_CHECKS_BARRIER">CYQLONE_SANITY_CHECKS_BARRIER</a> is disabled, the line number is ignored and this function is equivalent to <a class="el" href="#a1e16a4fa48eb471928ca51afd2bd648e" title="arrive(uint32_t)">arrive(uint32_t)</a>. Each thread should use a unique thread ID in [0, expected-1]. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00365">365</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6b970c685efe9c5ae0bb76392aecfbeb" name="a6b970c685efe9c5ae0bb76392aecfbeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b970c685efe9c5ae0bb76392aecfbeb">&#9670;&#160;</a></span>current_phase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a> <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::current_phase </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Query the current barrier phase. </p>
+<p>May wrap around on overflow, but all threads will see the same phase values in the same order. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00386">386</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aab8bb93bd21232e0af39f0b4b758e853" name="aab8bb93bd21232e0af39f0b4b758e853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab8bb93bd21232e0af39f0b4b758e853">&#9670;&#160;</a></span>wait_may_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::wait_may_block </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if <a class="el" href="#a07d3dc32c955801e3ebd0dcaf361bcb3" title="wait()">wait()</a> may block. </p>
+<p>If it returns false, the caller can call <a class="el" href="#a07d3dc32c955801e3ebd0dcaf361bcb3" title="wait()">wait()</a> and it will return immediately without spinning or sleeping. This is useful if the caller has other non-critical work to do while waiting for other threads. Users should still call <a class="el" href="#a07d3dc32c955801e3ebd0dcaf361bcb3" title="wait()">wait()</a> before arriving again. </p><dl class="section note"><dt>Note</dt><dd>This function does not impose any memory ordering, so even when it returns false, changes made before the arrival of other threads may not be visible yet. In contrast, <a class="el" href="#a07d3dc32c955801e3ebd0dcaf361bcb3" title="wait()">wait()</a> does ensure proper synchronization. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00400">400</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a07d3dc32c955801e3ebd0dcaf361bcb3" name="a07d3dc32c955801e3ebd0dcaf361bcb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07d3dc32c955801e3ebd0dcaf361bcb3">&#9670;&#160;</a></span>wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::wait </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token.html">arrival_token</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wait for the barrier to complete after an arrival, using the given token. </p>
+<p>Separating the arrival and wait phases allows for overlapping computation with waiting, hiding the synchronization latency. Waiting on the same token multiple times is not allowed. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00408">408</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a45aca0b295dbb8317c2c5e7909a2cbca" name="a45aca0b295dbb8317c2c5e7909a2cbca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45aca0b295dbb8317c2c5e7909a2cbca">&#9670;&#160;</a></span>arrive_and_wait() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive_and_wait </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience function to arrive and wait in a single call. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00415">415</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a740776cd985d606597c39a5c6f275f1f" name="a740776cd985d606597c39a5c6f275f1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a740776cd985d606597c39a5c6f275f1f">&#9670;&#160;</a></span>arrive_and_wait() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive_and_wait </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience function to arrive and wait in a single call (with optional sanity check). </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00417">417</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a80287f7d7d312f5a48dff068229d3efc" name="a80287f7d7d312f5a48dff068229d3efc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80287f7d7d312f5a48dff068229d3efc">&#9670;&#160;</a></span>arrive_and_wait_with_completion() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive_and_wait_with_completion </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>custom_completion</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience function to arrive and wait in a single call (with custom completion). </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00421">421</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0aa0a4974334842f7ae5203edf48d3fd" name="a0aa0a4974334842f7ae5203edf48d3fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aa0a4974334842f7ae5203edf48d3fd">&#9670;&#160;</a></span>arrive_and_wait_with_completion() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive_and_wait_with_completion </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>custom_completion</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convenience function to arrive and wait in a single call (with custom completion). </p>
+<p>Broadcasts the return value of the custom completion function to all threads. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00430">430</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa08a6fe4b247e0399389c762c5afd458" name="aa08a6fe4b247e0399389c762c5afd458"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa08a6fe4b247e0399389c762c5afd458">&#9670;&#160;</a></span>arrive_reduce() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T, class F, class CF&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed.html">arrival_token_typed</a>&lt; T &gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive_reduce </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>reduce</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CF</td>          <td class="paramname"><span class="paramname"><em>custom_completion</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Combining tree reduction across all threads. </p>
+<p>Deterministic application order for a given number of threads. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00442">442</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a644416667659efc3406896e32f61227a" name="a644416667659efc3406896e32f61227a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a644416667659efc3406896e32f61227a">&#9670;&#160;</a></span>arrive_reduce() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed.html">arrival_token_typed</a>&lt; T &gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::arrive_reduce </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>reduce</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00469">469</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a80c39456c87a2a707e0bd783c341d0e2" name="a80c39456c87a2a707e0bd783c341d0e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80c39456c87a2a707e0bd783c341d0e2">&#9670;&#160;</a></span>wait_reduce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::wait_reduce </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed.html">arrival_token_typed</a>&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wait for the result of an <a class="el" href="#aa08a6fe4b247e0399389c762c5afd458" title="arrive_reduce">arrive_reduce</a> call and obtain the reduced value. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00475">475</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aae574e8188bea8b623e0eb0f4fa00630" name="aae574e8188bea8b623e0eb0f4fa00630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae574e8188bea8b623e0eb0f4fa00630">&#9670;&#160;</a></span>reduce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::reduce </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>reduce</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Combining tree reduction across all threads. </p>
+<p>Deterministic application order for a given number of threads. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00483">483</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab8bbc42b942cce94a31cb2d86420e70f" name="ab8bbc42b942cce94a31cb2d86420e70f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8bbc42b942cce94a31cb2d86420e70f">&#9670;&#160;</a></span>broadcast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::broadcast </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>src</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broadcast a value from the source thread to all other threads. </p>
+<p>All threads must call this function with the same source thread ID. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00490">490</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab708281682ba8e26a1974cf712309cf3" name="ab708281682ba8e26a1974cf712309cf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab708281682ba8e26a1974cf712309cf3">&#9670;&#160;</a></span>shuffle_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::shuffle_start </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>src</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Publish the value <code class="param">x</code> to another thread, and prepare to receive the value from thread <code class="param">src</code>. </p>
+<p>Note that the <code class="param">src</code> and <code class="param">thread_id</code> arguments should define a complete permutation, i.e. each thread sends its value to exactly one other thread. </p><dl class="section note"><dt>Note</dt><dd>This does not complete a barrier phase. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00521">521</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acbcd7d942260998f2cb4925327809382" name="acbcd7d942260998f2cb4925327809382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbcd7d942260998f2cb4925327809382">&#9670;&#160;</a></span>shuffle_wait() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::shuffle_wait </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wait from the value sent by <a class="el" href="#ab708281682ba8e26a1974cf712309cf3" title="shuffle_start">shuffle_start</a>, applying a function to it. </p>
+<p>Note that if the value contains any references to local variables on the sending thread, they can safely be accessed in <code class="param">func</code>, but they become dangling after <code class="param">func</code> returns, because then the sending thread may continue execution asynchronously. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00541">541</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac18c471eb1d4c3d8d00bd9bc648e30a8" name="ac18c471eb1d4c3d8d00bd9bc648e30a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac18c471eb1d4c3d8d00bd9bc648e30a8">&#9670;&#160;</a></span>shuffle_wait() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::invoke_result_t&lt; F &amp;&amp;, T &amp;&amp; &gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::shuffle_wait </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00555">555</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acfaf6fb359f9bb4423f1253f35ec95f8" name="acfaf6fb359f9bb4423f1253f35ec95f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfaf6fb359f9bb4423f1253f35ec95f8">&#9670;&#160;</a></span>shuffle_wait() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::shuffle_wait </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section warning"><dt>Warning</dt><dd>Any pointers or references in the return value should be assumed to be dangling. Use the variant that takes a function argument to access them safely. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00572">572</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abf08463e0b6dbcfae3cdd49dbf3b6df2" name="abf08463e0b6dbcfae3cdd49dbf3b6df2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf08463e0b6dbcfae3cdd49dbf3b6df2">&#9670;&#160;</a></span>shuffle_rotr_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::shuffle_rotr_start </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Thread <span class="tt">thread_id</span> receives the value from thread <span class="tt">thread_id - n</span>. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00588">588</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9e0f2d7062ddc026cbd2f97f85568cd5" name="a9e0f2d7062ddc026cbd2f97f85568cd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e0f2d7062ddc026cbd2f97f85568cd5">&#9670;&#160;</a></span>shuffle_rotl_start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1TreeBarrier_1_1shuffle__token.html">shuffle_token</a>&lt; T &gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::shuffle_rotl_start </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>thread_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>n</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Thread <span class="tt">thread_id</span> receives the value from thread <span class="tt">thread_id + n</span>. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00595">595</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-related-members" id="doc-related-members"></a><h2 id="header-doc-related-members" class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="ad4d9646827a64100cd5328fd937d336a" name="ad4d9646827a64100cd5328fd937d336a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4d9646827a64100cd5328fd937d336a">&#9670;&#160;</a></span>swap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a>&lt; CompletionFn, PhaseType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a6d54e9ab947af6bf5f2c444145a2dc24">TreeBarrier</a>&lt; CompletionFn, PhaseType &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a04980b9b0ad0dd719a156368e88c6014" name="a04980b9b0ad0dd719a156368e88c6014"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04980b9b0ad0dd719a156368e88c6014">&#9670;&#160;</a></span>cache_line_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::cache_line_size = 64</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00080">80</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aaac2c23d5ea2791a4cf0043b2b09d77a" name="aaac2c23d5ea2791a4cf0043b2b09d77a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaac2c23d5ea2791a4cf0043b2b09d77a">&#9670;&#160;</a></span>expected</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::expected</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of participating threads. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00146">146</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a429ac76d59e59e172a330c184717bf45" name="a429ac76d59e59e172a330c184717bf45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a429ac76d59e59e172a330c184717bf45">&#9670;&#160;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="structfancyqlone_1_1TreeBarrier_1_1State.html">State</a>[]&gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::state</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Combining tree state. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00148">148</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3b7b57ec186357bbc28e5d410f00b079" name="a3b7b57ec186357bbc28e5d410f00b079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b7b57ec186357bbc28e5d410f00b079">&#9670;&#160;</a></span>storage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="structfancyqlone_1_1TreeBarrier_1_1Storage.html">Storage</a>[]&gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::storage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used for reductions and shuffles. </p>
+<dl class="section invariant"><dt>Invariant</dt><dd>For each operation (shuffle or reduction), <span class="tt"><a class="el" href="#a3b7b57ec186357bbc28e5d410f00b079" title="Used for reductions and shuffles.">storage</a>[i]</span> is always written by thread <span class="tt">i</span>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00152">152</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a154be37a328ecb1148a5a779eae69486" name="a154be37a328ecb1148a5a779eae69486"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a154be37a328ecb1148a5a779eae69486">&#9670;&#160;</a></span>broadcast_storage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1TreeBarrier_1_1Storage.html">Storage</a> <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::broadcast_storage</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used for broadcasts (including after reductions). </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00154">154</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7e283536548d011a6ef15eac342259b2" name="a7e283536548d011a6ef15eac342259b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e283536548d011a6ef15eac342259b2">&#9670;&#160;</a></span>completion</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">CompletionFn <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::completion</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called when last thread arrives. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00156">156</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2ceeebe2f2f399f6691f7d0517d9fa24" name="a2ceeebe2f2f399f6691f7d0517d9fa24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ceeebe2f2f399f6691f7d0517d9fa24">&#9670;&#160;</a></span>phase</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;<a class="el" href="#a8aa0a8c6ade3525e99efb950bd72139e">BarrierPhase</a>&gt; <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::phase {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00157">157</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0f24581b62ac628bee1a56f1247f1f0a" name="a0f24581b62ac628bee1a56f1247f1f0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f24581b62ac628bee1a56f1247f1f0a">&#9670;&#160;</a></span>spin_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename CompletionFn = EmptyCompletion, class PhaseType = uint32_t&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t <a class="el" href="classfancyqlone_1_1TreeBarrier.html">fancyqlone::TreeBarrier</a>&lt; CompletionFn, PhaseType &gt;::spin_count = 1000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of spin iterations before falling back to futex-based wait. </p>
+
+<p class="definition">Definition at line <a class="el" href="barrier_8hpp_source.html#l00391">391</a> of file <a class="el" href="barrier_8hpp_source.html">barrier.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/fancyqlone/include/fancyqlone/<a class="el" href="barrier_8hpp_source.html">barrier.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacefancyqlone.html">fancyqlone</a></li><li class="navelem"><a href="classfancyqlone_1_1TreeBarrier.html">TreeBarrier</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

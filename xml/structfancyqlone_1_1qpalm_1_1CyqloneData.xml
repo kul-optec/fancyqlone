@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1CyqloneData" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::CyqloneData</compoundname>
+    <includes refid="ocp-backend-fancyqlone_8hpp" local="no">fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyqloneData_1ab77a021f2f97c46942f5ad6cd1ac9ff9" prot="public" static="no" mutable="no">
+        <type>std::span&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::span&lt;const real_t&gt; fancyqlone::qpalm::CyqloneData::initial_variables</definition>
+        <argsstring></argsstring>
+        <name>initial_variables</name>
+        <qualifiedname>fancyqlone::qpalm::CyqloneData::initial_variables</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="25" column="15" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyqloneData_1a097110456baa8420a2d53664ba93bf05" prot="public" static="no" mutable="no">
+        <type>std::span&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::span&lt;const real_t&gt; fancyqlone::qpalm::CyqloneData::initial_inequality_multipliers</definition>
+        <argsstring></argsstring>
+        <name>initial_inequality_multipliers</name>
+        <qualifiedname>fancyqlone::qpalm::CyqloneData::initial_inequality_multipliers</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="25" column="34" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyqloneData_1a39f2543d4cdbfec0a25ba7797256efb6" prot="public" static="no" mutable="no">
+        <type>std::span&lt; const <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::span&lt;const real_t&gt; fancyqlone::qpalm::CyqloneData::initial_equality_multipliers</definition>
+        <argsstring></argsstring>
+        <name>initial_equality_multipliers</name>
+        <qualifiedname>fancyqlone::qpalm::CyqloneData::initial_equality_multipliers</qualifiedname>
+        <initializer>= {}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="26" column="29" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="26" bodyend="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::CyqloneData</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1CyqloneData"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+initial_equality_multipliers</edgelabel>
+          <edgelabel>+initial_inequality_multipliers</edgelabel>
+          <edgelabel>+initial_variables</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::span&lt; const real_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="24" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" bodystart="24" bodyend="27"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyqloneData_1a39f2543d4cdbfec0a25ba7797256efb6" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyqloneData</scope><name>initial_equality_multipliers</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyqloneData_1a097110456baa8420a2d53664ba93bf05" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyqloneData</scope><name>initial_inequality_multipliers</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyqloneData_1ab77a021f2f97c46942f5ad6cd1ac9ff9" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyqloneData</scope><name>initial_variables</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

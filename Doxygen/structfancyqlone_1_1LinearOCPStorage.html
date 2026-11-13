@@ -1,0 +1,1790 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: fancyqlone::LinearOCPStorage Struct Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structfancyqlone_1_1LinearOCPStorage.html','','structfancyqlone_1_1LinearOCPStorage-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fancyqlone::LinearOCPStorage Struct Reference<div class="ingroups"><a class="el" href="group__topic-ocp-formulations.html">Optimal control problem formulations</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="ocp_8hpp_source.html">fancyqlone/ocp.hpp</a>&gt;</code></p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Storage for a linear-quadratic OCP of the form. </p>
+<div class="fragment"><div class="line">           ₙ₋₁</div>
+<div class="line">minimize    ∑ [½ uᵢᵀ Rᵢ uᵢ + uᵢᵀ <a class="code hl_function" href="#a46055cc9e375ddd69ea173667928d52a">S</a> xᵢ + ½ xᵢᵀ Qᵢ xᵢ + rᵢᵀuᵢ + qᵢᵀxᵢ] + ½ xₙᵀ Qₙ xₙ + qₙᵀ xₙ</div>
+<div class="line">           ⁱ⁼⁰</div>
+<div class="line">s.t.        x₀   = b₀</div>
+<div class="line">            xᵢ₊₁ = Aᵢ xᵢ + Bᵢ uᵢ + bᵢ₊₁</div>
+<div class="line">            lᵢ   ≤ Cᵢ xᵢ + Dᵢ uᵢ ≤ uᵢ</div>
+<div class="line">            lₙ   ≤ Cₙ xₙ ≤ uₙ</div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_a46055cc9e375ddd69ea173667928d52a"><div class="ttname"><a href="#a46055cc9e375ddd69ea173667928d52a">fancyqlone::LinearOCPStorage::S</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; S(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00087">ocp.hpp:87</a></div></div>
+</div><!-- fragment --> <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="solve-ocp_8cpp-example.html#_a5">solve-ocp.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00039">39</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:Solution" id="r_Solution"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1LinearOCPStorage_1_1Solution.html">Solution</a></td></tr>
+<tr class="memitem:KKTError_5Fstructfancyqlone_5F1_5F1LinearOCPStorage_5F1_5F1KKTError" id="r_KKTError_5Fstructfancyqlone_5F1_5F1LinearOCPStorage_5F1_5F1KKTError"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTError">KKTError</a></td></tr>
+<tr class="memitem:KKTErroru0Seperated_5Fstructfancyqlone_5F1_5F1LinearOCPStorage_5F1_5F1KKTErroru0Seperated" id="r_KKTErroru0Seperated_5Fstructfancyqlone_5F1_5F1LinearOCPStorage_5F1_5F1KKTErroru0Seperated"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0Seperated">KKTErroru0Seperated</a></td></tr>
+<tr class="memitem:KKTErroru0x0Seperated_5Fstructfancyqlone_5F1_5F1LinearOCPStorage_5F1_5F1KKTErroru0x0Seperated" id="r_KKTErroru0x0Seperated_5Fstructfancyqlone_5F1_5F1LinearOCPStorage_5F1_5F1KKTErroru0x0Seperated"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated">KKTErroru0x0Seperated</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ac9ffaec3d88ad5fe53e953c4a97fcc29" id="r_ac9ffaec3d88ad5fe53e953c4a97fcc29"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac9ffaec3d88ad5fe53e953c4a97fcc29">H</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:aaced9f219b04dc25c0817bc04b9890d9" id="r_aaced9f219b04dc25c0817bc04b9890d9"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aaced9f219b04dc25c0817bc04b9890d9">Q</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:ab0b91b1dac835a47452d45c0d2d9f1ee" id="r_ab0b91b1dac835a47452d45c0d2d9f1ee"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab0b91b1dac835a47452d45c0d2d9f1ee">R</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:a46055cc9e375ddd69ea173667928d52a" id="r_a46055cc9e375ddd69ea173667928d52a"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a46055cc9e375ddd69ea173667928d52a">S</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:a9d642f91f961e14b7ed372b34c5d8371" id="r_a9d642f91f961e14b7ed372b34c5d8371"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9d642f91f961e14b7ed372b34c5d8371">S_trans</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:a79fd5025e97ec571a22aac597d2e793c" id="r_a79fd5025e97ec571a22aac597d2e793c"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a79fd5025e97ec571a22aac597d2e793c">CD</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:ad991b26c207c150cf4117e3dea673b6d" id="r_ad991b26c207c150cf4117e3dea673b6d"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ad991b26c207c150cf4117e3dea673b6d">C</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:a755b42ad7574b683175254de50793aa0" id="r_a755b42ad7574b683175254de50793aa0"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a755b42ad7574b683175254de50793aa0">D</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:af9aaaa55d850faa3fd5b676f05f94c49" id="r_af9aaaa55d850faa3fd5b676f05f94c49"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af9aaaa55d850faa3fd5b676f05f94c49">AB</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:aaea931c3de39b21c1adc2adda6927391" id="r_aaea931c3de39b21c1adc2adda6927391"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aaea931c3de39b21c1adc2adda6927391">A</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:a069e76a6c76bd62ab2eb0c5546f74897" id="r_a069e76a6c76bd62ab2eb0c5546f74897"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a069e76a6c76bd62ab2eb0c5546f74897">B</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:a898167d9045f1a53b782cc01a6977455" id="r_a898167d9045f1a53b782cc01a6977455"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a898167d9045f1a53b782cc01a6977455">H</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:a161dda1b8f2ca0362cf590e8af5a8104" id="r_a161dda1b8f2ca0362cf590e8af5a8104"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a161dda1b8f2ca0362cf590e8af5a8104">Q</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:ac91c7428e235f3af6d7145fbd1de2b79" id="r_ac91c7428e235f3af6d7145fbd1de2b79"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac91c7428e235f3af6d7145fbd1de2b79">R</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:a17b94bf468910584e3a2c1721fcf456f" id="r_a17b94bf468910584e3a2c1721fcf456f"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a17b94bf468910584e3a2c1721fcf456f">S</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:ac020c63b3b06275c5ed6c428a11ba2a5" id="r_ac020c63b3b06275c5ed6c428a11ba2a5"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac020c63b3b06275c5ed6c428a11ba2a5">S_trans</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:a5c9cd8631b3474cdb2b8fc2f0e5a47f8" id="r_a5c9cd8631b3474cdb2b8fc2f0e5a47f8"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a5c9cd8631b3474cdb2b8fc2f0e5a47f8">CD</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:a402fee7a6439b63c07dcc69a1d32307f" id="r_a402fee7a6439b63c07dcc69a1d32307f"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a402fee7a6439b63c07dcc69a1d32307f">C</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:af7c6fa03bed907a9b69c0577599bb0e2" id="r_af7c6fa03bed907a9b69c0577599bb0e2"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af7c6fa03bed907a9b69c0577599bb0e2">D</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:a06f7a193e7eceacb89f26f26cfc3a6c2" id="r_a06f7a193e7eceacb89f26f26cfc3a6c2"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a06f7a193e7eceacb89f26f26cfc3a6c2">AB</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:ac582fa61972da14bde570b3aa903e72a" id="r_ac582fa61972da14bde570b3aa903e72a"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac582fa61972da14bde570b3aa903e72a">A</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:a9cfc18dbb90e6e731da5d12339d8f0ed" id="r_a9cfc18dbb90e6e731da5d12339d8f0ed"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9cfc18dbb90e6e731da5d12339d8f0ed">B</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:ad55df437b96b1ef8790814a9e048900e" id="r_ad55df437b96b1ef8790814a9e048900e"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad55df437b96b1ef8790814a9e048900e">num_variables</a> () const</td></tr>
+<tr class="memitem:a3c5d86cdf3f19586f414847529a5671c" id="r_a3c5d86cdf3f19586f414847529a5671c"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3c5d86cdf3f19586f414847529a5671c">num_constraints</a> () const</td></tr>
+<tr class="memitem:add7bf920f26e1a37e0dd00d7aeecabc7" id="r_add7bf920f26e1a37e0dd00d7aeecabc7"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#add7bf920f26e1a37e0dd00d7aeecabc7">num_dynamics_constraints</a> () const</td></tr>
+<tr class="memitem:a087bd89a45d03b02126021b5fec8d1df" id="r_a087bd89a45d03b02126021b5fec8d1df"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a087bd89a45d03b02126021b5fec8d1df">qr</a> ()</td></tr>
+<tr class="memitem:a7e1dde39c63e9ea014e1327d17297c12" id="r_a7e1dde39c63e9ea014e1327d17297c12"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a7e1dde39c63e9ea014e1327d17297c12">qr</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:ab03b4cc3577893f2c19db9fd2901ebab" id="r_ab03b4cc3577893f2c19db9fd2901ebab"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab03b4cc3577893f2c19db9fd2901ebab">q</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:ae137ef05e092ee1a8b81e155c520c429" id="r_ae137ef05e092ee1a8b81e155c520c429"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae137ef05e092ee1a8b81e155c520c429">r</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:a8aea35b5a5e016e82ec0f62bc9202c8a" id="r_a8aea35b5a5e016e82ec0f62bc9202c8a"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a8aea35b5a5e016e82ec0f62bc9202c8a">b</a> ()</td></tr>
+<tr class="memitem:a5bf0f53aa9f74b0655fa265dac731e69" id="r_a5bf0f53aa9f74b0655fa265dac731e69"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a5bf0f53aa9f74b0655fa265dac731e69">b</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:a3d26901e03695e9c20cfc4a762574b6c" id="r_a3d26901e03695e9c20cfc4a762574b6c"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3d26901e03695e9c20cfc4a762574b6c">b_min</a> ()</td></tr>
+<tr class="memitem:ab68b7baa1d4e7f1048557a76f869703b" id="r_ab68b7baa1d4e7f1048557a76f869703b"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab68b7baa1d4e7f1048557a76f869703b">b_min</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:a9537f3f21aa23aadbd02eecde6f92e35" id="r_a9537f3f21aa23aadbd02eecde6f92e35"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9537f3f21aa23aadbd02eecde6f92e35">b_max</a> ()</td></tr>
+<tr class="memitem:aeb5a3dd4688593f16af7906c71d70b8d" id="r_aeb5a3dd4688593f16af7906c71d70b8d"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aeb5a3dd4688593f16af7906c71d70b8d">b_max</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i)</td></tr>
+<tr class="memitem:af544b91076b1169d827c4f92c33f4835" id="r_af544b91076b1169d827c4f92c33f4835"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af544b91076b1169d827c4f92c33f4835">qr</a> () const</td></tr>
+<tr class="memitem:afb8b8c56d0d49ad8044e038e7f27fc6a" id="r_afb8b8c56d0d49ad8044e038e7f27fc6a"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#afb8b8c56d0d49ad8044e038e7f27fc6a">qr</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:a8d7d72ffe088152a7a00f2a31169c015" id="r_a8d7d72ffe088152a7a00f2a31169c015"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a8d7d72ffe088152a7a00f2a31169c015">q</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:ae7e3db06e0885525cca86d75c4f0bcac" id="r_ae7e3db06e0885525cca86d75c4f0bcac"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae7e3db06e0885525cca86d75c4f0bcac">r</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:a4ca0893ec5631a00781863f12e8bf4ff" id="r_a4ca0893ec5631a00781863f12e8bf4ff"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4ca0893ec5631a00781863f12e8bf4ff">b</a> () const</td></tr>
+<tr class="memitem:acbbeaad6c130f73a454481cc7f8efe57" id="r_acbbeaad6c130f73a454481cc7f8efe57"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#acbbeaad6c130f73a454481cc7f8efe57">b</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:abb328430a5372685904c05cdd7398f86" id="r_abb328430a5372685904c05cdd7398f86"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abb328430a5372685904c05cdd7398f86">b_min</a> () const</td></tr>
+<tr class="memitem:a223a115d5f2ef41ffc247011ccfe783e" id="r_a223a115d5f2ef41ffc247011ccfe783e"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a223a115d5f2ef41ffc247011ccfe783e">b_min</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:a3a8fd69282b0fdf34beef684095eaeff" id="r_a3a8fd69282b0fdf34beef684095eaeff"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3a8fd69282b0fdf34beef684095eaeff">b_max</a> () const</td></tr>
+<tr class="memitem:abaaacb188f51bf9564e7193a9eb29fbb" id="r_abaaacb188f51bf9564e7193a9eb29fbb"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abaaacb188f51bf9564e7193a9eb29fbb">b_max</a> (<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> i) const</td></tr>
+<tr class="memitem:a12952b0941c12e01365138e4638a182f" id="r_a12952b0941c12e01365138e4638a182f"><td class="memItemLeft"><a class="el" href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTError">KKTError</a>&#160;</td><td class="memItemRight"><a class="el" href="#a12952b0941c12e01365138e4638a182f">compute_kkt_error</a> (const <a class="el" href="structfancyqlone_1_1LinearOCPStorage_1_1Solution.html">Solution</a> &amp;sol) const</td></tr>
+<tr class="memitem:a5a1e18d96a195c6168118b8b077dec79" id="r_a5a1e18d96a195c6168118b8b077dec79"><td class="memItemLeft"><a class="el" href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0Seperated">KKTErroru0Seperated</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5a1e18d96a195c6168118b8b077dec79">compute_kkt_error_u0_seperated</a> (const <a class="el" href="structfancyqlone_1_1LinearOCPStorage_1_1Solution.html">Solution</a> &amp;sol) const</td></tr>
+<tr class="memitem:a131401d2e88983aa79abb0d216707672" id="r_a131401d2e88983aa79abb0d216707672"><td class="memItemLeft"><a class="el" href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated">KKTErroru0x0Seperated</a>&#160;</td><td class="memItemRight"><a class="el" href="#a131401d2e88983aa79abb0d216707672">compute_kkt_error_u0x0_seperated</a> (const <a class="el" href="structfancyqlone_1_1LinearOCPStorage_1_1Solution.html">Solution</a> &amp;sol) const</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aba227f4a469325d9edcbb7b553d0f2f1" id="r_aba227f4a469325d9edcbb7b553d0f2f1"><td class="memItemLeft">static std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aba227f4a469325d9edcbb7b553d0f2f1">create_storage</a> (<a class="el" href="structfancyqlone_1_1OCPDim.html">OCPDim</a> <a class="el" href="#a27006d25c166fadc27d783dc1da0b2e7">dim</a>)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a27006d25c166fadc27d783dc1da0b2e7" id="r_a27006d25c166fadc27d783dc1da0b2e7"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1OCPDim.html">OCPDim</a>&#160;</td><td class="memItemRight"><a class="el" href="#a27006d25c166fadc27d783dc1da0b2e7">dim</a> {}</td></tr>
+<tr class="memitem:a481519fd6bca65ed130589a980bc3dd7" id="r_a481519fd6bca65ed130589a980bc3dd7"><td class="memItemLeft">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a481519fd6bca65ed130589a980bc3dd7">storage</a> = <a class="el" href="#aba227f4a469325d9edcbb7b553d0f2f1">create_storage</a>(<a class="el" href="#a27006d25c166fadc27d783dc1da0b2e7">dim</a>)</td></tr>
+<tr class="memdesc:a481519fd6bca65ed130589a980bc3dd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a single contiguous storage for all problem data.  <br /></td></tr>
+</table>
+<hr/><h2 id="header-inline_5Fclasses" class="groupheader">Class Documentation</h2>
+<a name="structfancyqlone_1_1LinearOCPStorage_1_1KKTError" id="structfancyqlone_1_1LinearOCPStorage_1_1KKTError"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTError">&#9670;&#160;</a></span>fancyqlone::LinearOCPStorage::KKTError</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::LinearOCPStorage::KKTError</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="af7c894d8059fddc1101c937aa0556ac3" name="af7c894d8059fddc1101c937aa0556ac3"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+stationarity</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a16a0d8bc8d63222f16c995bc9952bec0" name="a16a0d8bc8d63222f16c995bc9952bec0"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+inequality_residual</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a85cd4b55f3f693cc573c555fb26ac328" name="a85cd4b55f3f693cc573c555fb26ac328"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+equality_residual</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ae6ddeb6b57645deaf3e5c0e72923a113" name="ae6ddeb6b57645deaf3e5c0e72923a113"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+complementarity</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0Seperated" id="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0Seperated"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0Seperated">&#9670;&#160;</a></span>fancyqlone::LinearOCPStorage::KKTErroru0Seperated</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::LinearOCPStorage::KKTErroru0Seperated</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="a0c204707ab10bffd8357cc1503733653" name="a0c204707ab10bffd8357cc1503733653"></a><a class="el" href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTError">KKTError</a></td>
+<td class="fieldname">
+kkt</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ac624c5b93296066077c1272216750fc6" name="ac624c5b93296066077c1272216750fc6"></a>vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+stationarity_u0</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated" id="structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTErroru0x0Seperated">&#9670;&#160;</a></span>fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::LinearOCPStorage::KKTErroru0x0Seperated</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="aeaabb155425751a02ea3bf31595ce111" name="aeaabb155425751a02ea3bf31595ce111"></a><a class="el" href="#structfancyqlone_1_1LinearOCPStorage_1_1KKTError">KKTError</a></td>
+<td class="fieldname">
+kkt</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a0b177a3f92d447c2e097079f62154523" name="a0b177a3f92d447c2e097079f62154523"></a>vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+stationarity_u0</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aa00959d7ee2168e5be7550829a98e003" name="aa00959d7ee2168e5be7550829a98e003"></a>vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+stationarity_x0</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="aba227f4a469325d9edcbb7b553d0f2f1" name="aba227f4a469325d9edcbb7b553d0f2f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba227f4a469325d9edcbb7b553d0f2f1">&#9670;&#160;</a></span>create_storage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; fancyqlone::LinearOCPStorage::create_storage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1OCPDim.html">OCPDim</a></td>          <td class="paramname"><span class="paramname"><em>dim</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00060">60</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac9ffaec3d88ad5fe53e953c4a97fcc29" name="ac9ffaec3d88ad5fe53e953c4a97fcc29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9ffaec3d88ad5fe53e953c4a97fcc29">&#9670;&#160;</a></span>H() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::H </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="solve-ocp_8cpp-example.html#a19">solve-ocp.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00066">66</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aaced9f219b04dc25c0817bc04b9890d9" name="aaced9f219b04dc25c0817bc04b9890d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaced9f219b04dc25c0817bc04b9890d9">&#9670;&#160;</a></span>Q() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::Q </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="solve-ocp_8cpp-example.html#a12">solve-ocp.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00077">77</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab0b91b1dac835a47452d45c0d2d9f1ee" name="ab0b91b1dac835a47452d45c0d2d9f1ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0b91b1dac835a47452d45c0d2d9f1ee">&#9670;&#160;</a></span>R() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::R </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="solve-ocp_8cpp-example.html#a13">solve-ocp.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00082">82</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a46055cc9e375ddd69ea173667928d52a" name="a46055cc9e375ddd69ea173667928d52a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46055cc9e375ddd69ea173667928d52a">&#9670;&#160;</a></span>S() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="solve-ocp_8cpp-example.html#a14">solve-ocp.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00087">87</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9d642f91f961e14b7ed372b34c5d8371" name="a9d642f91f961e14b7ed372b34c5d8371"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d642f91f961e14b7ed372b34c5d8371">&#9670;&#160;</a></span>S_trans() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::S_trans </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00092">92</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a79fd5025e97ec571a22aac597d2e793c" name="a79fd5025e97ec571a22aac597d2e793c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79fd5025e97ec571a22aac597d2e793c">&#9670;&#160;</a></span>CD() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::CD </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00097">97</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad991b26c207c150cf4117e3dea673b6d" name="ad991b26c207c150cf4117e3dea673b6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad991b26c207c150cf4117e3dea673b6d">&#9670;&#160;</a></span>C() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::C </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00108">108</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a755b42ad7574b683175254de50793aa0" name="a755b42ad7574b683175254de50793aa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a755b42ad7574b683175254de50793aa0">&#9670;&#160;</a></span>D() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::D </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00113">113</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af9aaaa55d850faa3fd5b676f05f94c49" name="af9aaaa55d850faa3fd5b676f05f94c49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9aaaa55d850faa3fd5b676f05f94c49">&#9670;&#160;</a></span>AB() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::AB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00118">118</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aaea931c3de39b21c1adc2adda6927391" name="aaea931c3de39b21c1adc2adda6927391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaea931c3de39b21c1adc2adda6927391">&#9670;&#160;</a></span>A() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::A </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="solve-ocp_8cpp-example.html#a10">solve-ocp.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00129">129</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a069e76a6c76bd62ab2eb0c5546f74897" name="a069e76a6c76bd62ab2eb0c5546f74897"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a069e76a6c76bd62ab2eb0c5546f74897">&#9670;&#160;</a></span>B() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::B </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="solve-ocp_8cpp-example.html#a11">solve-ocp.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00134">134</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a898167d9045f1a53b782cc01a6977455" name="a898167d9045f1a53b782cc01a6977455"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a898167d9045f1a53b782cc01a6977455">&#9670;&#160;</a></span>H() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::H </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00140">140</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a161dda1b8f2ca0362cf590e8af5a8104" name="a161dda1b8f2ca0362cf590e8af5a8104"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a161dda1b8f2ca0362cf590e8af5a8104">&#9670;&#160;</a></span>Q() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::Q </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00151">151</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac91c7428e235f3af6d7145fbd1de2b79" name="ac91c7428e235f3af6d7145fbd1de2b79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac91c7428e235f3af6d7145fbd1de2b79">&#9670;&#160;</a></span>R() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::R </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00156">156</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a17b94bf468910584e3a2c1721fcf456f" name="a17b94bf468910584e3a2c1721fcf456f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17b94bf468910584e3a2c1721fcf456f">&#9670;&#160;</a></span>S() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::S </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00161">161</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac020c63b3b06275c5ed6c428a11ba2a5" name="ac020c63b3b06275c5ed6c428a11ba2a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac020c63b3b06275c5ed6c428a11ba2a5">&#9670;&#160;</a></span>S_trans() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::S_trans </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00166">166</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5c9cd8631b3474cdb2b8fc2f0e5a47f8" name="a5c9cd8631b3474cdb2b8fc2f0e5a47f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c9cd8631b3474cdb2b8fc2f0e5a47f8">&#9670;&#160;</a></span>CD() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::CD </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00171">171</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a402fee7a6439b63c07dcc69a1d32307f" name="a402fee7a6439b63c07dcc69a1d32307f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a402fee7a6439b63c07dcc69a1d32307f">&#9670;&#160;</a></span>C() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::C </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00182">182</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af7c6fa03bed907a9b69c0577599bb0e2" name="af7c6fa03bed907a9b69c0577599bb0e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7c6fa03bed907a9b69c0577599bb0e2">&#9670;&#160;</a></span>D() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::D </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00187">187</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a06f7a193e7eceacb89f26f26cfc3a6c2" name="a06f7a193e7eceacb89f26f26cfc3a6c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06f7a193e7eceacb89f26f26cfc3a6c2">&#9670;&#160;</a></span>AB() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::AB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00192">192</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac582fa61972da14bde570b3aa903e72a" name="ac582fa61972da14bde570b3aa903e72a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac582fa61972da14bde570b3aa903e72a">&#9670;&#160;</a></span>A() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::A </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00203">203</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9cfc18dbb90e6e731da5d12339d8f0ed" name="a9cfc18dbb90e6e731da5d12339d8f0ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cfc18dbb90e6e731da5d12339d8f0ed">&#9670;&#160;</a></span>B() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::B </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00208">208</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad55df437b96b1ef8790814a9e048900e" name="ad55df437b96b1ef8790814a9e048900e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad55df437b96b1ef8790814a9e048900e">&#9670;&#160;</a></span>num_variables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> fancyqlone::LinearOCPStorage::num_variables </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00214">214</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3c5d86cdf3f19586f414847529a5671c" name="a3c5d86cdf3f19586f414847529a5671c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c5d86cdf3f19586f414847529a5671c">&#9670;&#160;</a></span>num_constraints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> fancyqlone::LinearOCPStorage::num_constraints </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00218">218</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="add7bf920f26e1a37e0dd00d7aeecabc7" name="add7bf920f26e1a37e0dd00d7aeecabc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add7bf920f26e1a37e0dd00d7aeecabc7">&#9670;&#160;</a></span>num_dynamics_constraints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> fancyqlone::LinearOCPStorage::num_dynamics_constraints </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00222">222</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a087bd89a45d03b02126021b5fec8d1df" name="a087bd89a45d03b02126021b5fec8d1df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a087bd89a45d03b02126021b5fec8d1df">&#9670;&#160;</a></span>qr() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::qr </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00227">227</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7e1dde39c63e9ea014e1327d17297c12" name="a7e1dde39c63e9ea014e1327d17297c12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e1dde39c63e9ea014e1327d17297c12">&#9670;&#160;</a></span>qr() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::qr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00236">236</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab03b4cc3577893f2c19db9fd2901ebab" name="ab03b4cc3577893f2c19db9fd2901ebab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab03b4cc3577893f2c19db9fd2901ebab">&#9670;&#160;</a></span>q() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::q </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="solve-ocp_8cpp-example.html#a15">solve-ocp.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00242">242</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae137ef05e092ee1a8b81e155c520c429" name="ae137ef05e092ee1a8b81e155c520c429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae137ef05e092ee1a8b81e155c520c429">&#9670;&#160;</a></span>r() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::r </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="solve-ocp_8cpp-example.html#a16">solve-ocp.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00247">247</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8aea35b5a5e016e82ec0f62bc9202c8a" name="a8aea35b5a5e016e82ec0f62bc9202c8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aea35b5a5e016e82ec0f62bc9202c8a">&#9670;&#160;</a></span>b() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="solve-ocp_8cpp-example.html#a9">solve-ocp.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00253">253</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5bf0f53aa9f74b0655fa265dac731e69" name="a5bf0f53aa9f74b0655fa265dac731e69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bf0f53aa9f74b0655fa265dac731e69">&#9670;&#160;</a></span>b() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00262">262</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3d26901e03695e9c20cfc4a762574b6c" name="a3d26901e03695e9c20cfc4a762574b6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d26901e03695e9c20cfc4a762574b6c">&#9670;&#160;</a></span>b_min() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b_min </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00269">269</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ab68b7baa1d4e7f1048557a76f869703b" name="ab68b7baa1d4e7f1048557a76f869703b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab68b7baa1d4e7f1048557a76f869703b">&#9670;&#160;</a></span>b_min() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b_min </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00278">278</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9537f3f21aa23aadbd02eecde6f92e35" name="a9537f3f21aa23aadbd02eecde6f92e35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9537f3f21aa23aadbd02eecde6f92e35">&#9670;&#160;</a></span>b_max() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b_max </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00285">285</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aeb5a3dd4688593f16af7906c71d70b8d" name="aeb5a3dd4688593f16af7906c71d70b8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb5a3dd4688593f16af7906c71d70b8d">&#9670;&#160;</a></span>b_max() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b_max </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00295">295</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af544b91076b1169d827c4f92c33f4835" name="af544b91076b1169d827c4f92c33f4835"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af544b91076b1169d827c4f92c33f4835">&#9670;&#160;</a></span>qr() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::qr </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00302">302</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afb8b8c56d0d49ad8044e038e7f27fc6a" name="afb8b8c56d0d49ad8044e038e7f27fc6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb8b8c56d0d49ad8044e038e7f27fc6a">&#9670;&#160;</a></span>qr() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::qr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00311">311</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8d7d72ffe088152a7a00f2a31169c015" name="a8d7d72ffe088152a7a00f2a31169c015"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d7d72ffe088152a7a00f2a31169c015">&#9670;&#160;</a></span>q() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::q </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00317">317</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae7e3db06e0885525cca86d75c4f0bcac" name="ae7e3db06e0885525cca86d75c4f0bcac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7e3db06e0885525cca86d75c4f0bcac">&#9670;&#160;</a></span>r() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::r </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00322">322</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4ca0893ec5631a00781863f12e8bf4ff" name="a4ca0893ec5631a00781863f12e8bf4ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ca0893ec5631a00781863f12e8bf4ff">&#9670;&#160;</a></span>b() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00328">328</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acbbeaad6c130f73a454481cc7f8efe57" name="acbbeaad6c130f73a454481cc7f8efe57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbbeaad6c130f73a454481cc7f8efe57">&#9670;&#160;</a></span>b() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00337">337</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abb328430a5372685904c05cdd7398f86" name="abb328430a5372685904c05cdd7398f86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb328430a5372685904c05cdd7398f86">&#9670;&#160;</a></span>b_min() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b_min </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00344">344</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a223a115d5f2ef41ffc247011ccfe783e" name="a223a115d5f2ef41ffc247011ccfe783e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a223a115d5f2ef41ffc247011ccfe783e">&#9670;&#160;</a></span>b_min() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b_min </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00353">353</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3a8fd69282b0fdf34beef684095eaeff" name="a3a8fd69282b0fdf34beef684095eaeff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a8fd69282b0fdf34beef684095eaeff">&#9670;&#160;</a></span>b_max() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b_max </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00360">360</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abaaacb188f51bf9564e7193a9eb29fbb" name="abaaacb188f51bf9564e7193a9eb29fbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaaacb188f51bf9564e7193a9eb29fbb">&#9670;&#160;</a></span>b_max() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; fancyqlone::LinearOCPStorage::b_max </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00370">370</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a12952b0941c12e01365138e4638a182f" name="a12952b0941c12e01365138e4638a182f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12952b0941c12e01365138e4638a182f">&#9670;&#160;</a></span>compute_kkt_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto fancyqlone::LinearOCPStorage::compute_kkt_error </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1LinearOCPStorage_1_1Solution.html">Solution</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sol</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8cpp_source.html#l00011">11</a> of file <a class="el" href="ocp_8cpp_source.html">ocp.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5a1e18d96a195c6168118b8b077dec79" name="a5a1e18d96a195c6168118b8b077dec79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a1e18d96a195c6168118b8b077dec79">&#9670;&#160;</a></span>compute_kkt_error_u0_seperated()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto fancyqlone::LinearOCPStorage::compute_kkt_error_u0_seperated </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1LinearOCPStorage_1_1Solution.html">Solution</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sol</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8cpp_source.html#l00108">108</a> of file <a class="el" href="ocp_8cpp_source.html">ocp.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a131401d2e88983aa79abb0d216707672" name="a131401d2e88983aa79abb0d216707672"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a131401d2e88983aa79abb0d216707672">&#9670;&#160;</a></span>compute_kkt_error_u0x0_seperated()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto fancyqlone::LinearOCPStorage::compute_kkt_error_u0x0_seperated </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1LinearOCPStorage_1_1Solution.html">Solution</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>sol</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8cpp_source.html#l00211">211</a> of file <a class="el" href="ocp_8cpp_source.html">ocp.cpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a27006d25c166fadc27d783dc1da0b2e7" name="a27006d25c166fadc27d783dc1da0b2e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27006d25c166fadc27d783dc1da0b2e7">&#9670;&#160;</a></span>dim</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1OCPDim.html">OCPDim</a> fancyqlone::LinearOCPStorage::dim {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00040">40</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a481519fd6bca65ed130589a980bc3dd7" name="a481519fd6bca65ed130589a980bc3dd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a481519fd6bca65ed130589a980bc3dd7">&#9670;&#160;</a></span>storage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&gt; fancyqlone::LinearOCPStorage::storage = <a class="el" href="#aba227f4a469325d9edcbb7b553d0f2f1">create_storage</a>(<a class="el" href="#a27006d25c166fadc27d783dc1da0b2e7">dim</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a single contiguous storage for all problem data. </p>
+<div class="fragment"><div class="line">Storage layout:     size        offset</div>
+<div class="line">N × [ <a class="code hl_function" href="#aaced9f219b04dc25c0817bc04b9890d9">Q</a> Sᵀ] = <a class="code hl_function" href="#ac9ffaec3d88ad5fe53e953c4a97fcc29">H</a>     (nx+nu)²    0</div>
+<div class="line">    [ <a class="code hl_function" href="#a46055cc9e375ddd69ea173667928d52a">S</a> <a class="code hl_function" href="#ab0b91b1dac835a47452d45c0d2d9f1ee">R</a> ]</div>
+<div class="line">1 × [ <a class="code hl_function" href="#aaced9f219b04dc25c0817bc04b9890d9">Q</a> ]           nx²         N (nx+nu)²</div>
+<div class="line">N × [ <a class="code hl_function" href="#ad991b26c207c150cf4117e3dea673b6d">C</a> <a class="code hl_function" href="#a755b42ad7574b683175254de50793aa0">D</a> ]         ny(nx+nu)   N (nx+nu)² + nx²</div>
+<div class="line">1 × [ <a class="code hl_function" href="#ad991b26c207c150cf4117e3dea673b6d">C</a> ]           ny_N nx     N (nx+nu+ny)(nx+nu) + nx²</div>
+<div class="line">N × [ <a class="code hl_function" href="#aaea931c3de39b21c1adc2adda6927391">A</a> <a class="code hl_function" href="#a069e76a6c76bd62ab2eb0c5546f74897">B</a> ]         nx(nx+nu)   N (nx+nu+ny)(nx+nu) + (nx+ny_N)nx</div>
+<div class="line">N × [ <a class="code hl_function" href="#ab03b4cc3577893f2c19db9fd2901ebab">q</a> <a class="code hl_function" href="#ae137ef05e092ee1a8b81e155c520c429">r</a> ]         nx+nu       N (2nx+nu+ny)(nx+nu) + (nx+ny_N)nx</div>
+<div class="line">1 × [ <a class="code hl_function" href="#ab03b4cc3577893f2c19db9fd2901ebab">q</a> ]           nx          N (2nx+nu+ny+1)(nx+nu) + (nx+ny_N)nx</div>
+<div class="line">N+1 × [ <a class="code hl_function" href="#a8aea35b5a5e016e82ec0f62bc9202c8a">b</a> ]         nx          N (2nx+nu+ny+1)(nx+nu) + (nx+ny_N+1)nx</div>
+<div class="line">N × [ l ]           ny          N (2nx+nu+ny+1)(nx+nu) + (nx+ny_N+2+N)nx</div>
+<div class="line">1 × [ l ]           ny_N        N (2nx+nu+ny+1)(nx+nu) + (nx+ny_N+2+N)nx + N ny</div>
+<div class="line">N × [ u ]           ny          N (2nx+nu+ny+1)(nx+nu) + (nx+ny_N+2+N)nx + N ny + ny_N</div>
+<div class="line">1 × [ u ]           ny_N        N (2nx+nu+ny+1)(nx+nu) + (nx+ny_N+2+N)nx + N (2ny) + ny_N</div>
+<div class="line">                                N (2nx+nu+ny+1)(nx+nu) + (nx+ny_N+2+N)nx + N (2ny) + 2ny_N</div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_a069e76a6c76bd62ab2eb0c5546f74897"><div class="ttname"><a href="#a069e76a6c76bd62ab2eb0c5546f74897">fancyqlone::LinearOCPStorage::B</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; B(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00134">ocp.hpp:134</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_a755b42ad7574b683175254de50793aa0"><div class="ttname"><a href="#a755b42ad7574b683175254de50793aa0">fancyqlone::LinearOCPStorage::D</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; D(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00113">ocp.hpp:113</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_a8aea35b5a5e016e82ec0f62bc9202c8a"><div class="ttname"><a href="#a8aea35b5a5e016e82ec0f62bc9202c8a">fancyqlone::LinearOCPStorage::b</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; b()</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00253">ocp.hpp:253</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_aaced9f219b04dc25c0817bc04b9890d9"><div class="ttname"><a href="#aaced9f219b04dc25c0817bc04b9890d9">fancyqlone::LinearOCPStorage::Q</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; Q(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00077">ocp.hpp:77</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_aaea931c3de39b21c1adc2adda6927391"><div class="ttname"><a href="#aaea931c3de39b21c1adc2adda6927391">fancyqlone::LinearOCPStorage::A</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; A(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00129">ocp.hpp:129</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_ab03b4cc3577893f2c19db9fd2901ebab"><div class="ttname"><a href="#ab03b4cc3577893f2c19db9fd2901ebab">fancyqlone::LinearOCPStorage::q</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; q(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00242">ocp.hpp:242</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_ab0b91b1dac835a47452d45c0d2d9f1ee"><div class="ttname"><a href="#ab0b91b1dac835a47452d45c0d2d9f1ee">fancyqlone::LinearOCPStorage::R</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; R(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00082">ocp.hpp:82</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_ac9ffaec3d88ad5fe53e953c4a97fcc29"><div class="ttname"><a href="#ac9ffaec3d88ad5fe53e953c4a97fcc29">fancyqlone::LinearOCPStorage::H</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; H(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00066">ocp.hpp:66</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_ad991b26c207c150cf4117e3dea673b6d"><div class="ttname"><a href="#ad991b26c207c150cf4117e3dea673b6d">fancyqlone::LinearOCPStorage::C</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; C(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00108">ocp.hpp:108</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_ae137ef05e092ee1a8b81e155c520c429"><div class="ttname"><a href="#ae137ef05e092ee1a8b81e155c520c429">fancyqlone::LinearOCPStorage::r</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; r(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00247">ocp.hpp:247</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="ocp_8hpp_source.html#l00059">59</a> of file <a class="el" href="ocp_8hpp_source.html">ocp.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/fancyqlone/include/fancyqlone/<a class="el" href="ocp_8hpp_source.html">ocp.hpp</a></li>
+<li>src/fancyqlone/src/<a class="el" href="ocp_8cpp_source.html">ocp.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacefancyqlone.html">fancyqlone</a></li><li class="navelem"><a href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

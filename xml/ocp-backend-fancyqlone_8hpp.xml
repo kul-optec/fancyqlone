@@ -1,0 +1,909 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="ocp-backend-fancyqlone_8hpp" kind="file" language="C++">
+    <compoundname>ocp-backend-fancyqlone.hpp</compoundname>
+    <includes refid="config_8hpp" local="no">fancyqlone/config.hpp</includes>
+    <includes refid="cyqlone_8hpp" local="no">fancyqlone/cyqlone/cyqlone.hpp</includes>
+    <includes refid="fancyqlone_8hpp" local="no">fancyqlone/fancyqlone/fancyqlone.hpp</includes>
+    <includes refid="serial-fancyqlone_8hpp" local="no">fancyqlone/sequential-fancyqlone/serial-fancyqlone.hpp</includes>
+    <includes refid="cyqlone-params_8hpp" local="no">fancyqlone/cyqlone/cyqlone-params.hpp</includes>
+    <includes refid="cyqlone-storage_8hpp" local="no">fancyqlone/cyqlone/cyqlone-storage.hpp</includes>
+    <includes refid="solver_8hpp" local="no">fancyqlone/fancyqpalm/solver.hpp</includes>
+    <includes local="no">guanaqo/mat-view.hpp</includes>
+    <includes local="no">cstdint</includes>
+    <includes local="no">limits</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">span</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp" local="no">benchmarks/cyqpalm/spring-mass.cpp</includedby>
+    <includedby refid="ocp-backend-fancyqlone_8tpp" local="no">src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp</includedby>
+    <incdepgraph>
+      <node id="28">
+        <label>fancyqlone/barrier.hpp</label>
+        <link refid="barrier_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fancyqlone/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>fancyqlone/cyqlone/cyqlone-params.hpp</label>
+        <link refid="cyqlone-params_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>fancyqlone/cyqlone/cyqlone-storage.hpp</label>
+        <link refid="cyqlone-storage_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>fancyqlone/cyqlone/cyqlone.hpp</label>
+        <link refid="cyqlone_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>fancyqlone/cyqlone/tridiagonal-solver.hpp</label>
+        <link refid="tridiagonal-solver_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>fancyqlone/fancyqlone/fancyqlone.hpp</label>
+        <link refid="fancyqlone_8hpp"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>fancyqlone/linalg.hpp</label>
+        <link refid="linalg_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>fancyqlone/ocp.hpp</label>
+        <link refid="ocp_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>fancyqlone/packing.hpp</label>
+        <link refid="packing_8hpp"/>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>fancyqlone/parallel.hpp</label>
+        <link refid="parallel_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>fancyqlone/sequential-fancyqlone/serial-fancyqlone.hpp</label>
+        <link refid="serial-fancyqlone_8hpp"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>fancyqlone/sparse.hpp</label>
+        <link refid="sparse_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>fancyqlone/timing.hpp</label>
+        <link refid="timing_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</label>
+        <link refid="ocp-backend-fancyqlone_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>fancyqlone/fancyqpalm/detailed-stats.hpp</label>
+        <link refid="detailed-stats_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>fancyqlone/fancyqpalm/settings.hpp</label>
+        <link refid="settings_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>fancyqlone/fancyqpalm/solver.hpp</label>
+        <link refid="solver_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>fancyqlone/fancyqpalm/status.hpp</label>
+        <link refid="status_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>algorithm</label>
+      </node>
+      <node id="29">
+        <label>array</label>
+      </node>
+      <node id="30">
+        <label>atomic</label>
+      </node>
+      <node id="5">
+        <label>batmat/assume.hpp</label>
+      </node>
+      <node id="3">
+        <label>batmat/config.hpp</label>
+      </node>
+      <node id="17">
+        <label>batmat/linalg/copy.hpp</label>
+      </node>
+      <node id="18">
+        <label>batmat/linalg/elementwise.hpp</label>
+      </node>
+      <node id="54">
+        <label>batmat/linalg/gemm.hpp</label>
+      </node>
+      <node id="55">
+        <label>batmat/linalg/gemv.hpp</label>
+      </node>
+      <node id="6">
+        <label>batmat/linalg/hyhound.hpp</label>
+      </node>
+      <node id="56">
+        <label>batmat/linalg/potrf.hpp</label>
+      </node>
+      <node id="19">
+        <label>batmat/linalg/reduce.hpp</label>
+      </node>
+      <node id="60">
+        <label>batmat/linalg/shift.hpp</label>
+      </node>
+      <node id="25">
+        <label>batmat/linalg/simdify.hpp</label>
+      </node>
+      <node id="57">
+        <label>batmat/linalg/small-potrf.hpp</label>
+      </node>
+      <node id="43">
+        <label>batmat/linalg/structure.hpp</label>
+      </node>
+      <node id="61">
+        <label>batmat/linalg/triangular.hpp</label>
+      </node>
+      <node id="58">
+        <label>batmat/linalg/trsm.hpp</label>
+      </node>
+      <node id="62">
+        <label>batmat/linalg/uview.hpp</label>
+      </node>
+      <node id="63">
+        <label>batmat/loop.hpp</label>
+      </node>
+      <node id="64">
+        <label>batmat/lut.hpp</label>
+      </node>
+      <node id="7">
+        <label>batmat/matrix/layout.hpp</label>
+      </node>
+      <node id="8">
+        <label>batmat/matrix/matrix.hpp</label>
+      </node>
+      <node id="52">
+        <label>batmat/matrix/storage.hpp</label>
+      </node>
+      <node id="9">
+        <label>batmat/openmp.h</label>
+      </node>
+      <node id="65">
+        <label>batmat/ops/rotate.hpp</label>
+      </node>
+      <node id="66">
+        <label>batmat/ops/transpose.hpp</label>
+      </node>
+      <node id="10">
+        <label>batmat/simd.hpp</label>
+      </node>
+      <node id="48">
+        <label>batmat/timing.hpp</label>
+      </node>
+      <node id="11">
+        <label>batmat/unroll.h</label>
+      </node>
+      <node id="50">
+        <label>bit</label>
+      </node>
+      <node id="31">
+        <label>cassert</label>
+      </node>
+      <node id="73">
+        <label>chrono</label>
+      </node>
+      <node id="45">
+        <label>concepts</label>
+      </node>
+      <node id="32">
+        <label>cstdint</label>
+      </node>
+      <node id="33">
+        <label>cstring</label>
+      </node>
+      <node id="71">
+        <label>fancyqlone/fancyqpalm/export.h</label>
+      </node>
+      <node id="39">
+        <label>format</label>
+      </node>
+      <node id="34">
+        <label>functional</label>
+      </node>
+      <node id="76">
+        <label>guanaqo/atomic-stop-signal.hpp</label>
+      </node>
+      <node id="44">
+        <label>guanaqo/linalg/sparsity.hpp</label>
+      </node>
+      <node id="21">
+        <label>guanaqo/mat-view.hpp</label>
+      </node>
+      <node id="67">
+        <label>guanaqo/perfetto/trace.hpp</label>
+      </node>
+      <node id="22">
+        <label>guanaqo/print.hpp</label>
+      </node>
+      <node id="77">
+        <label>guanaqo/timed.hpp</label>
+      </node>
+      <node id="41">
+        <label>guanaqo/trace.hpp</label>
+      </node>
+      <node id="75">
+        <label>iosfwd</label>
+      </node>
+      <node id="23">
+        <label>iostream</label>
+      </node>
+      <node id="13">
+        <label>limits</label>
+      </node>
+      <node id="78">
+        <label>map</label>
+      </node>
+      <node id="35">
+        <label>memory</label>
+      </node>
+      <node id="36">
+        <label>optional</label>
+      </node>
+      <node id="46">
+        <label>ranges</label>
+      </node>
+      <node id="26">
+        <label>span</label>
+      </node>
+      <node id="14">
+        <label>stdexcept</label>
+      </node>
+      <node id="79">
+        <label>string</label>
+      </node>
+      <node id="40">
+        <label>syncstream</label>
+      </node>
+      <node id="37">
+        <label>type_traits</label>
+      </node>
+      <node id="38">
+        <label>utility</label>
+      </node>
+      <node id="24">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>benchmarks/cyqpalm/spring-mass.cpp</label>
+        <link refid="benchmarks_2cyqpalm_2spring-mass_8cpp"/>
+      </node>
+      <node id="4">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/ineq-constr.tpp</label>
+        <link refid="ineq-constr_8tpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linalg.tpp</label>
+        <link refid="linalg_8tpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linesearch.tpp</label>
+        <link refid="backends_2backend-fancyqlone_2linesearch_8tpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/solve.tpp</label>
+        <link refid="solve_8tpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</label>
+        <link refid="ocp-backend-fancyqlone_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp</label>
+        <link refid="ocp-backend-fancyqlone_8tpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>src/fancyqpalm/src/ocp-backend-cyqlone.cpp</label>
+        <link refid="ocp-backend-cyqlone_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CyqloneData" prot="public">fancyqlone::qpalm::CyqloneData</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" prot="public">fancyqlone::qpalm::CyQPALMBackendSettings</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats" prot="public">fancyqlone::qpalm::CyQPALMBackendStats</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411" prot="public">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::CyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43" prot="public">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::CyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::storage_t</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb" prot="public">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb" prot="public">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::storage_t</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908" prot="public">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97" prot="public">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;::storage_t</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type_3_01CyQPALMBackend_3_01VL_00_01Defaubd648f5f0e10a35ee91edfe54afecd28" prot="public">fancyqlone::qpalm::detail::backend_stats_type&lt; CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" prot="public">fancyqlone::qpalm::unique_CyQPALMBackend</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01unique__CyQPALMBackend_3_01VL_00_01Defa306830a29b74570e9069a8a538af8ff0" prot="public">fancyqlone::qpalm::detail::backend_type&lt; unique_CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; &gt;</innerclass>
+    <innernamespace refid="namespacefancyqlone">fancyqlone</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm">fancyqlone::qpalm</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm_1_1detail">fancyqlone::qpalm::detail</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="config_8hpp" kindref="compound">fancyqlone/config.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="cyqlone_8hpp" kindref="compound">fancyqlone/cyqlone/cyqlone.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="fancyqlone_8hpp" kindref="compound">fancyqlone/fancyqlone/fancyqlone.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="serial-fancyqlone_8hpp" kindref="compound">fancyqlone/sequential-fancyqlone/serial-fancyqlone.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="cyqlone-params_8hpp" kindref="compound">fancyqlone/cyqlone/cyqlone-params.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="cyqlone-storage_8hpp" kindref="compound">fancyqlone/cyqlone/cyqlone-storage.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="solver_8hpp" kindref="compound">fancyqlone/fancyqpalm/solver.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;guanaqo/mat-view.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cstdint&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;limits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;span&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacefancyqlone_1_1qpalm" kindref="compound">fancyqlone::qpalm</ref><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="21"><highlight class="comment">///<sp/>@addtogroup<sp/>topic-optimization-solvers-ocp</highlight></codeline>
+<codeline lineno="22"><highlight class="comment">///<sp/>@{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="structfancyqlone_1_1qpalm_1_1CyqloneData" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData" kindref="compound">CyqloneData</ref><sp/>{</highlight></codeline>
+<codeline lineno="25" refid="structfancyqlone_1_1qpalm_1_1CyqloneData_1a097110456baa8420a2d53664ba93bf05" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::span&lt;const<sp/>real_t&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData_1ab77a021f2f97c46942f5ad6cd1ac9ff9" kindref="member">initial_variables</ref><sp/>=<sp/>{},<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData_1a097110456baa8420a2d53664ba93bf05" kindref="member">initial_inequality_multipliers</ref><sp/>=<sp/>{},</highlight></codeline>
+<codeline lineno="26" refid="structfancyqlone_1_1qpalm_1_1CyqloneData_1a39f2543d4cdbfec0a25ba7797256efb6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyqloneData_1a39f2543d4cdbfec0a25ba7797256efb6" kindref="member">initial_equality_multipliers</ref><sp/>=<sp/>{};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="group__topic-optimization-solvers-ocp_1gac67dc98973eb37748e986ba97732b38c" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers-ocp_1gac67dc98973eb37748e986ba97732b38c" kindref="member">WarmStartingStrategy</ref><sp/>{</highlight></codeline>
+<codeline lineno="30" refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca8b7a61a6e9bd5b8977b7b3f02a425adc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca8b7a61a6e9bd5b8977b7b3f02a425adc" kindref="member">Zeros</ref>,</highlight></codeline>
+<codeline lineno="31" refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea" kindref="member">Copy</ref>,</highlight></codeline>
+<codeline lineno="32" refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca825a3d98017bab11815ad2817201324c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca825a3d98017bab11815ad2817201324c" kindref="member">Shift</ref>,</highlight></codeline>
+<codeline lineno="33" refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38cab882fa82c60e5b9a229e5ed6e52ad31a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38cab882fa82c60e5b9a229e5ed6e52ad31a" kindref="member">ShiftNoInequality</ref>,</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="group__topic-optimization-solvers-ocp_1ga90c820ba89c66a51ee3e57a7ebf796d2" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="group__topic-optimization-solvers-ocp_1ga90c820ba89c66a51ee3e57a7ebf796d2" kindref="member">FanWarmStartingStrategy</ref><sp/>{</highlight></codeline>
+<codeline lineno="37" refid="group__topic-optimization-solvers-ocp_1gga90c820ba89c66a51ee3e57a7ebf796d2a8b7a61a6e9bd5b8977b7b3f02a425adc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca8b7a61a6e9bd5b8977b7b3f02a425adc" kindref="member">Zeros</ref>,</highlight></codeline>
+<codeline lineno="38" refid="group__topic-optimization-solvers-ocp_1gga90c820ba89c66a51ee3e57a7ebf796d2a5fb63579fc981698f97d55bfecb213ea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea" kindref="member">Copy</ref>,</highlight></codeline>
+<codeline lineno="39" refid="group__topic-optimization-solvers-ocp_1gga90c820ba89c66a51ee3e57a7ebf796d2a825a3d98017bab11815ad2817201324c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca825a3d98017bab11815ad2817201324c" kindref="member">Shift</ref>,</highlight></codeline>
+<codeline lineno="40" refid="group__topic-optimization-solvers-ocp_1gga90c820ba89c66a51ee3e57a7ebf796d2ab882fa82c60e5b9a229e5ed6e52ad31a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38cab882fa82c60e5b9a229e5ed6e52ad31a" kindref="member">ShiftNoInequality</ref>,</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" kindref="compound">CyQPALMBackendSettings</ref><sp/>{</highlight></codeline>
+<codeline lineno="44" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a18f9794881668ebfca3e5184c5d73ac4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a18f9794881668ebfca3e5184c5d73ac4" kindref="member">processors</ref><sp/><sp/><sp/>=<sp/>8;</highlight></codeline>
+<codeline lineno="45" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1ac19d3e9a8a8ffe0e2358a75c5d72e617" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1ac19d3e9a8a8ffe0e2358a75c5d72e617" kindref="member">print_residuals</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="46" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a8fc5a6d972faff0bb450a45b1d5b5de6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a8fc5a6d972faff0bb450a45b1d5b5de6" kindref="member">print_precision</ref><sp/><sp/>=<sp/>3;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>bool<sp/>init_x0<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>false;<sp/>//<sp/>TODO</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a3b1b95630e5123b6c7acb315c4e67293" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a3b1b95630e5123b6c7acb315c4e67293" kindref="member">changing_constr_factor</ref><sp/>=<sp/>0.05;</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/>///<sp/>Maximum<sp/>number<sp/>of<sp/>factorization<sp/>updates<sp/>before<sp/>refactorization.</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/>///<sp/>Fan<sp/>backends<sp/>do<sp/>not<sp/>support<sp/>updates<sp/>and<sp/>use<sp/>an<sp/>effective<sp/>value<sp/>of<sp/>zero.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1ae59a1ddb7e2589acdefb7fe7966b0c76" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1ae59a1ddb7e2589acdefb7fe7966b0c76" kindref="member">max_update_count</ref><sp/>=<sp/>5;</highlight></codeline>
+<codeline lineno="52" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aa418e27c51a14390ab0eb4b68cc26041" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aa418e27c51a14390ab0eb4b68cc26041" kindref="member">detailed_timings</ref><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="53"><highlight class="comment"><sp/><sp/><sp/><sp/>///<sp/>Fan<sp/>backends<sp/>always<sp/>use<sp/>SolveMethod::None<sp/>for<sp/>the<sp/>branch<sp/>Schur<sp/>complements.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a3aeec64cba09d6847e23d7f9decbe09f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1TricyqleParams" kindref="compound">fancyqlone::TricyqleParams&lt;real_t&gt;</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1a3aeec64cba09d6847e23d7f9decbe09f" kindref="member">tricyqle_params</ref>{};</highlight></codeline>
+<codeline lineno="55" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aadba1d46308e13bf564d75afec16b4bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aadba1d46308e13bf564d75afec16b4bc" kindref="member">spin_count</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>std::numeric_limits&lt;uint32_t&gt;::max();</highlight></codeline>
+<codeline lineno="56" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aa373f519bbc753135e481d4188c77c91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group__topic-optimization-solvers-ocp_1gac67dc98973eb37748e986ba97732b38c" kindref="member">WarmStartingStrategy</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings_1aa373f519bbc753135e481d4188c77c91" kindref="member">strategy</ref><sp/>=<sp/><ref refid="group__topic-optimization-solvers-ocp_1ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea" kindref="member">WarmStartingStrategy::Copy</ref>;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats" kindref="compound">CyQPALMBackendStats</ref><sp/>{</highlight></codeline>
+<codeline lineno="60" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats_1ad61f69a15b9082390dcff94207aa9d09" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats_1ad61f69a15b9082390dcff94207aa9d09" kindref="member">num_updates</ref><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="61" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats_1a39ccff5d04291617afbbff9be156dcdf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats_1a39ccff5d04291617afbbff9be156dcdf" kindref="member">rank_updates</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="62" refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats_1a5b5a034bdda4cd09e63d0839eb485d64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats_1a5b5a034bdda4cd09e63d0839eb485d64" kindref="member">num_factor</ref><sp/><sp/><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="65"><highlight class="comment">///<sp/>@}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fancyqlone::qpalm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="config_8hpp_1aa4b496c143fba922704a143c4411beb1" kindref="member">FANCYQLONE_NS</ref>(<ref refid="namespacefancyqlone" kindref="compound">fancyqlone</ref>::<ref refid="namespacefancyqlone_1_1qpalm" kindref="compound">qpalm</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="group__linalg__views_1gac0a39236f11af6725f2dc1d339c95bae" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::StorageOrder</ref>;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>VL,<sp/><ref refid="namespacebatmat_1_1linalg_1a12561d95ffd5ca9cc074d7b3edceb429" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">StorageOrder</ref><sp/>DefaultOrder<sp/>=<sp/>StorageOrder::ColMajor,</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LinearSolver<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;</ref>&gt;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">CyQPALMBackend;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>LinearSolver&gt;</highlight></codeline>
+<codeline lineno="78" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits" kindref="compound">CycloneBackendTraits</ref>;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Traits<sp/>for<sp/>the<sp/>CyqloneSolver</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;index_t<sp/>VL,<sp/>StorageOrder<sp/>DefaultOrder&gt;</highlight></codeline>
+<codeline lineno="81" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits" kindref="compound">CycloneBackendTraits</ref>&lt;<ref refid="namespacefancyqlone" kindref="compound">fancyqlone</ref>::<ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">CyqloneSolver</ref>&lt;VL,<sp/>real_t,<sp/>DefaultOrder&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="82" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1ae842a7bc8ffdda78e6b12eb384c971a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1ae842a7bc8ffdda78e6b12eb384c971a8" kindref="member">supports_factorization_updates</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="83" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1ace424e69a4f3cc26f1fc82bd86fcec89" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1ace424e69a4f3cc26f1fc82bd86fcec89" kindref="member">requires_external_schur_solve</ref><sp/><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1ac7a65c66af59bc62f606457f7219e996" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1ac7a65c66af59bc62f606457f7219e996" kindref="member">OCP_t</ref><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;</ref>;</highlight></codeline>
+<codeline lineno="85" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1abd86bda2ccf3db8deabc697541dd9fee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1abd86bda2ccf3db8deabc697541dd9fee" kindref="member">simd</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1CyqloneSolver_1a524b8d42ef9271fe19eb4020f4b49b30" kindref="member">OCP_t::simd</ref>;</highlight></codeline>
+<codeline lineno="86" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1a3a7faf5d2728c9e222ebfdcfe1272c7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1a3a7faf5d2728c9e222ebfdcfe1272c7c" kindref="member">CStorage</ref><sp/><sp/><sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneStorage" kindref="compound">CyqloneStorage&lt;&gt;</ref>;</highlight></codeline>
+<codeline lineno="87" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1a38acbf98ebd1faf2d3584b572ba377a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1a38acbf98ebd1faf2d3584b572ba377a9" kindref="member">OCPStorage</ref><sp/>=<sp/><ref refid="structfancyqlone_1_1LinearOCPStorage" kindref="compound">LinearOCPStorage</ref>;</highlight></codeline>
+<codeline lineno="88" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1af9dfe2829d972fab0636b84497dd61df" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1af9dfe2829d972fab0636b84497dd61df" kindref="member">store_t</ref><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>OCP_t::template<sp/><ref refid="namespacebatmat_1_1linalg_1aa93224d87d900a2dacc032305840169b" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">matrix&lt;&gt;</ref>;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Tag&gt;</highlight></codeline>
+<codeline lineno="90" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43_1a2c13f694e25ba9d1692f6d713a453fa8" kindref="member">storage_t</ref><sp/>:<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1af9dfe2829d972fab0636b84497dd61df" kindref="member">store_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="91" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43_1a28db13ea6ab4475e59e0cf5829db52b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend&lt;VL, DefaultOrder, OCP_t&gt;</ref>;</highlight></codeline>
+<codeline lineno="92" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43_1a2c13f694e25ba9d1692f6d713a453fa8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43_1a2c13f694e25ba9d1692f6d713a453fa8" kindref="member">storage_t</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="95" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43_1aea4e22d31583530a17c4e65990673d33" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43_1aea4e22d31583530a17c4e65990673d33" kindref="member">storage_t</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1af9dfe2829d972fab0636b84497dd61df" kindref="member">store_t</ref><sp/>&amp;&amp;o)<sp/>:<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1af9dfe2829d972fab0636b84497dd61df" kindref="member">store_t</ref>{std::move(o)}<sp/>{}</highlight></codeline>
+<codeline lineno="96" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43_1a4bd5dd7f76293e94c382e9320d961b9e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43_1a4bd5dd7f76293e94c382e9320d961b9e" kindref="member">check_dimensions_col</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43_1a2c13f694e25ba9d1692f6d713a453fa8" kindref="member">storage_t</ref><sp/>&amp;other,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>&amp;dim_col)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;cols()<sp/>==<sp/>dim_col);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(other.cols()<sp/>==<sp/>dim_col);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;rows()<sp/>==<sp/>other.rows());</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;depth()<sp/>==<sp/>other.depth());</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="103" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1aae22610f380c019efc1fcc710d5e87b6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411_1aae22610f380c019efc1fcc710d5e87b6" kindref="member">warm_start_t</ref><sp/>=<sp/><ref refid="group__topic-optimization-solvers-ocp_1gac67dc98973eb37748e986ba97732b38c" kindref="member">WarmStartingStrategy</ref>;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Traits<sp/>for<sp/>FanCyqloneSolver</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;index_t<sp/>VL,<sp/>StorageOrder<sp/>DefaultOrder&gt;</highlight></codeline>
+<codeline lineno="107" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits" kindref="compound">CycloneBackendTraits</ref>&lt;<ref refid="namespacefancyqlone" kindref="compound">fancyqlone</ref>::<ref refid="structfancyqlone_1_1FanCyqloneSolver" kindref="compound">FanCyqloneSolver</ref>&lt;VL,<sp/>real_t,<sp/>DefaultOrder&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="108" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a20fd14b1fe5833bee51ce28f3d6d5a89" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a20fd14b1fe5833bee51ce28f3d6d5a89" kindref="member">supports_factorization_updates</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="109" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a6619875c2d09d9ae4cb43b7d2a8781b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a6619875c2d09d9ae4cb43b7d2a8781b9" kindref="member">requires_external_schur_solve</ref><sp/><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="110" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1ad02e72bc31e0f49dace1aafd2876a2a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1ad02e72bc31e0f49dace1aafd2876a2a2" kindref="member">OCP_t</ref><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="structfancyqlone_1_1FanCyqloneSolver" kindref="compound">fancyqlone::FanCyqloneSolver&lt;VL, real_t, DefaultOrder&gt;</ref>;</highlight></codeline>
+<codeline lineno="111" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a4e444c87dcbe6e8be7efd65c46f5e5e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a4e444c87dcbe6e8be7efd65c46f5e5e1" kindref="member">simd</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1FanCyqloneSolver_1a6c3af33268fc5a13dec809c57550db75" kindref="member">OCP_t::simd</ref>;</highlight></codeline>
+<codeline lineno="112" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1abc1b71927c79bd9817ba08b4764e7666" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1abc1b71927c79bd9817ba08b4764e7666" kindref="member">CStorage</ref><sp/><sp/><sp/>=<sp/><ref refid="structfancyqlone_1_1FanCyqloneStorage" kindref="compound">FanCyqloneStorage&lt;&gt;</ref>;</highlight></codeline>
+<codeline lineno="113" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a99188b308711fd07e305e8b4aa589f07" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a99188b308711fd07e305e8b4aa589f07" kindref="member">OCPStorage</ref><sp/>=<sp/><ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref>;</highlight></codeline>
+<codeline lineno="114" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a83320b8c1f866583604e51f1a0f1ca70" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a83320b8c1f866583604e51f1a0f1ca70" kindref="member">store_t</ref><sp/><sp/><sp/><sp/>=<sp/><ref refid="structfancyqlone_1_1FanStorage__t" kindref="compound">FanStorage_t&lt;typename OCP_t::template matrix&lt;&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Tag&gt;</highlight></codeline>
+<codeline lineno="116" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref><sp/>:<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a83320b8c1f866583604e51f1a0f1ca70" kindref="member">store_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="117" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aafc7d5c618cc70086433570e64394fc1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend&lt;VL, DefaultOrder, OCP_t&gt;</ref>;</highlight></codeline>
+<codeline lineno="118" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a90683900d656f44b84d0be14e9c79d97" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a90683900d656f44b84d0be14e9c79d97" kindref="member">storage_t</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref><sp/>&amp;&amp;)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="121" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a5bd1dc82847e1bb8628f702c0ae6a533" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref><sp/>&amp;<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a5bd1dc82847e1bb8628f702c0ae6a533" kindref="member">operator=</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref><sp/>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a85c95628e86edec1fa5f9c18f90c0d27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a85c95628e86edec1fa5f9c18f90c0d27" kindref="member">storage_t</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref><sp/>&amp;)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="124" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1afb9299ca04a7d46f18861b3556097b0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref><sp/>&amp;<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1afb9299ca04a7d46f18861b3556097b0f" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref><sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="127" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a72c329770956629dd71690b6371d4ae1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a72c329770956629dd71690b6371d4ae1" kindref="member">storage_t</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a83320b8c1f866583604e51f1a0f1ca70" kindref="member">store_t</ref><sp/>&amp;&amp;o)<sp/>:<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a83320b8c1f866583604e51f1a0f1ca70" kindref="member">store_t</ref>{std::move(o)}<sp/>{}</highlight></codeline>
+<codeline lineno="128" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1af0a3fb126bdec7d25ddd648e3f14f0b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1af0a3fb126bdec7d25ddd648e3f14f0b4" kindref="member">check_dimensions_col</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref><sp/>&amp;other,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>&amp;dim_col)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>c<sp/>=<sp/>0;<sp/>c<sp/>&lt;<sp/>static_cast&lt;index_t&gt;(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>.size());<sp/>++c)<sp/>{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].cols()<sp/>==<sp/>dim_col);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(other.<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].cols()<sp/>==<sp/>dim_col);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].rows()<sp/>==<sp/>other.<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].rows());</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].depth()<sp/>==<sp/>other.<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].depth());</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.cols()<sp/>==<sp/>dim_col);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(other.<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.<ref refid="structbatmat_1_1matrix_1_1Matrix_1af06fdfd92d9395fb9bf37221781d64ae" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">cols</ref>()<sp/>==<sp/>dim_col);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.rows()<sp/>==<sp/>other.<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.<ref refid="structbatmat_1_1matrix_1_1Matrix_1a6db175aa1b211d594161f61e2a1d629f" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">rows</ref>());</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.depth()<sp/>==<sp/>other.<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.<ref refid="structbatmat_1_1matrix_1_1Matrix_1af958e54ea0b2a2c074a97dcf1c1e78d9" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">depth</ref>());</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="140" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a454b4effa5b4f4ac699ff798c86c598f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a454b4effa5b4f4ac699ff798c86c598f" kindref="member">size</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>total_size<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>.size());</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_size;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="147" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a9910f45a620fd406b34fda676f49fd31" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1a9910f45a620fd406b34fda676f49fd31" kindref="member">clone</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb_1aae2a2a26b28a35d44a988ab665caac66" kindref="member">storage_t</ref>(<ref refid="structfancyqlone_1_1FanStorage__t_1ae3f41fdfa5a4f6d746077d04dbca5f04" kindref="member">store_t::clone</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="149" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a4539f7905e6826d72cbe0e3a84de9b4e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb_1a4539f7905e6826d72cbe0e3a84de9b4e" kindref="member">warm_start_t</ref><sp/>=<sp/><ref refid="group__topic-optimization-solvers-ocp_1ga90c820ba89c66a51ee3e57a7ebf796d2" kindref="member">FanWarmStartingStrategy</ref>;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Traits<sp/>for<sp/>SerialFanCyqloneSolver</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;index_t<sp/>VL,<sp/>StorageOrder<sp/>DefaultOrder&gt;</highlight></codeline>
+<codeline lineno="153" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits" kindref="compound">CycloneBackendTraits</ref>&lt;<ref refid="namespacefancyqlone" kindref="compound">fancyqlone</ref>::<ref refid="structfancyqlone_1_1SerialFanCyqloneSolver" kindref="compound">SerialFanCyqloneSolver</ref>&lt;VL,<sp/>real_t,<sp/>DefaultOrder&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="154" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1ae70a5dfb434dcb5decf80a44de14dc21" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1ae70a5dfb434dcb5decf80a44de14dc21" kindref="member">supports_factorization_updates</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="155" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1a32e8821a40f675aace01594552f4b44a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1a32e8821a40f675aace01594552f4b44a" kindref="member">requires_external_schur_solve</ref><sp/><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="156" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1aacfdf274421c7a07b6860bd232b1f997" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1aacfdf274421c7a07b6860bd232b1f997" kindref="member">OCP_t</ref><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="structfancyqlone_1_1SerialFanCyqloneSolver" kindref="compound">fancyqlone::SerialFanCyqloneSolver&lt;VL, real_t, DefaultOrder&gt;</ref>;</highlight></codeline>
+<codeline lineno="157" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1ae4d9b0e2a5ba17afaccd5d59095eea85" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1ae4d9b0e2a5ba17afaccd5d59095eea85" kindref="member">simd</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a9664b4dcc392901740252495915c5d50" kindref="member">OCP_t::simd</ref>;</highlight></codeline>
+<codeline lineno="158" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1aab16680783d32417ea3dbcdf897793b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1aab16680783d32417ea3dbcdf897793b4" kindref="member">CStorage</ref><sp/><sp/><sp/>=<sp/><ref refid="structfancyqlone_1_1FanCyqloneStorage" kindref="compound">FanCyqloneStorage&lt;&gt;</ref>;</highlight></codeline>
+<codeline lineno="159" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1ac5d22a9b47bce1fd1470ea3e7d547bc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1ac5d22a9b47bce1fd1470ea3e7d547bc9" kindref="member">OCPStorage</ref><sp/>=<sp/><ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref>;</highlight></codeline>
+<codeline lineno="160" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1a2d18d3f6f540cd90dc7b20c62e37c3e9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1a2d18d3f6f540cd90dc7b20c62e37c3e9" kindref="member">store_t</ref><sp/><sp/><sp/><sp/>=<sp/><ref refid="structfancyqlone_1_1FanStorage__t" kindref="compound">FanStorage_t&lt;typename OCP_t::template matrix&lt;&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Tag&gt;</highlight></codeline>
+<codeline lineno="162" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref><sp/>:<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1a2d18d3f6f540cd90dc7b20c62e37c3e9" kindref="member">store_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="163" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a35e76e95f355c7bc9a82bf0fbd79dcdf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend&lt;VL, DefaultOrder, OCP_t&gt;</ref>;</highlight></codeline>
+<codeline lineno="164" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a54ee82962b7ad1ddf63f1c2f6437cd4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a54ee82962b7ad1ddf63f1c2f6437cd4c" kindref="member">storage_t</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref><sp/>&amp;&amp;)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="167" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a68020bcc76210eeba608d1ac87e22f7b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref><sp/>&amp;<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a68020bcc76210eeba608d1ac87e22f7b" kindref="member">operator=</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref><sp/>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a27d3ff896b58e8ee12e39cd76463f769" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a27d3ff896b58e8ee12e39cd76463f769" kindref="member">storage_t</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref><sp/>&amp;)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="170" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1aa54f919bbad9174035ec2451ee8bc6d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref><sp/>&amp;<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1aa54f919bbad9174035ec2451ee8bc6d4" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref><sp/>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="173" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a0d22b5abd7033db45b4b6d253ea29fea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a0d22b5abd7033db45b4b6d253ea29fea" kindref="member">storage_t</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1a2d18d3f6f540cd90dc7b20c62e37c3e9" kindref="member">store_t</ref><sp/>&amp;&amp;o)<sp/>:<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1a2d18d3f6f540cd90dc7b20c62e37c3e9" kindref="member">store_t</ref>{std::move(o)}<sp/>{}</highlight></codeline>
+<codeline lineno="174" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a6c95b4526aab5adab3b6c575e11d0fb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a6c95b4526aab5adab3b6c575e11d0fb9" kindref="member">check_dimensions_col</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref><sp/>&amp;other,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>&amp;dim_col)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>c<sp/>=<sp/>0;<sp/>c<sp/>&lt;<sp/>static_cast&lt;index_t&gt;(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>.size());<sp/>++c)<sp/>{</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].cols()<sp/>==<sp/>dim_col);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(other.<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].cols()<sp/>==<sp/>dim_col);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].rows()<sp/>==<sp/>other.<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].rows());</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].depth()<sp/>==<sp/>other.<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>[c].depth());</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.cols()<sp/>==<sp/>dim_col);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(other.<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.<ref refid="structbatmat_1_1matrix_1_1Matrix_1af06fdfd92d9395fb9bf37221781d64ae" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">cols</ref>()<sp/>==<sp/>dim_col);</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.rows()<sp/>==<sp/>other.<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.<ref refid="structbatmat_1_1matrix_1_1Matrix_1a6db175aa1b211d594161f61e2a1d629f" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">rows</ref>());</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="assume_8hpp_1a64f9b433541d79ef4ca7cd707bcbb2bd" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">BATMAT_ASSERT</ref>(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.depth()<sp/>==<sp/>other.<ref refid="structfancyqlone_1_1FanStorage__t_1ac8551afd82d7328c539f5a53d17dff8e" kindref="member">first</ref>.<ref refid="structbatmat_1_1matrix_1_1Matrix_1af958e54ea0b2a2c074a97dcf1c1e78d9" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">depth</ref>());</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1ab0804c69b8e30803894db7667d1093b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1ab0804c69b8e30803894db7667d1093b3" kindref="member">size</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>total_size<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(this-&gt;<ref refid="structfancyqlone_1_1FanStorage__t_1a9c7a03c819601e2c5aff9e80b15fe251" kindref="member">branches</ref>.size());</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_size;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="193" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a0f43051311173a151331dd0e85193e51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a0f43051311173a151331dd0e85193e51" kindref="member">clone</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vf7b171bffc760673034c5ba1d9d8bf97_1a9214c4a780668c8d80e45806a64cda3f" kindref="member">storage_t</ref>(<ref refid="structfancyqlone_1_1FanStorage__t_1ae3f41fdfa5a4f6d746077d04dbca5f04" kindref="member">store_t::clone</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="195" refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1a9910164b52784efac2582dd8a616f322" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908_1a9910164b52784efac2582dd8a616f322" kindref="member">warm_start_t</ref><sp/>=<sp/><ref refid="group__topic-optimization-solvers-ocp_1ga90c820ba89c66a51ee3e57a7ebf796d2" kindref="member">FanWarmStartingStrategy</ref>;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="197" refid="namespacefancyqlone_1_1qpalm_1_1detail" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacefancyqlone_1_1qpalm_1_1detail" kindref="compound">detail</ref><sp/>{</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;index_t<sp/>VL,<sp/>StorageOrder<sp/>DefaultOrder,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>LinearSolver&gt;</highlight></codeline>
+<codeline lineno="200" refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type_3_01CyQPALMBackend_3_01VL_00_01Defaubd648f5f0e10a35ee91edfe54afecd28" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type" kindref="compound">backend_stats_type</ref>&lt;<ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt;VL,<sp/>DefaultOrder,<sp/>LinearSolver&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="201" refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type_3_01CyQPALMBackend_3_01VL_00_01Defaubd648f5f0e10a35ee91edfe54afecd28_1afb46dddb42347b2306a8aa45affb6f53" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type_3_01CyQPALMBackend_3_01VL_00_01Defaubd648f5f0e10a35ee91edfe54afecd28_1afb46dddb42347b2306a8aa45affb6f53" kindref="member">type</ref><sp/>=<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats" kindref="compound">CyQPALMBackendStats</ref>;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="206"><highlight class="comment">///<sp/>@addtogroup<sp/>topic-optimization-solvers-ocp</highlight></codeline>
+<codeline lineno="207"><highlight class="comment">///<sp/>@{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>VL,<sp/><ref refid="group__linalg__views_1gac0a39236f11af6725f2dc1d339c95bae" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">StorageOrder</ref><sp/>DefaultOrder<sp/>=<sp/>StorageOrder::ColMajor,</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LinearSolver<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;</ref>&gt;</highlight></codeline>
+<codeline lineno="211" refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a079000ac5b4001aa5ba1af80aa6552d1" kindref="member">unique_CyQPALMBackend</ref><sp/>:<sp/>std::unique_ptr&lt;CyQPALMBackend&lt;VL,<sp/>DefaultOrder,<sp/>LinearSolver&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="212" refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a079000ac5b4001aa5ba1af80aa6552d1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a079000ac5b4001aa5ba1af80aa6552d1" kindref="member">unique_CyQPALMBackend</ref>()<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="213" refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1ac498faf5c77427b13ba76d7dea8c9e64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1ac498faf5c77427b13ba76d7dea8c9e64" kindref="member">unique_CyQPALMBackend</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a079000ac5b4001aa5ba1af80aa6552d1" kindref="member">unique_CyQPALMBackend</ref><sp/>&amp;&amp;)<sp/>noexcept<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="214" refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a47068fb7be83eb7606a2921c7c1e3aaf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a079000ac5b4001aa5ba1af80aa6552d1" kindref="member">unique_CyQPALMBackend</ref><sp/>&amp;operator=(<ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a079000ac5b4001aa5ba1af80aa6552d1" kindref="member">unique_CyQPALMBackend</ref><sp/>&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="215" refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a02e6d84ba0e5a086cdce17700fc6247d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>~<ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a079000ac5b4001aa5ba1af80aa6552d1" kindref="member">unique_CyQPALMBackend</ref>();</highlight></codeline>
+<codeline lineno="216" refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a8681f9e22c7cdd40ad535b73256ce277" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend_1a079000ac5b4001aa5ba1af80aa6552d1" kindref="member">unique_CyQPALMBackend</ref>(</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::unique_ptr&lt;<ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt;VL,<sp/>DefaultOrder,<sp/>LinearSolver&gt;&gt;<sp/>&amp;&amp;o)<sp/>noexcept</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>std::unique_ptr&lt;<ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend</ref>&lt;VL,<sp/>DefaultOrder,<sp/>LinearSolver&gt;&gt;{std::move(o)}<sp/>{}</highlight></codeline>
+<codeline lineno="219"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;<ref refid="example_8cpp_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>VL,<sp/>StorageOrder<sp/>DefaultOrder<sp/>=<sp/>StorageOrder::ColMajor,</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LinearSolver<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;</ref>&gt;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal">unique_CyQPALMBackend&lt;VL,<sp/>DefaultOrder,<sp/>LinearSolver&gt;</highlight></codeline>
+<codeline lineno="224"><highlight class="normal">make_cyqpalm_backend(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CycloneBackendTraits&lt;LinearSolver&gt;::CStorage<sp/>&amp;ocp,</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CyqloneData<sp/>data,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>CyQPALMBackendSettings<sp/>&amp;settings);</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;<ref refid="example_8cpp_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>VL,<sp/>StorageOrder<sp/>DefaultOrder<sp/>=<sp/>StorageOrder::ColMajor,</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LinearSolver<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;</ref>&gt;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update_cyqpalm_backend(CyQPALMBackend&lt;VL,<sp/>DefaultOrder,<sp/>LinearSolver&gt;<sp/>&amp;backend,</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CycloneBackendTraits&lt;LinearSolver&gt;::CStorage<sp/>&amp;ocp);</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;<ref refid="example_8cpp_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>VL,<sp/>StorageOrder<sp/>DefaultOrder<sp/>=<sp/>StorageOrder::ColMajor,</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">LinearSolver<sp/>=<sp/><ref refid="structfancyqlone_1_1CyqloneSolver" kindref="compound">fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;</ref>&gt;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update_cyqpalm_backend(CyQPALMBackend&lt;VL,<sp/>DefaultOrder,<sp/>LinearSolver&gt;<sp/>&amp;backend,</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CycloneBackendTraits&lt;LinearSolver&gt;::OCPStorage<sp/>&amp;ocp);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="237"><highlight class="comment">///<sp/>@}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;index_t<sp/>VL,<sp/>StorageOrder<sp/>DefaultOrder,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>LinearSolver&gt;</highlight></codeline>
+<codeline lineno="240" refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01unique__CyQPALMBackend_3_01VL_00_01Defa306830a29b74570e9069a8a538af8ff0" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__type" kindref="compound">detail::backend_type</ref>&lt;<ref refid="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend" kindref="compound">unique_CyQPALMBackend</ref>&lt;VL,<sp/>DefaultOrder,<sp/>LinearSolver&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="241" refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01unique__CyQPALMBackend_3_01VL_00_01Defa306830a29b74570e9069a8a538af8ff0_1ae29114b42ac1827184b3a69ceaeaa229" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01unique__CyQPALMBackend_3_01VL_00_01Defa306830a29b74570e9069a8a538af8ff0_1ae29114b42ac1827184b3a69ceaeaa229" kindref="member">type</ref><sp/>=<sp/><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend" kindref="compound">CyQPALMBackend&lt;VL, DefaultOrder, LinearSolver&gt;</ref>;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>FANCYQLONE_NS(fancyqlone::qpalm)</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1LineSearchSettings" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::LineSearchSettings</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1LineSearchSettings_1acf1045e3ec5821846ff4ab070c6b12ff" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::LineSearchSettings::find_smallest_breakpoint_first</definition>
+        <argsstring></argsstring>
+        <name>find_smallest_breakpoint_first</name>
+        <qualifiedname>fancyqlone::qpalm::LineSearchSettings::find_smallest_breakpoint_first</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp" line="33" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::LineSearchSettings</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1LineSearchSettings"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp" line="32" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp" bodystart="32" bodyend="34"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1LineSearchSettings_1acf1045e3ec5821846ff4ab070c6b12ff" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::LineSearchSettings</scope><name>find_smallest_breakpoint_first</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

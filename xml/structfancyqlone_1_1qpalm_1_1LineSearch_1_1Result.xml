@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1LineSearch_1_1Result" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::LineSearch::Result</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1LineSearch_1_1Result_1a6b8fa265b6f62db063c06988c5a30a42" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::LineSearch&lt; Vec &gt;::Result::τ</definition>
+        <argsstring></argsstring>
+        <name>τ</name>
+        <qualifiedname>fancyqlone::qpalm::LineSearch::Result::τ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp" line="43" column="16" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1LineSearch_1_1Result_1a87f6eb4c850974d1f6633d665893c5eb" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t fancyqlone::qpalm::LineSearch&lt; Vec &gt;::Result::index</definition>
+        <argsstring></argsstring>
+        <name>index</name>
+        <qualifiedname>fancyqlone::qpalm::LineSearch::Result::index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp" line="44" column="16" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::LineSearch&lt; Vec &gt;::Result</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1LineSearch_1_1Result"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp" line="42" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/linesearch.tpp" bodystart="42" bodyend="45"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1LineSearch_1_1Result_1a6b8fa265b6f62db063c06988c5a30a42" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::LineSearch::Result</scope><name>τ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1LineSearch_1_1Result_1a87f6eb4c850974d1f6633d665893c5eb" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::LineSearch::Result</scope><name>index</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

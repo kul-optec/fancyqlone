@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classfancyqlone_1_1TreeBarrier_1_1arrival__token" kind="class" language="C++" prot="public">
+    <compoundname>fancyqlone::TreeBarrier::arrival_token</compoundname>
+    <derivedcompoundref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed" prot="public" virt="non-virtual">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token_typed&lt; T &gt;</derivedcompoundref>
+    <includes refid="barrier_8hpp" local="no">fancyqlone/barrier.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1af574588108b5b32e2a2b23e75bbb1430" prot="private" static="no" mutable="no">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1a8aa0a8c6ade3525e99efb950bd72139e" kindref="member">BarrierPhase</ref></type>
+        <definition>BarrierPhase fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::phase</definition>
+        <argsstring></argsstring>
+        <name>phase</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrival_token::phase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="64" column="22" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="64" bodyend="-1"/>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a6a6d1655e963af7263e87699d6322310">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" compoundref="barrier_8hpp" startline="65" endline="65">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a19a7a8bf066a78622146a4e2c7b5cf6c">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1ab390272000928793dab646b3cc0d3351" compoundref="barrier_8hpp" startline="73" endline="73">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::get</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1aa5209b893098f1898a375e4b26ac6675">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::operator=</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1acc081f926971e20704a1fc53035bbf16">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1ad0e531e25907f5cd748d921583fbe122" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::TreeBarrier</definition>
+        <argsstring></argsstring>
+        <name>TreeBarrier</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrival_token::TreeBarrier</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="66" column="16" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</definition>
+        <argsstring>(BarrierPhase phase)</argsstring>
+        <name>arrival_token</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrival_token::arrival_token</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1a8aa0a8c6ade3525e99efb950bd72139e" kindref="member">BarrierPhase</ref></type>
+          <declname>phase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="65" column="18" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="65" bodyend="65"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1af574588108b5b32e2a2b23e75bbb1430" compoundref="barrier_8hpp" startline="64">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::phase</references>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a6a6d1655e963af7263e87699d6322310">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a19a7a8bf066a78622146a4e2c7b5cf6c">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1aa5209b893098f1898a375e4b26ac6675">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::operator=</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1acc081f926971e20704a1fc53035bbf16">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::operator=</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a19a7a8bf066a78622146a4e2c7b5cf6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</definition>
+        <argsstring>(const arrival_token &amp;phase)=delete</argsstring>
+        <name>arrival_token</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrival_token::arrival_token</qualifiedname>
+        <param>
+          <type>const arrival_token &amp;</type>
+          <declname>phase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="69" column="9"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" compoundref="barrier_8hpp" startline="65" endline="65">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</references>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1af574588108b5b32e2a2b23e75bbb1430" compoundref="barrier_8hpp" startline="64">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::phase</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a6a6d1655e963af7263e87699d6322310" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</definition>
+        <argsstring>(arrival_token &amp;&amp;phase)=default</argsstring>
+        <name>arrival_token</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrival_token::arrival_token</qualifiedname>
+        <param>
+          <type>arrival_token &amp;&amp;</type>
+          <declname>phase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="70" column="9"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" compoundref="barrier_8hpp" startline="65" endline="65">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</references>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1af574588108b5b32e2a2b23e75bbb1430" compoundref="barrier_8hpp" startline="64">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::phase</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1acc081f926971e20704a1fc53035bbf16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" kindref="member">arrival_token</ref> &amp;</type>
+        <definition>arrival_token &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::operator=</definition>
+        <argsstring>(const arrival_token &amp;phase)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrival_token::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" kindref="member">arrival_token</ref> &amp;</type>
+          <declname>phase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="71" column="23"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" compoundref="barrier_8hpp" startline="65" endline="65">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</references>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1af574588108b5b32e2a2b23e75bbb1430" compoundref="barrier_8hpp" startline="64">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::phase</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1aa5209b893098f1898a375e4b26ac6675" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" kindref="member">arrival_token</ref> &amp;</type>
+        <definition>arrival_token &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::operator=</definition>
+        <argsstring>(arrival_token &amp;&amp;phase)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrival_token::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" kindref="member">arrival_token</ref> &amp;&amp;</type>
+          <declname>phase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="72" column="23"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" compoundref="barrier_8hpp" startline="65" endline="65">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::arrival_token</references>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1af574588108b5b32e2a2b23e75bbb1430" compoundref="barrier_8hpp" startline="64">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::phase</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1ab390272000928793dab646b3cc0d3351" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1a8aa0a8c6ade3525e99efb950bd72139e" kindref="member">BarrierPhase</ref></type>
+        <definition>BarrierPhase fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::get</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrival_token::get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="73" column="22" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="73" bodyend="73"/>
+        <references refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1af574588108b5b32e2a2b23e75bbb1430" compoundref="barrier_8hpp" startline="64">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token::phase</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token_typed&lt; T &gt;</label>
+        <link refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token</label>
+        <link refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrival_token</label>
+        <link refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="63" column="5" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="63" bodyend="74"/>
+    <listofallmembers>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a4c5ecb9922bfa679e2a5c4fa9ea780bc" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier::arrival_token</scope><name>arrival_token</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a19a7a8bf066a78622146a4e2c7b5cf6c" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::arrival_token</scope><name>arrival_token</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1a6a6d1655e963af7263e87699d6322310" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::arrival_token</scope><name>arrival_token</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1ab390272000928793dab646b3cc0d3351" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::arrival_token</scope><name>get</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1acc081f926971e20704a1fc53035bbf16" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::arrival_token</scope><name>operator=</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1aa5209b893098f1898a375e4b26ac6675" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::arrival_token</scope><name>operator=</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1af574588108b5b32e2a2b23e75bbb1430" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier::arrival_token</scope><name>phase</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token_1ad0e531e25907f5cd748d921583fbe122" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier::arrival_token</scope><name>TreeBarrier</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

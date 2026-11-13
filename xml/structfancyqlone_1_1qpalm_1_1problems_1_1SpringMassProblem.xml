@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::problems::SpringMassProblem</compoundname>
+    <includes refid="spring-mass_8hpp" local="no">fancyqlone/fancyqpalm/example-problems/spring-mass.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem_1ab9cecf9882fcb9668cac94b1632e4bd9" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1LinearOCPStorage" kindref="compound">LinearOCPStorage</ref></type>
+        <definition>LinearOCPStorage fancyqlone::qpalm::problems::SpringMassProblem::ocp</definition>
+        <argsstring></argsstring>
+        <name>ocp</name>
+        <qualifiedname>fancyqlone::qpalm::problems::SpringMassProblem::ocp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/spring-mass.hpp" line="132" column="22" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/spring-mass.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem_1a5dbff369282a38338509c0c4cae8ff2c" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt;real_t&gt; fancyqlone::qpalm::problems::SpringMassProblem::ref</definition>
+        <argsstring></argsstring>
+        <name>ref</name>
+        <qualifiedname>fancyqlone::qpalm::problems::SpringMassProblem::ref</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/spring-mass.hpp" line="133" column="17" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/spring-mass.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>fancyqlone::LinearOCPStorage</label>
+        <link refid="structfancyqlone_1_1LinearOCPStorage"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+dim</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+storage</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fancyqlone::OCPDim</label>
+        <link refid="structfancyqlone_1_1OCPDim"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::qpalm::problems::SpringMassProblem</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+ocp</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+ref</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; real_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/spring-mass.hpp" line="131" column="1" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/spring-mass.hpp" bodystart="131" bodyend="134"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem_1ab9cecf9882fcb9668cac94b1632e4bd9" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::SpringMassProblem</scope><name>ocp</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem_1a5dbff369282a38338509c0c4cae8ff2c" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::SpringMassProblem</scope><name>ref</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

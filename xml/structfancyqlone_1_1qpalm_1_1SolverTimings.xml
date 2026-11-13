@@ -1,0 +1,336 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1SolverTimings" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::SolverTimings</compoundname>
+    <includes refid="solver_8hpp" local="no">fancyqlone/fancyqpalm/solver.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a5c07e1d4ce62c59236c7b530fb9dc731" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::total</definition>
+        <argsstring></argsstring>
+        <name>total</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::total</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="20" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1af1ab57cceb5b82ef4da881a72617c4af" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::scaling</definition>
+        <argsstring></argsstring>
+        <name>scaling</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::scaling</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="21" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1adef8f9e4303820edf1a9ea9f9bcbd242" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::line_search</definition>
+        <argsstring></argsstring>
+        <name>line_search</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::line_search</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="22" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="22" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a120087a1bc52b1502b2785113309e3a8" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::recompute_inner</definition>
+        <argsstring></argsstring>
+        <name>recompute_inner</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::recompute_inner</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="23" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="23" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a4d3db5ec8ef938d1beb2c803543485dd" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::recompute_outer</definition>
+        <argsstring></argsstring>
+        <name>recompute_outer</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::recompute_outer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="24" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="24" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a6a837b0ff15ecc6da5554c08edd5826b" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::mat_vec_M</definition>
+        <argsstring></argsstring>
+        <name>mat_vec_M</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::mat_vec_M</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="25" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="25" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a67dd079c50a37b031655d13fc0c02e9f" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::mat_vec_MT</definition>
+        <argsstring></argsstring>
+        <name>mat_vec_MT</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::mat_vec_MT</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="26" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="26" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1ad095aa1ab8c1698bdc197be1c6935d3c" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::mat_vec_A</definition>
+        <argsstring></argsstring>
+        <name>mat_vec_A</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::mat_vec_A</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="27" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="27" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1afa360ccb3f64be02feb26afc7d707e2f" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::mat_vec_AT</definition>
+        <argsstring></argsstring>
+        <name>mat_vec_AT</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::mat_vec_AT</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="28" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="28" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a0288d608b2f61578facd60cbd66293d4" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::mat_vec_Q</definition>
+        <argsstring></argsstring>
+        <name>mat_vec_Q</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::mat_vec_Q</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="29" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a570f329f65f40d8462c3d46cb0a7f1b6" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::active_set_change</definition>
+        <argsstring></argsstring>
+        <name>active_set_change</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::active_set_change</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="30" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="30" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a03a9a4399a51882b2ca13f9a2a81cb11" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::update_penalty</definition>
+        <argsstring></argsstring>
+        <name>update_penalty</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::update_penalty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="31" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="31" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a8775e3cc7d961157cc55db4dec49d58e" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::update_regularization</definition>
+        <argsstring></argsstring>
+        <name>update_regularization</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::update_regularization</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="32" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="32" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a1653b97c4af6f88fd517bae229222d5c" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::boost_regularization</definition>
+        <argsstring></argsstring>
+        <name>boost_regularization</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::boost_regularization</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="33" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="33" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1ad820174663a5e1b6e1d97c165a96c218" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>DefaultTimings fancyqlone::qpalm::SolverTimings::solve</definition>
+        <argsstring></argsstring>
+        <name>solve</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::solve</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="34" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="34" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1aee79e3c791cc4f3ebb3ccda8372dc274" prot="public" static="no" mutable="no">
+        <type>std::map&lt; std::string, <ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref> &gt;</type>
+        <definition>std::map&lt;std::string, DefaultTimings&gt; fancyqlone::qpalm::SolverTimings::backend</definition>
+        <argsstring></argsstring>
+        <name>backend</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::backend</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="35" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="35" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="related">
+      <memberdef kind="function" id="structfancyqlone_1_1qpalm_1_1SolverTimings_1a3177822c4e8bd78867cb8736f643e562" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::ostream &amp;</type>
+        <definition>std::ostream &amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;, const SolverTimings &amp;)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <qualifiedname>fancyqlone::qpalm::SolverTimings::operator&lt;&lt;</qualifiedname>
+        <param>
+          <type>std::ostream &amp;</type>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1SolverTimings" kindref="compound">SolverTimings</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="39" column="2" declfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" declline="39" declcolumn="2"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>batmat::DefaultTimings</label>
+        <link refid="namespacebatmat" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::qpalm::SolverTimings</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1SolverTimings"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+active_set_change</edgelabel>
+          <edgelabel>+boost_regularization</edgelabel>
+          <edgelabel>+line_search</edgelabel>
+          <edgelabel>+mat_vec_A</edgelabel>
+          <edgelabel>+mat_vec_AT</edgelabel>
+          <edgelabel>+mat_vec_M</edgelabel>
+          <edgelabel>+mat_vec_MT</edgelabel>
+          <edgelabel>+mat_vec_Q</edgelabel>
+          <edgelabel>+recompute_inner</edgelabel>
+          <edgelabel>+recompute_outer</edgelabel>
+          <edgelabel>  ...</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+backend</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="3">
+        <label>std::map&lt; std::string, batmat::DefaultTimings &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+keys</edgelabel>
+        </childnode>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::string</label>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="19" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="19" bodyend="36"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a570f329f65f40d8462c3d46cb0a7f1b6" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>active_set_change</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1aee79e3c791cc4f3ebb3ccda8372dc274" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>backend</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a1653b97c4af6f88fd517bae229222d5c" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>boost_regularization</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1adef8f9e4303820edf1a9ea9f9bcbd242" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>line_search</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1ad095aa1ab8c1698bdc197be1c6935d3c" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>mat_vec_A</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1afa360ccb3f64be02feb26afc7d707e2f" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>mat_vec_AT</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a6a837b0ff15ecc6da5554c08edd5826b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>mat_vec_M</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a67dd079c50a37b031655d13fc0c02e9f" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>mat_vec_MT</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a0288d608b2f61578facd60cbd66293d4" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>mat_vec_Q</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a3177822c4e8bd78867cb8736f643e562" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>operator&lt;&lt;</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a120087a1bc52b1502b2785113309e3a8" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>recompute_inner</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a4d3db5ec8ef938d1beb2c803543485dd" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>recompute_outer</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1af1ab57cceb5b82ef4da881a72617c4af" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>scaling</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1ad820174663a5e1b6e1d97c165a96c218" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>solve</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a5c07e1d4ce62c59236c7b530fb9dc731" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>total</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a03a9a4399a51882b2ca13f9a2a81cb11" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>update_penalty</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1SolverTimings_1a8775e3cc7d961157cc55db4dec49d58e" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::SolverTimings</scope><name>update_regularization</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

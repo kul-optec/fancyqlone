@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="detailed-stats_8hpp" kind="file" language="C++">
+    <compoundname>detailed-stats.hpp</compoundname>
+    <includes refid="config_8hpp" local="no">fancyqlone/config.hpp</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="solver_8tpp" local="no">src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp</includedby>
+    <includedby refid="solver_8hpp" local="no">src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>fancyqlone/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp</label>
+        <link refid="detailed-stats_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>batmat/config.hpp</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="5">
+        <label>benchmarks/cyqpalm/spring-mass.cpp</label>
+        <link refid="benchmarks_2cyqpalm_2spring-mass_8cpp"/>
+      </node>
+      <node id="8">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/ineq-constr.tpp</label>
+        <link refid="ineq-constr_8tpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linalg.tpp</label>
+        <link refid="linalg_8tpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linesearch.tpp</label>
+        <link refid="backends_2backend-fancyqlone_2linesearch_8tpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/solve.tpp</label>
+        <link refid="solve_8tpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</label>
+        <link refid="ocp-backend-fancyqlone_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp</label>
+        <link refid="ocp-backend-fancyqlone_8tpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp</label>
+        <link refid="detailed-stats_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/solver.tpp</label>
+        <link refid="solver_8tpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp</label>
+        <link refid="solver_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/fancyqpalm/src/ocp-backend-cyqlone.cpp</label>
+        <link refid="ocp-backend-cyqlone_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1DetailedStats" prot="public">fancyqlone::qpalm::DetailedStats</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry" prot="public">fancyqlone::qpalm::DetailedStats::Entry</innerclass>
+    <innernamespace refid="namespacefancyqlone">fancyqlone</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm">fancyqlone::qpalm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="config_8hpp" kindref="compound">fancyqlone/config.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacefancyqlone_1_1qpalm" kindref="compound">fancyqlone::qpalm</ref><sp/>{</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment"></highlight></codeline>
+<codeline lineno="8"><highlight class="comment">///<sp/>@ingroup<sp/>topic-optimization-solvers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="structfancyqlone_1_1qpalm_1_1DetailedStats" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats" kindref="compound">DetailedStats</ref><sp/>{</highlight></codeline>
+<codeline lineno="10" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4" kindref="member">ExitReason</ref><sp/>{</highlight></codeline>
+<codeline lineno="11" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a1e09cea3694db6fc5d651b9bda0cc725" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a1e09cea3694db6fc5d651b9bda0cc725" kindref="member">Busy</ref>,</highlight></codeline>
+<codeline lineno="12" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a2a2d0f9274e02f2638d78d1c8d7090ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a2a2d0f9274e02f2638d78d1c8d7090ba" kindref="member">Converged</ref>,</highlight></codeline>
+<codeline lineno="13" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a43232261d9812be7067f2526855cae80" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a43232261d9812be7067f2526855cae80" kindref="member">NoActiveSetChange</ref>,</highlight></codeline>
+<codeline lineno="14" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a0ff02ea9e82a89d4b223bb9d03d1772a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a0ff02ea9e82a89d4b223bb9d03d1772a" kindref="member">Fail</ref>,</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="16" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry" kindref="compound">Entry</ref><sp/>{</highlight></codeline>
+<codeline lineno="17" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a7f71e4f351ef7fde7850c9a044a52a0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1af9e7927ca67506604ec4d987cebcdc6a" kindref="member">outer_iter</ref>,<sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a7f71e4f351ef7fde7850c9a044a52a0f" kindref="member">inner_iter</ref>;</highlight></codeline>
+<codeline lineno="18" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1ad371dfc5b3db38e0f064b77f8b6ea49b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1ac81e537a835b841242fed8d6f23f9372" kindref="member">stationarity</ref>,<sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a19ba00696ef6c5dcc6a2ae4ba5b5f70e" kindref="member">ineq_constr_viol</ref>,<sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1ad371dfc5b3db38e0f064b77f8b6ea49b" kindref="member">eq_constr_viol</ref>;</highlight></codeline>
+<codeline lineno="19" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a228d8e8caa7498a92cf256bb2e1bc6f9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a228d8e8caa7498a92cf256bb2e1bc6f9" kindref="member">linesearch_step_size</ref>;</highlight></codeline>
+<codeline lineno="20" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1acb8999d0e42de4749c705a38c8edca75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1acb8999d0e42de4749c705a38c8edca75" kindref="member">linesearch_breakpoint_index</ref>;</highlight></codeline>
+<codeline lineno="21" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1abee26b75e55cd0b7e0b38b39ca186e8b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1abee26b75e55cd0b7e0b38b39ca186e8b" kindref="member">num_active_constr</ref>,<sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1ad0e2e847f965f40c70cc5a1a6497fe3a" kindref="member">num_changing_constr</ref>;</highlight></codeline>
+<codeline lineno="22" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1adce842b5223bb4ec4c1d3fd61af2f0f4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4" kindref="member">ExitReason</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1adce842b5223bb4ec4c1d3fd61af2f0f4" kindref="member">exit_reason</ref>;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="24" refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1af98782913e11f16d892416cdeb033055" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;Entry&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1af98782913e11f16d892416cdeb033055" kindref="member">entries</ref>;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fancyqlone::qpalm</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp"/>
+  </compounddef>
+</doxygen>

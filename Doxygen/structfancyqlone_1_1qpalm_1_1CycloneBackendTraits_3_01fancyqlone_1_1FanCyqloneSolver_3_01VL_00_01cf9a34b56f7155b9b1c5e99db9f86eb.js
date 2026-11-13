@@ -1,0 +1,12 @@
+var structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb =
+[
+    [ "storage_t", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb.html", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_06298f63ebf819c6f4e03a5867ab258eb" ],
+    [ "OCP_t", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb.html#ad02e72bc31e0f49dace1aafd2876a2a2", null ],
+    [ "simd", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb.html#a4e444c87dcbe6e8be7efd65c46f5e5e1", null ],
+    [ "CStorage", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb.html#abc1b71927c79bd9817ba08b4764e7666", null ],
+    [ "OCPStorage", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb.html#a99188b308711fd07e305e8b4aa589f07", null ],
+    [ "store_t", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb.html#a83320b8c1f866583604e51f1a0f1ca70", null ],
+    [ "warm_start_t", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb.html#a4539f7905e6826d72cbe0e3a84de9b4e", null ],
+    [ "supports_factorization_updates", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb.html#a20fd14b1fe5833bee51ce28f3d6d5a89", null ],
+    [ "requires_external_schur_solve", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb.html#a6619875c2d09d9ae4cb43b7d2a8781b9", null ]
+];

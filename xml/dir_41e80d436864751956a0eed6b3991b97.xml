@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_41e80d436864751956a0eed6b3991b97" kind="dir">
+    <compoundname>src/example-problems/centroidal-quadruped</compoundname>
+    <innerfile refid="centroidal-quadruped_8cpp">centroidal-quadruped.cpp</innerfile>
+    <innerfile refid="centroidal-quadruped_8hpp">centroidal-quadruped.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/example-problems/centroidal-quadruped/"/>
+  </compounddef>
+</doxygen>

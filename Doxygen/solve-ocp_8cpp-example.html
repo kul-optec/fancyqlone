@@ -1,0 +1,370 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: solve-ocp.cpp</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('solve-ocp_8cpp-example.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">solve-ocp.cpp</div></div>
+</div><!--header-->
+<div class="contents">
+<dl class="section user"><dt>Example demonstrating how to solve an optimal control problem using Cyqlone.</dt><dd></dd></dl>
+<p>This example generates a random optimal control problem (without inequality constraints), and solves the resulting KKT system using Cyqlone.</p>
+<div class="fragment"><div class="line"><span class="lineno">    1</span><span class="preprocessor">#include &lt;<a class="codeRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/dtypes_8hpp.html">batmat/dtypes.hpp</a>&gt;</span></div>
+<div class="line"><span class="lineno">    2</span><span class="preprocessor">#include &lt;<a class="code" href="cyqlone-storage_8hpp.html">fancyqlone/cyqlone/cyqlone-storage.hpp</a>&gt;</span></div>
+<div class="line"><span class="lineno">    3</span><span class="preprocessor">#include &lt;<a class="code" href="cyqlone_8hpp.html">fancyqlone/cyqlone/cyqlone.hpp</a>&gt;</span></div>
+<div class="line"><span class="lineno">    4</span><span class="preprocessor">#include &lt;<a class="code" href="linalg_8hpp.html">fancyqlone/linalg.hpp</a>&gt;</span></div>
+<div class="line"><span class="lineno">    5</span><span class="preprocessor">#include &lt;<a class="code" href="ocp_8hpp.html">fancyqlone/ocp.hpp</a>&gt;</span></div>
+<div class="line"><span class="lineno">    6</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="lineno">    7</span><span class="preprocessor">#include &lt;print&gt;</span></div>
+<div class="line"><span class="lineno">    8</span><span class="preprocessor">#include &lt;random&gt;</span></div>
+<div class="line"><span class="lineno">    9</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><span class="lineno">   10</span> </div>
+<div class="line"><span class="lineno">   11</span><span class="preprocessor">#if CYQLONE_WITH_MATIO</span></div>
+<div class="line"><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</span></div>
+<div class="line"><span class="lineno">   13</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   14</span> </div>
+<div class="line"><span class="lineno">   15</span><span class="keyword">using </span><a id="_a0" name="_a0"></a><a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">fancyqlone::index_t</a>; <span class="comment">// Integer type for indices</span></div>
+<div class="line"><span class="lineno">   16</span><span class="keyword">using </span><a id="_a1" name="_a1"></a><a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">fancyqlone::real_t</a>;  <span class="comment">// Floating-point type for scalars</span></div>
+<div class="line"><span class="lineno">   17</span><span class="keyword">constexpr</span> <a id="_a2" name="_a2"></a><a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> <a id="_a3" name="_a3"></a><a class="code hl_variable" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a> =      <span class="comment">// Vector length to use</span></div>
+<div class="line"><span class="lineno">   18</span>    <a id="_a4" name="_a4"></a><a class="code hl_variableRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1types.html#aae92c3201f735f2fefabf1173b89d79b">batmat::types::vl_at_most&lt;real_t, 4&gt;</a>;</div>
+<div class="line"><span class="lineno">   19</span> </div>
+<div class="line"><span class="lineno">   20</span><span class="comment">// Generate a random linear-quadratic OCP.</span></div>
+<div class="line"><span class="lineno">   21</span><a id="_a5" name="_a5"></a><a class="code hl_struct" href="structfancyqlone_1_1LinearOCPStorage.html">fancyqlone::LinearOCPStorage</a> init_ocp(<a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> N, <a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> nx, <a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> nu) {</div>
+<div class="line"><span class="lineno">   22</span>    <span class="keyword">using </span><a id="_a6" name="_a6"></a><a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#gafc9f5555ed4639e0e5ad0e552f9717e4">batmat::linalg::tril</a>;</div>
+<div class="line"><span class="lineno">   23</span>    <span class="keyword">using </span><a id="_a7" name="_a7"></a><a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#gaf6d9519ee15d51a0ba7243e640d8be71">batmat::linalg::triu</a>;</div>
+<div class="line"><span class="lineno">   24</span> </div>
+<div class="line"><span class="lineno">   25</span>    std::mt19937 rng{12345};</div>
+<div class="line"><span class="lineno">   26</span>    std::uniform_real_distribution&lt;real_t&gt; uni_dist{-1.2, 1.2};</div>
+<div class="line"><span class="lineno">   27</span>    <span class="keyword">auto</span> uni_gen = [&amp;] { <span class="keywordflow">return</span> uni_dist(rng); };</div>
+<div class="line"><span class="lineno">   28</span> </div>
+<div class="line"><span class="lineno">   29</span>    <a class="code hl_struct" href="structfancyqlone_1_1LinearOCPStorage.html">fancyqlone::LinearOCPStorage</a> ocp{.dim{.N_horiz = N, .nx = nx, .nu = nu, .ny = 0}};</div>
+<div class="line"><span class="lineno">   30</span>    <span class="keyword">auto</span> diag = 2 * <span class="keyword">static_cast&lt;</span><a id="_a8" name="_a8"></a><a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a31461fabd319f19bc15256fde4d75495">real_t</a><span class="keyword">&gt;</span>(nx + nu);</div>
+<div class="line"><span class="lineno">   31</span>    ocp.<a id="a9" name="a9"></a><a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#a8aea35b5a5e016e82ec0f62bc9202c8a">b</a>(0).generate(uni_gen); <span class="comment">// initial state x(0)</span></div>
+<div class="line"><span class="lineno">   32</span>    <span class="keywordflow">for</span> (<a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> j = 0; j &lt; N; ++j) {</div>
+<div class="line"><span class="lineno">   33</span>        ocp.<a id="a10" name="a10"></a><a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#aaea931c3de39b21c1adc2adda6927391">A</a>(j).generate(uni_gen);     <span class="comment">// Dynamics Jacobian df/dx</span></div>
+<div class="line"><span class="lineno">   34</span>        ocp.<a id="a11" name="a11"></a><a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#a069e76a6c76bd62ab2eb0c5546f74897">B</a>(j).generate(uni_gen);     <span class="comment">// Dynamics Jacobian df/du</span></div>
+<div class="line"><span class="lineno">   35</span>        ocp.<a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#a8aea35b5a5e016e82ec0f62bc9202c8a">b</a>(j + 1).generate(uni_gen); <span class="comment">// Dynamics constant term f(j)</span></div>
+<div class="line"><span class="lineno">   36</span>        ocp.<a id="a12" name="a12"></a><a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#aaced9f219b04dc25c0817bc04b9890d9">Q</a>(j).generate(uni_gen);     <span class="comment">// Cost Hessian d²ℓ/dx²</span></div>
+<div class="line"><span class="lineno">   37</span>        ocp.<a id="a13" name="a13"></a><a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#ab0b91b1dac835a47452d45c0d2d9f1ee">R</a>(j).generate(uni_gen);     <span class="comment">// Cost Hessian d²ℓ/du²</span></div>
+<div class="line"><span class="lineno">   38</span>        ocp.<a id="a14" name="a14"></a><a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#a46055cc9e375ddd69ea173667928d52a">S</a>(j).generate(uni_gen);     <span class="comment">// Cost Hessian d²ℓ/dxdu</span></div>
+<div class="line"><span class="lineno">   39</span>        ocp.<a id="a15" name="a15"></a><a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#ab03b4cc3577893f2c19db9fd2901ebab">q</a>(j).generate(uni_gen);     <span class="comment">// Cost gradient dℓ/dx</span></div>
+<div class="line"><span class="lineno">   40</span>        ocp.<a id="a16" name="a16"></a><a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#ae137ef05e092ee1a8b81e155c520c429">r</a>(j).generate(uni_gen);     <span class="comment">// Cost gradient dℓ/du</span></div>
+<div class="line"><span class="lineno">   41</span>        ocp.<a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#aaced9f219b04dc25c0817bc04b9890d9">Q</a>(j).add_to_diagonal(diag); <span class="comment">// ensure positive definiteness</span></div>
+<div class="line"><span class="lineno">   42</span>        ocp.<a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#ab0b91b1dac835a47452d45c0d2d9f1ee">R</a>(j).add_to_diagonal(diag);</div>
+<div class="line"><span class="lineno">   43</span>        <a id="a17" name="a17"></a><a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#ga9df61b993f7e79ad21eddb76b4c2089e">copy</a>(<a id="a18" name="a18"></a><a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#gafc9f5555ed4639e0e5ad0e552f9717e4">tril</a>(ocp.<a id="a19" name="a19"></a><a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#ac9ffaec3d88ad5fe53e953c4a97fcc29">H</a>(j)).transposed(), <a id="_a20" name="_a20"></a><a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#gaf6d9519ee15d51a0ba7243e640d8be71">triu</a>(ocp.<a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#ac9ffaec3d88ad5fe53e953c4a97fcc29">H</a>(j))); <span class="comment">// ensure symmetry of cost Hessian</span></div>
+<div class="line"><span class="lineno">   44</span>    }</div>
+<div class="line"><span class="lineno">   45</span>    ocp.<a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#aaced9f219b04dc25c0817bc04b9890d9">Q</a>(N).generate(uni_gen); <span class="comment">// Terminal cost Hessian d²ℓ_N(x)/dx²</span></div>
+<div class="line"><span class="lineno">   46</span>    ocp.<a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#ab03b4cc3577893f2c19db9fd2901ebab">q</a>(N).generate(uni_gen);</div>
+<div class="line"><span class="lineno">   47</span>    ocp.<a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#aaced9f219b04dc25c0817bc04b9890d9">Q</a>(N).add_to_diagonal(diag);</div>
+<div class="line"><span class="lineno">   48</span>    <a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#ga9df61b993f7e79ad21eddb76b4c2089e">copy</a>(<a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#gafc9f5555ed4639e0e5ad0e552f9717e4">tril</a>(ocp.<a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#aaced9f219b04dc25c0817bc04b9890d9">Q</a>(N)).transposed(), <a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#gaf6d9519ee15d51a0ba7243e640d8be71">triu</a>(ocp.<a class="code hl_function" href="structfancyqlone_1_1LinearOCPStorage.html#aaced9f219b04dc25c0817bc04b9890d9">Q</a>(N)));</div>
+<div class="line"><span class="lineno">   49</span>    <span class="keywordflow">return</span> ocp;</div>
+<div class="line"><span class="lineno">   50</span>}</div>
+<div class="line"><span class="lineno">   51</span> </div>
+<div class="line"><span class="lineno">   52</span><span class="comment">// Example of solving a linear-quadratic OCP using the CyqloneSolver.</span></div>
+<div class="line"><span class="lineno">   53</span><span class="keywordtype">int</span> <a id="a21" name="a21"></a><a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]) <span class="keyword">try</span> {</div>
+<div class="line"><span class="lineno">   54</span>    <span class="comment">// Problem dimensions and parameters</span></div>
+<div class="line"><span class="lineno">   55</span>    <span class="keyword">const</span> <a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> p  = argc &gt; 1 ? std::stoi(argv[1]) : 8;   <span class="comment">// Number of processors/threads</span></div>
+<div class="line"><span class="lineno">   56</span>    <span class="keyword">const</span> <a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> N  = argc &gt; 2 ? std::stoi(argv[2]) : 128; <span class="comment">// Horizon length</span></div>
+<div class="line"><span class="lineno">   57</span>    <span class="keyword">const</span> <a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> nx = argc &gt; 3 ? std::stoi(argv[3]) : 10;  <span class="comment">// State dimension</span></div>
+<div class="line"><span class="lineno">   58</span>    <span class="keyword">const</span> <a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> nu = argc &gt; 4 ? std::stoi(argv[4]) : 5;   <span class="comment">// Control dimension</span></div>
+<div class="line"><span class="lineno">   59</span>    <a id="a22" name="a22"></a><a class="code hl_defineRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/assume_8hpp.html#a64f9b433541d79ef4ca7cd707bcbb2bd">BATMAT_ASSERT</a>(<a class="code hl_variable" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a> == 1 || <a id="_a23" name="_a23"></a><a class="code hl_function" href="namespacefancyqlone.html#af93f62caf86d8c86b7acd61a61ad3553">fancyqlone::is_pow_2</a>(p));</div>
+<div class="line"><span class="lineno">   60</span> </div>
+<div class="line"><span class="lineno">   61</span>    <span class="comment">// Initialize a random linear-quadratic OCP</span></div>
+<div class="line"><span class="lineno">   62</span>    <span class="keyword">auto</span> ocp = init_ocp(N, nx, nu);</div>
+<div class="line"><span class="lineno">   63</span>    <span class="comment">// Eliminate the initial state x0 and merge the first and last stages for Cyqlone</span></div>
+<div class="line"><span class="lineno">   64</span>    <span class="keyword">auto</span> cocp = <a id="a24" name="a24"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneStorage.html#a3070b42b5e205a963afe189d05362a71">fancyqlone::CyqloneStorage&lt;real_t&gt;::build</a>(ocp);</div>
+<div class="line"><span class="lineno">   65</span> </div>
+<div class="line"><span class="lineno">   66</span>    <span class="comment">// Create a Cyqlone solver for the OCP</span></div>
+<div class="line"><span class="lineno">   67</span>    <a id="_a25" name="_a25"></a><a class="code hl_struct" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver&lt;v, real_t&gt;</a> solver =</div>
+<div class="line"><span class="lineno">   68</span>        <a id="a26" name="a26"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#afe6fdf3a11c1345f4c423757d5462c65">fancyqlone::CyqloneSolver&lt;v, real_t&gt;::build</a>(cocp, p);</div>
+<div class="line"><span class="lineno">   69</span>    <span class="comment">// Optionally configure the solver parameters</span></div>
+<div class="line"><span class="lineno">   70</span>    <span class="keyword">auto</span> params         = solver.<a id="a27" name="a27"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#ad390c7c56beee8df9a4723cf52b46283">get_tricyqle_params</a>();</div>
+<div class="line"><span class="lineno">   71</span>    params.<a id="a28" name="a28"></a><a class="code hl_variable" href="group__topic-block-tridiag-solvers.html#a0dba2378f2f1d16718569d318898492b">solve_method</a> = <a id="_a29" name="_a29"></a><a class="code hl_enumvalue" href="group__topic-block-tridiag-solvers.html#gga02b7bc5e6f2bb033f2f89b03d51d6436ac0ff1599838f84547b6668a463198617">fancyqlone::SolveMethod::PCR</a>; <span class="comment">// Use the PCR solver instead of PCG</span></div>
+<div class="line"><span class="lineno">   72</span>    solver.<a id="a30" name="a30"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#a2dd3b14ee1cf95f6e2b594d2a1f55562">update_tricyqle_params</a>(params);</div>
+<div class="line"><span class="lineno">   73</span>    std::println(<span class="stringliteral">&quot;{}&quot;</span>, solver.<a id="a31" name="a31"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#a310d0ddc9f00f45b0147e2472618b13d">get_params_string</a>());</div>
+<div class="line"><span class="lineno">   74</span> </div>
+<div class="line"><span class="lineno">   75</span>    <span class="comment">// Initialize copies of the OCP data vectors in compact storage format</span></div>
+<div class="line"><span class="lineno">   76</span>    <span class="keyword">const</span> <span class="keyword">auto</span> rq = solver.<a id="a32" name="a32"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#a8e4f01b7ddbc2e5c6e3f34b8b8c5c223">initialize_gradient</a>(cocp); <span class="comment">// gradient vectors r and q</span></div>
+<div class="line"><span class="lineno">   77</span>    <span class="keyword">const</span> <span class="keyword">auto</span> b  = solver.<a id="a33" name="a33"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#a6770372a7369416de882a265acd4ea99">initialize_rhs</a>(cocp); <span class="comment">// right-hand side vector b of dynamics constraints</span></div>
+<div class="line"><span class="lineno">   78</span>    <span class="comment">// Initialize the right-hand side of the KKT system (will be overwritten by the solution)</span></div>
+<div class="line"><span class="lineno">   79</span>    <span class="keyword">auto</span> ux = solver.<a id="a34" name="a34"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#a46edf913f6c512d1455e48fd7e166875">initialize_variables</a>(), λ = solver.<a id="a35" name="a35"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#a6031917f10494910ea41ebbc966c5948">initialize_dynamics_constraints</a>();</div>
+<div class="line"><span class="lineno">   80</span>    <a id="a36" name="a36"></a><a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#gabf251e141515826dd94c1523c6368248">fancyqlone::linalg::negate</a>(rq, ux); <span class="comment">// right-hand side of the KKT system is negative gradient</span></div>
+<div class="line"><span class="lineno">   81</span>    <a id="a37" name="a37"></a><a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#ga9df61b993f7e79ad21eddb76b4c2089e">fancyqlone::linalg::copy</a>(b, λ);</div>
+<div class="line"><span class="lineno">   82</span>    <span class="keyword">const</span> <a class="code hl_typedefRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a31461fabd319f19bc15256fde4d75495">real_t</a> γ = 1e99; <span class="comment">// Primal regularization</span></div>
+<div class="line"><span class="lineno">   83</span> </div>
+<div class="line"><span class="lineno">   84</span>    <span class="comment">// Call the solver in parallel, passing a lambda that is executed by each thread</span></div>
+<div class="line"><span class="lineno">   85</span>    <span class="keyword">auto</span> pctx = solver.<a id="a38" name="a38"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#a98370bd249aa9c5a62411dad23a66c1a">create_parallel_context</a>();</div>
+<div class="line"><span class="lineno">   86</span>    <span class="keyword">auto</span> t0   = std::chrono::high_resolution_clock::now();</div>
+<div class="line"><span class="lineno">   87</span>    pctx-&gt;run([&amp;](<a id="_a39" name="_a39"></a><a class="code hl_typedef" href="structfancyqlone_1_1CyqloneSolver.html#a5ac1d7aa42f70939fb48b9759cf70b62">fancyqlone::CyqloneSolver&lt;v, real_t&gt;::Context</a> &amp;ctx) {</div>
+<div class="line"><span class="lineno">   88</span>        solver.<a id="a40" name="a40"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#ae294468e1ce952cc0892afcc845d3258">factor_solve</a>(ctx, γ, 0, {}, ux, λ); <span class="comment">// Cholesky factorization &amp; forward substitution</span></div>
+<div class="line"><span class="lineno">   89</span>        solver.<a id="a41" name="a41"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#ad7ec129f8c72c1a2150266dec245dc41">solve_reverse</a>(ctx, ux, λ);          <span class="comment">// Backward substitution</span></div>
+<div class="line"><span class="lineno">   90</span>    });                                            <span class="comment">// blocks until all threads have joined</span></div>
+<div class="line"><span class="lineno">   91</span>    <span class="keyword">auto</span> t1 = std::chrono::high_resolution_clock::now();</div>
+<div class="line"><span class="lineno">   92</span>    std::println(<span class="stringliteral">&quot;Time: {:.3f} ms&quot;</span>, std::chrono::duration&lt;double, std::milli&gt;(t1 - t0).count());</div>
+<div class="line"><span class="lineno">   93</span> </div>
+<div class="line"><span class="lineno">   94</span>    <span class="comment">// Compute the residuals (in compact storage and without x0, also in parallel)</span></div>
+<div class="line"><span class="lineno">   95</span>    <span class="keyword">auto</span> Mxb  = solver.<a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#a6031917f10494910ea41ebbc966c5948">initialize_dynamics_constraints</a>(); <span class="comment">// primal equality constraint residual</span></div>
+<div class="line"><span class="lineno">   96</span>    <span class="keyword">auto</span> grad = solver.<a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#a46edf913f6c512d1455e48fd7e166875">initialize_variables</a>();            <span class="comment">// gradient of the Lagrangian</span></div>
+<div class="line"><span class="lineno">   97</span>    pctx-&gt;run([&amp;](<a class="code hl_typedef" href="structfancyqlone_1_1CyqloneSolver.html#a5ac1d7aa42f70939fb48b9759cf70b62">fancyqlone::CyqloneSolver&lt;v, real_t&gt;::Context</a> &amp;ctx) {</div>
+<div class="line"><span class="lineno">   98</span>        solver.<a id="a42" name="a42"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#af8f2769af6bb9a01ada3130d39daf6be">residual_dynamics_constr</a>(ctx, ux, b, Mxb); <span class="comment">// Mx + b</span></div>
+<div class="line"><span class="lineno">   99</span>        solver.<a id="a43" name="a43"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#ad7d91603551679aa49c8d382f8e30fb2">transposed_dynamics_constr</a>(ctx, λ, grad);  <span class="comment">// Mᵀλ</span></div>
+<div class="line"><span class="lineno">  100</span>        solver.<a id="a44" name="a44"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#ad17d2104fb052033a72745bad977c4d7">cost_gradient</a>(ctx, ux, 1, rq, 1, grad);    <span class="comment">// + Qx + q</span></div>
+<div class="line"><span class="lineno">  101</span>    });</div>
+<div class="line"><span class="lineno">  102</span> </div>
+<div class="line"><span class="lineno">  103</span>    <span class="comment">// Print the residuals</span></div>
+<div class="line"><span class="lineno">  104</span>    <span class="keyword">using </span><a id="_a45" name="_a45"></a><a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#ga1b8d5cb073a99fca044b1997898f75b0">fancyqlone::linalg::norm_inf</a>;</div>
+<div class="line"><span class="lineno">  105</span>    std::println(<span class="stringliteral">&quot;Eq. residual (compact):       {:.17e}&quot;</span>, <a id="a46" name="a46"></a><a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#ga1b8d5cb073a99fca044b1997898f75b0">norm_inf</a>(Mxb));</div>
+<div class="line"><span class="lineno">  106</span>    std::println(<span class="stringliteral">&quot;Lagr. stationarity (compact): {:.17e}&quot;</span>, <a class="code hl_functionRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#ga1b8d5cb073a99fca044b1997898f75b0">norm_inf</a>(grad));</div>
+<div class="line"><span class="lineno">  107</span> </div>
+<div class="line"><span class="lineno">  108</span>    <span class="comment">// Reconstruct the full solution (as a flat vector, including x0)</span></div>
+<div class="line"><span class="lineno">  109</span>    std::vector ux_unpacked = solver.<a id="a47" name="a47"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#a426c05b7620fa7c7b75ab08424e232ce">unpack_variables</a>(ux); <span class="comment">// convert compact to linear storage</span></div>
+<div class="line"><span class="lineno">  110</span>    std::vector λ_unpacked  = solver.<a id="a48" name="a48"></a><a class="code hl_function" href="structfancyqlone_1_1CyqloneSolver.html#ae543bfbaad88aaebf717fb7283838566">unpack_dynamics</a>(λ);</div>
+<div class="line"><span class="lineno">  111</span>    <span class="keyword">auto</span> sol                = cocp.reconstruct_solution(ocp, ux_unpacked, {}, λ_unpacked);</div>
+<div class="line"><span class="lineno">  112</span> </div>
+<div class="line"><span class="lineno">  113</span>    <span class="comment">// Check the residuals of the original OCP</span></div>
+<div class="line"><span class="lineno">  114</span>    <span class="keyword">auto</span> resid = ocp.compute_kkt_error(sol);</div>
+<div class="line"><span class="lineno">  115</span>    std::println(<span class="stringliteral">&quot;Eq. residual (full):       {:.17e}&quot;</span>, resid.equality_residual);</div>
+<div class="line"><span class="lineno">  116</span>    std::println(<span class="stringliteral">&quot;Lagr. stationarity (full): {:.17e}&quot;</span>, resid.stationarity);</div>
+<div class="line"><span class="lineno">  117</span> </div>
+<div class="line"><span class="lineno">  118</span><span class="preprocessor">#if CYQLONE_WITH_MATIO</span></div>
+<div class="line"><span class="lineno">  119</span>    <span class="comment">// Export the original OCP and the solution as a .mat file</span></div>
+<div class="line"><span class="lineno">  120</span>    std::filesystem::path filename = <span class="stringliteral">&quot;ocp_solution.mat&quot;</span>;</div>
+<div class="line"><span class="lineno">  121</span>    <span class="keyword">auto</span> matfile                   = <a id="a49" name="a49"></a><a class="code hl_function" href="group__topic-util-matio.html#ga1e524da3db4f81ddb5dd6c2856c88502">fancyqlone::create_mat</a>(filename);</div>
+<div class="line"><span class="lineno">  122</span>    <a id="a50" name="a50"></a><a class="code hl_function" href="group__topic-util-matio.html#ga235db8e974db22f3e8d4999cc1241290">fancyqlone::add_to_mat</a>(matfile.get(), <span class="stringliteral">&quot;ocp&quot;</span>, ocp);</div>
+<div class="line"><span class="lineno">  123</span>    <a class="code hl_function" href="group__topic-util-matio.html#ga235db8e974db22f3e8d4999cc1241290">fancyqlone::add_to_mat</a>(matfile.get(), <span class="stringliteral">&quot;sol_x&quot;</span>, sol.solution);</div>
+<div class="line"><span class="lineno">  124</span>    <a class="code hl_function" href="group__topic-util-matio.html#ga235db8e974db22f3e8d4999cc1241290">fancyqlone::add_to_mat</a>(matfile.get(), <span class="stringliteral">&quot;sol_λ&quot;</span>, sol.equality_multipliers);</div>
+<div class="line"><span class="lineno">  125</span>    std::cout &lt;&lt; <span class="stringliteral">&quot;Saved OCP and solution to &quot;</span> &lt;&lt; filename &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  126</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">  127</span>} <span class="keywordflow">catch</span> (std::exception &amp;e) {</div>
+<div class="line"><span class="lineno">  128</span>    std::cerr &lt;&lt; <span class="stringliteral">&quot;Error: &quot;</span> &lt;&lt; e.what() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  129</span>    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><span class="lineno">  130</span>}</div>
+<div class="ttc" id="aassume_8hpp_html_a64f9b433541d79ef4ca7cd707bcbb2bd"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/assume_8hpp.html#a64f9b433541d79ef4ca7cd707bcbb2bd">BATMAT_ASSERT</a></div><div class="ttdeci">#define BATMAT_ASSERT(x)</div></div>
+<div class="ttc" id="acyqlone-storage_8hpp_html"><div class="ttname"><a href="cyqlone-storage_8hpp.html">cyqlone-storage.hpp</a></div><div class="ttdoc">Data structure for optimal control problems where the initial states are eliminated.</div></div>
+<div class="ttc" id="acyqlone_8hpp_html"><div class="ttname"><a href="cyqlone_8hpp.html">cyqlone.hpp</a></div><div class="ttdoc">The main header for the Cyqlone and Tricyqle linear solvers.</div></div>
+<div class="ttc" id="adtypes_8hpp_html"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/dtypes_8hpp.html">dtypes.hpp</a></div></div>
+<div class="ttc" id="aexample_8cpp_html_a31461fabd319f19bc15256fde4d75495"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a31461fabd319f19bc15256fde4d75495">real_t</a></div><div class="ttdeci">double real_t</div></div>
+<div class="ttc" id="aexample_8cpp_html_a67314e2becdee2c795c5ea0bd5626451"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></div><div class="ttdeci">int index_t</div></div>
+<div class="ttc" id="aexample_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/example_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div></div>
+<div class="ttc" id="agroup__topic-block-tridiag-solvers_html_a0dba2378f2f1d16718569d318898492b"><div class="ttname"><a href="group__topic-block-tridiag-solvers.html#a0dba2378f2f1d16718569d318898492b">fancyqlone::TricyqleParams::solve_method</a></div><div class="ttdeci">SolveMethod solve_method</div><div class="ttdoc">Algorithm to use for solving the final reduced block tridiagonal system.</div><div class="ttdef"><b>Definition</b> <a href="cyqlone-params_8hpp_source.html#l00050">cyqlone-params.hpp:50</a></div></div>
+<div class="ttc" id="agroup__topic-block-tridiag-solvers_html_gga02b7bc5e6f2bb033f2f89b03d51d6436ac0ff1599838f84547b6668a463198617"><div class="ttname"><a href="group__topic-block-tridiag-solvers.html#gga02b7bc5e6f2bb033f2f89b03d51d6436ac0ff1599838f84547b6668a463198617">fancyqlone::SolveMethod::PCR</a></div><div class="ttdeci">@ PCR</div><div class="ttdoc">Parallel Cyclic Reduction (direct).</div><div class="ttdef"><b>Definition</b> <a href="cyqlone-params_8hpp_source.html#l00017">cyqlone-params.hpp:17</a></div></div>
+<div class="ttc" id="agroup__topic-linalg_html_ga1b8d5cb073a99fca044b1997898f75b0"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#ga1b8d5cb073a99fca044b1997898f75b0">batmat::linalg::norm_inf</a></div><div class="ttdeci">simdified_value_t&lt; Vx &gt; norm_inf(Vx &amp;&amp;x)</div></div>
+<div class="ttc" id="agroup__topic-linalg_html_ga9df61b993f7e79ad21eddb76b4c2089e"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#ga9df61b993f7e79ad21eddb76b4c2089e">copy</a></div><div class="ttdeci">void copy(VA &amp;&amp;A, VB &amp;&amp;B, Opts... opts)</div></div>
+<div class="ttc" id="agroup__topic-linalg_html_gabf251e141515826dd94c1523c6368248"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#gabf251e141515826dd94c1523c6368248">batmat::linalg::negate</a></div><div class="ttdeci">void negate(VA &amp;&amp;A, VB &amp;&amp;B, with_rotate_t&lt; Rotate &gt;={})</div></div>
+<div class="ttc" id="agroup__topic-linalg_html_gaf6d9519ee15d51a0ba7243e640d8be71"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#gaf6d9519ee15d51a0ba7243e640d8be71">batmat::linalg::triu</a></div><div class="ttdeci">constexpr auto triu(M &amp;&amp;m)</div></div>
+<div class="ttc" id="agroup__topic-linalg_html_gafc9f5555ed4639e0e5ad0e552f9717e4"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-linalg.html#gafc9f5555ed4639e0e5ad0e552f9717e4">batmat::linalg::tril</a></div><div class="ttdeci">constexpr auto tril(M &amp;&amp;m)</div></div>
+<div class="ttc" id="agroup__topic-util-matio_html_ga1e524da3db4f81ddb5dd6c2856c88502"><div class="ttname"><a href="group__topic-util-matio.html#ga1e524da3db4f81ddb5dd6c2856c88502">fancyqlone::create_mat</a></div><div class="ttdeci">MatFilePtr create_mat(const std::filesystem::path &amp;filename)</div><div class="ttdoc">Create and open a new .mat file for writing.</div><div class="ttdef"><b>Definition</b> <a href="matio_8cpp_source.html#l00097">matio.cpp:97</a></div></div>
+<div class="ttc" id="agroup__topic-util-matio_html_ga235db8e974db22f3e8d4999cc1241290"><div class="ttname"><a href="group__topic-util-matio.html#ga235db8e974db22f3e8d4999cc1241290">fancyqlone::add_to_mat</a></div><div class="ttdeci">void add_to_mat(mat_t *mat, const std::string &amp;varname, float value)</div><div class="ttdoc">Add a value to an open .mat file.</div><div class="ttdef"><b>Definition</b> <a href="matio_8cpp_source.html#l00122">matio.cpp:122</a></div></div>
+<div class="ttc" id="alinalg_8hpp_html"><div class="ttname"><a href="linalg_8hpp.html">linalg.hpp</a></div></div>
+<div class="ttc" id="amatio_8hpp_html"><div class="ttname"><a href="matio_8hpp.html">matio.hpp</a></div><div class="ttdoc">Functions for exporting and loading matrices and OCP data to and from .mat files.</div></div>
+<div class="ttc" id="anamespacebatmat_1_1types_html_aae92c3201f735f2fefabf1173b89d79b"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1types.html#aae92c3201f735f2fefabf1173b89d79b">batmat::types::vl_at_most</a></div><div class="ttdeci">constexpr index_t vl_at_most</div></div>
+<div class="ttc" id="anamespacebatmat_html_a31461fabd319f19bc15256fde4d75495"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">batmat::real_t</a></div><div class="ttdeci">double real_t</div></div>
+<div class="ttc" id="anamespacebatmat_html_a67314e2becdee2c795c5ea0bd5626451"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">batmat::index_t</a></div><div class="ttdeci">int index_t</div></div>
+<div class="ttc" id="anamespacefancyqlone_html_af93f62caf86d8c86b7acd61a61ad3553"><div class="ttname"><a href="namespacefancyqlone.html#af93f62caf86d8c86b7acd61a61ad3553">fancyqlone::is_pow_2</a></div><div class="ttdeci">constexpr bool is_pow_2(index_t n)</div><div class="ttdef"><b>Definition</b> <a href="cyqlone_8hpp_source.html#l00036">cyqlone.hpp:36</a></div></div>
+<div class="ttc" id="aocp_8hpp_html"><div class="ttname"><a href="ocp_8hpp.html">ocp.hpp</a></div><div class="ttdoc">Data structure for optimal control problems.</div></div>
+<div class="ttc" id="asolve-block-tridiagonal_8cpp_html_ac818a8f049bd46d6d6996d28f22de4a9"><div class="ttname"><a href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a></div><div class="ttdeci">constexpr index_t v</div><div class="ttdef"><b>Definition</b> <a href="solve-block-tridiagonal_8cpp_source.html#l00019">solve-block-tridiagonal.cpp:19</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a></div><div class="ttdoc">Linear solver for systems with optimal control structure.</div><div class="ttdef"><b>Definition</b> <a href="cyqlone_8hpp_source.html#l00630">cyqlone.hpp:630</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_a2dd3b14ee1cf95f6e2b594d2a1f55562"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#a2dd3b14ee1cf95f6e2b594d2a1f55562">fancyqlone::CyqloneSolver::update_tricyqle_params</a></div><div class="ttdeci">void update_tricyqle_params(const TricyqleParams&lt; value_type &gt; &amp;new_params)</div><div class="ttdoc">Update the Tricyqle solver parameters.</div><div class="ttdef"><b>Definition</b> <a href="cyqlone_8hpp_source.html#l00841">cyqlone.hpp:841</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_a310d0ddc9f00f45b0147e2472618b13d"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#a310d0ddc9f00f45b0147e2472618b13d">fancyqlone::CyqloneSolver::get_params_string</a></div><div class="ttdeci">std::string get_params_string() const</div><div class="ttdoc">Get a string representation of the main solver parameters. Used mainly for file names.</div><div class="ttdef"><b>Definition</b> <a href="cyqlone_8hpp_source.html#l00846">cyqlone.hpp:846</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_a426c05b7620fa7c7b75ab08424e232ce"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#a426c05b7620fa7c7b75ab08424e232ce">fancyqlone::CyqloneSolver::unpack_variables</a></div><div class="ttdeci">void unpack_variables(view&lt;&gt; ux, std::span&lt; value_type &gt; ux_lin) const</div><div class="ttdef"><b>Definition</b> <a href="data_8tpp_source.html#l00279">data.tpp:279</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_a46edf913f6c512d1455e48fd7e166875"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#a46edf913f6c512d1455e48fd7e166875">fancyqlone::CyqloneSolver::initialize_variables</a></div><div class="ttdeci">matrix initialize_variables() const</div><div class="ttdoc">Get a zero-initialized matrix for the primal variables u and x.</div><div class="ttdef"><b>Definition</b> <a href="data_8tpp_source.html#l00495">data.tpp:495</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_a5ac1d7aa42f70939fb48b9759cf70b62"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#a5ac1d7aa42f70939fb48b9759cf70b62">fancyqlone::CyqloneSolver::Context</a></div><div class="ttdeci">tricyqle_t::Context Context</div><div class="ttdef"><b>Definition</b> <a href="cyqlone_8hpp_source.html#l00665">cyqlone.hpp:665</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_a6031917f10494910ea41ebbc966c5948"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#a6031917f10494910ea41ebbc966c5948">fancyqlone::CyqloneSolver::initialize_dynamics_constraints</a></div><div class="ttdeci">matrix initialize_dynamics_constraints() const</div><div class="ttdoc">Get a zero-initialized matrix for the dynamics constraints (or their multipliers).</div><div class="ttdef"><b>Definition</b> <a href="data_8tpp_source.html#l00500">data.tpp:500</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_a6770372a7369416de882a265acd4ea99"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#a6770372a7369416de882a265acd4ea99">fancyqlone::CyqloneSolver::initialize_rhs</a></div><div class="ttdeci">void initialize_rhs(const CyqloneStorage&lt; value_type &gt; &amp;ocp, mut_view&lt;&gt; rhs) const</div><div class="ttdoc">Initialize the right-hand side vector for the dynamics constraints of the OCP, using the custom Cyqlo...</div><div class="ttdef"><b>Definition</b> <a href="data_8tpp_source.html#l00148">data.tpp:148</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_a8e4f01b7ddbc2e5c6e3f34b8b8c5c223"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#a8e4f01b7ddbc2e5c6e3f34b8b8c5c223">fancyqlone::CyqloneSolver::initialize_gradient</a></div><div class="ttdeci">void initialize_gradient(const CyqloneStorage&lt; value_type &gt; &amp;ocp, mut_view&lt;&gt; grad) const</div><div class="ttdoc">Initialize the gradient vector for the OCP cost function, using the custom Cyqlone storage format.</div><div class="ttdef"><b>Definition</b> <a href="data_8tpp_source.html#l00171">data.tpp:171</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_a98370bd249aa9c5a62411dad23a66c1a"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#a98370bd249aa9c5a62411dad23a66c1a">fancyqlone::CyqloneSolver::create_parallel_context</a></div><div class="ttdeci">std::unique_ptr&lt; SharedContext &gt; create_parallel_context() const</div><div class="ttdef"><b>Definition</b> <a href="cyqlone_8hpp_source.html#l00685">cyqlone.hpp:685</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_ad17d2104fb052033a72745bad977c4d7"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#ad17d2104fb052033a72745bad977c4d7">fancyqlone::CyqloneSolver::cost_gradient</a></div><div class="ttdeci">void cost_gradient(Context &amp;ctx, view&lt;&gt; ux, value_type α, view&lt;&gt; q, value_type β, mut_view&lt;&gt; grad_f) const</div><div class="ttdoc">Compute the cost gradient, with optional scaling factors.</div><div class="ttdef"><b>Definition</b> <a href="mat-vec_8tpp_source.html#l00119">mat-vec.tpp:119</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_ad390c7c56beee8df9a4723cf52b46283"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#ad390c7c56beee8df9a4723cf52b46283">fancyqlone::CyqloneSolver::get_tricyqle_params</a></div><div class="ttdeci">TricyqleParams&lt; value_type &gt; get_tricyqle_params() const</div><div class="ttdoc">Get the current Tricyqle solver parameters.</div><div class="ttdef"><b>Definition</b> <a href="cyqlone_8hpp_source.html#l00836">cyqlone.hpp:836</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_ad7d91603551679aa49c8d382f8e30fb2"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#ad7d91603551679aa49c8d382f8e30fb2">fancyqlone::CyqloneSolver::transposed_dynamics_constr</a></div><div class="ttdeci">void transposed_dynamics_constr(Context &amp;ctx, view&lt;&gt; λ, mut_view&lt;&gt; Mᵀλ, bool accum=false) const</div><div class="ttdoc">Compute Mᵀλ, where M is the dynamics constraint Jacobian matrix of the OCP.</div><div class="ttdef"><b>Definition</b> <a href="mat-vec_8tpp_source.html#l00057">mat-vec.tpp:57</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_ad7ec129f8c72c1a2150266dec245dc41"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#ad7ec129f8c72c1a2150266dec245dc41">fancyqlone::CyqloneSolver::solve_reverse</a></div><div class="ttdeci">void solve_reverse(Context &amp;ctx, mut_view&lt;&gt; ux, mut_view&lt;&gt; λ)</div><div class="ttdoc">Perform a reverse solve with the Cyqlone factorization.</div><div class="ttdef"><b>Definition</b> <a href="factor_8tpp_source.html#l00261">factor.tpp:261</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_ae294468e1ce952cc0892afcc845d3258"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#ae294468e1ce952cc0892afcc845d3258">fancyqlone::CyqloneSolver::factor_solve</a></div><div class="ttdeci">void factor_solve(Context &amp;ctx, value_type γ, real_t ρ_inv, view&lt;&gt; Σ, mut_view&lt;&gt; ux, mut_view&lt;&gt; λ)</div><div class="ttdoc">Compute the Cyqlone factorization of the KKT matrix of the OCP and perform a forward solve (fused for...</div><div class="ttdef"><b>Definition</b> <a href="factor_8tpp_source.html#l00134">factor.tpp:134</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_ae543bfbaad88aaebf717fb7283838566"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#ae543bfbaad88aaebf717fb7283838566">fancyqlone::CyqloneSolver::unpack_dynamics</a></div><div class="ttdeci">void unpack_dynamics(view&lt;&gt; λ, std::span&lt; value_type &gt; λ_lin) const</div><div class="ttdef"><b>Definition</b> <a href="data_8tpp_source.html#l00338">data.tpp:338</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_af8f2769af6bb9a01ada3130d39daf6be"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#af8f2769af6bb9a01ada3130d39daf6be">fancyqlone::CyqloneSolver::residual_dynamics_constr</a></div><div class="ttdeci">void residual_dynamics_constr(Context &amp;ctx, view&lt;&gt; x, view&lt;&gt; b, mut_view&lt;&gt; Mxb) const</div><div class="ttdoc">Compute Mx + b, where M is the dynamics constraint Jacobian matrix of the OCP.</div><div class="ttdef"><b>Definition</b> <a href="mat-vec_8tpp_source.html#l00017">mat-vec.tpp:17</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html_afe6fdf3a11c1345f4c423757d5462c65"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html#afe6fdf3a11c1345f4c423757d5462c65">fancyqlone::CyqloneSolver::build</a></div><div class="ttdeci">static CyqloneSolver build(const CyqloneStorage&lt; value_type &gt; &amp;ocp, index_t p, CyqloneParams&lt; value_type &gt; params={})</div><div class="ttdoc">Initialize a Cyqlone solver for the given OCP.</div><div class="ttdef"><b>Definition</b> <a href="data_8tpp_source.html#l00041">data.tpp:41</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneStorage_html_a3070b42b5e205a963afe189d05362a71"><div class="ttname"><a href="structfancyqlone_1_1CyqloneStorage.html#a3070b42b5e205a963afe189d05362a71">fancyqlone::CyqloneStorage::build</a></div><div class="ttdeci">static CyqloneStorage build(const LinearOCPStorage &amp;ocp, index_t ny_0=-1)</div><div class="ttdef"><b>Definition</b> <a href="cyqlone-storage_8cpp_source.html#l00157">cyqlone-storage.cpp:157</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html"><div class="ttname"><a href="structfancyqlone_1_1LinearOCPStorage.html">fancyqlone::LinearOCPStorage</a></div><div class="ttdoc">Storage for a linear-quadratic OCP of the form.</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00039">ocp.hpp:39</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_a069e76a6c76bd62ab2eb0c5546f74897"><div class="ttname"><a href="structfancyqlone_1_1LinearOCPStorage.html#a069e76a6c76bd62ab2eb0c5546f74897">fancyqlone::LinearOCPStorage::B</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; B(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00134">ocp.hpp:134</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_a46055cc9e375ddd69ea173667928d52a"><div class="ttname"><a href="structfancyqlone_1_1LinearOCPStorage.html#a46055cc9e375ddd69ea173667928d52a">fancyqlone::LinearOCPStorage::S</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; S(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00087">ocp.hpp:87</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_a8aea35b5a5e016e82ec0f62bc9202c8a"><div class="ttname"><a href="structfancyqlone_1_1LinearOCPStorage.html#a8aea35b5a5e016e82ec0f62bc9202c8a">fancyqlone::LinearOCPStorage::b</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; b()</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00253">ocp.hpp:253</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_aaced9f219b04dc25c0817bc04b9890d9"><div class="ttname"><a href="structfancyqlone_1_1LinearOCPStorage.html#aaced9f219b04dc25c0817bc04b9890d9">fancyqlone::LinearOCPStorage::Q</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; Q(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00077">ocp.hpp:77</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_aaea931c3de39b21c1adc2adda6927391"><div class="ttname"><a href="structfancyqlone_1_1LinearOCPStorage.html#aaea931c3de39b21c1adc2adda6927391">fancyqlone::LinearOCPStorage::A</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; A(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00129">ocp.hpp:129</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_ab03b4cc3577893f2c19db9fd2901ebab"><div class="ttname"><a href="structfancyqlone_1_1LinearOCPStorage.html#ab03b4cc3577893f2c19db9fd2901ebab">fancyqlone::LinearOCPStorage::q</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; q(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00242">ocp.hpp:242</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_ab0b91b1dac835a47452d45c0d2d9f1ee"><div class="ttname"><a href="structfancyqlone_1_1LinearOCPStorage.html#ab0b91b1dac835a47452d45c0d2d9f1ee">fancyqlone::LinearOCPStorage::R</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; R(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00082">ocp.hpp:82</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_ac9ffaec3d88ad5fe53e953c4a97fcc29"><div class="ttname"><a href="structfancyqlone_1_1LinearOCPStorage.html#ac9ffaec3d88ad5fe53e953c4a97fcc29">fancyqlone::LinearOCPStorage::H</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; H(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00066">ocp.hpp:66</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1LinearOCPStorage_html_ae137ef05e092ee1a8b81e155c520c429"><div class="ttname"><a href="structfancyqlone_1_1LinearOCPStorage.html#ae137ef05e092ee1a8b81e155c520c429">fancyqlone::LinearOCPStorage::r</a></div><div class="ttdeci">guanaqo::MatrixView&lt; real_t, index_t &gt; r(index_t i)</div><div class="ttdef"><b>Definition</b> <a href="ocp_8hpp_source.html#l00247">ocp.hpp:247</a></div></div>
+</div><!-- fragment --> </div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

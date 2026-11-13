@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1ABSums" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::ABSums</compoundname>
+    <includes refid="breakpoint_8hpp" local="no">fancyqlone/fancyqpalm/implementation/breakpoint.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1ABSums_1ad57c7978b6c189679d0c2378cc684452" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1_1qpalm_1a49bd3110c376daeaa8abb3fc29b761cd" kindref="member">ABSum_t</ref></type>
+        <definition>ABSum_t fancyqlone::qpalm::ABSums::a</definition>
+        <argsstring></argsstring>
+        <name>a</name>
+        <qualifiedname>fancyqlone::qpalm::ABSums::a</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="30" column="13" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" bodystart="30" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1ABSums_1ad64dcba97952dece7508e4b6935335ce" compoundref="breakpoint_8hpp" startline="31" endline="33">operator+</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1ABSums_1a9c0c23060f2da7aeb33710c903b96f82" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacefancyqlone_1_1qpalm_1a49bd3110c376daeaa8abb3fc29b761cd" kindref="member">ABSum_t</ref></type>
+        <definition>ABSum_t fancyqlone::qpalm::ABSums::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <qualifiedname>fancyqlone::qpalm::ABSums::b</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="30" column="15" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" bodystart="30" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1ABSums_1ad64dcba97952dece7508e4b6935335ce" compoundref="breakpoint_8hpp" startline="31" endline="33">operator+</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structfancyqlone_1_1qpalm_1_1ABSums_1ad64dcba97952dece7508e4b6935335ce" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>friend <ref refid="structfancyqlone_1_1qpalm_1_1ABSums" kindref="compound">ABSums</ref></type>
+        <definition>friend ABSums operator+</definition>
+        <argsstring>(const ABSums &amp;lhs, const ABSums &amp;rhs)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>fancyqlone::qpalm::ABSums::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1ABSums" kindref="compound">ABSums</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1ABSums" kindref="compound">ABSums</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="31" column="29" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" bodystart="31" bodyend="33"/>
+        <references refid="structfancyqlone_1_1qpalm_1_1ABSums_1ad57c7978b6c189679d0c2378cc684452" compoundref="breakpoint_8hpp" startline="30">a</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1ABSums_1a9c0c23060f2da7aeb33710c903b96f82" compoundref="breakpoint_8hpp" startline="30">b</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::ABSums</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1ABSums"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" line="29" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/breakpoint.hpp" bodystart="29" bodyend="34"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1ABSums_1ad57c7978b6c189679d0c2378cc684452" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::ABSums</scope><name>a</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1ABSums_1a9c0c23060f2da7aeb33710c903b96f82" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::ABSums</scope><name>b</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1ABSums_1ad64dcba97952dece7508e4b6935335ce" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::ABSums</scope><name>operator+</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

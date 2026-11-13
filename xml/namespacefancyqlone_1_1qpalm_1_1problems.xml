@@ -1,0 +1,346 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacefancyqlone_1_1qpalm_1_1problems" kind="namespace" language="C++">
+    <compoundname>fancyqlone::qpalm::problems</compoundname>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase" prot="public">fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams" prot="public">fancyqlone::qpalm::problems::CentroidalQuadrupedParams</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem" prot="public">fancyqlone::qpalm::problems::CentroidalQuadrupedProblem</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem" prot="public">fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams" prot="public">fancyqlone::qpalm::problems::PlatooningParams</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem" prot="public">fancyqlone::qpalm::problems::PlatooningProblem</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams" prot="public">fancyqlone::qpalm::problems::SpringMassParams</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem" prot="public">fancyqlone::qpalm::problems::SpringMassProblem</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanSpringMassProblem" prot="public">fancyqlone::qpalm::problems::FanSpringMassProblem</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" prot="public" static="no">
+        <type>Eigen::MatrixX&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>typedef Eigen::MatrixX&lt; real_t &gt; fancyqlone::qpalm::problems::eigen_mat = Eigen::MatrixX&lt;real_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>eigen_mat</name>
+        <qualifiedname>fancyqlone::qpalm::problems::eigen_mat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/zoh.hpp" line="9" column="1" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/zoh.hpp" bodystart="9" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1_1problems_1a55df8252720b2ca53506533388b9c4ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem" kindref="compound">CentroidalQuadrupedProblem</ref></type>
+        <definition>CentroidalQuadrupedProblem fancyqlone::qpalm::problems::centroidal_quadruped</definition>
+        <argsstring>(CentroidalQuadrupedParams p)</argsstring>
+        <name>centroidal_quadruped</name>
+        <qualifiedname>fancyqlone::qpalm::problems::centroidal_quadruped</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams" kindref="compound">CentroidalQuadrupedParams</ref></type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.cpp" line="118" column="28" bodyfile="src/example-problems/centroidal-quadruped/centroidal-quadruped.cpp" bodystart="118" bodyend="220" declfile="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" declline="108" declcolumn="1"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaea931c3de39b21c1adc2adda6927391" compoundref="ocp_8hpp" startline="129" endline="133">fancyqlone::LinearOCPStorage::A</references>
+        <references refid="group__linalg__views_1ga2ccef3dcd53320ccda2be9948781c65b">guanaqo::as_view</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a069e76a6c76bd62ab2eb0c5546f74897" compoundref="ocp_8hpp" startline="134" endline="138">fancyqlone::LinearOCPStorage::B</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" compoundref="ocp_8hpp" startline="253" endline="261">fancyqlone::LinearOCPStorage::b</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" compoundref="ocp_8hpp" startline="285" endline="294">fancyqlone::LinearOCPStorage::b_max</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" compoundref="ocp_8hpp" startline="269" endline="277">fancyqlone::LinearOCPStorage::b_min</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a34c39df9caefe2052ebc58ac2eecd1d6" compoundref="centroidal-quadruped_8hpp" startline="42">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::base_height</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a55df8252720b2ca53506533388b9c4ed" compoundref="centroidal-quadruped_8cpp" startline="118" endline="220">centroidal_quadruped</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a755b42ad7574b683175254de50793aa0" compoundref="ocp_8hpp" startline="113" endline="117">fancyqlone::LinearOCPStorage::D</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1abc48889c22bac2e35b735464309f9a64" compoundref="centroidal-quadruped_8hpp" startline="33">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::dt</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1540bea47a7122cfa884576697d5f6b2" compoundref="centroidal-quadruped_8hpp" startline="36">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::f_max</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a9a689150c297d950a142999cb760f6e7" compoundref="centroidal-quadruped_8hpp" startline="43">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::foot_x</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ae22830fd85e26c2d28a7ce56f7c3b60e" compoundref="centroidal-quadruped_8hpp" startline="44">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::foot_y</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ae632aa0072f83a674ef2912d52936c9b" compoundref="centroidal-quadruped_8hpp" startline="57" endline="59">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::force_weights</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ab879e0814053d773e96f2e3ec19520c5" compoundref="centroidal-quadruped_8hpp" startline="37">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::gravity</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a47f8b720ff2014b9fd5895d8bd4588be" compoundref="centroidal-quadruped_8hpp" startline="48" endline="51">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::inertia</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ae2c211426954dd86fe3b5ffc71490d0d" compoundref="centroidal-quadruped_8hpp" startline="40">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::initial_stage</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a63b033555393bcc93eea9bebafc5416d" compoundref="centroidal-quadruped_8hpp" startline="35">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::mass</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1bc3835a2d764573c46ad977a11e4e71" compoundref="centroidal-quadruped_8hpp" startline="34">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::mu</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" compoundref="ocp_8hpp" startline="77" endline="81">fancyqlone::LinearOCPStorage::Q</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ab0b91b1dac835a47452d45c0d2d9f1ee" compoundref="ocp_8hpp" startline="82" endline="86">fancyqlone::LinearOCPStorage::R</references>
+        <references refid="group__topic-ocp-formulations_1gaec2ffbb855f9e5dcfc01dcf321ce51cb" compoundref="conversion_8cpp" startline="9" endline="35">fancyqlone::reference_to_gradient</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1acec6ee0d2f9984b9dd3d70b3895fc582" compoundref="centroidal-quadruped_8hpp" startline="53" endline="55">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::state_weights</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a55df8252720b2ca53506533388b9c4ed" compoundref="centroidal-quadruped_8cpp" startline="118" endline="220">centroidal_quadruped</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a21ab1286bab4a60e920b940a639020a4" compoundref="centroidal-quadruped_8cpp" startline="222" endline="246">fan_centroidal_quadruped</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1_1problems_1a21ab1286bab4a60e920b940a639020a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem" kindref="compound">FanCentroidalQuadrupedProblem</ref></type>
+        <definition>FanCentroidalQuadrupedProblem fancyqlone::qpalm::problems::fan_centroidal_quadruped</definition>
+        <argsstring>(CentroidalQuadrupedParams p, index_t num_branches, real_t mu_radius)</argsstring>
+        <name>fan_centroidal_quadruped</name>
+        <qualifiedname>fancyqlone::qpalm::problems::fan_centroidal_quadruped</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams" kindref="compound">CentroidalQuadrupedParams</ref></type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>num_branches</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+          <declname>mu_radius</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.cpp" line="222" column="31" bodyfile="src/example-problems/centroidal-quadruped/centroidal-quadruped.cpp" bodystart="222" bodyend="246" declfile="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" declline="111" declcolumn="1"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a55df8252720b2ca53506533388b9c4ed" compoundref="centroidal-quadruped_8cpp" startline="118" endline="220">centroidal_quadruped</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a21ab1286bab4a60e920b940a639020a4" compoundref="centroidal-quadruped_8cpp" startline="222" endline="246">fan_centroidal_quadruped</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1bc3835a2d764573c46ad977a11e4e71" compoundref="centroidal-quadruped_8hpp" startline="34">fancyqlone::qpalm::problems::CentroidalQuadrupedParams::mu</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a21ab1286bab4a60e920b940a639020a4" compoundref="centroidal-quadruped_8cpp" startline="222" endline="246">fan_centroidal_quadruped</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1_1problems_1a5dcb9459cf8edbf58534c782b419cbf3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1LinearOCPStorage" kindref="compound">LinearOCPStorage</ref></type>
+        <definition>LinearOCPStorage fancyqlone::qpalm::problems::load_from_csv</definition>
+        <argsstring>(const fs::path &amp;folder, const std::string &amp;name)</argsstring>
+        <name>load_from_csv</name>
+        <qualifiedname>fancyqlone::qpalm::problems::load_from_csv</qualifiedname>
+        <param>
+          <type>const fs::path &amp;</type>
+          <declname>folder</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/src/csv.cpp" line="12" column="18" bodyfile="src/example-problems/src/csv.cpp" bodystart="12" bodyend="112" declfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/csv.hpp" declline="13" declcolumn="19"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaea931c3de39b21c1adc2adda6927391" compoundref="ocp_8hpp" startline="129" endline="133">fancyqlone::LinearOCPStorage::A</references>
+        <references refid="group__linalg__views_1ga2ccef3dcd53320ccda2be9948781c65b">guanaqo::as_view</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a069e76a6c76bd62ab2eb0c5546f74897" compoundref="ocp_8hpp" startline="134" endline="138">fancyqlone::LinearOCPStorage::B</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" compoundref="ocp_8hpp" startline="253" endline="261">fancyqlone::LinearOCPStorage::b</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" compoundref="ocp_8hpp" startline="285" endline="294">fancyqlone::LinearOCPStorage::b_max</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" compoundref="ocp_8hpp" startline="269" endline="277">fancyqlone::LinearOCPStorage::b_min</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ad991b26c207c150cf4117e3dea673b6d" compoundref="ocp_8hpp" startline="108" endline="112">fancyqlone::LinearOCPStorage::C</references>
+        <references refid="group__io_1ga7b55c259788953b68dc075f6c3f3859a">guanaqo::io::csv_read</references>
+        <references refid="group__io_1ga087c9290a0520b3f1b02b6787c921604">guanaqo::io::csv_read_row</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a755b42ad7574b683175254de50793aa0" compoundref="ocp_8hpp" startline="113" endline="117">fancyqlone::LinearOCPStorage::D</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a5dcb9459cf8edbf58534c782b419cbf3" compoundref="csv_8cpp" startline="12" endline="112">load_from_csv</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" compoundref="ocp_8hpp" startline="77" endline="81">fancyqlone::LinearOCPStorage::Q</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a087bd89a45d03b02126021b5fec8d1df" compoundref="ocp_8hpp" startline="227" endline="235">fancyqlone::LinearOCPStorage::qr</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ab0b91b1dac835a47452d45c0d2d9f1ee" compoundref="ocp_8hpp" startline="82" endline="86">fancyqlone::LinearOCPStorage::R</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a5dcb9459cf8edbf58534c782b419cbf3" compoundref="csv_8cpp" startline="12" endline="112">load_from_csv</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem" kindref="compound">PlatooningProblem</ref></type>
+        <definition>PlatooningProblem fancyqlone::qpalm::problems::platooning</definition>
+        <argsstring>(PlatooningParams p)</argsstring>
+        <name>platooning</name>
+        <qualifiedname>fancyqlone::qpalm::problems::platooning</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams" kindref="compound">PlatooningParams</ref></type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/src/platooning.cpp" line="11" column="19" bodyfile="src/example-problems/src/platooning.cpp" bodystart="11" bodyend="101" declfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/platooning.hpp" declline="33" declcolumn="20"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaea931c3de39b21c1adc2adda6927391" compoundref="ocp_8hpp" startline="129" endline="133">fancyqlone::LinearOCPStorage::A</references>
+        <references refid="group__linalg__views_1ga2ccef3dcd53320ccda2be9948781c65b">guanaqo::as_view</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a069e76a6c76bd62ab2eb0c5546f74897" compoundref="ocp_8hpp" startline="134" endline="138">fancyqlone::LinearOCPStorage::B</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" compoundref="ocp_8hpp" startline="253" endline="261">fancyqlone::LinearOCPStorage::b</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" compoundref="ocp_8hpp" startline="285" endline="294">fancyqlone::LinearOCPStorage::b_max</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" compoundref="ocp_8hpp" startline="269" endline="277">fancyqlone::LinearOCPStorage::b_min</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ad991b26c207c150cf4117e3dea673b6d" compoundref="ocp_8hpp" startline="108" endline="112">fancyqlone::LinearOCPStorage::C</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a755b42ad7574b683175254de50793aa0" compoundref="ocp_8hpp" startline="113" endline="117">fancyqlone::LinearOCPStorage::D</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0cf7ee6db68a2209fb95a6f343461591" compoundref="zoh_8hpp" startline="11" endline="21">discretize_zoh</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1ae574bb1582aa67d783009f0c29908f51" compoundref="platooning_8hpp" startline="16">fancyqlone::qpalm::problems::PlatooningParams::dist_init</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a4d13a8d404917263c4d289a1f9074833" compoundref="platooning_8hpp" startline="15">fancyqlone::qpalm::problems::PlatooningParams::dist_min</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a273aeeeba1ae769ba508ea1e04ab2e78" compoundref="platooning_8hpp" startline="13">fancyqlone::qpalm::problems::PlatooningParams::F_max</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a88f78df37958bdf3f976a993fb8fa07f" compoundref="platooning_8hpp" startline="12">fancyqlone::qpalm::problems::PlatooningParams::friction</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a5b9fa5ebf0093fd6fc14888bfe94c06d" compoundref="platooning_8hpp" startline="21" endline="21">fancyqlone::qpalm::problems::PlatooningParams::masses</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a66621b59aafde7792093f827861762e5" compoundref="platooning_8hpp" startline="18">fancyqlone::qpalm::problems::PlatooningParams::N_horiz</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a8eacc3e256b2b7df6961338524c4e098" compoundref="platooning_8hpp" startline="17">fancyqlone::qpalm::problems::PlatooningParams::p_target</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">platooning</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" compoundref="ocp_8hpp" startline="77" endline="81">fancyqlone::LinearOCPStorage::Q</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ab0b91b1dac835a47452d45c0d2d9f1ee" compoundref="ocp_8hpp" startline="82" endline="86">fancyqlone::LinearOCPStorage::R</references>
+        <references refid="group__topic-ocp-formulations_1gaec2ffbb855f9e5dcfc01dcf321ce51cb" compoundref="conversion_8cpp" startline="9" endline="35">fancyqlone::reference_to_gradient</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a92338826956b02eff6eb831c63d0ec02" compoundref="platooning_8hpp" startline="20">fancyqlone::qpalm::problems::PlatooningParams::scale_cost</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a78a5576a2f94d735900650259cee975d" compoundref="platooning_8hpp" startline="19">fancyqlone::qpalm::problems::PlatooningParams::T_horiz</references>
+        <references refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" compoundref="solve-block-tridiagonal_8cpp" startline="19">v</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams_1a928de9d8c7468ce98e7efb47df7c00f3" compoundref="platooning_8hpp" startline="14">fancyqlone::qpalm::problems::PlatooningParams::v_max</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">platooning</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1_1problems_1a28c6f6b2da0b1720ba707c5351e1f5f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem" kindref="compound">SpringMassProblem</ref></type>
+        <definition>SpringMassProblem fancyqlone::qpalm::problems::spring_mass</definition>
+        <argsstring>(SpringMassParams p)</argsstring>
+        <name>spring_mass</name>
+        <qualifiedname>fancyqlone::qpalm::problems::spring_mass</qualifiedname>
+        <param>
+          <type><ref refid="structSpringMassParams" kindref="compound">SpringMassParams</ref></type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/src/spring-mass.cpp" line="17" column="19" bodyfile="src/example-problems/src/spring-mass.cpp" bodystart="17" bodyend="161" declfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/spring-mass.hpp" declline="143" declcolumn="20"/>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaea931c3de39b21c1adc2adda6927391" compoundref="ocp_8hpp" startline="129" endline="133">fancyqlone::LinearOCPStorage::A</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a9dc0a5da6779fd9a342b32ee7344ee25">fancyqlone::qpalm::problems::SpringMassParams::actuator_placement</references>
+        <references refid="group__linalg__views_1ga2ccef3dcd53320ccda2be9948781c65b">guanaqo::as_view</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a069e76a6c76bd62ab2eb0c5546f74897" compoundref="ocp_8hpp" startline="134" endline="138">fancyqlone::LinearOCPStorage::B</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a8aea35b5a5e016e82ec0f62bc9202c8a" compoundref="ocp_8hpp" startline="253" endline="261">fancyqlone::LinearOCPStorage::b</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a9537f3f21aa23aadbd02eecde6f92e35" compoundref="ocp_8hpp" startline="285" endline="294">fancyqlone::LinearOCPStorage::b_max</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a3d26901e03695e9c20cfc4a762574b6c" compoundref="ocp_8hpp" startline="269" endline="277">fancyqlone::LinearOCPStorage::b_min</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ad991b26c207c150cf4117e3dea673b6d" compoundref="ocp_8hpp" startline="108" endline="112">fancyqlone::LinearOCPStorage::C</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a755b42ad7574b683175254de50793aa0" compoundref="ocp_8hpp" startline="113" endline="117">fancyqlone::LinearOCPStorage::D</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1a27006d25c166fadc27d783dc1da0b2e7" compoundref="ocp_8hpp" startline="40" endline="40">fancyqlone::LinearOCPStorage::dim</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0cf7ee6db68a2209fb95a6f343461591" compoundref="zoh_8hpp" startline="11" endline="21">discretize_zoh</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a76e7d91c9e87d37d0955f9afad53f846" compoundref="spring-mass_8hpp" startline="14">fancyqlone::qpalm::problems::SpringMassParams::F_max</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1aa3bb54a4ca88ab2b1cf5a181eef31ce8" compoundref="spring-mass_8hpp" startline="12">fancyqlone::qpalm::problems::SpringMassParams::friction</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a3870c15ac408fa3157f56ae43e175ac5ac28debccf0ec03098e0d622441b97501" compoundref="spring-mass_8hpp" startline="32">fancyqlone::qpalm::problems::SpringMassParams::IndividualActuators</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1aed0f60da86572d85c4bc99f156216eb9" compoundref="spring-mass_8hpp" startline="13">fancyqlone::qpalm::problems::SpringMassParams::k_spring</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a66c4b295339d39d8a623b68cbd687fb2" compoundref="spring-mass_8hpp" startline="29" endline="29">fancyqlone::qpalm::problems::SpringMassParams::masses</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a43d1d5ad7ca31fcb4242f20b642f2b22" compoundref="spring-mass_8hpp" startline="30">fancyqlone::qpalm::problems::SpringMassParams::n_actuators</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a7a8d1e0374f87744590361e0716fbb7c" compoundref="spring-mass_8hpp" startline="22">fancyqlone::qpalm::problems::SpringMassParams::N_horiz</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a258e8b49d16185b306f31dec843c8a70" compoundref="spring-mass_8hpp" startline="15">fancyqlone::qpalm::problems::SpringMassParams::p_max</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a192d6833a5f25b5f12530fe336c9e66e" compoundref="spring-mass_8hpp" startline="18">fancyqlone::qpalm::problems::SpringMassParams::p_max_f</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1ae8f483bc01bb19969aba0b83054e53a5" compoundref="spring-mass_8hpp" startline="16">fancyqlone::qpalm::problems::SpringMassParams::p_min</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1acba02f1a5a83c23dfe9a5484fb716c2b" compoundref="spring-mass_8hpp" startline="17">fancyqlone::qpalm::problems::SpringMassParams::p_min_f</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1aaced9f219b04dc25c0817bc04b9890d9" compoundref="ocp_8hpp" startline="77" endline="81">fancyqlone::LinearOCPStorage::Q</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1afa903242f8e5f4270a156a84c3d87702" compoundref="spring-mass_8hpp" startline="25">fancyqlone::qpalm::problems::SpringMassParams::q_pos</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a089bcd6d646a0341ef8590ca816e0b18" compoundref="spring-mass_8hpp" startline="27">fancyqlone::qpalm::problems::SpringMassParams::q_pos_f</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a0381978841501bc74680613c211f2b63" compoundref="spring-mass_8hpp" startline="24">fancyqlone::qpalm::problems::SpringMassParams::q_vel</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a866961b0395fad85fa519113069a5bdd" compoundref="spring-mass_8hpp" startline="26">fancyqlone::qpalm::problems::SpringMassParams::q_vel_f</references>
+        <references refid="structfancyqlone_1_1LinearOCPStorage_1ab0b91b1dac835a47452d45c0d2d9f1ee" compoundref="ocp_8hpp" startline="82" endline="86">fancyqlone::LinearOCPStorage::R</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a65eb165b4cff46cd6c59d9df05997cfa" compoundref="spring-mass_8hpp" startline="28">fancyqlone::qpalm::problems::SpringMassParams::r_act</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a3870c15ac408fa3157f56ae43e175ac5ace4c2af40b98dbf0cb5a6c221a89b735" compoundref="spring-mass_8hpp" startline="33">fancyqlone::qpalm::problems::SpringMassParams::RandomActuators</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a3870c15ac408fa3157f56ae43e175ac5aa1d1d5f166ac34202eda32af48eeefbc" compoundref="spring-mass_8hpp" startline="34">fancyqlone::qpalm::problems::SpringMassParams::RandomPairsOfActuators</references>
+        <references refid="group__topic-ocp-formulations_1gaec2ffbb855f9e5dcfc01dcf321ce51cb" compoundref="conversion_8cpp" startline="9" endline="35">fancyqlone::reference_to_gradient</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1ab574c84dacb8d6f6ec661cb14b0a3743" compoundref="spring-mass_8hpp" startline="37">fancyqlone::qpalm::problems::SpringMassParams::seed</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a28c6f6b2da0b1720ba707c5351e1f5f7" compoundref="src_2example-problems_2src_2spring-mass_8cpp" startline="17" endline="161">spring_mass</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a89a70c9b03f36c55f702bc2e272d87ea" compoundref="spring-mass_8hpp" startline="23">fancyqlone::qpalm::problems::SpringMassParams::T_horiz</references>
+        <references refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" compoundref="solve-block-tridiagonal_8cpp" startline="19">v</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a5f4c951467b3f93bce635b623802a704" compoundref="spring-mass_8hpp" startline="19">fancyqlone::qpalm::problems::SpringMassParams::v_max</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a6d633bc3b4eb7231f6e85b0c9aa2c833" compoundref="spring-mass_8hpp" startline="20">fancyqlone::qpalm::problems::SpringMassParams::v_max_f</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a3870c15ac408fa3157f56ae43e175ac5ab7136f7e85d24b484e2dc94d4ba33d5a" compoundref="spring-mass_8hpp" startline="35">fancyqlone::qpalm::problems::SpringMassParams::WangBoydActuators</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1a357b32c5456d16dccde256b6399cdbe3" compoundref="spring-mass_8hpp" startline="21">fancyqlone::qpalm::problems::SpringMassParams::width</references>
+        <referencedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1a87c3add091c930e9266aaf6c71d5b499" compoundref="benchmarks_2cyqpalm_2spring-mass_8cpp" startline="109" endline="119">create_problem</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1ad6df35818fd1a905713ce59651c93018" compoundref="src_2example-problems_2src_2spring-mass_8cpp" startline="162" endline="181">fan_spring_mass</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a28c6f6b2da0b1720ba707c5351e1f5f7" compoundref="src_2example-problems_2src_2spring-mass_8cpp" startline="17" endline="161">spring_mass</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1_1problems_1ad6df35818fd1a905713ce59651c93018" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanSpringMassProblem" kindref="compound">FanSpringMassProblem</ref></type>
+        <definition>FanSpringMassProblem fancyqlone::qpalm::problems::fan_spring_mass</definition>
+        <argsstring>(SpringMassParams p, index_t num_branches, real_t k_spring_diff=0.1)</argsstring>
+        <name>fan_spring_mass</name>
+        <qualifiedname>fancyqlone::qpalm::problems::fan_spring_mass</qualifiedname>
+        <param>
+          <type><ref refid="structSpringMassParams" kindref="compound">SpringMassParams</ref></type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>num_branches</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+          <declname>k_spring_diff</declname>
+          <defval>0.1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/src/spring-mass.cpp" line="162" column="22" bodyfile="src/example-problems/src/spring-mass.cpp" bodystart="162" bodyend="181" declfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/spring-mass.hpp" declline="144" declcolumn="23"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1ad6df35818fd1a905713ce59651c93018" compoundref="src_2example-problems_2src_2spring-mass_8cpp" startline="162" endline="181">fan_spring_mass</references>
+        <references refid="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams_1aed0f60da86572d85c4bc99f156216eb9" compoundref="spring-mass_8hpp" startline="13">fancyqlone::qpalm::problems::SpringMassParams::k_spring</references>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a28c6f6b2da0b1720ba707c5351e1f5f7" compoundref="src_2example-problems_2src_2spring-mass_8cpp" startline="17" endline="161">spring_mass</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1ad6df35818fd1a905713ce59651c93018" compoundref="src_2example-problems_2src_2spring-mass_8cpp" startline="162" endline="181">fan_spring_mass</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1_1problems_1a0cf7ee6db68a2209fb95a6f343461591" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::tuple&lt; <ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref>, <ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref> &gt;</type>
+        <definition>std::tuple&lt; eigen_mat, eigen_mat &gt; fancyqlone::qpalm::problems::discretize_zoh</definition>
+        <argsstring>(const Eigen::Ref&lt; const eigen_mat &gt; &amp;A, const Eigen::Ref&lt; const eigen_mat &gt; &amp;B, real_t Ts)</argsstring>
+        <name>discretize_zoh</name>
+        <qualifiedname>fancyqlone::qpalm::problems::discretize_zoh</qualifiedname>
+        <param>
+          <type>const Eigen::Ref&lt; const <ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref> &gt; &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>const Eigen::Ref&lt; const <ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref> &gt; &amp;</type>
+          <declname>B</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+          <declname>Ts</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/zoh.hpp" line="11" column="19" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/zoh.hpp" bodystart="11" bodyend="21"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0cf7ee6db68a2209fb95a6f343461591" compoundref="zoh_8hpp" startline="11" endline="21">discretize_zoh</references>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a9f4835c0a5aa54fbe52650937a54d6c7" compoundref="zoh_8hpp" startline="24" endline="35">discretize_zoh</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0cf7ee6db68a2209fb95a6f343461591" compoundref="zoh_8hpp" startline="11" endline="21">discretize_zoh</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0e5975050cdbdc3702c00f519922a6dd" compoundref="platooning_8cpp" startline="11" endline="101">platooning</referencedby>
+        <referencedby refid="namespacefancyqlone_1_1qpalm_1_1problems_1a28c6f6b2da0b1720ba707c5351e1f5f7" compoundref="src_2example-problems_2src_2spring-mass_8cpp" startline="17" endline="161">spring_mass</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespacefancyqlone_1_1qpalm_1_1problems_1a9f4835c0a5aa54fbe52650937a54d6c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::tuple&lt; <ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref>, <ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref>, <ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref> &gt;</type>
+        <definition>std::tuple&lt; eigen_mat, eigen_mat, eigen_mat &gt; fancyqlone::qpalm::problems::discretize_zoh</definition>
+        <argsstring>(const Eigen::Ref&lt; const eigen_mat &gt; &amp;A, const Eigen::Ref&lt; const eigen_mat &gt; &amp;B, const Eigen::Ref&lt; const eigen_mat &gt; &amp;b, real_t Ts)</argsstring>
+        <name>discretize_zoh</name>
+        <qualifiedname>fancyqlone::qpalm::problems::discretize_zoh</qualifiedname>
+        <param>
+          <type>const Eigen::Ref&lt; const <ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref> &gt; &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>const Eigen::Ref&lt; const <ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref> &gt; &amp;</type>
+          <declname>B</declname>
+        </param>
+        <param>
+          <type>const Eigen::Ref&lt; const <ref refid="namespacefancyqlone_1_1qpalm_1_1problems_1a64074f24c2af831ca90b0cc3e8ecae19" kindref="member">eigen_mat</ref> &gt; &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+          <declname>Ts</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/zoh.hpp" line="24" column="1" bodyfile="src/example-problems/include/fancyqlone/fancyqpalm/example-problems/zoh.hpp" bodystart="24" bodyend="35"/>
+        <references refid="namespacefancyqlone_1_1qpalm_1_1problems_1a0cf7ee6db68a2209fb95a6f343461591" compoundref="zoh_8hpp" startline="11" endline="21">discretize_zoh</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.cpp" line="22" column="1"/>
+  </compounddef>
+</doxygen>

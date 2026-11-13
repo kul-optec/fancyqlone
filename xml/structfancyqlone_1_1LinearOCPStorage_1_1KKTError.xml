@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1LinearOCPStorage_1_1KKTError" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::LinearOCPStorage::KKTError</compoundname>
+    <includes refid="ocp_8hpp" local="no">fancyqlone/ocp.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPStorage_1_1KKTError_1af7c894d8059fddc1101c937aa0556ac3" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::LinearOCPStorage::KKTError::stationarity</definition>
+        <argsstring></argsstring>
+        <name>stationarity</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::KKTError::stationarity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="446" column="16" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="446" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPStorage_1_1KKTError_1a16a0d8bc8d63222f16c995bc9952bec0" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::LinearOCPStorage::KKTError::inequality_residual</definition>
+        <argsstring></argsstring>
+        <name>inequality_residual</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::KKTError::inequality_residual</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="446" column="29" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="446" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPStorage_1_1KKTError_1a85cd4b55f3f693cc573c555fb26ac328" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::LinearOCPStorage::KKTError::equality_residual</definition>
+        <argsstring></argsstring>
+        <name>equality_residual</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::KKTError::equality_residual</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="446" column="49" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="446" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPStorage_1_1KKTError_1ae6ddeb6b57645deaf3e5c0e72923a113" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::LinearOCPStorage::KKTError::complementarity</definition>
+        <argsstring></argsstring>
+        <name>complementarity</name>
+        <qualifiedname>fancyqlone::LinearOCPStorage::KKTError::complementarity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="446" column="67" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="446" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::LinearOCPStorage::KKTError</label>
+        <link refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTError"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="445" column="5" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="445" bodyend="447"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTError_1ae6ddeb6b57645deaf3e5c0e72923a113" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::KKTError</scope><name>complementarity</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTError_1a85cd4b55f3f693cc573c555fb26ac328" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::KKTError</scope><name>equality_residual</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTError_1a16a0d8bc8d63222f16c995bc9952bec0" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::KKTError</scope><name>inequality_residual</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPStorage_1_1KKTError_1af7c894d8059fddc1101c937aa0556ac3" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPStorage::KKTError</scope><name>stationarity</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

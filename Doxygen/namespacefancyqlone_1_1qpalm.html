@@ -1,0 +1,1805 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: fancyqlone::qpalm Namespace Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('namespacefancyqlone_1_1qpalm.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fancyqlone::qpalm Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:problems" id="r_problems"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm_1_1problems.html">problems</a></td></tr>
+<tr class="memitem:detail" id="r_detail"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm_1_1detail.html">detail</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:CyqloneData_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyqloneData" id="r_CyqloneData_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyqloneData"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td></tr>
+<tr class="memitem:CyQPALMBackendSettings_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyQPALMBackendSettings" id="r_CyQPALMBackendSettings_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyQPALMBackendSettings"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a></td></tr>
+<tr class="memitem:CyQPALMBackendStats_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyQPALMBackendStats" id="r_CyQPALMBackendStats_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyQPALMBackendStats"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats">CyQPALMBackendStats</a></td></tr>
+<tr class="memitem:CyQPALMBackend" id="r_CyQPALMBackend"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a></td></tr>
+<tr class="memitem:CycloneBackendTraits_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CycloneBackendTraits" id="r_CycloneBackendTraits_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CycloneBackendTraits"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">CycloneBackendTraits</a></td></tr>
+<tr class="memitem:CycloneBackendTraits_3C_20fancyqlone_3A_3ACyqloneSolver_3C_20VL_2C_20real_5Ft_2C_20DefaultOrder_20_3E_20_3E" id="r_CycloneBackendTraits_3C_20fancyqlone_3A_3ACyqloneSolver_3C_20VL_2C_20real_5Ft_2C_20DefaultOrder_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411.html">CycloneBackendTraits&lt; fancyqlone::CyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</a></td></tr>
+<tr class="memitem:CycloneBackendTraits_3C_20fancyqlone_3A_3AFanCyqloneSolver_3C_20VL_2C_20real_5Ft_2C_20DefaultOrder_20_3E_20_3E" id="r_CycloneBackendTraits_3C_20fancyqlone_3A_3AFanCyqloneSolver_3C_20VL_2C_20real_5Ft_2C_20DefaultOrder_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1FanCyqloneSolver_3_01VL_00_01cf9a34b56f7155b9b1c5e99db9f86eb.html">CycloneBackendTraits&lt; fancyqlone::FanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</a></td></tr>
+<tr class="memitem:CycloneBackendTraits_3C_20fancyqlone_3A_3ASerialFanCyqloneSolver_3C_20VL_2C_20real_5Ft_2C_20DefaultOrder_20_3E_20_3E" id="r_CycloneBackendTraits_3C_20fancyqlone_3A_3ASerialFanCyqloneSolver_3C_20VL_2C_20real_5Ft_2C_20DefaultOrder_20_3E_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1SerialFanCyqloneSolver_3_01Vee92cd4a6c95599f8faa9bb93bc54908.html">CycloneBackendTraits&lt; fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</a></td></tr>
+<tr class="memitem:unique_5FCyQPALMBackend" id="r_unique_5FCyQPALMBackend"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a></td></tr>
+<tr class="memitem:DetailedStats" id="r_DetailedStats"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1DetailedStats.html">DetailedStats</a></td></tr>
+<tr class="memitem:Breakpoint" id="r_Breakpoint"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1Breakpoint.html">Breakpoint</a></td></tr>
+<tr class="memitem:ABSums" id="r_ABSums"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1ABSums.html">ABSums</a></td></tr>
+<tr class="memitem:PartitionedBreakpoints_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1PartitionedBreakpoints" id="r_PartitionedBreakpoints_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1PartitionedBreakpoints"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints">PartitionedBreakpoints</a></td></tr>
+<tr class="memitem:BreakpointsResult_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1BreakpointsResult" id="r_BreakpointsResult_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1BreakpointsResult"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1BreakpointsResult">BreakpointsResult</a></td></tr>
+<tr class="memitem:compute_5Fbreakpoints_5Ffn" id="r_compute_5Fbreakpoints_5Ffn"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1compute__breakpoints__fn.html">compute_breakpoints_fn</a></td></tr>
+<tr class="memitem:get_5Fpartitioned_5Fbreakpoints_5Ffn" id="r_get_5Fpartitioned_5Fbreakpoints_5Ffn"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1get__partitioned__breakpoints__fn.html">get_partitioned_breakpoints_fn</a></td></tr>
+<tr class="memitem:get_5Fbreakpoints_5Ffn" id="r_get_5Fbreakpoints_5Ffn"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1get__breakpoints__fn.html">get_breakpoints_fn</a></td></tr>
+<tr class="memitem:LineSearchSettings_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1LineSearchSettings" id="r_LineSearchSettings_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1LineSearchSettings"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1LineSearchSettings">LineSearchSettings</a></td></tr>
+<tr class="memitem:LineSearch" id="r_LineSearch"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1LineSearch.html">LineSearch</a></td></tr>
+<tr class="memitem:SolverImplementation" id="r_SolverImplementation"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">SolverImplementation</a></td></tr>
+<tr class="memitem:Settings" id="r_Settings"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a></td></tr>
+<tr class="memitem:SolverTimings" id="r_SolverTimings"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1SolverTimings.html">SolverTimings</a></td></tr>
+<tr class="memitem:SolverStats_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1SolverStats" id="r_SolverStats_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1SolverStats"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="group__topic-optimization-solvers.html#structfancyqlone_1_1qpalm_1_1SolverStats">SolverStats</a></td></tr>
+<tr class="memitem:Solver" id="r_Solver"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">Solver</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a49bd3110c376daeaa8abb3fc29b761cd" id="r_a49bd3110c376daeaa8abb3fc29b761cd"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a49bd3110c376daeaa8abb3fc29b761cd">ABSum_t</a> = <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td></tr>
+<tr class="memitem:aa1ebbe5feb2e66562ad44d9002bab7ef" id="r_aa1ebbe5feb2e66562ad44d9002bab7ef"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> v, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> order&gt; </td></tr>
+<tr class="memitem:aa1ebbe5feb2e66562ad44d9002bab7ef template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a></td></tr>
+<tr class="memitem:a27779a7c1b02137d9aed6561bc79232a" id="r_a27779a7c1b02137d9aed6561bc79232a"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> v, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> order&gt; </td></tr>
+<tr class="memitem:a27779a7c1b02137d9aed6561bc79232a template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a></td></tr>
+<tr class="memitem:a9428e937fd2cf61f1d9e1c1053e79e7e" id="r_a9428e937fd2cf61f1d9e1c1053e79e7e"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> v, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> order&gt; </td></tr>
+<tr class="memitem:a9428e937fd2cf61f1d9e1c1053e79e7e template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gac67dc98973eb37748e986ba97732b38c" id="r_gac67dc98973eb37748e986ba97732b38c"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group__topic-optimization-solvers-ocp.html#gac67dc98973eb37748e986ba97732b38c">WarmStartingStrategy</a> { <a class="el" href="group__topic-optimization-solvers-ocp.html#ggac67dc98973eb37748e986ba97732b38ca8b7a61a6e9bd5b8977b7b3f02a425adc">WarmStartingStrategy::Zeros</a>
+, <a class="el" href="group__topic-optimization-solvers-ocp.html#ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea">WarmStartingStrategy::Copy</a>
+, <a class="el" href="group__topic-optimization-solvers-ocp.html#ggac67dc98973eb37748e986ba97732b38ca825a3d98017bab11815ad2817201324c">WarmStartingStrategy::Shift</a>
+, <a class="el" href="group__topic-optimization-solvers-ocp.html#ggac67dc98973eb37748e986ba97732b38cab882fa82c60e5b9a229e5ed6e52ad31a">WarmStartingStrategy::ShiftNoInequality</a>
+ }</td></tr>
+<tr class="memitem:ga90c820ba89c66a51ee3e57a7ebf796d2" id="r_ga90c820ba89c66a51ee3e57a7ebf796d2"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group__topic-optimization-solvers-ocp.html#ga90c820ba89c66a51ee3e57a7ebf796d2">FanWarmStartingStrategy</a> { <a class="el" href="group__topic-optimization-solvers-ocp.html#gga90c820ba89c66a51ee3e57a7ebf796d2a8b7a61a6e9bd5b8977b7b3f02a425adc">FanWarmStartingStrategy::Zeros</a>
+, <a class="el" href="group__topic-optimization-solvers-ocp.html#gga90c820ba89c66a51ee3e57a7ebf796d2a5fb63579fc981698f97d55bfecb213ea">FanWarmStartingStrategy::Copy</a>
+, <a class="el" href="group__topic-optimization-solvers-ocp.html#gga90c820ba89c66a51ee3e57a7ebf796d2a825a3d98017bab11815ad2817201324c">FanWarmStartingStrategy::Shift</a>
+, <a class="el" href="group__topic-optimization-solvers-ocp.html#gga90c820ba89c66a51ee3e57a7ebf796d2ab882fa82c60e5b9a229e5ed6e52ad31a">FanWarmStartingStrategy::ShiftNoInequality</a>
+ }</td></tr>
+<tr class="memitem:ga24477fe148453ccedf7d5ad6d0ba0f78" id="r_ga24477fe148453ccedf7d5ad6d0ba0f78"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a> { <br />
+&#160;&#160;<a class="el" href="group__topic-optimization-solvers.html#gga24477fe148453ccedf7d5ad6d0ba0f78ad8a942ef2b04672adfafef0ad817a407">SolverStatus::Busy</a> = 0
+, <a class="el" href="group__topic-optimization-solvers.html#gga24477fe148453ccedf7d5ad6d0ba0f78ada5418b1eb4e80d05f2c1c7c4fa1b6ec">SolverStatus::Converged</a>
+, <a class="el" href="group__topic-optimization-solvers.html#gga24477fe148453ccedf7d5ad6d0ba0f78a9e8b9350c8f1716701ec1f9bbe76432e">SolverStatus::MaxTime</a>
+, <a class="el" href="group__topic-optimization-solvers.html#gga24477fe148453ccedf7d5ad6d0ba0f78abbf52264f7a6e91c48a242f95aeed3db">SolverStatus::MaxIter</a>
+, <br />
+&#160;&#160;<a class="el" href="group__topic-optimization-solvers.html#gga24477fe148453ccedf7d5ad6d0ba0f78aff6e97b110349dae9c6e8be0ff7a85c3">SolverStatus::NotFinite</a>
+, <a class="el" href="group__topic-optimization-solvers.html#gga24477fe148453ccedf7d5ad6d0ba0f78ab644b4f0de4cf0c46acb4583602e168c">SolverStatus::NoProgress</a>
+, <a class="el" href="group__topic-optimization-solvers.html#gga24477fe148453ccedf7d5ad6d0ba0f78a12c37c4278b8c0db6c2f65052569cd80">SolverStatus::Interrupted</a>
+, <a class="el" href="group__topic-optimization-solvers.html#gga24477fe148453ccedf7d5ad6d0ba0f78ab0d4998a26f5b5742ad38c4af8817e32">SolverStatus::Exception</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ga24477fe148453ccedf7d5ad6d0ba0f78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exit status of a numerical solver.  <a href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">More...</a><br /></td></tr>
+<tr class="memitem:a12561d95ffd5ca9cc074d7b3edceb429" id="r_a12561d95ffd5ca9cc074d7b3edceb429"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> </td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga04ffaf134708a2b3476e949e6dfa426e" id="r_ga04ffaf134708a2b3476e949e6dfa426e"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;&gt; </td></tr>
+<tr class="memitem:ga04ffaf134708a2b3476e949e6dfa426e template"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; VL, DefaultOrder, LinearSolver &gt;&#160;</td><td class="memItemRight"><a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">make_cyqpalm_backend</a> (const typename <a class="el" href="#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">CycloneBackendTraits</a>&lt; LinearSolver &gt;::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:ga923329c8239f305d13cb14a91d838483" id="r_ga923329c8239f305d13cb14a91d838483"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;&gt; </td></tr>
+<tr class="memitem:ga923329c8239f305d13cb14a91d838483 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">update_cyqpalm_backend</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; VL, DefaultOrder, LinearSolver &gt; &amp;backend, const typename <a class="el" href="#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">CycloneBackendTraits</a>&lt; LinearSolver &gt;::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:ga9b8823b057fe6a59e9d65db005d8c3ff" id="r_ga9b8823b057fe6a59e9d65db005d8c3ff"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;&gt; </td></tr>
+<tr class="memitem:ga9b8823b057fe6a59e9d65db005d8c3ff template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="group__topic-optimization-solvers-ocp.html#ga9b8823b057fe6a59e9d65db005d8c3ff">update_cyqpalm_backend</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; VL, DefaultOrder, LinearSolver &gt; &amp;backend, const typename <a class="el" href="#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">CycloneBackendTraits</a>&lt; LinearSolver &gt;::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a0e5621455d223744bb4cb2ff621cdf21" id="r_a0e5621455d223744bb4cb2ff621cdf21"><td class="memTemplParams" colspan="2">template&lt;class R, class F&gt; </td></tr>
+<tr class="memitem:a0e5621455d223744bb4cb2ff621cdf21 template"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a0e5621455d223744bb4cb2ff621cdf21">sort</a> (R &amp;&amp;range, F key)</td></tr>
+<tr class="memitem:a4416f34ca15a7ca342298669a346af77" id="r_a4416f34ca15a7ca342298669a346af77"><td class="memTemplParams" colspan="2">template&lt;class R, class I, class F&gt; </td></tr>
+<tr class="memitem:a4416f34ca15a7ca342298669a346af77 template"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a4416f34ca15a7ca342298669a346af77">nth_element</a> (R &amp;&amp;range, I mid, F key)</td></tr>
+<tr class="memitem:a71954dbb7921433116705e923e036306" id="r_a71954dbb7921433116705e923e036306"><td class="memTemplParams" colspan="2">template&lt;std::ranges::bidirectional_range R, class F, class C&gt; </td></tr>
+<tr class="memitem:a71954dbb7921433116705e923e036306 template"><td class="memItemLeft">static std::ranges::subrange&lt; std::ranges::iterator_t&lt; R &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a71954dbb7921433116705e923e036306">partition_min</a> (R &amp;&amp;range, F pred, C cmp)</td></tr>
+<tr class="memdesc:a71954dbb7921433116705e923e036306"><td class="mdescLeft">&#160;</td><td class="mdescRight">A variant of std::ranges::partition where the first element of the return value is the smallest element of the "false" partition.  <br /></td></tr>
+<tr class="memitem:a817e4099fa7003745265f06fa0e8f552" id="r_a817e4099fa7003745265f06fa0e8f552"><td class="memTemplParams" colspan="2">template&lt;std::ranges::forward_range R, class F&gt; </td></tr>
+<tr class="memitem:a817e4099fa7003745265f06fa0e8f552 template"><td class="memItemLeft">static decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#a817e4099fa7003745265f06fa0e8f552">partition</a> (R &amp;&amp;range, F key)</td></tr>
+<tr class="memitem:a253d1e03560fadd7156b05f405f30622" id="r_a253d1e03560fadd7156b05f405f30622"><td class="memTemplParams" colspan="2">template&lt;std::permutable I, std::sentinel_for&lt; I &gt; S, class F&gt; </td></tr>
+<tr class="memitem:a253d1e03560fadd7156b05f405f30622 template"><td class="memItemLeft">static decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#a253d1e03560fadd7156b05f405f30622">partition</a> (I first, S last, F key)</td></tr>
+<tr class="memitem:aa056c09b3502ed82684674fbcc8281e1" id="r_aa056c09b3502ed82684674fbcc8281e1"><td class="memTemplParams" colspan="2">template&lt;class R, class F&gt; </td></tr>
+<tr class="memitem:aa056c09b3502ed82684674fbcc8281e1 template"><td class="memItemLeft">static decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#aa056c09b3502ed82684674fbcc8281e1">min_element</a> (R &amp;&amp;range, F key)</td></tr>
+<tr class="memitem:a1e5cde98e9bb08c358e0dbde2e26f24f" id="r_a1e5cde98e9bb08c358e0dbde2e26f24f"><td class="memTemplParams" colspan="2">template&lt;class I, class T, class BinOp, class UnOp&gt; </td></tr>
+<tr class="memitem:a1e5cde98e9bb08c358e0dbde2e26f24f template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#a1e5cde98e9bb08c358e0dbde2e26f24f">transform_reduce</a> (I first, I last, T init, BinOp binary_op, UnOp unary_op)</td></tr>
+<tr class="memitem:a6f138c5f7d15cc41c0cecc4c2321e5e7" id="r_a6f138c5f7d15cc41c0cecc4c2321e5e7"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1qpalm_1_1ABSums.html">ABSums</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6f138c5f7d15cc41c0cecc4c2321e5e7">partial_sum_negative</a> (<a class="el" href="#structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints">PartitionedBreakpoints</a> breakpoints, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> η=0, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> β=0)</td></tr>
+<tr class="memitem:a31712886c80efac2ce71a559731db2c3" id="r_a31712886c80efac2ce71a559731db2c3"><td class="memTemplParams" colspan="2">template&lt;class Vec&gt; </td></tr>
+<tr class="memitem:a31712886c80efac2ce71a559731db2c3 template"><td class="memItemLeft">std::span&lt; <a class="el" href="structfancyqlone_1_1qpalm_1_1Breakpoint.html">Breakpoint</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a31712886c80efac2ce71a559731db2c3">compute_breakpoints_default</a> (std::vector&lt; <a class="el" href="structfancyqlone_1_1qpalm_1_1Breakpoint.html">Breakpoint</a> &gt; &amp;breakpoints, const Vec &amp;Σ, const Vec &amp;y, const Vec &amp;Ad, const Vec &amp;Ax, const Vec &amp;b_min, const Vec &amp;b_max)</td></tr>
+<tr class="memdesc:a31712886c80efac2ce71a559731db2c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the break points t[i] using formula (3.6) in the QPALM paper.  <br /></td></tr>
+<tr class="memitem:a284200507c01e1f1c9823d99c318cf1b" id="r_a284200507c01e1f1c9823d99c318cf1b"><td class="memItemLeft"><a class="el" href="#structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints">PartitionedBreakpoints</a>&#160;</td><td class="memItemRight"><a class="el" href="#a284200507c01e1f1c9823d99c318cf1b">partition_breakpoints_default</a> (std::span&lt; <a class="el" href="structfancyqlone_1_1qpalm_1_1Breakpoint.html">Breakpoint</a> &gt; breakpoints)</td></tr>
+<tr class="memdesc:a284200507c01e1f1c9823d99c318cf1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves any non-finite elements in t to the end of the range, and all negative elements to the front.  <br /></td></tr>
+<tr class="memitem:a26d4973d280fd9cde97918d0b0b1fe78" id="r_a26d4973d280fd9cde97918d0b0b1fe78"><td class="memItemLeft">const char *&#160;</td><td class="memItemRight"><a class="el" href="#a26d4973d280fd9cde97918d0b0b1fe78">enum_name</a> (<a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a> s)</td></tr>
+<tr class="memitem:ac78668c7efb8aa549ac3d3e7ce13810c" id="r_ac78668c7efb8aa549ac3d3e7ce13810c"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac78668c7efb8aa549ac3d3e7ce13810c">operator&lt;&lt;</a> (std::ostream &amp;os, <a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a> s)</td></tr>
+<tr class="memitem:ae8c565fbca93f5e40e0c426c7975ad5a" id="r_ae8c565fbca93f5e40e0c426c7975ad5a"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae8c565fbca93f5e40e0c426c7975ad5a">make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:ac6f465fad8dd8f57357f5d897f7978d8" id="r_ac6f465fad8dd8f57357f5d897f7978d8"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#ac6f465fad8dd8f57357f5d897f7978d8">update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a66aece703a8d869eed4fde92f3bc09e7" id="r_a66aece703a8d869eed4fde92f3bc09e7"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a66aece703a8d869eed4fde92f3bc09e7">update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a55a4e67def5e01beaea2271c4f55fbcc" id="r_a55a4e67def5e01beaea2271c4f55fbcc"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a55a4e67def5e01beaea2271c4f55fbcc">make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:ad8dac8123ef4d4c18e0cb67b9a5e6bd6" id="r_ad8dac8123ef4d4c18e0cb67b9a5e6bd6"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#ad8dac8123ef4d4c18e0cb67b9a5e6bd6">update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:ab44d5bd8534ec63b05acd10977dc0928" id="r_ab44d5bd8534ec63b05acd10977dc0928"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#ab44d5bd8534ec63b05acd10977dc0928">update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a981c1441f46473d19aed87f81689fc02" id="r_a981c1441f46473d19aed87f81689fc02"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a981c1441f46473d19aed87f81689fc02">make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:abe6927ae4965c8b6c24f3f699788cdcd" id="r_abe6927ae4965c8b6c24f3f699788cdcd"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#abe6927ae4965c8b6c24f3f699788cdcd">update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a08a0f11654165b7c9801676518571ef9" id="r_a08a0f11654165b7c9801676518571ef9"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a08a0f11654165b7c9801676518571ef9">update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:ab9112086e72eca21453b423ae8c2a66b" id="r_ab9112086e72eca21453b423ae8c2a66b"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab9112086e72eca21453b423ae8c2a66b">make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:a11ab78a582975ea70b503e6e9349d907" id="r_a11ab78a582975ea70b503e6e9349d907"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a11ab78a582975ea70b503e6e9349d907">update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:ad654bc906af1db1fb3a6d0b0e25945e9" id="r_ad654bc906af1db1fb3a6d0b0e25945e9"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#ad654bc906af1db1fb3a6d0b0e25945e9">update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a0306349b78a982abb009e045d0012cf5" id="r_a0306349b78a982abb009e045d0012cf5"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0306349b78a982abb009e045d0012cf5">make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:a6f6fbb0b0e38f611b69051ad818c8f02" id="r_a6f6fbb0b0e38f611b69051ad818c8f02"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a6f6fbb0b0e38f611b69051ad818c8f02">update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:afcf80c489204cebc1cd09a6c3827624f" id="r_afcf80c489204cebc1cd09a6c3827624f"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#afcf80c489204cebc1cd09a6c3827624f">update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a9844fac65cfbf75551d6dc262741d9b0" id="r_a9844fac65cfbf75551d6dc262741d9b0"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9844fac65cfbf75551d6dc262741d9b0">make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:a933156eda2a07a6f5475c7d309bc5d11" id="r_a933156eda2a07a6f5475c7d309bc5d11"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a933156eda2a07a6f5475c7d309bc5d11">update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:ad10e9c442eb06442f8dc8dfa64893a76" id="r_ad10e9c442eb06442f8dc8dfa64893a76"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#ad10e9c442eb06442f8dc8dfa64893a76">update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a98408f45e677c32bcad07999c05ed8bd" id="r_a98408f45e677c32bcad07999c05ed8bd"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a98408f45e677c32bcad07999c05ed8bd">make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:ac2a4fff46354cd00910bb2b5feeb41c2" id="r_ac2a4fff46354cd00910bb2b5feeb41c2"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#ac2a4fff46354cd00910bb2b5feeb41c2">update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a0f32f33e20fbb13f2273c8a5653c50c5" id="r_a0f32f33e20fbb13f2273c8a5653c50c5"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a0f32f33e20fbb13f2273c8a5653c50c5">update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a99fa8edac0425cb26c86803d043b9035" id="r_a99fa8edac0425cb26c86803d043b9035"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a99fa8edac0425cb26c86803d043b9035">make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:a6997955ebe0ed55bcdcaf83537ebc0e1" id="r_a6997955ebe0ed55bcdcaf83537ebc0e1"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a6997955ebe0ed55bcdcaf83537ebc0e1">update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a448e54f6554b5e65572426f0d29e6771" id="r_a448e54f6554b5e65572426f0d29e6771"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a448e54f6554b5e65572426f0d29e6771">update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a239e9713e387d7d43c863e2517ef0deb" id="r_a239e9713e387d7d43c863e2517ef0deb"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a239e9713e387d7d43c863e2517ef0deb">make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:a7f011c4b0f2d346cc8ed6ec6a9e4f4ca" id="r_a7f011c4b0f2d346cc8ed6ec6a9e4f4ca"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a7f011c4b0f2d346cc8ed6ec6a9e4f4ca">update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a5969103fd508334f653401b25511875b" id="r_a5969103fd508334f653401b25511875b"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a5969103fd508334f653401b25511875b">update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a0a62631675a6269f207247760f65b2fc" id="r_a0a62631675a6269f207247760f65b2fc"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0a62631675a6269f207247760f65b2fc">make_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:af748664021387ba684ecf88351f20007" id="r_af748664021387ba684ecf88351f20007"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#af748664021387ba684ecf88351f20007">update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:aaa1c07be76b6df0935034afbe5f734f8" id="r_aaa1c07be76b6df0935034afbe5f734f8"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#aaa1c07be76b6df0935034afbe5f734f8">update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a533b35626fdd48fb12e7348286b1b93c" id="r_a533b35626fdd48fb12e7348286b1b93c"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a533b35626fdd48fb12e7348286b1b93c">make_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:aa0dd7f7e0b1892c5f9d408fcb58fa7ec" id="r_aa0dd7f7e0b1892c5f9d408fcb58fa7ec"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#aa0dd7f7e0b1892c5f9d408fcb58fa7ec">update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:ae350ab1a31a11d04711d6a2bf8e5e345" id="r_ae350ab1a31a11d04711d6a2bf8e5e345"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#ae350ab1a31a11d04711d6a2bf8e5e345">update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:aa8dc8a8cdd00d671de1d420c55c85299" id="r_aa8dc8a8cdd00d671de1d420c55c85299"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa8dc8a8cdd00d671de1d420c55c85299">make_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:aec89b4fdbe5bf6db4ea9a91f8befe8e8" id="r_aec89b4fdbe5bf6db4ea9a91f8befe8e8"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#aec89b4fdbe5bf6db4ea9a91f8befe8e8">update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a4b8166ca2e5cfa40320e2c5526e44050" id="r_a4b8166ca2e5cfa40320e2c5526e44050"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="#a4b8166ca2e5cfa40320e2c5526e44050">update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a3177822c4e8bd78867cb8736f643e562" id="r_a3177822c4e8bd78867cb8736f643e562"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1SolverTimings.html#a3177822c4e8bd78867cb8736f643e562">operator&lt;&lt;</a> (std::ostream &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverTimings.html">SolverTimings</a> &amp;)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a188d0d7d6c6ee33d437bc4fa5ae155f6" id="r_a188d0d7d6c6ee33d437bc4fa5ae155f6"><td class="memItemLeft">struct <a class="el" href="structfancyqlone_1_1qpalm_1_1compute__breakpoints__fn.html">fancyqlone::qpalm::compute_breakpoints_fn</a>&#160;</td><td class="memItemRight"><a class="el" href="#a188d0d7d6c6ee33d437bc4fa5ae155f6">compute_breakpoints</a></td></tr>
+<tr class="memitem:a007773760e14275aa0e91d97ce19f7fb" id="r_a007773760e14275aa0e91d97ce19f7fb"><td class="memItemLeft">struct <a class="el" href="structfancyqlone_1_1qpalm_1_1get__partitioned__breakpoints__fn.html">fancyqlone::qpalm::get_partitioned_breakpoints_fn</a>&#160;</td><td class="memItemRight"><a class="el" href="#a007773760e14275aa0e91d97ce19f7fb">get_partitioned_breakpoints</a></td></tr>
+<tr class="memitem:a39b3b7bd65a62c6ecc606506542ca966" id="r_a39b3b7bd65a62c6ecc606506542ca966"><td class="memItemLeft">struct <a class="el" href="structfancyqlone_1_1qpalm_1_1get__breakpoints__fn.html">fancyqlone::qpalm::get_breakpoints_fn</a>&#160;</td><td class="memItemRight"><a class="el" href="#a39b3b7bd65a62c6ecc606506542ca966">get_breakpoints</a></td></tr>
+</table>
+<hr/><h2 id="header-inline_5Fclasses" class="groupheader">Class Documentation</h2>
+<a name="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits" id="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">&#9670;&#160;</a></span>fancyqlone::qpalm::CycloneBackendTraits</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::CycloneBackendTraits</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints" id="structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints">&#9670;&#160;</a></span>fancyqlone::qpalm::PartitionedBreakpoints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::PartitionedBreakpoints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="a3c0530a084bfe68e91682261f97b6e38" name="a3c0530a084bfe68e91682261f97b6e38"></a>span&lt; <a class="el" href="structfancyqlone_1_1qpalm_1_1Breakpoint.html">Breakpoint</a> &gt;</td>
+<td class="fieldname">
+neg_bp</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aa716efd59a006b2088a65c399dc2f990" name="aa716efd59a006b2088a65c399dc2f990"></a>span&lt; <a class="el" href="structfancyqlone_1_1qpalm_1_1Breakpoint.html">Breakpoint</a> &gt;</td>
+<td class="fieldname">
+pos_bp</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1BreakpointsResult" id="structfancyqlone_1_1qpalm_1_1BreakpointsResult"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1BreakpointsResult">&#9670;&#160;</a></span>fancyqlone::qpalm::BreakpointsResult</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::BreakpointsResult</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="aafb2edecbcd95f35aa65b5555e94a4bb" name="aafb2edecbcd95f35aa65b5555e94a4bb"></a><a class="el" href="#structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints">PartitionedBreakpoints</a></td>
+<td class="fieldname">
+bp</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ae46b6c81e68f9b46777d44cb84fe3731" name="ae46b6c81e68f9b46777d44cb84fe3731"></a><a class="el" href="structfancyqlone_1_1qpalm_1_1ABSums.html">ABSums</a></td>
+<td class="fieldname">
+ab_neg</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1LineSearchSettings" id="structfancyqlone_1_1qpalm_1_1LineSearchSettings"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1LineSearchSettings">&#9670;&#160;</a></span>fancyqlone::qpalm::LineSearchSettings</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::LineSearchSettings</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="acf1045e3ec5821846ff4ab070c6b12ff" name="acf1045e3ec5821846ff4ab070c6b12ff"></a>bool</td>
+<td class="fieldname">
+find_smallest_breakpoint_first = false</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="a49bd3110c376daeaa8abb3fc29b761cd" name="a49bd3110c376daeaa8abb3fc29b761cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49bd3110c376daeaa8abb3fc29b761cd">&#9670;&#160;</a></span>ABSum_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a49bd3110c376daeaa8abb3fc29b761cd">fancyqlone::qpalm::ABSum_t</a> = <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="breakpoint_8hpp_source.html#l00026">26</a> of file <a class="el" href="breakpoint_8hpp_source.html">breakpoint.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa1ebbe5feb2e66562ad44d9002bab7ef" name="aa1ebbe5feb2e66562ad44d9002bab7ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1ebbe5feb2e66562ad44d9002bab7ef">&#9670;&#160;</a></span>DefaultInnerSolver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> v, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> order&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">fancyqlone::qpalm::DefaultInnerSolver</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"> </div>
+<div class="line"><a class="code hl_struct" href="structfancyqlone_1_1CyqloneSolver.html">CyqloneSolver&lt;v, real_t, order, parallel::Context&lt;parallel::SharedContext&gt;</a>&gt;</div>
+<div class="ttc" id="astructfancyqlone_1_1CyqloneSolver_html"><div class="ttname"><a href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a></div><div class="ttdoc">Linear solver for systems with optimal control structure.</div><div class="ttdef"><b>Definition</b> <a href="cyqlone_8hpp_source.html#l00630">cyqlone.hpp:630</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ocp-backend-cyqlone_8cpp_source.html#l00030">30</a> of file <a class="el" href="ocp-backend-cyqlone_8cpp_source.html">ocp-backend-cyqlone.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a27779a7c1b02137d9aed6561bc79232a" name="a27779a7c1b02137d9aed6561bc79232a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27779a7c1b02137d9aed6561bc79232a">&#9670;&#160;</a></span>FanInnerSolver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> v, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> order&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">fancyqlone::qpalm::FanInnerSolver</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"> </div>
+<div class="line"><a class="code hl_struct" href="structfancyqlone_1_1FanCyqloneSolver.html">FanCyqloneSolver&lt;v, real_t, order, parallel::FanContext&lt;parallel::FanSharedContext&gt;</a>&gt;</div>
+<div class="ttc" id="astructfancyqlone_1_1FanCyqloneSolver_html"><div class="ttname"><a href="structfancyqlone_1_1FanCyqloneSolver.html">fancyqlone::FanCyqloneSolver</a></div><div class="ttdef"><b>Definition</b> <a href="fancyqlone_8hpp_source.html#l00112">fancyqlone.hpp:112</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ocp-backend-cyqlone_8cpp_source.html#l00034">34</a> of file <a class="el" href="ocp-backend-cyqlone_8cpp_source.html">ocp-backend-cyqlone.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a9428e937fd2cf61f1d9e1c1053e79e7e" name="a9428e937fd2cf61f1d9e1c1053e79e7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9428e937fd2cf61f1d9e1c1053e79e7e">&#9670;&#160;</a></span>SerialFanInnerSolver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> v, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> order&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">fancyqlone::qpalm::SerialFanInnerSolver</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"> </div>
+<div class="line"><a class="code hl_struct" href="structfancyqlone_1_1SerialFanCyqloneSolver.html">SerialFanCyqloneSolver&lt;v, real_t, order, parallel::Context&lt;parallel::SharedContext&gt;</a>&gt;</div>
+<div class="ttc" id="astructfancyqlone_1_1SerialFanCyqloneSolver_html"><div class="ttname"><a href="structfancyqlone_1_1SerialFanCyqloneSolver.html">fancyqlone::SerialFanCyqloneSolver</a></div><div class="ttdoc">Linear solver for systems with optimal control structure with multiple horizons.</div><div class="ttdef"><b>Definition</b> <a href="serial-fancyqlone_8hpp_source.html#l00090">serial-fancyqlone.hpp:90</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ocp-backend-cyqlone_8cpp_source.html#l00037">37</a> of file <a class="el" href="ocp-backend-cyqlone_8cpp_source.html">ocp-backend-cyqlone.cpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="a12561d95ffd5ca9cc074d7b3edceb429" name="a12561d95ffd5ca9cc074d7b3edceb429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12561d95ffd5ca9cc074d7b3edceb429">&#9670;&#160;</a></span>StorageOrder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">guanaqo::StorageOrder</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a0e5621455d223744bb4cb2ff621cdf21" name="a0e5621455d223744bb4cb2ff621cdf21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e5621455d223744bb4cb2ff621cdf21">&#9670;&#160;</a></span>sort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class R, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::qpalm::sort </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>range</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="algorithms_8hpp_source.html#l00017">17</a> of file <a class="el" href="algorithms_8hpp_source.html">algorithms.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a4416f34ca15a7ca342298669a346af77" name="a4416f34ca15a7ca342298669a346af77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4416f34ca15a7ca342298669a346af77">&#9670;&#160;</a></span>nth_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class R, class I, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::qpalm::nth_element </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>range</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">I</td>          <td class="paramname"><span class="paramname"><em>mid</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="algorithms_8hpp_source.html#l00028">28</a> of file <a class="el" href="algorithms_8hpp_source.html">algorithms.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a71954dbb7921433116705e923e036306" name="a71954dbb7921433116705e923e036306"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71954dbb7921433116705e923e036306">&#9670;&#160;</a></span>partition_min()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::bidirectional_range R, class F, class C&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ranges::subrange&lt; std::ranges::iterator_t&lt; R &gt; &gt; fancyqlone::qpalm::partition_min </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>range</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>pred</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">C</td>          <td class="paramname"><span class="paramname"><em>cmp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A variant of std::ranges::partition where the first element of the return value is the smallest element of the "false" partition. </p>
+
+<p class="definition">Definition at line <a class="el" href="algorithms_8hpp_source.html#l00037">37</a> of file <a class="el" href="algorithms_8hpp_source.html">algorithms.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a817e4099fa7003745265f06fa0e8f552" name="a817e4099fa7003745265f06fa0e8f552"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a817e4099fa7003745265f06fa0e8f552">&#9670;&#160;</a></span>partition() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::ranges::forward_range R, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) fancyqlone::qpalm::partition </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>range</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="algorithms_8hpp_source.html#l00093">93</a> of file <a class="el" href="algorithms_8hpp_source.html">algorithms.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a253d1e03560fadd7156b05f405f30622" name="a253d1e03560fadd7156b05f405f30622"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a253d1e03560fadd7156b05f405f30622">&#9670;&#160;</a></span>partition() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::permutable I, std::sentinel_for&lt; I &gt; S, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) fancyqlone::qpalm::partition </td>
+          <td>(</td>
+          <td class="paramtype">I</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">S</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="algorithms_8hpp_source.html#l00098">98</a> of file <a class="el" href="algorithms_8hpp_source.html">algorithms.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa056c09b3502ed82684674fbcc8281e1" name="aa056c09b3502ed82684674fbcc8281e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa056c09b3502ed82684674fbcc8281e1">&#9670;&#160;</a></span>min_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class R, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) fancyqlone::qpalm::min_element </td>
+          <td>(</td>
+          <td class="paramtype">R &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>range</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>key</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="algorithms_8hpp_source.html#l00104">104</a> of file <a class="el" href="algorithms_8hpp_source.html">algorithms.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1e5cde98e9bb08c358e0dbde2e26f24f" name="a1e5cde98e9bb08c358e0dbde2e26f24f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e5cde98e9bb08c358e0dbde2e26f24f">&#9670;&#160;</a></span>transform_reduce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class I, class T, class BinOp, class UnOp&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T fancyqlone::qpalm::transform_reduce </td>
+          <td>(</td>
+          <td class="paramtype">I</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">I</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>init</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BinOp</td>          <td class="paramname"><span class="paramname"><em>binary_op</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UnOp</td>          <td class="paramname"><span class="paramname"><em>unary_op</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="algorithms_8hpp_source.html#l00110">110</a> of file <a class="el" href="algorithms_8hpp_source.html">algorithms.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6f138c5f7d15cc41c0cecc4c2321e5e7" name="a6f138c5f7d15cc41c0cecc4c2321e5e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f138c5f7d15cc41c0cecc4c2321e5e7">&#9670;&#160;</a></span>partial_sum_negative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1qpalm_1_1ABSums.html">ABSums</a> fancyqlone::qpalm::partial_sum_negative </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints">PartitionedBreakpoints</a></td>          <td class="paramname"><span class="paramname"><em>breakpoints</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>          <td class="paramname"><span class="paramname"><em>η</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>          <td class="paramname"><span class="paramname"><em>β</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="breakpoint_8cpp_source.html#l00025">25</a> of file <a class="el" href="breakpoint_8cpp_source.html">breakpoint.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a31712886c80efac2ce71a559731db2c3" name="a31712886c80efac2ce71a559731db2c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31712886c80efac2ce71a559731db2c3">&#9670;&#160;</a></span>compute_breakpoints_default()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Vec&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::span&lt; <a class="el" href="structfancyqlone_1_1qpalm_1_1Breakpoint.html">Breakpoint</a> &gt; fancyqlone::qpalm::compute_breakpoints_default </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="structfancyqlone_1_1qpalm_1_1Breakpoint.html">Breakpoint</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>breakpoints</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vec &amp;</td>          <td class="paramname"><span class="paramname"><em>Σ</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vec &amp;</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vec &amp;</td>          <td class="paramname"><span class="paramname"><em>Ad</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vec &amp;</td>          <td class="paramname"><span class="paramname"><em>Ax</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vec &amp;</td>          <td class="paramname"><span class="paramname"><em>b_min</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vec &amp;</td>          <td class="paramname"><span class="paramname"><em>b_max</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the break points t[i] using formula (3.6) in the QPALM paper. </p>
+<dl class="section return"><dt>Returns</dt><dd>t, α, δ </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="breakpoint_8tpp_source.html#l00011">11</a> of file <a class="el" href="breakpoint_8tpp_source.html">breakpoint.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a284200507c01e1f1c9823d99c318cf1b" name="a284200507c01e1f1c9823d99c318cf1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a284200507c01e1f1c9823d99c318cf1b">&#9670;&#160;</a></span>partition_breakpoints_default()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#structfancyqlone_1_1qpalm_1_1PartitionedBreakpoints">PartitionedBreakpoints</a> fancyqlone::qpalm::partition_breakpoints_default </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="el" href="structfancyqlone_1_1qpalm_1_1Breakpoint.html">Breakpoint</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>breakpoints</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Moves any non-finite elements in t to the end of the range, and all negative elements to the front. </p>
+<p>Returns the negative and positive partitions. </p>
+
+<p class="definition">Definition at line <a class="el" href="breakpoint_8cpp_source.html#l00007">7</a> of file <a class="el" href="breakpoint_8cpp_source.html">breakpoint.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a26d4973d280fd9cde97918d0b0b1fe78" name="a26d4973d280fd9cde97918d0b0b1fe78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26d4973d280fd9cde97918d0b0b1fe78">&#9670;&#160;</a></span>enum_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * fancyqlone::qpalm::enum_name </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a></td>          <td class="paramname"><span class="paramname"><em>s</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="status_8hpp_source.html#l00023">23</a> of file <a class="el" href="status_8hpp_source.html">status.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac78668c7efb8aa549ac3d3e7ce13810c" name="ac78668c7efb8aa549ac3d3e7ce13810c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac78668c7efb8aa549ac3d3e7ce13810c">&#9670;&#160;</a></span>operator&lt;&lt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; fancyqlone::qpalm::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;</td>          <td class="paramname"><span class="paramname"><em>os</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a></td>          <td class="paramname"><span class="paramname"><em>s</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="status_8cpp_source.html#l00006">6</a> of file <a class="el" href="status_8cpp_source.html">status.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae8c565fbca93f5e40e0c426c7975ad5a" name="ae8c565fbca93f5e40e0c426c7975ad5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8c565fbca93f5e40e0c426c7975ad5a">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 1, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6f465fad8dd8f57357f5d897f7978d8" name="ac6f465fad8dd8f57357f5d897f7978d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6f465fad8dd8f57357f5d897f7978d8">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 1, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66aece703a8d869eed4fde92f3bc09e7" name="a66aece703a8d869eed4fde92f3bc09e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66aece703a8d869eed4fde92f3bc09e7">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 1, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a55a4e67def5e01beaea2271c4f55fbcc" name="a55a4e67def5e01beaea2271c4f55fbcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55a4e67def5e01beaea2271c4f55fbcc">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 4, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8dac8123ef4d4c18e0cb67b9a5e6bd6" name="ad8dac8123ef4d4c18e0cb67b9a5e6bd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8dac8123ef4d4c18e0cb67b9a5e6bd6">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 4, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab44d5bd8534ec63b05acd10977dc0928" name="ab44d5bd8534ec63b05acd10977dc0928"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab44d5bd8534ec63b05acd10977dc0928">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 4, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a981c1441f46473d19aed87f81689fc02" name="a981c1441f46473d19aed87f81689fc02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a981c1441f46473d19aed87f81689fc02">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 8, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe6927ae4965c8b6c24f3f699788cdcd" name="abe6927ae4965c8b6c24f3f699788cdcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6927ae4965c8b6c24f3f699788cdcd">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 8, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a08a0f11654165b7c9801676518571ef9" name="a08a0f11654165b7c9801676518571ef9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08a0f11654165b7c9801676518571ef9">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 8, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab9112086e72eca21453b423ae8c2a66b" name="ab9112086e72eca21453b423ae8c2a66b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9112086e72eca21453b423ae8c2a66b">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 1, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11ab78a582975ea70b503e6e9349d907" name="a11ab78a582975ea70b503e6e9349d907"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11ab78a582975ea70b503e6e9349d907">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 1, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad654bc906af1db1fb3a6d0b0e25945e9" name="ad654bc906af1db1fb3a6d0b0e25945e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad654bc906af1db1fb3a6d0b0e25945e9">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 1, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0306349b78a982abb009e045d0012cf5" name="a0306349b78a982abb009e045d0012cf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0306349b78a982abb009e045d0012cf5">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 4, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f6fbb0b0e38f611b69051ad818c8f02" name="a6f6fbb0b0e38f611b69051ad818c8f02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f6fbb0b0e38f611b69051ad818c8f02">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 4, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afcf80c489204cebc1cd09a6c3827624f" name="afcf80c489204cebc1cd09a6c3827624f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcf80c489204cebc1cd09a6c3827624f">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 4, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9844fac65cfbf75551d6dc262741d9b0" name="a9844fac65cfbf75551d6dc262741d9b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9844fac65cfbf75551d6dc262741d9b0">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 8, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a933156eda2a07a6f5475c7d309bc5d11" name="a933156eda2a07a6f5475c7d309bc5d11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a933156eda2a07a6f5475c7d309bc5d11">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 8, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad10e9c442eb06442f8dc8dfa64893a76" name="ad10e9c442eb06442f8dc8dfa64893a76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad10e9c442eb06442f8dc8dfa64893a76">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 8, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98408f45e677c32bcad07999c05ed8bd" name="a98408f45e677c32bcad07999c05ed8bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98408f45e677c32bcad07999c05ed8bd">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 1, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac2a4fff46354cd00910bb2b5feeb41c2" name="ac2a4fff46354cd00910bb2b5feeb41c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2a4fff46354cd00910bb2b5feeb41c2">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 1, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f32f33e20fbb13f2273c8a5653c50c5" name="a0f32f33e20fbb13f2273c8a5653c50c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f32f33e20fbb13f2273c8a5653c50c5">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 1, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99fa8edac0425cb26c86803d043b9035" name="a99fa8edac0425cb26c86803d043b9035"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99fa8edac0425cb26c86803d043b9035">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 4, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6997955ebe0ed55bcdcaf83537ebc0e1" name="a6997955ebe0ed55bcdcaf83537ebc0e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6997955ebe0ed55bcdcaf83537ebc0e1">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 4, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a448e54f6554b5e65572426f0d29e6771" name="a448e54f6554b5e65572426f0d29e6771"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a448e54f6554b5e65572426f0d29e6771">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 4, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a239e9713e387d7d43c863e2517ef0deb" name="a239e9713e387d7d43c863e2517ef0deb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a239e9713e387d7d43c863e2517ef0deb">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 8, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f011c4b0f2d346cc8ed6ec6a9e4f4ca" name="a7f011c4b0f2d346cc8ed6ec6a9e4f4ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f011c4b0f2d346cc8ed6ec6a9e4f4ca">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 8, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5969103fd508334f653401b25511875b" name="a5969103fd508334f653401b25511875b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5969103fd508334f653401b25511875b">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 8, StorageOrder::ColMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a62631675a6269f207247760f65b2fc" name="a0a62631675a6269f207247760f65b2fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a62631675a6269f207247760f65b2fc">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 1, StorageOrder::RowMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af748664021387ba684ecf88351f20007" name="af748664021387ba684ecf88351f20007"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af748664021387ba684ecf88351f20007">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 1, StorageOrder::RowMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa1c07be76b6df0935034afbe5f734f8" name="aaa1c07be76b6df0935034afbe5f734f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa1c07be76b6df0935034afbe5f734f8">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 1, StorageOrder::RowMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a533b35626fdd48fb12e7348286b1b93c" name="a533b35626fdd48fb12e7348286b1b93c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a533b35626fdd48fb12e7348286b1b93c">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 4, StorageOrder::RowMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa0dd7f7e0b1892c5f9d408fcb58fa7ec" name="aa0dd7f7e0b1892c5f9d408fcb58fa7ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0dd7f7e0b1892c5f9d408fcb58fa7ec">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 4, StorageOrder::RowMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae350ab1a31a11d04711d6a2bf8e5e345" name="ae350ab1a31a11d04711d6a2bf8e5e345"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae350ab1a31a11d04711d6a2bf8e5e345">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 4, StorageOrder::RowMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa8dc8a8cdd00d671de1d420c55c85299" name="aa8dc8a8cdd00d671de1d420c55c85299"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8dc8a8cdd00d671de1d420c55c85299">&#9670;&#160;</a></span>make_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt; <a class="el" href="group__topic-optimization-solvers-ocp.html#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a>&lt; 8, StorageOrder::RowMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec89b4fdbe5bf6db4ea9a91f8befe8e8" name="aec89b4fdbe5bf6db4ea9a91f8befe8e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec89b4fdbe5bf6db4ea9a91f8befe8e8">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 8, StorageOrder::RowMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b8166ca2e5cfa40320e2c5526e44050" name="a4b8166ca2e5cfa40320e2c5526e44050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b8166ca2e5cfa40320e2c5526e44050">&#9670;&#160;</a></span>update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template void <a class="el" href="group__topic-optimization-solvers-ocp.html#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a>&lt; 8, StorageOrder::RowMajor &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="a188d0d7d6c6ee33d437bc4fa5ae155f6" name="a188d0d7d6c6ee33d437bc4fa5ae155f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a188d0d7d6c6ee33d437bc4fa5ae155f6">&#9670;&#160;</a></span>compute_breakpoints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structfancyqlone_1_1qpalm_1_1compute__breakpoints__fn.html">fancyqlone::qpalm::compute_breakpoints_fn</a> fancyqlone::qpalm::compute_breakpoints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a007773760e14275aa0e91d97ce19f7fb" name="a007773760e14275aa0e91d97ce19f7fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a007773760e14275aa0e91d97ce19f7fb">&#9670;&#160;</a></span>get_partitioned_breakpoints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structfancyqlone_1_1qpalm_1_1get__partitioned__breakpoints__fn.html">fancyqlone::qpalm::get_partitioned_breakpoints_fn</a> fancyqlone::qpalm::get_partitioned_breakpoints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a39b3b7bd65a62c6ecc606506542ca966" name="a39b3b7bd65a62c6ecc606506542ca966"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39b3b7bd65a62c6ecc606506542ca966">&#9670;&#160;</a></span>get_breakpoints</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structfancyqlone_1_1qpalm_1_1get__breakpoints__fn.html">fancyqlone::qpalm::get_breakpoints_fn</a> fancyqlone::qpalm::get_breakpoints</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacefancyqlone.html">fancyqlone</a></li><li class="navelem"><a href="namespacefancyqlone_1_1qpalm.html">qpalm</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

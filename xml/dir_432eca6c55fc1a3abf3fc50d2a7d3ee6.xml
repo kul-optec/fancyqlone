@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_432eca6c55fc1a3abf3fc50d2a7d3ee6" kind="dir">
+    <compoundname>src/fancyqlone/src</compoundname>
+    <innerdir refid="dir_4b0b1672edc8a4577d37605f9a54dda4">src/fancyqlone/src/cyqlone</innerdir>
+    <innerdir refid="dir_7377093b88dc72dd529436e1ffcbb7c9">src/fancyqlone/src/fancyqlone</innerdir>
+    <innerdir refid="dir_d8883acabce15c9255dbdbde9961ce14">src/fancyqlone/src/sequential-fancyqlone</innerdir>
+    <innerfile refid="conversion_8cpp">conversion.cpp</innerfile>
+    <innerfile refid="matio_8cpp">matio.cpp</innerfile>
+    <innerfile refid="ocp_8cpp">ocp.cpp</innerfile>
+    <innerfile refid="tracing_8cpp">tracing.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqlone/src/"/>
+  </compounddef>
+</doxygen>

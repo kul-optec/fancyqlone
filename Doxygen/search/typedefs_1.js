@@ -1,0 +1,15 @@
+var searchData=
+[
+  ['backend_5ftype_0',['backend_type',['../structfancyqlone_1_1qpalm_1_1SolverImplementation.html#a34b5e2426ebd0d71d21f16887df4bf1d',1,'fancyqlone::qpalm::SolverImplementation::backend_type'],['../classfancyqlone_1_1qpalm_1_1Solver.html#ae4e7dbf2f441165985217b4c84211fbb',1,'fancyqlone::qpalm::Solver::backend_type']]],
+  ['backend_5ftype_5ft_1',['backend_type_t',['../namespacefancyqlone_1_1qpalm_1_1detail.html#a49f3a418b141bc5e8f6b556923568b6a',1,'fancyqlone::qpalm::detail']]],
+  ['backendstats_2',['BackendStats',['../classfancyqlone_1_1qpalm_1_1Solver.html#a542bb07db5aed8c5b8c0765abea2efa7',1,'fancyqlone::qpalm::Solver']]],
+  ['barrier_5ftype_3',['barrier_type',['../structfancyqlone_1_1parallel_1_1SharedContext.html#a1176a87158faf062ca2f7065b934cedc',1,'fancyqlone::parallel::SharedContext::barrier_type'],['../structfancyqlone_1_1parallel_1_1FanSharedContext.html#a46508c09511c1434210d0a4323b00534',1,'fancyqlone::parallel::FanSharedContext::barrier_type']]],
+  ['batch_5fsize_5ftype_4',['batch_size_type',['https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1Layout.html#a5e721839d51c94a99b049d07bcabef34',1,'batmat::matrix::Layout::batch_size_type'],['https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1View.html#a0c328fcfd23b220a108167a511021954',1,'batmat::matrix::View::batch_size_type'],['https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1Matrix.html#a423c138da500752d102a65b64440fdab',1,'batmat::matrix::Matrix::batch_size_type']]],
+  ['batch_5fview_5',['batch_view',['../structfancyqlone_1_1TricyqleSolver.html#a9cf720cf2f9335601942caa13255937c',1,'fancyqlone::TricyqleSolver::batch_view'],['../structfancyqlone_1_1CyqloneSolver.html#a617db84eed177588427e71dff4c23592',1,'fancyqlone::CyqloneSolver::batch_view']]],
+  ['batch_5fview_5ftype_6',['batch_view_type',['https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1View.html#a144c1ef95a12cb6134e85f06bf306988',1,'batmat::matrix::View']]],
+  ['begin_5ft_7',['begin_t',['https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1enumerate__t.html#aafa4e8f3dfeabe3a1709fbccc7e338fe',1,'guanaqo::enumerate_t']]],
+  ['blas_5findex_5ft_8',['blas_index_t',['https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/namespaceguanaqo_1_1blas.html#a8edb93f1ff7e1a4a6a85fc1a1e426735',1,'guanaqo::blas']]],
+  ['bmatrix_9',['bmatrix',['../structfancyqlone_1_1PCRFactorTest.html#abf29a1386f68e032d69178d5d182e25f',1,'fancyqlone::PCRFactorTest']]],
+  ['branch_5ftoken_5ft_10',['branch_token_t',['../namespacefancyqlone_1_1parallel.html#a926f1b76ff6313b14d2a6affc127a3af',1,'fancyqlone::parallel::arrival_token_typed_fan::branch_token_t'],['../namespacefancyqlone_1_1parallel.html#a4c156be5fa172a625fc2c1b03e8cea62',1,'fancyqlone::parallel::arrival_token_fan::branch_token_t']]],
+  ['buffer_5ftype_11',['buffer_type',['https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/classguanaqo_1_1TypeErased.html#a0fc595fb27452f980e12e3d9ee099295',1,'guanaqo::TypeErased']]]
+];

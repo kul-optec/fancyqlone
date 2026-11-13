@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_d8883acabce15c9255dbdbde9961ce14" kind="dir">
+    <compoundname>src/fancyqlone/src/sequential-fancyqlone</compoundname>
+    <innerfile refid="serial-fancyqlone_8cpp">serial-fancyqlone.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqlone/src/sequential-fancyqlone/"/>
+  </compounddef>
+</doxygen>

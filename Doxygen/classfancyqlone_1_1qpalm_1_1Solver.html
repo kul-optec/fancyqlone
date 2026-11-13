@@ -1,0 +1,1222 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: fancyqlone::qpalm::Solver&lt; Backend &gt; Class Template Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classfancyqlone_1_1qpalm_1_1Solver.html','','classfancyqlone_1_1qpalm_1_1Solver-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fancyqlone::qpalm::Solver&lt; Backend &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__topic-optimization-solvers.html">Optimization solvers</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="solver_8hpp_source.html">fancyqlone/fancyqpalm/solver.hpp</a>&gt;</code></p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class Backend&gt;<br />
+class fancyqlone::qpalm::Solver&lt; Backend &gt;</div><dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#_a66">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00084">84</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a542bb07db5aed8c5b8c0765abea2efa7" id="r_a542bb07db5aed8c5b8c0765abea2efa7"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a542bb07db5aed8c5b8c0765abea2efa7">BackendStats</a> = typename <a class="el" href="namespacefancyqlone_1_1qpalm_1_1detail.html#structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type">detail::backend_stats_type</a>&lt;<a class="el" href="#ae4e7dbf2f441165985217b4c84211fbb">backend_type</a>&gt;::type</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2aee1d8cf07c13e5d4a574f033de87ef" id="r_a2aee1d8cf07c13e5d4a574f033de87ef"><td class="memItemLeft"><a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2aee1d8cf07c13e5d4a574f033de87ef">operator()</a> ()</td></tr>
+<tr class="memitem:ade67a39b7de8d754c6b34516913b94f4" id="r_ade67a39b7de8d754c6b34516913b94f4"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ade67a39b7de8d754c6b34516913b94f4">get_num_variables</a> () const</td></tr>
+<tr class="memitem:a3d34b4bf63cf4a64d75a28661b18ad3e" id="r_a3d34b4bf63cf4a64d75a28661b18ad3e"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3d34b4bf63cf4a64d75a28661b18ad3e">get_num_equality_constraints</a> () const</td></tr>
+<tr class="memitem:a9087fec3b36d2e7795555e097b81ae56" id="r_a9087fec3b36d2e7795555e097b81ae56"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9087fec3b36d2e7795555e097b81ae56">get_num_inequality_constraints</a> () const</td></tr>
+<tr class="memitem:aaf903dfe0171e1f52b7b3be5a8ab5c3a" id="r_aaf903dfe0171e1f52b7b3be5a8ab5c3a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aaf903dfe0171e1f52b7b3be5a8ab5c3a">has_result</a> () const</td></tr>
+<tr class="memitem:ae4d201b79ee15c1fb9a5be2128a04c68" id="r_ae4d201b79ee15c1fb9a5be2128a04c68"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae4d201b79ee15c1fb9a5be2128a04c68">get_solution</a> (std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;) const</td></tr>
+<tr class="memitem:aa641b1c16589f7957f78ac175eb5000b" id="r_aa641b1c16589f7957f78ac175eb5000b"><td class="memItemLeft">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa641b1c16589f7957f78ac175eb5000b">get_solution</a> () const</td></tr>
+<tr class="memitem:a4884fb12e75d2ca2667e9c6044201e5d" id="r_a4884fb12e75d2ca2667e9c6044201e5d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4884fb12e75d2ca2667e9c6044201e5d">get_equality_multipliers</a> (std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;) const</td></tr>
+<tr class="memitem:a8b96f0f22f26395472962929b9549c5f" id="r_a8b96f0f22f26395472962929b9549c5f"><td class="memItemLeft">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a8b96f0f22f26395472962929b9549c5f">get_equality_multipliers</a> () const</td></tr>
+<tr class="memitem:a6dc0e385224505aeb966c670a4a7e2d3" id="r_a6dc0e385224505aeb966c670a4a7e2d3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6dc0e385224505aeb966c670a4a7e2d3">get_equality_constraints</a> (std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;) const</td></tr>
+<tr class="memitem:aaa6ce03c9fa6566942e784d0d7b04881" id="r_aaa6ce03c9fa6566942e784d0d7b04881"><td class="memItemLeft">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aaa6ce03c9fa6566942e784d0d7b04881">get_equality_constraints</a> () const</td></tr>
+<tr class="memitem:ac03face48fec747837c37f794b025de3" id="r_ac03face48fec747837c37f794b025de3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac03face48fec747837c37f794b025de3">get_inequality_multipliers</a> (std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;) const</td></tr>
+<tr class="memitem:a0a41c7830f109e5c8a0594652bfd2410" id="r_a0a41c7830f109e5c8a0594652bfd2410"><td class="memItemLeft">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0a41c7830f109e5c8a0594652bfd2410">get_inequality_multipliers</a> () const</td></tr>
+<tr class="memitem:a40effc9d8e12effae34d392e68ee16a6" id="r_a40effc9d8e12effae34d392e68ee16a6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a40effc9d8e12effae34d392e68ee16a6">get_inequality_constraints</a> (std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;) const</td></tr>
+<tr class="memitem:abc8b439ef78d256d68b9db2ed5541256" id="r_abc8b439ef78d256d68b9db2ed5541256"><td class="memItemLeft">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abc8b439ef78d256d68b9db2ed5541256">get_inequality_constraints</a> () const</td></tr>
+<tr class="memitem:a5e04d45a336c4fb12c4021f3bbdf25d7" id="r_a5e04d45a336c4fb12c4021f3bbdf25d7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5e04d45a336c4fb12c4021f3bbdf25d7">get_penalty_factors</a> (std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;) const</td></tr>
+<tr class="memitem:ab31c33c657cdf3702528d02b51d6085a" id="r_ab31c33c657cdf3702528d02b51d6085a"><td class="memItemLeft">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab31c33c657cdf3702528d02b51d6085a">get_penalty_factors</a> () const</td></tr>
+<tr class="memitem:abaef224fb463ba3a15bfce92eabc94ca" id="r_abaef224fb463ba3a15bfce92eabc94ca"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abaef224fb463ba3a15bfce92eabc94ca">warm_start_solution</a> ()</td></tr>
+<tr class="memitem:add9ec6bd553362b1445da9234e3b7899" id="r_add9ec6bd553362b1445da9234e3b7899"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#add9ec6bd553362b1445da9234e3b7899">set_initial_guess</a> (std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; x, std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; y, std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; λ)</td></tr>
+<tr class="memitem:a088f56e2c4b01879da588ff5e108ec9a" id="r_a088f56e2c4b01879da588ff5e108ec9a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a088f56e2c4b01879da588ff5e108ec9a">get_initial_guess</a> (std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; x, std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; y, std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; λ)</td></tr>
+<tr class="memitem:ad3663285ee0b100080181b4d5e5c05a6" id="r_ad3663285ee0b100080181b4d5e5c05a6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad3663285ee0b100080181b4d5e5c05a6">set_b_eq</a> (std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; b_eq)</td></tr>
+<tr class="memitem:af0fd34bfe915e89b65edb57a42481756" id="r_af0fd34bfe915e89b65edb57a42481756"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af0fd34bfe915e89b65edb57a42481756">set_b_lb</a> (std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; b_lb)</td></tr>
+<tr class="memitem:a164292e938142aea28bd9dffa3663d64" id="r_a164292e938142aea28bd9dffa3663d64"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a164292e938142aea28bd9dffa3663d64">set_b_ub</a> (std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; b_ub)</td></tr>
+<tr class="memitem:adb145dd3e5f7f8a94730d5b86195182b" id="r_adb145dd3e5f7f8a94730d5b86195182b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#adb145dd3e5f7f8a94730d5b86195182b">stop</a> ()</td></tr>
+<tr class="memitem:abbec795f190d8aae0f4ccfa968bd7264" id="r_abbec795f190d8aae0f4ccfa968bd7264"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#abbec795f190d8aae0f4ccfa968bd7264">Solver</a> (Backend <a class="el" href="#af182f08cd7a8d608a6a31f2fd90540d7">backend</a>, <a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a> <a class="el" href="#a5c6eaebce9526ffbe806c147bdc09440">settings</a>={})</td></tr>
+<tr class="memitem:aa35b651c330fec353069ca2cd96fd73e" id="r_aa35b651c330fec353069ca2cd96fd73e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa35b651c330fec353069ca2cd96fd73e">Solver</a> (const <a class="el" href="structSolver.html">Solver</a> &amp;)=delete</td></tr>
+<tr class="memitem:a2f245c4ef5c44a77bc96c66dd936af45" id="r_a2f245c4ef5c44a77bc96c66dd936af45"><td class="memItemLeft"><a class="el" href="structSolver.html">Solver</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2f245c4ef5c44a77bc96c66dd936af45">operator=</a> (const <a class="el" href="structSolver.html">Solver</a> &amp;)=delete</td></tr>
+<tr class="memitem:a2765ef900d1635c20eb7a9d3bdbf0082" id="r_a2765ef900d1635c20eb7a9d3bdbf0082"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2765ef900d1635c20eb7a9d3bdbf0082">Solver</a> (<a class="el" href="structSolver.html">Solver</a> &amp;&amp;) noexcept</td></tr>
+<tr class="memitem:ae1c62e390d6ef043d3b82c9095c09b44" id="r_ae1c62e390d6ef043d3b82c9095c09b44"><td class="memItemLeft"><a class="el" href="structSolver.html">Solver</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae1c62e390d6ef043d3b82c9095c09b44">operator=</a> (<a class="el" href="structSolver.html">Solver</a> &amp;&amp;) noexcept</td></tr>
+<tr class="memitem:aba52d3c92fafceb6fe39f937f2d73db3" id="r_aba52d3c92fafceb6fe39f937f2d73db3"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aba52d3c92fafceb6fe39f937f2d73db3">~Solver</a> ()</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:af182f08cd7a8d608a6a31f2fd90540d7" id="r_af182f08cd7a8d608a6a31f2fd90540d7"><td class="memItemLeft">Backend&#160;</td><td class="memItemRight"><a class="el" href="#af182f08cd7a8d608a6a31f2fd90540d7">backend</a></td></tr>
+<tr class="memitem:a5c6eaebce9526ffbe806c147bdc09440" id="r_a5c6eaebce9526ffbe806c147bdc09440"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5c6eaebce9526ffbe806c147bdc09440">settings</a></td></tr>
+<tr class="memitem:adcccd917cf1f4d674cb17f7da4eac01c" id="r_adcccd917cf1f4d674cb17f7da4eac01c"><td class="memItemLeft">std::unique_ptr&lt; <a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">SolverImplementation</a>&lt; <a class="el" href="#ae4e7dbf2f441165985217b4c84211fbb">backend_type</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#adcccd917cf1f4d674cb17f7da4eac01c">impl</a> {}</td></tr>
+<tr class="memitem:a1fe6faba7845403358c97550beb2d31d" id="r_a1fe6faba7845403358c97550beb2d31d"><td class="memItemLeft">std::optional&lt; <a class="el" href="group__topic-optimization-solvers.html#structfancyqlone_1_1qpalm_1_1SolverStats">SolverStats</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a1fe6faba7845403358c97550beb2d31d">stats</a> = std::nullopt</td></tr>
+<tr class="memitem:af8953830ed7f7b541b0a64f24e55f202" id="r_af8953830ed7f7b541b0a64f24e55f202"><td class="memItemLeft">std::optional&lt; <a class="el" href="#a542bb07db5aed8c5b8c0765abea2efa7">BackendStats</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af8953830ed7f7b541b0a64f24e55f202">stats_backend</a> = std::nullopt</td></tr>
+<tr class="memitem:acbfb74f0082f9027638762d8a6004c48" id="r_acbfb74f0082f9027638762d8a6004c48"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/classguanaqo_1_1AtomicStopSignal.html">guanaqo::AtomicStopSignal</a>&#160;</td><td class="memItemRight"><a class="el" href="#acbfb74f0082f9027638762d8a6004c48">stop_signal</a> {}</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-types" class="groupheader"><a id="pri-types" name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:ae4e7dbf2f441165985217b4c84211fbb" id="r_ae4e7dbf2f441165985217b4c84211fbb"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae4e7dbf2f441165985217b4c84211fbb">backend_type</a> = <a class="el" href="namespacefancyqlone_1_1qpalm_1_1detail.html#a49f3a418b141bc5e8f6b556923568b6a">detail::backend_type_t</a>&lt;Backend&gt;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a86283f73247832e1c17ea3c639d99d6c" id="r_a86283f73247832e1c17ea3c639d99d6c"><td class="memItemLeft"><a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a>&#160;</td><td class="memItemRight"><a class="el" href="#a86283f73247832e1c17ea3c639d99d6c">do_solve</a> ()</td></tr>
+<tr class="memdesc:a86283f73247832e1c17ea3c639d99d6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run QPALM on the scaled problem.  <br /></td></tr>
+</table>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
+<a id="ae4e7dbf2f441165985217b4c84211fbb" name="ae4e7dbf2f441165985217b4c84211fbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4e7dbf2f441165985217b4c84211fbb">&#9670;&#160;</a></span>backend_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::backend_type = <a class="el" href="namespacefancyqlone_1_1qpalm_1_1detail.html#a49f3a418b141bc5e8f6b556923568b6a">detail::backend_type_t</a>&lt;Backend&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00086">86</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a542bb07db5aed8c5b8c0765abea2efa7" name="a542bb07db5aed8c5b8c0765abea2efa7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a542bb07db5aed8c5b8c0765abea2efa7">&#9670;&#160;</a></span>BackendStats</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::BackendStats = typename <a class="el" href="namespacefancyqlone_1_1qpalm_1_1detail.html#structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type">detail::backend_stats_type</a>&lt;<a class="el" href="#ae4e7dbf2f441165985217b4c84211fbb">backend_type</a>&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00091">91</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abbec795f190d8aae0f4ccfa968bd7264" name="abbec795f190d8aae0f4ccfa968bd7264"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbec795f190d8aae0f4ccfa968bd7264">&#9670;&#160;</a></span>Solver() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Solver::Solver </td>
+          <td>(</td>
+          <td class="paramtype">Backend</td>          <td class="paramname"><span class="paramname"><em>backend</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a></td>          <td class="paramname"><span class="paramname"><em>settings</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00626">626</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="aa35b651c330fec353069ca2cd96fd73e" name="aa35b651c330fec353069ca2cd96fd73e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa35b651c330fec353069ca2cd96fd73e">&#9670;&#160;</a></span>Solver() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::Solver </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structSolver.html">Solver</a>&lt; Backend &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2765ef900d1635c20eb7a9d3bdbf0082" name="a2765ef900d1635c20eb7a9d3bdbf0082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2765ef900d1635c20eb7a9d3bdbf0082">&#9670;&#160;</a></span>Solver() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Solver::Solver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSolver.html">Solver</a>&lt; Backend &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba52d3c92fafceb6fe39f937f2d73db3" name="aba52d3c92fafceb6fe39f937f2d73db3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba52d3c92fafceb6fe39f937f2d73db3">&#9670;&#160;</a></span>~Solver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Solver::~Solver </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a86283f73247832e1c17ea3c639d99d6c" name="a86283f73247832e1c17ea3c639d99d6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86283f73247832e1c17ea3c639d99d6c">&#9670;&#160;</a></span>do_solve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a> Solver::do_solve </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Run QPALM on the scaled problem. </p>
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00102">102</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a2aee1d8cf07c13e5d4a574f033de87ef" name="a2aee1d8cf07c13e5d4a574f033de87ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2aee1d8cf07c13e5d4a574f033de87ef">&#9670;&#160;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__topic-optimization-solvers.html#ga24477fe148453ccedf7d5ad6d0ba0f78">SolverStatus</a> <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::operator() </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00093">93</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ade67a39b7de8d754c6b34516913b94f4" name="ade67a39b7de8d754c6b34516913b94f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade67a39b7de8d754c6b34516913b94f4">&#9670;&#160;</a></span>get_num_variables()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> Solver::get_num_variables </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00504">504</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a3d34b4bf63cf4a64d75a28661b18ad3e" name="a3d34b4bf63cf4a64d75a28661b18ad3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d34b4bf63cf4a64d75a28661b18ad3e">&#9670;&#160;</a></span>get_num_equality_constraints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> Solver::get_num_equality_constraints </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00508">508</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a9087fec3b36d2e7795555e097b81ae56" name="a9087fec3b36d2e7795555e097b81ae56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9087fec3b36d2e7795555e097b81ae56">&#9670;&#160;</a></span>get_num_inequality_constraints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> Solver::get_num_inequality_constraints </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00512">512</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="aaf903dfe0171e1f52b7b3be5a8ab5c3a" name="aaf903dfe0171e1f52b7b3be5a8ab5c3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf903dfe0171e1f52b7b3be5a8ab5c3a">&#9670;&#160;</a></span>has_result()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Solver::has_result </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00516">516</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="ae4d201b79ee15c1fb9a5be2128a04c68" name="ae4d201b79ee15c1fb9a5be2128a04c68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4d201b79ee15c1fb9a5be2128a04c68">&#9670;&#160;</a></span>get_solution() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::get_solution </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00520">520</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="aa641b1c16589f7957f78ac175eb5000b" name="aa641b1c16589f7957f78ac175eb5000b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa641b1c16589f7957f78ac175eb5000b">&#9670;&#160;</a></span>get_solution() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; Solver::get_solution </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00525">525</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a4884fb12e75d2ca2667e9c6044201e5d" name="a4884fb12e75d2ca2667e9c6044201e5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4884fb12e75d2ca2667e9c6044201e5d">&#9670;&#160;</a></span>get_equality_multipliers() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::get_equality_multipliers </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>λ</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00531">531</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a8b96f0f22f26395472962929b9549c5f" name="a8b96f0f22f26395472962929b9549c5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b96f0f22f26395472962929b9549c5f">&#9670;&#160;</a></span>get_equality_multipliers() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; Solver::get_equality_multipliers </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00536">536</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a6dc0e385224505aeb966c670a4a7e2d3" name="a6dc0e385224505aeb966c670a4a7e2d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dc0e385224505aeb966c670a4a7e2d3">&#9670;&#160;</a></span>get_equality_constraints() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::get_equality_constraints </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>Mxb</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00542">542</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="aaa6ce03c9fa6566942e784d0d7b04881" name="aaa6ce03c9fa6566942e784d0d7b04881"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa6ce03c9fa6566942e784d0d7b04881">&#9670;&#160;</a></span>get_equality_constraints() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; Solver::get_equality_constraints </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00547">547</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="ac03face48fec747837c37f794b025de3" name="ac03face48fec747837c37f794b025de3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac03face48fec747837c37f794b025de3">&#9670;&#160;</a></span>get_inequality_multipliers() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::get_inequality_multipliers </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>y</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00553">553</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a0a41c7830f109e5c8a0594652bfd2410" name="a0a41c7830f109e5c8a0594652bfd2410"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a41c7830f109e5c8a0594652bfd2410">&#9670;&#160;</a></span>get_inequality_multipliers() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; Solver::get_inequality_multipliers </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00558">558</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a40effc9d8e12effae34d392e68ee16a6" name="a40effc9d8e12effae34d392e68ee16a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40effc9d8e12effae34d392e68ee16a6">&#9670;&#160;</a></span>get_inequality_constraints() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::get_inequality_constraints </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>Ax</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00564">564</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="abc8b439ef78d256d68b9db2ed5541256" name="abc8b439ef78d256d68b9db2ed5541256"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc8b439ef78d256d68b9db2ed5541256">&#9670;&#160;</a></span>get_inequality_constraints() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; Solver::get_inequality_constraints </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00569">569</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a5e04d45a336c4fb12c4021f3bbdf25d7" name="a5e04d45a336c4fb12c4021f3bbdf25d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e04d45a336c4fb12c4021f3bbdf25d7">&#9670;&#160;</a></span>get_penalty_factors() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::get_penalty_factors </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab31c33c657cdf3702528d02b51d6085a" name="ab31c33c657cdf3702528d02b51d6085a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab31c33c657cdf3702528d02b51d6085a">&#9670;&#160;</a></span>get_penalty_factors() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::get_penalty_factors </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abaef224fb463ba3a15bfce92eabc94ca" name="abaef224fb463ba3a15bfce92eabc94ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaef224fb463ba3a15bfce92eabc94ca">&#9670;&#160;</a></span>warm_start_solution()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::warm_start_solution </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00575">575</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="add9ec6bd553362b1445da9234e3b7899" name="add9ec6bd553362b1445da9234e3b7899"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add9ec6bd553362b1445da9234e3b7899">&#9670;&#160;</a></span>set_initial_guess()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::set_initial_guess </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>λ</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00580">580</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a088f56e2c4b01879da588ff5e108ec9a" name="a088f56e2c4b01879da588ff5e108ec9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a088f56e2c4b01879da588ff5e108ec9a">&#9670;&#160;</a></span>get_initial_guess()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Solver::get_initial_guess </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>y</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>λ</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00593">593</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="ad3663285ee0b100080181b4d5e5c05a6" name="ad3663285ee0b100080181b4d5e5c05a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3663285ee0b100080181b4d5e5c05a6">&#9670;&#160;</a></span>set_b_eq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::set_b_eq </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>b_eq</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00603">603</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="af0fd34bfe915e89b65edb57a42481756" name="af0fd34bfe915e89b65edb57a42481756"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0fd34bfe915e89b65edb57a42481756">&#9670;&#160;</a></span>set_b_lb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::set_b_lb </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>b_lb</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00607">607</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="a164292e938142aea28bd9dffa3663d64" name="a164292e938142aea28bd9dffa3663d64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a164292e938142aea28bd9dffa3663d64">&#9670;&#160;</a></span>set_b_ub()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void Solver::set_b_ub </td>
+          <td>(</td>
+          <td class="paramtype">std::span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>b_ub</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8tpp_source.html#l00611">611</a> of file <a class="el" href="solver_8tpp_source.html">solver.tpp</a>.</p>
+
+</div>
+</div>
+<a id="adb145dd3e5f7f8a94730d5b86195182b" name="adb145dd3e5f7f8a94730d5b86195182b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb145dd3e5f7f8a94730d5b86195182b">&#9670;&#160;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::stop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00130">130</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2f245c4ef5c44a77bc96c66dd936af45" name="a2f245c4ef5c44a77bc96c66dd936af45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f245c4ef5c44a77bc96c66dd936af45">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structSolver.html">Solver</a> &amp; <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structSolver.html">Solver</a>&lt; Backend &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel delete">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae1c62e390d6ef043d3b82c9095c09b44" name="ae1c62e390d6ef043d3b82c9095c09b44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1c62e390d6ef043d3b82c9095c09b44">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structSolver.html">Solver</a>&lt; Backend &gt; &amp; Solver::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSolver.html">Solver</a>&lt; Backend &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="af182f08cd7a8d608a6a31f2fd90540d7" name="af182f08cd7a8d608a6a31f2fd90540d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af182f08cd7a8d608a6a31f2fd90540d7">&#9670;&#160;</a></span>backend</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Backend <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::backend</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00098">98</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5c6eaebce9526ffbe806c147bdc09440" name="a5c6eaebce9526ffbe806c147bdc09440"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c6eaebce9526ffbe806c147bdc09440">&#9670;&#160;</a></span>settings</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1qpalm_1_1Settings.html">Settings</a> <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::settings</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00099">99</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+
+</div>
+</div>
+<a id="adcccd917cf1f4d674cb17f7da4eac01c" name="adcccd917cf1f4d674cb17f7da4eac01c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcccd917cf1f4d674cb17f7da4eac01c">&#9670;&#160;</a></span>impl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="structfancyqlone_1_1qpalm_1_1SolverImplementation.html">SolverImplementation</a>&lt;<a class="el" href="#ae4e7dbf2f441165985217b4c84211fbb">backend_type</a>&gt; &gt; <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::impl {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00100">100</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a1fe6faba7845403358c97550beb2d31d" name="a1fe6faba7845403358c97550beb2d31d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fe6faba7845403358c97550beb2d31d">&#9670;&#160;</a></span>stats</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt;<a class="el" href="group__topic-optimization-solvers.html#structfancyqlone_1_1qpalm_1_1SolverStats">SolverStats</a>&gt; <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::stats = std::nullopt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00101">101</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af8953830ed7f7b541b0a64f24e55f202" name="af8953830ed7f7b541b0a64f24e55f202"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8953830ed7f7b541b0a64f24e55f202">&#9670;&#160;</a></span>stats_backend</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt;<a class="el" href="#a542bb07db5aed8c5b8c0765abea2efa7">BackendStats</a>&gt; <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::stats_backend = std::nullopt</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00102">102</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acbfb74f0082f9027638762d8a6004c48" name="acbfb74f0082f9027638762d8a6004c48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbfb74f0082f9027638762d8a6004c48">&#9670;&#160;</a></span>stop_signal</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Backend&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/classguanaqo_1_1AtomicStopSignal.html">guanaqo::AtomicStopSignal</a> <a class="el" href="classfancyqlone_1_1qpalm_1_1Solver.html">fancyqlone::qpalm::Solver</a>&lt; Backend &gt;::stop_signal {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="solver_8hpp_source.html#l00103">103</a> of file <a class="el" href="solver_8hpp_source.html">solver.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/fancyqpalm/include/fancyqlone/fancyqpalm/<a class="el" href="solver_8hpp_source.html">solver.hpp</a></li>
+<li>src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/<a class="el" href="solver_8tpp_source.html">solver.tpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacefancyqlone.html">fancyqlone</a></li><li class="navelem"><a href="namespacefancyqlone_1_1qpalm.html">qpalm</a></li><li class="navelem"><a href="classfancyqlone_1_1qpalm_1_1Solver.html">Solver</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="centroidal-quadruped_8hpp" kind="file" language="C++">
+    <compoundname>centroidal-quadruped.hpp</compoundname>
+    <includes refid="config_8hpp" local="no">fancyqlone/config.hpp</includes>
+    <includes local="no">fancyqlone/example-problems/export.h</includes>
+    <includes refid="ocp_8hpp" local="no">fancyqlone/ocp.hpp</includes>
+    <includes local="no">array</includes>
+    <includes local="no">stdexcept</includes>
+    <includes local="no">vector</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp</label>
+        <link refid="centroidal-quadruped_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fancyqlone/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>fancyqlone/ocp.hpp</label>
+        <link refid="ocp_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>array</label>
+      </node>
+      <node id="3">
+        <label>batmat/config.hpp</label>
+      </node>
+      <node id="4">
+        <label>fancyqlone/example-problems/export.h</label>
+      </node>
+      <node id="6">
+        <label>guanaqo/mat-view.hpp</label>
+      </node>
+      <node id="7">
+        <label>guanaqo/print.hpp</label>
+      </node>
+      <node id="8">
+        <label>iostream</label>
+      </node>
+      <node id="11">
+        <label>stdexcept</label>
+      </node>
+      <node id="9">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase" prot="public">fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams" prot="public">fancyqlone::qpalm::problems::CentroidalQuadrupedParams</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem" prot="public">fancyqlone::qpalm::problems::CentroidalQuadrupedProblem</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem" prot="public">fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem</innerclass>
+    <innernamespace refid="namespacefancyqlone">fancyqlone</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm">fancyqlone::qpalm</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm_1_1problems">fancyqlone::qpalm::problems</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>This<sp/>file<sp/>contains<sp/>code<sp/>derived<sp/>from:</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*<sp/>https://gitlab.laas.fr/paleziart/quadruped-qp-problems</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>2023<sp/>Pierre-Alexandre<sp/>Leziart</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>Original<sp/>code<sp/>licensed<sp/>under<sp/>the<sp/>Apache<sp/>License,<sp/>Version<sp/>2.0.</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*<sp/>C++<sp/>modifications:</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*<sp/>Copyright<sp/>2026<sp/>Matisse<sp/>Teuwen</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>This<sp/>modified<sp/>work<sp/>is<sp/>distributed<sp/>as<sp/>part<sp/>of<sp/>fancyqlone</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>under<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public<sp/>License,<sp/>version<sp/>3.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="config_8hpp" kindref="compound">fancyqlone/config.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fancyqlone/example-problems/export.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="ocp_8hpp" kindref="compound">fancyqlone/ocp.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;array&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdexcept&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacefancyqlone_1_1qpalm_1_1problems" kindref="compound">fancyqlone::qpalm::problems</ref><sp/>{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase" kindref="compound">CentroidalQuadrupedGaitPhase</ref><sp/>{</highlight></codeline>
+<codeline lineno="28" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase_1aa6eb8a088581d6aedd62059cb3b367df" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase_1aa6eb8a088581d6aedd62059cb3b367df" kindref="member">duration</ref>;</highlight></codeline>
+<codeline lineno="29" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase_1aa11800628e2c7e1950e5d4e893e35ef5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::array&lt;bool,<sp/>4&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase_1aa11800628e2c7e1950e5d4e893e35ef5" kindref="member">contacts</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ad0ea6ad0dd8f63eeb599373a06fb1edd" kindref="member">CentroidalQuadrupedParams</ref><sp/>{</highlight></codeline>
+<codeline lineno="33" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1abc48889c22bac2e35b735464309f9a64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1abc48889c22bac2e35b735464309f9a64" kindref="member">dt</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0.02;</highlight></codeline>
+<codeline lineno="34" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1bc3835a2d764573c46ad977a11e4e71" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1bc3835a2d764573c46ad977a11e4e71" kindref="member">mu</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0.5;</highlight></codeline>
+<codeline lineno="35" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a63b033555393bcc93eea9bebafc5416d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a63b033555393bcc93eea9bebafc5416d" kindref="member">mass</ref><sp/><sp/><sp/><sp/><sp/>=<sp/>2.5;</highlight></codeline>
+<codeline lineno="36" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1540bea47a7122cfa884576697d5f6b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1540bea47a7122cfa884576697d5f6b2" kindref="member">f_max</ref><sp/><sp/><sp/><sp/>=<sp/>30;</highlight></codeline>
+<codeline lineno="37" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ab879e0814053d773e96f2e3ec19520c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ab879e0814053d773e96f2e3ec19520c5" kindref="member">gravity</ref><sp/><sp/>=<sp/>9.81;</highlight></codeline>
+<codeline lineno="38" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a39bb1be196c30a7f4a99754dceb40d3d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a39bb1be196c30a7f4a99754dceb40d3d" kindref="member">N_horiz</ref><sp/>=<sp/>32;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ae2c211426954dd86fe3b5ffc71490d0d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ae2c211426954dd86fe3b5ffc71490d0d" kindref="member">initial_stage</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a34c39df9caefe2052ebc58ac2eecd1d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a34c39df9caefe2052ebc58ac2eecd1d6" kindref="member">base_height</ref><sp/>=<sp/>0.235;</highlight></codeline>
+<codeline lineno="43" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a9a689150c297d950a142999cb760f6e7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a9a689150c297d950a142999cb760f6e7" kindref="member">foot_x</ref><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0.19;</highlight></codeline>
+<codeline lineno="44" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ae22830fd85e26c2d28a7ce56f7c3b60e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ae22830fd85e26c2d28a7ce56f7c3b60e" kindref="member">foot_y</ref><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>0.15;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a23ff7b282b56b2a1b346b77c1850b697" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::array&lt;real_t,<sp/>3&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a23ff7b282b56b2a1b346b77c1850b697" kindref="member">v_ref</ref>{0.1,<sp/>0,<sp/>0};</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a47f8b720ff2014b9fd5895d8bd4588be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::array&lt;real_t,<sp/>9&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a47f8b720ff2014b9fd5895d8bd4588be" kindref="member">inertia</ref>{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3.06065356e-02,<sp/><sp/>-7.44810900e-07,<sp/>9.33810799e-06,<sp/><sp/>-7.44810900e-07,<sp/>5.12750881e-02,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-4.33680869e-19,<sp/>9.33810799e-06,<sp/><sp/>-4.33680869e-19,<sp/>6.88650704e-02,</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1acec6ee0d2f9984b9dd3d70b3895fc582" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::array&lt;real_t,<sp/>12&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1acec6ee0d2f9984b9dd3d70b3895fc582" kindref="member">state_weights</ref>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>2,<sp/>2,<sp/>10,<sp/>0.25,<sp/>0.25,<sp/>10,<sp/>0.2,<sp/>0.2,<sp/>0.2,<sp/>0,<sp/>0,<sp/>0.3,</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ae632aa0072f83a674ef2912d52936c9b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::array&lt;real_t,<sp/>12&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ae632aa0072f83a674ef2912d52936c9b" kindref="member">force_weights</ref>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>5e-5,<sp/>5e-5,<sp/>5e-5,<sp/>5e-5,<sp/>5e-5,<sp/>5e-5,<sp/>5e-5,<sp/>5e-5,<sp/>5e-5,<sp/>5e-5,<sp/>5e-5,<sp/>5e-5,</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1ca193cb823d00c1de45aedbed9c5642" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;CentroidalQuadrupedGaitPhase&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1ca193cb823d00c1de45aedbed9c5642" kindref="member">gait</ref>;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ad9cb59884c8cc8e7884b7d3a73bc8bef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>uint64_t<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ad9cb59884c8cc8e7884b7d3a73bc8bef" kindref="member">seed</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ad0ea6ad0dd8f63eeb599373a06fb1edd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ad0ea6ad0dd8f63eeb599373a06fb1edd" kindref="member">CentroidalQuadrupedParams</ref>()<sp/>:<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1ca193cb823d00c1de45aedbed9c5642" kindref="member">gait</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ab24f634f68f282c9a7aae74728971d73" kindref="member">make_gait</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a39bb1be196c30a7f4a99754dceb40d3d" kindref="member">N_horiz</ref>))<sp/>{}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a8cc261c96374c2fd0efab4d205fc09c7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a8cc261c96374c2fd0efab4d205fc09c7" kindref="member">CentroidalQuadrupedParams</ref>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>N,<sp/>uint64_t<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ad9cb59884c8cc8e7884b7d3a73bc8bef" kindref="member">seed</ref>,<sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/>Ts,<sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/>force_weight<sp/>=<sp/>5e-5,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/>reg<sp/>=<sp/>0)</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1abc48889c22bac2e35b735464309f9a64" kindref="member">dt</ref>(Ts),<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a39bb1be196c30a7f4a99754dceb40d3d" kindref="member">N_horiz</ref>(N),<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1a1ca193cb823d00c1de45aedbed9c5642" kindref="member">gait</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ab24f634f68f282c9a7aae74728971d73" kindref="member">make_gait</ref>(N)),<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ad9cb59884c8cc8e7884b7d3a73bc8bef" kindref="member">seed</ref>(<ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ad9cb59884c8cc8e7884b7d3a73bc8bef" kindref="member">seed</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ae632aa0072f83a674ef2912d52936c9b" kindref="member">force_weights</ref>.fill(force_weight);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;w<sp/>:<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1acec6ee0d2f9984b9dd3d70b3895fc582" kindref="member">state_weights</ref>)</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>w<sp/>+=<sp/>reg;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="76" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ab24f634f68f282c9a7aae74728971d73" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::vector&lt;CentroidalQuadrupedGaitPhase&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams_1ab24f634f68f282c9a7aae74728971d73" kindref="member">make_gait</ref>(<ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>N)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(N<sp/>%<sp/>4<sp/>!=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::invalid_argument(</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;CentroidalQuadrupedParams:<sp/>N_horiz<sp/>must<sp/>be<sp/>a<sp/>multiple<sp/>of<sp/>4&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>phase_length<sp/>=<sp/>N<sp/>/<sp/>4;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{phase_length,<sp/>{</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">}},</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{phase_length,<sp/>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">}},</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{phase_length,<sp/>{</highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">}},</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{phase_length,<sp/>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">}},</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem" kindref="compound">CentroidalQuadrupedProblem</ref><sp/>{</highlight></codeline>
+<codeline lineno="94" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem_1ae5a6e6ccfb7eada389151c1744329f4d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1LinearOCPStorage" kindref="compound">LinearOCPStorage</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem_1ae5a6e6ccfb7eada389151c1744329f4d" kindref="member">ocp</ref>;</highlight></codeline>
+<codeline lineno="95" refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem_1a5f6c087e1bdaac3faf4899d21f2e89f3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;real_t&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem_1a5f6c087e1bdaac3faf4899d21f2e89f3" kindref="member">reference</ref>;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem" kindref="compound">FanCentroidalQuadrupedProblem</ref><sp/>{</highlight></codeline>
+<codeline lineno="99" refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem_1adb14d6526e2bd936bcee183c12c4f1ab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref><sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem_1adb14d6526e2bd936bcee183c12c4f1ab" kindref="member">ocp</ref>;</highlight></codeline>
+<codeline lineno="100" refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem_1a2b0e9b8c50902512eb20e033215deba4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;real_t&gt;<sp/><ref refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem_1a2b0e9b8c50902512eb20e033215deba4" kindref="member">friction_coefficients</ref>;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fancyqlone::qpalm::problems</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="config_8hpp_1aa4b496c143fba922704a143c4411beb1" kindref="member">FANCYQLONE_NS</ref>(<ref refid="namespacefancyqlone" kindref="compound">fancyqlone</ref>::<ref refid="namespacefancyqlone_1_1qpalm_1_1problems" kindref="compound">qpalm::problems</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal">CentroidalQuadrupedProblem<sp/>CYQLONE_EXAMPLE_PROBLEMS_EXPORT</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">centroidal_quadruped(CentroidalQuadrupedParams<sp/>p<sp/>=<sp/>{});</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal">FanCentroidalQuadrupedProblem<sp/>CYQLONE_EXAMPLE_PROBLEMS_EXPORT</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">fan_centroidal_quadruped(CentroidalQuadrupedParams<sp/>p,<sp/><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref><sp/>num_branches,<sp/><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref><sp/>mu_radius<sp/>=<sp/>0.2);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>FANCYQLONE_NS(fancyqlone::qpalm::problems)</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp"/>
+  </compounddef>
+</doxygen>

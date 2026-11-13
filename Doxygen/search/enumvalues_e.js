@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['shift_0',['Shift',['../group__topic-optimization-solvers-ocp.html#ggac67dc98973eb37748e986ba97732b38ca825a3d98017bab11815ad2817201324c',1,'fancyqlone::qpalm::Shift'],['../group__topic-optimization-solvers-ocp.html#gga90c820ba89c66a51ee3e57a7ebf796d2a825a3d98017bab11815ad2817201324c',1,'fancyqlone::qpalm::Shift']]],
+  ['shiftnoinequality_1',['ShiftNoInequality',['../group__topic-optimization-solvers-ocp.html#ggac67dc98973eb37748e986ba97732b38cab882fa82c60e5b9a229e5ed6e52ad31a',1,'fancyqlone::qpalm::ShiftNoInequality'],['../group__topic-optimization-solvers-ocp.html#gga90c820ba89c66a51ee3e57a7ebf796d2ab882fa82c60e5b9a229e5ed6e52ad31a',1,'fancyqlone::qpalm::ShiftNoInequality']]],
+  ['stairpcg_2',['StairPCG',['../group__topic-block-tridiag-solvers.html#gga02b7bc5e6f2bb033f2f89b03d51d6436a91fa024e7c3efdd56efd4588853cf488',1,'fancyqlone']]],
+  ['strictlylower_3',['StrictlyLower',['https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gadf6653e463ee8f039eef7c9599ccc2c8a193da069e844f39710728c05a67407ac',1,'guanaqo::StrictlyLower'],['https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gadf6653e463ee8f039eef7c9599ccc2c8a193da069e844f39710728c05a67407ac',1,'guanaqo::StrictlyLower']]],
+  ['strictlyupper_4',['StrictlyUpper',['https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gadf6653e463ee8f039eef7c9599ccc2c8aa820e0f60e4b3fe7be5f4c1324bb9990',1,'guanaqo::StrictlyUpper'],['https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gadf6653e463ee8f039eef7c9599ccc2c8aa820e0f60e4b3fe7be5f4c1324bb9990',1,'guanaqo::StrictlyUpper']]]
+];

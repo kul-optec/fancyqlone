@@ -1,0 +1,338 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1TreeBarrier_1_1Storage" kind="struct" language="C++" prot="private">
+    <compoundname>fancyqlone::TreeBarrier::Storage</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a20342bccb5b13a5a0ed78a6b87b8d84e" prot="public" static="no">
+        <type>void(*)(void *) noexcept</type>
+        <definition>using fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::destructor_t = void (*)(void *) noexcept</definition>
+        <argsstring></argsstring>
+        <name>destructor_t</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::destructor_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="83" column="9" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a2f6c721d55034b3d5c2a04e679424ec4" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::payload_size</definition>
+        <argsstring></argsstring>
+        <name>payload_size</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::payload_size</qualifiedname>
+        <initializer>= <ref refid="classfancyqlone_1_1TreeBarrier_1a04980b9b0ad0dd719a156368e88c6014" kindref="member">cache_line_size</ref> - sizeof(<ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a20342bccb5b13a5a0ed78a6b87b8d84e" kindref="member">destructor_t</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="84" column="38" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1aa3dc9671fb7e5f8a1083d07095a18762" prot="public" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::is_compatible</definition>
+        <argsstring></argsstring>
+        <name>is_compatible</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::is_compatible</qualifiedname>
+        <initializer>                                =
+sizeof(T) &lt;= <ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a2f6c721d55034b3d5c2a04e679424ec4" kindref="member">payload_size</ref> &amp;&amp; alignof(T) &lt;= <ref refid="classfancyqlone_1_1TreeBarrier_1a04980b9b0ad0dd719a156368e88c6014" kindref="member">cache_line_size</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="124" column="31" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="124" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1acdce266ea9dc685653ed264822b0ec75" compoundref="barrier_8hpp" startline="101" endline="109">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::emplace</referencedby>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a345c2cef90d428a234c20f791f21170d" compoundref="barrier_8hpp" startline="117" endline="121">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::load</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a0da7943273b256b282d2340a81baee4a" prot="public" static="no" mutable="no">
+        <type>std::array&lt; std::byte, <ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a2f6c721d55034b3d5c2a04e679424ec4" kindref="member">payload_size</ref> &gt;</type>
+        <definition>std::array&lt;std::byte, payload_size&gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::payload</definition>
+        <argsstring></argsstring>
+        <name>payload</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::payload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="85" column="28" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="85" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1acdce266ea9dc685653ed264822b0ec75" compoundref="barrier_8hpp" startline="101" endline="109">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::emplace</referencedby>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a345c2cef90d428a234c20f791f21170d" compoundref="barrier_8hpp" startline="117" endline="121">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::load</referencedby>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a2cf556d9d3bec90e437be6446a308322" compoundref="barrier_8hpp" startline="95" endline="98">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::reset</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a8569c0370d6e9f5bc16f6d707789150d" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a20342bccb5b13a5a0ed78a6b87b8d84e" kindref="member">destructor_t</ref></type>
+        <definition>destructor_t fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::destructor</definition>
+        <argsstring></argsstring>
+        <name>destructor</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::destructor</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="86" column="22" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="86" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1acdce266ea9dc685653ed264822b0ec75" compoundref="barrier_8hpp" startline="101" endline="109">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::emplace</referencedby>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a345c2cef90d428a234c20f791f21170d" compoundref="barrier_8hpp" startline="117" endline="121">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::load</referencedby>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a2cf556d9d3bec90e437be6446a308322" compoundref="barrier_8hpp" startline="95" endline="98">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::reset</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a14915c4c9ba8ebf0e0abef78a3b02abd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::Storage</definition>
+        <argsstring>()=default</argsstring>
+        <name>Storage</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::Storage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="88" column="9"/>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a28018c7327b19b09ef24fb97efd6d270">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::Storage</referencedby>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a041cb8d069652f9a440b1cc9f8387713">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::Storage</referencedby>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a7a8c6326cf1e14e9e8c0812620213afb">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::operator=</referencedby>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1aa5a8efb35d53b9da0af12b83987d88c7">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a28018c7327b19b09ef24fb97efd6d270" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::Storage</definition>
+        <argsstring>(const Storage &amp;)=delete</argsstring>
+        <name>Storage</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::Storage</qualifiedname>
+        <param>
+          <type>const Storage &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="89" column="9"/>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a14915c4c9ba8ebf0e0abef78a3b02abd">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::Storage</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a7a8c6326cf1e14e9e8c0812620213afb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a14915c4c9ba8ebf0e0abef78a3b02abd" kindref="member">Storage</ref> &amp;</type>
+        <definition>Storage &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::operator=</definition>
+        <argsstring>(const Storage &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a14915c4c9ba8ebf0e0abef78a3b02abd" kindref="member">Storage</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="90" column="17"/>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a14915c4c9ba8ebf0e0abef78a3b02abd">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::Storage</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a041cb8d069652f9a440b1cc9f8387713" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::Storage</definition>
+        <argsstring>(Storage &amp;&amp;)=delete</argsstring>
+        <name>Storage</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::Storage</qualifiedname>
+        <param>
+          <type>Storage &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="91" column="9"/>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a14915c4c9ba8ebf0e0abef78a3b02abd">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::Storage</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1aa5a8efb35d53b9da0af12b83987d88c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a14915c4c9ba8ebf0e0abef78a3b02abd" kindref="member">Storage</ref> &amp;</type>
+        <definition>Storage &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::operator=</definition>
+        <argsstring>(Storage &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a14915c4c9ba8ebf0e0abef78a3b02abd" kindref="member">Storage</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="92" column="17"/>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a14915c4c9ba8ebf0e0abef78a3b02abd">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::Storage</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1ae43852f20d9e7021566af69bae00cc76" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::~Storage</definition>
+        <argsstring>()</argsstring>
+        <name>~Storage</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::~Storage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="93" column="9" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="93" bodyend="93"/>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a2cf556d9d3bec90e437be6446a308322" compoundref="barrier_8hpp" startline="95" endline="98">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a2cf556d9d3bec90e437be6446a308322" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="95" column="14" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="95" bodyend="98"/>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a8569c0370d6e9f5bc16f6d707789150d" compoundref="barrier_8hpp" startline="86">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::destructor</references>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a0da7943273b256b282d2340a81baee4a" compoundref="barrier_8hpp" startline="85">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::payload</references>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1ae43852f20d9e7021566af69bae00cc76" compoundref="barrier_8hpp" startline="93" endline="93">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::~Storage</referencedby>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1acdce266ea9dc685653ed264822b0ec75" compoundref="barrier_8hpp" startline="101" endline="109">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::emplace</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1acdce266ea9dc685653ed264822b0ec75" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::emplace</definition>
+        <argsstring>(Args &amp;&amp;...args) noexcept</argsstring>
+        <name>emplace</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="101" column="11" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="101" bodyend="109"/>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a8569c0370d6e9f5bc16f6d707789150d" compoundref="barrier_8hpp" startline="86">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::destructor</references>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1aa3dc9671fb7e5f8a1083d07095a18762" compoundref="barrier_8hpp" startline="124">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::is_compatible</references>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a0da7943273b256b282d2340a81baee4a" compoundref="barrier_8hpp" startline="85">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::payload</references>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a2cf556d9d3bec90e437be6446a308322" compoundref="barrier_8hpp" startline="95" endline="98">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::reset</references>
+        <referencedby refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a4649e891e4be4573278638d9c8f8b7f2" compoundref="barrier_8hpp" startline="112" endline="114">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::store</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a4649e891e4be4573278638d9c8f8b7f2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class U</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::store</definition>
+        <argsstring>(U &amp;&amp;value) noexcept</argsstring>
+        <name>store</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::store</qualifiedname>
+        <param>
+          <type>U &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="112" column="14" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="112" bodyend="114"/>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1acdce266ea9dc685653ed264822b0ec75" compoundref="barrier_8hpp" startline="101" endline="109">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::emplace</references>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1TreeBarrier_1_1Storage_1a345c2cef90d428a234c20f791f21170d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::load</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>load</name>
+        <qualifiedname>fancyqlone::TreeBarrier::Storage::load</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="117" column="11" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="117" bodyend="121"/>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a8569c0370d6e9f5bc16f6d707789150d" compoundref="barrier_8hpp" startline="86">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::destructor</references>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1aa3dc9671fb7e5f8a1083d07095a18762" compoundref="barrier_8hpp" startline="124">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::is_compatible</references>
+        <references refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a0da7943273b256b282d2340a81baee4a" compoundref="barrier_8hpp" startline="85">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage::payload</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para><ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage" kindref="compound">Storage</ref> for small values used in reductions and broadcasts. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage</label>
+        <link refid="structfancyqlone_1_1TreeBarrier_1_1Storage"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+payload</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::array&lt; std::byte, payload_size &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="82" column="5" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="82" bodyend="126"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a8569c0370d6e9f5bc16f6d707789150d" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>destructor</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a20342bccb5b13a5a0ed78a6b87b8d84e" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>destructor_t</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1acdce266ea9dc685653ed264822b0ec75" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>emplace</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1aa3dc9671fb7e5f8a1083d07095a18762" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>is_compatible</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a345c2cef90d428a234c20f791f21170d" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>load</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a7a8c6326cf1e14e9e8c0812620213afb" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>operator=</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1aa5a8efb35d53b9da0af12b83987d88c7" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>operator=</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a0da7943273b256b282d2340a81baee4a" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>payload</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a2f6c721d55034b3d5c2a04e679424ec4" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>payload_size</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a2cf556d9d3bec90e437be6446a308322" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>reset</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a14915c4c9ba8ebf0e0abef78a3b02abd" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>Storage</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a28018c7327b19b09ef24fb97efd6d270" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>Storage</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a041cb8d069652f9a440b1cc9f8387713" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>Storage</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1a4649e891e4be4573278638d9c8f8b7f2" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>store</name></member>
+      <member refid="structfancyqlone_1_1TreeBarrier_1_1Storage_1ae43852f20d9e7021566af69bae00cc76" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier::Storage</scope><name>~Storage</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

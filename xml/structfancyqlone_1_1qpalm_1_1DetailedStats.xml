@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1DetailedStats" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::DetailedStats</compoundname>
+    <includes refid="detailed-stats_8hpp" local="no">fancyqlone/fancyqpalm/detailed-stats.hpp</includes>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry" prot="public">fancyqlone::qpalm::DetailedStats::Entry</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4" prot="public" static="no" strong="no">
+        <type></type>
+        <name>ExitReason</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::ExitReason</qualifiedname>
+        <enumvalue id="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a1e09cea3694db6fc5d651b9bda0cc725" prot="public">
+          <name>Busy</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a2a2d0f9274e02f2638d78d1c8d7090ba" prot="public">
+          <name>Converged</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a43232261d9812be7067f2526855cae80" prot="public">
+          <name>NoActiveSetChange</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a0ff02ea9e82a89d4b223bb9d03d1772a" prot="public">
+          <name>Fail</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="10" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="10" bodyend="15"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1af98782913e11f16d892416cdeb033055" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry" kindref="compound">Entry</ref> &gt;</type>
+        <definition>std::vector&lt;Entry&gt; fancyqlone::qpalm::DetailedStats::entries</definition>
+        <argsstring></argsstring>
+        <name>entries</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::entries</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="24" column="17" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::DetailedStats</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1DetailedStats"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+entries</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fancyqlone::qpalm::DetailedStats::Entry</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry"/>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; fancyqlone::qpalm::DetailedStats::Entry &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="9" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="9" bodyend="25"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a1e09cea3694db6fc5d651b9bda0cc725" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats</scope><name>Busy</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a2a2d0f9274e02f2638d78d1c8d7090ba" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats</scope><name>Converged</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1af98782913e11f16d892416cdeb033055" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats</scope><name>entries</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats</scope><name>ExitReason</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a0ff02ea9e82a89d4b223bb9d03d1772a" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats</scope><name>Fail</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4a43232261d9812be7067f2526855cae80" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats</scope><name>NoActiveSetChange</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

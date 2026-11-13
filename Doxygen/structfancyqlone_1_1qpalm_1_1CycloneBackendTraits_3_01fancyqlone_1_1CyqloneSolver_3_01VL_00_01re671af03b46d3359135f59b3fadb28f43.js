@@ -1,0 +1,7 @@
+var structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43 =
+[
+    [ "storage_t", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43.html#a2c13f694e25ba9d1692f6d713a453fa8", null ],
+    [ "storage_t", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43.html#aea4e22d31583530a17c4e65990673d33", null ],
+    [ "check_dimensions_col", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43.html#a4bd5dd7f76293e94c382e9320d961b9e", null ],
+    [ "CyQPALMBackend< VL, DefaultOrder, OCP_t >", "structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43.html#a28db13ea6ab4475e59e0cf5829db52b9", null ]
+];

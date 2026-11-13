@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1LinearOCPSparseQP_1_1KKTMatrix" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::LinearOCPSparseQP::KKTMatrix</compoundname>
+    <includes refid="conversion_8hpp" local="no">fancyqlone/conversion.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPSparseQP_1_1KKTMatrix_1a0827018682359b844c1f937adfa83769" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>std::vector&lt;index_t&gt; fancyqlone::LinearOCPSparseQP::KKTMatrix::outer_ptr</definition>
+        <argsstring></argsstring>
+        <name>outer_ptr</name>
+        <qualifiedname>fancyqlone::LinearOCPSparseQP::KKTMatrix::outer_ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/conversion.hpp" line="36" column="21" bodyfile="src/fancyqlone/include/fancyqlone/conversion.hpp" bodystart="36" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1LinearOCPSparseQP_1a5c4ca071e6db0744b9ec8abe0cc7adb6" compoundref="conversion_8cpp" startline="151" endline="214">fancyqlone::LinearOCPSparseQP::build_kkt</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPSparseQP_1_1KKTMatrix_1a167c5aae5a809505b3a625fb332de852" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>std::vector&lt;index_t&gt; fancyqlone::LinearOCPSparseQP::KKTMatrix::inner_idx</definition>
+        <argsstring></argsstring>
+        <name>inner_idx</name>
+        <qualifiedname>fancyqlone::LinearOCPSparseQP::KKTMatrix::inner_idx</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/conversion.hpp" line="36" column="31" bodyfile="src/fancyqlone/include/fancyqlone/conversion.hpp" bodystart="36" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1LinearOCPSparseQP_1a5c4ca071e6db0744b9ec8abe0cc7adb6" compoundref="conversion_8cpp" startline="151" endline="214">fancyqlone::LinearOCPSparseQP::build_kkt</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPSparseQP_1_1KKTMatrix_1a549e7e935fac14391f42237aee110f88" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt;real_t&gt; fancyqlone::LinearOCPSparseQP::KKTMatrix::values</definition>
+        <argsstring></argsstring>
+        <name>values</name>
+        <qualifiedname>fancyqlone::LinearOCPSparseQP::KKTMatrix::values</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/conversion.hpp" line="37" column="21" bodyfile="src/fancyqlone/include/fancyqlone/conversion.hpp" bodystart="37" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1LinearOCPSparseQP_1a5c4ca071e6db0744b9ec8abe0cc7adb6" compoundref="conversion_8cpp" startline="151" endline="214">fancyqlone::LinearOCPSparseQP::build_kkt</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1LinearOCPSparseQP_1_1KKTMatrix_1a68d955ddf3a22d32d10c6909f5814cb2" prot="public" static="no" mutable="no">
+        <type><ref refid="structguanaqo_1_1linalg_1_1sparsity_1_1SparseCSC" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">SparseCSC</ref>&lt; <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref>, <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref> &gt;</type>
+        <definition>SparseCSC&lt;index_t, index_t&gt; fancyqlone::LinearOCPSparseQP::KKTMatrix::sparsity</definition>
+        <argsstring></argsstring>
+        <name>sparsity</name>
+        <qualifiedname>fancyqlone::LinearOCPSparseQP::KKTMatrix::sparsity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/conversion.hpp" line="38" column="19" bodyfile="src/fancyqlone/include/fancyqlone/conversion.hpp" bodystart="38" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1LinearOCPSparseQP_1a5c4ca071e6db0744b9ec8abe0cc7adb6" compoundref="conversion_8cpp" startline="151" endline="214">fancyqlone::LinearOCPSparseQP::build_kkt</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::LinearOCPSparseQP::KKTMatrix</label>
+        <link refid="structfancyqlone_1_1LinearOCPSparseQP_1_1KKTMatrix"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+inner_idx</edgelabel>
+          <edgelabel>+outer_ptr</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+values</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+sparsity</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>guanaqo::linalg::sparsity::SparseCSC&lt; index_t, index_t &gt;</label>
+        <link refid="structguanaqo_1_1linalg_1_1sparsity_1_1SparseCSC" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+inner_idx</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>+outer_ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::span&lt; const index_t &gt;</label>
+      </node>
+      <node id="6">
+        <label>std::span&lt; const storage_index_t &gt;</label>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; index_t &gt;</label>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; real_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/conversion.hpp" line="35" column="5" bodyfile="src/fancyqlone/include/fancyqlone/conversion.hpp" bodystart="35" bodyend="39"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1LinearOCPSparseQP_1_1KKTMatrix_1a167c5aae5a809505b3a625fb332de852" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPSparseQP::KKTMatrix</scope><name>inner_idx</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPSparseQP_1_1KKTMatrix_1a0827018682359b844c1f937adfa83769" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPSparseQP::KKTMatrix</scope><name>outer_ptr</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPSparseQP_1_1KKTMatrix_1a68d955ddf3a22d32d10c6909f5814cb2" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPSparseQP::KKTMatrix</scope><name>sparsity</name></member>
+      <member refid="structfancyqlone_1_1LinearOCPSparseQP_1_1KKTMatrix_1a549e7e935fac14391f42237aee110f88" prot="public" virt="non-virtual"><scope>fancyqlone::LinearOCPSparseQP::KKTMatrix</scope><name>values</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

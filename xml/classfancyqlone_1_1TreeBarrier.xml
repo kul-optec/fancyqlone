@@ -1,0 +1,1311 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classfancyqlone_1_1TreeBarrier" kind="class" language="C++" prot="public">
+    <compoundname>fancyqlone::TreeBarrier</compoundname>
+    <includes refid="barrier_8hpp" local="no">fancyqlone/barrier.hpp</includes>
+    <innerclass refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token" prot="public">fancyqlone::TreeBarrier::arrival_token</innerclass>
+    <innerclass refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed" prot="public">fancyqlone::TreeBarrier::arrival_token_typed</innerclass>
+    <innerclass refid="structfancyqlone_1_1TreeBarrier_1_1Storage" prot="private">fancyqlone::TreeBarrier::Storage</innerclass>
+    <innerclass refid="structfancyqlone_1_1TreeBarrier_1_1State" prot="private">fancyqlone::TreeBarrier::State</innerclass>
+    <innerclass refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token" prot="public">fancyqlone::TreeBarrier::shuffle_token</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename CompletionFn</type>
+        <defval><ref refid="structfancyqlone_1_1EmptyCompletion" kindref="compound">EmptyCompletion</ref></defval>
+      </param>
+      <param>
+        <type>class PhaseType</type>
+        <defval>uint32_t</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classfancyqlone_1_1TreeBarrier_1a8aa0a8c6ade3525e99efb950bd72139e" prot="public" static="no" strong="yes">
+        <type>PhaseType</type>
+        <name>BarrierPhase</name>
+        <qualifiedname>fancyqlone::TreeBarrier::BarrierPhase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="62" column="5" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classfancyqlone_1_1TreeBarrier_1a922552c50e0d877bd73725bc755622f0" prot="private" static="no">
+        <type>typename State::ticket_t::value_type</type>
+        <definition>using fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::ticket_value_type = typename State::ticket_t::value_type</definition>
+        <argsstring></argsstring>
+        <name>ticket_value_type</name>
+        <qualifiedname>fancyqlone::TreeBarrier::ticket_value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="143" column="5" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="143" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1a04980b9b0ad0dd719a156368e88c6014" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>size_t</type>
+        <definition>size_t fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::cache_line_size</definition>
+        <argsstring></argsstring>
+        <name>cache_line_size</name>
+        <qualifiedname>fancyqlone::TreeBarrier::cache_line_size</qualifiedname>
+        <initializer>= 64</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="80" column="29" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1aaac2c23d5ea2791a4cf0043b2b09d77a" prot="private" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::expected</definition>
+        <argsstring></argsstring>
+        <name>expected</name>
+        <qualifiedname>fancyqlone::TreeBarrier::expected</qualifiedname>
+        <briefdescription>
+<para>Number of participating threads. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="146" column="14" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1a429ac76d59e59e172a330c184717bf45" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="structfancyqlone_1_1TreeBarrier_1_1State" kindref="compound">State</ref>[]&gt;</type>
+        <definition>std::unique_ptr&lt;State[]&gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::state</definition>
+        <argsstring></argsstring>
+        <name>state</name>
+        <qualifiedname>fancyqlone::TreeBarrier::state</qualifiedname>
+        <briefdescription>
+<para>Combining tree state. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="148" column="21" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1a3b7b57ec186357bbc28e5d410f00b079" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage" kindref="compound">Storage</ref>[]&gt;</type>
+        <definition>std::unique_ptr&lt;Storage[]&gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::storage</definition>
+        <argsstring></argsstring>
+        <name>storage</name>
+        <qualifiedname>fancyqlone::TreeBarrier::storage</qualifiedname>
+        <briefdescription>
+<para>Used for reductions and shuffles. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="invariant"><para>For each operation (shuffle or reduction), <computeroutput><ref refid="classfancyqlone_1_1TreeBarrier_1a3b7b57ec186357bbc28e5d410f00b079" kindref="member">storage</ref>[i]</computeroutput> is always written by thread <computeroutput>i</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="152" column="21" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1a154be37a328ecb1148a5a779eae69486" prot="private" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1TreeBarrier_1_1Storage" kindref="compound">Storage</ref></type>
+        <definition>Storage fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::broadcast_storage</definition>
+        <argsstring></argsstring>
+        <name>broadcast_storage</name>
+        <qualifiedname>fancyqlone::TreeBarrier::broadcast_storage</qualifiedname>
+        <briefdescription>
+<para>Used for broadcasts (including after reductions). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="154" column="13" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1a7e283536548d011a6ef15eac342259b2" prot="private" static="no" mutable="no">
+        <type>CompletionFn</type>
+        <definition>CompletionFn fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::completion</definition>
+        <argsstring></argsstring>
+        <name>completion</name>
+        <qualifiedname>fancyqlone::TreeBarrier::completion</qualifiedname>
+        <briefdescription>
+<para>Called when last thread arrives. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="156" column="19" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1a2ceeebe2f2f399f6691f7d0517d9fa24" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; <ref refid="classfancyqlone_1_1TreeBarrier_1a8aa0a8c6ade3525e99efb950bd72139e" kindref="member">BarrierPhase</ref> &gt;</type>
+        <definition>std::atomic&lt;BarrierPhase&gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::phase</definition>
+        <argsstring></argsstring>
+        <name>phase</name>
+        <qualifiedname>fancyqlone::TreeBarrier::phase</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="157" column="25" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="157" bodyend="157"/>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ad4dedb1b60a5bfb099f5a82dc6dab8e2">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ab9bc091835cb692c5fcc2ef879c1a8a9">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::shuffle_token</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1ad9e0f26cd39de3d0af3342755abc6132">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token_1a5a54af715488a76e0cdafd94fd8b8423">fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_token&lt; T &gt;::operator=</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classfancyqlone_1_1TreeBarrier_1a0f24581b62ac628bee1a56f1247f1f0a" prot="public" static="no" mutable="no">
+        <type>uint32_t</type>
+        <definition>uint32_t fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::spin_count</definition>
+        <argsstring></argsstring>
+        <name>spin_count</name>
+        <qualifiedname>fancyqlone::TreeBarrier::spin_count</qualifiedname>
+        <initializer>= 1000</initializer>
+        <briefdescription>
+<para>Number of spin iterations before falling back to futex-based wait. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="391" column="14" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="391" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1afaa905ac36eba180a87aaec6df5a63ae" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1TreeBarrier_1_1State_1a701cec8604e6ee7e412d2a5fbd423431" kindref="member">State::ticket_t</ref> &amp;</type>
+        <definition>State::ticket_t &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::get_shuffle_ticket</definition>
+        <argsstring>(uint32_t thread_id) noexcept</argsstring>
+        <name>get_shuffle_ticket</name>
+        <qualifiedname>fancyqlone::TreeBarrier::get_shuffle_ticket</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="159" column="21" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="159" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1abf515ba22e9c5c057b5ed1e1f79c64df" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1TreeBarrier_1_1State_1a701cec8604e6ee7e412d2a5fbd423431" kindref="member">State::ticket_t</ref> &amp;</type>
+        <definition>State::ticket_t &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::get_local_phase</definition>
+        <argsstring>(uint32_t thread_id) noexcept</argsstring>
+        <name>get_local_phase</name>
+        <qualifiedname>fancyqlone::TreeBarrier::get_local_phase</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="163" column="21" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="163" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a2b89f8cfda4ad371c864476ba89b71cd" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1TreeBarrier_1_1State_1a701cec8604e6ee7e412d2a5fbd423431" kindref="member">State::ticket_t</ref> &amp;</type>
+        <definition>State::ticket_t &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::get_local_line</definition>
+        <argsstring>(uint32_t thread_id) noexcept</argsstring>
+        <name>get_local_line</name>
+        <qualifiedname>fancyqlone::TreeBarrier::get_local_line</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="166" column="21" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="166" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a6f83be86fc2df5f89c7b8b371a6c37fd" prot="private" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::sanity_check_arrival</definition>
+        <argsstring>(uint32_t thread_id, BarrierPhase cur_phase) noexcept</argsstring>
+        <name>sanity_check_arrival</name>
+        <qualifiedname>fancyqlone::TreeBarrier::sanity_check_arrival</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1a8aa0a8c6ade3525e99efb950bd72139e" kindref="member">BarrierPhase</ref></type>
+          <declname>cur_phase</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="169" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="169" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a918ff6cce9cb715ca8c82d7123243eac" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive_impl</definition>
+        <argsstring>(BarrierPhase old_phase, uint32_t thread_id)</argsstring>
+        <name>arrive_impl</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive_impl</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1a8aa0a8c6ade3525e99efb950bd72139e" kindref="member">BarrierPhase</ref></type>
+          <declname>old_phase</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <briefdescription>
+<para>Combining tree arrival. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The last thread arriving at a certain ticket (counter) moves on to the next level of the tree. When reaching the root, it returns true. The number of tickets halves at each level, with at most two threads per ticket. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="179" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="179" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1acc9ffd50c6126efdc8a11073ac4a12a2" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>std::optional&lt; T &gt;</type>
+        <definition>std::optional&lt; T &gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive_impl</definition>
+        <argsstring>(BarrierPhase old_phase, uint32_t thread_id, T value, F reduce)</argsstring>
+        <name>arrive_impl</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive_impl</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1a8aa0a8c6ade3525e99efb950bd72139e" kindref="member">BarrierPhase</ref></type>
+          <declname>old_phase</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>reduce</declname>
+        </param>
+        <briefdescription>
+<para>Fused implementation of the combining tree arrival and a reduction operation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The last thread arriving at a certain ticket (counter) moves on to the next level of the tree. When it does so, it reads the value written by the other thread that arrived at the same ticket, applies the reduction function, and writes the result to be used in the next level. When reaching the root, it stores the final value and returns true. Note that the left and right arguments to the reduction function are determined by the thread IDs, regardless of the order in which threads arrive. In other words, for a given number of threads, the order of the reduction operations is fully deterministic. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="210" column="19" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="210" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a5f8c5f2ae69564be38abc63991d205ff" prot="private" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class A</type>
+          </param>
+          <param>
+            <type>class C</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token" kindref="compound">arrival_token</ref></type>
+        <definition>arrival_token fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive_with_completion</definition>
+        <argsstring>(uint32_t thread_id, A arrival, C &amp;&amp;custom_completion)</argsstring>
+        <name>arrive_with_completion</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive_with_completion</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>A</type>
+          <declname>arrival</declname>
+        </param>
+        <param>
+          <type>C &amp;&amp;</type>
+          <declname>custom_completion</declname>
+        </param>
+        <briefdescription>
+<para>Generic implementation of arrive with custom completion function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The arrival function should return true when the thread is the last to arrive at the root of the tree. Returns a token that can be used to wait for the barrier to complete. The custom completion function is called by the last thread arriving at the root, before advancing the barrier phase and notifying all waiting threads. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="252" column="20" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="252" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a5b0490321386fa0317ee77a29e8e8f1c" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::atomic_wait_ne_acq</definition>
+        <argsstring>(const std::atomic&lt; T &gt; &amp;a, T old) const</argsstring>
+        <name>atomic_wait_ne_acq</name>
+        <qualifiedname>fancyqlone::TreeBarrier::atomic_wait_ne_acq</qualifiedname>
+        <param>
+          <type>const std::atomic&lt; T &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>old</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="273" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="273" bodyend="281"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1aac0cdb386b168a93ed6927b0118003e5" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::atomic_wait_eq_acq</definition>
+        <argsstring>(const std::atomic&lt; T &gt; &amp;a, T target) const</argsstring>
+        <name>atomic_wait_eq_acq</name>
+        <qualifiedname>fancyqlone::TreeBarrier::atomic_wait_eq_acq</qualifiedname>
+        <param>
+          <type>const std::atomic&lt; T &gt; &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>target</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="284" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="284" bodyend="296"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a17c8bd883172d66c2d463abd34a2f556" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint32_t</type>
+        <definition>static constexpr uint32_t fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::max</definition>
+        <argsstring>()</argsstring>
+        <name>max</name>
+        <qualifiedname>fancyqlone::TreeBarrier::max</qualifiedname>
+        <briefdescription>
+<para>Maximum number of threads supported by this barrier implementation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="300" column="31" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="300" bodyend="307"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a6d54e9ab947af6bf5f2c444145a2dc24" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::TreeBarrier</definition>
+        <argsstring>(uint32_t expected, CompletionFn completion)</argsstring>
+        <name>TreeBarrier</name>
+        <qualifiedname>fancyqlone::TreeBarrier::TreeBarrier</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type>CompletionFn</type>
+          <declname>completion</declname>
+        </param>
+        <briefdescription>
+<para>Create a barrier with <computeroutput>expected</computeroutput> participating threads and a completion function that is called by the last thread that arrives at each phase. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="311" column="5" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="311" bodyend="318"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a6608037e06d9c8a288459cd0c45de243" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::TreeBarrier</definition>
+        <argsstring>(const TreeBarrier &amp;)=delete</argsstring>
+        <name>TreeBarrier</name>
+        <qualifiedname>fancyqlone::TreeBarrier::TreeBarrier</qualifiedname>
+        <param>
+          <type>const TreeBarrier &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="319" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1ae33ad5af5efb88ceac23e61ea906b9de" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::TreeBarrier</definition>
+        <argsstring>(TreeBarrier &amp;&amp;other) noexcept</argsstring>
+        <name>TreeBarrier</name>
+        <qualifiedname>fancyqlone::TreeBarrier::TreeBarrier</qualifiedname>
+        <param>
+          <type>TreeBarrier &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="320" column="5" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="320" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a7b30e650ac3640c7fd0cdaaf79d2ed82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1a6d54e9ab947af6bf5f2c444145a2dc24" kindref="member">TreeBarrier</ref> &amp;</type>
+        <definition>TreeBarrier &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::operator=</definition>
+        <argsstring>(const TreeBarrier &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::TreeBarrier::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classfancyqlone_1_1TreeBarrier_1a6d54e9ab947af6bf5f2c444145a2dc24" kindref="member">TreeBarrier</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="324" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a13cabba1f7b1f7edcc8615c0c13ab7ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1a6d54e9ab947af6bf5f2c444145a2dc24" kindref="member">TreeBarrier</ref> &amp;</type>
+        <definition>TreeBarrier &amp; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::operator=</definition>
+        <argsstring>(TreeBarrier &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>fancyqlone::TreeBarrier::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1a6d54e9ab947af6bf5f2c444145a2dc24" kindref="member">TreeBarrier</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="325" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1aec0a639e83e2d56df18631d9778c84c1" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class C</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token" kindref="compound">arrival_token</ref></type>
+        <definition>arrival_token fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive_with_completion</definition>
+        <argsstring>(uint32_t thread_id, C &amp;&amp;custom_completion)</argsstring>
+        <name>arrive_with_completion</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive_with_completion</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>C &amp;&amp;</type>
+          <declname>custom_completion</declname>
+        </param>
+        <briefdescription>
+<para>Arrive at the barrier with a custom completion function that is called by the last thread that arrives, before advancing the barrier phase and notifying all waiting threads. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The completion function of the barrier is not called in this case. Each thread should use a unique thread ID in [0, expected-1]. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="333" column="20" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="333" bodyend="338"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1aa172bc3219792bce916f5c05b279beda" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token" kindref="compound">arrival_token</ref></type>
+        <definition>arrival_token fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::get_arrival_token</definition>
+        <argsstring>()</argsstring>
+        <name>get_arrival_token</name>
+        <qualifiedname>fancyqlone::TreeBarrier::get_arrival_token</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="339" column="20" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="339" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a1a1da88ed85fbefc5a8717dcd8553a0f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed" kindref="compound">arrival_token_typed</ref>&lt; T &gt;</type>
+        <definition>arrival_token_typed&lt; T &gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::get_typed_token</definition>
+        <argsstring>()</argsstring>
+        <name>get_typed_token</name>
+        <qualifiedname>fancyqlone::TreeBarrier::get_typed_token</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="344" column="26" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="344" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a1e16a4fa48eb471928ca51afd2bd648e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token" kindref="compound">arrival_token</ref></type>
+        <definition>arrival_token fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive</definition>
+        <argsstring>(uint32_t thread_id)</argsstring>
+        <name>arrive</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <briefdescription>
+<para>Arrive at the barrier. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The barrier&apos;s completion function is called by the last thread that arrives, before advancing the barrier phase and notifying all waiting threads. Each thread should use a unique thread ID in [0, expected-1]. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="351" column="20" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="351" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1aab6053813cdf32978918bdd13018b1c7" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token" kindref="compound">arrival_token</ref></type>
+        <definition>arrival_token fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive</definition>
+        <argsstring>(uint32_t thread_id, int line)</argsstring>
+        <name>arrive</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Arrive at the barrier, recording the given line number for sanity checking to make sure that all threads arrive from the same line or statement in the source code. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is useful for debugging purposes to detect mismatched barrier calls, but should not really be used otherwise. If <ref refid="barrier_8hpp_1a4d1e252dc13b658ff525ba615f94ae8b" kindref="member">CYQLONE_SANITY_CHECKS_BARRIER</ref> is disabled, the line number is ignored and this function is equivalent to <ref refid="classfancyqlone_1_1TreeBarrier_1a1e16a4fa48eb471928ca51afd2bd648e" kindref="member">arrive(uint32_t)</ref>. Each thread should use a unique thread ID in [0, expected-1]. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="365" column="20" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="365" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a6b970c685efe9c5ae0bb76392aecfbeb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1a8aa0a8c6ade3525e99efb950bd72139e" kindref="member">BarrierPhase</ref></type>
+        <definition>BarrierPhase fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::current_phase</definition>
+        <argsstring>() const</argsstring>
+        <name>current_phase</name>
+        <qualifiedname>fancyqlone::TreeBarrier::current_phase</qualifiedname>
+        <briefdescription>
+<para>Query the current barrier phase. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>May wrap around on overflow, but all threads will see the same phase values in the same order. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="386" column="19" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="386" bodyend="388"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1aab8bb93bd21232e0af39f0b4b758e853" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::wait_may_block</definition>
+        <argsstring>(const arrival_token &amp;token) const noexcept</argsstring>
+        <name>wait_may_block</name>
+        <qualifiedname>fancyqlone::TreeBarrier::wait_may_block</qualifiedname>
+        <param>
+          <type>const <ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token" kindref="compound">arrival_token</ref> &amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>Check if <ref refid="classfancyqlone_1_1TreeBarrier_1a07d3dc32c955801e3ebd0dcaf361bcb3" kindref="member">wait()</ref> may block. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If it returns false, the caller can call <ref refid="classfancyqlone_1_1TreeBarrier_1a07d3dc32c955801e3ebd0dcaf361bcb3" kindref="member">wait()</ref> and it will return immediately without spinning or sleeping. This is useful if the caller has other non-critical work to do while waiting for other threads. Users should still call <ref refid="classfancyqlone_1_1TreeBarrier_1a07d3dc32c955801e3ebd0dcaf361bcb3" kindref="member">wait()</ref> before arriving again. <simplesect kind="note"><para>This function does not impose any memory ordering, so even when it returns false, changes made before the arrival of other threads may not be visible yet. In contrast, <ref refid="classfancyqlone_1_1TreeBarrier_1a07d3dc32c955801e3ebd0dcaf361bcb3" kindref="member">wait()</ref> does ensure proper synchronization. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="400" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="400" bodyend="402"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a07d3dc32c955801e3ebd0dcaf361bcb3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::wait</definition>
+        <argsstring>(arrival_token &amp;&amp;token) const</argsstring>
+        <name>wait</name>
+        <qualifiedname>fancyqlone::TreeBarrier::wait</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token" kindref="compound">arrival_token</ref> &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>Wait for the barrier to complete after an arrival, using the given token. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Separating the arrival and wait phases allows for overlapping computation with waiting, hiding the synchronization latency. Waiting on the same token multiple times is not allowed. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="408" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="408" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a45aca0b295dbb8317c2c5e7909a2cbca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive_and_wait</definition>
+        <argsstring>(uint32_t thread_id)</argsstring>
+        <name>arrive_and_wait</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive_and_wait</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <briefdescription>
+<para>Convenience function to arrive and wait in a single call. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="415" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="415" bodyend="415"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a740776cd985d606597c39a5c6f275f1f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive_and_wait</definition>
+        <argsstring>(uint32_t thread_id, int line)</argsstring>
+        <name>arrive_and_wait</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive_and_wait</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Convenience function to arrive and wait in a single call (with optional sanity check). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="417" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="417" bodyend="417"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a80287f7d7d312f5a48dff068229d3efc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class C</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive_and_wait_with_completion</definition>
+        <argsstring>(uint32_t thread_id, C &amp;&amp;custom_completion)</argsstring>
+        <name>arrive_and_wait_with_completion</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive_and_wait_with_completion</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>C &amp;&amp;</type>
+          <declname>custom_completion</declname>
+        </param>
+        <briefdescription>
+<para>Convenience function to arrive and wait in a single call (with custom completion). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="421" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="421" bodyend="423"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a0aa0a4974334842f7ae5203edf48d3fd" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class C</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive_and_wait_with_completion</definition>
+        <argsstring>(uint32_t thread_id, C &amp;&amp;custom_completion)</argsstring>
+        <name>arrive_and_wait_with_completion</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive_and_wait_with_completion</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>C &amp;&amp;</type>
+          <declname>custom_completion</declname>
+        </param>
+        <briefdescription>
+<para>Convenience function to arrive and wait in a single call (with custom completion). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Broadcasts the return value of the custom completion function to all threads. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="430" column="11" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="430" bodyend="437"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1aa08a6fe4b247e0399389c762c5afd458" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+          <param>
+            <type>class CF</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed" kindref="compound">arrival_token_typed</ref>&lt; T &gt;</type>
+        <definition>arrival_token_typed&lt; T &gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive_reduce</definition>
+        <argsstring>(uint32_t thread_id, T x, F reduce, CF custom_completion)</argsstring>
+        <name>arrive_reduce</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive_reduce</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>reduce</declname>
+        </param>
+        <param>
+          <type>CF</type>
+          <declname>custom_completion</declname>
+        </param>
+        <briefdescription>
+<para>Combining tree reduction across all threads. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Deterministic application order for a given number of threads. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="442" column="26" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="442" bodyend="467"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a644416667659efc3406896e32f61227a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed" kindref="compound">arrival_token_typed</ref>&lt; T &gt;</type>
+        <definition>arrival_token_typed&lt; T &gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::arrive_reduce</definition>
+        <argsstring>(uint32_t thread_id, T x, F reduce)</argsstring>
+        <name>arrive_reduce</name>
+        <qualifiedname>fancyqlone::TreeBarrier::arrive_reduce</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>reduce</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="469" column="26" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="469" bodyend="472"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a80c39456c87a2a707e0bd783c341d0e2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::wait_reduce</definition>
+        <argsstring>(arrival_token_typed&lt; T &gt; &amp;&amp;token)</argsstring>
+        <name>wait_reduce</name>
+        <qualifiedname>fancyqlone::TreeBarrier::wait_reduce</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1arrival__token__typed" kindref="compound">arrival_token_typed</ref>&lt; T &gt; &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>Wait for the result of an <ref refid="classfancyqlone_1_1TreeBarrier_1aa08a6fe4b247e0399389c762c5afd458" kindref="member">arrive_reduce</ref> call and obtain the reduced value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="475" column="8" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="475" bodyend="478"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1aae574e8188bea8b623e0eb0f4fa00630" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::reduce</definition>
+        <argsstring>(uint32_t thread_id, T x, F reduce)</argsstring>
+        <name>reduce</name>
+        <qualifiedname>fancyqlone::TreeBarrier::reduce</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>reduce</declname>
+        </param>
+        <briefdescription>
+<para>Combining tree reduction across all threads. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Deterministic application order for a given number of threads. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="483" column="8" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="483" bodyend="485"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1ab8bbc42b942cce94a31cb2d86420e70f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::broadcast</definition>
+        <argsstring>(uint32_t thread_id, T &amp;&amp;x, uint32_t src=0)</argsstring>
+        <name>broadcast</name>
+        <qualifiedname>fancyqlone::TreeBarrier::broadcast</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>src</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Broadcast a value from the source thread to all other threads. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All threads must call this function with the same source thread ID. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="490" column="8" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="490" bodyend="500"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1ab708281682ba8e26a1974cf712309cf3" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token" kindref="compound">shuffle_token</ref>&lt; T &gt;</type>
+        <definition>shuffle_token&lt; T &gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_start</definition>
+        <argsstring>(uint32_t thread_id, T x, uint32_t src)</argsstring>
+        <name>shuffle_start</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_start</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+<para>Publish the value <computeroutput>x</computeroutput> to another thread, and prepare to receive the value from thread <computeroutput>src</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note that the <computeroutput>src</computeroutput> and <computeroutput>thread_id</computeroutput> arguments should define a complete permutation, i.e. each thread sends its value to exactly one other thread. <simplesect kind="note"><para>This does not complete a barrier phase. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="521" column="20" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="521" bodyend="533"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1acbcd7d942260998f2cb4925327809382" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_wait</definition>
+        <argsstring>(uint32_t thread_id, shuffle_token&lt; T &gt; &amp;&amp;token, F &amp;&amp;func)</argsstring>
+        <name>shuffle_wait</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_wait</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token" kindref="compound">shuffle_token</ref>&lt; T &gt; &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>Wait from the value sent by <ref refid="classfancyqlone_1_1TreeBarrier_1ab708281682ba8e26a1974cf712309cf3" kindref="member">shuffle_start</ref>, applying a function to it. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note that if the value contains any references to local variables on the sending thread, they can safely be accessed in <computeroutput>func</computeroutput>, but they become dangling after <computeroutput>func</computeroutput> returns, because then the sending thread may continue execution asynchronously. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="541" column="10" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="541" bodyend="550"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1ac18c471eb1d4c3d8d00bd9bc648e30a8" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>std::invoke_result_t&lt; F &amp;&amp;, T &amp;&amp; &gt;</type>
+        <definition>std::invoke_result_t&lt; F &amp;&amp;, T &amp;&amp; &gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_wait</definition>
+        <argsstring>(uint32_t thread_id, shuffle_token&lt; T &gt; &amp;&amp;token, F &amp;&amp;func)</argsstring>
+        <name>shuffle_wait</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_wait</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token" kindref="compound">shuffle_token</ref>&lt; T &gt; &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="555" column="26" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="555" bodyend="567"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1acfaf6fb359f9bb4423f1253f35ec95f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_wait</definition>
+        <argsstring>(uint32_t thread_id, shuffle_token&lt; T &gt; &amp;&amp;token)</argsstring>
+        <name>shuffle_wait</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_wait</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token" kindref="compound">shuffle_token</ref>&lt; T &gt; &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Any pointers or references in the return value should be assumed to be dangling. Use the variant that takes a function argument to access them safely. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="572" column="7" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="572" bodyend="584"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1abf08463e0b6dbcfae3cdd49dbf3b6df2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token" kindref="compound">shuffle_token</ref>&lt; T &gt;</type>
+        <definition>shuffle_token&lt; T &gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_rotr_start</definition>
+        <argsstring>(uint32_t thread_id, T x, uint32_t n)</argsstring>
+        <name>shuffle_rotr_start</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_rotr_start</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Thread <computeroutput>thread_id</computeroutput> receives the value from thread <computeroutput>thread_id - n</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="588" column="20" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="588" bodyend="591"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1TreeBarrier_1a9e0f2d7062ddc026cbd2f97f85568cd5" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classfancyqlone_1_1TreeBarrier_1_1shuffle__token" kindref="compound">shuffle_token</ref>&lt; T &gt;</type>
+        <definition>shuffle_token&lt; T &gt; fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::shuffle_rotl_start</definition>
+        <argsstring>(uint32_t thread_id, T x, uint32_t n)</argsstring>
+        <name>shuffle_rotl_start</name>
+        <qualifiedname>fancyqlone::TreeBarrier::shuffle_rotl_start</qualifiedname>
+        <param>
+          <type>uint32_t</type>
+          <declname>thread_id</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Thread <computeroutput>thread_id</computeroutput> receives the value from thread <computeroutput>thread_id + n</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="595" column="20" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="595" bodyend="598"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classfancyqlone_1_1TreeBarrier_1ad4d9646827a64100cd5328fd937d336a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void swap</definition>
+        <argsstring>(TreeBarrier &amp;a, TreeBarrier &amp;b) noexcept=delete</argsstring>
+        <name>swap</name>
+        <qualifiedname>fancyqlone::TreeBarrier::swap</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1a6d54e9ab947af6bf5f2c444145a2dc24" kindref="member">TreeBarrier</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1TreeBarrier_1a6d54e9ab947af6bf5f2c444145a2dc24" kindref="member">TreeBarrier</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="326" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Fairly vanilla combining tree barrier. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It is inspired by GCC 15.2&apos;s __tree_barrier, with some important API differences:<itemizedlist>
+<listitem><para>Every thread has a unique thread ID in [0, expected-1]. This eliminates the need for hashing the pthread thread IDs and for the inner search loop to find free slots in the tree.</para>
+</listitem><listitem><para>Wait tries to spin for a given number of iterations before falling back to a futex-based atomic wait.</para>
+</listitem><listitem><para>The barrier phase is exposed to the user.</para>
+</listitem><listitem><para>Custom completion functions can be provided at arrival time.</para>
+</listitem><listitem><para>Reductions and broadcasts on small values are supported. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="8">
+        <label>fancyqlone::EmptyCompletion</label>
+        <link refid="structfancyqlone_1_1EmptyCompletion"/>
+      </node>
+      <node id="3">
+        <label>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::State</label>
+        <link refid="structfancyqlone_1_1TreeBarrier_1_1State"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+tickets</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;::Storage</label>
+        <link refid="structfancyqlone_1_1TreeBarrier_1_1Storage"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>+payload</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fancyqlone::TreeBarrier&lt; CompletionFn, PhaseType &gt;</label>
+        <link refid="classfancyqlone_1_1TreeBarrier"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>-state</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>-storage</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>-broadcast_storage</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>-completion</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>-phase</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::array&lt; std::byte, payload_size &gt;</label>
+      </node>
+      <node id="4">
+        <label>std::array&lt; ticket_t, num_levels &gt;</label>
+      </node>
+      <node id="9">
+        <label>std::atomic&lt; BarrierPhase &gt;</label>
+      </node>
+      <node id="2">
+        <label>std::unique_ptr&lt; fancyqlone::TreeBarrier::State[]&gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::unique_ptr&lt; fancyqlone::TreeBarrier::Storage[]&gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>+ptr</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/barrier.hpp" line="60" column="1" bodyfile="src/fancyqlone/include/fancyqlone/barrier.hpp" bodystart="60" bodyend="599"/>
+    <listofallmembers>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a1e16a4fa48eb471928ca51afd2bd648e" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1aab6053813cdf32978918bdd13018b1c7" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a45aca0b295dbb8317c2c5e7909a2cbca" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive_and_wait</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a740776cd985d606597c39a5c6f275f1f" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive_and_wait</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a80287f7d7d312f5a48dff068229d3efc" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive_and_wait_with_completion</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a0aa0a4974334842f7ae5203edf48d3fd" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive_and_wait_with_completion</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a918ff6cce9cb715ca8c82d7123243eac" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive_impl</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1acc9ffd50c6126efdc8a11073ac4a12a2" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive_impl</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1aa08a6fe4b247e0399389c762c5afd458" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive_reduce</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a644416667659efc3406896e32f61227a" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive_reduce</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a5f8c5f2ae69564be38abc63991d205ff" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive_with_completion</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1aec0a639e83e2d56df18631d9778c84c1" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>arrive_with_completion</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1aac0cdb386b168a93ed6927b0118003e5" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>atomic_wait_eq_acq</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a5b0490321386fa0317ee77a29e8e8f1c" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>atomic_wait_ne_acq</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a8aa0a8c6ade3525e99efb950bd72139e" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>BarrierPhase</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1ab8bbc42b942cce94a31cb2d86420e70f" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>broadcast</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a154be37a328ecb1148a5a779eae69486" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>broadcast_storage</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a04980b9b0ad0dd719a156368e88c6014" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>cache_line_size</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a7e283536548d011a6ef15eac342259b2" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>completion</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a6b970c685efe9c5ae0bb76392aecfbeb" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>current_phase</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1aaac2c23d5ea2791a4cf0043b2b09d77a" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>expected</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1aa172bc3219792bce916f5c05b279beda" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>get_arrival_token</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a2b89f8cfda4ad371c864476ba89b71cd" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>get_local_line</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1abf515ba22e9c5c057b5ed1e1f79c64df" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>get_local_phase</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1afaa905ac36eba180a87aaec6df5a63ae" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>get_shuffle_ticket</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a1a1da88ed85fbefc5a8717dcd8553a0f" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>get_typed_token</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a17c8bd883172d66c2d463abd34a2f556" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>max</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a7b30e650ac3640c7fd0cdaaf79d2ed82" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>operator=</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a13cabba1f7b1f7edcc8615c0c13ab7ac" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>operator=</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a2ceeebe2f2f399f6691f7d0517d9fa24" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>phase</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1aae574e8188bea8b623e0eb0f4fa00630" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>reduce</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a6f83be86fc2df5f89c7b8b371a6c37fd" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>sanity_check_arrival</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a9e0f2d7062ddc026cbd2f97f85568cd5" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>shuffle_rotl_start</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1abf08463e0b6dbcfae3cdd49dbf3b6df2" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>shuffle_rotr_start</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1ab708281682ba8e26a1974cf712309cf3" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>shuffle_start</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1acbcd7d942260998f2cb4925327809382" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>shuffle_wait</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1ac18c471eb1d4c3d8d00bd9bc648e30a8" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>shuffle_wait</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1acfaf6fb359f9bb4423f1253f35ec95f8" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>shuffle_wait</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a0f24581b62ac628bee1a56f1247f1f0a" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>spin_count</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a429ac76d59e59e172a330c184717bf45" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>state</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a3b7b57ec186357bbc28e5d410f00b079" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>storage</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1ad4d9646827a64100cd5328fd937d336a" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>swap</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a922552c50e0d877bd73725bc755622f0" prot="private" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>ticket_value_type</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a6d54e9ab947af6bf5f2c444145a2dc24" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>TreeBarrier</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a6608037e06d9c8a288459cd0c45de243" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>TreeBarrier</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1ae33ad5af5efb88ceac23e61ea906b9de" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>TreeBarrier</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a07d3dc32c955801e3ebd0dcaf361bcb3" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>wait</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1aab8bb93bd21232e0af39f0b4b758e853" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>wait_may_block</name></member>
+      <member refid="classfancyqlone_1_1TreeBarrier_1a80c39456c87a2a707e0bd783c341d0e2" prot="public" virt="non-virtual"><scope>fancyqlone::TreeBarrier</scope><name>wait_reduce</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

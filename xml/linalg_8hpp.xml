@@ -1,0 +1,436 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="linalg_8hpp" kind="file" language="C++">
+    <compoundname>linalg.hpp</compoundname>
+    <includes local="no">batmat/linalg/copy.hpp</includes>
+    <includes local="no">batmat/linalg/elementwise.hpp</includes>
+    <includes local="no">batmat/linalg/reduce.hpp</includes>
+    <includes refid="config_8hpp" local="no">fancyqlone/config.hpp</includes>
+    <includedby refid="cyqlone-storage_8hpp" local="no">src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp</includedby>
+    <includedby refid="cr_8tpp" local="no">src/fancyqlone/include/fancyqlone/cyqlone/implementation/cr.tpp</includedby>
+    <includedby refid="mat-vec_8tpp" local="no">src/fancyqlone/include/fancyqlone/cyqlone/implementation/mat-vec.tpp</includedby>
+    <includedby refid="pcg_8tpp" local="no">src/fancyqlone/include/fancyqlone/cyqlone/implementation/pcg.tpp</includedby>
+    <includedby refid="pcr_8tpp" local="no">src/fancyqlone/include/fancyqlone/cyqlone/implementation/pcr.tpp</includedby>
+    <includedby refid="riccati_8tpp" local="no">src/fancyqlone/include/fancyqlone/cyqlone/implementation/riccati.tpp</includedby>
+    <includedby refid="schur_8tpp" local="no">src/fancyqlone/include/fancyqlone/cyqlone/implementation/schur.tpp</includedby>
+    <includedby refid="tridiagonal-solver_8hpp" local="no">src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp</includedby>
+    <includedby refid="fan-data_8tpp" local="no">src/fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-data.tpp</includedby>
+    <includedby refid="fan-factor_8tpp" local="no">src/fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-factor.tpp</includedby>
+    <includedby refid="fan-mat-vec_8tpp" local="no">src/fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-mat-vec.tpp</includedby>
+    <includedby refid="fan-update_8tpp" local="no">src/fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-update.tpp</includedby>
+    <includedby refid="sfan-data_8tpp" local="no">src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-data.tpp</includedby>
+    <includedby refid="sfan-factor_8tpp" local="no">src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-factor.tpp</includedby>
+    <includedby refid="sfan-mat-vec_8tpp" local="no">src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-mat-vec.tpp</includedby>
+    <includedby refid="sfan-update_8tpp" local="no">src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-update.tpp</includedby>
+    <includedby refid="ineq-constr_8tpp" local="no">src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/ineq-constr.tpp</includedby>
+    <includedby refid="linalg_8tpp" local="no">src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linalg.tpp</includedby>
+    <includedby refid="solve_8tpp" local="no">src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/solve.tpp</includedby>
+    <includedby refid="ocp-backend-fancyqlone_8tpp" local="no">src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp</includedby>
+    <includedby refid="test-pcr_8cpp" local="no">test/test-pcr.cpp</includedby>
+    <incdepgraph>
+      <node id="5">
+        <label>fancyqlone/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/fancyqlone/include/fancyqlone/linalg.hpp</label>
+        <link refid="linalg_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>batmat/config.hpp</label>
+      </node>
+      <node id="2">
+        <label>batmat/linalg/copy.hpp</label>
+      </node>
+      <node id="3">
+        <label>batmat/linalg/elementwise.hpp</label>
+      </node>
+      <node id="4">
+        <label>batmat/linalg/reduce.hpp</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="30">
+        <label>benchmarks/cyqpalm/spring-mass.cpp</label>
+        <link refid="benchmarks_2cyqpalm_2spring-mass_8cpp"/>
+      </node>
+      <node id="4">
+        <label>examples/solve-block-tridiagonal.cpp</label>
+        <link refid="solve-block-tridiagonal_8cpp"/>
+      </node>
+      <node id="2">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-storage.hpp</label>
+        <link refid="cyqlone-storage_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/cyqlone.hpp</label>
+        <link refid="cyqlone_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/cr.tpp</label>
+        <link refid="cr_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/data.tpp</label>
+        <link refid="data_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/factor.tpp</label>
+        <link refid="factor_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/indexing.tpp</label>
+        <link refid="indexing_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/mat-vec.tpp</label>
+        <link refid="mat-vec_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/pcg.tpp</label>
+        <link refid="pcg_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/pcr.tpp</label>
+        <link refid="pcr_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/riccati.tpp</label>
+        <link refid="riccati_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/schur.tpp</label>
+        <link refid="schur_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/sparse.tpp</label>
+        <link refid="sparse_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/implementation/update.tpp</label>
+        <link refid="update_8tpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>src/fancyqlone/include/fancyqlone/cyqlone/tridiagonal-solver.hpp</label>
+        <link refid="tridiagonal-solver_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>src/fancyqlone/include/fancyqlone/fancyqlone/fancyqlone.hpp</label>
+        <link refid="fancyqlone_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>src/fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-data.tpp</label>
+        <link refid="fan-data_8tpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>src/fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-factor.tpp</label>
+        <link refid="fan-factor_8tpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>src/fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-mat-vec.tpp</label>
+        <link refid="fan-mat-vec_8tpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>src/fancyqlone/include/fancyqlone/fancyqlone/implementation/fan-update.tpp</label>
+        <link refid="fan-update_8tpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/fancyqlone/include/fancyqlone/linalg.hpp</label>
+        <link refid="linalg_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-data.tpp</label>
+        <link refid="sfan-data_8tpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-factor.tpp</label>
+        <link refid="sfan-factor_8tpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-mat-vec.tpp</label>
+        <link refid="sfan-mat-vec_8tpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/sfan-update.tpp</label>
+        <link refid="sfan-update_8tpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>src/fancyqlone/include/fancyqlone/sequential-fancyqlone/serial-fancyqlone.hpp</label>
+        <link refid="serial-fancyqlone_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>src/fancyqlone/src/cyqlone/cyqlone-storage.cpp</label>
+        <link refid="cyqlone-storage_8cpp"/>
+      </node>
+      <node id="6">
+        <label>src/fancyqlone/src/cyqlone/cyqlone.cpp</label>
+        <link refid="cyqlone_8cpp"/>
+      </node>
+      <node id="19">
+        <label>src/fancyqlone/src/fancyqlone/fancyqlone.cpp</label>
+        <link refid="fancyqlone_8cpp"/>
+      </node>
+      <node id="25">
+        <label>src/fancyqlone/src/sequential-fancyqlone/serial-fancyqlone.cpp</label>
+        <link refid="serial-fancyqlone_8cpp"/>
+      </node>
+      <node id="32">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/ineq-constr.tpp</label>
+        <link refid="ineq-constr_8tpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linalg.tpp</label>
+        <link refid="linalg_8tpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/linesearch.tpp</label>
+        <link refid="backends_2backend-fancyqlone_2linesearch_8tpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/backend-fancyqlone/solve.tpp</label>
+        <link refid="solve_8tpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</label>
+        <link refid="ocp-backend-fancyqlone_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp</label>
+        <link refid="ocp-backend-fancyqlone_8tpp"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>src/fancyqpalm/src/ocp-backend-cyqlone.cpp</label>
+        <link refid="ocp-backend-cyqlone_8cpp"/>
+      </node>
+      <node id="39">
+        <label>test/test-pcr.cpp</label>
+        <link refid="test-pcr_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacefancyqlone">fancyqlone</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1linalg">fancyqlone::linalg</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/linalg/copy.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/linalg/elementwise.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;batmat/linalg/reduce.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="config_8hpp" kindref="compound">fancyqlone/config.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="namespacefancyqlone_1_1linalg" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacefancyqlone_1_1linalg" kindref="compound">fancyqlone::linalg</ref><sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal"><ref refid="namespacebatmat_1_1linalg" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::linalg</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fancyqlone::linalg</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/fancyqlone/include/fancyqlone/linalg.hpp"/>
+  </compounddef>
+</doxygen>

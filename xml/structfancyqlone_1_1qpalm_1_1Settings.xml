@@ -1,0 +1,622 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1Settings" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::Settings</compoundname>
+    <includes refid="settings_8hpp" local="no">fancyqlone/fancyqpalm/settings.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a503e9eb8d840a68f37b16dc206ffd440" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fancyqlone::qpalm::Settings::max_outer_iter</definition>
+        <argsstring></argsstring>
+        <name>max_outer_iter</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::max_outer_iter</qualifiedname>
+        <initializer>= 100</initializer>
+        <briefdescription>
+<para>Maximum number of (total) iterations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="14" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="14" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a1a5f9c090e0240ca0f99990463c713c8" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fancyqlone::qpalm::Settings::max_inner_iter</definition>
+        <argsstring></argsstring>
+        <name>max_inner_iter</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::max_inner_iter</qualifiedname>
+        <initializer>= 100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="15" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="15" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a8f7c17c4374dcc0a845b9ecb657774cf" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fancyqlone::qpalm::Settings::max_total_inner_iter</definition>
+        <argsstring></argsstring>
+        <name>max_total_inner_iter</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::max_total_inner_iter</qualifiedname>
+        <initializer>= 10000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="16" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="16" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a088439178e1c50a29e96411c25dfb2b0" prot="public" static="no" mutable="no">
+        <type>std::chrono::microseconds</type>
+        <definition>std::chrono::microseconds fancyqlone::qpalm::Settings::max_time</definition>
+        <argsstring></argsstring>
+        <name>max_time</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::max_time</qualifiedname>
+        <initializer>= 5min</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="17" column="31" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="17" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a7e19ef7da04fe7b497f455806b4fac07" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::tolerance</definition>
+        <argsstring></argsstring>
+        <name>tolerance</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::tolerance</qualifiedname>
+        <initializer>= <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>(1e-8)</initializer>
+        <briefdescription>
+<para>Primal tolerance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="19" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="19" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a4a9761232818f40aa28a3a6390bce311" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::dual_tolerance</definition>
+        <argsstring></argsstring>
+        <name>dual_tolerance</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::dual_tolerance</qualifiedname>
+        <initializer>= <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>(1e-8)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="20" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="20" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a8cac2f86a77e08ccf9823453941e3f92" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::eq_constr_tolerance</definition>
+        <argsstring></argsstring>
+        <name>eq_constr_tolerance</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::eq_constr_tolerance</qualifiedname>
+        <initializer>= <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>(1e-10)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="21" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="21" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1af1ae9b0797c33283c94e38ecf0eb3f27" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::initial_inner_tolerance</definition>
+        <argsstring></argsstring>
+        <name>initial_inner_tolerance</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::initial_inner_tolerance</qualifiedname>
+        <initializer>= <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>(1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="22" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="22" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+        <referencedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1ac3104388361a980a90810067441fdad2" compoundref="benchmarks_2cyqpalm_2spring-mass_8cpp" startline="352" endline="408">get_cyqlone_solvers</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a2069f08884d20a78d8b66bf95b3561af" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::ρ</definition>
+        <argsstring></argsstring>
+        <name>ρ</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::ρ</qualifiedname>
+        <initializer>= <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref>(1e-1)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="23" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="23" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a98b8cf1c8cb47fb1b9c5cafe937bb394" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::θ</definition>
+        <argsstring></argsstring>
+        <name>θ</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::θ</qualifiedname>
+        <initializer>= 0.25</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="24" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="24" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9b80dc8ea42a8aae326ba3492f3cf05d" compoundref="solver_8tpp" startline="45" endline="75">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_y</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a975bea37b9700d3183e6f83d4a17ec13" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::Δy</definition>
+        <argsstring></argsstring>
+        <name>Δy</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::Δy</qualifiedname>
+        <initializer>= 100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="25" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="25" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9b80dc8ea42a8aae326ba3492f3cf05d" compoundref="solver_8tpp" startline="45" endline="75">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_y</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a87adae90d0babbb1ee900563b5ecbd6b" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::Δy_always</definition>
+        <argsstring></argsstring>
+        <name>Δy_always</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::Δy_always</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="26" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="26" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9b80dc8ea42a8aae326ba3492f3cf05d" compoundref="solver_8tpp" startline="45" endline="75">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_y</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a5f0f4bf881558472117ec74ed299d564" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::max_penalty_y</definition>
+        <argsstring></argsstring>
+        <name>max_penalty_y</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::max_penalty_y</qualifiedname>
+        <initializer>= 1e9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="27" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="27" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a9b80dc8ea42a8aae326ba3492f3cf05d" compoundref="solver_8tpp" startline="45" endline="75">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_y</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a08b494958c16a3abc0562cdbb19dd8a4" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::initial_penalty_y</definition>
+        <argsstring></argsstring>
+        <name>initial_penalty_y</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::initial_penalty_y</qualifiedname>
+        <initializer>= 20</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="28" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="28" bodyend="-1"/>
+        <referencedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1ac3104388361a980a90810067441fdad2" compoundref="benchmarks_2cyqpalm_2spring-mass_8cpp" startline="352" endline="408">get_cyqlone_solvers</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4bc47a06e0eba099513ff65f253b80ee" compoundref="solver_8tpp" startline="31" endline="43">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::initialize_penalty_y</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a7f22bff5c25b35e7a5213158a2dc889a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::scale_initial_penalty_y</definition>
+        <argsstring></argsstring>
+        <name>scale_initial_penalty_y</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::scale_initial_penalty_y</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="29" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a4bc47a06e0eba099513ff65f253b80ee" compoundref="solver_8tpp" startline="31" endline="43">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::initialize_penalty_y</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1aa45e62c9fb500f2cd4ef9acf30164f8b" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::Δx</definition>
+        <argsstring></argsstring>
+        <name>Δx</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::Δx</qualifiedname>
+        <initializer>= 10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="30" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="30" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a30681bb7f9314cb69eb0cf0e70c7614b" compoundref="solver_8tpp" startline="77" endline="80">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_x</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1ac3bd70c98c96d5b9ea4b011bc5f8505b" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::max_penalty_x</definition>
+        <argsstring></argsstring>
+        <name>max_penalty_x</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::max_penalty_x</qualifiedname>
+        <initializer>= 1e7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="31" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="31" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a30681bb7f9314cb69eb0cf0e70c7614b" compoundref="solver_8tpp" startline="77" endline="80">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::update_penalty_x</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a6147e3b7ee8db5436b8921989988c434" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::boost_penalty_x</definition>
+        <argsstring></argsstring>
+        <name>boost_penalty_x</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::boost_penalty_x</qualifiedname>
+        <initializer>= 1e12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="32" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1abb6756b9a51cba37b191a2424399c1b4" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::Settings::initial_penalty_x</definition>
+        <argsstring></argsstring>
+        <name>initial_penalty_x</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::initial_penalty_x</qualifiedname>
+        <initializer>= 1e7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="33" column="12" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="33" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a8cbfd3b43f89bca125ff14c53d6cb81d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::proximal</definition>
+        <argsstring></argsstring>
+        <name>proximal</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::proximal</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="34" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a11c25746e5571e9b00908dc924e08e37" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::recompute_eq_res</definition>
+        <argsstring></argsstring>
+        <name>recompute_eq_res</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::recompute_eq_res</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="35" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="35" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a9ce3eb8e2b278b5ae9e4e5d574902c48" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::recompute_inner</definition>
+        <argsstring></argsstring>
+        <name>recompute_inner</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::recompute_inner</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="36" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="36" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1ad7581fda29453336114d05ff3174e415" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::recompute</definition>
+        <argsstring></argsstring>
+        <name>recompute</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::recompute</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="37" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="37" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a82f0d6f07b0aa0c3489f741b87764bef" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::verbose</definition>
+        <argsstring></argsstring>
+        <name>verbose</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::verbose</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="38" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="38" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a684148b27f4c004d8c4082789b062a2d" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int fancyqlone::qpalm::Settings::print_precision</definition>
+        <argsstring></argsstring>
+        <name>print_precision</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::print_precision</qualifiedname>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="39" column="9" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="39" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1aecf5f7c747dac641b564e7faf42edd71" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fancyqlone::qpalm::Settings::max_no_changes_active_set</definition>
+        <argsstring></argsstring>
+        <name>max_no_changes_active_set</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::max_no_changes_active_set</qualifiedname>
+        <initializer>= 5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="40" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="40" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1ab897a4544fa2e8a7eaa0a998aa78d0ae" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::linesearch_include_multipliers</definition>
+        <argsstring></argsstring>
+        <name>linesearch_include_multipliers</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::linesearch_include_multipliers</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="41" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a8f7dc2a7cedb7bf71e2b006d8ff12e69" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::force_linesearch_if_no_set_change</definition>
+        <argsstring></argsstring>
+        <name>force_linesearch_if_no_set_change</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::force_linesearch_if_no_set_change</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="42" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="42" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a02fdf7d1873feb740ee970ae58691d0e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::force_linesearch_if_dir_deriv_pos</definition>
+        <argsstring></argsstring>
+        <name>force_linesearch_if_dir_deriv_pos</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::force_linesearch_if_dir_deriv_pos</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="43" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="43" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a474a969a9138f946e09efebc74cdbd7d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::detailed_stats</definition>
+        <argsstring></argsstring>
+        <name>detailed_stats</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::detailed_stats</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="44" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="44" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a38b33955fc2b29e0de6e6e58437bb9cf" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::scale_newton_step</definition>
+        <argsstring></argsstring>
+        <name>scale_newton_step</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::scale_newton_step</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="45" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="45" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a5d42bfef9864390b62f86454469c7b5a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::print_directional_deriv</definition>
+        <argsstring></argsstring>
+        <name>print_directional_deriv</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::print_directional_deriv</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="46" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="46" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1SolverImplementation_1a68a8d399599111330d5048b81a67f2ef" compoundref="solver_8tpp" startline="125" endline="501">fancyqlone::qpalm::SolverImplementation&lt; Backend &gt;::do_main_loop</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1Settings_1a1439db8444857c8d72759bc3227759ba" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::print_linesearch_inputs</definition>
+        <argsstring></argsstring>
+        <name>print_linesearch_inputs</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::print_linesearch_inputs</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="47" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1qpalm_1_1Settings_1a7297c1cc26d2f7f4bd84bc7889b173c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::operator==</definition>
+        <argsstring>(const Settings &amp;) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1Settings" kindref="compound">Settings</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="50" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1qpalm_1_1Settings_1adcc0989a2437d4b48d6977a89e61bfe8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fancyqlone::qpalm::Settings::operator!=</definition>
+        <argsstring>(const Settings &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>fancyqlone::qpalm::Settings::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1qpalm_1_1Settings" kindref="compound">Settings</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="51" column="10" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::Settings</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1Settings"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" line="12" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/settings.hpp" bodystart="12" bodyend="52"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1aa45e62c9fb500f2cd4ef9acf30164f8b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>Δx</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a975bea37b9700d3183e6f83d4a17ec13" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>Δy</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a87adae90d0babbb1ee900563b5ecbd6b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>Δy_always</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a98b8cf1c8cb47fb1b9c5cafe937bb394" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>θ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a2069f08884d20a78d8b66bf95b3561af" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>ρ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a6147e3b7ee8db5436b8921989988c434" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>boost_penalty_x</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a474a969a9138f946e09efebc74cdbd7d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>detailed_stats</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a4a9761232818f40aa28a3a6390bce311" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>dual_tolerance</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a8cac2f86a77e08ccf9823453941e3f92" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>eq_constr_tolerance</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a02fdf7d1873feb740ee970ae58691d0e" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>force_linesearch_if_dir_deriv_pos</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a8f7dc2a7cedb7bf71e2b006d8ff12e69" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>force_linesearch_if_no_set_change</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1af1ae9b0797c33283c94e38ecf0eb3f27" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>initial_inner_tolerance</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1abb6756b9a51cba37b191a2424399c1b4" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>initial_penalty_x</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a08b494958c16a3abc0562cdbb19dd8a4" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>initial_penalty_y</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1ab897a4544fa2e8a7eaa0a998aa78d0ae" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>linesearch_include_multipliers</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a1a5f9c090e0240ca0f99990463c713c8" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>max_inner_iter</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1aecf5f7c747dac641b564e7faf42edd71" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>max_no_changes_active_set</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a503e9eb8d840a68f37b16dc206ffd440" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>max_outer_iter</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1ac3bd70c98c96d5b9ea4b011bc5f8505b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>max_penalty_x</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a5f0f4bf881558472117ec74ed299d564" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>max_penalty_y</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a088439178e1c50a29e96411c25dfb2b0" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>max_time</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a8f7c17c4374dcc0a845b9ecb657774cf" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>max_total_inner_iter</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1adcc0989a2437d4b48d6977a89e61bfe8" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>operator!=</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a7297c1cc26d2f7f4bd84bc7889b173c0" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>operator==</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a5d42bfef9864390b62f86454469c7b5a" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>print_directional_deriv</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a1439db8444857c8d72759bc3227759ba" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>print_linesearch_inputs</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a684148b27f4c004d8c4082789b062a2d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>print_precision</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a8cbfd3b43f89bca125ff14c53d6cb81d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>proximal</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1ad7581fda29453336114d05ff3174e415" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>recompute</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a11c25746e5571e9b00908dc924e08e37" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>recompute_eq_res</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a9ce3eb8e2b278b5ae9e4e5d574902c48" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>recompute_inner</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a7f22bff5c25b35e7a5213158a2dc889a" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>scale_initial_penalty_y</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a38b33955fc2b29e0de6e6e58437bb9cf" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>scale_newton_step</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a7e19ef7da04fe7b497f455806b4fac07" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>tolerance</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1Settings_1a82f0d6f07b0aa0c3489f741b87764bef" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::Settings</scope><name>verbose</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

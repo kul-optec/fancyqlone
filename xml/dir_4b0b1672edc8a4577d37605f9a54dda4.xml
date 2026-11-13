@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_4b0b1672edc8a4577d37605f9a54dda4" kind="dir">
+    <compoundname>src/fancyqlone/src/cyqlone</compoundname>
+    <innerfile refid="cyqlone-storage_8cpp">cyqlone-storage.cpp</innerfile>
+    <innerfile refid="cyqlone_8cpp">cyqlone.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqlone/src/cyqlone/"/>
+  </compounddef>
+</doxygen>

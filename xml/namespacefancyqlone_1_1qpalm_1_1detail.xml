@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacefancyqlone_1_1qpalm_1_1detail" kind="namespace" language="C++">
+    <compoundname>fancyqlone::qpalm::detail</compoundname>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type_3_01CyQPALMBackend_3_01VL_00_01Defaubd648f5f0e10a35ee91edfe54afecd28" prot="public">fancyqlone::qpalm::detail::backend_stats_type&lt; CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01unique__CyQPALMBackend_3_01VL_00_01Defa306830a29b74570e9069a8a538af8ff0" prot="public">fancyqlone::qpalm::detail::backend_type&lt; unique_CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt; &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__type" prot="public">fancyqlone::qpalm::detail::backend_type</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01std_1_1unique__ptr_3_01T_00_01D_01_4_01_4" prot="public">fancyqlone::qpalm::detail::backend_type&lt; std::unique_ptr&lt; T, D &gt; &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__type_3_01T_01_5_01_4" prot="public">fancyqlone::qpalm::detail::backend_type&lt; T * &gt;</innerclass>
+    <innerclass refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type" prot="public">fancyqlone::qpalm::detail::backend_stats_type</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacefancyqlone_1_1qpalm_1_1detail_1a49f3a418b141bc5e8f6b556923568b6a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structfancyqlone_1_1qpalm_1_1detail_1_1backend__type" kindref="compound">backend_type</ref>&lt; T &gt;::type</type>
+        <definition>using fancyqlone::qpalm::detail::backend_type_t = typename backend_type&lt;T&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>backend_type_t</name>
+        <qualifiedname>fancyqlone::qpalm::detail::backend_type_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" line="72" column="1" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/solver.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp" line="197" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::DetailedStats::Entry</compoundname>
+    <includes refid="detailed-stats_8hpp" local="no">fancyqlone/fancyqpalm/detailed-stats.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1af9e7927ca67506604ec4d987cebcdc6a" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fancyqlone::qpalm::DetailedStats::Entry::outer_iter</definition>
+        <argsstring></argsstring>
+        <name>outer_iter</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::Entry::outer_iter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="17" column="18" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a7f71e4f351ef7fde7850c9a044a52a0f" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fancyqlone::qpalm::DetailedStats::Entry::inner_iter</definition>
+        <argsstring></argsstring>
+        <name>inner_iter</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::Entry::inner_iter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="17" column="29" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1ac81e537a835b841242fed8d6f23f9372" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::DetailedStats::Entry::stationarity</definition>
+        <argsstring></argsstring>
+        <name>stationarity</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::Entry::stationarity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="18" column="16" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a19ba00696ef6c5dcc6a2ae4ba5b5f70e" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::DetailedStats::Entry::ineq_constr_viol</definition>
+        <argsstring></argsstring>
+        <name>ineq_constr_viol</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::Entry::ineq_constr_viol</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="18" column="29" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1ad371dfc5b3db38e0f064b77f8b6ea49b" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::DetailedStats::Entry::eq_constr_viol</definition>
+        <argsstring></argsstring>
+        <name>eq_constr_viol</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::Entry::eq_constr_viol</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="18" column="46" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a228d8e8caa7498a92cf256bb2e1bc6f9" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::DetailedStats::Entry::linesearch_step_size</definition>
+        <argsstring></argsstring>
+        <name>linesearch_step_size</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::Entry::linesearch_step_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="19" column="16" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1acb8999d0e42de4749c705a38c8edca75" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t fancyqlone::qpalm::DetailedStats::Entry::linesearch_breakpoint_index</definition>
+        <argsstring></argsstring>
+        <name>linesearch_breakpoint_index</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::Entry::linesearch_breakpoint_index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="20" column="16" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1abee26b75e55cd0b7e0b38b39ca186e8b" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::qpalm::DetailedStats::Entry::num_active_constr</definition>
+        <argsstring></argsstring>
+        <name>num_active_constr</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::Entry::num_active_constr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="21" column="17" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1ad0e2e847f965f40c70cc5a1a6497fe3a" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::qpalm::DetailedStats::Entry::num_changing_constr</definition>
+        <argsstring></argsstring>
+        <name>num_changing_constr</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::Entry::num_changing_constr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="21" column="35" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1adce842b5223bb4ec4c1d3fd61af2f0f4" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1a81aa219ba9cf504f50b0050b779557c4" kindref="member">ExitReason</ref></type>
+        <definition>ExitReason fancyqlone::qpalm::DetailedStats::Entry::exit_reason</definition>
+        <argsstring></argsstring>
+        <name>exit_reason</name>
+        <qualifiedname>fancyqlone::qpalm::DetailedStats::Entry::exit_reason</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="22" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::DetailedStats::Entry</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" line="16" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/detailed-stats.hpp" bodystart="16" bodyend="23"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1ad371dfc5b3db38e0f064b77f8b6ea49b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats::Entry</scope><name>eq_constr_viol</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1adce842b5223bb4ec4c1d3fd61af2f0f4" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats::Entry</scope><name>exit_reason</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a19ba00696ef6c5dcc6a2ae4ba5b5f70e" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats::Entry</scope><name>ineq_constr_viol</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a7f71e4f351ef7fde7850c9a044a52a0f" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats::Entry</scope><name>inner_iter</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1acb8999d0e42de4749c705a38c8edca75" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats::Entry</scope><name>linesearch_breakpoint_index</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1a228d8e8caa7498a92cf256bb2e1bc6f9" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats::Entry</scope><name>linesearch_step_size</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1abee26b75e55cd0b7e0b38b39ca186e8b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats::Entry</scope><name>num_active_constr</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1ad0e2e847f965f40c70cc5a1a6497fe3a" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats::Entry</scope><name>num_changing_constr</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1af9e7927ca67506604ec4d987cebcdc6a" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats::Entry</scope><name>outer_iter</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1DetailedStats_1_1Entry_1ac81e537a835b841242fed8d6f23f9372" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::DetailedStats::Entry</scope><name>stationarity</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

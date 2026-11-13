@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_5245091977c81dde984ed67937983437" kind="dir">
+    <compoundname>src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation</compoundname>
+    <innerfile refid="sfan-data_8tpp">sfan-data.tpp</innerfile>
+    <innerfile refid="sfan-factor_8tpp">sfan-factor.tpp</innerfile>
+    <innerfile refid="sfan-mat-vec_8tpp">sfan-mat-vec.tpp</innerfile>
+    <innerfile refid="sfan-update_8tpp">sfan-update.tpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqlone/include/fancyqlone/sequential-fancyqlone/implementation/"/>
+  </compounddef>
+</doxygen>

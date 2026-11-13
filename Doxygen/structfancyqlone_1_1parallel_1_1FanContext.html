@@ -1,0 +1,796 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: fancyqlone::parallel::FanContext&lt; SC &gt; Struct Template Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structfancyqlone_1_1parallel_1_1FanContext.html','','structfancyqlone_1_1parallel_1_1FanContext-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fancyqlone::parallel::FanContext&lt; SC &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="parallel_8hpp_source.html">fancyqlone/parallel.hpp</a>&gt;</code></p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class SC&gt;<br />
+struct fancyqlone::parallel::FanContext&lt; SC &gt;</div>
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00310">310</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a75bb7fe3d239e1d54b71964da0f8a946" id="r_a75bb7fe3d239e1d54b71964da0f8a946"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a75bb7fe3d239e1d54b71964da0f8a946">shared_context_type</a> = SC</td></tr>
+<tr class="memitem:abcebbd69c08e5b9de9e02bc9af5745d7" id="r_abcebbd69c08e5b9de9e02bc9af5745d7"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:abcebbd69c08e5b9de9e02bc9af5745d7 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#abcebbd69c08e5b9de9e02bc9af5745d7">arrival_token_typed</a> = FanSharedContext::barrier_type::template <a class="el" href="#abcebbd69c08e5b9de9e02bc9af5745d7">arrival_token_typed</a>&lt;T&gt;</td></tr>
+<tr class="memitem:a2d54a0d78724a9ca3b71c4248257a5d1" id="r_a2d54a0d78724a9ca3b71c4248257a5d1"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a2d54a0d78724a9ca3b71c4248257a5d1">arrival_token</a> = FanSharedContext::barrier_type::arrival_token</td></tr>
+<tr class="memitem:a6f9841c17f571f356e0514956d6cdfb9" id="r_a6f9841c17f571f356e0514956d6cdfb9"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a6f9841c17f571f356e0514956d6cdfb9">arrival_t</a> = <a class="el" href="structfancyqlone_1_1parallel_1_1Context.html">Context</a>&lt;<a class="el" href="structfancyqlone_1_1parallel_1_1SharedContext.html">SharedContext</a>&gt;<a class="el" href="#a2d54a0d78724a9ca3b71c4248257a5d1">::arrival_token</a></td></tr>
+<tr class="memitem:ae9b748236e08bd2445358bf2531ced02" id="r_ae9b748236e08bd2445358bf2531ced02"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ae9b748236e08bd2445358bf2531ced02">fan_arrival_t</a> = <a class="el" href="structfancyqlone_1_1parallel_1_1Context.html">Context</a>&lt;<a class="el" href="structfancyqlone_1_1parallel_1_1FanSharedContext.html">FanSharedContext</a>&gt;<a class="el" href="#a2d54a0d78724a9ca3b71c4248257a5d1">::arrival_token</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a088fca5194863e4c521507cb73bc8f18" id="r_a088fca5194863e4c521507cb73bc8f18"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a088fca5194863e4c521507cb73bc8f18">is_master</a> () const</td></tr>
+<tr class="memitem:adb9cf462067ee4139a30a890d15089d6" id="r_adb9cf462067ee4139a30a890d15089d6"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#adb9cf462067ee4139a30a890d15089d6">arrive</a> ()</td></tr>
+<tr class="memdesc:adb9cf462067ee4139a30a890d15089d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arrive at the barrier and obtain a token that can be used to wait for completion of the current barrier phase.  <br /></td></tr>
+<tr class="memitem:aec930e2ae0f2a18c1cfa199e3afd46d3" id="r_aec930e2ae0f2a18c1cfa199e3afd46d3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aec930e2ae0f2a18c1cfa199e3afd46d3">wait</a> (<a class="el" href="namespacefancyqlone_1_1parallel.html#structfancyqlone_1_1parallel_1_1arrival__token__fan">arrival_token_fan</a> &amp;&amp;token)</td></tr>
+<tr class="memdesc:aec930e2ae0f2a18c1cfa199e3afd46d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Await a token returned by <a class="el" href="#adb9cf462067ee4139a30a890d15089d6" title="arrive()">arrive()</a>, waiting for the barrier phase to complete.  <br /></td></tr>
+<tr class="memitem:a5fc2e840fda993098174e8fc7c1e4ef8" id="r_a5fc2e840fda993098174e8fc7c1e4ef8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5fc2e840fda993098174e8fc7c1e4ef8">arrive_and_wait</a> ()</td></tr>
+<tr class="memdesc:a5fc2e840fda993098174e8fc7c1e4ef8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arrive at the barrier and wait for the barrier phase to complete.  <br /></td></tr>
+<tr class="memitem:a33ecc4cf756fdb6560a99872c70e5129" id="r_a33ecc4cf756fdb6560a99872c70e5129"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a33ecc4cf756fdb6560a99872c70e5129">arrive_and_wait</a> (int line)</td></tr>
+<tr class="memdesc:a33ecc4cf756fdb6560a99872c70e5129"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug version of <a class="el" href="#a5fc2e840fda993098174e8fc7c1e4ef8" title="arrive_and_wait()">arrive_and_wait()</a> that performs a sanity check to ensure that all threads are arriving at the same line of code.  <br /></td></tr>
+<tr class="memitem:a80df190d3d9e6d48b17e8f7002bcff36" id="r_a80df190d3d9e6d48b17e8f7002bcff36"><td class="memTemplParams" colspan="2">template&lt;class T, class F&gt; </td></tr>
+<tr class="memitem:a80df190d3d9e6d48b17e8f7002bcff36 template"><td class="memItemLeft"><a class="el" href="namespacefancyqlone_1_1parallel.html#structfancyqlone_1_1parallel_1_1arrival__token__typed__fan">arrival_token_typed_fan</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a80df190d3d9e6d48b17e8f7002bcff36">arrive_reduce</a> (T x, F func)</td></tr>
+<tr class="memdesc:a80df190d3d9e6d48b17e8f7002bcff36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a reduction of <code class="param">x</code> across all threads using the given binary function <code class="param">func</code>.  <br /></td></tr>
+<tr class="memitem:a365f8a883ff71b787274825a826312b7" id="r_a365f8a883ff71b787274825a826312b7"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:a365f8a883ff71b787274825a826312b7 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#a365f8a883ff71b787274825a826312b7">wait_reduce</a> (<a class="el" href="namespacefancyqlone_1_1parallel.html#structfancyqlone_1_1parallel_1_1arrival__token__typed__fan">arrival_token_typed_fan</a>&lt; T &gt; &amp;&amp;token)</td></tr>
+<tr class="memitem:acbb9c72671eac2b78f5069248b809619" id="r_acbb9c72671eac2b78f5069248b809619"><td class="memTemplParams" colspan="2">template&lt;class T, class F&gt; </td></tr>
+<tr class="memitem:acbb9c72671eac2b78f5069248b809619 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#acbb9c72671eac2b78f5069248b809619">reduce</a> (T x, F func)</td></tr>
+<tr class="memitem:a0d7d3a0bcd2c2f4a7d2f261482a17185" id="r_a0d7d3a0bcd2c2f4a7d2f261482a17185"><td class="memTemplParams" colspan="2">template&lt;class T&gt; </td></tr>
+<tr class="memitem:a0d7d3a0bcd2c2f4a7d2f261482a17185 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#a0d7d3a0bcd2c2f4a7d2f261482a17185">reduce</a> (T x)</td></tr>
+<tr class="memitem:ad8ad650b5aa60f51ca974216978129be" id="r_ad8ad650b5aa60f51ca974216978129be"><td class="memTemplParams" colspan="2">template&lt;class F&gt; </td></tr>
+<tr class="memitem:ad8ad650b5aa60f51ca974216978129be template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#ad8ad650b5aa60f51ca974216978129be">run_single_sync</a> (F &amp;&amp;f)</td></tr>
+<tr class="memdesc:ad8ad650b5aa60f51ca974216978129be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for all threads to reach this point, then run the given function on a single thread before releasing all threads again.  <br /></td></tr>
+<tr class="memitem:ad8c5bc8bb1d82219d721eb26aa4433d8" id="r_ad8c5bc8bb1d82219d721eb26aa4433d8"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ad8c5bc8bb1d82219d721eb26aa4433d8 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#ad8c5bc8bb1d82219d721eb26aa4433d8">broadcast</a> (T x, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> src=0)</td></tr>
+<tr class="memdesc:ad8c5bc8bb1d82219d721eb26aa4433d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcast a value <code class="param">x</code> from the thread with index <code class="param">src</code> to all threads.  <br /></td></tr>
+<tr class="memitem:a6d42b4f9c06f1b875419161fc022add5" id="r_a6d42b4f9c06f1b875419161fc022add5"><td class="memTemplParams" colspan="2">template&lt;class F, class... Args&gt; </td></tr>
+<tr class="memitem:a6d42b4f9c06f1b875419161fc022add5 template"><td class="memItemLeft">auto&#160;</td><td class="memItemRight"><a class="el" href="#a6d42b4f9c06f1b875419161fc022add5">call_broadcast</a> (F &amp;&amp;f, Args &amp;&amp;...args) -&gt; std::invoke_result_t&lt; F, Args... &gt;</td></tr>
+<tr class="memdesc:a6d42b4f9c06f1b875419161fc022add5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call a function <code class="param">f</code> with the given <code class="param">args</code> on a single thread and broadcast the return value to all threads.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a1df1bbfcfcd0df73c73b686d48e2860e" id="r_a1df1bbfcfcd0df73c73b686d48e2860e"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1parallel_1_1Context.html">Context</a>&lt; <a class="el" href="structfancyqlone_1_1parallel_1_1SharedContext.html">SharedContext</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a1df1bbfcfcd0df73c73b686d48e2860e">branch_ctx</a></td></tr>
+<tr class="memitem:aa31104903840ac35304957050809a2cf" id="r_aa31104903840ac35304957050809a2cf"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1parallel_1_1Context.html">Context</a>&lt; <a class="el" href="structfancyqlone_1_1parallel_1_1FanSharedContext.html">FanSharedContext</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa31104903840ac35304957050809a2cf">total_ctx</a></td></tr>
+<tr class="memitem:a7c8163be469c138cc103fd24123f7bb5" id="r_a7c8163be469c138cc103fd24123f7bb5"><td class="memItemLeft"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7c8163be469c138cc103fd24123f7bb5">index</a></td></tr>
+</table>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
+<a id="a75bb7fe3d239e1d54b71964da0f8a946" name="a75bb7fe3d239e1d54b71964da0f8a946"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75bb7fe3d239e1d54b71964da0f8a946">&#9670;&#160;</a></span>shared_context_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::shared_context_type = SC</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00311">311</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abcebbd69c08e5b9de9e02bc9af5745d7" name="abcebbd69c08e5b9de9e02bc9af5745d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcebbd69c08e5b9de9e02bc9af5745d7">&#9670;&#160;</a></span>arrival_token_typed</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::arrival_token_typed = FanSharedContext::barrier_type::template <a class="el" href="#abcebbd69c08e5b9de9e02bc9af5745d7">arrival_token_typed</a>&lt;T&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00316">316</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2d54a0d78724a9ca3b71c4248257a5d1" name="a2d54a0d78724a9ca3b71c4248257a5d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d54a0d78724a9ca3b71c4248257a5d1">&#9670;&#160;</a></span>arrival_token</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::arrival_token = FanSharedContext::barrier_type::arrival_token</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00317">317</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6f9841c17f571f356e0514956d6cdfb9" name="a6f9841c17f571f356e0514956d6cdfb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f9841c17f571f356e0514956d6cdfb9">&#9670;&#160;</a></span>arrival_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::arrival_t = <a class="el" href="structfancyqlone_1_1parallel_1_1Context.html">Context</a>&lt;<a class="el" href="structfancyqlone_1_1parallel_1_1SharedContext.html">SharedContext</a>&gt;<a class="el" href="#a2d54a0d78724a9ca3b71c4248257a5d1">::arrival_token</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00322">322</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae9b748236e08bd2445358bf2531ced02" name="ae9b748236e08bd2445358bf2531ced02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9b748236e08bd2445358bf2531ced02">&#9670;&#160;</a></span>fan_arrival_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::fan_arrival_t = <a class="el" href="structfancyqlone_1_1parallel_1_1Context.html">Context</a>&lt;<a class="el" href="structfancyqlone_1_1parallel_1_1FanSharedContext.html">FanSharedContext</a>&gt;<a class="el" href="#a2d54a0d78724a9ca3b71c4248257a5d1">::arrival_token</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00323">323</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a088fca5194863e4c521507cb73bc8f18" name="a088fca5194863e4c521507cb73bc8f18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a088fca5194863e4c521507cb73bc8f18">&#9670;&#160;</a></span>is_master()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::is_master </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00326">326</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="adb9cf462067ee4139a30a890d15089d6" name="adb9cf462067ee4139a30a890d15089d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb9cf462067ee4139a30a890d15089d6">&#9670;&#160;</a></span>arrive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::arrive </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Arrive at the barrier and obtain a token that can be used to wait for completion of the current barrier phase. </p>
+<dl class="section note"><dt>Note</dt><dd>Token must be awaited before any other call to arrive. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00330">330</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aec930e2ae0f2a18c1cfa199e3afd46d3" name="aec930e2ae0f2a18c1cfa199e3afd46d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec930e2ae0f2a18c1cfa199e3afd46d3">&#9670;&#160;</a></span>wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::wait </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefancyqlone_1_1parallel.html#structfancyqlone_1_1parallel_1_1arrival__token__fan">arrival_token_fan</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Await a token returned by <a class="el" href="#adb9cf462067ee4139a30a890d15089d6" title="arrive()">arrive()</a>, waiting for the barrier phase to complete. </p>
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00344">344</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5fc2e840fda993098174e8fc7c1e4ef8" name="a5fc2e840fda993098174e8fc7c1e4ef8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fc2e840fda993098174e8fc7c1e4ef8">&#9670;&#160;</a></span>arrive_and_wait() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::arrive_and_wait </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Arrive at the barrier and wait for the barrier phase to complete. </p>
+<p>This is a convenience wrapper around <a class="el" href="#adb9cf462067ee4139a30a890d15089d6" title="arrive()">arrive()</a> and <a class="el" href="#aec930e2ae0f2a18c1cfa199e3afd46d3" title="wait()">wait()</a> for the common case where the thread does not have other work to do while waiting. </p>
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00352">352</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a33ecc4cf756fdb6560a99872c70e5129" name="a33ecc4cf756fdb6560a99872c70e5129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33ecc4cf756fdb6560a99872c70e5129">&#9670;&#160;</a></span>arrive_and_wait() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::arrive_and_wait </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Debug version of <a class="el" href="#a5fc2e840fda993098174e8fc7c1e4ef8" title="arrive_and_wait()">arrive_and_wait()</a> that performs a sanity check to ensure that all threads are arriving at the same line of code. </p>
+<p>The <code class="param">line</code> parameter should be the same for all threads arriving at the same barrier. It is only verified in debug builds, and is equivalent to <a class="el" href="#a5fc2e840fda993098174e8fc7c1e4ef8" title="arrive_and_wait()">arrive_and_wait()</a> in release builds. </p>
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00372">372</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a80df190d3d9e6d48b17e8f7002bcff36" name="a80df190d3d9e6d48b17e8f7002bcff36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80df190d3d9e6d48b17e8f7002bcff36">&#9670;&#160;</a></span>arrive_reduce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<div class="memtemplate">
+template&lt;class T, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacefancyqlone_1_1parallel.html#structfancyqlone_1_1parallel_1_1arrival__token__typed__fan">arrival_token_typed_fan</a>&lt; T &gt; <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::arrive_reduce </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>func</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Perform a reduction of <code class="param">x</code> across all threads using the given binary function <code class="param">func</code>. </p>
+<p>Returns a token that can be used to wait for the reduction to complete and obtain the reduced value. </p>
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00387">387</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a365f8a883ff71b787274825a826312b7" name="a365f8a883ff71b787274825a826312b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a365f8a883ff71b787274825a826312b7">&#9670;&#160;</a></span>wait_reduce()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::wait_reduce </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefancyqlone_1_1parallel.html#structfancyqlone_1_1parallel_1_1arrival__token__typed__fan">arrival_token_typed_fan</a>&lt; T &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00397">397</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acbb9c72671eac2b78f5069248b809619" name="acbb9c72671eac2b78f5069248b809619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbb9c72671eac2b78f5069248b809619">&#9670;&#160;</a></span>reduce() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<div class="memtemplate">
+template&lt;class T, class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::reduce </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F</td>          <td class="paramname"><span class="paramname"><em>func</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00405">405</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0d7d3a0bcd2c2f4a7d2f261482a17185" name="a0d7d3a0bcd2c2f4a7d2f261482a17185"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d7d3a0bcd2c2f4a7d2f261482a17185">&#9670;&#160;</a></span>reduce() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::reduce </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00415">415</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad8ad650b5aa60f51ca974216978129be" name="ad8ad650b5aa60f51ca974216978129be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8ad650b5aa60f51ca974216978129be">&#9670;&#160;</a></span>run_single_sync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<div class="memtemplate">
+template&lt;class F&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::run_single_sync </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>f</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Wait for all threads to reach this point, then run the given function on a single thread before releasing all threads again. </p>
+<p>Changes by all threads are visible during the call to <code class="param">f</code> and changes made by <code class="param">f</code> are visible to all threads after this function returns. </p>
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00422">422</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad8c5bc8bb1d82219d721eb26aa4433d8" name="ad8c5bc8bb1d82219d721eb26aa4433d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8c5bc8bb1d82219d721eb26aa4433d8">&#9670;&#160;</a></span>broadcast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::broadcast </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>src</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broadcast a value <code class="param">x</code> from the thread with index <code class="param">src</code> to all threads. </p>
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00428">428</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a6d42b4f9c06f1b875419161fc022add5" name="a6d42b4f9c06f1b875419161fc022add5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d42b4f9c06f1b875419161fc022add5">&#9670;&#160;</a></span>call_broadcast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+<div class="memtemplate">
+template&lt;class F, class... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::call_broadcast </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>f</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;) -&gt; std::invoke_result_t&lt; F, Args... &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Call a function <code class="param">f</code> with the given <code class="param">args</code> on a single thread and broadcast the return value to all threads. </p>
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00448">448</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a1df1bbfcfcd0df73c73b686d48e2860e" name="a1df1bbfcfcd0df73c73b686d48e2860e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1df1bbfcfcd0df73c73b686d48e2860e">&#9670;&#160;</a></span>branch_ctx</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1parallel_1_1Context.html">Context</a>&lt;<a class="el" href="structfancyqlone_1_1parallel_1_1SharedContext.html">SharedContext</a>&gt; <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::branch_ctx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00312">312</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa31104903840ac35304957050809a2cf" name="aa31104903840ac35304957050809a2cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa31104903840ac35304957050809a2cf">&#9670;&#160;</a></span>total_ctx</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1parallel_1_1Context.html">Context</a>&lt;<a class="el" href="structfancyqlone_1_1parallel_1_1FanSharedContext.html">FanSharedContext</a>&gt; <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::total_ctx</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00313">313</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a7c8163be469c138cc103fd24123f7bb5" name="a7c8163be469c138cc103fd24123f7bb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c8163be469c138cc103fd24123f7bb5">&#9670;&#160;</a></span>index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class SC&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> <a class="el" href="structfancyqlone_1_1parallel_1_1FanContext.html">fancyqlone::parallel::FanContext</a>&lt; SC &gt;::index</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="parallel_8hpp_source.html#l00314">314</a> of file <a class="el" href="parallel_8hpp_source.html">parallel.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/fancyqlone/include/fancyqlone/<a class="el" href="parallel_8hpp_source.html">parallel.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacefancyqlone.html">fancyqlone</a></li><li class="navelem"><a href="namespacefancyqlone_1_1parallel.html">parallel</a></li><li class="navelem"><a href="structfancyqlone_1_1parallel_1_1FanContext.html">FanContext</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

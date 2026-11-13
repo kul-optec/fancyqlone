@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1matio__traits_3_01float_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::matio_traits&lt; float &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1matio__traits_3_01float_01_4_1ad2abc92aee87b81cab99623025523b5c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto fancyqlone::matio_traits&lt; float &gt;::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>fancyqlone::matio_traits&lt; float &gt;::type</qualifiedname>
+        <initializer>= MAT_T_SINGLE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/src/matio.cpp" line="24" column="27" bodyfile="src/fancyqlone/src/matio.cpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1matio__traits_3_01float_01_4_1a4f314fe68d7bb61e087dbd7b90955735" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto fancyqlone::matio_traits&lt; float &gt;::class_</definition>
+        <argsstring></argsstring>
+        <name>class_</name>
+        <qualifiedname>fancyqlone::matio_traits&lt; float &gt;::class_</qualifiedname>
+        <initializer>= MAT_C_SINGLE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/src/matio.cpp" line="25" column="27" bodyfile="src/fancyqlone/src/matio.cpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::matio_traits&lt; float &gt;</label>
+        <link refid="structfancyqlone_1_1matio__traits_3_01float_01_4"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/src/matio.cpp" line="23" column="1" bodyfile="src/fancyqlone/src/matio.cpp" bodystart="23" bodyend="26"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1matio__traits_3_01float_01_4_1a4f314fe68d7bb61e087dbd7b90955735" prot="public" virt="non-virtual"><scope>fancyqlone::matio_traits&lt; float &gt;</scope><name>class_</name></member>
+      <member refid="structfancyqlone_1_1matio__traits_3_01float_01_4_1ad2abc92aee87b81cab99623025523b5c" prot="public" virt="non-virtual"><scope>fancyqlone::matio_traits&lt; float &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

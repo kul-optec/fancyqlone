@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1TricyqleParams" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::TricyqleParams</compoundname>
+    <includes refid="cyqlone-params_8hpp" local="no">fancyqlone/cyqlone/cyqlone-params.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+        <defval><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1TricyqleParams_1ac8ccd54fceab2ca5d45e4283a8670f5a" prot="public" static="no">
+        <type>T</type>
+        <definition>using fancyqlone::TricyqleParams&lt; T &gt;::value_type = T</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>fancyqlone::TricyqleParams::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="39" column="5" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1TricyqleParams_1a30b7332db0e61ec548f71156df4de4f2" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::TricyqleParams&lt; T &gt;::enable_prefetching</definition>
+        <argsstring></argsstring>
+        <name>enable_prefetching</name>
+        <qualifiedname>fancyqlone::TricyqleParams::enable_prefetching</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Use prefetching during the reverse CR solve phase. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="42" column="10" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TricyqleParams_1a210ccd590f20dbaf5ecf8c3ae33a6947" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::TricyqleParams&lt; T &gt;::pcg_max_iter</definition>
+        <argsstring></argsstring>
+        <name>pcg_max_iter</name>
+        <qualifiedname>fancyqlone::TricyqleParams::pcg_max_iter</qualifiedname>
+        <initializer>= 100</initializer>
+        <briefdescription>
+<para>Maximum number of preconditioned conjugate gradient iterations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="44" column="13" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TricyqleParams_1a73b33493dc3b236499647b0dae9c7755" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1TricyqleParams_1ac8ccd54fceab2ca5d45e4283a8670f5a" kindref="member">value_type</ref></type>
+        <definition>value_type fancyqlone::TricyqleParams&lt; T &gt;::pcg_tolerance</definition>
+        <argsstring></argsstring>
+        <name>pcg_tolerance</name>
+        <qualifiedname>fancyqlone::TricyqleParams::pcg_tolerance</qualifiedname>
+        <initializer>= std::numeric_limits&lt;<ref refid="structfancyqlone_1_1TricyqleParams_1ac8ccd54fceab2ca5d45e4283a8670f5a" kindref="member">value_type</ref>&gt;::epsilon() / 10</initializer>
+        <briefdescription>
+<para>Tolerance for the preconditioned conjugate gradient solver. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="46" column="16" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TricyqleParams_1aaaded6f939767536b950c5b1655ff8ae" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fancyqlone::TricyqleParams&lt; T &gt;::pcg_print_resid</definition>
+        <argsstring></argsstring>
+        <name>pcg_print_resid</name>
+        <qualifiedname>fancyqlone::TricyqleParams::pcg_print_resid</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Enable printing of the residuals during PCG. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="48" column="10" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TricyqleParams_1a0dba2378f2f1d16718569d318898492b" prot="public" static="no" mutable="no">
+        <type><ref refid="group__topic-block-tridiag-solvers_1ga02b7bc5e6f2bb033f2f89b03d51d6436" kindref="member">SolveMethod</ref></type>
+        <definition>SolveMethod fancyqlone::TricyqleParams&lt; T &gt;::solve_method</definition>
+        <argsstring></argsstring>
+        <name>solve_method</name>
+        <qualifiedname>fancyqlone::TricyqleParams::solve_method</qualifiedname>
+        <initializer>= <ref refid="group__topic-block-tridiag-solvers_1gga02b7bc5e6f2bb033f2f89b03d51d6436a91fa024e7c3efdd56efd4588853cf488" kindref="member">SolveMethod::StairPCG</ref></initializer>
+        <briefdescription>
+<para>Algorithm to use for solving the final reduced block tridiagonal system. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="50" column="17" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="50" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1ac648c68f03d94009d36e86036f058de0" compoundref="ocp-backend-fancyqlone_8tpp" startline="98" endline="131">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::CyQPALMBackend</referencedby>
+        <referencedby refid="benchmarks_2cyqpalm_2spring-mass_8cpp_1ac3104388361a980a90810067441fdad2" compoundref="benchmarks_2cyqpalm_2spring-mass_8cpp" startline="352" endline="408">get_cyqlone_solvers</referencedby>
+        <referencedby refid="solve-block-tridiagonal_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" compoundref="solve-block-tridiagonal_8cpp" startline="38" endline="160">main</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TricyqleParams_1a7f1e1fabdc765df35d6dddecc9491551" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double fancyqlone::TricyqleParams&lt; T &gt;::pcr_max_update_fraction</definition>
+        <argsstring></argsstring>
+        <name>pcr_max_update_fraction</name>
+        <qualifiedname>fancyqlone::TricyqleParams::pcr_max_update_fraction</qualifiedname>
+        <initializer>= 0.6</initializer>
+        <briefdescription>
+<para>Tuning parameter for deciding when to update or re-factor the PCR factorization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the update rank exceeds this fraction of nx, the PCR factorization is recomputed </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="53" column="12" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TricyqleParams_1a9320fd179b09efa8ee8140053a2626fd" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double fancyqlone::TricyqleParams&lt; T &gt;::cr_max_update_fraction_Y0</definition>
+        <argsstring></argsstring>
+        <name>cr_max_update_fraction_Y0</name>
+        <qualifiedname>fancyqlone::TricyqleParams::cr_max_update_fraction_Y0</qualifiedname>
+        <initializer>= 0.9</initializer>
+        <briefdescription>
+<para>Tuning parameter for deciding when to update or re-factor the last subdiagonal blocks in the CR factorization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the update rank exceeds this fraction of nx, the last subdiagonal blocks are recomputed.  </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="59" column="12" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TricyqleParams_1a0502c7479d74808336a819522952b81e" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::TricyqleParams&lt; T &gt;::parallel_solve_cr_threshold</definition>
+        <argsstring></argsstring>
+        <name>parallel_solve_cr_threshold</name>
+        <qualifiedname>fancyqlone::TricyqleParams::parallel_solve_cr_threshold</qualifiedname>
+        <initializer>= 10</initializer>
+        <briefdescription>
+<para>Threshold on nx for switching to a serial implementation of the reverse CR solve. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="61" column="13" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1TricyqleParams_1a07ba880afa9f31cf6efb4c792f340393" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::TricyqleParams&lt; T &gt;::parallel_factor_pcr_threshold</definition>
+        <argsstring></argsstring>
+        <name>parallel_factor_pcr_threshold</name>
+        <qualifiedname>fancyqlone::TricyqleParams::parallel_factor_pcr_threshold</qualifiedname>
+        <initializer>= 20</initializer>
+        <briefdescription>
+<para>Threshold on nx for switching to a serial implementation of the PCR factorization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="63" column="13" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Parameters and settings for the Tricyqle block-tridiagonal solver. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::TricyqleParams&lt; T &gt;</label>
+        <link refid="structfancyqlone_1_1TricyqleParams"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" line="38" column="1" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone-params.hpp" bodystart="38" bodyend="64"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1TricyqleParams_1a9320fd179b09efa8ee8140053a2626fd" prot="public" virt="non-virtual"><scope>fancyqlone::TricyqleParams</scope><name>cr_max_update_fraction_Y0</name></member>
+      <member refid="structfancyqlone_1_1TricyqleParams_1a30b7332db0e61ec548f71156df4de4f2" prot="public" virt="non-virtual"><scope>fancyqlone::TricyqleParams</scope><name>enable_prefetching</name></member>
+      <member refid="structfancyqlone_1_1TricyqleParams_1a07ba880afa9f31cf6efb4c792f340393" prot="public" virt="non-virtual"><scope>fancyqlone::TricyqleParams</scope><name>parallel_factor_pcr_threshold</name></member>
+      <member refid="structfancyqlone_1_1TricyqleParams_1a0502c7479d74808336a819522952b81e" prot="public" virt="non-virtual"><scope>fancyqlone::TricyqleParams</scope><name>parallel_solve_cr_threshold</name></member>
+      <member refid="structfancyqlone_1_1TricyqleParams_1a210ccd590f20dbaf5ecf8c3ae33a6947" prot="public" virt="non-virtual"><scope>fancyqlone::TricyqleParams</scope><name>pcg_max_iter</name></member>
+      <member refid="structfancyqlone_1_1TricyqleParams_1aaaded6f939767536b950c5b1655ff8ae" prot="public" virt="non-virtual"><scope>fancyqlone::TricyqleParams</scope><name>pcg_print_resid</name></member>
+      <member refid="structfancyqlone_1_1TricyqleParams_1a73b33493dc3b236499647b0dae9c7755" prot="public" virt="non-virtual"><scope>fancyqlone::TricyqleParams</scope><name>pcg_tolerance</name></member>
+      <member refid="structfancyqlone_1_1TricyqleParams_1a7f1e1fabdc765df35d6dddecc9491551" prot="public" virt="non-virtual"><scope>fancyqlone::TricyqleParams</scope><name>pcr_max_update_fraction</name></member>
+      <member refid="structfancyqlone_1_1TricyqleParams_1a0dba2378f2f1d16718569d318898492b" prot="public" virt="non-virtual"><scope>fancyqlone::TricyqleParams</scope><name>solve_method</name></member>
+      <member refid="structfancyqlone_1_1TricyqleParams_1ac8ccd54fceab2ca5d45e4283a8670f5a" prot="public" virt="non-virtual"><scope>fancyqlone::TricyqleParams</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

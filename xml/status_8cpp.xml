@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="status_8cpp" kind="file" language="C++">
+    <compoundname>status.cpp</compoundname>
+    <includes refid="status_8hpp" local="no">fancyqlone/fancyqpalm/status.hpp</includes>
+    <includes local="no">ostream</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>fancyqlone/config.hpp</label>
+        <link refid="config_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fancyqlone/fancyqpalm/status.hpp</label>
+        <link refid="status_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>src/fancyqpalm/src/status.cpp</label>
+        <link refid="status_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>batmat/config.hpp</label>
+      </node>
+      <node id="5">
+        <label>fancyqlone/fancyqpalm/export.h</label>
+      </node>
+      <node id="6">
+        <label>iosfwd</label>
+      </node>
+      <node id="8">
+        <label>ostream</label>
+      </node>
+      <node id="7">
+        <label>stdexcept</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacefancyqlone">fancyqlone</innernamespace>
+    <innernamespace refid="namespacefancyqlone_1_1qpalm">fancyqlone::qpalm</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;<ref refid="status_8hpp" kindref="compound">fancyqlone/fancyqpalm/status.hpp</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacefancyqlone_1_1qpalm" kindref="compound">fancyqlone::qpalm</ref><sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="namespacefancyqlone_1_1qpalm_1ac78668c7efb8aa549ac3d3e7ce13810c" refkind="member"><highlight class="normal">std::ostream<sp/>&amp;<ref refid="namespacefancyqlone_1_1qpalm_1ac78668c7efb8aa549ac3d3e7ce13810c" kindref="member">operator&lt;&lt;</ref>(std::ostream<sp/>&amp;os,<sp/><ref refid="group__topic-optimization-solvers_1ga24477fe148453ccedf7d5ad6d0ba0f78" kindref="member">SolverStatus</ref><sp/>s)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>os<sp/>&lt;&lt;<sp/><ref refid="namespacefancyqlone_1_1qpalm_1a26d4973d280fd9cde97918d0b0b1fe78" kindref="member">enum_name</ref>(s);<sp/>}</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fancyqlone::qpalm</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="src/fancyqpalm/src/status.cpp"/>
+  </compounddef>
+</doxygen>

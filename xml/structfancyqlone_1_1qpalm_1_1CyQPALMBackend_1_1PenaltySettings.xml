@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1PenaltySettings" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::CyQPALMBackend::PenaltySettings</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1PenaltySettings_1a3503b67ca3c03402b5273d5a37d76579" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::PenaltySettings::θ</definition>
+        <argsstring></argsstring>
+        <name>θ</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::PenaltySettings::θ</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="330" column="16" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="330" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1PenaltySettings_1ad877fb1ad17082c78c1b026cade55930" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::PenaltySettings::Δy</definition>
+        <argsstring></argsstring>
+        <name>Δy</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::PenaltySettings::Δy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="331" column="16" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="331" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1PenaltySettings_1a47d0baaec2df30f582eb1350147e548b" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::PenaltySettings::Δy_always</definition>
+        <argsstring></argsstring>
+        <name>Δy_always</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::PenaltySettings::Δy_always</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="331" column="20" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="331" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1PenaltySettings_1a0a5447b841bc916f4a25432afc7b70e8" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref></type>
+        <definition>real_t fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::PenaltySettings::max_penalty_y</definition>
+        <argsstring></argsstring>
+        <name>max_penalty_y</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::PenaltySettings::max_penalty_y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="332" column="16" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="332" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::PenaltySettings</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1PenaltySettings"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="329" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="329" bodyend="333"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1PenaltySettings_1ad877fb1ad17082c78c1b026cade55930" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::PenaltySettings</scope><name>Δy</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1PenaltySettings_1a47d0baaec2df30f582eb1350147e548b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::PenaltySettings</scope><name>Δy_always</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1PenaltySettings_1a3503b67ca3c03402b5273d5a37d76579" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::PenaltySettings</scope><name>θ</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1PenaltySettings_1a0a5447b841bc916f4a25432afc7b70e8" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::PenaltySettings</scope><name>max_penalty_y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

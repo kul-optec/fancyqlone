@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_de42a1381fa3e72a4caa5d47ecf60f7d" kind="dir">
+    <compoundname>src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation</compoundname>
+    <innerfile refid="algorithms_8hpp">algorithms.hpp</innerfile>
+    <innerfile refid="breakpoint_8hpp">breakpoint.hpp</innerfile>
+    <innerfile refid="breakpoint_8tpp">breakpoint.tpp</innerfile>
+    <innerfile refid="implementation_2linesearch_8tpp">linesearch.tpp</innerfile>
+    <innerfile refid="solver_8tpp">solver.tpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/implementation/"/>
+  </compounddef>
+</doxygen>

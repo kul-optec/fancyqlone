@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_48567aea9121bf34c6c92bfd773d108e" kind="dir">
+    <compoundname>src/fancyqlone/include/fancyqlone/fancyqlone/implementation</compoundname>
+    <innerfile refid="fan-data_8tpp">fan-data.tpp</innerfile>
+    <innerfile refid="fan-factor_8tpp">fan-factor.tpp</innerfile>
+    <innerfile refid="fan-mat-vec_8tpp">fan-mat-vec.tpp</innerfile>
+    <innerfile refid="fan-update_8tpp">fan-update.tpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqlone/include/fancyqlone/fancyqlone/implementation/"/>
+  </compounddef>
+</doxygen>

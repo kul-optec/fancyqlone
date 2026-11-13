@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structBidiagUpdate" kind="struct" language="C++" prot="public">
+    <compoundname>BidiagUpdate</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structBidiagUpdate_1a8d8e08fa369c7b58de20b9292e167fda" prot="public" static="no" mutable="no">
+        <type><ref refid="solve-block-tridiagonal_8cpp_1a93ebb2b3c08761f352b56f5a0ffa5606" kindref="member">matrices</ref></type>
+        <definition>matrices BidiagUpdate::B</definition>
+        <argsstring></argsstring>
+        <name>B</name>
+        <qualifiedname>BidiagUpdate::B</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="examples/solve-block-tridiagonal.cpp" line="27" column="14" bodyfile="examples/solve-block-tridiagonal.cpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structBidiagUpdate_1a4543c34e2e6c5a8ca443738ce3850d3c" prot="public" static="no" mutable="no">
+        <type><ref refid="solve-block-tridiagonal_8cpp_1a93ebb2b3c08761f352b56f5a0ffa5606" kindref="member">matrices</ref></type>
+        <definition>matrices BidiagUpdate::F</definition>
+        <argsstring></argsstring>
+        <name>F</name>
+        <qualifiedname>BidiagUpdate::F</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="examples/solve-block-tridiagonal.cpp" line="27" column="16" bodyfile="examples/solve-block-tridiagonal.cpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structBidiagUpdate_1a2763bc1cf341891c9e20ebdac9d60163" prot="public" static="no" mutable="no">
+        <type><ref refid="solve-block-tridiagonal_8cpp_1a93ebb2b3c08761f352b56f5a0ffa5606" kindref="member">matrices</ref></type>
+        <definition>matrices BidiagUpdate::S</definition>
+        <argsstring></argsstring>
+        <name>S</name>
+        <qualifiedname>BidiagUpdate::S</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="examples/solve-block-tridiagonal.cpp" line="28" column="14" bodyfile="examples/solve-block-tridiagonal.cpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>BidiagUpdate</label>
+        <link refid="structBidiagUpdate"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+B</edgelabel>
+          <edgelabel>+F</edgelabel>
+          <edgelabel>+S</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>batmat::matrix::Matrix&lt; real_t, index_t &gt;</label>
+        <link refid="structbatmat_1_1matrix_1_1Matrix" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+      </node>
+    </collaborationgraph>
+    <location file="examples/solve-block-tridiagonal.cpp" line="26" column="1" bodyfile="examples/solve-block-tridiagonal.cpp" bodystart="26" bodyend="29"/>
+    <listofallmembers>
+      <member refid="structBidiagUpdate_1a8d8e08fa369c7b58de20b9292e167fda" prot="public" virt="non-virtual"><scope>BidiagUpdate</scope><name>B</name></member>
+      <member refid="structBidiagUpdate_1a4543c34e2e6c5a8ca443738ce3850d3c" prot="public" virt="non-virtual"><scope>BidiagUpdate</scope><name>F</name></member>
+      <member refid="structBidiagUpdate_1a2763bc1cf341891c9e20ebdac9d60163" prot="public" virt="non-virtual"><scope>BidiagUpdate</scope><name>S</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

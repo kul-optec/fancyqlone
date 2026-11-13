@@ -1,0 +1,462 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::CyQPALMBackend::Timings</compoundname>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" prot="public" static="no">
+        <type><ref refid="namespacefancyqlone_1ac6f3d9ae1ac95657fbb5307ae5a70530" kindref="member">DefaultTimings</ref></type>
+        <definition>using fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::type = DefaultTimings</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="53" column="9" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a5e4f10382b024c9060b47caa3c9eca28" prot="public" static="no">
+        <type><ref refid="group__timing" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/guanaqo-1.0.0-alpha.28.tag">guanaqo::Timed</ref>&lt; <ref refid="namespacebatmat" kindref="compound" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">batmat::DefaultTimings</ref> &gt;</type>
+        <definition>using fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::timed_t = guanaqo::Timed&lt;batmat::DefaultTimings&gt;</definition>
+        <argsstring></argsstring>
+        <name>timed_t</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::timed_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="54" column="9" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a8d8de3a4f42fe8eaf1bf1369c87577f1" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::breakpoints</definition>
+        <argsstring></argsstring>
+        <name>breakpoints</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::breakpoints</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="55" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="55" bodyend="55"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a6293a02fd5eef14dc6e3a55f3336009f" compoundref="backends_2backend-fancyqlone_2linesearch_8tpp" startline="40" endline="116">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::compute_partition_breakpoints_cyq</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1ab8ae67297a7c7838dcabccdf9ab22c35" compoundref="backends_2backend-fancyqlone_2linesearch_8tpp" startline="119" endline="226">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::compute_partition_breakpoints_fan</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1aa76923d7538180e9b0668be2c7c41134" compoundref="backends_2backend-fancyqlone_2linesearch_8tpp" startline="229" endline="324">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::compute_partition_breakpoints_sfan</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1af9ebd22714d0f319719304c64745b0f8" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::calc_y_hat</definition>
+        <argsstring></argsstring>
+        <name>calc_y_hat</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::calc_y_hat</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="56" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="56" bodyend="56"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1acf72555503958eca9595e2e91f3c42df" compoundref="ineq-constr_8tpp" startline="130" endline="169">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::calc_ŷ_Aᵀŷ</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a1ba1a48eb82ad0af5df4219a45201c74" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::calc_y_hat_AT</definition>
+        <argsstring></argsstring>
+        <name>calc_y_hat_AT</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::calc_y_hat_AT</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="57" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="57" bodyend="57"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1acf72555503958eca9595e2e91f3c42df" compoundref="ineq-constr_8tpp" startline="130" endline="169">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::calc_ŷ_Aᵀŷ</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a82417e36933e8ea05f69798390c6e7be" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::update_active_set_change</definition>
+        <argsstring></argsstring>
+        <name>update_active_set_change</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::update_active_set_change</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="58" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="58" bodyend="58"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1aad7471be099427ab8bb1a2be417d843d" compoundref="ocp-backend-fancyqlone_8tpp" startline="499" endline="548">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::active_set_change</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a7f355330a9a276fc2c511ddb2290130a" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::update_factorization</definition>
+        <argsstring></argsstring>
+        <name>update_factorization</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::update_factorization</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="59" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="59" bodyend="59"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1aad7471be099427ab8bb1a2be417d843d" compoundref="ocp-backend-fancyqlone_8tpp" startline="499" endline="548">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::active_set_change</referencedby>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1adad14581c51906620c70a01e83c2bd71" compoundref="solve_8tpp" startline="18" endline="71">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::solve</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a25ddef4fed81210794df479535037dae" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::factor</definition>
+        <argsstring></argsstring>
+        <name>factor</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::factor</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="60" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="60" bodyend="60"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1adad14581c51906620c70a01e83c2bd71" compoundref="solve_8tpp" startline="18" endline="71">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::solve</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a967a06e856f0a0e556d4963225a855f5" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::solve</definition>
+        <argsstring></argsstring>
+        <name>solve</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::solve</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="61" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="61" bodyend="61"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1adad14581c51906620c70a01e83c2bd71" compoundref="solve_8tpp" startline="18" endline="71">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::solve</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1ad465e304f42a9ed2329ce66b0540829b" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::solve_MT</definition>
+        <argsstring></argsstring>
+        <name>solve_MT</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::solve_MT</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="62" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a602695e7ac6ce1f0e9722a5ac8b5b896" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::solve_A</definition>
+        <argsstring></argsstring>
+        <name>solve_A</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::solve_A</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="63" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="63" bodyend="63"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1adad14581c51906620c70a01e83c2bd71" compoundref="solve_8tpp" startline="18" endline="71">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::solve</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1ac063c7b797b95d834f5e8210a2ae71bb" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::solve_grad</definition>
+        <argsstring></argsstring>
+        <name>solve_grad</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::solve_grad</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="64" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="64" bodyend="64"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1adad14581c51906620c70a01e83c2bd71" compoundref="solve_8tpp" startline="18" endline="71">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::solve</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a398d0b471fc191c187b4be6d1592372a" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::solve_resid</definition>
+        <argsstring></argsstring>
+        <name>solve_resid</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::solve_resid</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="65" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="65" bodyend="65"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1ab82534ab1b29bcd364d26466ba5036fe" compoundref="solve_8tpp" startline="98" endline="189">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::print_solve_resid_norms</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a66f0a57aa1bccb05473eb945fccf1f86" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::recompute_outer_grad</definition>
+        <argsstring></argsstring>
+        <name>recompute_outer_grad</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::recompute_outer_grad</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="66" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="66" bodyend="66"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a5117f1e7b4e29120db3dfc0256bcc843" compoundref="ocp-backend-fancyqlone_8tpp" startline="567" endline="586">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::recompute_outer</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1ad8f4ea0333532c2e19f297dc2b1d06be" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::recompute_outer_A</definition>
+        <argsstring></argsstring>
+        <name>recompute_outer_A</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::recompute_outer_A</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="67" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="67" bodyend="67"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a5117f1e7b4e29120db3dfc0256bcc843" compoundref="ocp-backend-fancyqlone_8tpp" startline="567" endline="586">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::recompute_outer</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1aeaedc23fdb4a738d2018b876bcf01883" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::recompute_outer_AT</definition>
+        <argsstring></argsstring>
+        <name>recompute_outer_AT</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::recompute_outer_AT</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="68" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1ac49b7fc7961c86fa55597ed6e419e4a5" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::recompute_outer_MT</definition>
+        <argsstring></argsstring>
+        <name>recompute_outer_MT</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::recompute_outer_MT</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="69" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="69" bodyend="69"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a5117f1e7b4e29120db3dfc0256bcc843" compoundref="ocp-backend-fancyqlone_8tpp" startline="567" endline="586">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::recompute_outer</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a76c5010f7409a704fb28c3b9d76503a2" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::recompute_outer_norm</definition>
+        <argsstring></argsstring>
+        <name>recompute_outer_norm</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::recompute_outer_norm</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="70" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="70" bodyend="70"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a5117f1e7b4e29120db3dfc0256bcc843" compoundref="ocp-backend-fancyqlone_8tpp" startline="567" endline="586">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::recompute_outer</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a95ad43c6e2d1d08a7af01cef49e61399" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::recompute_inner_grad</definition>
+        <argsstring></argsstring>
+        <name>recompute_inner_grad</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::recompute_inner_grad</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="71" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="71" bodyend="71"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a0527b5772ee8f9241aefd652212d2ccc" compoundref="ocp-backend-fancyqlone_8tpp" startline="550" endline="565">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::recompute_inner</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a48a43fa4c49fdd084ccfa40fc69208ef" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::recompute_inner_A</definition>
+        <argsstring></argsstring>
+        <name>recompute_inner_A</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::recompute_inner_A</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="72" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="72" bodyend="72"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a0527b5772ee8f9241aefd652212d2ccc" compoundref="ocp-backend-fancyqlone_8tpp" startline="550" endline="565">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::recompute_inner</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1aa96c9c51f4e02d8c2a501fddce19f02d" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::recompute_inner_MT</definition>
+        <argsstring></argsstring>
+        <name>recompute_inner_MT</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::recompute_inner_MT</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="73" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="73" bodyend="73"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a0527b5772ee8f9241aefd652212d2ccc" compoundref="ocp-backend-fancyqlone_8tpp" startline="550" endline="565">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::recompute_inner</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1aedb562a8e11cb66fccf81d6f33c79c42" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::ineq_constr_resid</definition>
+        <argsstring></argsstring>
+        <name>ineq_constr_resid</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::ineq_constr_resid</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="74" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="74" bodyend="74"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1afb3e756dfcdcce5370670403917a1dc9" compoundref="ineq-constr_8tpp" startline="40" endline="49">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::ineq_constr_resid</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a30734be3808e532699fa03b10f36d1a1" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::ineq_constr_viol</definition>
+        <argsstring></argsstring>
+        <name>ineq_constr_viol</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::ineq_constr_viol</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="75" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="75" bodyend="75"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a287a248e9ed0e1d7a7b9f2dfd79d4871" compoundref="ineq-constr_8tpp" startline="68" endline="95">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::ineq_constr_viol</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a39797ee07b0b8acb952e651c94305061" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::ineq_constr_resid_al</definition>
+        <argsstring></argsstring>
+        <name>ineq_constr_resid_al</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::ineq_constr_resid_al</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="76" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="76" bodyend="76"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1a6ba2e7cc1ba931180f4dbb9f956eccab" compoundref="ineq-constr_8tpp" startline="98" endline="127">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::ineq_constr_resid_al</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1aa303a1254c4bc1e773cb401bfb85bde8" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" kindref="member">type</ref></type>
+        <definition>type fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings::update_penalty_y</definition>
+        <argsstring></argsstring>
+        <name>update_penalty_y</name>
+        <qualifiedname>fancyqlone::qpalm::CyQPALMBackend::Timings::update_penalty_y</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="77" column="14" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="77" bodyend="77"/>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1aefcda6b2136e99f703d02bc2f4befec8" compoundref="ineq-constr_8tpp" startline="11" endline="37">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::update_penalty_y</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>batmat::DefaultTimings</label>
+        <link refid="namespacebatmat" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::Timings</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+breakpoints</edgelabel>
+          <edgelabel>+calc_y_hat</edgelabel>
+          <edgelabel>+calc_y_hat_AT</edgelabel>
+          <edgelabel>+factor</edgelabel>
+          <edgelabel>+ineq_constr_resid</edgelabel>
+          <edgelabel>+ineq_constr_resid_al</edgelabel>
+          <edgelabel>+ineq_constr_viol</edgelabel>
+          <edgelabel>+recompute_inner_A</edgelabel>
+          <edgelabel>+recompute_inner_MT</edgelabel>
+          <edgelabel>+recompute_inner_grad</edgelabel>
+          <edgelabel>  ...</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" line="52" column="5" bodyfile="src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp" bodystart="52" bodyend="78"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a8d8de3a4f42fe8eaf1bf1369c87577f1" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>breakpoints</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1af9ebd22714d0f319719304c64745b0f8" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>calc_y_hat</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a1ba1a48eb82ad0af5df4219a45201c74" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>calc_y_hat_AT</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a25ddef4fed81210794df479535037dae" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>factor</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1aedb562a8e11cb66fccf81d6f33c79c42" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>ineq_constr_resid</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a39797ee07b0b8acb952e651c94305061" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>ineq_constr_resid_al</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a30734be3808e532699fa03b10f36d1a1" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>ineq_constr_viol</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a48a43fa4c49fdd084ccfa40fc69208ef" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>recompute_inner_A</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a95ad43c6e2d1d08a7af01cef49e61399" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>recompute_inner_grad</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1aa96c9c51f4e02d8c2a501fddce19f02d" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>recompute_inner_MT</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1ad8f4ea0333532c2e19f297dc2b1d06be" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>recompute_outer_A</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1aeaedc23fdb4a738d2018b876bcf01883" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>recompute_outer_AT</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a66f0a57aa1bccb05473eb945fccf1f86" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>recompute_outer_grad</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1ac49b7fc7961c86fa55597ed6e419e4a5" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>recompute_outer_MT</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a76c5010f7409a704fb28c3b9d76503a2" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>recompute_outer_norm</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a967a06e856f0a0e556d4963225a855f5" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>solve</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a602695e7ac6ce1f0e9722a5ac8b5b896" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>solve_A</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1ac063c7b797b95d834f5e8210a2ae71bb" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>solve_grad</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1ad465e304f42a9ed2329ce66b0540829b" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>solve_MT</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a398d0b471fc191c187b4be6d1592372a" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>solve_resid</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a5e4f10382b024c9060b47caa3c9eca28" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>timed_t</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a724c7b117174b08ba4b3074bfefb3754" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>type</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a82417e36933e8ea05f69798390c6e7be" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>update_active_set_change</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1a7f355330a9a276fc2c511ddb2290130a" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>update_factorization</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1_1Timings_1aa303a1254c4bc1e773cb401bfb85bde8" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::CyQPALMBackend::Timings</scope><name>update_penalty_y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

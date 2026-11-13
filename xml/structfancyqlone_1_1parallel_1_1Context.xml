@@ -1,0 +1,668 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1parallel_1_1Context" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::parallel::Context</compoundname>
+    <includes refid="parallel_8hpp" local="no">fancyqlone/parallel.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class SC</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structfancyqlone_1_1parallel_1_1Context_1a2db636541de0063026a9e3ad8da2e0d3" prot="public" static="no">
+        <type>SC</type>
+        <definition>using fancyqlone::parallel::Context&lt; SC &gt;::shared_context_type = SC</definition>
+        <argsstring></argsstring>
+        <name>shared_context_type</name>
+        <qualifiedname>fancyqlone::parallel::Context::shared_context_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="112" column="5" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1parallel_1_1Context_1a2f86e4fbd108b71a537b16af315451f2" prot="public" static="no">
+        <type>typename shared_context_type::barrier_type::arrival_token</type>
+        <definition>using fancyqlone::parallel::Context&lt; SC &gt;::arrival_token = typename shared_context_type::barrier_type::arrival_token</definition>
+        <argsstring></argsstring>
+        <name>arrival_token</name>
+        <qualifiedname>fancyqlone::parallel::Context::arrival_token</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="120" column="5" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1parallel_1_1Context_1ae3857bcfb854a3bb15040c7a12fdd8a9" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>shared_context_type::barrier_type::template <ref refid="structfancyqlone_1_1parallel_1_1Context_1ae3857bcfb854a3bb15040c7a12fdd8a9" kindref="member">arrival_token_typed</ref>&lt; T &gt;</type>
+        <definition>using fancyqlone::parallel::Context&lt; SC &gt;::arrival_token_typed = shared_context_type::barrier_type::template arrival_token_typed&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>arrival_token_typed</name>
+        <qualifiedname>fancyqlone::parallel::Context::arrival_token_typed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="123" column="5" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structfancyqlone_1_1parallel_1_1Context_1ac6f9cbb4caec54f521adb136c6e616b0" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>shared_context_type::barrier_type::template <ref refid="structfancyqlone_1_1parallel_1_1Context_1ac6f9cbb4caec54f521adb136c6e616b0" kindref="member">shuffle_token</ref>&lt; T &gt;</type>
+        <definition>using fancyqlone::parallel::Context&lt; SC &gt;::shuffle_token = shared_context_type::barrier_type::template shuffle_token&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>shuffle_token</name>
+        <qualifiedname>fancyqlone::parallel::Context::shuffle_token</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="125" column="5" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1parallel_1_1Context_1a63364b83ce8310ae9745bcedcee739ac" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1parallel_1_1Context_1a2db636541de0063026a9e3ad8da2e0d3" kindref="member">shared_context_type</ref> &amp;</type>
+        <definition>shared_context_type&amp; fancyqlone::parallel::Context&lt; SC &gt;::shared</definition>
+        <argsstring></argsstring>
+        <name>shared</name>
+        <qualifiedname>fancyqlone::parallel::Context::shared</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="127" column="25" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="127" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1parallel_1_1Context_1ae464c8a4dc0d8acc3e410fa51d3c33fd" compoundref="parallel_8hpp" startline="132" endline="134">fancyqlone::parallel::arrival_token&lt; SharedContext &gt;::operator==</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1parallel_1_1Context_1a44ef7d4977aad75037a4b302cf4cdafa" prot="public" static="no" mutable="no">
+        <type>const <ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>const index_t fancyqlone::parallel::Context&lt; SC &gt;::index</definition>
+        <argsstring></argsstring>
+        <name>index</name>
+        <qualifiedname>fancyqlone::parallel::Context::index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="128" column="19" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="128" bodyend="-1"/>
+        <referencedby refid="structfancyqlone_1_1parallel_1_1Context_1ae464c8a4dc0d8acc3e410fa51d3c33fd" compoundref="parallel_8hpp" startline="132" endline="134">fancyqlone::parallel::arrival_token&lt; SharedContext &gt;::operator==</referencedby>
+        <referencedby refid="structfancyqlone_1_1CyqloneSolver_1a876877d03142bf6c9d6c41142fba1482" compoundref="cyqlone_8hpp" startline="1106" endline="1106">fancyqlone::CyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::riccati_thread_assignment</referencedby>
+        <referencedby refid="structfancyqlone_1_1parallel_1_1FanSharedContext_1ae1e570595df82461a2c3d98d60bc1076" compoundref="parallel_8hpp" startline="477" endline="537">fancyqlone::parallel::FanSharedContext::run</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a8d0ae0086e4de699f62e8ae07d5a5ead" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::parallel::Context&lt; SC &gt;::num_thr</definition>
+        <argsstring>() const</argsstring>
+        <name>num_thr</name>
+        <qualifiedname>fancyqlone::parallel::Context::num_thr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="130" column="14" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="130" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1adb10b8647aeca664a177bc1fb4a5bf03" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fancyqlone::parallel::Context&lt; SC &gt;::is_master</definition>
+        <argsstring>() const</argsstring>
+        <name>is_master</name>
+        <qualifiedname>fancyqlone::parallel::Context::is_master</qualifiedname>
+        <briefdescription>
+<para>Check if this thread is the master thread (thread index 0). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Useful for determining which thread should perform operations like printing to the console, which should be done by a single thread and does not require synchronization. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="139" column="11" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="139" bodyend="139"/>
+        <referencedby refid="structfancyqlone_1_1parallel_1_1Context_1a3626aa7c4c2f58da58667c480d011979" compoundref="parallel_8hpp" startline="211" endline="220">fancyqlone::parallel::arrival_token&lt; SharedContext &gt;::call_broadcast</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a56a2649936e048a026d98e823991a1ab" compoundref="serial-fancyqlone_8hpp" startline="236" endline="244">fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::foreach_batch</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a0e6bd8bc8d720af1ccb0f636d380b122" compoundref="serial-fancyqlone_8hpp" startline="249" endline="256">fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::foreach_batch_fwd</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a13bd5ad4c86af7df0bc6b2e3b6d8a16a" compoundref="serial-fancyqlone_8hpp" startline="257" endline="268">fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::print_grad</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a084bced4dc23604ffe14862428c51cd0" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structfancyqlone_1_1parallel_1_1Context_1a2f86e4fbd108b71a537b16af315451f2" kindref="member">arrival_token</ref></type>
+        <definition>arrival_token fancyqlone::parallel::Context&lt; SC &gt;::arrive</definition>
+        <argsstring>()</argsstring>
+        <name>arrive</name>
+        <qualifiedname>fancyqlone::parallel::Context::arrive</qualifiedname>
+        <briefdescription>
+<para>Arrive at the barrier and obtain a token that can be used to wait for completion of the current barrier phase. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Token must be awaited before any other call to arrive. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="144" column="20" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="144" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1ac92bc73d97e15ecff0b20bcc0e74688e" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class C</type>
+          </param>
+        </templateparamlist>
+        <type>shared_context_type::barrier_type::arrival_token</type>
+        <definition>shared_context_type::barrier_type::arrival_token fancyqlone::parallel::Context&lt; SC &gt;::arrive_with_completion</definition>
+        <argsstring>(C func)</argsstring>
+        <name>arrive_with_completion</name>
+        <qualifiedname>fancyqlone::parallel::Context::arrive_with_completion</qualifiedname>
+        <param>
+          <type>C</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>Arrive at the barrier and obtain a token that can be used to wait for completion of the current barrier phase and call a function on completion. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Token must be awaited before any other call to arrive. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="166" column="55" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="166" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1ad697aa2df2923ddfac099279138955cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::parallel::Context&lt; SC &gt;::wait</definition>
+        <argsstring>(arrival_token &amp;&amp;token)</argsstring>
+        <name>wait</name>
+        <qualifiedname>fancyqlone::parallel::Context::wait</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1parallel_1_1Context_1a2f86e4fbd108b71a537b16af315451f2" kindref="member">arrival_token</ref> &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>Await a token returned by <ref refid="structfancyqlone_1_1parallel_1_1Context_1a084bced4dc23604ffe14862428c51cd0" kindref="member">arrive()</ref>, waiting for the barrier phase to complete. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="172" column="10" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="172" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1aa7492ccf3bc500d6ae33a6b3a27fee1c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::parallel::Context&lt; SC &gt;::arrive_and_wait</definition>
+        <argsstring>()</argsstring>
+        <name>arrive_and_wait</name>
+        <qualifiedname>fancyqlone::parallel::Context::arrive_and_wait</qualifiedname>
+        <briefdescription>
+<para>Arrive at the barrier and wait for the barrier phase to complete. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a convenience wrapper around <ref refid="structfancyqlone_1_1parallel_1_1Context_1a084bced4dc23604ffe14862428c51cd0" kindref="member">arrive()</ref> and <ref refid="structfancyqlone_1_1parallel_1_1Context_1ad697aa2df2923ddfac099279138955cf" kindref="member">wait()</ref> for the common case where the thread does not have other work to do while waiting. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="184" column="10" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="184" bodyend="189"/>
+        <referencedby refid="structfancyqlone_1_1CyqloneSolver_1abb81dc48ae2d64ac5baaf98c5db8b4c3" compoundref="cyqlone_8hpp" startline="711" endline="721">fancyqlone::CyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::print_grad</referencedby>
+        <referencedby refid="structfancyqlone_1_1SerialFanCyqloneSolver_1a13bd5ad4c86af7df0bc6b2e3b6d8a16a" compoundref="serial-fancyqlone_8hpp" startline="257" endline="268">fancyqlone::SerialFanCyqloneSolver&lt; VL, real_t, DefaultOrder &gt;::print_grad</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a1ccbb1da1cdbf9299790d8cbb4bc7f99" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fancyqlone::parallel::Context&lt; SC &gt;::arrive_and_wait</definition>
+        <argsstring>(int line)</argsstring>
+        <name>arrive_and_wait</name>
+        <qualifiedname>fancyqlone::parallel::Context::arrive_and_wait</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Debug version of <ref refid="structfancyqlone_1_1parallel_1_1Context_1aa7492ccf3bc500d6ae33a6b3a27fee1c" kindref="member">arrive_and_wait()</ref> that performs a sanity check to ensure that all threads are arriving at the same line of code. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The <computeroutput>line</computeroutput> parameter should be the same for all threads arriving at the same barrier. It is only verified in debug builds, and is equivalent to <ref refid="structfancyqlone_1_1parallel_1_1Context_1aa7492ccf3bc500d6ae33a6b3a27fee1c" kindref="member">arrive_and_wait()</ref> in release builds. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="194" column="10" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="194" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a80c2342335200ce3f89ff0bfbd0ca4d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T fancyqlone::parallel::Context&lt; SC &gt;::broadcast</definition>
+        <argsstring>(T x, index_t src=0)</argsstring>
+        <name>broadcast</name>
+        <qualifiedname>fancyqlone::parallel::Context::broadcast</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+          <declname>src</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Broadcast a value <computeroutput>x</computeroutput> from the thread with index <computeroutput>src</computeroutput> to all threads. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="203" column="7" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="203" bodyend="206"/>
+        <referencedby refid="structfancyqlone_1_1parallel_1_1Context_1a3626aa7c4c2f58da58667c480d011979" compoundref="parallel_8hpp" startline="211" endline="220">fancyqlone::parallel::arrival_token&lt; SharedContext &gt;::call_broadcast</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a3626aa7c4c2f58da58667c480d011979" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class F</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>std::invoke_result_t&lt; F, Args... &gt;</type>
+        <definition>std::invoke_result_t&lt; F, Args... &gt; fancyqlone::parallel::Context&lt; SC &gt;::call_broadcast</definition>
+        <argsstring>(F &amp;&amp;f, Args &amp;&amp;...args)</argsstring>
+        <name>call_broadcast</name>
+        <qualifiedname>fancyqlone::parallel::Context::call_broadcast</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Call a function <computeroutput>f</computeroutput> with the given <computeroutput>args</computeroutput> on a single thread and broadcast the return value to all threads. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="211" column="10" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="211" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1aee7792cf9250cf101393ed3835542c73" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto fancyqlone::parallel::Context&lt; SC &gt;::arrive_reduce</definition>
+        <argsstring>(T x, F func)</argsstring>
+        <name>arrive_reduce</name>
+        <qualifiedname>fancyqlone::parallel::Context::arrive_reduce</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>Perform a reduction of <computeroutput>x</computeroutput> across all threads using the given binary function <computeroutput>func</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a token that can be used to wait for the reduction to complete and obtain the reduced value. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="226" column="11" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="226" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1ad51bec8e4bcfff3ad1f381532b054bba" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+          <param>
+            <type>class CF</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto fancyqlone::parallel::Context&lt; SC &gt;::arrive_reduce_with_completion</definition>
+        <argsstring>(T x, F func, CF completion)</argsstring>
+        <name>arrive_reduce_with_completion</name>
+        <qualifiedname>fancyqlone::parallel::Context::arrive_reduce_with_completion</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>CF</type>
+          <declname>completion</declname>
+        </param>
+        <briefdescription>
+<para>Perform a reduction of <computeroutput>x</computeroutput> across all threads using the given binary function <computeroutput>func</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a token that can be used to wait for the reduction to complete and obtain the reduced value. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="234" column="11" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="234" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a532b168b53b885631647084ebc694a79" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T fancyqlone::parallel::Context&lt; SC &gt;::wait_reduce</definition>
+        <argsstring>(arrival_token_typed&lt; T &gt; &amp;&amp;token)</argsstring>
+        <name>wait_reduce</name>
+        <qualifiedname>fancyqlone::parallel::Context::wait_reduce</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1parallel_1_1Context_1ae3857bcfb854a3bb15040c7a12fdd8a9" kindref="member">arrival_token_typed</ref>&lt; T &gt; &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+<para>Wait for the reduction initiated by <ref refid="structfancyqlone_1_1parallel_1_1Context_1aee7792cf9250cf101393ed3835542c73" kindref="member">arrive_reduce()</ref> to complete and obtain the reduced value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="242" column="7" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="242" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1ad7b25f991d95093cda5f0410ba969559" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T fancyqlone::parallel::Context&lt; SC &gt;::reduce</definition>
+        <argsstring>(T x, F func)</argsstring>
+        <name>reduce</name>
+        <qualifiedname>fancyqlone::parallel::Context::reduce</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>F</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>Perform a reduction of <computeroutput>x</computeroutput> across all threads using the given binary function <computeroutput>func</computeroutput>, and wait for the result. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="249" column="7" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="249" bodyend="251"/>
+        <referencedby refid="structfancyqlone_1_1parallel_1_1Context_1a68c2f3d619808b7cdd6b3e7f9bfd6314" compoundref="parallel_8hpp" startline="256" endline="258">fancyqlone::parallel::arrival_token&lt; SharedContext &gt;::reduce</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a68c2f3d619808b7cdd6b3e7f9bfd6314" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T fancyqlone::parallel::Context&lt; SC &gt;::reduce</definition>
+        <argsstring>(T x)</argsstring>
+        <name>reduce</name>
+        <qualifiedname>fancyqlone::parallel::Context::reduce</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Reduction with <computeroutput>std::plus</computeroutput>, i.e., summation across all threads. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="structfancyqlone_1_1parallel_1_1Context_1ad7b25f991d95093cda5f0410ba969559" kindref="member">reduce(T,F)</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="256" column="7" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="256" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a2aac3724d3b2c1830193e74dea5d4e84" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto fancyqlone::parallel::Context&lt; SC &gt;::run_single_sync</definition>
+        <argsstring>(F &amp;&amp;f)</argsstring>
+        <name>run_single_sync</name>
+        <qualifiedname>fancyqlone::parallel::Context::run_single_sync</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>Wait for all threads to reach this point, then run the given function on a single thread before releasing all threads again. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Changes by all threads are visible during the call to <computeroutput>f</computeroutput> and changes made by <computeroutput>f</computeroutput> are visible to all threads after this function returns. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="264" column="10" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="264" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a9ef01ebbf9c845e81946384b1eeaddc0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class F</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) fancyqlone::parallel::Context&lt; SC &gt;::shuffle_wait</definition>
+        <argsstring>(shuffle_token&lt; T &gt; &amp;&amp;token, F &amp;&amp;func)</argsstring>
+        <name>shuffle_wait</name>
+        <qualifiedname>fancyqlone::parallel::Context::shuffle_wait</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1parallel_1_1Context_1ac6f9cbb4caec54f521adb136c6e616b0" kindref="member">shuffle_token</ref>&lt; T &gt; &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="270" column="14" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="270" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1ae0a2ce33c08b3cb64bca293ee631079a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) fancyqlone::parallel::Context&lt; SC &gt;::shuffle_wait</definition>
+        <argsstring>(shuffle_token&lt; T &gt; &amp;&amp;token)</argsstring>
+        <name>shuffle_wait</name>
+        <qualifiedname>fancyqlone::parallel::Context::shuffle_wait</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1parallel_1_1Context_1ac6f9cbb4caec54f521adb136c6e616b0" kindref="member">shuffle_token</ref>&lt; T &gt; &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="276" column="14" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="276" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a45079b7a8eb2c81181570f19c21f8c08" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto fancyqlone::parallel::Context&lt; SC &gt;::shuffle_rotr_start</definition>
+        <argsstring>(T x, uint32_t n)</argsstring>
+        <name>shuffle_rotr_start</name>
+        <qualifiedname>fancyqlone::parallel::Context::shuffle_rotr_start</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="281" column="11" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="281" bodyend="283"/>
+      </memberdef>
+      <memberdef kind="function" id="structfancyqlone_1_1parallel_1_1Context_1a311d4e463f9a3a38be243ca4286bc6a9" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto fancyqlone::parallel::Context&lt; SC &gt;::shuffle_rotl_start</definition>
+        <argsstring>(T x, uint32_t n)</argsstring>
+        <name>shuffle_rotl_start</name>
+        <qualifiedname>fancyqlone::parallel::Context::shuffle_rotl_start</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="286" column="11" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="286" bodyend="288"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structfancyqlone_1_1parallel_1_1Context_1ae464c8a4dc0d8acc3e410fa51d3c33fd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(const Context &amp;a, const Context &amp;b)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>fancyqlone::parallel::Context::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1parallel_1_1Context" kindref="compound">Context</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfancyqlone_1_1parallel_1_1Context" kindref="compound">Context</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="132" column="27" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="132" bodyend="134"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Thread context for parallel execution. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Each thread has a unique thread index, and can synchronize and communicate with other threads in the same shared context. <simplesect kind="see"><para><ref refid="structfancyqlone_1_1parallel_1_1SharedContext" kindref="compound">SharedContext</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::parallel::Context&lt; SC &gt;</label>
+        <link refid="structfancyqlone_1_1parallel_1_1Context"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/parallel.hpp" line="111" column="1" bodyfile="src/fancyqlone/include/fancyqlone/parallel.hpp" bodystart="111" bodyend="289"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a2f86e4fbd108b71a537b16af315451f2" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>arrival_token</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1ae3857bcfb854a3bb15040c7a12fdd8a9" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>arrival_token_typed</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a084bced4dc23604ffe14862428c51cd0" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>arrive</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1aa7492ccf3bc500d6ae33a6b3a27fee1c" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>arrive_and_wait</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a1ccbb1da1cdbf9299790d8cbb4bc7f99" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>arrive_and_wait</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1aee7792cf9250cf101393ed3835542c73" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>arrive_reduce</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1ad51bec8e4bcfff3ad1f381532b054bba" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>arrive_reduce_with_completion</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1ac92bc73d97e15ecff0b20bcc0e74688e" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>arrive_with_completion</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a80c2342335200ce3f89ff0bfbd0ca4d5" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>broadcast</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a3626aa7c4c2f58da58667c480d011979" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>call_broadcast</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a44ef7d4977aad75037a4b302cf4cdafa" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>index</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1adb10b8647aeca664a177bc1fb4a5bf03" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>is_master</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a8d0ae0086e4de699f62e8ae07d5a5ead" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>num_thr</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1ae464c8a4dc0d8acc3e410fa51d3c33fd" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>operator==</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1ad7b25f991d95093cda5f0410ba969559" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>reduce</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a68c2f3d619808b7cdd6b3e7f9bfd6314" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>reduce</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a2aac3724d3b2c1830193e74dea5d4e84" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>run_single_sync</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a63364b83ce8310ae9745bcedcee739ac" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>shared</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a2db636541de0063026a9e3ad8da2e0d3" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>shared_context_type</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a311d4e463f9a3a38be243ca4286bc6a9" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>shuffle_rotl_start</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a45079b7a8eb2c81181570f19c21f8c08" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>shuffle_rotr_start</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1ac6f9cbb4caec54f521adb136c6e616b0" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>shuffle_token</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a9ef01ebbf9c845e81946384b1eeaddc0" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>shuffle_wait</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1ae0a2ce33c08b3cb64bca293ee631079a" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>shuffle_wait</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1ad697aa2df2923ddfac099279138955cf" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>wait</name></member>
+      <member refid="structfancyqlone_1_1parallel_1_1Context_1a532b168b53b885631647084ebc694a79" prot="public" virt="non-virtual"><scope>fancyqlone::parallel::Context</scope><name>wait_reduce</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,4 @@
+var namespacefancyqlone_1_1qpalm_1_1detail_structfancyqlone_1_1qpalm_1_1detail_1_1backend__stats__type_3_01CyQPALMBackend_3_01VL_00_01Defaubd648f5f0e10a35ee91edfe54afecd28_dup =
+[
+    [ "type", "namespacefancyqlone_1_1qpalm_1_1detail.html#afb46dddb42347b2306a8aa45affb6f53", null ]
+];

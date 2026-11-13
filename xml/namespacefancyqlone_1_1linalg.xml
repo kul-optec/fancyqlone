@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="namespacefancyqlone_1_1linalg" kind="namespace" language="C++">
+    <compoundname>fancyqlone::linalg</compoundname>
+    <sectiondef kind="user-defined">
+      <header>Packing and unpacking</header>
+      <member refid="group__topic-linalg_1gaa42da3bc15768d28dea6e9f9d10070ea" kind="function"><name>unpack</name></member>
+      <member refid="group__topic-linalg_1ga699631bdd8928031c01a6bdc9aea4aec" kind="function"><name>unpack</name></member>
+      <member refid="group__topic-linalg_1ga62982e090fc0815e6ba05adc13ca0f14" kind="function"><name>unpack_add</name></member>
+      <member refid="group__topic-linalg_1gaddcef15139ef3f45552b83b51431bd4b" kind="function"><name>pack</name></member>
+      <member refid="group__topic-linalg_1gaaecce2aaac4780def856ed1b5a5474b0" kind="function"><name>pack</name></member>
+      <member refid="group__topic-linalg_1ga1fd60de59ea38008c45e198b8bb8cadb" kind="function"><name>pack_add</name></member>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqlone/include/fancyqlone/linalg.hpp" line="8" column="1"/>
+  </compounddef>
+</doxygen>

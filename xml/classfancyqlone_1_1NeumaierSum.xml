@@ -1,0 +1,506 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="classfancyqlone_1_1NeumaierSum" kind="class" language="C++" prot="public">
+    <compoundname>fancyqlone::NeumaierSum</compoundname>
+    <includes refid="neumaier_8hpp" local="no">fancyqlone/neumaier.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" prot="public" static="no" mutable="no">
+        <type>T</type>
+        <definition>T fancyqlone::NeumaierSum&lt; T &gt;::sum</definition>
+        <argsstring></argsstring>
+        <name>sum</name>
+        <qualifiedname>fancyqlone::NeumaierSum::sum</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="19" column="7" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="19" bodyend="-1"/>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a233655bb8696ab01177d35e624a6c73b" compoundref="neumaier_8hpp" startline="23" endline="23">fancyqlone::NeumaierSum&lt; T &gt;::get</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1ae7e835e9873b2305581e673744385ea3" compoundref="neumaier_8hpp" startline="22" endline="22">fancyqlone::NeumaierSum&lt; T &gt;::operator T</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a27ec7543c36110a2281af26a9bedd8e5" compoundref="neumaier_8hpp" startline="73" endline="79">fancyqlone::NeumaierSum&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a39555a9263f53e921f6606941f7325fe" compoundref="neumaier_8hpp" startline="80" endline="82">fancyqlone::NeumaierSum&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a78ba89c6c79ffd4b81408693c4b47171" compoundref="neumaier_8hpp" startline="83" endline="85">fancyqlone::NeumaierSum&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a1430ab4579f601ea4deed293627c4d2d" compoundref="neumaier_8hpp" startline="39" endline="43">fancyqlone::NeumaierSum&lt; T &gt;::operator+=</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1ac2a6eed64beecd1dd227e0b28343cfe5" compoundref="neumaier_8hpp" startline="25" endline="38">fancyqlone::NeumaierSum&lt; T &gt;::operator+=</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a0b91b6662611c3350e081696ef9e4c5b" compoundref="neumaier_8hpp" startline="24" endline="24">fancyqlone::NeumaierSum&lt; T &gt;::operator-</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1ad29ba11ff37e0c2a7f06de7ce6d542a1" compoundref="neumaier_8hpp" startline="45" endline="49">fancyqlone::NeumaierSum&lt; T &gt;::operator-=</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" prot="public" static="no" mutable="no">
+        <type>T</type>
+        <definition>T fancyqlone::NeumaierSum&lt; T &gt;::compensation</definition>
+        <argsstring></argsstring>
+        <name>compensation</name>
+        <qualifiedname>fancyqlone::NeumaierSum::compensation</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="19" column="11" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="19" bodyend="19"/>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a233655bb8696ab01177d35e624a6c73b" compoundref="neumaier_8hpp" startline="23" endline="23">fancyqlone::NeumaierSum&lt; T &gt;::get</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1ae7e835e9873b2305581e673744385ea3" compoundref="neumaier_8hpp" startline="22" endline="22">fancyqlone::NeumaierSum&lt; T &gt;::operator T</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a27ec7543c36110a2281af26a9bedd8e5" compoundref="neumaier_8hpp" startline="73" endline="79">fancyqlone::NeumaierSum&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a39555a9263f53e921f6606941f7325fe" compoundref="neumaier_8hpp" startline="80" endline="82">fancyqlone::NeumaierSum&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a78ba89c6c79ffd4b81408693c4b47171" compoundref="neumaier_8hpp" startline="83" endline="85">fancyqlone::NeumaierSum&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a1430ab4579f601ea4deed293627c4d2d" compoundref="neumaier_8hpp" startline="39" endline="43">fancyqlone::NeumaierSum&lt; T &gt;::operator+=</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1ac2a6eed64beecd1dd227e0b28343cfe5" compoundref="neumaier_8hpp" startline="25" endline="38">fancyqlone::NeumaierSum&lt; T &gt;::operator+=</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a0b91b6662611c3350e081696ef9e4c5b" compoundref="neumaier_8hpp" startline="24" endline="24">fancyqlone::NeumaierSum&lt; T &gt;::operator-</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1ad29ba11ff37e0c2a7f06de7ce6d542a1" compoundref="neumaier_8hpp" startline="45" endline="49">fancyqlone::NeumaierSum&lt; T &gt;::operator-=</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</definition>
+        <argsstring>(T sum, T compensation)</argsstring>
+        <name>NeumaierSum</name>
+        <qualifiedname>fancyqlone::NeumaierSum::NeumaierSum</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>sum</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>compensation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="20" column="5" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="20" bodyend="20"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" compoundref="neumaier_8hpp" startline="19" endline="19">fancyqlone::NeumaierSum&lt; T &gt;::compensation</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" compoundref="neumaier_8hpp" startline="19">fancyqlone::NeumaierSum&lt; T &gt;::sum</references>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a27ec7543c36110a2281af26a9bedd8e5" compoundref="neumaier_8hpp" startline="73" endline="79">fancyqlone::NeumaierSum&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a39555a9263f53e921f6606941f7325fe" compoundref="neumaier_8hpp" startline="80" endline="82">fancyqlone::NeumaierSum&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a78ba89c6c79ffd4b81408693c4b47171" compoundref="neumaier_8hpp" startline="83" endline="85">fancyqlone::NeumaierSum&lt; T &gt;::operator*</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a81cc781ba392c62870490923aec1b788" compoundref="neumaier_8hpp" startline="59" endline="62">fancyqlone::NeumaierSum&lt; T &gt;::operator+</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1aa1a0ff64fbd206621f3932fd3d889cbd" compoundref="neumaier_8hpp" startline="51" endline="54">fancyqlone::NeumaierSum&lt; T &gt;::operator+</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a79b2b0a27d953a81fd12901e4aa92482" compoundref="neumaier_8hpp" startline="55" endline="58">fancyqlone::NeumaierSum&lt; T &gt;::operator+</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a1430ab4579f601ea4deed293627c4d2d" compoundref="neumaier_8hpp" startline="39" endline="43">fancyqlone::NeumaierSum&lt; T &gt;::operator+=</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1ac2a6eed64beecd1dd227e0b28343cfe5" compoundref="neumaier_8hpp" startline="25" endline="38">fancyqlone::NeumaierSum&lt; T &gt;::operator+=</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a0b91b6662611c3350e081696ef9e4c5b" compoundref="neumaier_8hpp" startline="24" endline="24">fancyqlone::NeumaierSum&lt; T &gt;::operator-</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a7f28fe9f7125430a30e6a086a5812bd7" compoundref="neumaier_8hpp" startline="69" endline="72">fancyqlone::NeumaierSum&lt; T &gt;::operator-</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a7489c5f2d5249961c8edca3e95be9b30" compoundref="neumaier_8hpp" startline="64" endline="67">fancyqlone::NeumaierSum&lt; T &gt;::operator-</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a561f4df562069d61ae54b6fc1e5e5ede" compoundref="neumaier_8hpp" startline="68" endline="68">fancyqlone::NeumaierSum&lt; T &gt;::operator-</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1ad29ba11ff37e0c2a7f06de7ce6d542a1" compoundref="neumaier_8hpp" startline="45" endline="49">fancyqlone::NeumaierSum&lt; T &gt;::operator-=</referencedby>
+        <referencedby refid="classfancyqlone_1_1NeumaierSum_1a7f274e5867b69c578e5ae122cd3fc576" compoundref="neumaier_8hpp" startline="44" endline="44">fancyqlone::NeumaierSum&lt; T &gt;::operator-=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1NeumaierSum_1adc8f65316ae70c2b00add4507c497349" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</definition>
+        <argsstring>(T value={})</argsstring>
+        <name>NeumaierSum</name>
+        <qualifiedname>fancyqlone::NeumaierSum::NeumaierSum</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="21" column="5" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1NeumaierSum_1ae7e835e9873b2305581e673744385ea3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fancyqlone::NeumaierSum&lt; T &gt;::operator T</definition>
+        <argsstring>() const</argsstring>
+        <name>operator T</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator T</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="22" column="5" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="22" bodyend="22"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" compoundref="neumaier_8hpp" startline="19" endline="19">fancyqlone::NeumaierSum&lt; T &gt;::compensation</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" compoundref="neumaier_8hpp" startline="19">fancyqlone::NeumaierSum&lt; T &gt;::sum</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1NeumaierSum_1a233655bb8696ab01177d35e624a6c73b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>T</type>
+        <definition>T fancyqlone::NeumaierSum&lt; T &gt;::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <qualifiedname>fancyqlone::NeumaierSum::get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="23" column="7" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="23" bodyend="23"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" compoundref="neumaier_8hpp" startline="19" endline="19">fancyqlone::NeumaierSum&lt; T &gt;::compensation</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" compoundref="neumaier_8hpp" startline="19">fancyqlone::NeumaierSum&lt; T &gt;::sum</references>
+        <referencedby refid="structfancyqlone_1_1qpalm_1_1CyQPALMBackend_1ab82534ab1b29bcd364d26466ba5036fe" compoundref="solve_8tpp" startline="98" endline="189">fancyqlone::qpalm::CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;::print_solve_resid_norms</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1NeumaierSum_1a0b91b6662611c3350e081696ef9e4c5b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+        <definition>NeumaierSum fancyqlone::NeumaierSum&lt; T &gt;::operator-</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator-</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="24" column="17" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="24" bodyend="24"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" compoundref="neumaier_8hpp" startline="19" endline="19">fancyqlone::NeumaierSum&lt; T &gt;::compensation</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" compoundref="neumaier_8hpp" startline="19">fancyqlone::NeumaierSum&lt; T &gt;::sum</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1NeumaierSum_1ac2a6eed64beecd1dd227e0b28343cfe5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref> &amp;</type>
+        <definition>NeumaierSum &amp; fancyqlone::NeumaierSum&lt; T &gt;::operator+=</definition>
+        <argsstring>(T v)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator+=</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="25" column="17" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="25" bodyend="38"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" compoundref="neumaier_8hpp" startline="19" endline="19">fancyqlone::NeumaierSum&lt; T &gt;::compensation</references>
+        <references refid="namespacebatmat_1_1datapar_1ad0c6f39983831e00225b0ebc6088c5eb">batmat::datapar::select</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" compoundref="neumaier_8hpp" startline="19">fancyqlone::NeumaierSum&lt; T &gt;::sum</references>
+        <references refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" compoundref="solve-block-tridiagonal_8cpp" startline="19">v</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1NeumaierSum_1a1430ab4579f601ea4deed293627c4d2d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref> &amp;</type>
+        <definition>NeumaierSum &amp; fancyqlone::NeumaierSum&lt; T &gt;::operator+=</definition>
+        <argsstring>(const NeumaierSum &amp;other)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="39" column="17" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="39" bodyend="43"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" compoundref="neumaier_8hpp" startline="19" endline="19">fancyqlone::NeumaierSum&lt; T &gt;::compensation</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" compoundref="neumaier_8hpp" startline="19">fancyqlone::NeumaierSum&lt; T &gt;::sum</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1NeumaierSum_1a7f274e5867b69c578e5ae122cd3fc576" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref> &amp;</type>
+        <definition>NeumaierSum &amp; fancyqlone::NeumaierSum&lt; T &gt;::operator-=</definition>
+        <argsstring>(T v)</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator-=</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="44" column="17" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="44" bodyend="44"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+        <references refid="solve-block-tridiagonal_8cpp_1ac818a8f049bd46d6d6996d28f22de4a9" compoundref="solve-block-tridiagonal_8cpp" startline="19">v</references>
+      </memberdef>
+      <memberdef kind="function" id="classfancyqlone_1_1NeumaierSum_1ad29ba11ff37e0c2a7f06de7ce6d542a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref> &amp;</type>
+        <definition>NeumaierSum &amp; fancyqlone::NeumaierSum&lt; T &gt;::operator-=</definition>
+        <argsstring>(const NeumaierSum &amp;other)</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="45" column="17" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="45" bodyend="49"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" compoundref="neumaier_8hpp" startline="19" endline="19">fancyqlone::NeumaierSum&lt; T &gt;::compensation</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" compoundref="neumaier_8hpp" startline="19">fancyqlone::NeumaierSum&lt; T &gt;::sum</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classfancyqlone_1_1NeumaierSum_1aa1a0ff64fbd206621f3932fd3d889cbd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+        <definition>NeumaierSum operator+</definition>
+        <argsstring>(NeumaierSum lhs, T rhs)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator+</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="51" column="24" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="51" bodyend="54"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+      </memberdef>
+      <memberdef kind="friend" id="classfancyqlone_1_1NeumaierSum_1a79b2b0a27d953a81fd12901e4aa92482" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+        <definition>NeumaierSum operator+</definition>
+        <argsstring>(T lhs, NeumaierSum rhs)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator+</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="55" column="24" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="55" bodyend="58"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+      </memberdef>
+      <memberdef kind="friend" id="classfancyqlone_1_1NeumaierSum_1a81cc781ba392c62870490923aec1b788" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+        <definition>NeumaierSum operator+</definition>
+        <argsstring>(NeumaierSum lhs, NeumaierSum rhs)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator+</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="59" column="24" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="59" bodyend="62"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+      </memberdef>
+      <memberdef kind="friend" id="classfancyqlone_1_1NeumaierSum_1a7489c5f2d5249961c8edca3e95be9b30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+        <definition>NeumaierSum operator-</definition>
+        <argsstring>(NeumaierSum lhs, T rhs)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator-</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="64" column="24" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="64" bodyend="67"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+      </memberdef>
+      <memberdef kind="friend" id="classfancyqlone_1_1NeumaierSum_1a561f4df562069d61ae54b6fc1e5e5ede" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+        <definition>NeumaierSum operator-</definition>
+        <argsstring>(T lhs, NeumaierSum rhs)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator-</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="68" column="24" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="68" bodyend="68"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+      </memberdef>
+      <memberdef kind="friend" id="classfancyqlone_1_1NeumaierSum_1a7f28fe9f7125430a30e6a086a5812bd7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+        <definition>NeumaierSum operator-</definition>
+        <argsstring>(NeumaierSum lhs, const NeumaierSum &amp;rhs)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator-</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="69" column="24" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="69" bodyend="72"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+      </memberdef>
+      <memberdef kind="friend" id="classfancyqlone_1_1NeumaierSum_1a27ec7543c36110a2281af26a9bedd8e5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+        <definition>NeumaierSum operator*</definition>
+        <argsstring>(NeumaierSum lhs, NeumaierSum rhs)</argsstring>
+        <name>operator*</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator*</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="73" column="24" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="73" bodyend="79"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" compoundref="neumaier_8hpp" startline="19" endline="19">fancyqlone::NeumaierSum&lt; T &gt;::compensation</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" compoundref="neumaier_8hpp" startline="19">fancyqlone::NeumaierSum&lt; T &gt;::sum</references>
+      </memberdef>
+      <memberdef kind="friend" id="classfancyqlone_1_1NeumaierSum_1a39555a9263f53e921f6606941f7325fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+        <definition>NeumaierSum operator*</definition>
+        <argsstring>(NeumaierSum lhs, T rhs)</argsstring>
+        <name>operator*</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator*</qualifiedname>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>T</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="80" column="24" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="80" bodyend="82"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" compoundref="neumaier_8hpp" startline="19" endline="19">fancyqlone::NeumaierSum&lt; T &gt;::compensation</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" compoundref="neumaier_8hpp" startline="19">fancyqlone::NeumaierSum&lt; T &gt;::sum</references>
+      </memberdef>
+      <memberdef kind="friend" id="classfancyqlone_1_1NeumaierSum_1a78ba89c6c79ffd4b81408693c4b47171" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+        <definition>NeumaierSum operator*</definition>
+        <argsstring>(T lhs, NeumaierSum rhs)</argsstring>
+        <name>operator*</name>
+        <qualifiedname>fancyqlone::NeumaierSum::operator*</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" kindref="member">NeumaierSum</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="83" column="24" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="83" bodyend="85"/>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" compoundref="neumaier_8hpp" startline="20" endline="20">fancyqlone::NeumaierSum&lt; T &gt;::NeumaierSum</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" compoundref="neumaier_8hpp" startline="19" endline="19">fancyqlone::NeumaierSum&lt; T &gt;::compensation</references>
+        <references refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" compoundref="neumaier_8hpp" startline="19">fancyqlone::NeumaierSum&lt; T &gt;::sum</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Kahan-Babuška-Neumaier compensated summation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::NeumaierSum&lt; T &gt;</label>
+        <link refid="classfancyqlone_1_1NeumaierSum"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/neumaier.hpp" line="17" column="1" bodyfile="src/fancyqlone/include/fancyqlone/neumaier.hpp" bodystart="17" bodyend="86"/>
+    <listofallmembers>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a96cde5a18358f2084270b42ddea67dea" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>compensation</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a233655bb8696ab01177d35e624a6c73b" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>get</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a071dc37e60322a006c21585ea1eec407" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>NeumaierSum</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1adc8f65316ae70c2b00add4507c497349" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>NeumaierSum</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1ae7e835e9873b2305581e673744385ea3" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator T</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a27ec7543c36110a2281af26a9bedd8e5" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator*</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a39555a9263f53e921f6606941f7325fe" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator*</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a78ba89c6c79ffd4b81408693c4b47171" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator*</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1aa1a0ff64fbd206621f3932fd3d889cbd" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator+</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a79b2b0a27d953a81fd12901e4aa92482" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator+</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a81cc781ba392c62870490923aec1b788" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator+</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1ac2a6eed64beecd1dd227e0b28343cfe5" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator+=</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a1430ab4579f601ea4deed293627c4d2d" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator+=</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a0b91b6662611c3350e081696ef9e4c5b" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator-</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a7489c5f2d5249961c8edca3e95be9b30" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator-</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a561f4df562069d61ae54b6fc1e5e5ede" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator-</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a7f28fe9f7125430a30e6a086a5812bd7" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator-</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1a7f274e5867b69c578e5ae122cd3fc576" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator-=</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1ad29ba11ff37e0c2a7f06de7ce6d542a1" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>operator-=</name></member>
+      <member refid="classfancyqlone_1_1NeumaierSum_1af95863352c7298d1003f3cdf1a20c099" prot="public" virt="non-virtual"><scope>fancyqlone::NeumaierSum</scope><name>sum</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

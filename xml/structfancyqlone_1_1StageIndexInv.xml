@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1StageIndexInv" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::StageIndexInv</compoundname>
+    <includes refid="cyqlone_8hpp" local="no">fancyqlone/cyqlone/cyqlone.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1StageIndexInv_1a68ed30ac1dc65c53319d017fdb43d70d" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::StageIndexInv::c</definition>
+        <argsstring></argsstring>
+        <name>c</name>
+        <qualifiedname>fancyqlone::StageIndexInv::c</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone.hpp" line="62" column="13" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1StageIndexInv_1a0fd1d8496ff8d4ff0846e89b45c0607f" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::StageIndexInv::i</definition>
+        <argsstring></argsstring>
+        <name>i</name>
+        <qualifiedname>fancyqlone::StageIndexInv::i</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone.hpp" line="63" column="13" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1StageIndexInv_1a73ac05e0479e4015b92af7b20a9dd676" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::StageIndexInv::l</definition>
+        <argsstring></argsstring>
+        <name>l</name>
+        <qualifiedname>fancyqlone::StageIndexInv::l</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone.hpp" line="64" column="13" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::StageIndexInv</label>
+        <link refid="structfancyqlone_1_1StageIndexInv"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone.hpp" line="61" column="1" bodyfile="src/fancyqlone/include/fancyqlone/cyqlone/cyqlone.hpp" bodystart="61" bodyend="65"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1StageIndexInv_1a68ed30ac1dc65c53319d017fdb43d70d" prot="public" virt="non-virtual"><scope>fancyqlone::StageIndexInv</scope><name>c</name></member>
+      <member refid="structfancyqlone_1_1StageIndexInv_1a0fd1d8496ff8d4ff0846e89b45c0607f" prot="public" virt="non-virtual"><scope>fancyqlone::StageIndexInv</scope><name>i</name></member>
+      <member refid="structfancyqlone_1_1StageIndexInv_1a73ac05e0479e4015b92af7b20a9dd676" prot="public" virt="non-virtual"><scope>fancyqlone::StageIndexInv</scope><name>l</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

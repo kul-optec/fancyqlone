@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="dir_d084f60815cfdf1dfcd08e8f9616e2eb" kind="dir">
+    <compoundname>src/fancyqpalm/include/fancyqlone</compoundname>
+    <innerdir refid="dir_c3e3505100d7d08d3d6dea325ef2107f">src/fancyqpalm/include/fancyqlone/fancyqpalm</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="src/fancyqpalm/include/fancyqlone/"/>
+  </compounddef>
+</doxygen>

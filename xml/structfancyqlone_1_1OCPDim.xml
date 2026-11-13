@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1OCPDim" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::OCPDim</compoundname>
+    <includes refid="ocp_8hpp" local="no">fancyqlone/ocp.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1OCPDim_1a082c467cf2ca52f4b594977905447ead" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::OCPDim::N_horiz</definition>
+        <argsstring></argsstring>
+        <name>N_horiz</name>
+        <qualifiedname>fancyqlone::OCPDim::N_horiz</qualifiedname>
+        <briefdescription>
+<para>Horizon length (one less than the number of stages). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="19" column="13" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1OCPDim_1a34deb1679abea1ea44c9deceb4c1f7a9" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::OCPDim::nx</definition>
+        <argsstring></argsstring>
+        <name>nx</name>
+        <qualifiedname>fancyqlone::OCPDim::nx</qualifiedname>
+        <briefdescription>
+<para>Number of state variables. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="20" column="13" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1OCPDim_1a68bf290d668cdd356eb56e665451345a" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::OCPDim::nu</definition>
+        <argsstring></argsstring>
+        <name>nu</name>
+        <qualifiedname>fancyqlone::OCPDim::nu</qualifiedname>
+        <briefdescription>
+<para>Number of input variables. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="21" column="13" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1OCPDim_1ad5131bd4667597f367fdb48c14b29d46" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::OCPDim::ny</definition>
+        <argsstring></argsstring>
+        <name>ny</name>
+        <qualifiedname>fancyqlone::OCPDim::ny</qualifiedname>
+        <briefdescription>
+<para>Number of output variables. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="22" column="13" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1OCPDim_1a6e5441c0b740c5deb2d1fbfa05c2db38" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::OCPDim::ny_N</definition>
+        <argsstring></argsstring>
+        <name>ny_N</name>
+        <qualifiedname>fancyqlone::OCPDim::ny_N</qualifiedname>
+        <initializer>= <ref refid="structfancyqlone_1_1OCPDim_1ad5131bd4667597f367fdb48c14b29d46" kindref="member">ny</ref></initializer>
+        <briefdescription>
+<para>Number of output variables in the last stage. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="23" column="13" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structfancyqlone_1_1OCPDim_1a4511f2022217e0599d1d2bc20054f1c9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(OCPDim, OCPDim)=default</argsstring>
+        <name>operator==</name>
+        <qualifiedname>fancyqlone::OCPDim::operator==</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="24" column="27"/>
+      </memberdef>
+      <memberdef kind="friend" id="structfancyqlone_1_1OCPDim_1aebd30f5cebe1ca27cfdfd8354a0fa805" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator!=</definition>
+        <argsstring>(OCPDim, OCPDim)=default</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>fancyqlone::OCPDim::operator!=</qualifiedname>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+        </param>
+        <param>
+          <type><ref refid="structfancyqlone_1_1OCPDim" kindref="compound">OCPDim</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="25" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Dimensions of an optimal control problem. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::OCPDim</label>
+        <link refid="structfancyqlone_1_1OCPDim"/>
+      </node>
+    </collaborationgraph>
+    <location file="src/fancyqlone/include/fancyqlone/ocp.hpp" line="18" column="1" bodyfile="src/fancyqlone/include/fancyqlone/ocp.hpp" bodystart="18" bodyend="26"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1OCPDim_1a082c467cf2ca52f4b594977905447ead" prot="public" virt="non-virtual"><scope>fancyqlone::OCPDim</scope><name>N_horiz</name></member>
+      <member refid="structfancyqlone_1_1OCPDim_1a68bf290d668cdd356eb56e665451345a" prot="public" virt="non-virtual"><scope>fancyqlone::OCPDim</scope><name>nu</name></member>
+      <member refid="structfancyqlone_1_1OCPDim_1a34deb1679abea1ea44c9deceb4c1f7a9" prot="public" virt="non-virtual"><scope>fancyqlone::OCPDim</scope><name>nx</name></member>
+      <member refid="structfancyqlone_1_1OCPDim_1ad5131bd4667597f367fdb48c14b29d46" prot="public" virt="non-virtual"><scope>fancyqlone::OCPDim</scope><name>ny</name></member>
+      <member refid="structfancyqlone_1_1OCPDim_1a6e5441c0b740c5deb2d1fbfa05c2db38" prot="public" virt="non-virtual"><scope>fancyqlone::OCPDim</scope><name>ny_N</name></member>
+      <member refid="structfancyqlone_1_1OCPDim_1aebd30f5cebe1ca27cfdfd8354a0fa805" prot="public" virt="non-virtual"><scope>fancyqlone::OCPDim</scope><name>operator!=</name></member>
+      <member refid="structfancyqlone_1_1OCPDim_1a4511f2022217e0599d1d2bc20054f1c9" prot="public" virt="non-virtual"><scope>fancyqlone::OCPDim</scope><name>operator==</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,521 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: Optimal control solvers</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group__topic-optimization-solvers-ocp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Optimal control solvers <div class="ingroups"><a class="el" href="group__topic-optimization-solvers.html">Optimization solvers</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Solvers for optimal control problems. </p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:fancyqlone_3A_3Aqpalm_3A_3ACyqloneData_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyqloneData" id="r_fancyqlone_3A_3Aqpalm_3A_3ACyqloneData_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyqloneData"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1CyqloneData">fancyqlone::qpalm::CyqloneData</a></td></tr>
+<tr class="memitem:fancyqlone_3A_3Aqpalm_3A_3ACyQPALMBackendSettings_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyQPALMBackendSettings" id="r_fancyqlone_3A_3Aqpalm_3A_3ACyQPALMBackendSettings_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyQPALMBackendSettings"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">fancyqlone::qpalm::CyQPALMBackendSettings</a></td></tr>
+<tr class="memitem:fancyqlone_3A_3Aqpalm_3A_3ACyQPALMBackendStats_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyQPALMBackendStats" id="r_fancyqlone_3A_3Aqpalm_3A_3ACyQPALMBackendStats_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1CyQPALMBackendStats"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats">fancyqlone::qpalm::CyQPALMBackendStats</a></td></tr>
+<tr class="memitem:fancyqlone_3A_3Aqpalm_3A_3Aunique_5FCyQPALMBackend_3C_20VL_2C_20DefaultOrder_2C_20LinearSolver_20_3E" id="r_fancyqlone_3A_3Aqpalm_3A_3Aunique_5FCyQPALMBackend_3C_20VL_2C_20DefaultOrder_2C_20LinearSolver_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">fancyqlone::qpalm::unique_CyQPALMBackend&lt; VL, DefaultOrder, LinearSolver &gt;</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:gac67dc98973eb37748e986ba97732b38c" id="r_gac67dc98973eb37748e986ba97732b38c"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#gac67dc98973eb37748e986ba97732b38c">fancyqlone::qpalm::WarmStartingStrategy</a> { <a class="el" href="#ggac67dc98973eb37748e986ba97732b38ca8b7a61a6e9bd5b8977b7b3f02a425adc">fancyqlone::qpalm::WarmStartingStrategy::Zeros</a>
+, <a class="el" href="#ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea">fancyqlone::qpalm::WarmStartingStrategy::Copy</a>
+, <a class="el" href="#ggac67dc98973eb37748e986ba97732b38ca825a3d98017bab11815ad2817201324c">fancyqlone::qpalm::WarmStartingStrategy::Shift</a>
+, <a class="el" href="#ggac67dc98973eb37748e986ba97732b38cab882fa82c60e5b9a229e5ed6e52ad31a">fancyqlone::qpalm::WarmStartingStrategy::ShiftNoInequality</a>
+ }</td></tr>
+<tr class="memitem:ga90c820ba89c66a51ee3e57a7ebf796d2" id="r_ga90c820ba89c66a51ee3e57a7ebf796d2"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga90c820ba89c66a51ee3e57a7ebf796d2">fancyqlone::qpalm::FanWarmStartingStrategy</a> { <a class="el" href="#gga90c820ba89c66a51ee3e57a7ebf796d2a8b7a61a6e9bd5b8977b7b3f02a425adc">fancyqlone::qpalm::FanWarmStartingStrategy::Zeros</a>
+, <a class="el" href="#gga90c820ba89c66a51ee3e57a7ebf796d2a5fb63579fc981698f97d55bfecb213ea">fancyqlone::qpalm::FanWarmStartingStrategy::Copy</a>
+, <a class="el" href="#gga90c820ba89c66a51ee3e57a7ebf796d2a825a3d98017bab11815ad2817201324c">fancyqlone::qpalm::FanWarmStartingStrategy::Shift</a>
+, <a class="el" href="#gga90c820ba89c66a51ee3e57a7ebf796d2ab882fa82c60e5b9a229e5ed6e52ad31a">fancyqlone::qpalm::FanWarmStartingStrategy::ShiftNoInequality</a>
+ }</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga04ffaf134708a2b3476e949e6dfa426e" id="r_ga04ffaf134708a2b3476e949e6dfa426e"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;&gt; </td></tr>
+<tr class="memitem:ga04ffaf134708a2b3476e949e6dfa426e template"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; VL, DefaultOrder, LinearSolver &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga04ffaf134708a2b3476e949e6dfa426e">fancyqlone::qpalm::make_cyqpalm_backend</a> (const typename <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">CycloneBackendTraits</a>&lt; LinearSolver &gt;::CStorage &amp;ocp, <a class="el" href="#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:ga923329c8239f305d13cb14a91d838483" id="r_ga923329c8239f305d13cb14a91d838483"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;&gt; </td></tr>
+<tr class="memitem:ga923329c8239f305d13cb14a91d838483 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga923329c8239f305d13cb14a91d838483">fancyqlone::qpalm::update_cyqpalm_backend</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; VL, DefaultOrder, LinearSolver &gt; &amp;backend, const typename <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">CycloneBackendTraits</a>&lt; LinearSolver &gt;::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:ga9b8823b057fe6a59e9d65db005d8c3ff" id="r_ga9b8823b057fe6a59e9d65db005d8c3ff"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;&gt; </td></tr>
+<tr class="memitem:ga9b8823b057fe6a59e9d65db005d8c3ff template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga9b8823b057fe6a59e9d65db005d8c3ff">fancyqlone::qpalm::update_cyqpalm_backend</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; VL, DefaultOrder, LinearSolver &gt; &amp;backend, const typename <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">CycloneBackendTraits</a>&lt; LinearSolver &gt;::OCPStorage &amp;ocp)</td></tr>
+</table>
+<hr/><h2 id="header-inline_5Fclasses" class="groupheader">Class Documentation</h2>
+<a name="structfancyqlone_1_1qpalm_1_1CyqloneData" id="structfancyqlone_1_1qpalm_1_1CyqloneData"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1CyqloneData">&#9670;&#160;</a></span>fancyqlone::qpalm::CyqloneData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::CyqloneData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="ab77a021f2f97c46942f5ad6cd1ac9ff9" name="ab77a021f2f97c46942f5ad6cd1ac9ff9"></a>span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+initial_variables = {}</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a097110456baa8420a2d53664ba93bf05" name="a097110456baa8420a2d53664ba93bf05"></a>span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+initial_inequality_multipliers = {}</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a39f2543d4cdbfec0a25ba7797256efb6" name="a39f2543d4cdbfec0a25ba7797256efb6"></a>span&lt; const <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+initial_equality_multipliers = {}</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">&#9670;&#160;</a></span>fancyqlone::qpalm::CyQPALMBackendSettings</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::CyQPALMBackendSettings</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="a18f9794881668ebfca3e5184c5d73ac4" name="a18f9794881668ebfca3e5184c5d73ac4"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>
+<td class="fieldname">
+processors = 8</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ac19d3e9a8a8ffe0e2358a75c5d72e617" name="ac19d3e9a8a8ffe0e2358a75c5d72e617"></a>bool</td>
+<td class="fieldname">
+print_residuals = false</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a8fc5a6d972faff0bb450a45b1d5b5de6" name="a8fc5a6d972faff0bb450a45b1d5b5de6"></a>int</td>
+<td class="fieldname">
+print_precision = 3</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a3b1b95630e5123b6c7acb315c4e67293" name="a3b1b95630e5123b6c7acb315c4e67293"></a>double</td>
+<td class="fieldname">
+changing_constr_factor = 0.05</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ae59a1ddb7e2589acdefb7fe7966b0c76" name="ae59a1ddb7e2589acdefb7fe7966b0c76"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>
+<td class="fieldname">
+max_update_count = 5</td>
+<td class="fielddoc">
+Maximum number of factorization updates before refactorization. <p>Fan backends do not support updates and use an effective value of zero. </p>
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aa418e27c51a14390ab0eb4b68cc26041" name="aa418e27c51a14390ab0eb4b68cc26041"></a>bool</td>
+<td class="fieldname">
+detailed_timings = false</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a3aeec64cba09d6847e23d7f9decbe09f" name="a3aeec64cba09d6847e23d7f9decbe09f"></a><a class="el" href="group__topic-block-tridiag-solvers.html#structfancyqlone_1_1TricyqleParams">TricyqleParams</a>&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+tricyqle_params {}</td>
+<td class="fielddoc">
+Fan backends always use <a class="el" href="group__topic-block-tridiag-solvers.html#gga02b7bc5e6f2bb033f2f89b03d51d6436a6adf97f83acf6453d4a6a4b1070f3754" title="The final Schur complement is not solved, so it should be handled manually by the user.">SolveMethod::None</a> for the branch Schur complements. </td></tr>
+<tr><td class="fieldtype">
+<a id="aadba1d46308e13bf564d75afec16b4bc" name="aadba1d46308e13bf564d75afec16b4bc"></a>uint32_t</td>
+<td class="fieldname">
+spin_count = std::numeric_limits&lt;uint32_t&gt;::max()</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aa373f519bbc753135e481d4188c77c91" name="aa373f519bbc753135e481d4188c77c91"></a><a class="el" href="#gac67dc98973eb37748e986ba97732b38c">WarmStartingStrategy</a></td>
+<td class="fieldname">
+strategy = <a class="el" href="#ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea">WarmStartingStrategy::Copy</a></td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats" id="structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1CyQPALMBackendStats">&#9670;&#160;</a></span>fancyqlone::qpalm::CyQPALMBackendStats</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::CyQPALMBackendStats</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="ad61f69a15b9082390dcff94207aa9d09" name="ad61f69a15b9082390dcff94207aa9d09"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>
+<td class="fieldname">
+num_updates = 0</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a39ccff5d04291617afbbff9be156dcdf" name="a39ccff5d04291617afbbff9be156dcdf"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>
+<td class="fieldname">
+rank_updates = 0</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a5b5a034bdda4cd09e63d0839eb485d64" name="a5b5a034bdda4cd09e63d0839eb485d64"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>
+<td class="fieldname">
+num_factor = 0</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="gac67dc98973eb37748e986ba97732b38c" name="gac67dc98973eb37748e986ba97732b38c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac67dc98973eb37748e986ba97732b38c">&#9670;&#160;</a></span>WarmStartingStrategy</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#gac67dc98973eb37748e986ba97732b38c">fancyqlone::qpalm::WarmStartingStrategy</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="ocp-backend-fancyqlone_8hpp.html">fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</a>&gt;</code></p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ggac67dc98973eb37748e986ba97732b38ca8b7a61a6e9bd5b8977b7b3f02a425adc" name="ggac67dc98973eb37748e986ba97732b38ca8b7a61a6e9bd5b8977b7b3f02a425adc"></a>Zeros&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea" name="ggac67dc98973eb37748e986ba97732b38ca5fb63579fc981698f97d55bfecb213ea"></a>Copy&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggac67dc98973eb37748e986ba97732b38ca825a3d98017bab11815ad2817201324c" name="ggac67dc98973eb37748e986ba97732b38ca825a3d98017bab11815ad2817201324c"></a>Shift&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ggac67dc98973eb37748e986ba97732b38cab882fa82c60e5b9a229e5ed6e52ad31a" name="ggac67dc98973eb37748e986ba97732b38cab882fa82c60e5b9a229e5ed6e52ad31a"></a>ShiftNoInequality&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00029">29</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ga90c820ba89c66a51ee3e57a7ebf796d2" name="ga90c820ba89c66a51ee3e57a7ebf796d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga90c820ba89c66a51ee3e57a7ebf796d2">&#9670;&#160;</a></span>FanWarmStartingStrategy</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#ga90c820ba89c66a51ee3e57a7ebf796d2">fancyqlone::qpalm::FanWarmStartingStrategy</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="ocp-backend-fancyqlone_8hpp.html">fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</a>&gt;</code></p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga90c820ba89c66a51ee3e57a7ebf796d2a8b7a61a6e9bd5b8977b7b3f02a425adc" name="gga90c820ba89c66a51ee3e57a7ebf796d2a8b7a61a6e9bd5b8977b7b3f02a425adc"></a>Zeros&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga90c820ba89c66a51ee3e57a7ebf796d2a5fb63579fc981698f97d55bfecb213ea" name="gga90c820ba89c66a51ee3e57a7ebf796d2a5fb63579fc981698f97d55bfecb213ea"></a>Copy&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga90c820ba89c66a51ee3e57a7ebf796d2a825a3d98017bab11815ad2817201324c" name="gga90c820ba89c66a51ee3e57a7ebf796d2a825a3d98017bab11815ad2817201324c"></a>Shift&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga90c820ba89c66a51ee3e57a7ebf796d2ab882fa82c60e5b9a229e5ed6e52ad31a" name="gga90c820ba89c66a51ee3e57a7ebf796d2ab882fa82c60e5b9a229e5ed6e52ad31a"></a>ShiftNoInequality&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00036">36</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="ga04ffaf134708a2b3476e949e6dfa426e" name="ga04ffaf134708a2b3476e949e6dfa426e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga04ffaf134708a2b3476e949e6dfa426e">&#9670;&#160;</a></span>make_cyqpalm_backend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; VL, DefaultOrder, LinearSolver &gt; fancyqlone::qpalm::make_cyqpalm_backend </td>
+          <td>(</td>
+          <td class="paramtype">const typename <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">CycloneBackendTraits</a>&lt; LinearSolver &gt;::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a></td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>settings</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="ocp-backend-fancyqlone_8hpp.html">fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</a>&gt;</code></p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a65">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8tpp_source.html#l00653">653</a> of file <a class="el" href="ocp-backend-fancyqlone_8tpp_source.html">ocp-backend-fancyqlone.tpp</a>.</p>
+
+</div>
+</div>
+<a id="ga923329c8239f305d13cb14a91d838483" name="ga923329c8239f305d13cb14a91d838483"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga923329c8239f305d13cb14a91d838483">&#9670;&#160;</a></span>update_cyqpalm_backend() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::qpalm::update_cyqpalm_backend </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; VL, DefaultOrder, LinearSolver &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>backend</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">CycloneBackendTraits</a>&lt; LinearSolver &gt;::CStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="ocp-backend-fancyqlone_8hpp.html">fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</a>&gt;</code></p>
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8tpp_source.html#l00659">659</a> of file <a class="el" href="ocp-backend-fancyqlone_8tpp_source.html">ocp-backend-fancyqlone.tpp</a>.</p>
+
+</div>
+</div>
+<a id="ga9b8823b057fe6a59e9d65db005d8c3ff" name="ga9b8823b057fe6a59e9d65db005d8c3ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9b8823b057fe6a59e9d65db005d8c3ff">&#9670;&#160;</a></span>update_cyqpalm_backend() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class LinearSolver = fancyqlone::CyqloneSolver&lt;VL, real_t, DefaultOrder&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::qpalm::update_cyqpalm_backend </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; VL, DefaultOrder, LinearSolver &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>backend</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const typename <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">CycloneBackendTraits</a>&lt; LinearSolver &gt;::OCPStorage &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="ocp-backend-fancyqlone_8hpp.html">fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</a>&gt;</code></p>
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8tpp_source.html#l00665">665</a> of file <a class="el" href="ocp-backend-fancyqlone_8tpp_source.html">ocp-backend-fancyqlone.tpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,706 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: fancyqlone::qpalm::problems Namespace Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('namespacefancyqlone_1_1qpalm_1_1problems.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fancyqlone::qpalm::problems Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:CentroidalQuadrupedGaitPhase_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1CentroidalQuadrupedGaitPhase" id="r_CentroidalQuadrupedGaitPhase_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1CentroidalQuadrupedGaitPhase"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase">CentroidalQuadrupedGaitPhase</a></td></tr>
+<tr class="memitem:CentroidalQuadrupedParams" id="r_CentroidalQuadrupedParams"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams.html">CentroidalQuadrupedParams</a></td></tr>
+<tr class="memitem:CentroidalQuadrupedProblem_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1CentroidalQuadrupedProblem" id="r_CentroidalQuadrupedProblem_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1CentroidalQuadrupedProblem"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem">CentroidalQuadrupedProblem</a></td></tr>
+<tr class="memitem:FanCentroidalQuadrupedProblem_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1FanCentroidalQuadrupedProblem" id="r_FanCentroidalQuadrupedProblem_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1FanCentroidalQuadrupedProblem"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem">FanCentroidalQuadrupedProblem</a></td></tr>
+<tr class="memitem:PlatooningParams_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1PlatooningParams" id="r_PlatooningParams_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1PlatooningParams"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams">PlatooningParams</a></td></tr>
+<tr class="memitem:PlatooningProblem_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1PlatooningProblem" id="r_PlatooningProblem_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1PlatooningProblem"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem">PlatooningProblem</a></td></tr>
+<tr class="memitem:SpringMassParams" id="r_SpringMassParams"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassParams.html">SpringMassParams</a></td></tr>
+<tr class="memitem:SpringMassProblem_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1SpringMassProblem" id="r_SpringMassProblem_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1SpringMassProblem"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem">SpringMassProblem</a></td></tr>
+<tr class="memitem:FanSpringMassProblem_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1FanSpringMassProblem" id="r_FanSpringMassProblem_5Fstructfancyqlone_5F1_5F1qpalm_5F1_5F1problems_5F1_5F1FanSpringMassProblem"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1FanSpringMassProblem">FanSpringMassProblem</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a64074f24c2af831ca90b0cc3e8ecae19" id="r_a64074f24c2af831ca90b0cc3e8ecae19"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> = Eigen::MatrixX&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&gt;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a55df8252720b2ca53506533388b9c4ed" id="r_a55df8252720b2ca53506533388b9c4ed"><td class="memItemLeft"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem">CentroidalQuadrupedProblem</a>&#160;</td><td class="memItemRight"><a class="el" href="#a55df8252720b2ca53506533388b9c4ed">centroidal_quadruped</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams.html">CentroidalQuadrupedParams</a> p)</td></tr>
+<tr class="memitem:a21ab1286bab4a60e920b940a639020a4" id="r_a21ab1286bab4a60e920b940a639020a4"><td class="memItemLeft"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem">FanCentroidalQuadrupedProblem</a>&#160;</td><td class="memItemRight"><a class="el" href="#a21ab1286bab4a60e920b940a639020a4">fan_centroidal_quadruped</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams.html">CentroidalQuadrupedParams</a> p, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> num_branches, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> mu_radius)</td></tr>
+<tr class="memitem:a5dcb9459cf8edbf58534c782b419cbf3" id="r_a5dcb9459cf8edbf58534c782b419cbf3"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5dcb9459cf8edbf58534c782b419cbf3">load_from_csv</a> (const fs::path &amp;folder, const std::string &amp;name)</td></tr>
+<tr class="memitem:a0e5975050cdbdc3702c00f519922a6dd" id="r_a0e5975050cdbdc3702c00f519922a6dd"><td class="memItemLeft"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem">PlatooningProblem</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0e5975050cdbdc3702c00f519922a6dd">platooning</a> (<a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams">PlatooningParams</a> p)</td></tr>
+<tr class="memitem:a28c6f6b2da0b1720ba707c5351e1f5f7" id="r_a28c6f6b2da0b1720ba707c5351e1f5f7"><td class="memItemLeft"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem">SpringMassProblem</a>&#160;</td><td class="memItemRight"><a class="el" href="#a28c6f6b2da0b1720ba707c5351e1f5f7">spring_mass</a> (<a class="el" href="structSpringMassParams.html">SpringMassParams</a> p)</td></tr>
+<tr class="memitem:ad6df35818fd1a905713ce59651c93018" id="r_ad6df35818fd1a905713ce59651c93018"><td class="memItemLeft"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1FanSpringMassProblem">FanSpringMassProblem</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad6df35818fd1a905713ce59651c93018">fan_spring_mass</a> (<a class="el" href="structSpringMassParams.html">SpringMassParams</a> p, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> num_branches, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> k_spring_diff=0.1)</td></tr>
+<tr class="memitem:a0cf7ee6db68a2209fb95a6f343461591" id="r_a0cf7ee6db68a2209fb95a6f343461591"><td class="memItemLeft">std::tuple&lt; <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a>, <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0cf7ee6db68a2209fb95a6f343461591">discretize_zoh</a> (const Eigen::Ref&lt; const <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; &amp;A, const Eigen::Ref&lt; const <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; &amp;B, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> Ts)</td></tr>
+<tr class="memitem:a9f4835c0a5aa54fbe52650937a54d6c7" id="r_a9f4835c0a5aa54fbe52650937a54d6c7"><td class="memItemLeft">std::tuple&lt; <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a>, <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a>, <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a9f4835c0a5aa54fbe52650937a54d6c7">discretize_zoh</a> (const Eigen::Ref&lt; const <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; &amp;A, const Eigen::Ref&lt; const <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; &amp;B, const Eigen::Ref&lt; const <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; &amp;b, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> Ts)</td></tr>
+</table>
+<hr/><h2 id="header-inline_5Fclasses" class="groupheader">Class Documentation</h2>
+<a name="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase" id="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase">&#9670;&#160;</a></span>fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="aa6eb8a088581d6aedd62059cb3b367df" name="aa6eb8a088581d6aedd62059cb3b367df"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>
+<td class="fieldname">
+duration</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="aa11800628e2c7e1950e5d4e893e35ef5" name="aa11800628e2c7e1950e5d4e893e35ef5"></a>array&lt; bool, 4 &gt;</td>
+<td class="fieldname">
+contacts</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem" id="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem">&#9670;&#160;</a></span>fancyqlone::qpalm::problems::CentroidalQuadrupedProblem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::problems::CentroidalQuadrupedProblem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="ae5a6e6ccfb7eada389151c1744329f4d" name="ae5a6e6ccfb7eada389151c1744329f4d"></a><a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a></td>
+<td class="fieldname">
+ocp</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a5f6c087e1bdaac3faf4899d21f2e89f3" name="a5f6c087e1bdaac3faf4899d21f2e89f3"></a>vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+reference</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem" id="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem">&#9670;&#160;</a></span>fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="adb14d6526e2bd936bcee183c12c4f1ab" name="adb14d6526e2bd936bcee183c12c4f1ab"></a><a class="el" href="structfancyqlone_1_1FanOCPStorage.html">FanOCPStorage</a></td>
+<td class="fieldname">
+ocp</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a2b0e9b8c50902512eb20e033215deba4" name="a2b0e9b8c50902512eb20e033215deba4"></a>vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+friction_coefficients</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams">&#9670;&#160;</a></span>fancyqlone::qpalm::problems::PlatooningParams</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::problems::PlatooningParams</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="a88f78df37958bdf3f976a993fb8fa07f" name="a88f78df37958bdf3f976a993fb8fa07f"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+friction = 0.1</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a273aeeeba1ae769ba508ea1e04ab2e78" name="a273aeeeba1ae769ba508ea1e04ab2e78"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+F_max = 20</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a928de9d8c7468ce98e7efb47df7c00f3" name="a928de9d8c7468ce98e7efb47df7c00f3"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+v_max = 1.6</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a4d13a8d404917263c4d289a1f9074833" name="a4d13a8d404917263c4d289a1f9074833"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+dist_min = 5</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="ae574bb1582aa67d783009f0c29908f51" name="ae574bb1582aa67d783009f0c29908f51"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+dist_init = 2 * <a class="el" href="#a4d13a8d404917263c4d289a1f9074833">dist_min</a></td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a8eacc3e256b2b7df6961338524c4e098" name="a8eacc3e256b2b7df6961338524c4e098"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+p_target = 100</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a66621b59aafde7792093f827861762e5" name="a66621b59aafde7792093f827861762e5"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>
+<td class="fieldname">
+N_horiz = 512</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a78a5576a2f94d735900650259cee975d" name="a78a5576a2f94d735900650259cee975d"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+T_horiz = 30</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a92338826956b02eff6eb831c63d0ec02" name="a92338826956b02eff6eb831c63d0ec02"></a><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>
+<td class="fieldname">
+scale_cost = 1e-3</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a5b9fa5ebf0093fd6fc14888bfe94c06d" name="a5b9fa5ebf0093fd6fc14888bfe94c06d"></a>vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+masses {100, 150, 130, 70, 180}</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem" id="structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem">&#9670;&#160;</a></span>fancyqlone::qpalm::problems::PlatooningProblem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::problems::PlatooningProblem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="a348aea758db4d3c18613ab5e361c29cc" name="a348aea758db4d3c18613ab5e361c29cc"></a><a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a></td>
+<td class="fieldname">
+ocp</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a83901de8ad08d00e7e90b4a81670fbce" name="a83901de8ad08d00e7e90b4a81670fbce"></a>vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+ref</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem" id="structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem">&#9670;&#160;</a></span>fancyqlone::qpalm::problems::SpringMassProblem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::problems::SpringMassProblem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="ab9cecf9882fcb9668cac94b1632e4bd9" name="ab9cecf9882fcb9668cac94b1632e4bd9"></a><a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a></td>
+<td class="fieldname">
+ocp</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a5dbff369282a38338509c0c4cae8ff2c" name="a5dbff369282a38338509c0c4cae8ff2c"></a>vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+ref</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="structfancyqlone_1_1qpalm_1_1problems_1_1FanSpringMassProblem" id="structfancyqlone_1_1qpalm_1_1problems_1_1FanSpringMassProblem"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#structfancyqlone_1_1qpalm_1_1problems_1_1FanSpringMassProblem">&#9670;&#160;</a></span>fancyqlone::qpalm::problems::FanSpringMassProblem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct fancyqlone::qpalm::problems::FanSpringMassProblem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="ab9c584ddd7c42f1eb31f27e2832e6ba9" name="ab9c584ddd7c42f1eb31f27e2832e6ba9"></a><a class="el" href="structfancyqlone_1_1FanOCPStorage.html">FanOCPStorage</a></td>
+<td class="fieldname">
+ocp</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a687537f0b92912a204e6443c073402c5" name="a687537f0b92912a204e6443c073402c5"></a>vector&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt;</td>
+<td class="fieldname">
+ref</td>
+<td class="fielddoc">
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="a64074f24c2af831ca90b0cc3e8ecae19" name="a64074f24c2af831ca90b0cc3e8ecae19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64074f24c2af831ca90b0cc3e8ecae19">&#9670;&#160;</a></span>eigen_mat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef Eigen::MatrixX&lt; <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a> &gt; <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">fancyqlone::qpalm::problems::eigen_mat</a> = Eigen::MatrixX&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="zoh_8hpp_source.html#l00009">9</a> of file <a class="el" href="zoh_8hpp_source.html">zoh.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a55df8252720b2ca53506533388b9c4ed" name="a55df8252720b2ca53506533388b9c4ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55df8252720b2ca53506533388b9c4ed">&#9670;&#160;</a></span>centroidal_quadruped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedProblem">CentroidalQuadrupedProblem</a> fancyqlone::qpalm::problems::centroidal_quadruped </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams.html">CentroidalQuadrupedParams</a></td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="centroidal-quadruped_8cpp_source.html#l00118">118</a> of file <a class="el" href="centroidal-quadruped_8cpp_source.html">centroidal-quadruped.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a21ab1286bab4a60e920b940a639020a4" name="a21ab1286bab4a60e920b940a639020a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21ab1286bab4a60e920b940a639020a4">&#9670;&#160;</a></span>fan_centroidal_quadruped()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem">FanCentroidalQuadrupedProblem</a> fancyqlone::qpalm::problems::fan_centroidal_quadruped </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedParams.html">CentroidalQuadrupedParams</a></td>          <td class="paramname"><span class="paramname"><em>p</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>num_branches</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>          <td class="paramname"><span class="paramname"><em>mu_radius</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="centroidal-quadruped_8cpp_source.html#l00222">222</a> of file <a class="el" href="centroidal-quadruped_8cpp_source.html">centroidal-quadruped.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5dcb9459cf8edbf58534c782b419cbf3" name="a5dcb9459cf8edbf58534c782b419cbf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dcb9459cf8edbf58534c782b419cbf3">&#9670;&#160;</a></span>load_from_csv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a> fancyqlone::qpalm::problems::load_from_csv </td>
+          <td>(</td>
+          <td class="paramtype">const fs::path &amp;</td>          <td class="paramname"><span class="paramname"><em>folder</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="csv_8cpp_source.html#l00012">12</a> of file <a class="el" href="csv_8cpp_source.html">csv.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0e5975050cdbdc3702c00f519922a6dd" name="a0e5975050cdbdc3702c00f519922a6dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e5975050cdbdc3702c00f519922a6dd">&#9670;&#160;</a></span>platooning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningProblem">PlatooningProblem</a> fancyqlone::qpalm::problems::platooning </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1PlatooningParams">PlatooningParams</a></td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="platooning_8cpp_source.html#l00011">11</a> of file <a class="el" href="platooning_8cpp_source.html">platooning.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a28c6f6b2da0b1720ba707c5351e1f5f7" name="a28c6f6b2da0b1720ba707c5351e1f5f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28c6f6b2da0b1720ba707c5351e1f5f7">&#9670;&#160;</a></span>spring_mass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1SpringMassProblem">SpringMassProblem</a> fancyqlone::qpalm::problems::spring_mass </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSpringMassParams.html">SpringMassParams</a></td>          <td class="paramname"><span class="paramname"><em>p</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a45">benchmarks/cyqpalm/spring-mass.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="src_2example-problems_2src_2spring-mass_8cpp_source.html#l00017">17</a> of file <a class="el" href="src_2example-problems_2src_2spring-mass_8cpp_source.html">spring-mass.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad6df35818fd1a905713ce59651c93018" name="ad6df35818fd1a905713ce59651c93018"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6df35818fd1a905713ce59651c93018">&#9670;&#160;</a></span>fan_spring_mass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#structfancyqlone_1_1qpalm_1_1problems_1_1FanSpringMassProblem">FanSpringMassProblem</a> fancyqlone::qpalm::problems::fan_spring_mass </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSpringMassParams.html">SpringMassParams</a></td>          <td class="paramname"><span class="paramname"><em>p</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a></td>          <td class="paramname"><span class="paramname"><em>num_branches</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>          <td class="paramname"><span class="paramname"><em>k_spring_diff</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.1</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="src_2example-problems_2src_2spring-mass_8cpp_source.html#l00162">162</a> of file <a class="el" href="src_2example-problems_2src_2spring-mass_8cpp_source.html">spring-mass.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0cf7ee6db68a2209fb95a6f343461591" name="a0cf7ee6db68a2209fb95a6f343461591"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cf7ee6db68a2209fb95a6f343461591">&#9670;&#160;</a></span>discretize_zoh() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::tuple&lt; <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a>, <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; fancyqlone::qpalm::problems::discretize_zoh </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::Ref&lt; const <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>A</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::Ref&lt; const <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>B</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>          <td class="paramname"><span class="paramname"><em>Ts</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="zoh_8hpp_source.html#l00011">11</a> of file <a class="el" href="zoh_8hpp_source.html">zoh.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9f4835c0a5aa54fbe52650937a54d6c7" name="a9f4835c0a5aa54fbe52650937a54d6c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f4835c0a5aa54fbe52650937a54d6c7">&#9670;&#160;</a></span>discretize_zoh() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::tuple&lt; <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a>, <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a>, <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; fancyqlone::qpalm::problems::discretize_zoh </td>
+          <td>(</td>
+          <td class="paramtype">const Eigen::Ref&lt; const <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>A</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::Ref&lt; const <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>B</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::Ref&lt; const <a class="el" href="#a64074f24c2af831ca90b0cc3e8ecae19">eigen_mat</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a></td>          <td class="paramname"><span class="paramname"><em>Ts</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="zoh_8hpp_source.html#l00024">24</a> of file <a class="el" href="zoh_8hpp_source.html">zoh.hpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacefancyqlone.html">fancyqlone</a></li><li class="navelem"><a href="namespacefancyqlone_1_1qpalm.html">qpalm</a></li><li class="navelem"><a href="namespacefancyqlone_1_1qpalm_1_1problems.html">problems</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

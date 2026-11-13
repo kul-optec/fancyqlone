@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase</compoundname>
+    <includes refid="centroidal-quadruped_8hpp" local="no">/home/runner/work/fancyqlone/fancyqlone/src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase_1aa6eb8a088581d6aedd62059cb3b367df" prot="public" static="no" mutable="no">
+        <type><ref refid="namespacebatmat_1a67314e2becdee2c795c5ea0bd5626451" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">index_t</ref></type>
+        <definition>index_t fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase::duration</definition>
+        <argsstring></argsstring>
+        <name>duration</name>
+        <qualifiedname>fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase::duration</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" line="28" column="13" bodyfile="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase_1aa11800628e2c7e1950e5d4e893e35ef5" prot="public" static="no" mutable="no">
+        <type>std::array&lt; bool, 4 &gt;</type>
+        <definition>std::array&lt;bool, 4&gt; fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase::contacts</definition>
+        <argsstring></argsstring>
+        <name>contacts</name>
+        <qualifiedname>fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase::contacts</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" line="29" column="16" bodyfile="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+contacts</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::array&lt; bool, 4 &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" line="27" column="1" bodyfile="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" bodystart="27" bodyend="30"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase_1aa11800628e2c7e1950e5d4e893e35ef5" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase</scope><name>contacts</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1CentroidalQuadrupedGaitPhase_1aa6eb8a088581d6aedd62059cb3b367df" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::CentroidalQuadrupedGaitPhase</scope><name>duration</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

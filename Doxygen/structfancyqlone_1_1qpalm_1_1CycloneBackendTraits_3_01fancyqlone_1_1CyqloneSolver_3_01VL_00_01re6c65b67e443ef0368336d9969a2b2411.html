@@ -1,0 +1,383 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::CyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt; Struct Template Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411.html','','structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re4914117fae818c6d33dfc3fdd6b5b925'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::CyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt; Struct Template Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.hpp</a>&gt;</code></p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder&gt;<br />
+struct fancyqlone::qpalm::CycloneBackendTraits&lt; fancyqlone::CyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</div>
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00081">81</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:storage_5Ft" id="r_storage_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re671af03b46d3359135f59b3fadb28f43.html">storage_t</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ac7a65c66af59bc62f606457f7219e996" id="r_ac7a65c66af59bc62f606457f7219e996"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ac7a65c66af59bc62f606457f7219e996">OCP_t</a> = <a class="el" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a>&lt;VL, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, DefaultOrder&gt;</td></tr>
+<tr class="memitem:abd86bda2ccf3db8deabc697541dd9fee" id="r_abd86bda2ccf3db8deabc697541dd9fee"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#abd86bda2ccf3db8deabc697541dd9fee">simd</a> = typename <a class="el" href="structfancyqlone_1_1CyqloneSolver.html#a524b8d42ef9271fe19eb4020f4b49b30">OCP_t::simd</a></td></tr>
+<tr class="memitem:a3a7faf5d2728c9e222ebfdcfe1272c7c" id="r_a3a7faf5d2728c9e222ebfdcfe1272c7c"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a3a7faf5d2728c9e222ebfdcfe1272c7c">CStorage</a> = <a class="el" href="structfancyqlone_1_1CyqloneStorage.html">CyqloneStorage</a>&lt;&gt;</td></tr>
+<tr class="memitem:a38acbf98ebd1faf2d3584b572ba377a9" id="r_a38acbf98ebd1faf2d3584b572ba377a9"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a38acbf98ebd1faf2d3584b572ba377a9">OCPStorage</a> = <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a></td></tr>
+<tr class="memitem:af9dfe2829d972fab0636b84497dd61df" id="r_af9dfe2829d972fab0636b84497dd61df"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#af9dfe2829d972fab0636b84497dd61df">store_t</a> = typename OCP_t::template <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#aa93224d87d900a2dacc032305840169b">matrix</a>&lt;&gt;</td></tr>
+<tr class="memitem:aae22610f380c019efc1fcc710d5e87b6" id="r_aae22610f380c019efc1fcc710d5e87b6"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aae22610f380c019efc1fcc710d5e87b6">warm_start_t</a> = <a class="el" href="group__topic-optimization-solvers-ocp.html#gac67dc98973eb37748e986ba97732b38c">WarmStartingStrategy</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ae842a7bc8ffdda78e6b12eb384c971a8" id="r_ae842a7bc8ffdda78e6b12eb384c971a8"><td class="memItemLeft">static constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ae842a7bc8ffdda78e6b12eb384c971a8">supports_factorization_updates</a> = true</td></tr>
+<tr class="memitem:ace424e69a4f3cc26f1fc82bd86fcec89" id="r_ace424e69a4f3cc26f1fc82bd86fcec89"><td class="memItemLeft">static constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ace424e69a4f3cc26f1fc82bd86fcec89">requires_external_schur_solve</a> = false</td></tr>
+</table>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
+<a id="ac7a65c66af59bc62f606457f7219e996" name="ac7a65c66af59bc62f606457f7219e996"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7a65c66af59bc62f606457f7219e996">&#9670;&#160;</a></span>OCP_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">fancyqlone::qpalm::CycloneBackendTraits</a>&lt; <a class="el" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a>&lt; VL, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, DefaultOrder &gt; &gt;::OCP_t = <a class="el" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a>&lt;VL, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, DefaultOrder&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00084">84</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abd86bda2ccf3db8deabc697541dd9fee" name="abd86bda2ccf3db8deabc697541dd9fee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd86bda2ccf3db8deabc697541dd9fee">&#9670;&#160;</a></span>simd</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">fancyqlone::qpalm::CycloneBackendTraits</a>&lt; <a class="el" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a>&lt; VL, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, DefaultOrder &gt; &gt;::simd = typename <a class="el" href="structfancyqlone_1_1CyqloneSolver.html#a524b8d42ef9271fe19eb4020f4b49b30">OCP_t::simd</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00085">85</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3a7faf5d2728c9e222ebfdcfe1272c7c" name="a3a7faf5d2728c9e222ebfdcfe1272c7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a7faf5d2728c9e222ebfdcfe1272c7c">&#9670;&#160;</a></span>CStorage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">fancyqlone::qpalm::CycloneBackendTraits</a>&lt; <a class="el" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a>&lt; VL, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, DefaultOrder &gt; &gt;::CStorage = <a class="el" href="structfancyqlone_1_1CyqloneStorage.html">CyqloneStorage</a>&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00086">86</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a38acbf98ebd1faf2d3584b572ba377a9" name="a38acbf98ebd1faf2d3584b572ba377a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38acbf98ebd1faf2d3584b572ba377a9">&#9670;&#160;</a></span>OCPStorage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">fancyqlone::qpalm::CycloneBackendTraits</a>&lt; <a class="el" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a>&lt; VL, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, DefaultOrder &gt; &gt;::OCPStorage = <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00087">87</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af9dfe2829d972fab0636b84497dd61df" name="af9dfe2829d972fab0636b84497dd61df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9dfe2829d972fab0636b84497dd61df">&#9670;&#160;</a></span>store_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">fancyqlone::qpalm::CycloneBackendTraits</a>&lt; <a class="el" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a>&lt; VL, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, DefaultOrder &gt; &gt;::store_t = typename OCP_t::template <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#aa93224d87d900a2dacc032305840169b">matrix</a>&lt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00088">88</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aae22610f380c019efc1fcc710d5e87b6" name="aae22610f380c019efc1fcc710d5e87b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae22610f380c019efc1fcc710d5e87b6">&#9670;&#160;</a></span>warm_start_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">fancyqlone::qpalm::CycloneBackendTraits</a>&lt; <a class="el" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a>&lt; VL, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, DefaultOrder &gt; &gt;::warm_start_t = <a class="el" href="group__topic-optimization-solvers-ocp.html#gac67dc98973eb37748e986ba97732b38c">WarmStartingStrategy</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00103">103</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="ae842a7bc8ffdda78e6b12eb384c971a8" name="ae842a7bc8ffdda78e6b12eb384c971a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae842a7bc8ffdda78e6b12eb384c971a8">&#9670;&#160;</a></span>supports_factorization_updates</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">fancyqlone::qpalm::CycloneBackendTraits</a>&lt; <a class="el" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a>&lt; VL, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, DefaultOrder &gt; &gt;::supports_factorization_updates = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00082">82</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ace424e69a4f3cc26f1fc82bd86fcec89" name="ace424e69a4f3cc26f1fc82bd86fcec89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace424e69a4f3cc26f1fc82bd86fcec89">&#9670;&#160;</a></span>requires_external_schur_solve</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> DefaultOrder&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="namespacefancyqlone_1_1qpalm.html#structfancyqlone_1_1qpalm_1_1CycloneBackendTraits">fancyqlone::qpalm::CycloneBackendTraits</a>&lt; <a class="el" href="structfancyqlone_1_1CyqloneSolver.html">fancyqlone::CyqloneSolver</a>&lt; VL, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a31461fabd319f19bc15256fde4d75495">real_t</a>, DefaultOrder &gt; &gt;::requires_external_schur_solve = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html#l00083">83</a> of file <a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/fancyqpalm/include/fancyqlone/fancyqpalm/backends/<a class="el" href="ocp-backend-fancyqlone_8hpp_source.html">ocp-backend-fancyqlone.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacefancyqlone.html">fancyqlone</a></li><li class="navelem"><a href="namespacefancyqlone_1_1qpalm.html">qpalm</a></li><li class="navelem"><a href="structfancyqlone_1_1qpalm_1_1CycloneBackendTraits_3_01fancyqlone_1_1CyqloneSolver_3_01VL_00_01re6c65b67e443ef0368336d9969a2b2411.html">CycloneBackendTraits&lt; fancyqlone::CyqloneSolver&lt; VL, real_t, DefaultOrder &gt; &gt;</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: src/fancyqpalm/src/ocp-backend-cyqlone.cpp File Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('ocp-backend-cyqlone_8cpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ocp-backend-cyqlone.cpp File Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="parallel_8hpp_source.html">fancyqlone/parallel.hpp</a>&quot;</code><br />
+<code>#include &lt;batmat/config.hpp&gt;</code><br />
+<code>#include &lt;<a class="el" href="ineq-constr_8tpp_source.html">fancyqlone/fancyqpalm/backends/backend-fancyqlone/ineq-constr.tpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="linalg_8tpp_source.html">fancyqlone/fancyqpalm/backends/backend-fancyqlone/linalg.tpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="backends_2backend-fancyqlone_2linesearch_8tpp_source.html">fancyqlone/fancyqpalm/backends/backend-fancyqlone/linesearch.tpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="solve_8tpp_source.html">fancyqlone/fancyqpalm/backends/backend-fancyqlone/solve.tpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="ocp-backend-fancyqlone_8tpp_source.html">fancyqlone/fancyqpalm/backends/ocp-backend-fancyqlone.tpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="solver_8tpp_source.html">fancyqlone/fancyqpalm/implementation/solver.tpp</a>&gt;</code><br />
+</div>
+<p><a href="ocp-backend-cyqlone_8cpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:fancyqlone" id="r_fancyqlone"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone.html">fancyqlone</a></td></tr>
+<tr class="memitem:fancyqlone_3A_3Aqpalm" id="r_fancyqlone_3A_3Aqpalm"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html">fancyqlone::qpalm</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a76a67ff6a8b41587d5f86389cd45e853" id="r_a76a67ff6a8b41587d5f86389cd45e853"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a76a67ff6a8b41587d5f86389cd45e853">CYQLONE_INSTANTIATE_QPALM_Cyqlone</a>(<a class="el" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a>,  <a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp.html#af61fff0ad381f171d5c3d5fdbb5835d5">order</a>)</td></tr>
+<tr class="memitem:a8aad14e3f787ae45b664db30a093af39" id="r_a8aad14e3f787ae45b664db30a093af39"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a8aad14e3f787ae45b664db30a093af39">CYQLONE_INSTANTIATE_QPALM_FanCyqlone</a>(<a class="el" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a>,  <a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp.html#af61fff0ad381f171d5c3d5fdbb5835d5">order</a>,  InnerSolver)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aa1ebbe5feb2e66562ad44d9002bab7ef" id="r_aa1ebbe5feb2e66562ad44d9002bab7ef"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> v, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> order&gt; </td></tr>
+<tr class="memitem:aa1ebbe5feb2e66562ad44d9002bab7ef template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">fancyqlone::qpalm::DefaultInnerSolver</a></td></tr>
+<tr class="memitem:a27779a7c1b02137d9aed6561bc79232a" id="r_a27779a7c1b02137d9aed6561bc79232a"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> v, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> order&gt; </td></tr>
+<tr class="memitem:a27779a7c1b02137d9aed6561bc79232a template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">fancyqlone::qpalm::FanInnerSolver</a></td></tr>
+<tr class="memitem:a9428e937fd2cf61f1d9e1c1053e79e7e" id="r_a9428e937fd2cf61f1d9e1c1053e79e7e"><td class="memTemplParams" colspan="2">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> v, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/group__linalg__views.html#gac0a39236f11af6725f2dc1d339c95bae">StorageOrder</a> order&gt; </td></tr>
+<tr class="memitem:a9428e937fd2cf61f1d9e1c1053e79e7e template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">fancyqlone::qpalm::SerialFanInnerSolver</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae8c565fbca93f5e40e0c426c7975ad5a" id="r_ae8c565fbca93f5e40e0c426c7975ad5a"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#ae8c565fbca93f5e40e0c426c7975ad5a">fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:ac6f465fad8dd8f57357f5d897f7978d8" id="r_ac6f465fad8dd8f57357f5d897f7978d8"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#ac6f465fad8dd8f57357f5d897f7978d8">fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a66aece703a8d869eed4fde92f3bc09e7" id="r_a66aece703a8d869eed4fde92f3bc09e7"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a66aece703a8d869eed4fde92f3bc09e7">fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a55a4e67def5e01beaea2271c4f55fbcc" id="r_a55a4e67def5e01beaea2271c4f55fbcc"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a55a4e67def5e01beaea2271c4f55fbcc">fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:ad8dac8123ef4d4c18e0cb67b9a5e6bd6" id="r_ad8dac8123ef4d4c18e0cb67b9a5e6bd6"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#ad8dac8123ef4d4c18e0cb67b9a5e6bd6">fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:ab44d5bd8534ec63b05acd10977dc0928" id="r_ab44d5bd8534ec63b05acd10977dc0928"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#ab44d5bd8534ec63b05acd10977dc0928">fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a981c1441f46473d19aed87f81689fc02" id="r_a981c1441f46473d19aed87f81689fc02"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a981c1441f46473d19aed87f81689fc02">fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:abe6927ae4965c8b6c24f3f699788cdcd" id="r_abe6927ae4965c8b6c24f3f699788cdcd"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#abe6927ae4965c8b6c24f3f699788cdcd">fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a08a0f11654165b7c9801676518571ef9" id="r_a08a0f11654165b7c9801676518571ef9"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a08a0f11654165b7c9801676518571ef9">fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:ab9112086e72eca21453b423ae8c2a66b" id="r_ab9112086e72eca21453b423ae8c2a66b"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#ab9112086e72eca21453b423ae8c2a66b">fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:a11ab78a582975ea70b503e6e9349d907" id="r_a11ab78a582975ea70b503e6e9349d907"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a11ab78a582975ea70b503e6e9349d907">fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:ad654bc906af1db1fb3a6d0b0e25945e9" id="r_ad654bc906af1db1fb3a6d0b0e25945e9"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#ad654bc906af1db1fb3a6d0b0e25945e9">fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a0306349b78a982abb009e045d0012cf5" id="r_a0306349b78a982abb009e045d0012cf5"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a0306349b78a982abb009e045d0012cf5">fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:a6f6fbb0b0e38f611b69051ad818c8f02" id="r_a6f6fbb0b0e38f611b69051ad818c8f02"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a6f6fbb0b0e38f611b69051ad818c8f02">fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:afcf80c489204cebc1cd09a6c3827624f" id="r_afcf80c489204cebc1cd09a6c3827624f"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#afcf80c489204cebc1cd09a6c3827624f">fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a9844fac65cfbf75551d6dc262741d9b0" id="r_a9844fac65cfbf75551d6dc262741d9b0"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a9844fac65cfbf75551d6dc262741d9b0">fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:a933156eda2a07a6f5475c7d309bc5d11" id="r_a933156eda2a07a6f5475c7d309bc5d11"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a933156eda2a07a6f5475c7d309bc5d11">fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:ad10e9c442eb06442f8dc8dfa64893a76" id="r_ad10e9c442eb06442f8dc8dfa64893a76"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#ad10e9c442eb06442f8dc8dfa64893a76">fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a27779a7c1b02137d9aed6561bc79232a">FanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a98408f45e677c32bcad07999c05ed8bd" id="r_a98408f45e677c32bcad07999c05ed8bd"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a98408f45e677c32bcad07999c05ed8bd">fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:ac2a4fff46354cd00910bb2b5feeb41c2" id="r_ac2a4fff46354cd00910bb2b5feeb41c2"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#ac2a4fff46354cd00910bb2b5feeb41c2">fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a0f32f33e20fbb13f2273c8a5653c50c5" id="r_a0f32f33e20fbb13f2273c8a5653c50c5"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a0f32f33e20fbb13f2273c8a5653c50c5">fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 1, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a99fa8edac0425cb26c86803d043b9035" id="r_a99fa8edac0425cb26c86803d043b9035"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a99fa8edac0425cb26c86803d043b9035">fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:a6997955ebe0ed55bcdcaf83537ebc0e1" id="r_a6997955ebe0ed55bcdcaf83537ebc0e1"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a6997955ebe0ed55bcdcaf83537ebc0e1">fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a448e54f6554b5e65572426f0d29e6771" id="r_a448e54f6554b5e65572426f0d29e6771"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a448e54f6554b5e65572426f0d29e6771">fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 4, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a239e9713e387d7d43c863e2517ef0deb" id="r_a239e9713e387d7d43c863e2517ef0deb"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a239e9713e387d7d43c863e2517ef0deb">fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:a7f011c4b0f2d346cc8ed6ec6a9e4f4ca" id="r_a7f011c4b0f2d346cc8ed6ec6a9e4f4ca"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a7f011c4b0f2d346cc8ed6ec6a9e4f4ca">fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a5969103fd508334f653401b25511875b" id="r_a5969103fd508334f653401b25511875b"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a5969103fd508334f653401b25511875b">fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::ColMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::ColMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#a9428e937fd2cf61f1d9e1c1053e79e7e">SerialFanInnerSolver</a>&lt; 8, StorageOrder::ColMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a0a62631675a6269f207247760f65b2fc" id="r_a0a62631675a6269f207247760f65b2fc"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a0a62631675a6269f207247760f65b2fc">fancyqlone::qpalm::make_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:af748664021387ba684ecf88351f20007" id="r_af748664021387ba684ecf88351f20007"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#af748664021387ba684ecf88351f20007">fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:aaa1c07be76b6df0935034afbe5f734f8" id="r_aaa1c07be76b6df0935034afbe5f734f8"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#aaa1c07be76b6df0935034afbe5f734f8">fancyqlone::qpalm::update_cyqpalm_backend&lt; 1, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 1, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 1, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:a533b35626fdd48fb12e7348286b1b93c" id="r_a533b35626fdd48fb12e7348286b1b93c"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a533b35626fdd48fb12e7348286b1b93c">fancyqlone::qpalm::make_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:aa0dd7f7e0b1892c5f9d408fcb58fa7ec" id="r_aa0dd7f7e0b1892c5f9d408fcb58fa7ec"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#aa0dd7f7e0b1892c5f9d408fcb58fa7ec">fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:ae350ab1a31a11d04711d6a2bf8e5e345" id="r_ae350ab1a31a11d04711d6a2bf8e5e345"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#ae350ab1a31a11d04711d6a2bf8e5e345">fancyqlone::qpalm::update_cyqpalm_backend&lt; 4, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 4, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 4, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+<tr class="memitem:aa8dc8a8cdd00d671de1d420c55c85299" id="r_aa8dc8a8cdd00d671de1d420c55c85299"><td class="memItemLeft">template <a class="el" href="structfancyqlone_1_1qpalm_1_1unique__CyQPALMBackend.html">unique_CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#aa8dc8a8cdd00d671de1d420c55c85299">fancyqlone::qpalm::make_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</a> (const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp, <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyqloneData">CyqloneData</a> data, const <a class="el" href="group__topic-optimization-solvers-ocp.html#structfancyqlone_1_1qpalm_1_1CyQPALMBackendSettings">CyQPALMBackendSettings</a> &amp;settings)</td></tr>
+<tr class="memitem:aec89b4fdbe5bf6db4ea9a91f8befe8e8" id="r_aec89b4fdbe5bf6db4ea9a91f8befe8e8"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#aec89b4fdbe5bf6db4ea9a91f8befe8e8">fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt; &amp;, const <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::CStorage &amp;ocp)</td></tr>
+<tr class="memitem:a4b8166ca2e5cfa40320e2c5526e44050" id="r_a4b8166ca2e5cfa40320e2c5526e44050"><td class="memItemLeft">template void&#160;</td><td class="memItemRight"><a class="el" href="namespacefancyqlone_1_1qpalm.html#a4b8166ca2e5cfa40320e2c5526e44050">fancyqlone::qpalm::update_cyqpalm_backend&lt; 8, StorageOrder::RowMajor &gt;</a> (<a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt; &amp;, const typename <a class="el" href="structfancyqlone_1_1qpalm_1_1CyQPALMBackend.html">CyQPALMBackend</a>&lt; 8, StorageOrder::RowMajor, <a class="el" href="namespacefancyqlone_1_1qpalm.html#aa1ebbe5feb2e66562ad44d9002bab7ef">DefaultInnerSolver</a>&lt; 8, StorageOrder::RowMajor &gt; &gt;::traits::OCPStorage &amp;ocp)</td></tr>
+</table>
+<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="a76a67ff6a8b41587d5f86389cd45e853" name="a76a67ff6a8b41587d5f86389cd45e853"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76a67ff6a8b41587d5f86389cd45e853">&#9670;&#160;</a></span>CYQLONE_INSTANTIATE_QPALM_Cyqlone</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CYQLONE_INSTANTIATE_QPALM_Cyqlone</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em><a class="el" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp.html#af61fff0ad381f171d5c3d5fdbb5835d5">order</a></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">                                                                                               \</div>
+<div class="line"><span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_struct" href="structSolver.html">Solver&lt;CyQPALMBackend&lt;v, order&gt;</a> *&gt;;                                             \</div>
+<div class="line"><span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_struct" href="structSolver.html">Solver&lt;unique_CyQPALMBackend&lt;v, order&gt;</a>&gt;;                                        \</div>
+<div class="line"><span class="keyword">template</span> <span class="keyword">struct </span>unique_CyQPALMBackend&lt;v, order&gt;;                                               \</div>
+<div class="line">                                                                                               \</div>
+<div class="line"><span class="keyword">template</span> unique_CyQPALMBackend&lt;v, order&gt; make_cyqpalm_backend&lt;v, order&gt;(                       \</div>
+<div class="line">    <span class="keyword">const</span> CyQPALMBackend&lt;v, order&gt;::traits::CStorage &amp;ocp, CyqloneData data,                   \</div>
+<div class="line">    <span class="keyword">const</span> CyQPALMBackendSettings &amp;settings);                                                   \</div>
+<div class="line"><span class="keyword">template</span> <span class="keywordtype">void</span> update_cyqpalm_backend&lt;v, order&gt;(                                                \</div>
+<div class="line">    CyQPALMBackend&lt;v, order&gt; &amp;, <span class="keyword">const</span> CyQPALMBackend&lt;v, order&gt;::traits::CStorage &amp;ocp);        \</div>
+<div class="line"><span class="keyword">template</span> <span class="keywordtype">void</span> update_cyqpalm_backend&lt;v, order&gt;(                                                \</div>
+<div class="line">    CyQPALMBackend&lt;v, order&gt; &amp;,                                                                \</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> CyQPALMBackend&lt;v, order&gt;::traits::OCPStorage &amp;ocp);</div>
+<div class="ttc" id="astructSolver_html"><div class="ttname"><a href="structSolver.html">Solver</a></div><div class="ttdef"><b>Definition</b> <a href="benchmarks_2cyqpalm_2spring-mass_8cpp_source.html#l00344">spring-mass.cpp:344</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ocp-backend-cyqlone_8cpp_source.html#l00012">12</a> of file <a class="el" href="ocp-backend-cyqlone_8cpp_source.html">ocp-backend-cyqlone.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8aad14e3f787ae45b664db30a093af39" name="a8aad14e3f787ae45b664db30a093af39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aad14e3f787ae45b664db30a093af39">&#9670;&#160;</a></span>CYQLONE_INSTANTIATE_QPALM_FanCyqlone</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CYQLONE_INSTANTIATE_QPALM_FanCyqlone</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em><a class="el" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp.html#af61fff0ad381f171d5c3d5fdbb5835d5">order</a></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>InnerSolver</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">                                                                                               \</div>
+<div class="line"><span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_struct" href="structSolver.html">Solver&lt;CyQPALMBackend&lt;v, order, InnerSolver&lt;v, order&gt;</a>&gt; *&gt;;                      \</div>
+<div class="line"><span class="keyword">template</span> <span class="keyword">class </span><a class="code hl_struct" href="structSolver.html">Solver&lt;unique_CyQPALMBackend&lt;v, order, InnerSolver&lt;v, order&gt;</a>&gt;&gt;;                 \</div>
+<div class="line"><span class="keyword">template</span> <span class="keyword">struct </span>unique_CyQPALMBackend&lt;v, order, InnerSolver&lt;v, order&gt;&gt;;                        \</div>
+<div class="line">                                                                                               \</div>
+<div class="line"><span class="keyword">template</span> unique_CyQPALMBackend&lt;v, order, InnerSolver&lt;v, order&gt;&gt;                                \</div>
+<div class="line">make_cyqpalm_backend&lt;v, order&gt;(                                                                \</div>
+<div class="line">    <span class="keyword">const</span> CyQPALMBackend&lt;<a class="code hl_variable" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a>, <a class="code hl_function" href="benchmarks_2cyqpalm_2spring-mass_8cpp.html#af61fff0ad381f171d5c3d5fdbb5835d5">order</a>, InnerSolver&lt;v, order&gt;&gt;::traits::CStorage &amp;ocp,              \</div>
+<div class="line">    CyqloneData data, <span class="keyword">const</span> CyQPALMBackendSettings &amp;settings);                                 \</div>
+<div class="line"><span class="keyword">template</span> <span class="keywordtype">void</span> update_cyqpalm_backend&lt;v, order&gt;(                                                \</div>
+<div class="line">    CyQPALMBackend&lt;<a class="code hl_variable" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a>, <a class="code hl_function" href="benchmarks_2cyqpalm_2spring-mass_8cpp.html#af61fff0ad381f171d5c3d5fdbb5835d5">order</a>, InnerSolver&lt;v, order&gt;&gt; &amp;,                                         \</div>
+<div class="line">    <span class="keyword">const</span> CyQPALMBackend&lt;<a class="code hl_variable" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a>, <a class="code hl_function" href="benchmarks_2cyqpalm_2spring-mass_8cpp.html#af61fff0ad381f171d5c3d5fdbb5835d5">order</a>, InnerSolver&lt;v, order&gt;&gt;::traits::CStorage &amp;ocp);             \</div>
+<div class="line"><span class="keyword">template</span> <span class="keywordtype">void</span> update_cyqpalm_backend&lt;v, order&gt;(                                                \</div>
+<div class="line">    CyQPALMBackend&lt;<a class="code hl_variable" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a>, <a class="code hl_function" href="benchmarks_2cyqpalm_2spring-mass_8cpp.html#af61fff0ad381f171d5c3d5fdbb5835d5">order</a>, InnerSolver&lt;v, order&gt;&gt; &amp;,                                         \</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> CyQPALMBackend&lt;<a class="code hl_variable" href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a>, <a class="code hl_function" href="benchmarks_2cyqpalm_2spring-mass_8cpp.html#af61fff0ad381f171d5c3d5fdbb5835d5">order</a>, InnerSolver&lt;v, order&gt;&gt;::traits::OCPStorage &amp;ocp);</div>
+<div class="ttc" id="abenchmarks_2cyqpalm_2spring-mass_8cpp_html_af61fff0ad381f171d5c3d5fdbb5835d5"><div class="ttname"><a href="benchmarks_2cyqpalm_2spring-mass_8cpp.html#af61fff0ad381f171d5c3d5fdbb5835d5">order</a></div><div class="ttdeci">std::string_view order(qp::StorageOrder o)</div><div class="ttdef"><b>Definition</b> <a href="benchmarks_2cyqpalm_2spring-mass_8cpp_source.html#l00349">spring-mass.cpp:349</a></div></div>
+<div class="ttc" id="asolve-block-tridiagonal_8cpp_html_ac818a8f049bd46d6d6996d28f22de4a9"><div class="ttname"><a href="solve-block-tridiagonal_8cpp.html#ac818a8f049bd46d6d6996d28f22de4a9">v</a></div><div class="ttdeci">constexpr index_t v</div><div class="ttdef"><b>Definition</b> <a href="solve-block-tridiagonal_8cpp_source.html#l00019">solve-block-tridiagonal.cpp:19</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ocp-backend-cyqlone_8cpp_source.html#l00039">39</a> of file <a class="el" href="ocp-backend-cyqlone_8cpp_source.html">ocp-backend-cyqlone.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_bd4a26a8667a3e0a7dd5327ab8878314.html">fancyqpalm</a></li><li class="navelem"><a href="dir_6c100b72ce2d14aa9500f9c3d7abe405.html">src</a></li><li class="navelem"><a href="ocp-backend-cyqlone_8cpp.html">ocp-backend-cyqlone.cpp</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

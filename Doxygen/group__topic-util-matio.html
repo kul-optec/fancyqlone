@@ -1,0 +1,1451 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: Exporting and loading .mat files</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group__topic-util-matio.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Exporting and loading .mat files <div class="ingroups"><a class="el" href="group__topic-utilities.html">Utilities</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Functions for exporting and loading matrices and OCP data to and from .mat files. </p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:matio_2Ehpp" id="r_matio_2Ehpp"><td class="memItemLeft">file &#160;</td><td class="memItemRight"><a class="el" href="matio_8hpp.html">matio.hpp</a></td></tr>
+<tr class="memdesc:matio_8hpp"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functions for exporting and loading matrices and OCP data to and from .mat files. <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ga60963e57104b35af5ebf325817e3fe48" id="r_ga60963e57104b35af5ebf325817e3fe48"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">fancyqlone::mat_t</a> = ::_mat_t</td></tr>
+<tr class="memdesc:ga60963e57104b35af5ebf325817e3fe48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Incomplete matio struct type.  <br /></td></tr>
+<tr class="memitem:ga77aa9d5b4d523080df8ff52209ca89db" id="r_ga77aa9d5b4d523080df8ff52209ca89db"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga77aa9d5b4d523080df8ff52209ca89db">fancyqlone::MatFilePtr</a> = std::unique_ptr&lt;<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a>, int (*)(<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *)&gt;</td></tr>
+<tr class="memdesc:ga77aa9d5b4d523080df8ff52209ca89db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Owning handle to a matio file. The file will be closed when the handle goes out of scope.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga78e7543166e64d103643d53a0fa09e33" id="r_ga78e7543166e64d103643d53a0fa09e33"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga78e7543166e64d103643d53a0fa09e33">fancyqlone::MatioOpenMode</a> { <a class="el" href="#gga78e7543166e64d103643d53a0fa09e33a7a1a5f3e79fdc91edf2f5ead9d66abb4">fancyqlone::MatioOpenMode::Read</a>
+, <a class="el" href="#gga78e7543166e64d103643d53a0fa09e33a1129c0e4d43f2d121652a7302712cff6">fancyqlone::MatioOpenMode::Write</a>
+ }</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga67fec1938cb44d6909f91584bcfbef9f" id="r_ga67fec1938cb44d6909f91584bcfbef9f"><td class="memItemLeft"><a class="el" href="#ga77aa9d5b4d523080df8ff52209ca89db">MatFilePtr</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga67fec1938cb44d6909f91584bcfbef9f">fancyqlone::open_mat</a> (const std::filesystem::path &amp;filename, <a class="el" href="#ga78e7543166e64d103643d53a0fa09e33">MatioOpenMode</a> mode=<a class="el" href="#gga78e7543166e64d103643d53a0fa09e33a7a1a5f3e79fdc91edf2f5ead9d66abb4">MatioOpenMode::Read</a>)</td></tr>
+<tr class="memdesc:ga67fec1938cb44d6909f91584bcfbef9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a .mat file for reading or writing.  <br /></td></tr>
+<tr class="memitem:ga1e524da3db4f81ddb5dd6c2856c88502" id="r_ga1e524da3db4f81ddb5dd6c2856c88502"><td class="memItemLeft"><a class="el" href="#ga77aa9d5b4d523080df8ff52209ca89db">MatFilePtr</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga1e524da3db4f81ddb5dd6c2856c88502">fancyqlone::create_mat</a> (const std::filesystem::path &amp;filename)</td></tr>
+<tr class="memdesc:ga1e524da3db4f81ddb5dd6c2856c88502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and open a new .mat file for writing.  <br /></td></tr>
+<tr class="memitem:ga235db8e974db22f3e8d4999cc1241290" id="r_ga235db8e974db22f3e8d4999cc1241290"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga235db8e974db22f3e8d4999cc1241290">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, float value)</td></tr>
+<tr class="memdesc:ga235db8e974db22f3e8d4999cc1241290"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga1bce8c813758dc0ee0c51123eefd6d4c" id="r_ga1bce8c813758dc0ee0c51123eefd6d4c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga1bce8c813758dc0ee0c51123eefd6d4c">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, double value)</td></tr>
+<tr class="memdesc:ga1bce8c813758dc0ee0c51123eefd6d4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga542f7cc9199e691651d57a174aa33594" id="r_ga542f7cc9199e691651d57a174aa33594"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga542f7cc9199e691651d57a174aa33594">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, short value)</td></tr>
+<tr class="memdesc:ga542f7cc9199e691651d57a174aa33594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga2ac9bf168fcccac6824f7b8778763245" id="r_ga2ac9bf168fcccac6824f7b8778763245"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga2ac9bf168fcccac6824f7b8778763245">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, int value)</td></tr>
+<tr class="memdesc:ga2ac9bf168fcccac6824f7b8778763245"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga48939416d19f9dd327178bbd804acd3c" id="r_ga48939416d19f9dd327178bbd804acd3c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga48939416d19f9dd327178bbd804acd3c">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, long value)</td></tr>
+<tr class="memdesc:ga48939416d19f9dd327178bbd804acd3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga5881d75c5a03b3164aeed167d97f76bb" id="r_ga5881d75c5a03b3164aeed167d97f76bb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga5881d75c5a03b3164aeed167d97f76bb">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, long long value)</td></tr>
+<tr class="memdesc:ga5881d75c5a03b3164aeed167d97f76bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga69f73a0e5992ecc2f75e5d51ed123b5a" id="r_ga69f73a0e5992ecc2f75e5d51ed123b5a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga69f73a0e5992ecc2f75e5d51ed123b5a">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, unsigned short value)</td></tr>
+<tr class="memdesc:ga69f73a0e5992ecc2f75e5d51ed123b5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:gaae777ef5dd88755256300f62a2b13b87" id="r_gaae777ef5dd88755256300f62a2b13b87"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaae777ef5dd88755256300f62a2b13b87">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, unsigned int value)</td></tr>
+<tr class="memdesc:gaae777ef5dd88755256300f62a2b13b87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga0e78abb707d5bb79ff4372518e5dbb0e" id="r_ga0e78abb707d5bb79ff4372518e5dbb0e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga0e78abb707d5bb79ff4372518e5dbb0e">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, unsigned long value)</td></tr>
+<tr class="memdesc:ga0e78abb707d5bb79ff4372518e5dbb0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga521a1cd6aa32db7307ab2012dbe7630e" id="r_ga521a1cd6aa32db7307ab2012dbe7630e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga521a1cd6aa32db7307ab2012dbe7630e">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, unsigned long long value)</td></tr>
+<tr class="memdesc:ga521a1cd6aa32db7307ab2012dbe7630e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a value to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga9a8038d19161c792385831550f51d930" id="r_ga9a8038d19161c792385831550f51d930"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga9a8038d19161c792385831550f51d930">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const double, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; data)</td></tr>
+<tr class="memdesc:ga9a8038d19161c792385831550f51d930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a matrix to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga62f5dd78db8722e1f0e6d30ef89bda67" id="r_ga62f5dd78db8722e1f0e6d30ef89bda67"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga62f5dd78db8722e1f0e6d30ef89bda67">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, <a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const float, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; data)</td></tr>
+<tr class="memdesc:ga62f5dd78db8722e1f0e6d30ef89bda67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a matrix to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga519092628d6a98809f002bb92eea8a4b" id="r_ga519092628d6a98809f002bb92eea8a4b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga519092628d6a98809f002bb92eea8a4b">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1View.html">batmat::matrix::View</a>&lt; const double, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; data)</td></tr>
+<tr class="memdesc:ga519092628d6a98809f002bb92eea8a4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a batch of matrices to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga240cf9568cd4aea51407b96896d9b62d" id="r_ga240cf9568cd4aea51407b96896d9b62d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga240cf9568cd4aea51407b96896d9b62d">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1View.html">batmat::matrix::View</a>&lt; const float, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt; data)</td></tr>
+<tr class="memdesc:ga240cf9568cd4aea51407b96896d9b62d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a batch of matrices to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga011e2eba58eb8dc91e5f5ec6caed2479" id="r_ga011e2eba58eb8dc91e5f5ec6caed2479"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga011e2eba58eb8dc91e5f5ec6caed2479">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const float &gt; data)</td></tr>
+<tr class="memdesc:ga011e2eba58eb8dc91e5f5ec6caed2479"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga45b17062fb35011a96f441288627e51e" id="r_ga45b17062fb35011a96f441288627e51e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga45b17062fb35011a96f441288627e51e">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const double &gt; data)</td></tr>
+<tr class="memdesc:ga45b17062fb35011a96f441288627e51e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga6c8ac2c7fcd37fa428cedc3ddae1c4e2" id="r_ga6c8ac2c7fcd37fa428cedc3ddae1c4e2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga6c8ac2c7fcd37fa428cedc3ddae1c4e2">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const unsigned short &gt; data)</td></tr>
+<tr class="memdesc:ga6c8ac2c7fcd37fa428cedc3ddae1c4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga12bdb39a1589821c798ac8a32f8f0e0a" id="r_ga12bdb39a1589821c798ac8a32f8f0e0a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga12bdb39a1589821c798ac8a32f8f0e0a">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const unsigned int &gt; data)</td></tr>
+<tr class="memdesc:ga12bdb39a1589821c798ac8a32f8f0e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga8d7930ee44dba2ef0e087c40ab8fb923" id="r_ga8d7930ee44dba2ef0e087c40ab8fb923"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga8d7930ee44dba2ef0e087c40ab8fb923">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const unsigned long &gt; data)</td></tr>
+<tr class="memdesc:ga8d7930ee44dba2ef0e087c40ab8fb923"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga7f3f30db797283a4ee51ffafe255b21a" id="r_ga7f3f30db797283a4ee51ffafe255b21a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga7f3f30db797283a4ee51ffafe255b21a">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const unsigned long long &gt; data)</td></tr>
+<tr class="memdesc:ga7f3f30db797283a4ee51ffafe255b21a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga96ceb4c9787593db18b0d6aab5ff7287" id="r_ga96ceb4c9787593db18b0d6aab5ff7287"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga96ceb4c9787593db18b0d6aab5ff7287">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const short &gt; data)</td></tr>
+<tr class="memdesc:ga96ceb4c9787593db18b0d6aab5ff7287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga8b7b93f4fe4cab45686b30ece43f783a" id="r_ga8b7b93f4fe4cab45686b30ece43f783a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga8b7b93f4fe4cab45686b30ece43f783a">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const int &gt; data)</td></tr>
+<tr class="memdesc:ga8b7b93f4fe4cab45686b30ece43f783a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:gaf4b2434852e3878c5f5861dd6de10848" id="r_gaf4b2434852e3878c5f5861dd6de10848"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gaf4b2434852e3878c5f5861dd6de10848">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const long &gt; data)</td></tr>
+<tr class="memdesc:gaf4b2434852e3878c5f5861dd6de10848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:gadece8c937832409489f87c43e51b6834" id="r_gadece8c937832409489f87c43e51b6834"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gadece8c937832409489f87c43e51b6834">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; const long long &gt; data)</td></tr>
+<tr class="memdesc:gadece8c937832409489f87c43e51b6834"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a vector to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga173c33213fca9d73dd78980979535903" id="r_ga173c33213fca9d73dd78980979535903"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga173c33213fca9d73dd78980979535903">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, const <a class="el" href="structfancyqlone_1_1SparseMatrix.html">SparseMatrix</a> &amp;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#aa93224d87d900a2dacc032305840169b">matrix</a>)</td></tr>
+<tr class="memdesc:ga173c33213fca9d73dd78980979535903"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a sparse matrix to an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga3a92335133126b546a25f3f379f8dfe1" id="r_ga3a92335133126b546a25f3f379f8dfe1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga3a92335133126b546a25f3f379f8dfe1">fancyqlone::add_to_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, const <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a> &amp;ocp)</td></tr>
+<tr class="memdesc:ga3a92335133126b546a25f3f379f8dfe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the data from a <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html" title="Storage for a linear-quadratic OCP of the form.">LinearOCPStorage</a> to an open .mat file.  <br /></td></tr>
+<tr class="memitem:gad32c54affae4cfeb7fc996ab3deab14a" id="r_gad32c54affae4cfeb7fc996ab3deab14a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gad32c54affae4cfeb7fc996ab3deab14a">fancyqlone::read_from_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a> &amp;ocp)</td></tr>
+<tr class="memdesc:gad32c54affae4cfeb7fc996ab3deab14a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html" title="Storage for a linear-quadratic OCP of the form.">LinearOCPStorage</a> from a .mat file.  <br /></td></tr>
+<tr class="memitem:ga1a6f1d1a9acd5ebcdbb8763378b87c73" id="r_ga1a6f1d1a9acd5ebcdbb8763378b87c73"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga1a6f1d1a9acd5ebcdbb8763378b87c73">fancyqlone::read_from_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::vector&lt; float &gt; &amp;data)</td></tr>
+<tr class="memdesc:ga1a6f1d1a9acd5ebcdbb8763378b87c73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a vector from an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga46d71bd550f05e2b2db2f47041f7e978" id="r_ga46d71bd550f05e2b2db2f47041f7e978"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga46d71bd550f05e2b2db2f47041f7e978">fancyqlone::read_from_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::vector&lt; double &gt; &amp;data)</td></tr>
+<tr class="memdesc:ga46d71bd550f05e2b2db2f47041f7e978"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a vector from an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga55a7f52b546528d22f6ac869a61776ed" id="r_ga55a7f52b546528d22f6ac869a61776ed"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga55a7f52b546528d22f6ac869a61776ed">fancyqlone::read_from_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; float &gt; data)</td></tr>
+<tr class="memdesc:ga55a7f52b546528d22f6ac869a61776ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a vector from an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga2f614289bce89916b1d82d64abdc11cd" id="r_ga2f614289bce89916b1d82d64abdc11cd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga2f614289bce89916b1d82d64abdc11cd">fancyqlone::read_from_mat</a> (<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *mat, const std::string &amp;varname, std::span&lt; double &gt; data)</td></tr>
+<tr class="memdesc:ga2f614289bce89916b1d82d64abdc11cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a vector from an open .mat file.  <br /></td></tr>
+<tr class="memitem:ga24ad7736c10109c98fe49ab658f5c12a" id="r_ga24ad7736c10109c98fe49ab658f5c12a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga24ad7736c10109c98fe49ab658f5c12a">fancyqlone::ocp_dump_mat</a> (const std::filesystem::path &amp;filename, const <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a> &amp;ocp)</td></tr>
+<tr class="memdesc:ga24ad7736c10109c98fe49ab658f5c12a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dump the data from a <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html" title="Storage for a linear-quadratic OCP of the form.">LinearOCPStorage</a> to a new .mat file.  <br /></td></tr>
+</table>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="ga60963e57104b35af5ebf325817e3fe48" name="ga60963e57104b35af5ebf325817e3fe48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga60963e57104b35af5ebf325817e3fe48">&#9670;&#160;</a></span>mat_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">fancyqlone::mat_t</a> = ::_mat_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Incomplete matio struct type. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8hpp_source.html#l00024">24</a> of file <a class="el" href="matio_8hpp_source.html">matio.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ga77aa9d5b4d523080df8ff52209ca89db" name="ga77aa9d5b4d523080df8ff52209ca89db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga77aa9d5b4d523080df8ff52209ca89db">&#9670;&#160;</a></span>MatFilePtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::unique_ptr&lt; <a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a>, decltype(&amp;Mat_Close)&gt; <a class="el" href="#ga77aa9d5b4d523080df8ff52209ca89db">fancyqlone::MatFilePtr</a> = std::unique_ptr&lt;<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a>, int (*)(<a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Owning handle to a matio file. The file will be closed when the handle goes out of scope. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8hpp_source.html#l00026">26</a> of file <a class="el" href="matio_8hpp_source.html">matio.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="ga78e7543166e64d103643d53a0fa09e33" name="ga78e7543166e64d103643d53a0fa09e33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga78e7543166e64d103643d53a0fa09e33">&#9670;&#160;</a></span>MatioOpenMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#ga78e7543166e64d103643d53a0fa09e33">fancyqlone::MatioOpenMode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="gga78e7543166e64d103643d53a0fa09e33a7a1a5f3e79fdc91edf2f5ead9d66abb4" name="gga78e7543166e64d103643d53a0fa09e33a7a1a5f3e79fdc91edf2f5ead9d66abb4"></a>Read&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="gga78e7543166e64d103643d53a0fa09e33a1129c0e4d43f2d121652a7302712cff6" name="gga78e7543166e64d103643d53a0fa09e33a1129c0e4d43f2d121652a7302712cff6"></a>Write&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="matio_8hpp_source.html#l00028">28</a> of file <a class="el" href="matio_8hpp_source.html">matio.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="ga67fec1938cb44d6909f91584bcfbef9f" name="ga67fec1938cb44d6909f91584bcfbef9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga67fec1938cb44d6909f91584bcfbef9f">&#9670;&#160;</a></span>open_mat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ga77aa9d5b4d523080df8ff52209ca89db">MatFilePtr</a> fancyqlone::open_mat </td>
+          <td>(</td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#ga78e7543166e64d103643d53a0fa09e33">MatioOpenMode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#gga78e7543166e64d103643d53a0fa09e33a7a1a5f3e79fdc91edf2f5ead9d66abb4">MatioOpenMode::Read</a></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Opens a .mat file for reading or writing. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">runtime_error</td><td>if the file cannot be opened. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00089">89</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga1e524da3db4f81ddb5dd6c2856c88502" name="ga1e524da3db4f81ddb5dd6c2856c88502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1e524da3db4f81ddb5dd6c2856c88502">&#9670;&#160;</a></span>create_mat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ga77aa9d5b4d523080df8ff52209ca89db">MatFilePtr</a> fancyqlone::create_mat </td>
+          <td>(</td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Create and open a new .mat file for writing. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">runtime_error</td><td>if the file cannot be opened. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a84">benchmarks/cyqpalm/spring-mass.cpp</a>, <a class="el" href="solve-block-tridiagonal_8cpp-example.html#a38">solve-block-tridiagonal.cpp</a>, <a class="el" href="solve-ocp_8cpp-example.html#a49">solve-ocp.cpp</a>, and <a class="el" href="test_2test-pcr_8cpp-example.html#a65">test/test-pcr.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00097">97</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga235db8e974db22f3e8d4999cc1241290" name="ga235db8e974db22f3e8d4999cc1241290"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga235db8e974db22f3e8d4999cc1241290">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[1/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a value to an open .mat file. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="benchmarks_2cyqpalm_2spring-mass_8cpp-example.html#a85">benchmarks/cyqpalm/spring-mass.cpp</a>, <a class="el" href="solve-block-tridiagonal_8cpp-example.html#a39">solve-block-tridiagonal.cpp</a>, <a class="el" href="solve-ocp_8cpp-example.html#a50">solve-ocp.cpp</a>, and <a class="el" href="test_2test-pcr_8cpp-example.html#a66">test/test-pcr.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00122">122</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga1bce8c813758dc0ee0c51123eefd6d4c" name="ga1bce8c813758dc0ee0c51123eefd6d4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1bce8c813758dc0ee0c51123eefd6d4c">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[2/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a value to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00126">126</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga542f7cc9199e691651d57a174aa33594" name="ga542f7cc9199e691651d57a174aa33594"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga542f7cc9199e691651d57a174aa33594">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[3/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">short</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a value to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00146">146</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga2ac9bf168fcccac6824f7b8778763245" name="ga2ac9bf168fcccac6824f7b8778763245"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2ac9bf168fcccac6824f7b8778763245">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[4/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a value to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00150">150</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga48939416d19f9dd327178bbd804acd3c" name="ga48939416d19f9dd327178bbd804acd3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga48939416d19f9dd327178bbd804acd3c">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[5/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a value to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00154">154</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga5881d75c5a03b3164aeed167d97f76bb" name="ga5881d75c5a03b3164aeed167d97f76bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5881d75c5a03b3164aeed167d97f76bb">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[6/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long long</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a value to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00158">158</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga69f73a0e5992ecc2f75e5d51ed123b5a" name="ga69f73a0e5992ecc2f75e5d51ed123b5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga69f73a0e5992ecc2f75e5d51ed123b5a">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[7/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a value to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00130">130</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="gaae777ef5dd88755256300f62a2b13b87" name="gaae777ef5dd88755256300f62a2b13b87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaae777ef5dd88755256300f62a2b13b87">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[8/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a value to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00134">134</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga0e78abb707d5bb79ff4372518e5dbb0e" name="ga0e78abb707d5bb79ff4372518e5dbb0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0e78abb707d5bb79ff4372518e5dbb0e">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[9/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a value to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00138">138</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga521a1cd6aa32db7307ab2012dbe7630e" name="ga521a1cd6aa32db7307ab2012dbe7630e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga521a1cd6aa32db7307ab2012dbe7630e">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[10/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long long</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a value to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00142">142</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga9a8038d19161c792385831550f51d930" name="ga9a8038d19161c792385831550f51d930"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9a8038d19161c792385831550f51d930">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[11/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const double, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a matrix to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00162">162</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga62f5dd78db8722e1f0e6d30ef89bda67" name="ga62f5dd78db8722e1f0e6d30ef89bda67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga62f5dd78db8722e1f0e6d30ef89bda67">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[12/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/guanaqo/1.0.0-alpha.28/Doxygen/structguanaqo_1_1MatrixView.html">guanaqo::MatrixView</a>&lt; const float, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a matrix to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00167">167</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga519092628d6a98809f002bb92eea8a4b" name="ga519092628d6a98809f002bb92eea8a4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga519092628d6a98809f002bb92eea8a4b">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[13/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1View.html">batmat::matrix::View</a>&lt; const double, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a batch of matrices to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00192">192</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga240cf9568cd4aea51407b96896d9b62d" name="ga240cf9568cd4aea51407b96896d9b62d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga240cf9568cd4aea51407b96896d9b62d">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[14/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1View.html">batmat::matrix::View</a>&lt; const float, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a batch of matrices to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00197">197</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga011e2eba58eb8dc91e5f5ec6caed2479" name="ga011e2eba58eb8dc91e5f5ec6caed2479"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga011e2eba58eb8dc91e5f5ec6caed2479">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[15/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const float &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a vector to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00202">202</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga45b17062fb35011a96f441288627e51e" name="ga45b17062fb35011a96f441288627e51e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga45b17062fb35011a96f441288627e51e">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[16/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const double &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a vector to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00206">206</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga6c8ac2c7fcd37fa428cedc3ddae1c4e2" name="ga6c8ac2c7fcd37fa428cedc3ddae1c4e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6c8ac2c7fcd37fa428cedc3ddae1c4e2">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[17/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const unsigned short &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a vector to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00210">210</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga12bdb39a1589821c798ac8a32f8f0e0a" name="ga12bdb39a1589821c798ac8a32f8f0e0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga12bdb39a1589821c798ac8a32f8f0e0a">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[18/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const unsigned int &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a vector to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00215">215</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga8d7930ee44dba2ef0e087c40ab8fb923" name="ga8d7930ee44dba2ef0e087c40ab8fb923"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8d7930ee44dba2ef0e087c40ab8fb923">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[19/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const unsigned long &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a vector to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00219">219</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga7f3f30db797283a4ee51ffafe255b21a" name="ga7f3f30db797283a4ee51ffafe255b21a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7f3f30db797283a4ee51ffafe255b21a">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[20/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const unsigned long long &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a vector to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00223">223</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga96ceb4c9787593db18b0d6aab5ff7287" name="ga96ceb4c9787593db18b0d6aab5ff7287"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga96ceb4c9787593db18b0d6aab5ff7287">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[21/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const short &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a vector to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00228">228</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga8b7b93f4fe4cab45686b30ece43f783a" name="ga8b7b93f4fe4cab45686b30ece43f783a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8b7b93f4fe4cab45686b30ece43f783a">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[22/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const int &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a vector to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00232">232</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="gaf4b2434852e3878c5f5861dd6de10848" name="gaf4b2434852e3878c5f5861dd6de10848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf4b2434852e3878c5f5861dd6de10848">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[23/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const long &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a vector to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00236">236</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="gadece8c937832409489f87c43e51b6834" name="gadece8c937832409489f87c43e51b6834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadece8c937832409489f87c43e51b6834">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[24/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; const long long &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a vector to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00240">240</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga173c33213fca9d73dd78980979535903" name="ga173c33213fca9d73dd78980979535903"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga173c33213fca9d73dd78980979535903">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[25/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1SparseMatrix.html">SparseMatrix</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>matrix</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add a sparse matrix to an open .mat file. </p>
+<p>On the Python side, you can use the following code to load the sparse matrix: </p><div class="fragment"><div class="line"><span class="keyword">from</span> scipy.io <span class="keyword">import</span> loadmat</div>
+<div class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> coo_matrix</div>
+<div class="line">mat = loadmat(<span class="stringliteral">&quot;file.mat&quot;</span>)</div>
+<div class="line">data = mat[<span class="stringliteral">&quot;varname&quot;</span>][0, 0]</div>
+<div class="line">shape = data[<span class="stringliteral">&quot;num_rows&quot;</span>].item(), data[<span class="stringliteral">&quot;num_cols&quot;</span>].item()</div>
+<div class="line">rows = data[<span class="stringliteral">&quot;row_indices&quot;</span>].flatten()</div>
+<div class="line">cols = data[<span class="stringliteral">&quot;col_indices&quot;</span>].flatten()</div>
+<div class="line">values = data[<span class="stringliteral">&quot;values&quot;</span>].flatten()</div>
+<div class="line">matrix = coo_matrix((values, (rows, cols)), shape=shape)</div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00244">244</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga3a92335133126b546a25f3f379f8dfe1" name="ga3a92335133126b546a25f3f379f8dfe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3a92335133126b546a25f3f379f8dfe1">&#9670;&#160;</a></span>add_to_mat() <span class="overload">[26/26]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::add_to_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Add the data from a <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html" title="Storage for a linear-quadratic OCP of the form.">LinearOCPStorage</a> to an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00282">282</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="gad32c54affae4cfeb7fc996ab3deab14a" name="gad32c54affae4cfeb7fc996ab3deab14a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad32c54affae4cfeb7fc996ab3deab14a">&#9670;&#160;</a></span>read_from_mat() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::read_from_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Load a <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html" title="Storage for a linear-quadratic OCP of the form.">LinearOCPStorage</a> from a .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00365">365</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga1a6f1d1a9acd5ebcdbb8763378b87c73" name="ga1a6f1d1a9acd5ebcdbb8763378b87c73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1a6f1d1a9acd5ebcdbb8763378b87c73">&#9670;&#160;</a></span>read_from_mat() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::read_from_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; float &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Load a vector from an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00511">511</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga46d71bd550f05e2b2db2f47041f7e978" name="ga46d71bd550f05e2b2db2f47041f7e978"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga46d71bd550f05e2b2db2f47041f7e978">&#9670;&#160;</a></span>read_from_mat() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::read_from_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Load a vector from an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00519">519</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga55a7f52b546528d22f6ac869a61776ed" name="ga55a7f52b546528d22f6ac869a61776ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga55a7f52b546528d22f6ac869a61776ed">&#9670;&#160;</a></span>read_from_mat() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::read_from_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; float &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Load a vector from an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00495">495</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga2f614289bce89916b1d82d64abdc11cd" name="ga2f614289bce89916b1d82d64abdc11cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2f614289bce89916b1d82d64abdc11cd">&#9670;&#160;</a></span>read_from_mat() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::read_from_mat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ga60963e57104b35af5ebf325817e3fe48">mat_t</a> *</td>          <td class="paramname"><span class="paramname"><em>mat</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>varname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::span&lt; double &gt;</td>          <td class="paramname"><span class="paramname"><em>data</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Load a vector from an open .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00503">503</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ga24ad7736c10109c98fe49ab658f5c12a" name="ga24ad7736c10109c98fe49ab658f5c12a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga24ad7736c10109c98fe49ab658f5c12a">&#9670;&#160;</a></span>ocp_dump_mat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fancyqlone::ocp_dump_mat </td>
+          <td>(</td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>filename</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html">LinearOCPStorage</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>ocp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;<a class="el" href="matio_8hpp.html">fancyqlone/matio.hpp</a>&gt;</code></p>
+
+<p>Dump the data from a <a class="el" href="structfancyqlone_1_1LinearOCPStorage.html" title="Storage for a linear-quadratic OCP of the form.">LinearOCPStorage</a> to a new .mat file. </p>
+
+<p class="definition">Definition at line <a class="el" href="matio_8cpp_source.html#l00527">527</a> of file <a class="el" href="matio_8cpp_source.html">matio.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

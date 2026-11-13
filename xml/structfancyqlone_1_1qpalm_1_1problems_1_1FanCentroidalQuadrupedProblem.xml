@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.1" xml:lang="en-US">
+  <compounddef id="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem" kind="struct" language="C++" prot="public">
+    <compoundname>fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem</compoundname>
+    <includes refid="centroidal-quadruped_8hpp" local="no">/home/runner/work/fancyqlone/fancyqlone/src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem_1adb14d6526e2bd936bcee183c12c4f1ab" prot="public" static="no" mutable="no">
+        <type><ref refid="structfancyqlone_1_1FanOCPStorage" kindref="compound">FanOCPStorage</ref></type>
+        <definition>FanOCPStorage fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem::ocp</definition>
+        <argsstring></argsstring>
+        <name>ocp</name>
+        <qualifiedname>fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem::ocp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" line="99" column="19" bodyfile="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem_1a2b0e9b8c50902512eb20e033215deba4" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespacebatmat_1a31461fabd319f19bc15256fde4d75495" kindref="member" external="/home/runner/work/fancyqlone/fancyqlone/build/Debug/docs/batmat-0.0.26.tag">real_t</ref> &gt;</type>
+        <definition>std::vector&lt;real_t&gt; fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem::friction_coefficients</definition>
+        <argsstring></argsstring>
+        <name>friction_coefficients</name>
+        <qualifiedname>fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem::friction_coefficients</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" line="100" column="17" bodyfile="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>fancyqlone::FanOCPStorage</label>
+        <link refid="structfancyqlone_1_1FanOCPStorage"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+ocps</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>fancyqlone::LinearOCPStorage</label>
+        <link refid="structfancyqlone_1_1LinearOCPStorage"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>+dim</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>+storage</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>fancyqlone::OCPDim</label>
+        <link refid="structfancyqlone_1_1OCPDim"/>
+      </node>
+      <node id="1">
+        <label>fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem</label>
+        <link refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+ocp</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>+friction_coefficients</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; fancyqlone::LinearOCPStorage &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::vector&lt; real_t &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" line="98" column="1" bodyfile="src/example-problems/centroidal-quadruped/centroidal-quadruped.hpp" bodystart="98" bodyend="101"/>
+    <listofallmembers>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem_1a2b0e9b8c50902512eb20e033215deba4" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem</scope><name>friction_coefficients</name></member>
+      <member refid="structfancyqlone_1_1qpalm_1_1problems_1_1FanCentroidalQuadrupedProblem_1adb14d6526e2bd936bcee183c12c4f1ab" prot="public" virt="non-virtual"><scope>fancyqlone::qpalm::problems::FanCentroidalQuadrupedProblem</scope><name>ocp</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

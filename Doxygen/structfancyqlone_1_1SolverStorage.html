@@ -1,0 +1,555 @@
+<!-- HTML header for doxygen 1.16.1-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fancyqlone: fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt; Struct Template Reference</title>
+<link rel="icon" href="fancyqlone-logo.svg" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+window.MathJax = {
+  options: {
+    ignoreHtmlClass: 'tex2jax_ignore',
+    processHtmlClass: 'tex2jax_process'
+  },
+  loader: {
+    load: ['[tex]/ams']
+  },
+  tex: {
+    macros: {    Reals: "{\\mathrm{I\\!R}}",
+    Nats: "{\\mathrm{I\\!N}}",
+    Cplx: "{\\mathbb{C}}",
+    R: "{\\Reals}",
+    N: "{\\Nats}",
+    C: "{\\Cplx}",
+    Rn: "{\\Reals^n}",
+    Rm: "{\\Reals^m}",
+    gph: "{\\operatorname{\\mathbf{gph}}}",
+    zer: "{\\operatorname{\\mathbf{zer}}}",
+    fix: "{\\operatorname{\\mathbf{fix}}}",
+    minimize: "{\\operatorname*{\\mathbf{minimize}}}",
+    st: "{\\operatorname*{\\mathbf{s.\\!t.}}}",
+    argmin: "{\\operatorname*{\\mathbf{arg\\,min}}}",
+    argmax: "{\\operatorname*{\\mathbf{arg\\,max}}}",
+    subjto: "{\\operatorname*{\\mathbf{subject\\;to}}}",
+    prox: "{\\operatorname{\\mathbf{prox}}}",
+    Hilb: "{\\mathcal{H}}",
+    proj: ["{\\operatorname{\\mathbf{\\Pi}_\\mathnormal{#1}}}",1],
+    dist: "{\\operatorname{\\mathbf{dist}}}",
+    Id: "{\\mathrm{Id}}",
+    I: "{\\mathrm{I}}",
+    one: "{\\mathbf{1}}",
+    defeq: "{\\triangleq}",
+    inprod: ["{\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle}",2],
+    norm: ["{\\left\\| {#1} \\vphantom{X} \\right\\|}",1],
+    normsq: ["{\\norm{#1}^2}",1],
+    defset: ["{\\left\\{ {#1} \\;\\middle|\\; {#2} \\right\\}}",2],
+    tp: ["{#1^\\top}",1],
+    ttp: ["{#1^{\\!\\top\\!}}",1],
+    herm: ["{#1^\\mathrm{H}}",1],
+    invherm: ["{#1^{-\\mathrm{H}}}",1],
+    inv: ["{#1^{-1}}",1],
+    pinv: ["{#1^\\dagger}",1],
+    lconj: "{\\overline}",
+    sconj: ["{#1^*}",1],
+    iddots: "{\\mathinner{\\kern1mu\\raise1pt{.}\\kern2mu\\raise4pt{.}\\kern2mu\\raise7pt{\\Rule{0pt}{7pt}{0pt}.}\\kern1mu}}",
+    imagfun: ["{\\left(#1\\right)\\left(#2\\right)}",2],
+    Lagr: "{\\mathcal{L}}",
+    jac: "{\\mathrm{J}}",
+    dft: "{\\operatorname{\\mathbf{dft}}}",
+    cbrt: ["{\\sqrt[3]{#1}}",1],
+    sgn: "{\\operatorname{\\mathbf{sgn}}}",
+    setmap: "{\\rightrightarrows}",
+    lammin: "{\\lambda_\\text{min}}",
+    lammax: "{\\lambda_\\text{max}}",
+    Sc: "{\\mathcal{S}}",
+    Scstar: "{\\mathcal{S}^*}",
+    diag: "{\\operatorname{\\mathbf{diag}}}",
+    blkdiag: "{\\operatorname{\\mathbf{blkdiag}}}",
+    posdef: "{\\succ}",
+    possdef: "{\\succeq}",
+    half: "{\\tfrac{1}{2}}",
+    hhbar: "{\\hbar}",
+    barxuk: "{\\bar x^k\\!, \\bar u^k}",
+    },
+    packages: ['base','configmacros','newcommand','ams']
+  }
+};
+window.MathJax.tex.tags = 'ams';
+</script>
+<script type="text/javascript" id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fancyqlone-logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">fancyqlone<span id="projectnumber">&#160;<code><a href="/fancyqlone/index.html">main</a></code></span>
+   </div>
+   <div id="projectbrief">Fast, parallel and vectorized solver for linear systems with multi-horizon optimal control structure.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Search',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structfancyqlone_1_1SolverStorage.html','','structfancyqlone_1_1SolverStorage-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__topic-lin-solvers.html">Linear solvers</a> &raquo; <a class="el" href="group__topic-ocp-solvers.html">Optimal control solvers</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="fancyqlone_8hpp_source.html">fancyqlone/fancyqlone/fancyqlone.hpp</a>&gt;</code></p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt;<br />
+struct fancyqlone::SolverStorage&lt; VL, T, DefaultOrder, Ctx &gt;</div><p>Linear solver for systems with optimal control structure with multiple horizons. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">VL</td><td>Vector length. </td></tr>
+    <tr><td class="paramname">T</td><td>Scalar type. </td></tr>
+    <tr><td class="paramname">DefaultOrder</td><td>Storage order for the matrix workspaces (row/column major). </td></tr>
+    <tr><td class="paramname">Ctx</td><td>Parallel execution context type, see <a class="el" href="structfancyqlone_1_1parallel_1_1Context.html" title="parallel::Context">parallel::Context</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00028">28</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a2ad87c1c01e16af4fafc076667f5099f" id="r_a2ad87c1c01e16af4fafc076667f5099f"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a2ad87c1c01e16af4fafc076667f5099f">value_type</a> = T</td></tr>
+<tr class="memitem:ac371da26b007b56e2b79c62afc3fca5b" id="r_ac371da26b007b56e2b79c62afc3fca5b"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ac371da26b007b56e2b79c62afc3fca5b">tricyqle_t</a> = <a class="el" href="structfancyqlone_1_1TricyqleSolver.html">TricyqleSolver</a>&lt;VL, T, DefaultOrder, Ctx&gt;</td></tr>
+<tr class="memitem:a5c55c6c666e2459751ece438c3a3a178" id="r_a5c55c6c666e2459751ece438c3a3a178"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a5c55c6c666e2459751ece438c3a3a178">SolverLast</a> = <a class="el" href="structfancyqlone_1_1TridiagonalSolver.html">TridiagonalSolver</a>&lt;<a class="el" href="#a2ad87c1c01e16af4fafc076667f5099f">value_type</a>&gt;</td></tr>
+<tr class="memitem:ace66283bd419dc252ac56aefa9242b24" id="r_ace66283bd419dc252ac56aefa9242b24"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ace66283bd419dc252ac56aefa9242b24">one_t</a> = std::integral_constant&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>, 1&gt;</td></tr>
+<tr class="memitem:aa9270d846f5137d927b7ca1f59db250b" id="r_aa9270d846f5137d927b7ca1f59db250b"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#aa9270d846f5137d927b7ca1f59db250b">matrix</a> = <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1Matrix.html">batmat::matrix::Matrix</a>&lt;<a class="el" href="#a2ad87c1c01e16af4fafc076667f5099f">value_type</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>, <a class="el" href="#ace66283bd419dc252ac56aefa9242b24">one_t</a>, <a class="el" href="#ace66283bd419dc252ac56aefa9242b24">one_t</a>, DefaultOrder&gt;</td></tr>
+<tr class="memitem:ad1d863c887b146bb50e8642b4b0fddfc" id="r_ad1d863c887b146bb50e8642b4b0fddfc"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a> = <a class="el" href="structfancyqlone_1_1TridiagonalSolver.html#ab772a45a1d86245c589c91ddbd2405b3">SolverLast::matrix</a></td></tr>
+<tr class="memitem:af9c01fa429f349425abf44a2e3f3bbe5" id="r_af9c01fa429f349425abf44a2e3f3bbe5"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#af9c01fa429f349425abf44a2e3f3bbe5">SharedContext</a> = <a class="el" href="structfancyqlone_1_1TricyqleSolver.html#a4d348e07dbb61f1610d86f17e9b2bb6a">tricyqle_t::SharedContext</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a0244b672083e3ac9a2f0ff67a581e193" id="r_a0244b672083e3ac9a2f0ff67a581e193"><td class="memItemLeft"><a class="el" href="structfancyqlone_1_1CyqloneSolver.html">CyqloneSolver</a>&lt; VL, <a class="el" href="#a2ad87c1c01e16af4fafc076667f5099f">value_type</a>, DefaultOrder, Ctx &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a></td></tr>
+<tr class="memitem:ad3e83f92c133443897f7d9f4df94ff55" id="r_ad3e83f92c133443897f7d9f4df94ff55"><td class="memItemLeft"><a class="el" href="#a5c55c6c666e2459751ece438c3a3a178">SolverLast</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad3e83f92c133443897f7d9f4df94ff55">tridiagonal_solver</a></td></tr>
+<tr class="memitem:ada7ef528389e327b8f8f1612196f4934" id="r_ada7ef528389e327b8f8f1612196f4934"><td class="memItemLeft"><a class="el" href="#aa9270d846f5137d927b7ca1f59db250b">matrix</a>&#160;</td><td class="memItemRight"><a class="el" href="#ada7ef528389e327b8f8f1612196f4934">B0</a></td></tr>
+<tr class="memitem:a543101f37ca53a2981b99f132c289ac8" id="r_a543101f37ca53a2981b99f132c289ac8"><td class="memItemLeft"><a class="el" href="#aa9270d846f5137d927b7ca1f59db250b">matrix</a>&#160;</td><td class="memItemRight"><a class="el" href="#a543101f37ca53a2981b99f132c289ac8">L_old</a></td></tr>
+<tr class="memitem:afa833106ac87644c98f275cea242851c" id="r_afa833106ac87644c98f275cea242851c"><td class="memItemLeft"><a class="el" href="#aa9270d846f5137d927b7ca1f59db250b">matrix</a>&#160;</td><td class="memItemRight"><a class="el" href="#afa833106ac87644c98f275cea242851c">LB</a></td></tr>
+<tr class="memitem:abe6ff1a9a9d18febb18f12bda3149af0" id="r_abe6ff1a9a9d18febb18f12bda3149af0"><td class="memItemLeft"><a class="el" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a>&#160;</td><td class="memItemRight"><a class="el" href="#abe6ff1a9a9d18febb18f12bda3149af0">Mxb_row</a></td></tr>
+<tr class="memitem:a20eb68474ac24c638bcb523178cf91f2" id="r_a20eb68474ac24c638bcb523178cf91f2"><td class="memItemLeft"><a class="el" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a>&#160;</td><td class="memItemRight"><a class="el" href="#a20eb68474ac24c638bcb523178cf91f2">Mᵀλ_row</a></td></tr>
+<tr class="memitem:a16fa023de04383125bb29f2b1626f6a9" id="r_a16fa023de04383125bb29f2b1626f6a9"><td class="memItemLeft"><a class="el" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a>&#160;</td><td class="memItemRight"><a class="el" href="#a16fa023de04383125bb29f2b1626f6a9">λ_last</a></td></tr>
+<tr class="memitem:adbb652b9eb2b94a6497f4d0f060be4c7" id="r_adbb652b9eb2b94a6497f4d0f060be4c7"><td class="memItemLeft"><a class="el" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a>&#160;</td><td class="memItemRight"><a class="el" href="#adbb652b9eb2b94a6497f4d0f060be4c7">temp</a></td></tr>
+</table>
+<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Member Typedef Documentation</h2>
+<a id="a2ad87c1c01e16af4fafc076667f5099f" name="a2ad87c1c01e16af4fafc076667f5099f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad87c1c01e16af4fafc076667f5099f">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::value_type = T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00029">29</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac371da26b007b56e2b79c62afc3fca5b" name="ac371da26b007b56e2b79c62afc3fca5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac371da26b007b56e2b79c62afc3fca5b">&#9670;&#160;</a></span>tricyqle_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::tricyqle_t = <a class="el" href="structfancyqlone_1_1TricyqleSolver.html">TricyqleSolver</a>&lt;VL, T, DefaultOrder, Ctx&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00030">30</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5c55c6c666e2459751ece438c3a3a178" name="a5c55c6c666e2459751ece438c3a3a178"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c55c6c666e2459751ece438c3a3a178">&#9670;&#160;</a></span>SolverLast</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::SolverLast = <a class="el" href="structfancyqlone_1_1TridiagonalSolver.html">TridiagonalSolver</a>&lt;<a class="el" href="#a2ad87c1c01e16af4fafc076667f5099f">value_type</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00031">31</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ace66283bd419dc252ac56aefa9242b24" name="ace66283bd419dc252ac56aefa9242b24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace66283bd419dc252ac56aefa9242b24">&#9670;&#160;</a></span>one_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::one_t = std::integral_constant&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>, 1&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00032">32</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aa9270d846f5137d927b7ca1f59db250b" name="aa9270d846f5137d927b7ca1f59db250b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9270d846f5137d927b7ca1f59db250b">&#9670;&#160;</a></span>matrix</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::matrix = <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/structbatmat_1_1matrix_1_1Matrix.html">batmat::matrix::Matrix</a>&lt;<a class="el" href="#a2ad87c1c01e16af4fafc076667f5099f">value_type</a>, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a>, <a class="el" href="#ace66283bd419dc252ac56aefa9242b24">one_t</a>, <a class="el" href="#ace66283bd419dc252ac56aefa9242b24">one_t</a>, DefaultOrder&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00033">33</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad1d863c887b146bb50e8642b4b0fddfc" name="ad1d863c887b146bb50e8642b4b0fddfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1d863c887b146bb50e8642b4b0fddfc">&#9670;&#160;</a></span>matrix_s</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::matrix_s = <a class="el" href="structfancyqlone_1_1TridiagonalSolver.html#ab772a45a1d86245c589c91ddbd2405b3">SolverLast::matrix</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00034">34</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="af9c01fa429f349425abf44a2e3f3bbe5" name="af9c01fa429f349425abf44a2e3f3bbe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9c01fa429f349425abf44a2e3f3bbe5">&#9670;&#160;</a></span>SharedContext</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::SharedContext = <a class="el" href="structfancyqlone_1_1TricyqleSolver.html#a4d348e07dbb61f1610d86f17e9b2bb6a">tricyqle_t::SharedContext</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00036">36</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a id="a0244b672083e3ac9a2f0ff67a581e193" name="a0244b672083e3ac9a2f0ff67a581e193"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0244b672083e3ac9a2f0ff67a581e193">&#9670;&#160;</a></span>cyqlone_solver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfancyqlone_1_1CyqloneSolver.html">CyqloneSolver</a>&lt;VL, <a class="el" href="#a2ad87c1c01e16af4fafc076667f5099f">value_type</a>, DefaultOrder, Ctx&gt; <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::cyqlone_solver</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00038">38</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad3e83f92c133443897f7d9f4df94ff55" name="ad3e83f92c133443897f7d9f4df94ff55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3e83f92c133443897f7d9f4df94ff55">&#9670;&#160;</a></span>tridiagonal_solver</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a5c55c6c666e2459751ece438c3a3a178">SolverLast</a> <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::tridiagonal_solver</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00039">39</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ada7ef528389e327b8f8f1612196f4934" name="ada7ef528389e327b8f8f1612196f4934"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada7ef528389e327b8f8f1612196f4934">&#9670;&#160;</a></span>B0</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa9270d846f5137d927b7ca1f59db250b">matrix</a> <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::B0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">          = [<span class="keyword">this</span>] {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_typedef" href="#aa9270d846f5137d927b7ca1f59db250b">matrix</a>{{.rows = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nx, .cols = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nu},</div>
+<div class="line">                  <a class="code hl_variableRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-matrix-utils.html#gae1611b15c38c77550ccbe46aff4bdcea">batmat::matrix::uninitialized</a>};</div>
+<div class="line">}()</div>
+<div class="ttc" id="agroup__topic-matrix-utils_html_gae1611b15c38c77550ccbe46aff4bdcea"><div class="ttname"><a href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-matrix-utils.html#gae1611b15c38c77550ccbe46aff4bdcea">batmat::matrix::uninitialized</a></div><div class="ttdeci">struct batmat::matrix::uninitialized_t uninitialized</div></div>
+<div class="ttc" id="astructfancyqlone_1_1SolverStorage_html_a0244b672083e3ac9a2f0ff67a581e193"><div class="ttname"><a href="#a0244b672083e3ac9a2f0ff67a581e193">fancyqlone::SolverStorage::cyqlone_solver</a></div><div class="ttdeci">CyqloneSolver&lt; VL, value_type, DefaultOrder, Ctx &gt; cyqlone_solver</div><div class="ttdef"><b>Definition</b> <a href="fancyqlone_8hpp_source.html#l00038">fancyqlone.hpp:38</a></div></div>
+<div class="ttc" id="astructfancyqlone_1_1SolverStorage_html_aa9270d846f5137d927b7ca1f59db250b"><div class="ttname"><a href="#aa9270d846f5137d927b7ca1f59db250b">fancyqlone::SolverStorage::matrix</a></div><div class="ttdeci">batmat::matrix::Matrix&lt; value_type, index_t, one_t, one_t, DefaultOrder &gt; matrix</div><div class="ttdef"><b>Definition</b> <a href="fancyqlone_8hpp_source.html#l00033">fancyqlone.hpp:33</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00040">40</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a543101f37ca53a2981b99f132c289ac8" name="a543101f37ca53a2981b99f132c289ac8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a543101f37ca53a2981b99f132c289ac8">&#9670;&#160;</a></span>L_old</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa9270d846f5137d927b7ca1f59db250b">matrix</a> <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::L_old</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">             = [<span class="keyword">this</span>] {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_typedef" href="#aa9270d846f5137d927b7ca1f59db250b">matrix</a>{{.rows = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nx, .cols = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nx},</div>
+<div class="line">                  <a class="code hl_variableRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-matrix-utils.html#gae1611b15c38c77550ccbe46aff4bdcea">batmat::matrix::uninitialized</a>};</div>
+<div class="line">}()</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00044">44</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afa833106ac87644c98f275cea242851c" name="afa833106ac87644c98f275cea242851c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa833106ac87644c98f275cea242851c">&#9670;&#160;</a></span>LB</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa9270d846f5137d927b7ca1f59db250b">matrix</a> <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::LB</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">          = [<span class="keyword">this</span>] {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_typedef" href="#aa9270d846f5137d927b7ca1f59db250b">matrix</a>{{.rows = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nu, .cols = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nx},</div>
+<div class="line">                  <a class="code hl_variableRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-matrix-utils.html#gae1611b15c38c77550ccbe46aff4bdcea">batmat::matrix::uninitialized</a>};</div>
+<div class="line">}()</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00048">48</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="abe6ff1a9a9d18febb18f12bda3149af0" name="abe6ff1a9a9d18febb18f12bda3149af0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6ff1a9a9d18febb18f12bda3149af0">&#9670;&#160;</a></span>Mxb_row</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a> <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::Mxb_row</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">                 = [<span class="keyword">this</span>] {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_typedef" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a>{{.rows = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nx, .cols = 1}, <a class="code hl_variableRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-matrix-utils.html#gae1611b15c38c77550ccbe46aff4bdcea">batmat::matrix::uninitialized</a>};</div>
+<div class="line">}()</div>
+<div class="ttc" id="astructfancyqlone_1_1SolverStorage_html_ad1d863c887b146bb50e8642b4b0fddfc"><div class="ttname"><a href="#ad1d863c887b146bb50e8642b4b0fddfc">fancyqlone::SolverStorage::matrix_s</a></div><div class="ttdeci">SolverLast::matrix matrix_s</div><div class="ttdef"><b>Definition</b> <a href="fancyqlone_8hpp_source.html#l00034">fancyqlone.hpp:34</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00052">52</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a20eb68474ac24c638bcb523178cf91f2" name="a20eb68474ac24c638bcb523178cf91f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20eb68474ac24c638bcb523178cf91f2">&#9670;&#160;</a></span>Mᵀλ_row</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a> <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::Mᵀλ_row</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">                    = [<span class="keyword">this</span>] {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_typedef" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a>{{.rows = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nu, .cols = 1}, <a class="code hl_variableRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-matrix-utils.html#gae1611b15c38c77550ccbe46aff4bdcea">batmat::matrix::uninitialized</a>};</div>
+<div class="line">}()</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00055">55</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a16fa023de04383125bb29f2b1626f6a9" name="a16fa023de04383125bb29f2b1626f6a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16fa023de04383125bb29f2b1626f6a9">&#9670;&#160;</a></span>λ_last</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a> <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::λ_last</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">                 = [<span class="keyword">this</span>] {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_typedef" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a>{{.depth = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.v, .rows = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nx, .cols = 1},</div>
+<div class="line">                    <a class="code hl_variableRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-matrix-utils.html#gae1611b15c38c77550ccbe46aff4bdcea">batmat::matrix::uninitialized</a>};</div>
+<div class="line">}()</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00058">58</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<a id="adbb652b9eb2b94a6497f4d0f060be4c7" name="adbb652b9eb2b94a6497f4d0f060be4c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbb652b9eb2b94a6497f4d0f060be4c7">&#9670;&#160;</a></span>temp</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat.html#a67314e2becdee2c795c5ea0bd5626451">index_t</a> VL = 4, class T = real_t, <a class="elRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/namespacebatmat_1_1linalg.html#a12561d95ffd5ca9cc074d7b3edceb429">StorageOrder</a> DefaultOrder = StorageOrder::ColMajor, class Ctx = parallel::Context&lt;&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a> <a class="el" href="structfancyqlone_1_1SolverStorage.html">fancyqlone::SolverStorage</a>&lt; VL, T, DefaultOrder, Ctx &gt;::temp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">              = [<span class="keyword">this</span>] {</div>
+<div class="line">    <span class="keywordflow">return</span> <a class="code hl_typedef" href="#ad1d863c887b146bb50e8642b4b0fddfc">matrix_s</a>{{.rows = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nu, .cols = <a class="code hl_variable" href="#a0244b672083e3ac9a2f0ff67a581e193">cyqlone_solver</a>.nu},</div>
+<div class="line">                    <a class="code hl_variableRef" href="https://tttapa.github.io/batmat/0.0.26/Doxygen/group__topic-matrix-utils.html#gae1611b15c38c77550ccbe46aff4bdcea">batmat::matrix::uninitialized</a>};</div>
+<div class="line">}()</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="fancyqlone_8hpp_source.html#l00075">75</a> of file <a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/fancyqlone/include/fancyqlone/fancyqlone/<a class="el" href="fancyqlone_8hpp_source.html">fancyqlone.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacefancyqlone.html">fancyqlone</a></li><li class="navelem"><a href="structfancyqlone_1_1SolverStorage.html">SolverStorage</a></li>
+    <li class="footer">Generated on <span class="timestamp"></span> for fancyqlone by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>
